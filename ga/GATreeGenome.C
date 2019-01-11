@@ -140,7 +140,7 @@ template <class T> int
 GATreeGenome<T>::DestructiveMutator(GAGenome & c, float pmut)
 {
   GATreeGenome<T> &child=DYN_CAST(GATreeGenome<T> &, c);
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return 0;
 
   n = child.size();
@@ -176,7 +176,7 @@ template <class T> int
 GATreeGenome<T>::SwapNodeMutator(GAGenome & c, float pmut)
 {
   GATreeGenome<T> &child=DYN_CAST(GATreeGenome<T> &, c);
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return 0;
 
   n = child.size();
@@ -214,7 +214,7 @@ template <class T> int
 GATreeGenome<T>::SwapSubtreeMutator(GAGenome & c, float pmut)
 {
   GATreeGenome<T> &child=DYN_CAST(GATreeGenome<T> &, c);
-  register int n, i;
+  int n, i;
   int a, b;
   if(pmut <= 0.0) return 0;
 

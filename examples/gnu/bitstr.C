@@ -85,7 +85,7 @@ BitStringGenome::UniformInitializer(GAGenome & c) {
 int 
 BitStringGenome::UniformMutator(GAGenome & c, float pmut) {
   BitStringGenome &genome=(BitStringGenome &)c;
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return(0);
 
   float nMut = pmut * (float)(genome.length());

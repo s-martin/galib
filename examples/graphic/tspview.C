@@ -502,7 +502,7 @@ Initializer(GAGenome& g) {
 int
 Mutator(GAGenome& g, float pmut) {
   GAListGenome<int> &child=(GAListGenome<int> &)g;
-  register int n, i;
+  int n, i;
   if ((GARandomFloat() >= pmut) || (pmut <= 0)) return 0;
 
   n = child.size();

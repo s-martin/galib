@@ -143,7 +143,7 @@ template <class T> int
 GAListGenome<T>::DestructiveMutator(GAGenome & c, float pmut)
 {
   GAListGenome<T> &child=DYN_CAST(GAListGenome<T> &, c);
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return 0;
 
   n = child.size();
@@ -178,7 +178,7 @@ template <class T> int
 GAListGenome<T>::SwapMutator(GAGenome & c, float pmut)
 {
   GAListGenome<T> &child=DYN_CAST(GAListGenome<T> &, c);
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return 0;
 
   n = child.size();

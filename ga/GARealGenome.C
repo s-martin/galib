@@ -153,7 +153,7 @@ int
 GARealGaussianMutator(GAGenome& g, float pmut){
   GA1DArrayAlleleGenome<float> &child=
     DYN_CAST(GA1DArrayAlleleGenome<float> &, g);
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return(0);
 
   float nMut = pmut * (float)(child.length());

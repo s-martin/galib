@@ -275,7 +275,7 @@ int
 GA1DBinaryStringGenome::FlipMutator(GAGenome & c, float pmut)
 {
   GA1DBinaryStringGenome &child=DYN_CAST(GA1DBinaryStringGenome &, c);
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return(0);
 
   float nMut = pmut * STA_CAST(float, child.length());

@@ -118,7 +118,7 @@
 
       for ( ; length >= _BS_BITS_PER_WORD; length -= _BS_BITS_PER_WORD)
         {
-	  register _BS_word word1 = *psrc++;
+	  _BS_word word1 = *psrc++;
 	  DOIT_SOLID(*pdst,
 		     (word0 _BS_LEFT shift0) | (word1 _BS_RIGHT shift1));
 	  pdst++;
@@ -166,7 +166,7 @@
 
       for ( ; length >= _BS_BITS_PER_WORD; length -= _BS_BITS_PER_WORD)
         {
-	  register _BS_word word1 = *psrc--;
+	  _BS_word word1 = *psrc--;
 	  DOIT_SOLID(*pdst,
 		     (word0 _BS_RIGHT shift1) | (word1 _BS_LEFT shift0));
 	  pdst--;

@@ -1,8 +1,8 @@
 #ifndef ONES
 #define ONES  ((_BS_word)(~0L))
 #endif
-  register int nwords;
-  register _BS_word mask;
+  int nwords;
+  _BS_word mask;
   if (offset == 0)
     ;
   else if (offset + length >= _BS_BITS_PER_WORD)

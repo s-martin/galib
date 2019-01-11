@@ -493,7 +493,7 @@ int
 GA3DBinaryStringGenome::FlipMutator(GAGenome & c, float pmut)
 {
   GA3DBinaryStringGenome &child=DYN_CAST(GA3DBinaryStringGenome &, c);
-  register int n, m, i, j, k, d;
+  int n, m, i, j, k, d;
   if(pmut <= 0.0) return(0);
 
   float nMut = pmut * STA_CAST(float,child.size());

@@ -481,7 +481,7 @@ GA3DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome & c, float pmut)
 {
   GA3DArrayAlleleGenome<ARRAY_TYPE> &child=
     DYN_CAST(GA3DArrayAlleleGenome<ARRAY_TYPE> &, c);
-  register int n, m, d, i, j, k;
+  int n, m, d, i, j, k;
   if(pmut <= 0.0) return(0);
 
   float nMut = pmut * STA_CAST(float,child.size());
@@ -516,7 +516,7 @@ template <class ARRAY_TYPE> int
 GA3DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome & c, float pmut)
 {
   GA3DArrayGenome<ARRAY_TYPE> &child=DYN_CAST(GA3DArrayGenome<ARRAY_TYPE>&, c);
-  register int n, i;
+  int n, i;
   if(pmut <= 0.0) return(0);
 
   float nMut = pmut * STA_CAST(float,child.size());
