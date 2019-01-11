@@ -45,8 +45,8 @@ then these functions scale the distribution to that deviation.  Mean is still 0
 #define _ga_random_h_
 
 #include <stdlib.h>
-#include <ga/gatypes.h>
-#include <ga/gaconfig.h>
+#include <gatypes.h>
+#include <gaconfig.h>
 
 // Here we determine which random number generator will be used.  The critical
 // parts here are the name of the random number generator (e.g. rand or random)

@@ -8,7 +8,7 @@
  DESCRIPTION:
    Source file for the string specialization of the array genome.
 ---------------------------------------------------------------------------- */
-#include <ga/GAStringGenome.h>
+#include <GAStringGenome.h>
 
 template <> const char * 
 GA1DArrayAlleleGenome<char>::className() const {return "GAStringGenome";}
@@ -91,8 +91,8 @@ GA1DArrayAlleleGenome<char>::write(STD_OSTREAM & os) const
 // some compilers require a syntax different than others when forcing the 
 // instantiation (i.e. GNU wants the 'template class', borland does not).
 #ifndef GALIB_USE_AUTO_INST
-#include <ga/GAAllele.C>
-#include <ga/GA1DArrayGenome.C>
+#include <GAAllele.C>
+#include <GA1DArrayGenome.C>
 
 #if defined(__BORLANDC__)
 #define GALIB_STRINGGENOME_TEMPLATE_PREFACE

@@ -10,7 +10,7 @@
 #ifndef _ga_treebase_h_
 #define _ga_treebase_h_
 
-#include <ga/GANode.h>
+#include <GANode.h>
 
 
 /* ----------------------------------------------------------------------------

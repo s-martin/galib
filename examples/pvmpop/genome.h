@@ -10,8 +10,8 @@ genome in these examples.
 #ifndef _genome_h_
 #define _genome_h_
 
-#include <ga/gabase.h>
-#include <ga/binstr1.h>
+#include <gabase.h>
+#include <binstr1.h>
 
 #define GENOME_LENGTH 64
 

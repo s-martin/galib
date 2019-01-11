@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <values.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR
@@ -82,7 +82,7 @@ static BitmapInfo bm[] = {
   {ffwd_width, ffwd_height, (unsigned char *)ffwd_bits}
 };
 
-enum {
+enum class {
   bmStop,
   bmRewind,
   bmForward,
@@ -687,8 +687,8 @@ GAListGenome<int>::write(ostream & os) const
 // If your compiler does not do automatic instantiation (e.g. g++ 2.6.8),
 // then define the NO_AUTO_INST directive.
 #ifdef NO_AUTO_INST
-#include <ga/GAList.C>
-#include <ga/GAListGenome.C>
+#include <GAList.C>
+#include <GAListGenome.C>
 template class GAList<int>;
 template class GAListGenome<int>;
 #endif

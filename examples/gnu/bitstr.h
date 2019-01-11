@@ -14,7 +14,7 @@ we define the genome and all of the basic operators that it needs to function.
 #ifndef _bitstr_h_
 #define _bitstr_h_
 
-#include <ga/genome.h>
+#include <genome.h>
 #include "BitString.h"
 
 // This is the class definition for the BitString genome.  It is derived from

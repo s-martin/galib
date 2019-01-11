@@ -8,8 +8,8 @@
 ---------------------------------------------------------------------------- */
 #include <string.h>
 #include <math.h>
-#include <ga/garandom.h>
-#include <ga/std_stream.h>
+#include <garandom.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR

@@ -19,7 +19,7 @@ step method.
 #ifndef _ga_gademe_h_
 #define _ga_gademe_h_
 
-#include <ga/GABaseGA.h>
+#include <GABaseGA.h>
 
 class GADemeGA : public GAGeneticAlgorithm {
 public:

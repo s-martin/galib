@@ -10,8 +10,8 @@
 #ifndef _ga_listtmpl_h_
 #define _ga_listtmpl_h_
 
-#include <ga/gaerror.h>
-#include <ga/GAListBASE.h>
+#include <gaerror.h>
+#include <GAListBASE.h>
 
 /* ----------------------------------------------------------------------------
  GAList
@@ -191,7 +191,7 @@ private:
 };
 
 #ifdef GALIB_USE_BORLAND_INST
-#include <ga/GAList.C>
+#include <GAList.C>
 #endif
 
 #endif

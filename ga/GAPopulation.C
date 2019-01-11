@@ -7,10 +7,10 @@
 ---------------------------------------------------------------------------- */
 #include <string.h>
 #include <math.h>
-#include <ga/GAPopulation.h>
-#include <ga/GASelector.h>
-#include <ga/garandom.h>
-#include <ga/GABaseGA.h>		// for the sake of flaky g++ compiler
+#include <GAPopulation.h>
+#include <GASelector.h>
+#include <garandom.h>
+#include <GABaseGA.h>		// for the sake of flaky g++ compiler
 
 // windows is promiscuous in its use of min/max, and that causes us grief.  so
 // turn of the use of min/max macros in this file.   thanks nick wienholt

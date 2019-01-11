@@ -86,12 +86,12 @@ public:
 // the same number.  Beware.
 
 #define GADefineIdentity(name,id) \
-     const char * className() const {return name;} \
-     int classID() const {return id;}
+     const char * className() const override {return name;} \
+     int classID() const override {return id;}
 
 #define GADeclareIdentity() \
-     const char * className() const; \
-     int classID() const
+     const char * className() const override; \
+     int classID() const override
 
 #define GADefineIdentitySRC(clss,name,id) \
 const char * clss :: className() const {return name;} \

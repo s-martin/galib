@@ -14,8 +14,8 @@ License).
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR

@@ -13,9 +13,9 @@ imply the specific implementation of the container class).
 #ifndef _ga_allele_h_
 #define _ga_allele_h_
 
-#include <ga/gaconfig.h>
-#include <ga/garandom.h>
-#include <ga/std_stream.h>
+#include <gaconfig.h>
+#include <garandom.h>
+#include <std_stream.h>
 
 class GAAllele {
 public:
@@ -163,8 +163,8 @@ template <class T>
 class GAAlleleSetArray {
 public:
   GAAlleleSetArray();
-  GAAlleleSetArray(const GAAlleleSet<T>& s);
-  GAAlleleSetArray(const GAAlleleSetArray<T>&);
+  explicit GAAlleleSetArray(const GAAlleleSet<T>& s);
+  explicit GAAlleleSetArray(const GAAlleleSetArray<T>&);
   virtual ~GAAlleleSetArray();
   GAAlleleSetArray<T>& operator=(const GAAlleleSetArray<T>&);
 
@@ -200,7 +200,7 @@ operator>> (STD_ISTREAM & is, GAAlleleSet<T> & arg)
 
 
 #ifdef GALIB_USE_BORLAND_INST
-#include <ga/GAAllele.C>
+#include <GAAllele.C>
 #endif
 
 #endif

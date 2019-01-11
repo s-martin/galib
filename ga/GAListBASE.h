@@ -15,7 +15,7 @@ memory management, nor does it know the best way to count what its got.
 #ifndef _ga_listbase_h_
 #define _ga_listbase_h_
 
-#include <ga/GANode.h>
+#include <GANode.h>
 
 /* ----------------------------------------------------------------------------
  GAListBASE

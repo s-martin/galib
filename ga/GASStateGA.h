@@ -10,7 +10,7 @@
 #ifndef _ga_gasteadystate_h_
 #define _ga_gasteadystate_h_
 
-#include <ga/GABaseGA.h>
+#include <GABaseGA.h>
 
 class GASteadyStateGA : public GAGeneticAlgorithm {
 public:

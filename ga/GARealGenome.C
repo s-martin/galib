@@ -8,7 +8,7 @@
  DESCRIPTION:
    Source file for the real number specialization of the array genome.
 ---------------------------------------------------------------------------- */
-#include <ga/GARealGenome.h>
+#include <GARealGenome.h>
 
 
 // We must also specialize the allele set so that the alleles are handled
@@ -301,8 +301,8 @@ GARealBlendCrossover(const GAGenome& p1, const GAGenome& p2,
 // some compilers require a syntax different than others when forcing the 
 // instantiation (i.e. GNU wants the 'template class', borland does not).
 #ifndef GALIB_USE_AUTO_INST
-#include <ga/GAAllele.C>
-#include <ga/GA1DArrayGenome.C>
+#include <GAAllele.C>
+#include <GA1DArrayGenome.C>
 
 #if defined(__BORLANDC__)
 #define GALIB_REALGENOME_TEMPLATE_PREFACE

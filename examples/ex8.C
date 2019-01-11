@@ -17,8 +17,8 @@ to use the sigma truncation scaling method to handle the mixed scores.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <stdlib.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define ostream STD_OSTREAM
@@ -179,8 +179,8 @@ GAListGenome<int>::write(ostream & os) const
 // for some compilers (e.g. metrowerks) this must come after any
 // specializations or you will get 'multiply-defined errors when you compile.
 #if !defined(GALIB_USE_AUTO_INST)
-#include <ga/GAList.C>
-#include <ga/GAListGenome.C>
+#include <GAList.C>
+#include <GAListGenome.C>
 GALIB_INSTANTIATION_PREFIX GAList<int>;
 GALIB_INSTANTIATION_PREFIX GAListGenome<int>;
 #endif

@@ -25,9 +25,9 @@ that for common instantiations (float, char).
 #ifndef _ga_array1_h_
 #define _ga_array1_h_
 
-#include <ga/GAArray.h>
-#include <ga/GAGenome.h>
-#include <ga/GAAllele.h>
+#include <GAArray.h>
+#include <GAGenome.h>
+#include <GAAllele.h>
 
 
 /* ----------------------------------------------------------------------------
@@ -66,14 +66,14 @@ public:
     {for(unsigned int i=0; i<this->sz; i++) gene(i, *(array+i)); return *this;}
   virtual ~GA1DArrayGenome();
   virtual GAGenome *clone(GAGenome::CloneMethod flag=CONTENTS) const;
-  virtual void copy(const GAGenome &);
+  virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
-  virtual int read(STD_ISTREAM & is);
-  virtual int write (STD_OSTREAM & os) const;
+  virtual int read(STD_ISTREAM & is) override;
+  virtual int write (STD_OSTREAM & os) const override;
 #endif
 
-  virtual int equal(const GAGenome & c) const ;
+  virtual int equal(const GAGenome & c) const override;
 
   const T & gene(unsigned int x=0) const {return this->a[x];}
   T & gene(unsigned int x, const T & value){
@@ -152,16 +152,16 @@ public:
   GA1DArrayAlleleGenome<T>& operator=(const T array []) // no err checks!
     {GA1DArrayGenome<T>::operator=(array); return *this;}
   virtual ~GA1DArrayAlleleGenome();
-  virtual GAGenome *clone(GAGenome::CloneMethod flag=GAGenome::CONTENTS) const;
-  virtual void copy(const GAGenome &);
+  virtual GAGenome *clone(GAGenome::CloneMethod flag=GAGenome::CONTENTS) const override;
+  virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
-  virtual int read(STD_ISTREAM & is);
-  virtual int write (STD_OSTREAM & os) const;
+  virtual int read(STD_ISTREAM & is) override;
+  virtual int write (STD_OSTREAM & os) const override;
 #endif
 
-  virtual int equal(const GAGenome & c) const ;
-  virtual int resize(int x);
+  virtual int equal(const GAGenome & c) const override;
+  virtual int resize(int x) override;
 
   const GAAlleleSet<T>& alleleset(unsigned int i=0) const 
     {return aset[i%naset];}
@@ -175,7 +175,7 @@ protected:
 
 
 #ifdef GALIB_USE_BORLAND_INST
-#include <ga/GA1DArrayGenome.C>
+#include <GA1DArrayGenome.C>
 #endif
 
 #endif

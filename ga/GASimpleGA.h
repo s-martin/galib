@@ -10,7 +10,7 @@
 #ifndef _ga_gasimple_h_
 #define _ga_gasimple_h_
 
-#include <ga/GABaseGA.h>
+#include <GABaseGA.h>
 
 class GASimpleGA : public GAGeneticAlgorithm {
 public:

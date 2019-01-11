@@ -13,8 +13,8 @@
   Use array representation of nodes so we don't have to do so much recursion.
   Figure better way to do traversals so that we speed up the swaps.
 ---------------------------------------------------------------------------- */
-#include <ga/GATreeBASE.h>
-#include <ga/gaerror.h>
+#include <GATreeBASE.h>
+#include <gaerror.h>
 
 static int _GATreeSize(GANodeBASE *);
 static int _GATreeDepth(GANodeBASE *);

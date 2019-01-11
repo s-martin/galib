@@ -8,13 +8,13 @@
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <stdlib.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 
 #define INSTANTIATE_STRING_GENOME
-#include <ga/GAStringGenome.h>
+#include <GAStringGenome.h>
 
 
 // This is the declaration of the objective function that we will use in this

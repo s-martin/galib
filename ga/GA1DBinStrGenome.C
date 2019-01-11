@@ -12,10 +12,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include <ga/gaerror.h>
-#include <ga/garandom.h>
-#include <ga/GA1DBinStrGenome.h>
-#include <ga/GAMask.h>
+#include <gaerror.h>
+#include <garandom.h>
+#include <GA1DBinStrGenome.h>
+#include <GAMask.h>
 
 #define SWAP(a,b) {unsigned int tmp=a; a=b; b=tmp;}
 

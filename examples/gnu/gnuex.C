@@ -21,7 +21,7 @@ compact, etc implementation).
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <iostream.h>
-#include <ga/ga.h>		// this is the include file for the ga library
+#include <ga.h>		// this is the include file for the ga library
 
 // When this is defined, use the GNU BitString otherwise we use the 
 // GA1DBinaryString that is built in to GAlib.

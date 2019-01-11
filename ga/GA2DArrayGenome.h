@@ -12,9 +12,9 @@
 #ifndef _ga_array2_h_
 #define _ga_array2_h_
 
-#include <ga/GAArray.h>
-#include <ga/GAGenome.h>
-#include <ga/GAAllele.h>
+#include <GAArray.h>
+#include <GAGenome.h>
+#include <GAAllele.h>
 
 /* ----------------------------------------------------------------------------
 2DArrayGenome
@@ -147,7 +147,7 @@ protected:
 
 
 #ifdef GALIB_USE_BORLAND_INST
-#include <ga/GA2DArrayGenome.C>
+#include <GA2DArrayGenome.C>
 #endif
 
 #endif

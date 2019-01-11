@@ -16,10 +16,10 @@ override-able on any instance of the new genome.
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <ga/GABin2DecGenome.h>
-#include <ga/GA2DBinStrGenome.h>
-#include <ga/GASStateGA.h>
-#include <ga/std_stream.h>
+#include <GABin2DecGenome.h>
+#include <GA2DBinStrGenome.h>
+#include <GASStateGA.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR

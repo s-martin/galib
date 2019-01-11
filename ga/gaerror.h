@@ -11,9 +11,9 @@
 #ifndef _ga_error_h_
 #define _ga_error_h_
 
-#include <ga/gatypes.h>
-#include <ga/gaconfig.h>
-#include <ga/std_stream.h>
+#include <gatypes.h>
+#include <gaconfig.h>
+#include <std_stream.h>
 
 // This object is for telling us where in the source code an error occurs.
 class GASourceLocator {

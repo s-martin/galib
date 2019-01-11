@@ -15,7 +15,7 @@ code that merges the received individuals into the population.  You can also
 determine which individuals will be selected to migrate to another population.
 ---------------------------------------------------------------------------- */
 #include <pvm3.h>
-#include <ga/GASimpleGA.h>
+#include <GASimpleGA.h>
 #include "genome.h"
 
 int

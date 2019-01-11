@@ -37,7 +37,7 @@ RouletteWheel - weighted selection where individuals with better fitness have
 #define _ga_selector_h_
 
 #include <string.h>
-#include <ga/gaid.h>
+#include <gaid.h>
 
 class GAGenome;
 class GAPopulation;

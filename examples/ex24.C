@@ -13,15 +13,15 @@ example).
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <math.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define endl STD_ENDL
 #define ofstream STD_OFSTREAM
 
 #define INSTANTIATE_REAL_GENOME
-#include <ga/GARealGenome.h>
+#include <GARealGenome.h>
 
 #define MIN_VALUE -2
 #define MAX_VALUE 2

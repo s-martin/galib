@@ -9,7 +9,7 @@
 #ifndef _ga_deterministic_crowding_ga_h_
 #define _ga_deterministic_crowding_ga_h_
 
-#include <ga/GABaseGA.h>
+#include <GABaseGA.h>
 
 class GADCrowdingGA : public GAGeneticAlgorithm {
 public:

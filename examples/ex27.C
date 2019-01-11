@@ -16,10 +16,10 @@ it looks much better running in real-time in 3D, but, alas, there is not yet
 any standard 3D cross-platform API, so you get this instead.)
 ---------------------------------------------------------------------------- */
 #include <math.h>
-#include <ga/GASStateGA.h>
-#include <ga/GAList.h>
-#include <ga/GA1DArrayGenome.h>
-#include <ga/std_stream.h>
+#include <GASStateGA.h>
+#include <GAList.h>
+#include <GA1DArrayGenome.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR
@@ -29,8 +29,8 @@ any standard 3D cross-platform API, so you get this instead.)
 // for some compilers (e.g. metrowerks) this must come after any
 // specializations or you will get 'multiply-defined errors when you compile.
 #if !defined(GALIB_USE_AUTO_INST)
-#include <ga/GAList.C>
-#include <ga/GA1DArrayGenome.C>
+#include <GAList.C>
+#include <GA1DArrayGenome.C>
 GALIB_INSTANTIATION_PREFIX GAList<int>;
 GALIB_INSTANTIATION_PREFIX GA1DArrayGenome<float>;
 #endif

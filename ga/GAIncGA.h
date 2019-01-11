@@ -32,7 +32,7 @@ replacement function should return a reference to the individual.
 #ifndef _ga_gainc_h_
 #define _ga_gainc_h_
 
-#include <ga/GABaseGA.h>
+#include <GABaseGA.h>
 
 class GAIncrementalGA : public GAGeneticAlgorithm {
 public:

@@ -9,8 +9,8 @@ of a continuous function in two variables.  This program uses a binary-to-
 decimal genome.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 

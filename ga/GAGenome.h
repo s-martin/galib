@@ -14,11 +14,11 @@ it should operate on the data.  See comments below for further details.
 #ifndef _ga_genome_h_
 #define _ga_genome_h_
 
-#include <ga/gaid.h>
-#include <ga/gaconfig.h>
-#include <ga/gaerror.h>
-#include <ga/GAEvalData.h>
-#include <ga/std_stream.h>
+#include <gaid.h>
+#include <gaconfig.h>
+#include <gaerror.h>
+#include <GAEvalData.h>
+#include <std_stream.h>
 
 class GAGeneticAlgorithm;
 class GAGenome;

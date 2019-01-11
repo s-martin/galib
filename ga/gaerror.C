@@ -9,7 +9,7 @@
   This file contains all of the error messages for the library.
 ---------------------------------------------------------------------------- */
 #include <string.h>
-#include <ga/gaerror.h>
+#include <gaerror.h>
 #include <stdio.h>
 
 char gaErrMsg[512];

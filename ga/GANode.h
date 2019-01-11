@@ -10,8 +10,8 @@
 #ifndef _ga_node_h_
 #define _ga_node_h_
 
-#include <ga/gaconfig.h>
-#include <ga/std_stream.h>
+#include <gaconfig.h>
+#include <std_stream.h>
 
 /* ----------------------------------------------------------------------------
  GANodeBASE

@@ -7,8 +7,8 @@
 
    Souce file for the steady-state genetic algorithm object.
 ---------------------------------------------------------------------------- */
-#include <ga/GASStateGA.h>
-#include <ga/garandom.h>
+#include <GASStateGA.h>
+#include <garandom.h>
 
 //#define GA_DEBUG
 

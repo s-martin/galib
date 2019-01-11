@@ -14,7 +14,7 @@ you want a different Gray coding.
 #ifndef _ga_bincvt_h_
 #define _ga_bincvt_h_
 
-#include <ga/gatypes.h>
+#include <gatypes.h>
 
 // The encoder converts a decimal value into a binary string.  The decoder
 // converts a string of bits into a decimal value.  Both types of functions

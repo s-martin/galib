@@ -12,10 +12,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include <ga/gaerror.h>
-#include <ga/garandom.h>
-#include <ga/GA2DBinStrGenome.h>
-#include <ga/GAMask.h>
+#include <gaerror.h>
+#include <garandom.h>
+#include <GA2DBinStrGenome.h>
+#include <GAMask.h>
 
 /* ----------------------------------------------------------------------------
    Genome class definition

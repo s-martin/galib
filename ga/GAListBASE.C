@@ -12,8 +12,8 @@
   Implement better memory mangement, faster allocation, referencing.
   Use array representation of nodes so we don't have to do so much recursion.
 ---------------------------------------------------------------------------- */
-#include <ga/GAListBASE.h>
-#include <ga/gaerror.h>
+#include <GAListBASE.h>
+#include <gaerror.h>
 
 GANodeBASE * _GAListTraverse(unsigned int index, unsigned int & cur,
 			     GANodeBASE * node);

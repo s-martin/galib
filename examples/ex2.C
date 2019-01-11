@@ -14,9 +14,9 @@ objective function.
 #include <stdio.h>
 #include <math.h>
 
-#include <ga/GASimpleGA.h>
-#include <ga/GABin2DecGenome.h>
-#include <ga/std_stream.h>
+#include <GASimpleGA.h>
+#include <GABin2DecGenome.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 

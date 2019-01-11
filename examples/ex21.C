@@ -12,14 +12,14 @@ allele set for each element in the array.  The constructor that you use to
 create the array determines which behaviour you'll get.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define endl STD_ENDL
 
 #define INSTANTIATE_REAL_GENOME
-#include <ga/GARealGenome.h>
+#include <GARealGenome.h>
 
 float Objective1(GAGenome &);
 float Objective2(GAGenome &);

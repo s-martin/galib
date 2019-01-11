@@ -11,9 +11,9 @@
 #ifndef _ga_parameters_h_
 #define _ga_parameters_h_
 
-#include <ga/gaconfig.h>
-#include <ga/gatypes.h>
-#include <ga/std_stream.h>
+#include <gaconfig.h>
+#include <gatypes.h>
+#include <std_stream.h>
 
 
 /* ----------------------------------------------------------------------------

@@ -8,12 +8,12 @@
  DESCRIPTION:
   This file defines the built-in selection objects for GAlib.
 ---------------------------------------------------------------------------- */
-#include <ga/gaconfig.h>
-#include <ga/GAPopulation.h>
-#include <ga/GAGenome.h>
-#include <ga/GASelector.h>
-#include <ga/garandom.h>
-#include <ga/gaerror.h>
+#include <gaconfig.h>
+#include <GAPopulation.h>
+#include <GAGenome.h>
+#include <GASelector.h>
+#include <garandom.h>
+#include <gaerror.h>
 
 #if USE_DS_SELECTOR == 1
 static void GAQuickSort(unsigned int *, float *, int, int);

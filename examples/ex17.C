@@ -10,8 +10,8 @@ alternate 0 and 1 then put -1 in the corners.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <stdlib.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define endl STD_ENDL
@@ -129,8 +129,8 @@ GA2DArrayAlleleGenome<int>::write(ostream & os) const
 // for some compilers (e.g. metrowerks) this must come after any
 // specializations or you will get 'multiply-defined errors when you compile.
 #if !defined(GALIB_USE_AUTO_INST)
-#include <ga/GAAllele.C>
-#include <ga/GA2DArrayGenome.C>
+#include <GAAllele.C>
+#include <GA2DArrayGenome.C>
 GALIB_INSTANTIATION_PREFIX GAAlleleSet<int>;
 GALIB_INSTANTIATION_PREFIX GAAlleleSetCore<int>;
 GALIB_INSTANTIATION_PREFIX GAArray<int>;

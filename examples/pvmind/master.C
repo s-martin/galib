@@ -23,7 +23,7 @@ slowing everything down.
 #include <iostream.h>
 #include <time.h>
 #include <pvm3.h>
-#include <ga/ga.h>
+#include <ga.h>
 #include "genome.h"
 
 #define SLAVE_NAME "slave"	// name of the compiled slave program

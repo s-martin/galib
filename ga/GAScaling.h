@@ -20,10 +20,10 @@ it does know how to update itself, but it must be told when.
 #ifndef _ga_scaling_h_
 #define _ga_scaling_h_
 
-#include <ga/gaconfig.h>
-#include <ga/gaid.h>
-#include <ga/gatypes.h>
-#include <ga/GAGenome.h>
+#include <gaconfig.h>
+#include <gaid.h>
+#include <gatypes.h>
+#include <GAGenome.h>
 
 class GAPopulation;
 

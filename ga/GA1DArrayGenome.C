@@ -14,9 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ga/garandom.h>
-#include <ga/GA1DArrayGenome.h>
-#include <ga/GAMask.h>
+#include <garandom.h>
+#include <GA1DArrayGenome.h>
+#include <GAMask.h>
 
 template <class T> int 
 GA1DArrayIsHole(const GA1DArrayGenome<T>&, const GA1DArrayGenome<T>&,

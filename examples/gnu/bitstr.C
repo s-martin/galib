@@ -9,7 +9,7 @@
  DESCRIPTION:
   Source file for the BitString genome (derived from the GNU BitString object).
 ---------------------------------------------------------------------------- */
-#include <ga/random.h>
+#include <random.h>
 #include "bitstr.h"
 
 

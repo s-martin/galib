@@ -9,8 +9,8 @@
   Definition of the statistics object.
 ---------------------------------------------------------------------------- */
 #include <string.h>
-#include <ga/gaerror.h>
-#include <ga/GAStatistics.h>
+#include <gaerror.h>
+#include <GAStatistics.h>
 
 
 

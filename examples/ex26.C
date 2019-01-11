@@ -19,10 +19,10 @@ about all of the silly little inefficient aspects of the implementation.  But
 it does get the job done.
 ---------------------------------------------------------------------------- */
 #include <math.h>
-#include <ga/GASStateGA.h>
-#include <ga/GAListGenome.h>
-#include <ga/garandom.h>
-#include <ga/std_stream.h>
+#include <GASStateGA.h>
+#include <GAListGenome.h>
+#include <garandom.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR
@@ -427,8 +427,8 @@ GAListGenome<int>::write(ostream & os) const
 // for some compilers (e.g. metrowerks) this must come after any
 // specializations or you will get 'multiply-defined errors when you compile.
 #if !defined(GALIB_USE_AUTO_INST)
-#include <ga/GAList.C>
-#include <ga/GAListGenome.C>
+#include <GAList.C>
+#include <GAListGenome.C>
 GALIB_INSTANTIATION_PREFIX GAList<int>;
 GALIB_INSTANTIATION_PREFIX GAListGenome<int>;
 #endif

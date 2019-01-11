@@ -12,8 +12,8 @@ for the real number genome.
 #ifndef _ga_real_h_
 #define _ga_real_h_
 
-#include <ga/GAAllele.h>
-#include <ga/GA1DArrayGenome.h>
+#include <GAAllele.h>
+#include <GA1DArrayGenome.h>
 
 typedef GAAlleleSet<float> GARealAlleleSet;
 typedef GAAlleleSetArray<float> GARealAlleleSetArray;
@@ -26,7 +26,7 @@ int GARealGaussianMutator(GAGenome &, float);
 // should define INSTANTIATE_STRING_GENOME in order to force the specialization
 // for this genome.
 #if defined(INSTANTIATE_REAL_GENOME)
-#include <ga/GARealGenome.C>
+#include <GARealGenome.C>
 #endif
 
 inline void GARealUniformInitializer(GAGenome& g){

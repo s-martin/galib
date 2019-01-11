@@ -16,7 +16,7 @@
 #ifndef _ga_treetmpl_C_
 #define _ga_treetmpl_C_
 
-#include <ga/GATree.h>
+#include <GATree.h>
 
 extern GANodeBASE * _GATreeTraverse(unsigned int, unsigned int&, GANodeBASE *);
 //template <class T> void _GATreeDestroy(GANode<T> *);

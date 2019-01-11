@@ -10,7 +10,7 @@
 documentation for deriving new classes.  Comments here are implementation-
 specific details about base class member functions.
 ---------------------------------------------------------------------------- */
-#include <ga/GAGenome.h>
+#include <GAGenome.h>
 
 //   These are the default genome operators.
 // None does anything - they just post an error message to let you know that no

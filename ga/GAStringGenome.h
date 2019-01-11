@@ -10,8 +10,8 @@
 #ifndef _ga_string_h_
 #define _ga_string_h_
 
-#include <ga/GAAllele.h>
-#include <ga/GA1DArrayGenome.h>
+#include <GAAllele.h>
+#include <GA1DArrayGenome.h>
 
 typedef GAAlleleSet<char> GAStringAlleleSet;
 typedef GAAlleleSet<char> GACharacterAlleleSet;
@@ -23,7 +23,7 @@ typedef GA1DArrayAlleleGenome<char> GAStringGenome;
 // should define INSTANTIATE_STRING_GENOME in order to force the specialization
 // for this genome.
 #if defined(INSTANTIATE_STRING_GENOME)
-#include <ga/GAStringGenome.C>
+#include <GAStringGenome.C>
 #endif
 
 inline void GAStringUniformInitializer(GAGenome& g){

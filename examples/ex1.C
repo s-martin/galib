@@ -13,9 +13,9 @@ This program tries to fill the 2Dgenome with alternating 1s and 0s.
 to use if you want to generate a 'good' genome with this kind of objective 
 function.  But it does work.
 ---------------------------------------------------------------------------- */
-#include <ga/GASimpleGA.h>	// we're going to use the simple GA
-#include <ga/GA2DBinStrGenome.h> // and the 2D binary string genome
-#include <ga/std_stream.h>
+#include <GASimpleGA.h>	// we're going to use the simple GA
+#include <GA2DBinStrGenome.h> // and the 2D binary string genome
+#include <std_stream.h>
 
 #define cout STD_COUT
 

@@ -10,7 +10,7 @@ genome in these examples.
 #ifndef _genome_h_
 #define _genome_h_
 
-#include <ga/ga.h>
+#include <ga.h>
 
 float GenomeEvaluator(GAGenome&);
 void GenomeInitializer(GAGenome&);

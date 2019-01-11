@@ -4,7 +4,7 @@
 #ifndef _ga_std_stream_h_
 #define _ga_std_stream_h_
 
-#include <ga/gaconfig.h>
+#include <gaconfig.h>
 
 #if defined(GALIB_USE_STREAMS)
 #if defined(GALIB_USE_ANSI_HEADERS)

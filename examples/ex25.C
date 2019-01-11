@@ -7,9 +7,9 @@
    This example shows how to do multiple populations on a single CPU.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
-#include <ga/GA1DBinStrGenome.h>
-#include <ga/GADemeGA.h>
-#include <ga/std_stream.h>
+#include <GA1DBinStrGenome.h>
+#include <GADemeGA.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define endl STD_ENDL

@@ -20,7 +20,7 @@ step method.
 #define _PVMDemeGA_h_
 
 #include <pvm3.h>
-#include <ga/gademe.h>
+#include <gademe.h>
 
 class PVMDemeGA : public GADemeGA {
 public:

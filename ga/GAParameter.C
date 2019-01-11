@@ -14,9 +14,9 @@ implementation.
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <ga/gaconfig.h>
-#include <ga/gaerror.h>
-#include <ga/GAParameter.h>
+#include <gaconfig.h>
+#include <gaerror.h>
+#include <GAParameter.h>
 
 #define PRM_CHUNKSIZE 10
 #define BUFSIZE       1024	// size of buffer for reading pairs

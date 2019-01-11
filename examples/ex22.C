@@ -15,8 +15,8 @@ child crossover" you could use your own crossover algorithm instead.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <math.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR
@@ -28,7 +28,7 @@ child crossover" you could use your own crossover algorithm instead.
 // for some compilers (e.g. metrowerks) this must come after any
 // specializations or you will get 'multiply-defined errors when you compile.
 #if !defined(GALIB_USE_AUTO_INST)
-#include <ga/GA1DArrayGenome.C>
+#include <GA1DArrayGenome.C>
 GALIB_INSTANTIATION_PREFIX GA1DArrayGenome<float>;
 #endif
 

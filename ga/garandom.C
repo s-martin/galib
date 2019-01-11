@@ -8,7 +8,7 @@
  DESCRIPTION:
   Random number stuff for use in GAlib.
 ---------------------------------------------------------------------------- */
-#include <ga/garandom.h>
+#include <garandom.h>
 #include <time.h>
 #include <math.h>
 #include <string.h>

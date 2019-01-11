@@ -11,10 +11,10 @@
 #ifndef _ga_statistics_h_
 #define _ga_statistics_h_
 
-#include <ga/gatypes.h>
-#include <ga/gaconfig.h>
-#include <ga/GAGenome.h>
-#include <ga/GAPopulation.h>
+#include <gatypes.h>
+#include <gaconfig.h>
+#include <GAGenome.h>
+#include <GAPopulation.h>
 
 
 

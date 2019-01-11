@@ -15,15 +15,15 @@ depending on which you have on your system.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <math.h>
-#include <ga/ga.h>
-#include <ga/std_stream.h>
+#include <ga.h>
+#include <std_stream.h>
 
 #define cout STD_COUT
 #define cerr STD_CERR
 #define endl STD_ENDL
 
 #define INSTANTIATE_REAL_GENOME
-#include <ga/GARealGenome.h>
+#include <GARealGenome.h>
 
 // comment this line if you don't have MOTIF on your system
 //#define USE_MOTIF
