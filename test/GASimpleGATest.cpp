@@ -15,14 +15,20 @@
 float Objective(GAGenome& g) 
 {
     GA2DBinaryStringGenome & genome = (GA2DBinaryStringGenome &)g;
-    float score=0.0;
-    int count=0;
-    for(int i=0; i<genome.width(); i++){
-        for(int j=0; j<genome.height(); j++){
-            if(genome.gene(i,j) == 0 && count%2 == 0)
+    float score = 0.0;
+    int count = 0;
+    for (int i = 0; i < genome.width(); i++)
+    {
+        for (int j = 0; j < genome.height(); j++)
+        {
+            if (genome.gene(i, j) == 0 && count % 2 == 0)
+            {
 	            score += 1.0;
-            if(genome.gene(i,j) == 1 && count%2 != 0)
-	            score += 1.0;
+            }
+            if (genome.gene(i, j) == 1 && count % 2 != 0)
+	        {
+                   score += 1.0;
+            }
             count++;
         }
     }
@@ -33,21 +39,8 @@ BOOST_AUTO_TEST_SUITE( UnitTest )
 
 BOOST_AUTO_TEST_CASE(GASimpleGA_001)
 {
-    // for(int ii=1; ii<argc; ii++) {
-    //     if(strcmp(argv[ii++],"seed") == 0) {
-    //     GARandomSeed((unsigned int)atoi(argv[ii]));
-    //     }
-    // } 
-
-    // Declare variables for the GA parameters and set them to some default values.
-
     int width    = 10;
     int height   = 5;
-    int popsize  = 30;
-    int ngen     = 400;
-    float pmut   = 0.001;
-    float pcross = 0.9;
-
     // Now create the GA and run it.  First we create a genome of the type that
     // we want to use in the GA.  The ga doesn't operate on this genome in the
     // optimization - it just uses it to clone a population of genomes.
@@ -57,15 +50,12 @@ BOOST_AUTO_TEST_CASE(GASimpleGA_001)
     // its parameters - number of generations, mutation probability, and crossover
     // probability.  And finally we tell it to evolve itself.
     GASimpleGA ga(genome);
-    ga.populationSize(popsize);
-    ga.nGenerations(ngen);
-    ga.pMutation(pmut);
-    ga.pCrossover(pcross);
+    ga.populationSize(30);
+    ga.nGenerations(400);
+    ga.pMutation(0.001);
+    ga.pCrossover(0.9);
     ga.evolve();
 
-    // Now we print out the best genome that the GA found.
-
-    //cout << "The GA found:\n" << ga.statistics().bestIndividual() << "\n";
     std::stringstream str;
     str << ga.statistics().bestIndividual();
     BOOST_CHECK_EQUAL(str.str(), "0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n");
