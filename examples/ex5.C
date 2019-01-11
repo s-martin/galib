@@ -147,7 +147,7 @@ CompositeGenome::CompositeInitializer(GAGenome & c) {
   CompositeGenome & child = (CompositeGenome &)c;
   child.binstr().initialize();
   child.bin2dec().initialize();
-  child._evaluated = gaFalse;
+  child._evaluated = false;
 }
 
 
@@ -156,7 +156,7 @@ int
 CompositeGenome::CompositeMutator(GAGenome & c, float pmut) {
   CompositeGenome & child = (CompositeGenome &)c;
   int nmut = child.binstr().mutate(pmut) + child.bin2dec().mutate(pmut);
-  if(nmut) child._evaluated = gaFalse;
+  if(nmut) child._evaluated = false;
   return nmut;
 }
 
@@ -188,22 +188,22 @@ CompositeCrossover(const GAGenome& a, const GAGenome& b,
     CompositeGenome& bro = (CompositeGenome&)*d;
     (*strcross)(mom.binstr(), dad.binstr(), &sis.binstr(), &bro.binstr());
     (*b2dcross)(mom.bin2dec(),dad.bin2dec(), &sis.bin2dec(), &bro.bin2dec());
-    sis._evaluated = gaFalse;
-    bro._evaluated = gaFalse;
+    sis._evaluated = false;
+    bro._evaluated = false;
     n = 2;
   }
   else if(c){
     CompositeGenome& sis = (CompositeGenome&)*c;
     (*strcross)(mom.binstr(), dad.binstr(), &sis.binstr(), 0);
     (*b2dcross)(mom.bin2dec(), dad.bin2dec(), &sis.bin2dec(), 0);
-    sis._evaluated = gaFalse;
+    sis._evaluated = false;
     n = 1;
   }
   else if(d){
     CompositeGenome& bro = (CompositeGenome&)*d;
     (*strcross)(mom.binstr(), dad.binstr(), 0, &bro.binstr());
     (*b2dcross)(mom.bin2dec(), dad.bin2dec(), 0, &bro.bin2dec());
-    bro._evaluated = gaFalse;
+    bro._evaluated = false;
     n = 1;
   }
 
@@ -295,7 +295,7 @@ main(int argc, char *argv[])
   params.set(gaNscoreFilename, "bog.dat");
   params.set(gaNflushFrequency, 10);
   params.set(gaNnGenerations, 800);
-  params.parse(argc, argv, gaFalse);
+  params.parse(argc, argv, false);
 
   int i,j, n;
   char filename1[128] = "smiley.txt";

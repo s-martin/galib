@@ -24,13 +24,13 @@ GASimpleGA::registerDefaultParameters(GAParameterList& p) {
 GASimpleGA::GASimpleGA(const GAGenome& c) : GAGeneticAlgorithm(c){
   oldPop = pop->clone();
 
-  el = gaTrue;
+  el = true;
   params.add(gaNelitism, gaSNelitism, GAParameter::BOOLEAN, &el);
 }
 GASimpleGA::GASimpleGA(const GAPopulation& p) : GAGeneticAlgorithm(p){
   oldPop = pop->clone();
 
-  el = gaTrue;
+  el = true;
   params.add(gaNelitism, gaSNelitism, GAParameter::BOOLEAN, &el);
 }
 GASimpleGA::GASimpleGA(const GASimpleGA& ga) : GAGeneticAlgorithm(ga){
@@ -62,7 +62,7 @@ GASimpleGA::setptr(const char* name, const void* value){
 
   if(strcmp(name, gaNelitism) == 0 ||
      strcmp(name, gaSNelitism) == 0){
-    el = (*((int*)value) != 0 ? gaTrue : gaFalse);
+    el = (*((int*)value) != 0 ? true : false);
     status = 0;
   }
   return status;
@@ -74,7 +74,7 @@ GASimpleGA::get(const char* name, void* value) const {
 
   if(strcmp(name, gaNelitism) == 0 || 
      strcmp(name, gaSNelitism) == 0){
-    *((int*)value) = (el == gaTrue ? 1 : 0);
+    *((int*)value) = (el == true ? 1 : 0);
     status = 0;
   }
   return status;
@@ -145,7 +145,7 @@ GASimpleGA::initialize(unsigned int seed)
   GARandomSeed(seed);
 
   pop->initialize();
-  pop->evaluate(gaTrue);	// the old pop will get it when the pops switch
+  pop->evaluate(true);	// the old pop will get it when the pops switch
 //  oldPop->initialize();
 
   stats.reset(*pop);
@@ -221,7 +221,7 @@ GASimpleGA::step()
   }
 
   stats.numrep += pop->size();
-  pop->evaluate(gaTrue);	// get info about current pop for next time
+  pop->evaluate(true);	// get info about current pop for next time
 
 // If we are supposed to be elitist, carry the best individual from the old
 // population into the current population.  Be sure to check whether we are

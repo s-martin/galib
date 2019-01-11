@@ -129,7 +129,7 @@ GA2DBinaryStringGenome::resize(int w, int h)
   }
 
   nx = w; ny = h;
-  _evaluated = gaFalse;
+  _evaluated = false;
   return sz;
 }
 
@@ -151,7 +151,7 @@ GA2DBinaryStringGenome::read(STD_ISTREAM & is)
     }
   }
 
-  _evaluated = gaFalse;
+  _evaluated = false;
 
   if(is.eof() && 
      ((j < ny) ||	     // didn't get some lines
@@ -240,7 +240,7 @@ GA2DBinaryStringGenome::copy(const GA2DBinaryStringGenome & orig,
 
   for(unsigned int j=0; j<h; j++)
     GABinaryString::copy(orig, (s+j)*nx+r, (y+j)*orig.nx+x, w);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 
 
@@ -253,7 +253,7 @@ GA2DBinaryStringGenome::set(unsigned int x, unsigned int y,
 
   for(unsigned int j=0; j<h; j++)
     GABinaryString::set((y+j)*nx+x, w);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 
 
@@ -266,7 +266,7 @@ GA2DBinaryStringGenome::unset(unsigned int x, unsigned int y,
 
   for(unsigned int j=0; j<h; j++)
     GABinaryString::unset((y+j)*nx+x, w);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 
 
@@ -279,7 +279,7 @@ GA2DBinaryStringGenome::randomize(unsigned int x, unsigned int y,
 
   for(unsigned int j=0; j<h; j++)
     GABinaryString::randomize((y+j)*nx+x, w);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 
 
@@ -301,7 +301,7 @@ GA2DBinaryStringGenome::move(unsigned int x, unsigned int y,
     for(unsigned int j=0; j<h; j++)
       GABinaryString::move((y+j)*nx+x, (srcy+j)*nx+srcx, w);
   }
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 
 

@@ -36,7 +36,7 @@ GAGenome(Initializer i, Mutator m, Comparator c){
   if(i==0) i=NoInitializer;
   if(m==0) m=NoMutator;
   if(c==0) c=NoComparator;
-  _score=_fitness=0.0; _evaluated=gaFalse; _neval=0;
+  _score=_fitness=0.0; _evaluated=false; _neval=0;
   ga=0; ud=0; eval=0; evd=0;
   init=i; mutr=m; cmp=c;
   sexcross = 0;
@@ -77,11 +77,11 @@ GAGenome::copy(const GAGenome & orig){
 
 
 float 
-GAGenome::evaluate(GABoolean flag) const {
-  if(_evaluated == gaFalse || flag == gaTrue){
+GAGenome::evaluate(bool flag) const {
+  if(_evaluated == false || flag == true){
     GAGenome *This = (GAGenome*)this;
     if(eval){ This->_neval++; This->_score = (*eval)(*This); }
-    This->_evaluated = gaTrue;
+    This->_evaluated = true;
   }
   return _score; 
 }

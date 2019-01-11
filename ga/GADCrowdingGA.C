@@ -15,7 +15,7 @@ GADCrowdingGA::initialize(unsigned int seed)
   GARandomSeed(seed);
 
   pop->initialize();
-  pop->evaluate(gaTrue);
+  pop->evaluate(true);
 
   stats.reset(*pop);
 
@@ -83,7 +83,7 @@ GADCrowdingGA::step() {
     }
   } while (indpool.size()>1);
 
-  pop->evaluate(gaTrue);
+  pop->evaluate(true);
   stats.update(*pop);
 
   delete child;

@@ -54,7 +54,7 @@ main(int argc, char *argv[])
   params.set(gaNpCrossover, 0.9);	// probability of crossover 
   params.set(gaNpMutation, 0.01);	// probability of mutation
   params.set(gaNnGenerations, 4000);	// number of generations
-  params.parse(argc, argv, gaFalse);
+  params.parse(argc, argv, false);
 
 // Now create the GA and run it.  We first create a genome with the
 // operators we want.  Since we're using a template genome, we must assign

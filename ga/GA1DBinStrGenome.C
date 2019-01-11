@@ -125,7 +125,7 @@ GA1DBinaryStringGenome::resize(int l)
     for(int i=nx; i<l; i++)
       bit(i, GARandomBit());
   nx = l;
-  _evaluated = gaFalse;
+  _evaluated = false;
   return sz;
 }
 
@@ -146,7 +146,7 @@ GA1DBinaryStringGenome::read(STD_ISTREAM & is)
     if(isdigit(c)) gene(i++, ((c == '0') ? 0 : 1));
   }
 
-  _evaluated = gaFalse;
+  _evaluated = false;
 
   if(is.eof() && i < nx){
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);

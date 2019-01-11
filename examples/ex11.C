@@ -53,7 +53,7 @@ main(int argc, char *argv[])
   params.set(gaNflushFrequency, 10);	// how often to dump scores to file
   params.set(gaNscoreFilename, "bog.dat");
 //  params.read("settings.txt");	        // grab values from file first
-  params.parse(argc, argv, gaFalse); // parse command line for GAlib args
+  params.parse(argc, argv, false); // parse command line for GAlib args
 
 // Now create the GA and run it.  We first create a genome with the
 // operators we want.  Since we're using a template genome, we must assign

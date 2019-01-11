@@ -114,7 +114,7 @@ void GAErr(const GASourceLocator loc,
 // error reporting, the messages will still get stuck into the global error 
 // message string, but they will not be sent to the error stream.
 
-void GAReportErrors(GABoolean flag);
+void GAReportErrors(bool flag);
 
 // Provide a mechanism for redirecting the error messages.
 

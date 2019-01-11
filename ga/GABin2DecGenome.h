@@ -138,8 +138,8 @@ public:
   float phenotype(unsigned int n, float val);
   float phenotype(unsigned int n) const;
 
-  void encoder(GABinaryEncoder e){encode = e; _evaluated = gaFalse;}
-  void decoder(GABinaryDecoder d){decode = d; _evaluated = gaFalse;}
+  void encoder(GABinaryEncoder e){encode = e; _evaluated = false;}
+  void decoder(GABinaryDecoder d){decode = d; _evaluated = false;}
 
 protected:
   GABin2DecPhenotype * ptype;

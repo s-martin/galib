@@ -330,7 +330,7 @@ GADemeGA::initialize(unsigned int seed) {
 
   for(unsigned int i=0; i<npop; i++) {
     deme[i]->initialize();
-    deme[i]->evaluate(gaTrue);
+    deme[i]->evaluate(true);
     pstats[i].reset(*deme[i]);
     pop->individual(i).copy(deme[i]->best());
   }

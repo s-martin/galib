@@ -123,7 +123,7 @@ GA2DArrayGenome<T>::resize(int w, int h){
   }
 
   nx = w; ny = h;
-  _evaluated = gaFalse;
+  _evaluated = false;
   return this->sz;
 }
 
@@ -212,7 +212,7 @@ GA2DArrayGenome<T>::copy(const GA2DArrayGenome<T> & orig,
   for(unsigned int j=0; j<h; j++)
     GAArray<T>::copy(orig, (s+j)*nx+r, (y+j)*orig.nx+x, w);
 
-  _evaluated = gaFalse; 
+  _evaluated = false; 
 }
 
 

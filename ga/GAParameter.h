@@ -88,13 +88,13 @@ public:
   GAParameter& first(){return *(p[cur=0]);}
   GAParameter& last(){return *(p[cur=n-1]);}
   GAParameter* operator()(const char* name);
-  int parse(int& argc, char **argv, GABoolean flag=gaTrue);
+  int parse(int& argc, char **argv, bool flag=true);
 
 #ifdef GALIB_USE_STREAMS
   int write(const char* filename) const;
   int write(STD_OSTREAM & os) const;
-  int read(const char* filename, GABoolean flag=gaTrue);
-  int read(STD_ISTREAM & is, GABoolean flag=gaTrue);
+  int read(const char* filename, bool flag=true);
+  int read(STD_ISTREAM & is, bool flag=true);
 #endif
 
 protected:

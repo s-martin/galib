@@ -172,7 +172,7 @@ GAIncrementalGA::initialize(unsigned int seed)
   GARandomSeed(seed);
 
   pop->initialize();
-  pop->evaluate(gaTrue);
+  pop->evaluate(true);
 
   stats.reset(*pop);
 
@@ -256,6 +256,6 @@ GAIncrementalGA::step()
     stats.numrep += 2;
   }
 
-  pop->evaluate(gaTrue);        // allow pop-based evaluators to do their thing
+  pop->evaluate(true);        // allow pop-based evaluators to do their thing
   stats.update(*pop);		// update the statistics for this generation
 }

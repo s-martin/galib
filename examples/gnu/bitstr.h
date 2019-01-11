@@ -55,7 +55,7 @@ public:
 
   int gene(unsigned int x) const { return test(x); }
   int gene(unsigned int x, int b) 
-    { _evaluated = gaFalse; assign(x,b); return test(x); }
+    { _evaluated = false; assign(x,b); return test(x); }
 };
 
 

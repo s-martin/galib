@@ -259,7 +259,7 @@ GASteadyStateGA::initialize(unsigned int seed)
   GARandomSeed(seed);
 
   pop->initialize();
-  pop->evaluate(gaTrue);
+  pop->evaluate(true);
 
   stats.reset(*pop);
 

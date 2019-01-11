@@ -376,7 +376,7 @@ GAParameterList::write(const char* filename) const {
 // There's no global list to tell us what type things are, and we don't assume.
 //   We don't allow setting pointers using this method.
 int
-GAParameterList::read(STD_ISTREAM& is, GABoolean flag){
+GAParameterList::read(STD_ISTREAM& is, bool flag){
   int nfound = 0;
   if(n == 0) return nfound;
 
@@ -464,7 +464,7 @@ GAParameterList::read(STD_ISTREAM& is, GABoolean flag){
 	}
       }
 
-      if(!found && flag == gaTrue){
+      if(!found && flag == true){
 	strcpy(_gaerrbuf1, "");
 	strcat(_gaerrbuf1, "unrecognized variable name '");
 	strcat(_gaerrbuf1, name);
@@ -489,7 +489,7 @@ GAParameterList::read(STD_ISTREAM& is, GABoolean flag){
 }
 
 int
-GAParameterList::read(const char* filename, GABoolean flag){
+GAParameterList::read(const char* filename, bool flag){
   STD_IFSTREAM infile(filename, STD_IOS_IN);
   if(!infile){
     GAErr(GA_LOC, "GAParameterList", "read", gaErrReadError, filename);
@@ -517,7 +517,7 @@ GAParameterList::read(const char* filename, GABoolean flag){
 //   We assume that argv[0] is the name of the program, so we don't barf on 
 // it if it is not a recognized name.
 int
-GAParameterList::parse(int& argc, char *argv[], GABoolean flag){
+GAParameterList::parse(int& argc, char *argv[], bool flag){
   int nfound = 0;
   if(n == 0) return nfound;
 

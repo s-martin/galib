@@ -113,7 +113,7 @@ DCrowdingGA::step() {
     }
   } while (IndPool.size()>1);
 
-  pop->evaluate(gaTrue);
+  pop->evaluate(true);
   stats.update(*pop);	
 }
 
@@ -190,7 +190,7 @@ main(int argc, char** argv) {
   ga.pMutation(0.05);
   ga.pCrossover(1.0);
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, gaFalse);
+  ga.parameters(argc, argv, false);
 
   for (i=1; i<argc; i++){
     if(strcmp("func", argv[i]) == 0 || strcmp("f", argv[i]) == 0){

@@ -84,7 +84,7 @@ public:
 
   short gene(unsigned int x=0) const {return bit(x);}
   short gene(unsigned int x, short value) 
-    {_evaluated = gaFalse; return((bit(x) == value) ? value : bit(x,value));}
+    {_evaluated = false; return((bit(x) == value) ? value : bit(x,value));}
   short operator[](unsigned int x) {return gene(x);}
   int length() const {return nx;}
   int length(int x){resize(x); return nx;}
@@ -123,32 +123,32 @@ GA1DBinaryStringGenome::copy(const GA1DBinaryStringGenome & orig,
     if(r + l > nx) l = nx - r;
     GABinaryString::copy(orig,r,x,l);
   }
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 inline void  
 GA1DBinaryStringGenome::set(unsigned int x, unsigned int l){
   if(x + l > nx) l = nx - x;
   GABinaryString::set(x, l);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 inline void  
 GA1DBinaryStringGenome::unset(unsigned int x, unsigned int l){
   if(x + l > nx) l = nx - x;
   GABinaryString::unset(x, l);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 inline void  
 GA1DBinaryStringGenome::randomize(unsigned int x, unsigned int l){
   if(x + l > nx) l = nx - x;
   GABinaryString::randomize(x, l);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 inline void  
 GA1DBinaryStringGenome::move(unsigned int x, unsigned int srcx,unsigned int l){
   if(srcx + l > nx) l = nx - srcx;
   if(x + l > nx) l = nx - x;
   GABinaryString::move(x, srcx, l);
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 
 #endif

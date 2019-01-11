@@ -167,9 +167,9 @@ void GAResetRNG(unsigned int seed);
 int GARandomBit();
 double GAUnitGaussian();
 
-inline GABoolean GAFlipCoin(float p){
-  return((p == 1.0) ? gaTrue : (p == 0.0) ? gaFalse :
-	 ((GARandomFloat() <= p) ? gaTrue : gaFalse));
+inline bool GAFlipCoin(float p){
+  return((p == 1.0) ? true : (p == 0.0) ? false :
+	 ((GARandomFloat() <= p) ? true : false));
 }
 
 inline float GAGaussianFloat(float dev){ return (float)GAUnitGaussian()*dev; }

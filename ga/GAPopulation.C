@@ -69,8 +69,8 @@ GAPopulation::GAPopulation() {
   rawSum = rawAve = rawDev = rawVar = rawMax = rawMin = 0.0;
   fitSum = fitAve = fitDev = fitVar = fitMax = fitMin = 0.0;
   popDiv = -1.0;
-  rsorted = ssorted = evaluated = gaFalse;
-  scaled = statted = divved = selectready = gaFalse;
+  rsorted = ssorted = evaluated = false;
+  scaled = statted = divved = selectready = false;
   sortorder = HIGH_IS_BEST;
   init = DefaultInitializer;
   eval = DefaultEvaluator;
@@ -98,8 +98,8 @@ GAPopulation::GAPopulation(const GAGenome & c, unsigned int popsize) {
   rawSum = rawAve = rawDev = rawVar = rawMax = rawMin = 0.0;
   fitSum = fitAve = fitDev = fitVar = fitMax = fitMin = 0.0;
   popDiv = -1.0;
-  rsorted = ssorted = evaluated = gaFalse;
-  scaled = statted = divved = selectready = gaFalse;
+  rsorted = ssorted = evaluated = false;
+  scaled = statted = divved = selectready = false;
   sortorder = HIGH_IS_BEST;
   init = DefaultInitializer;
   eval = DefaultEvaluator;
@@ -164,13 +164,13 @@ GAPopulation::copy(const GAPopulation & arg)
   }
 
   sclscm = arg.sclscm->clone();
-  scaled = gaFalse;
-  if(arg.scaled == gaTrue) scale();
+  scaled = false;
+  if(arg.scaled == true) scale();
 
   slct = arg.slct->clone();
   slct->assign(*this);
-  selectready = gaFalse;
-  if(arg.selectready == gaTrue) prepselect();
+  selectready = false;
+  if(arg.selectready == true) prepselect();
 
   if(arg.evaldata) evaldata = arg.evaldata->clone();
   else evaldata = (GAEvalData*)0;
@@ -187,7 +187,7 @@ GAPopulation::copy(const GAPopulation & arg)
 
   sortorder = arg.sortorder;
   rsorted = arg.rsorted;
-  ssorted = gaFalse;		// we must sort at some later point
+  ssorted = false;		// we must sort at some later point
   statted = arg.statted;
   evaluated = arg.evaluated;
   divved = arg.divved;
@@ -225,7 +225,7 @@ GAPopulation::size(unsigned int popsize){
     grow(popsize);
     for(unsigned int i=n; i<popsize; i++)
       rind[i] = rind[GARandomInt(0,n-1)]->clone(GAGenome::CONTENTS);
-    rsorted = gaFalse;
+    rsorted = false;
   }
   else{
     for(unsigned int i=popsize; i<n; i++) // trash the worst ones (if sorted)
@@ -233,10 +233,10 @@ GAPopulation::size(unsigned int popsize){
   }
 
   memcpy(sind, rind, N * sizeof(GAGenome*));
-  ssorted = scaled = statted = divved = selectready = gaFalse;
+  ssorted = scaled = statted = divved = selectready = false;
   n = popsize;  
 
-  if(evaluated == gaTrue) evaluate(gaTrue);
+  if(evaluated == true) evaluate(true);
 
   return n;
 }
@@ -319,7 +319,7 @@ GAPopulation::SortOrder
 GAPopulation::order(GAPopulation::SortOrder flag) {
   if(sortorder == flag) return flag;
   sortorder = flag;
-  rsorted = ssorted = gaFalse;
+  rsorted = ssorted = false;
   return flag; 
 }
 
@@ -330,27 +330,27 @@ GAPopulation::order(GAPopulation::SortOrder flag) {
 //   We may sort either array of individuals - the array sorted by raw scores
 // or the array sorted by scaled scores.
 void 
-GAPopulation::sort(GABoolean flag, SortBasis basis) const {
+GAPopulation::sort(bool flag, SortBasis basis) const {
   GAPopulation * This = (GAPopulation *)this;
   if(basis == RAW){
-    if(rsorted == gaFalse || flag == gaTrue){
+    if(rsorted == false || flag == true){
       if(sortorder == LOW_IS_BEST)
 	GAPopulation::QuickSortAscendingRaw(This->rind, 0, n-1);
       else
 	GAPopulation::QuickSortDescendingRaw(This->rind, 0, n-1);
-      This->selectready = gaFalse;
+      This->selectready = false;
     }
-    This->rsorted = gaTrue;
+    This->rsorted = true;
   }
   else if(basis == SCALED){
-    if(ssorted == gaFalse || flag == gaTrue){
+    if(ssorted == false || flag == true){
       if(sortorder == LOW_IS_BEST)
 	GAPopulation::QuickSortAscendingScaled(This->sind, 0, n-1);
       else
 	GAPopulation::QuickSortDescendingScaled(This->sind, 0, n-1);
-      This->selectready = gaFalse;
+      This->selectready = false;
     }
-    This->ssorted = gaTrue;
+    This->ssorted = true;
   }
 }
 
@@ -364,8 +364,8 @@ GAPopulation::sort(GABoolean flag, SortBasis basis) const {
 // calculated so that the worst individual has the smallest partial sum.  All
 // of the partial sums add to 1.0.
 void
-GAPopulation::statistics(GABoolean flag) const {
-  if(statted == gaTrue && flag != gaTrue) return;
+GAPopulation::statistics(bool flag) const {
+  if(statted == true && flag != true) return;
   GAPopulation * This = (GAPopulation *)this;
 
   if(n > 0) {
@@ -400,7 +400,7 @@ GAPopulation::statistics(GABoolean flag) const {
     This->rawDev = This->rawVar = 0.0;
   }
 
-  This->statted = gaTrue;
+  This->statted = true;
 }
 
 
@@ -409,8 +409,8 @@ GAPopulation::statistics(GABoolean flag) const {
 // the values of the status members of the object.  So we allow it to work on
 // a const population.
 void
-GAPopulation::scale(GABoolean flag) const {
-  if(scaled == gaTrue && flag != gaTrue) return;
+GAPopulation::scale(bool flag) const {
+  if(scaled == true && flag != true) return;
   GAPopulation* This = (GAPopulation*)this;
 
   if(n > 0) {
@@ -446,8 +446,8 @@ GAPopulation::scale(GABoolean flag) const {
     This->fitVar = This->fitDev = 0.0;
   }
 
-  This->scaled = gaTrue;
-  This->ssorted = gaFalse;
+  This->scaled = true;
+  This->ssorted = false;
 }
 
 
@@ -465,8 +465,8 @@ GAPopulation::scale(GABoolean flag) const {
 // same, the diversity is 0.0.  We don't count the diagonals for the population
 // diversity measure.  0 means minimal diversity means all the same.
 void
-GAPopulation::diversity(GABoolean flag) const {
-  if(divved == gaTrue && flag != gaTrue) return;
+GAPopulation::diversity(bool flag) const {
+  if(divved == true && flag != true) return;
   GAPopulation* This = (GAPopulation*)this;
 
   if(n > 1) {
@@ -487,16 +487,16 @@ GAPopulation::diversity(GABoolean flag) const {
     This->popDiv = 0.0;
   }
 
-  This->divved = gaTrue;
+  This->divved = true;
 }
 
 
 void
-GAPopulation::prepselect(GABoolean flag) const {
-  if(selectready == gaTrue && flag != gaTrue) return;
+GAPopulation::prepselect(bool flag) const {
+  if(selectready == true && flag != true) return;
   GAPopulation* This = (GAPopulation*)this;
   This->slct->update();
-  This->selectready = gaTrue;
+  This->selectready = true;
 }
 
 
@@ -505,7 +505,7 @@ GAScalingScheme &
 GAPopulation::scaling(const GAScalingScheme& s){
   delete sclscm;
   sclscm = s.clone();
-  scaled = gaFalse;
+  scaled = false;
   return *sclscm;
 }
 
@@ -516,7 +516,7 @@ GAPopulation::selector(const GASelectionScheme& s) {
   delete slct;
   slct = s.clone();
   slct->assign(*this);
-  selectready = gaFalse;
+  selectready = false;
   return *slct;
 }
 
@@ -549,12 +549,12 @@ GAPopulation::replace(GAGenome * repl, int which, SortBasis basis)
 
   switch(which){
   case BEST:
-    sort(gaFalse, basis);
+    sort(false, basis);
     i = 0;
     break;
       
   case WORST:
-    sort(gaFalse, basis);
+    sort(false, basis);
     i = n-1;
     break;
 
@@ -583,19 +583,19 @@ GAPopulation::replace(GAGenome * repl, int which, SortBasis basis)
       sind[i] = repl;
       memcpy(rind, sind, N * sizeof(GAGenome*));
     }
-    rsorted = ssorted = gaFalse;	// must sort again
+    rsorted = ssorted = false;	// must sort again
 // flag for recalculate stats
-    statted = gaFalse;
+    statted = false;
 // Must flag for a new evaluation.
-    evaluated = gaFalse;
+    evaluated = false;
 // No way to do incremental update of scaling info since we don't know what the
 // scaling object will do.
-    scaled = gaFalse;
+    scaled = false;
 // *** should do an incremental update of the diversity here so we don't 
 // recalculate all of the diversities when only one is updated
-    divved = gaFalse;
+    divved = false;
 // selector needs update
-    selectready = gaFalse;
+    selectready = false;
 
 // make sure the genome has the correct genetic algorithm pointer
     if(ga) repl->geneticAlgorithm(*ga);
@@ -632,8 +632,8 @@ GAGenome *
 GAPopulation::remove(int i, SortBasis basis)
 {
   GAGenome * removed=(GAGenome *)0;
-  if(i == BEST) { sort(gaFalse, basis); i = 0; }
-  else if(i == WORST) { sort(gaFalse, basis); i = n-1; }
+  if(i == BEST) { sort(false, basis); i = 0; }
+  else if(i == WORST) { sort(false, basis); i = n-1; }
   else if(i == RANDOM) i = GARandomInt(0,n-1);
   else if(i < 0 || i >= (int)n) return removed;
 
@@ -641,21 +641,21 @@ GAPopulation::remove(int i, SortBasis basis)
     removed = rind[i];
     memmove(&(rind[i]), &(rind[i+1]), (n-i-1)*sizeof(GAGenome *));
     memcpy(sind, rind, N * sizeof(GAGenome*));
-    ssorted = gaFalse;
+    ssorted = false;
   }
   else if(basis == SCALED){
     removed = sind[i];
     memmove(&(sind[i]), &(sind[i+1]), (n-i-1)*sizeof(GAGenome *));
     memcpy(rind, sind, N * sizeof(GAGenome*));
-    rsorted = gaFalse;
+    rsorted = false;
   }
   else return removed;
 
   n--;
-  evaluated = gaFalse;
+  evaluated = false;
 
 // *** should be smart about these and do incremental update?
-  scaled = statted = divved = selectready = gaFalse;
+  scaled = statted = divved = selectready = false;
 
   return removed;
 }
@@ -707,8 +707,8 @@ GAPopulation::add(GAGenome* c)
   if(ga) rind[n]->geneticAlgorithm(*ga);
   n++;
 
-  rsorted = ssorted = gaFalse;	// may or may not be true, but must be sure
-  evaluated = scaled = statted = divved = selectready = gaFalse;
+  rsorted = ssorted = false;	// may or may not be true, but must be sure
+  evaluated = scaled = statted = divved = selectready = false;
 
   return c;
 }

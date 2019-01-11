@@ -108,10 +108,10 @@ GAResetRNG(unsigned int s) {
 // certain.)
 double
 GAUnitGaussian(){
-  static GABoolean cached=gaFalse;
+  static bool cached=false;
   static double cachevalue;
-  if(cached == gaTrue){
-    cached = gaFalse;
+  if(cached == true){
+    cached = false;
     return cachevalue;
   }
 
@@ -127,7 +127,7 @@ GAUnitGaussian(){
   else           factor = 0.0;	// should not happen, but might due to roundoff
 
   cachevalue = var1 * factor;
-  cached = gaTrue;
+  cached = true;
 
   return (var2 * factor);
 }

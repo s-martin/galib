@@ -74,7 +74,7 @@ main(int argc, char *argv[])
   params.set(gaNscoreFilename, "bog.dat");
   params.set(gaNscoreFrequency, 10);
   params.set(gaNflushFrequency, 50);
-  params.parse(argc, argv, gaFalse);   // don't complain about unknown args
+  params.parse(argc, argv, false);   // don't complain about unknown args
 
 // Create a user data object.  We'll keep all of the information for this 
 // program in this object.

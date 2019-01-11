@@ -67,7 +67,7 @@ main(int argc, char** argv)
   ga.scoreFrequency(1);		// keep the scores of every generation
   ga.flushFrequency(10);	// specify how often to write the score to disk
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, gaTrue); // parse commands, complain if bogus args
+  ga.parameters(argc, argv, true); // parse commands, complain if bogus args
 
   ga.initialize();
 

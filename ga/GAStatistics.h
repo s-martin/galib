@@ -82,8 +82,8 @@ public:
   const char* scoreFilename() const { return scorefile; }
   int selectScores(int w){ return which = w; }
   int selectScores() const { return which; }
-  GABoolean recordDiversity(GABoolean flag){ return dodiv=flag; }
-  GABoolean recordDiversity() const { return dodiv; }
+  bool recordDiversity(bool flag){ return dodiv=flag; }
+  bool recordDiversity() const { return dodiv; }
   void flushScores();
 
   void update(const GAPopulation & pop);
@@ -111,7 +111,7 @@ public:
 protected:
   unsigned int curgen;		// current generation number
   unsigned int scoreFreq;	// how often (in generations) to record scores
-  GABoolean dodiv;		// should we record diversity?
+  bool dodiv;		// should we record diversity?
 
   float maxever;		// maximum score since initialization
   float minever;		// minimum score since initialization
@@ -147,7 +147,7 @@ protected:
 
   void setConvergence(float);
   void setScore(const GAPopulation&);
-  void updateBestIndividual(const GAPopulation&, GABoolean flag=gaFalse);
+  void updateBestIndividual(const GAPopulation&, bool flag=false);
   void writeScores();
   void resizeScores(unsigned int);
 

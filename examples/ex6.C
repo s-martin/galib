@@ -64,7 +64,7 @@ main(int argc, char *argv[])
   params.set(gaNscoreFilename, "bog.dat");
   params.set(gaNscoreFrequency, 10); // record score every 10th generation
   params.set(gaNflushFrequency, 10); // dump scores every 10th recorded score
-  params.parse(argc, argv, gaFalse); // Parse the command line for GAlib args.
+  params.parse(argc, argv, false); // Parse the command line for GAlib args.
 
 // Now create the GA and run it.  We first create a chromsome with the
 // operators we want.  Once we have the genome set up, create the genetic 

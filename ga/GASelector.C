@@ -36,7 +36,7 @@ GARankSelector::select() const {
 
   GAPopulation::SortBasis basis = 
     (which == SCALED ? GAPopulation::SCALED : GAPopulation::RAW);
-  pop->sort(gaFalse, basis);
+  pop->sort(false, basis);
   if(which == SCALED){
     for(i=1; i<pop->size() &&
 	pop->best(i,basis).fitness() == pop->best(0,basis).fitness(); i++)
@@ -121,7 +121,7 @@ GARouletteWheelSelector::update() {
     }
     else if((pop->max() > 0 && pop->min() >= 0) ||
        (pop->max() <= 0 && pop->min() < 0)){
-      pop->sort(gaFalse, GAPopulation::RAW);
+      pop->sort(false, GAPopulation::RAW);
       if(pop->order() == GAPopulation::HIGH_IS_BEST){
 	psum[0] = pop->individual(0, GAPopulation::RAW).score();
 	for(i=1; i<n; i++)
@@ -152,7 +152,7 @@ GARouletteWheelSelector::update() {
     }
     else if((pop->fitmax() > 0 && pop->fitmin() >= 0) ||
 	    (pop->fitmax() <= 0 && pop->fitmin() < 0)){
-      pop->sort(gaFalse, GAPopulation::SCALED);
+      pop->sort(false, GAPopulation::SCALED);
       if(pop->order() == GAPopulation::HIGH_IS_BEST){
 	psum[0] = pop->individual(0, GAPopulation::SCALED).fitness();
 	for(i=1; i<n; i++)

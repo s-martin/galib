@@ -56,7 +56,7 @@ main(int argc, char *argv[])
   params.set(gaNscoreFrequency, 10);	// how often to record scores
   params.set(gaNflushFrequency, 50);	// how often to dump scores to file
   params.set(gaNscoreFilename, "bog.dat");
-  params.parse(argc, argv, gaFalse);    // parse command line for GAlib args
+  params.parse(argc, argv, false);    // parse command line for GAlib args
 
   const int SIMPLE=0, STEADY_STATE=1, INCREMENTAL=2;
   int whichGA = SIMPLE;

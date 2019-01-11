@@ -165,7 +165,7 @@ GA3DArrayGenome<T>::resize(int w, int h, int d)
   }
 
   nx = w; ny = h; nz = d;
-  _evaluated = gaFalse;
+  _evaluated = false;
   return this->sz;
 }
 
@@ -274,7 +274,7 @@ copy(const GA3DArrayGenome<T> & orig,
 		       (t+k)*ny*nx + (s+j)*nx + r,
 		       (z+k)*orig.ny*orig.nx + (y+j)*orig.nx + x, w);
 
-  _evaluated = gaFalse;
+  _evaluated = false;
 }
 
 

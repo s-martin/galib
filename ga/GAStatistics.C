@@ -33,7 +33,7 @@ GAStatistics::GAStatistics() {
   divCur = -1.0;
 
   scoreFreq = gaDefScoreFrequency1;
-  dodiv = gaFalse;		// default is do not calculate diversity
+  dodiv = false;		// default is do not calculate diversity
 
   nconv=0; Nconv = 10;
   cscore = new float[Nconv]; memset(cscore, 0, Nconv*sizeof(float));
@@ -164,11 +164,11 @@ GAStatistics::copy(const GAStatistics & orig){
 // comparator to do the comparison.
 void
 GAStatistics::
-updateBestIndividual(const GAPopulation & pop, GABoolean flag){
+updateBestIndividual(const GAPopulation & pop, bool flag){
   if(boa == (GAPopulation *)0 || boa->size() == 0) return; // do nothing
   if(pop.order() != boa->order()) boa->order(pop.order());
 
-  if(flag == gaTrue){		// reset the BOA array
+  if(flag == true){		// reset the BOA array
     int j=0;
     for(int i=0; i<boa->size(); i++){
       boa->best(i).copy(pop.best(j));
@@ -196,7 +196,7 @@ updateBestIndividual(const GAPopulation & pop, GABoolean flag){
 	  if(pop.best(i) == boa->best(j)) break;
 	  if(pop.best(i).score() > boa->best(j).score()){
 	    boa->worst().copy(pop.best(i));        // replace worst individual
-	    boa->sort(gaTrue, GAPopulation::RAW);  // re-sort the population
+	    boa->sort(true, GAPopulation::RAW);  // re-sort the population
 	    break;
 	  }
 	}
@@ -212,7 +212,7 @@ updateBestIndividual(const GAPopulation & pop, GABoolean flag){
 	  if(pop.best(i) == boa->best(j)) break;
 	  if(pop.best(i).score() < boa->best(j).score()){
 	    boa->worst().copy(pop.best(i));        // replace worst individual
-	    boa->sort(gaTrue, GAPopulation::RAW);  // re-sort the population
+	    boa->sort(true, GAPopulation::RAW);  // re-sort the population
 	    break;
 	  }
 	}
@@ -275,12 +275,12 @@ GAStatistics::reset(const GAPopulation & pop){
 //  cscore[0] = pop.max();
 //  setConvergence(maxScore[0]);
 
-  updateBestIndividual(pop, gaTrue);
+  updateBestIndividual(pop, true);
   aveCur = aveInit = pop.ave();
   maxCur = maxInit = maxever = pop.max();
   minCur = minInit = minever = pop.min();
   devCur = devInit = pop.dev();
-  divCur = divInit = ((dodiv == gaTrue) ? pop.div() : (float)-1.0);
+  divCur = divInit = ((dodiv == true) ? pop.div() : (float)-1.0);
 
   on = pop.ave();
   offmax = pop.max();
@@ -311,7 +311,7 @@ GAStatistics::setScore(const GAPopulation& pop){
   maxCur = pop.max();
   minCur = pop.min();
   devCur = pop.dev();
-  divCur = ((dodiv == gaTrue) ? pop.div() : (float)-1.0);
+  divCur = ((dodiv == true) ? pop.div() : (float)-1.0);
 
   if(Nscrs == 0) return;
   gen[nscrs] = curgen;

@@ -28,7 +28,7 @@ main(int argc, char *argv[]) {
   params.set(gaNflushFrequency, 5);
   params.set(gaNpMutation, 0.001);
   params.set(gaNpCrossover, 0.8);
-  params.parse(argc, argv, gaFalse);
+  params.parse(argc, argv, false);
 
   int i,j;
   char filename[128] = "smiley.txt";

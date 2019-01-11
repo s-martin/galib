@@ -12,13 +12,6 @@
 typedef float GAProbability;
 typedef float GAProb;
 
-// This enforces return values and arguments to functions that want strict
-// boolean arguments.
-typedef enum _GABoolean {
-  gaFalse=0,
-  gaTrue
-} GABoolean, GABool;
-
 typedef enum _GAStatus {
   gaSuccess=0,
   gaFailure=-1

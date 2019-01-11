@@ -114,7 +114,7 @@ main(int argc, char** argv)
   params.set(gaNscoreFrequency, 10);
   params.set(gaNflushFrequency, 50);
   params.set(gaNselectScores, (int)GAStatistics::AllScores);
-  params.parse(argc, argv, gaFalse);
+  params.parse(argc, argv, false);
 
 
 // Now do a genetic algorithm for each one of the genomes that we created.

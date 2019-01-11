@@ -64,7 +64,7 @@ public:
   }
   T & gene(unsigned int x, unsigned int y, unsigned int z, const T & value){
     if(this->a[z*ny*nx + y*nx + x] != value){ 
-      _evaluated = gaFalse;
+      _evaluated = false;
       this->a[z*ny*nx + y*nx + x] = value;
     }
     return this->a[z*ny*nx + y*nx + x];
@@ -93,7 +93,7 @@ public:
   void swap(unsigned int a, unsigned int b, unsigned int c,
 	    unsigned int d, unsigned int e, unsigned int f){
     GAArray<T>::swap(c*ny*nx+b*nx+a, f*ny*nx+e*nx+d);
-    _evaluated = gaFalse; 
+    _evaluated = false; 
   }
 
 protected:

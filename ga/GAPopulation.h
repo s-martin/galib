@@ -45,7 +45,7 @@ physical state.  We sort from best (0th individual) to worst (n-1).  The sort
 figures out whether high is best or low is best.
 
 evaluate
-  If you want to force an evaluation, pass gaTrue to the evaluate member
+  If you want to force an evaluation, pass true to the evaluate member
 function.  Otherwise the population will use its internal state to determine
 whether or not it needs to do the evaluation.
 
@@ -94,12 +94,12 @@ public:
   int compact();
 
   void touch() 
-    { rsorted=ssorted=selectready=divved=statted=scaled=evaluated=gaFalse; }
-  void statistics(GABoolean flag=gaFalse) const;
-  void diversity(GABoolean flag=gaFalse) const;
-  void scale(GABoolean flag=gaFalse) const;
-  void prepselect(GABoolean flag=gaFalse) const;
-  void sort(GABoolean flag=gaFalse, SortBasis basis=RAW) const;
+    { rsorted=ssorted=selectready=divved=statted=scaled=evaluated=false; }
+  void statistics(bool flag=false) const;
+  void diversity(bool flag=false) const;
+  void scale(bool flag=false) const;
+  void prepselect(bool flag=false) const;
+  void sort(bool flag=false, SortBasis basis=RAW) const;
 
   float sum() const {if(!statted) statistics(); return rawSum;}
   float ave() const {if(!statted) statistics(); return rawAve;}
@@ -118,16 +118,16 @@ public:
   float fitdev() const {if(!scaled) scale(); return fitDev;}
 
   int nevals() const { return neval; }
-  void evaluate(GABoolean flag=gaFalse) {
-    if(evaluated == gaFalse || flag == gaTrue){
+  void evaluate(bool flag=false) {
+    if(evaluated == false || flag == true){
       (*eval)(*this); neval++;
-      scaled = statted = divved = rsorted = ssorted = gaFalse;
+      scaled = statted = divved = rsorted = ssorted = false;
     }
-    evaluated = gaTrue;
+    evaluated = true;
   }
   Evaluator evaluator() const {return eval;}
   Evaluator evaluator(Evaluator e)
-    { evaluated = gaFalse; return eval=e; }
+    { evaluated = false; return eval=e; }
   void initialize() { neval = 0; (*init)(*this); touch(); }
   Initializer initializer() const {return init;}
   Initializer initializer(Initializer i)
@@ -139,7 +139,7 @@ public:
   GASelectionScheme & selector(const GASelectionScheme&);
   GAScalingScheme & scaling() const {
     GAPopulation* This = (GAPopulation*)this;
-    This->scaled=gaFalse;
+    This->scaled=false;
     return *sclscm; 
   }
   GAScalingScheme & scaling(const GAScalingScheme&);
@@ -154,12 +154,12 @@ public:
 
   GAGenome& best(unsigned int i=0, SortBasis basis=RAW) const {
     if(basis == SCALED) scale();
-    sort(gaFalse, basis);
+    sort(false, basis);
     return ((basis == RAW) ? *(rind[i]) : *(sind[i])); 
   }
   GAGenome& worst(unsigned int i=0, SortBasis basis=RAW) const {
     if(basis == SCALED) scale();
-    sort(gaFalse, basis); 
+    sort(false, basis); 
     return ((basis == RAW) ? *(rind[n-1-i]) : *(sind[n-1-i]));
   }
   GAGenome& individual(unsigned int i, SortBasis basis=RAW) const 
@@ -183,13 +183,13 @@ protected:
   unsigned int csz;		// how big are chunks we allocate?
   unsigned int n, N;		// how many are in the population, allocated
   SortOrder sortorder;		// is best a high score or a low score?
-  GABoolean rsorted;		// are the individuals sorted? (raw)
-  GABoolean ssorted;		// are the individuals sorted? (scaled)
-  GABoolean scaled;		// has the population been scaled?
-  GABoolean statted;		// are the stats valid?
-  GABoolean evaluated;		// has the population been evaluated?
-  GABoolean divved;		// has the population diversity been measured?
-  GABoolean selectready;	// has the selector been updated?
+  bool rsorted;		// are the individuals sorted? (raw)
+  bool ssorted;		// are the individuals sorted? (scaled)
+  bool scaled;		// has the population been scaled?
+  bool statted;		// are the stats valid?
+  bool evaluated;		// has the population been evaluated?
+  bool divved;		// has the population diversity been measured?
+  bool selectready;	// has the selector been updated?
   float rawSum, rawAve;		// sum, ave of the population's objectives
   float rawMax, rawMin;		// max, min of the population's objectives
   float rawVar, rawDev;		// variance, standard deviation

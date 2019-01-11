@@ -33,8 +33,8 @@ public:
   virtual int setptr(const char* name, const void* value);
   virtual int get(const char* name, void* value) const;
 
-  GABoolean elitist() const {return el;}
-  GABoolean elitist(GABoolean flag)
+  bool elitist() const {return el;}
+  bool elitist(bool flag)
     {params.set(gaNelitism, (int)flag); return el=flag;}
 
   virtual int minimaxi() const {return minmax;}
@@ -55,7 +55,7 @@ public:
 
 protected:
   GAPopulation *oldPop;		// current and old populations
-  GABoolean el;			// are we elitist?
+  bool el;			// are we elitist?
 };
 
 

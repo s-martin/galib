@@ -189,7 +189,7 @@ main(int argc, char** argv)
   ga.flushFrequency(50);	// specify how often to write the score to disk
   ga.selectScores(GAStatistics::AllScores);
   ga.parameters("settings.txt"); // read parameters from settings file
-  ga.parameters(argc, argv, gaTrue); // parse commands, complain if bogus args
+  ga.parameters(argc, argv, true); // parse commands, complain if bogus args
   ga.evolve(seed);
 
   ofstream outfile;

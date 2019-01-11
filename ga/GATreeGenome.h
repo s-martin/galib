@@ -53,18 +53,18 @@ public:
 // Here we do inlined versions of the access members of the super class.  We
 // do our own here so that we can set/unset the _evaluated flag appropriately.
 
-  int destroy() { _evaluated = gaFalse; return GATree<T>::destroy(); }
+  int destroy() { _evaluated = false; return GATree<T>::destroy(); }
   int swaptree(GATree<T> * t)
-    { _evaluated = gaFalse; return GATree<T>::swaptree(t); }
+    { _evaluated = false; return GATree<T>::swaptree(t); }
   int swaptree(unsigned int i, unsigned int j)
-    { _evaluated = gaFalse; return GATree<T>::swaptree(i,j); }
+    { _evaluated = false; return GATree<T>::swaptree(i,j); }
   int swap(unsigned int i, unsigned int j)
-    { _evaluated = gaFalse; return GATree<T>::swap(i,j); }
-  GATree<T> * remove() { _evaluated = gaFalse; return GATree<T>::remove(); }
+    { _evaluated = false; return GATree<T>::swap(i,j); }
+  GATree<T> * remove() { _evaluated = false; return GATree<T>::remove(); }
   int insert(GATree<T> * t, GATreeBASE::Location where=GATreeBASE::BELOW)
-    { _evaluated = gaFalse; return GATree<T>::insert(t, where); }
+    { _evaluated = false; return GATree<T>::insert(t, where); }
   int insert(const T & t, GATreeBASE::Location where=GATreeBASE::BELOW)
-    { _evaluated = gaFalse; return GATree<T>::insert(t, where); }
+    { _evaluated = false; return GATree<T>::insert(t, where); }
 };
 
 #ifdef GALIB_USE_BORLAND_INST

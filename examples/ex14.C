@@ -144,7 +144,7 @@ RobotPathGenome::Initializer(GAGenome& g) {
   RobotPathGenome & genome = (RobotPathGenome &)g;
   for(int i=0; i<genome.npaths(); i++)
     genome.path(i).initialize();
-  genome._evaluated = gaFalse;
+  genome._evaluated = false;
 }
 
 int 
@@ -153,7 +153,7 @@ RobotPathGenome::Mutator(GAGenome& g, float pmut) {
   int nMut = 0;
   for(int i=0; i<genome.npaths(); i++)
     nMut += genome.path(i).mutate(pmut);
-  if(nMut) genome._evaluated = gaFalse;
+  if(nMut) genome._evaluated = false;
   return nMut;
 }
 
@@ -199,8 +199,8 @@ Crossover(const GAGenome& a, const GAGenome& b, GAGenome* c, GAGenome* d) {
     for(int i=0; i<mom.npaths(); i++)
       GAListGenome<int>::PartialMatchCrossover(mom.path(i), dad.path(i),
 					       &sis.path(i), &bro.path(i));
-    sis._evaluated = gaFalse;
-    bro._evaluated = gaFalse;
+    sis._evaluated = false;
+    bro._evaluated = false;
     n=2;
   }
   else if(c) {
@@ -208,7 +208,7 @@ Crossover(const GAGenome& a, const GAGenome& b, GAGenome* c, GAGenome* d) {
     for(int i=0; i<mom.npaths(); i++)
       GAListGenome<int>::PartialMatchCrossover(mom.path(i), dad.path(i),
 					       &sis.path(i), 0);
-    sis._evaluated = gaFalse;
+    sis._evaluated = false;
     n=1;
   }
   else if(d) {
@@ -216,7 +216,7 @@ Crossover(const GAGenome& a, const GAGenome& b, GAGenome* c, GAGenome* d) {
     for(int i=0; i<mom.npaths(); i++)
       GAListGenome<int>::PartialMatchCrossover(mom.path(i), dad.path(i),
 					       0, &bro.path(i));
-    bro._evaluated = gaFalse;
+    bro._evaluated = false;
     n=1;
   }
   return n;

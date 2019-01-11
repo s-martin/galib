@@ -79,8 +79,8 @@ extern float gaDefPMig;
 extern int   gaDefNMig;
 extern int   gaDefSelectScores;
 extern int   gaDefMiniMaxi;
-extern GABoolean gaDefDivFlag;
-extern GABoolean gaDefElitism;
+extern bool gaDefDivFlag;
+extern bool gaDefElitism;
 extern int   gaDefSeed;
 
 
@@ -112,15 +112,15 @@ class GAGeneticAlgorithm : public GAID {
 public:
   GADefineIdentity("GAIncrementalGA", GAID::BaseGA);
 
-  typedef GABoolean (*Terminator)(GAGeneticAlgorithm & ga);
+  typedef bool (*Terminator)(GAGeneticAlgorithm & ga);
 
   enum { MINIMIZE=-1, MAXIMIZE=1 };
 
   static GAParameterList& registerDefaultParameters(GAParameterList&);
 
-  static GABoolean TerminateUponGeneration(GAGeneticAlgorithm &);
-  static GABoolean TerminateUponConvergence(GAGeneticAlgorithm &);
-  static GABoolean TerminateUponPopConvergence(GAGeneticAlgorithm &);
+  static bool TerminateUponGeneration(GAGeneticAlgorithm &);
+  static bool TerminateUponConvergence(GAGeneticAlgorithm &);
+  static bool TerminateUponPopConvergence(GAGeneticAlgorithm &);
 
 public:
   GAGeneticAlgorithm(const GAGenome&);
@@ -129,7 +129,7 @@ public:
   virtual ~GAGeneticAlgorithm();
   virtual void copy(const GAGeneticAlgorithm&);
 
-  GABoolean done(){ return (*cf)(*this); }
+  bool done(){ return (*cf)(*this); }
   virtual void initialize(unsigned int seed=0) =0;
   virtual void step() =0;
   virtual void evolve(unsigned int seed=0){
@@ -151,10 +151,10 @@ public:
 
   const GAParameterList& parameters() const { return params; }
   const GAParameterList& parameters(const GAParameterList&);
-  const GAParameterList& parameters(int&, char **, GABoolean flag=gaFalse);
+  const GAParameterList& parameters(int&, char **, bool flag=false);
 #ifdef GALIB_USE_STREAMS
-  const GAParameterList& parameters(const char* filename, GABoolean f=gaFalse);
-  const GAParameterList& parameters(STD_ISTREAM &, GABoolean flag=gaFalse);
+  const GAParameterList& parameters(const char* filename, bool f=false);
+  const GAParameterList& parameters(STD_ISTREAM &, bool flag=false);
 #endif
   virtual int get(const char*, void*) const;
   virtual int setptr(const char*, const void*);
@@ -209,8 +209,8 @@ public:
   int selectScores(){return stats.selectScores();}
   int selectScores(int w)
     {params.set(gaNselectScores, w); return stats.selectScores(w);}
-  GABoolean recordDiversity() const {return stats.recordDiversity();}
-  GABoolean recordDiversity(GABoolean f)
+  bool recordDiversity() const {return stats.recordDiversity();}
+  bool recordDiversity(bool f)
     {params.set(gaNrecordDiversity, (int)f); return stats.recordDiversity(f);}
 
   virtual const GAPopulation& population() const {return *pop;}

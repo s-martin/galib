@@ -72,7 +72,7 @@ public:
     return bit(z*ny*nx + y*nx + x);
   }
   short gene(unsigned int x, unsigned int y, unsigned int z, short value) {
-    _evaluated = gaFalse;
+    _evaluated = false;
     return((bit(z*ny*nx+y*nx+x) == value) ? value : bit(z*ny*nx+y*nx+x,value));
   }
   int width() const {return nx;}

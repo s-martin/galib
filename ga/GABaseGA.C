@@ -31,8 +31,8 @@ float gaDefPMig             = 0.1;
 int   gaDefNMig             = 5;
 int   gaDefSelectScores     = GAStatistics::Maximum;
 int   gaDefMiniMaxi         = 1;
-GABoolean gaDefDivFlag      = gaFalse;
-GABoolean gaDefElitism      = gaTrue;
+bool gaDefDivFlag      = false;
+bool gaDefElitism      = true;
 int   gaDefSeed             = 0;
 
 
@@ -44,29 +44,29 @@ const char* GAConfig() { return rcsid; }
 
 
 // Here are a few termination functions that you can use.  Terminators return
-// gaTrue if the algorithm should finish, gaFalse otherwise.
-GABoolean
+// true if the algorithm should finish, false otherwise.
+bool
 GAGeneticAlgorithm::TerminateUponGeneration(GAGeneticAlgorithm & ga){
-  return(ga.generation() < ga.nGenerations() ? gaFalse : gaTrue);
+  return(ga.generation() < ga.nGenerations() ? false : true);
 }
 
 // If we are maximizing, then terminate when the convergence has exceeded the
 // specified convergence.  If we are minimizing, then terminate when the 
 // convergence has dropped below the specified convergence.
-GABoolean 
+bool 
 GAGeneticAlgorithm::TerminateUponConvergence(GAGeneticAlgorithm & ga){
-  GABoolean val = gaFalse;
+  bool val = false;
   if(ga.minimaxi() == GAGeneticAlgorithm::MINIMIZE) {
     if(ga.convergence() == 0 || ga.convergence() > ga.pConvergence())
-      val = gaFalse;
+      val = false;
     else 
-      val = gaTrue;
+      val = true;
   }
   else {
     if(ga.convergence() < ga.pConvergence())
-      val = gaFalse;
+      val = false;
     else 
-      val = gaTrue;
+      val = true;
   }
   return val;
 }
@@ -84,9 +84,9 @@ GAGeneticAlgorithm::TerminateUponConvergence(GAGeneticAlgorithm & ga){
 // determine whether the population has converged.  If we are maximizing, then
 // check to see if the ratio exceeds the convergence.  If we are minimizing, 
 // then check to see if the ratio has dropped below the convergence.
-GABoolean 
+bool 
 GAGeneticAlgorithm::TerminateUponPopConvergence(GAGeneticAlgorithm & ga){
-  GABoolean val = gaFalse;
+  bool val = false;
 
   if(ga.statistics().current(GAStatistics::Maximum) == 0) {
     return val;
@@ -98,15 +98,15 @@ GAGeneticAlgorithm::TerminateUponPopConvergence(GAGeneticAlgorithm & ga){
 
   if(ga.minimaxi() == GAGeneticAlgorithm::MINIMIZE) {
     if(ratio <= ga.pConvergence())
-      val = gaTrue;
+      val = true;
     else
-      val = gaFalse;
+      val = false;
   }
   else {
     if(ratio >= ga.pConvergence())
-      val = gaTrue;
+      val = true;
     else
-      val = gaFalse;
+      val = false;
   }
 
   return val;
@@ -291,7 +291,7 @@ GAGeneticAlgorithm::parameters(const GAParameterList& list){
 }
 
 const GAParameterList&
-GAGeneticAlgorithm::parameters(int& argc, char **argv, GABoolean flag){
+GAGeneticAlgorithm::parameters(int& argc, char **argv, bool flag){
   params.parse(argc, argv, flag);	// get the args we understand
   for(int i=0; i<params.size(); i++)
     setptr(params[i].fullname(), params[i].value());
@@ -300,7 +300,7 @@ GAGeneticAlgorithm::parameters(int& argc, char **argv, GABoolean flag){
 
 #ifdef GALIB_USE_STREAMS
 const GAParameterList&
-GAGeneticAlgorithm::parameters(const char* filename, GABoolean flag){
+GAGeneticAlgorithm::parameters(const char* filename, bool flag){
   params.read(filename, flag);
   for(int i=0; i<params.size(); i++)
     setptr(params[i].fullname(), params[i].value());
@@ -308,7 +308,7 @@ GAGeneticAlgorithm::parameters(const char* filename, GABoolean flag){
 }
 
 const GAParameterList&
-GAGeneticAlgorithm::parameters(STD_ISTREAM& is, GABoolean flag){
+GAGeneticAlgorithm::parameters(STD_ISTREAM& is, bool flag){
   params.read(is, flag);
   for(int i=0; i<params.size(); i++)
     setptr(params[i].fullname(), params[i].value());
@@ -415,7 +415,7 @@ GAGeneticAlgorithm::setptr(const char* name, const void* value){
 #ifdef GA_DEBUG
     cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '" << *((int*)value) << "'\n";
 #endif
-    stats.recordDiversity(*((int*)value) ? gaTrue : gaFalse);
+    stats.recordDiversity(*((int*)value) ? true : false);
     status = 0;
   }
   else if(strcmp(name,gaNselectScores) == 0 ||

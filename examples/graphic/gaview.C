@@ -423,7 +423,7 @@ UpdateCounter(GAGeneticAlgorithm* ga) {
 
 Boolean
 Evolve(int n){
-  if((n < 0 && theAppData.ga->done() == gaFalse) || 
+  if((n < 0 && theAppData.ga->done() == false) || 
      theAppData.ga->generation() < n){
     theAppData.ga->step();
     DrawCB(theAppData.canvas, (XtPointer)&theAppData, 0);

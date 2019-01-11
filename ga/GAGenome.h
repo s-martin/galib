@@ -220,7 +220,7 @@ public:
 public:
   int nevals() const {return _neval;}
   float score() const { evaluate(); return _score; }
-  float score(float s){ _evaluated=gaTrue; return _score=s; }
+  float score(float s){ _evaluated=true; return _score=s; }
   float fitness(){return _fitness;}
   float fitness(float f){return _fitness = f;}
 
@@ -234,11 +234,11 @@ public:
   GAEvalData * evalData(const GAEvalData& o)
     {delete evd; evd = o.clone(); return evd;}
 
-  float evaluate(GABoolean flag = gaFalse) const;
+  float evaluate(bool flag = false) const;
   Evaluator evaluator() const {return eval;}
-  Evaluator evaluator(Evaluator f) { _evaluated=gaFalse; return(eval=f); }
+  Evaluator evaluator(Evaluator f) { _evaluated=false; return(eval=f); }
 
-  void initialize(){_evaluated=gaFalse; _neval=0; (*init)(*this);}
+  void initialize(){_evaluated=false; _neval=0; (*init)(*this);}
   Initializer initializer() const {return init;}
   Initializer initializer(Initializer op){return (init=op);}
 
@@ -258,7 +258,7 @@ public:
 protected:
   float _score;			// value returned by the objective function
   float _fitness;		// (possibly scaled) fitness score
-  GABoolean _evaluated;		// has this genome been evaluated?
+  bool _evaluated;		// has this genome been evaluated?
   unsigned int _neval;		// how many evaluations since initialization?
   GAGeneticAlgorithm* ga;	// the ga that is using this genome
   void* ud;		        // pointer to user data

@@ -132,7 +132,7 @@ GA1DArrayGenome<T>::resize(int len)
   }
 
   nx = GAArray<T>::size(len);
-  _evaluated = gaFalse;
+  _evaluated = false;
   return this->sz;
 }
 

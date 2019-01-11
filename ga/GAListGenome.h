@@ -54,14 +54,14 @@ public:
 // Here we do inlined versions of the access members of the super class.  We
 // do our own here so that we can set/unset the _evaluated flag appropriately.
 
-  int destroy() { _evaluated = gaFalse; return GAList<T>::destroy(); }
+  int destroy() { _evaluated = false; return GAList<T>::destroy(); }
   int swap(unsigned int i, unsigned int j)
-    { _evaluated = gaFalse; return GAList<T>::swap(i,j); }
-  T * remove() { _evaluated = gaFalse; return GAList<T>::remove(); }
+    { _evaluated = false; return GAList<T>::swap(i,j); }
+  T * remove() { _evaluated = false; return GAList<T>::remove(); }
   int insert(GAList<T> * t, GAListBASE::Location where=GAListBASE::AFTER)
-    { _evaluated = gaFalse; return GAList<T>::insert(t, where); }
+    { _evaluated = false; return GAList<T>::insert(t, where); }
   int insert(const T & t, GAListBASE::Location where=GAListBASE::AFTER)
-    { _evaluated = gaFalse; return GAList<T>::insert(t, where); }
+    { _evaluated = false; return GAList<T>::insert(t, where); }
 };
 
 #ifdef GALIB_USE_BORLAND_INST

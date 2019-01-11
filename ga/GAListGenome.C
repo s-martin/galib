@@ -116,7 +116,7 @@ GAListGenome<T>::equal(const GAGenome & c) const
   T *tmpA = iterA.head(), *tmpB = iterB.head();
   T *head = tmpA;
   do{
-    if(tmpA && tmpB && *tmpA != *tmpB) return gaFalse;
+    if(tmpA && tmpB && *tmpA != *tmpB) return false;
     tmpB = iterB.next();
     tmpA = iterA.next();
   }while(tmpA && tmpA != head);

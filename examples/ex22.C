@@ -163,7 +163,7 @@ main(int argc, char** argv)
   ga.scoreFrequency(10);	// keep the scores of every 10th generation
   ga.flushFrequency(100);	// specify how often to write the score to disk
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, gaTrue); // parse commands, complain if bogus args
+  ga.parameters(argc, argv, true); // parse commands, complain if bogus args
 
   cout << "initializing...\n"; cout.flush();
   ga.initialize(seed);

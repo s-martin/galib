@@ -149,13 +149,13 @@ GABin2DecPhenotype::remove(unsigned int x){
 
 int
 GABin2DecPhenotype::equal(const GABin2DecPhenotype & b) const {
-  if(core->sz != b.core->sz || core->n != b.core->n) return gaFalse;
+  if(core->sz != b.core->sz || core->n != b.core->n) return false;
   if(memcmp(core->nbits,b.core->nbits,core->n*sizeof(unsigned short))!=0 ||
      memcmp(core->oset, b.core->oset, core->n*sizeof(unsigned short))!=0 ||
      memcmp(core->minval, b.core->minval, core->n*sizeof(float)) != 0 ||
      memcmp(core->maxval, b.core->maxval, core->n*sizeof(float)))
-    return gaFalse;
-  return(gaTrue);
+    return false;
+  return(true);
 }
 
 
@@ -294,7 +294,7 @@ int
 GABin2DecGenome::equal(const GAGenome& g) const {
   GABin2DecGenome & b = (GABin2DecGenome&)g;
   return((GA1DBinaryStringGenome::equal(b) && *ptype == *(b.ptype)) ?
-	 gaTrue : gaFalse);
+	 true : false);
 }
 
 
@@ -302,5 +302,5 @@ int
 GABin2DecGenome::notequal(const GAGenome& g) const {
   GABin2DecGenome & b = (GABin2DecGenome&)g;
   return((GA1DBinaryStringGenome::notequal(b) || *ptype != *(b.ptype)) ?
-	 gaTrue : gaFalse);
+	 true : false);
 }

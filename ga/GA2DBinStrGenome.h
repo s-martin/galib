@@ -69,7 +69,7 @@ public:
 // specific to this class
   short gene(unsigned int x, unsigned int y) const {return bit(x+nx*y);}
   short gene(unsigned int x, unsigned int y, short value) {
-    _evaluated = gaFalse;
+    _evaluated = false;
     return((bit(x+nx*y) == value) ? value : bit(x+nx*y, value));
   }
   int width() const {return nx;}

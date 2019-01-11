@@ -342,7 +342,7 @@ main(int argc, char** argv) {
 
 Boolean
 Evolve(int n){
-  if((n < 0 && ga->done() == gaFalse) || ga->generation() < n){
+  if((n < 0 && ga->done() == false) || ga->generation() < n){
     ga->step();
     if(ga->generation() % 10 == 0){
       cerr << "generation: " << ga->generation() << "\t";

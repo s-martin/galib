@@ -77,7 +77,7 @@ public:
 
   const T & gene(unsigned int x=0) const {return this->a[x];}
   T & gene(unsigned int x, const T & value){
-    if(this->a[x] != value){ this->a[x] = value; _evaluated = gaFalse;}
+    if(this->a[x] != value){ this->a[x] = value; _evaluated = false;}
     return this->a[x];
   }
   int length() const {return nx;}
@@ -92,10 +92,10 @@ public:
       if(r + l > nx) l = nx - r;
       GAArray<T>::copy(orig,r,x,l);
     }
-    _evaluated = gaFalse;
+    _evaluated = false;
   }
   void swap(unsigned int i, unsigned int j)
-    {GAArray<T>::swap(i,j); _evaluated = gaFalse; }
+    {GAArray<T>::swap(i,j); _evaluated = false; }
 
 
 protected:
