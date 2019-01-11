@@ -92,9 +92,9 @@ public:
 
 #ifdef GALIB_USE_STREAMS
   int write(const char* filename) const;
-  int write(STD_OSTREAM & os) const;
+  int write(std::ostream & os) const;
   int read(const char* filename, bool flag=true);
-  int read(STD_ISTREAM & is, bool flag=true);
+  int read(std::istream & is, bool flag=true);
 #endif
 
 protected:
@@ -105,9 +105,9 @@ protected:
 
 
 #ifdef GALIB_USE_STREAMS
-inline STD_OSTREAM & operator<< (STD_OSTREAM &os, const GAParameterList& plist)
+inline std::ostream & operator<< (std::ostream &os, const GAParameterList& plist)
 { plist.write(os); return os; }
-inline STD_ISTREAM & operator>> (STD_ISTREAM& is, GAParameterList& plist)
+inline std::istream & operator>> (std::istream& is, GAParameterList& plist)
 { plist.read(is); return is; }
 #endif
 

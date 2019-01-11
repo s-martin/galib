@@ -172,14 +172,14 @@ GA3DArrayGenome<T>::resize(int w, int h, int d)
 
 #ifdef GALIB_USE_STREAMS
 template <class T> int
-GA3DArrayGenome<T>::read(STD_ISTREAM &) {
+GA3DArrayGenome<T>::read(std::istream &) {
   GAErr(GA_LOC, className(), "read", gaErrOpUndef);
   return 1;
 }
 
 
 template <class T> int
-GA3DArrayGenome<T>::write(STD_OSTREAM & os) const 
+GA3DArrayGenome<T>::write(std::ostream & os) const 
 {
   for(unsigned int k=0; k<nz; k++){
     for(unsigned int j=0; j<ny; j++){
@@ -437,12 +437,12 @@ GA3DArrayAlleleGenome<T>::resize(int w, int h, int d){
 
 #ifdef GALIB_USE_STREAMS
 template <class T> int
-GA3DArrayAlleleGenome<T>::read(STD_ISTREAM& is){
+GA3DArrayAlleleGenome<T>::read(std::istream& is){
   return GA3DArrayGenome<T>::read(is);
 }
 
 template <class T> int
-GA3DArrayAlleleGenome<T>::write(STD_OSTREAM& os) const {
+GA3DArrayAlleleGenome<T>::write(std::ostream& os) const {
   return GA3DArrayGenome<T>::write(os);
 }
 #endif
@@ -804,8 +804,8 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
     GA3DArrayGenome<T> &sis=DYN_CAST(GA3DArrayGenome<T> &, *c1);
     GA3DArrayGenome<T> &bro=DYN_CAST(GA3DArrayGenome<T> &, *c2);
 
-    if(sis.resizeBehaviour(GAGenome::WIDTH) == GAGenome::FIXED_SIZE &&
-       bro.resizeBehaviour(GAGenome::WIDTH) == GAGenome::FIXED_SIZE){
+    if(sis.resizeBehaviour(Dimension::WIDTH) == GAGenome::FIXED_SIZE &&
+       bro.resizeBehaviour(Dimension::WIDTH) == GAGenome::FIXED_SIZE){
       if(mom.width() != dad.width() || 
 	 sis.width() != bro.width() || 
 	 sis.width() != mom.width()){
@@ -815,8 +815,8 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
       sitex = momsitex = dadsitex = GARandomInt(0, mom.width());
       lenx = momlenx = dadlenx = mom.width() - momsitex;
     }
-    else if(sis.resizeBehaviour(GAGenome::WIDTH) == GAGenome::FIXED_SIZE ||
-	    bro.resizeBehaviour(GAGenome::WIDTH) == GAGenome::FIXED_SIZE){
+    else if(sis.resizeBehaviour(Dimension::WIDTH) == GAGenome::FIXED_SIZE ||
+	    bro.resizeBehaviour(Dimension::WIDTH) == GAGenome::FIXED_SIZE){
       GAErr(GA_LOC, mom.className(), "one-point cross", gaErrSameBehavReqd);
       return nc;
     }
@@ -829,8 +829,8 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
       lenx = GAMin(momlenx, dadlenx);
     }
     
-    if(sis.resizeBehaviour(GAGenome::HEIGHT) == GAGenome::FIXED_SIZE &&
-       bro.resizeBehaviour(GAGenome::HEIGHT) == GAGenome::FIXED_SIZE){
+    if(sis.resizeBehaviour(Dimension::HEIGHT) == GAGenome::FIXED_SIZE &&
+       bro.resizeBehaviour(Dimension::HEIGHT) == GAGenome::FIXED_SIZE){
       if(mom.height() != dad.height() || 
 	 sis.height() != bro.height() || 
 	 sis.height() != mom.height()){
@@ -840,8 +840,8 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
       sitey = momsitey = dadsitey = GARandomInt(0, mom.height());
       leny = momleny = dadleny = mom.height() - momsitey;
     }
-    else if(sis.resizeBehaviour(GAGenome::HEIGHT) == GAGenome::FIXED_SIZE ||
-	    bro.resizeBehaviour(GAGenome::HEIGHT) == GAGenome::FIXED_SIZE){
+    else if(sis.resizeBehaviour(Dimension::HEIGHT) == GAGenome::FIXED_SIZE ||
+	    bro.resizeBehaviour(Dimension::HEIGHT) == GAGenome::FIXED_SIZE){
       GAErr(GA_LOC, mom.className(), "one-point cross", gaErrSameBehavReqd);
       return nc;
     }
@@ -854,8 +854,8 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
       leny = GAMin(momleny, dadleny);
     }
 
-    if(sis.resizeBehaviour(GAGenome::DEPTH) == GAGenome::FIXED_SIZE &&
-       bro.resizeBehaviour(GAGenome::DEPTH) == GAGenome::FIXED_SIZE){
+    if(sis.resizeBehaviour(Dimension::DEPTH) == GAGenome::FIXED_SIZE &&
+       bro.resizeBehaviour(Dimension::DEPTH) == GAGenome::FIXED_SIZE){
       if(mom.depth() != dad.depth() || 
 	 sis.depth() != bro.depth() || 
 	 sis.depth() != mom.depth()){
@@ -865,8 +865,8 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
       sitez = momsitez = dadsitez = GARandomInt(0, mom.depth());
       lenz = momlenz = dadlenz = mom.depth() - momsitez;
     }
-    else if(sis.resizeBehaviour(GAGenome::DEPTH) == GAGenome::FIXED_SIZE ||
-	    bro.resizeBehaviour(GAGenome::DEPTH) == GAGenome::FIXED_SIZE){
+    else if(sis.resizeBehaviour(Dimension::DEPTH) == GAGenome::FIXED_SIZE ||
+	    bro.resizeBehaviour(Dimension::DEPTH) == GAGenome::FIXED_SIZE){
       GAErr(GA_LOC, mom.className(), "one-point cross", gaErrSameBehavReqd);
       return nc;
     }
@@ -953,7 +953,7 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
   else if(c1){
     GA3DArrayGenome<T> &sis=DYN_CAST(GA3DArrayGenome<T> &, *c1);
 
-    if(sis.resizeBehaviour(GAGenome::WIDTH) == GAGenome::FIXED_SIZE){
+    if(sis.resizeBehaviour(Dimension::WIDTH) == GAGenome::FIXED_SIZE){
       if(mom.width() != dad.width() || sis.width() != mom.width()){
 	GAErr(GA_LOC, mom.className(), "one-point cross", gaErrSameLengthReqd);
 	return nc;
@@ -970,7 +970,7 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
       lenx = GAMin(momlenx, dadlenx);
     }
     
-    if(sis.resizeBehaviour(GAGenome::HEIGHT) == GAGenome::FIXED_SIZE){
+    if(sis.resizeBehaviour(Dimension::HEIGHT) == GAGenome::FIXED_SIZE){
       if(mom.height() != dad.height() || sis.height() != mom.height()){
 	GAErr(GA_LOC, mom.className(), "one-point cross", gaErrSameLengthReqd);
 	return nc;
@@ -987,7 +987,7 @@ OnePointCrossover(const GAGenome& p1, const GAGenome& p2,
       leny = GAMin(momleny, dadleny);
     }
 
-    if(sis.resizeBehaviour(GAGenome::DEPTH) == GAGenome::FIXED_SIZE){
+    if(sis.resizeBehaviour(Dimension::DEPTH) == GAGenome::FIXED_SIZE){
       if(mom.depth() != dad.depth() || sis.depth() != mom.depth()){
 	GAErr(GA_LOC, mom.className(), "one-point cross", gaErrSameLengthReqd);
 	return nc;

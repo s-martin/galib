@@ -69,8 +69,8 @@ public:
   virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
-  virtual int read(STD_ISTREAM & is) override;
-  virtual int write (STD_OSTREAM & os) const override;
+  virtual int read(std::istream & is) override;
+  virtual int write (std::ostream & os) const override;
 #endif
 
   virtual int equal(const GAGenome & c) const override;
@@ -156,8 +156,8 @@ public:
   virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
-  virtual int read(STD_ISTREAM & is) override;
-  virtual int write (STD_OSTREAM & os) const override;
+  virtual int read(std::istream & is) override;
+  virtual int write (std::ostream & os) const override;
 #endif
 
   virtual int equal(const GAGenome & c) const override;

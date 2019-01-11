@@ -21,7 +21,7 @@ to use the sigma truncation scaling method to handle the mixed scores.
 #include <std_stream.h>
 
 #define cout STD_COUT
-#define ostream STD_OSTREAM
+#define ostream std::ostream
 
 
 // Objective function and initializer declarations.

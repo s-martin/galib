@@ -31,7 +31,7 @@ struct GANodeBASE {
 
 
 #ifdef GALIB_USE_STREAMS
-inline STD_OSTREAM & operator<<(STD_OSTREAM & os, GANodeBASE & arg){
+inline std::ostream & operator<<(std::ostream & os, GANodeBASE & arg){
   os << "  node:   " << &arg << "\n";
   os << "  next:   " << arg.next << "\n";
   os << "  prev:   " << arg.prev << "\n";
@@ -79,7 +79,7 @@ struct GANode : public GANodeBASE {
 };
 
 #ifdef GALIB_USE_STREAMS
-template <class T> STD_OSTREAM & operator<<(STD_OSTREAM & os, GANode<T> & arg){
+template <class T> std::ostream & operator<<(std::ostream & os, GANode<T> & arg){
   os << "  node:   " << &arg << "\n";
   os << "  next:   " << arg.next << "\n";
   os << "  prev:   " << arg.prev << "\n";

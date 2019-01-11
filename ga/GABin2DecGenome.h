@@ -125,8 +125,8 @@ public:
   virtual void copy(const GAGenome &);
 
 #ifdef GALIB_USE_STREAMS
-  virtual int read (STD_ISTREAM &);
-  virtual int write (STD_OSTREAM &) const;
+  virtual int read (std::istream &);
+  virtual int write (std::ostream &) const;
 #endif
 
   virtual int equal(const GAGenome &) const;

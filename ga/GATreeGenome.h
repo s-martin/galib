@@ -45,7 +45,7 @@ public:
   virtual void copy(const GAGenome &);
 
 #ifdef GALIB_USE_STREAMS
-  virtual int write (STD_OSTREAM &) const;
+  virtual int write (std::ostream &) const;
 #endif
 
   virtual int equal(const GAGenome & c) const;

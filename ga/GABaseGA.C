@@ -308,7 +308,7 @@ GAGeneticAlgorithm::parameters(const char* filename, bool flag){
 }
 
 const GAParameterList&
-GAGeneticAlgorithm::parameters(STD_ISTREAM& is, bool flag){
+GAGeneticAlgorithm::parameters(std::istream& is, bool flag){
   params.read(is, flag);
   for(int i=0; i<params.size(); i++)
     setptr(params[i].fullname(), params[i].value());

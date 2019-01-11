@@ -297,7 +297,7 @@ GAParameterList::operator()(const char* name){
 // tab delimiter and newline separating pairs.
 //   If there is an error, return 1, otherwise return 0.
 int
-GAParameterList::write(STD_OSTREAM& os) const {
+GAParameterList::write(std::ostream& os) const {
   for(unsigned int i=0; i<n; i++){
     int ival;
     float fval;
@@ -376,7 +376,7 @@ GAParameterList::write(const char* filename) const {
 // There's no global list to tell us what type things are, and we don't assume.
 //   We don't allow setting pointers using this method.
 int
-GAParameterList::read(STD_ISTREAM& is, bool flag){
+GAParameterList::read(std::istream& is, bool flag){
   int nfound = 0;
   if(n == 0) return nfound;
 

@@ -519,7 +519,7 @@ GAStatistics::write(const char* filename) const {
 }
 
 int
-GAStatistics::write(STD_OSTREAM & os) const {
+GAStatistics::write(std::ostream & os) const {
   os << curgen << "\t# current generation\n";
   os << convergence() << "\t# current convergence\n";
   os << numsel << "\t# number of selections since initialization\n";
@@ -573,7 +573,7 @@ GAStatistics::scores(const char* filename, int w){
 
 
 int
-GAStatistics::scores(STD_OSTREAM & os, int w){
+GAStatistics::scores(std::ostream & os, int w){
   if(w == NoScores) w = which;
 
   for(unsigned int i=0; i<nscrs; i++){

@@ -27,7 +27,7 @@ it does get the job done.
 #define cout STD_COUT
 #define cerr STD_CERR
 #define endl STD_ENDL
-#define ostream STD_OSTREAM
+#define ostream std::ostream
 #define ifstream STD_IFSTREAM
 
 // Set this up for your favorite TSP.  The sample one is a contrived problem

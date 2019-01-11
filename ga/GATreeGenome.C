@@ -77,7 +77,7 @@ GATreeGenome<T>::copy(const GAGenome & orig) {
 // order we get them in the traversal.  Each coord pair is measured relative to
 // the parent of the node.
 template <class T> void
-_tt(STD_OSTREAM & os, GANode<T> * n)
+_tt(std::ostream & os, GANode<T> * n)
 {
   if(!n) return;
   GANodeBASE * node = DYN_CAST(GANodeBASE*, n);
@@ -102,7 +102,7 @@ _tt(STD_OSTREAM & os, GANode<T> * n)
 }
 
 template <class T> int
-GATreeGenome<T>::write(STD_OSTREAM & os) const 
+GATreeGenome<T>::write(std::ostream & os) const 
 {
   os << "node       parent     child      next       prev       contents\n";
   _tt(os, (GANode<T> *)(this->rt));

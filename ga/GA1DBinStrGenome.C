@@ -136,7 +136,7 @@ GA1DBinaryStringGenome::resize(int l)
 // ignore all whitespace.  We ignore anything that is not a digit.  If it is a
 // zero then we set to zero.  Anything else is a 1.
 int
-GA1DBinaryStringGenome::read(STD_ISTREAM & is)
+GA1DBinaryStringGenome::read(std::istream & is)
 {
   static char c;
   unsigned int i=0;
@@ -161,7 +161,7 @@ GA1DBinaryStringGenome::read(STD_ISTREAM & is)
 // When we write the data to a stream we do it without any spaces.  Also, there
 // is no newline at the end of the stream of digits.
 int
-GA1DBinaryStringGenome::write(STD_OSTREAM & os) const
+GA1DBinaryStringGenome::write(std::ostream & os) const
 {
   for(unsigned int i=0; i<nx; i++)
     os << gene(i);

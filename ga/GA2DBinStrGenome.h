@@ -60,8 +60,8 @@ public:
   virtual void copy(const GAGenome & chrom);
 
 #ifdef GALIB_USE_STREAMS
-  virtual int read(STD_ISTREAM &);
-  virtual int write (STD_OSTREAM &) const;
+  virtual int read(std::istream &);
+  virtual int write (std::ostream &) const;
 #endif
 
   virtual int equal(const GAGenome & c) const;
@@ -82,8 +82,8 @@ public:
 		      unsigned int lowerX, unsigned int upperX);
   int resizeBehaviour(unsigned int lowerX, unsigned int upperX, 
 		      unsigned int lowerY, unsigned int upperY){
-    return(resizeBehaviour(WIDTH, lowerX, upperX) * 
-	   resizeBehaviour(HEIGHT, lowerY, upperY));
+    return(resizeBehaviour(Dimension::WIDTH, lowerX, upperX) * 
+	   resizeBehaviour(Dimension::HEIGHT, lowerY, upperY));
   }
   void copy(const GA2DBinaryStringGenome &, 
 	    unsigned int, unsigned int,

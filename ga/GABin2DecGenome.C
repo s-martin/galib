@@ -266,7 +266,7 @@ GABin2DecGenome::phenotype(unsigned int n, float val)
 // Read the incoming data as a list of phenotype values.  It would be nice to
 // do this either as binary or decimal read, but oh well...  not much need.
 int
-GABin2DecGenome::read(STD_ISTREAM & is)
+GABin2DecGenome::read(std::istream & is)
 {
   float value;
   for(unsigned int i=0; i<phenotypes().nPhenotypes(); i++){
@@ -279,7 +279,7 @@ GABin2DecGenome::read(STD_ISTREAM & is)
 
 
 int
-GABin2DecGenome::write(STD_OSTREAM & os) const 
+GABin2DecGenome::write(std::ostream & os) const 
 {
   for(unsigned int i=0; i<phenotypes().nPhenotypes(); i++)
     os << phenotype(i) << " ";

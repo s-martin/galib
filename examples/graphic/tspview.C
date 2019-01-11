@@ -12,7 +12,7 @@
 #define cerr STD_CERR
 #define endl STD_ENDL
 #define ifstream STD_IFSTREAM
-#define ostream STD_OSTREAM
+#define ostream std::ostream
 
 // comment this line if you don't have MOTIF on your system
 //#define USE_MOTIF

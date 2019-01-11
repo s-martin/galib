@@ -19,7 +19,7 @@ inlined).
 #include <std_stream.h>
 
 #define cout STD_COUT
-#define ostream STD_OSTREAM
+#define ostream std::ostream
 
 
 // The objective function is declared here and defined below.

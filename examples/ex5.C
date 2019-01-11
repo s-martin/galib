@@ -23,8 +23,8 @@ override-able on any instance of the new genome.
 
 #define cout STD_COUT
 #define cerr STD_CERR
-#define istream STD_ISTREAM
-#define ostream STD_OSTREAM
+#define istream std::istream
+#define ostream std::ostream
 #define ifstream STD_IFSTREAM
 
 

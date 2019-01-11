@@ -18,7 +18,7 @@ char _gaerrbuf2[120];
 
 
 #ifdef GALIB_USE_STREAMS
-static STD_OSTREAM *__gaErrStream = & STD_CERR;
+static std::ostream *__gaErrStream = & STD_CERR;
 #endif
 static bool __gaErrFlag = true;
 static char *__gaErrStr[] = {
@@ -158,7 +158,7 @@ GAReportErrors(bool flag){
 
 #ifdef GALIB_USE_STREAMS
 void
-GASetErrorStream(STD_OSTREAM & s){
+GASetErrorStream(std::ostream & s){
   __gaErrStream = &s;
 }
 #endif

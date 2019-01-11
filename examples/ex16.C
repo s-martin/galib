@@ -13,7 +13,7 @@ genome.  This example uses points in the nodes.
 #include <std_stream.h>
 
 #define cout STD_COUT
-#define ostream STD_OSTREAM
+#define ostream std::ostream
 
 
 // This is the object that we're going to put in the nodes.  Each point has 

@@ -54,7 +54,7 @@ GA1DArrayAlleleGenome<char>::~GA1DArrayAlleleGenome(){
 // The read specialization takes in each character whether it is whitespace or
 // not and stuffs it into the genome.  This is unlike the default array read.
 template <> int
-GA1DArrayAlleleGenome<char>::read(STD_ISTREAM & is)
+GA1DArrayAlleleGenome<char>::read(std::istream & is)
 {
   unsigned int i=0;
   char c;
@@ -74,7 +74,7 @@ GA1DArrayAlleleGenome<char>::read(STD_ISTREAM & is)
 // Unlike the base array genome, here when we write out we don't put any
 // whitespace between genes.  No newline at end of it all.
 template <> int
-GA1DArrayAlleleGenome<char>::write(STD_OSTREAM & os) const
+GA1DArrayAlleleGenome<char>::write(std::ostream & os) const
 {
   for(unsigned int i=0; i<nx; i++)
     os << gene(i);

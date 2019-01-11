@@ -15,7 +15,7 @@ alternate 0 and 1 then put -1 in the corners.
 
 #define cout STD_COUT
 #define endl STD_ENDL
-#define ostream STD_OSTREAM
+#define ostream std::ostream
 
 float objective(GAGenome &);
 

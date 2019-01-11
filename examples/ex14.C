@@ -17,8 +17,8 @@ from the GAlib.
 #define cout STD_COUT
 #define cerr STD_CERR
 #define endl STD_ENDL
-#define istream STD_ISTREAM
-#define ostream STD_OSTREAM
+#define istream std::istream
+#define ostream std::ostream
 
 
 // Here we specify how big the lists will be and how many lists will be in each

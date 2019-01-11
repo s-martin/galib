@@ -724,7 +724,7 @@ GAPopulation::geneticAlgorithm(GAGeneticAlgorithm& g){
 
 #ifdef GALIB_USE_STREAMS
 void 
-GAPopulation::write(STD_OSTREAM & os, SortBasis basis) const {
+GAPopulation::write(std::ostream & os, SortBasis basis) const {
   for(unsigned int i=0; i<n; i++){
     if(basis == RAW)
       os << *rind[i] << "\n";

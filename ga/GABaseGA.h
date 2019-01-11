@@ -139,9 +139,9 @@ public:
   }
 #ifdef GALIB_USE_STREAMS
   virtual int write(const char*) const {return 0;}
-  virtual int write(STD_OSTREAM &) const {return 0;}
+  virtual int write(std::ostream &) const {return 0;}
   virtual int read(const char*){return 0;}
-  virtual int read(STD_ISTREAM &){return 0;}
+  virtual int read(std::istream &){return 0;}
 #endif
 
   void * userData() const {return ud;}
@@ -154,7 +154,7 @@ public:
   const GAParameterList& parameters(int&, char **, bool flag=false);
 #ifdef GALIB_USE_STREAMS
   const GAParameterList& parameters(const char* filename, bool f=false);
-  const GAParameterList& parameters(STD_ISTREAM &, bool flag=false);
+  const GAParameterList& parameters(std::istream &, bool flag=false);
 #endif
   virtual int get(const char*, void*) const;
   virtual int setptr(const char*, const void*);

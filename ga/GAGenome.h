@@ -191,7 +191,7 @@ public:
   static float NoComparator(const GAGenome&, const GAGenome&);
 
 public:
-  enum Dimension {LENGTH = 0, WIDTH = 0, HEIGHT = 1, DEPTH = 2};
+  enum class Dimension {LENGTH = 0, WIDTH = 0, HEIGHT = 1, DEPTH = 2};
   enum CloneMethod {CONTENTS = 0, ATTRIBUTES = 1};
   enum {FIXED_SIZE = -1, ANY_SIZE = -10};
 
@@ -206,9 +206,9 @@ public:
   virtual void copy(const GAGenome &);
 
 #ifdef GALIB_USE_STREAMS
-  virtual int read(STD_ISTREAM &)
+  virtual int read(std::istream &)
     { GAErr(GA_LOC, className(), "read", gaErrOpUndef); return 0; }
-  virtual int write(STD_OSTREAM &) const
+  virtual int write(std::ostream &) const
     { GAErr(GA_LOC, className(), "write", gaErrOpUndef); return 0; }
 #endif
 
@@ -274,9 +274,9 @@ protected:
 
 
 #ifdef GALIB_USE_STREAMS
-inline STD_OSTREAM & operator<< (STD_OSTREAM& os, const GAGenome& genome)
+inline std::ostream & operator<< (std::ostream& os, const GAGenome& genome)
 { genome.write(os); return(os); }
-inline STD_ISTREAM & operator>> (STD_ISTREAM & is, GAGenome& genome)
+inline std::istream & operator>> (std::istream & is, GAGenome& genome)
 { genome.read(is); return(is); }
 #endif
 

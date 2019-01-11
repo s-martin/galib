@@ -119,7 +119,7 @@ void GAReportErrors(bool flag);
 // Provide a mechanism for redirecting the error messages.
 
 #ifdef GALIB_USE_STREAMS
-void GASetErrorStream(STD_OSTREAM &);
+void GASetErrorStream(std::ostream &);
 #else
 inline void GASetErrorStream(){} // dummy function
 #endif

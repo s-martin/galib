@@ -136,8 +136,8 @@ public:
   GAAllele::Type type() const {return core->type;}
 
 #ifdef GALIB_USE_STREAMS
-  int read(STD_ISTREAM &);
-  int write(STD_OSTREAM & os) const;
+  int read(std::istream &);
+  int write(std::ostream & os) const;
 #endif
 
 #if defined(THINK_C)
@@ -189,11 +189,11 @@ protected:
 
 
 #ifdef GALIB_USE_STREAMS
-template <class T> STD_OSTREAM & 
-operator<< (STD_OSTREAM & os, const GAAlleleSet<T> & arg)
+template <class T> std::ostream & 
+operator<< (std::ostream & os, const GAAlleleSet<T> & arg)
 { arg.write(os); return os; }
-template <class T> STD_ISTREAM & 
-operator>> (STD_ISTREAM & is, GAAlleleSet<T> & arg)
+template <class T> std::istream & 
+operator>> (std::istream & is, GAAlleleSet<T> & arg)
 { arg.read(is); return is; }
 #endif
 

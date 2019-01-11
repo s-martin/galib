@@ -79,7 +79,7 @@ GAListGenome<T>::copy(const GAGenome & orig){
 // the stream.  We don't try to write the contents of the nodes - we simply 
 // write a . for each node in the list.
 template <class T> int
-GAListGenome<T>::write(STD_OSTREAM & os) const 
+GAListGenome<T>::write(std::ostream & os) const 
 {
   os << "node       next       prev       contents\n";
   if(!this->hd) return 0;;
