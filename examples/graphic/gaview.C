@@ -18,9 +18,9 @@ depending on which you have on your system.
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
-#define endl STD_ENDL
+#define cout std::cout
+#define cerr std::cerr
+#define endl std::endl
 
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>

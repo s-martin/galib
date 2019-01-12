@@ -11,8 +11,8 @@
 #include <GADemeGA.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define endl STD_ENDL
+#define cout std::cout
+#define endl std::endl
 
 float Objective(GAGenome &);
 

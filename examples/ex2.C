@@ -18,7 +18,7 @@ objective function.
 #include <GABin2DecGenome.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
+#define cout std::cout
 
 float Objective(GAGenome &);
 

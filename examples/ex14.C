@@ -14,9 +14,9 @@ from the GAlib.
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
-#define endl STD_ENDL
+#define cout std::cout
+#define cerr std::cerr
+#define endl std::endl
 #define istream std::istream
 #define ostream std::ostream
 

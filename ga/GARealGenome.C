@@ -128,7 +128,7 @@ GA1DArrayAlleleGenome<float>::read(std::istream & is) {
 
   if(is.eof() && i < nx){
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(STD_IOS_BADBIT | is.rdstate());
+    is.clear(std::ios::badbit | is.rdstate());
     return 1;
   }
   return 0;

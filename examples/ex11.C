@@ -11,7 +11,7 @@
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
+#define cout std::cout
 #define ostream std::ostream
 
 // The objective function tells how good a genome is.  The Initializer defines

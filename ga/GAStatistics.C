@@ -488,9 +488,9 @@ void
 GAStatistics::writeScores(){
   if(!scorefile) return;
 #ifdef GALIB_USE_STREAMS
-  STD_OFSTREAM outfile(scorefile, ((gen[0] == 0) ?
-				   (STD_IOS_OUT | STD_IOS_TRUNC) :
-				   (STD_IOS_OUT | STD_IOS_APP)));
+  std::ofstream outfile(scorefile, ((gen[0] == 0) ?
+				   (std::ios::out | std::ios::trunc) :
+				   (std::ios::out | std::ios::app)));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){
@@ -506,7 +506,7 @@ GAStatistics::writeScores(){
 #ifdef GALIB_USE_STREAMS
 int 
 GAStatistics::write(const char* filename) const {
-  STD_OFSTREAM outfile(filename, (STD_IOS_OUT | STD_IOS_TRUNC));
+  std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){
@@ -559,7 +559,7 @@ GAStatistics::write(std::ostream & os) const {
 // specify a data set, that will be used rather than the 'which' in the object.
 int 
 GAStatistics::scores(const char* filename, int w){
-  STD_OFSTREAM outfile(filename, (STD_IOS_OUT | STD_IOS_TRUNC));
+  std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){

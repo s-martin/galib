@@ -211,7 +211,7 @@ GA3DBinaryStringGenome::read(std::istream & is)
       (j < ny && j != 0) ||	// didn't get some lines
       (i < nx && i != 0))){	// didn't get some lines
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(STD_IOS_BADBIT | is.rdstate());
+    is.clear(std::ios::badbit | is.rdstate());
     return 1;
   }
 

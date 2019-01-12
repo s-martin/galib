@@ -157,7 +157,7 @@ GA2DBinaryStringGenome::read(std::istream & is)
      ((j < ny) ||	     // didn't get some lines
       (i < nx && i != 0))){   // stopped early on a row
     GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
-    is.clear(STD_IOS_BADBIT | is.rdstate());
+    is.clear(std::ios::badbit | is.rdstate());
     return 1;
   }
 

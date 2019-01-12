@@ -17,8 +17,8 @@ License).
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
+#define cout std::cout
+#define cerr std::cerr
 
 double Gauss(double mean, double variance);
 

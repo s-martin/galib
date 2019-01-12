@@ -345,7 +345,7 @@ GAParameterList::write(std::ostream& os) const {
 
 int
 GAParameterList::write(const char* filename) const {
-  STD_OFSTREAM outfile(filename, (STD_IOS_OUT | STD_IOS_TRUNC));
+  std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
 // should be done this way, but SGI systems (and others?) don't do it right...
 //  if(! outfile.is_open()){
   if(outfile.fail()){
@@ -482,7 +482,7 @@ GAParameterList::read(std::istream& is, bool flag){
     strcat(_gaerrbuf2, "be sure there is a newline at end of the file");
     GAErr(GA_LOC, "GAParameterList", "read", _gaerrbuf1, _gaerrbuf2);
 
-    is.clear(STD_IOS_BADBIT | is.rdstate());
+    is.clear(std::ios::badbit | is.rdstate());
   }
 
   return nfound;
@@ -490,7 +490,7 @@ GAParameterList::read(std::istream& is, bool flag){
 
 int
 GAParameterList::read(const char* filename, bool flag){
-  STD_IFSTREAM infile(filename, STD_IOS_IN);
+  std::ifstream infile(filename, std::ios::in);
   if(!infile){
     GAErr(GA_LOC, "GAParameterList", "read", gaErrReadError, filename);
     return 1;

@@ -14,9 +14,9 @@ the command line.
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
-#define ifstream STD_IFSTREAM
+#define cout std::cout
+#define cerr std::cerr
+#define ifstream std::ifstream
 
 float objective(GAGenome &);
 int cntr=0;

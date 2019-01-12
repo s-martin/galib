@@ -24,11 +24,11 @@ it does get the job done.
 #include <garandom.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
-#define endl STD_ENDL
+#define cout std::cout
+#define cerr std::cerr
+#define endl std::endl
 #define ostream std::ostream
-#define ifstream STD_IFSTREAM
+#define ifstream std::ifstream
 
 // Set this up for your favorite TSP.  The sample one is a contrived problem
 // with the towns laid out in a grid (so it is easy to figure out what the 

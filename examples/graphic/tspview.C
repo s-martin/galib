@@ -8,10 +8,10 @@
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
-#define endl STD_ENDL
-#define ifstream STD_IFSTREAM
+#define cout std::cout
+#define cerr std::cerr
+#define endl std::endl
+#define ifstream std::ifstream
 #define ostream std::ostream
 
 // comment this line if you don't have MOTIF on your system

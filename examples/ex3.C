@@ -19,9 +19,9 @@ default parameters on the genetic algorithm and for parsing the command line.
 #include <GA2DBinStrGenome.h> // and the header for the genome we need
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
-#define ifstream STD_IFSTREAM
+#define cout std::cout
+#define cerr std::cerr
+#define ifstream std::ifstream
 
 float objective(GAGenome &);
 

@@ -17,7 +17,7 @@ function.  But it does work.
 #include <GA2DBinStrGenome.h> // and the 2D binary string genome
 #include <std_stream.h>
 
-#define cout STD_COUT
+#define cout std::cout
 
 float Objective(GAGenome &);	// This is the declaration of our obj function.
 				// The definition comes later in the file.

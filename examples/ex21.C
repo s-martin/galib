@@ -15,8 +15,8 @@ create the array determines which behaviour you'll get.
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define endl STD_ENDL
+#define cout std::cout
+#define endl std::endl
 
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>

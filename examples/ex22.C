@@ -18,10 +18,10 @@ child crossover" you could use your own crossover algorithm instead.
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
-#define endl STD_ENDL
-#define ofstream STD_OFSTREAM
+#define cout std::cout
+#define cerr std::cerr
+#define endl std::endl
+#define ofstream std::ofstream
 
 
 // force instantiations for compilers that do not do auto instantiation
@@ -170,7 +170,7 @@ main(int argc, char** argv)
 
 // dump the initial population to file
 
-  outfile.open(ifile, (STD_IOS_OUT | STD_IOS_TRUNC));
+  outfile.open(ifile, (std::ios::out | std::ios::trunc));
   for(i=0; i<ga.population().size(); i++){
     genome = ga.population().individual(i);
     outfile << genome.gene(0) << "\t" << genome.score() << "\n";
@@ -194,7 +194,7 @@ main(int argc, char** argv)
 
 // dump the final population to file
 
-  outfile.open(ffile, (STD_IOS_OUT | STD_IOS_TRUNC));
+  outfile.open(ffile, (std::ios::out | std::ios::trunc));
   for(i=0; i<ga.population().size(); i++){
     genome = ga.population().individual(i);
     outfile << genome.gene(0) << "\t" << genome.score() << "\n";
@@ -204,7 +204,7 @@ main(int argc, char** argv)
 // dump the function to file
 
   cout << "dumping the function to file..." << endl;
-  outfile.open(file, (STD_IOS_OUT | STD_IOS_TRUNC));
+  outfile.open(file, (std::ios::out | std::ios::trunc));
   if(outfile.fail()){
     cerr << "Cannot open " << file << " for output.\n";
     exit(1);

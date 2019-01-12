@@ -13,8 +13,8 @@ alternate 0 and 1 then put -1 in the corners.
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define endl STD_ENDL
+#define cout std::cout
+#define endl std::endl
 #define ostream std::ostream
 
 float objective(GAGenome &);

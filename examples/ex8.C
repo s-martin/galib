@@ -20,7 +20,7 @@ to use the sigma truncation scaling method to handle the mixed scores.
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
+#define cout std::cout
 #define ostream std::ostream
 
 

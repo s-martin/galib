@@ -11,8 +11,8 @@
 #include <garandom.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
+#define cout std::cout
+#define cerr std::cerr
 
 static const int HIST_SIZE=501;
 static const int NFLIPS=10000;

@@ -313,7 +313,7 @@ GAAlleleSet<T>::read(std::istream& is){
     if(is.fail() || is.eof()) return 1;
   }
   else {
-    is.clear(STD_IOS_BADBIT | is.rdstate());
+    is.clear(std::ios::badbit | is.rdstate());
     GAErr(GA_LOC, "GAAlleleSet", "read",
 	  "unrecognized allele set type.", 
 	  "Expected ENUMERATED, BOUNDED, or DISCRETIZED");

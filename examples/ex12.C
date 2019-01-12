@@ -11,7 +11,7 @@
 #include <ga.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
+#define cout std::cout
 
 #define INSTANTIATE_STRING_GENOME
 #include <GAStringGenome.h>

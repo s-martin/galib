@@ -21,7 +21,7 @@ algorithm object.
 #include <GA3DBinStrGenome.h> // and the header for the genome we'll use
 #include <std_stream.h>
 
-#define cout STD_COUT
+#define cout std::cout
 
 float objective(GAGenome &);
 

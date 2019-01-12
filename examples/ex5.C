@@ -21,11 +21,11 @@ override-able on any instance of the new genome.
 #include <GASStateGA.h>
 #include <std_stream.h>
 
-#define cout STD_COUT
-#define cerr STD_CERR
+#define cout std::cout
+#define cerr std::cerr
 #define istream std::istream
 #define ostream std::ostream
-#define ifstream STD_IFSTREAM
+#define ifstream std::ifstream
 
 
 // This is the class definition for the new genome.  The default operators are
