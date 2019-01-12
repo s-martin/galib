@@ -17,7 +17,10 @@ default parameters on the genetic algorithm and for parsing the command line.
 
 #include <GASimpleGA.h>	// the header for the GA we'll use
 #include <GA2DBinStrGenome.h> // and the header for the genome we need
-#include <std_stream.h>
+ 
+
+#include <iostream>
+#include <fstream>
 
 #define cout std::cout
 #define cerr std::cerr

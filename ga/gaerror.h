@@ -13,7 +13,8 @@
 
 #include <gatypes.h>
 #include <gaconfig.h>
-#include <std_stream.h>
+
+#include <ostream> 
 
 // This object is for telling us where in the source code an error occurs.
 class GASourceLocator {

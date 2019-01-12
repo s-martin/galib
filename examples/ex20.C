@@ -13,7 +13,9 @@ example - not good programming style, but it gets the job done.
 #include <stdio.h>
 #include <stdlib.h>
 #include <ga.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 

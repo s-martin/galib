@@ -19,7 +19,9 @@ algorithm object.
 
 #include <GASStateGA.h>	// include the steady-state GA header
 #include <GA3DBinStrGenome.h> // and the header for the genome we'll use
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 

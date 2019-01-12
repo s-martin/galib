@@ -16,7 +16,9 @@ child crossover" you could use your own crossover algorithm instead.
 #include <stdio.h>
 #include <math.h>
 #include <ga.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define cerr std::cerr

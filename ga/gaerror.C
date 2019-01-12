@@ -12,6 +12,9 @@
 #include <gaerror.h>
 #include <stdio.h>
 
+#include <iostream>
+#include <fstream>
+
 char gaErrMsg[512];
 char _gaerrbuf1[120];
 char _gaerrbuf2[120];

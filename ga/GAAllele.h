@@ -15,7 +15,9 @@ imply the specific implementation of the container class).
 
 #include <gaconfig.h>
 #include <garandom.h>
-#include <std_stream.h>
+ 
+ #include <istream>
+ #include <ostream>
 
 class GAAllele {
 public:

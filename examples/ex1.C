@@ -15,7 +15,9 @@ function.  But it does work.
 ---------------------------------------------------------------------------- */
 #include <GASimpleGA.h>	// we're going to use the simple GA
 #include <GA2DBinStrGenome.h> // and the 2D binary string genome
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 

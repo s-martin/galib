@@ -19,7 +19,9 @@ override-able on any instance of the new genome.
 #include <GABin2DecGenome.h>
 #include <GA2DBinStrGenome.h>
 #include <GASStateGA.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define cerr std::cerr

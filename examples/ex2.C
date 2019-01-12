@@ -16,7 +16,8 @@ objective function.
 
 #include <GASimpleGA.h>
 #include <GABin2DecGenome.h>
-#include <std_stream.h>
+ 
+#include <iostream>
 
 #define cout std::cout
 

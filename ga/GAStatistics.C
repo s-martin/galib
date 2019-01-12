@@ -12,7 +12,7 @@
 #include <gaerror.h>
 #include <GAStatistics.h>
 
-
+#include <fstream>
 
 // Default settings and their names.
 int  gaDefNumBestGenomes   = 1;

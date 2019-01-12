@@ -11,7 +11,9 @@
 #define _ga_node_h_
 
 #include <gaconfig.h>
-#include <std_stream.h>
+
+#include <ostream>
+ 
 
 /* ----------------------------------------------------------------------------
  GANodeBASE

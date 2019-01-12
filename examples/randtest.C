@@ -9,7 +9,9 @@
 #include <string.h>
 #include <math.h>
 #include <garandom.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define cerr std::cerr

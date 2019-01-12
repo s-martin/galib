@@ -18,7 +18,9 @@ it should operate on the data.  See comments below for further details.
 #include <gaconfig.h>
 #include <gaerror.h>
 #include <GAEvalData.h>
-#include <std_stream.h>
+
+#include <istream> 
+#include <ostream>
 
 class GAGeneticAlgorithm;
 class GAGenome;

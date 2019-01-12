@@ -10,7 +10,9 @@ minimize your objective functions.
 #include <stdio.h>
 #include <math.h>
 #include <ga.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define endl std::endl

@@ -9,7 +9,9 @@
 #include <stdio.h>
 #include <GA1DBinStrGenome.h>
 #include <GADemeGA.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define endl std::endl

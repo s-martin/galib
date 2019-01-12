@@ -13,8 +13,9 @@
 
 #include <gaconfig.h>
 #include <gatypes.h>
-#include <std_stream.h>
-
+ 
+#include <istream>
+#include <ostream>
 
 /* ----------------------------------------------------------------------------
    This object is used for naming the parameters.  We associate a fullname, a

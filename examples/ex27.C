@@ -19,7 +19,9 @@ any standard 3D cross-platform API, so you get this instead.)
 #include <GASStateGA.h>
 #include <GAList.h>
 #include <GA1DArrayGenome.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define cerr std::cerr

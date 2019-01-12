@@ -10,7 +10,9 @@ decimal genome.
 ---------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <ga.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 

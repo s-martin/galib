@@ -22,7 +22,9 @@ it does get the job done.
 #include <GASStateGA.h>
 #include <GAListGenome.h>
 #include <garandom.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define cerr std::cerr

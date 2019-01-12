@@ -18,6 +18,8 @@ implementation.
 #include <gaerror.h>
 #include <GAParameter.h>
 
+#include <fstream>
+
 #define PRM_CHUNKSIZE 10
 #define BUFSIZE       1024	// size of buffer for reading pairs
 #define MAX_PAIRS     5000	// max number of name-value pairs in stream

@@ -16,7 +16,9 @@ depending on which you have on your system.
 #include <stdio.h>
 #include <math.h>
 #include <ga.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 #define cerr std::cerr

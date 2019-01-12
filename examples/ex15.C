@@ -10,7 +10,9 @@ stopping criterion for the GA rather than number-of-generations.
 #include <stdio.h>
 #include <math.h>
 #include <ga.h>
-#include <std_stream.h>
+ 
+
+#include <iostream>
 
 #define cout std::cout
 
