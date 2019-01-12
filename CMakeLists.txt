@@ -6,8 +6,8 @@ else()
     cmake_policy(VERSION 3.13)
 endif()
 
-project(GAlib-NG VERSION 0.1
-                  DESCRIPTION "GAlib NG using modern C++"
+project(GAlib VERSION 3.0
+                  DESCRIPTION "GAlib using modern C++"
                   LANGUAGES CXX)
 
 if(MSVC)
