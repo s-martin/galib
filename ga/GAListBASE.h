@@ -8,7 +8,7 @@
   This defines the list objects.
 
  TO DO:
-  Probably should put the size (and depth for trees) into the templateized 
+  Probably should put the size (and depth for trees) into the templateized
 class since those take care of memory management.  BASE class has no concept of
 memory management, nor does it know the best way to count what its got.
 ---------------------------------------------------------------------------- */
@@ -20,9 +20,9 @@ memory management, nor does it know the best way to count what its got.
 /* ----------------------------------------------------------------------------
  GAListBASE
 -------------------------------------------------------------------------------
-  This is the base list class from which template lists are derived.  This 
+  This is the base list class from which template lists are derived.  This
 object does no memory management - it just keeps track of a list structure.
-Whoever calls the members of this object is responsible for allocating and 
+Whoever calls the members of this object is responsible for allocating and
 deallocating the memory associated with each node.
   This class does not define any of the iteration operators for traversing the
 list.  That is left to the iterator friend of this class.
@@ -39,8 +39,8 @@ pointers.  You cannot simply say list1 = list2 or GAListBASE l = list1.  If you
 do this, you'll get a copy of the list object, but not a duplicate of the list.
 
 creation
-  You can create a list by passing a node (the node becomes the head of the 
-  list) or by passing nothing (the head of the list is NULL, and the next 
+  You can create a list by passing a node (the node becomes the head of the
+  list) or by passing nothing (the head of the list is NULL, and the next
   insert automatically becomes the head).
 
 insert
@@ -50,22 +50,22 @@ insert
   node.  If you don't pass a value for flag, it defaults to after.  The syntax
   for using the insert method looks like this:
 
-       mylist.insert(newnode, oldnode, GAListBASE::before);
-       mylist.insert(newnode, oldnode);
+	   mylist.insert(newnode, oldnode, GAListBASE::before);
+	   mylist.insert(newnode, oldnode);
 
   The node can be a member of a list.  If it is, then the list will be broken
   just previous to the node, then inserted into the list.
-    If the insert was successful, return NO_ERR.  If there was a problem,
+	If the insert was successful, return NO_ERR.  If there was a problem,
   return ERR.
 
 remove
-  Remove the specified node from the list.  If the node does not exist, an 
-  ERR message is posted and NULL is returned.  The node is returned if the 
+  Remove the specified node from the list.  If the node does not exist, an
+  ERR message is posted and NULL is returned.  The node is returned if the
   removal is successful, otherwise NULL.
 
 swapnode
   Switch nodes a and b in the list.  Leave the rest of the list intact.
-    If the swap was successful, return NO_ERR.  If there was a problem,
+	If the swap was successful, return NO_ERR.  If there was a problem,
   return ERR.
 
 size
@@ -74,28 +74,47 @@ size
   change the contents of the list using any method other than those in this
   object (which you could do, by the way) then you risk screwing up the count.
 ---------------------------------------------------------------------------- */
-class GAListBASE {
-public:
-  enum Location {HEAD=0, TAIL, BEFORE, AFTER}; // values for 'where' to insert
-  enum {NO_ERR=0, ERR= -1};		       // return codes
+class GAListBASE
+{
+  public:
+	enum Location
+	{
+		HEAD = 0,
+		TAIL,
+		BEFORE,
+		AFTER
+	}; // values for 'where' to insert
+	enum
+	{
+		NO_ERR = 0,
+		ERR = -1
+	}; // return codes
 
-  GAListBASE(){hd=(GANodeBASE *)0; sz=0; csz=0;}
-  GAListBASE(GANodeBASE * n){hd=n; csz=1;}
-  GANodeBASE * remove(GANodeBASE * n);
-  int insert(GANodeBASE * n, GANodeBASE * idx, Location where=AFTER);
-  int swapnode(GANodeBASE * a, GANodeBASE * b);
-  int size() const;
+	GAListBASE()
+	{
+		hd = (GANodeBASE *)0;
+		sz = 0;
+		csz = 0;
+	}
+	GAListBASE(GANodeBASE *n)
+	{
+		hd = n;
+		csz = 1;
+	}
+	GANodeBASE *remove(GANodeBASE *n);
+	int insert(GANodeBASE *n, GANodeBASE *idx, Location where = AFTER);
+	int swapnode(GANodeBASE *a, GANodeBASE *b);
+	int size() const;
 
-protected:
-  int sz, csz;			// number of nodes, have contents changed?
-  GANodeBASE *hd;		// the head node of the list
+  protected:
+	int sz, csz; // number of nodes, have contents changed?
+	GANodeBASE *hd; // the head node of the list
 
-private:
-  GAListBASE(const GAListBASE &){} // copying is not allowed
-  GAListBASE & operator=(const GAListBASE &){return *this;} // or op=
-  friend class GAListIterBASE;
+  private:
+	GAListBASE(const GAListBASE &) {} // copying is not allowed
+	GAListBASE &operator=(const GAListBASE &) { return *this; } // or op=
+	friend class GAListIterBASE;
 };
-
 
 /* ----------------------------------------------------------------------------
  GAListIterBASE
@@ -127,34 +146,67 @@ warp
   Move the iterator to the node referenced by index.  The head node is node '0'
   then the count increases from there.
 ---------------------------------------------------------------------------- */
-class GAListIterBASE {
-public:
-  GAListIterBASE(){node=(GANodeBASE *)0; list=(GAListBASE *)0;}
-  GAListIterBASE(const GAListBASE & t){list = &t; node = t.hd;}
-  GAListIterBASE(const GAListIterBASE & i){list = i.list; node = i.node;}
-  void operator()(const GAListBASE & t){list = &t; node = t.hd;}
-  GANodeBASE * current(GANodeBASE * c)
-    {return(c ? (node=c) : (GANodeBASE *)0);}
-  GANodeBASE * current(){return node;}
-  GANodeBASE * next(){return(node ? (node=node->next) : (GANodeBASE *)0);}
-  GANodeBASE * next(GANodeBASE * c)
-    {return(c ? (node=c->next) : (GANodeBASE *)0);}
-  GANodeBASE * prev(){return(node ? (node=node->prev) : (GANodeBASE *)0);}
-  GANodeBASE * prev(GANodeBASE * c)
-    {return(c ? (node=c->prev) : (GANodeBASE *)0);}
-  GANodeBASE * head(){return(list ? (node=list->hd) : (GANodeBASE *)0);}
-  GANodeBASE * tail()
-    {return((list && list->hd)?(node=list->hd->prev) : (GANodeBASE *)0);}
-  GANodeBASE * warp(unsigned int);
-  GANodeBASE * warp(const GAListIterBASE & i){
-    list=i.list; node=(GANodeBASE *)0;
-    return(i.node ? (node=i.node) : (GANodeBASE *)0);
-  }
-  int size(){return(list ? list->size() : 0);}
+class GAListIterBASE
+{
+  public:
+	GAListIterBASE()
+	{
+		node = (GANodeBASE *)0;
+		list = (GAListBASE *)0;
+	}
+	GAListIterBASE(const GAListBASE &t)
+	{
+		list = &t;
+		node = t.hd;
+	}
+	GAListIterBASE(const GAListIterBASE &i)
+	{
+		list = i.list;
+		node = i.node;
+	}
+	void operator()(const GAListBASE &t)
+	{
+		list = &t;
+		node = t.hd;
+	}
+	GANodeBASE *current(GANodeBASE *c)
+	{
+		return (c ? (node = c) : (GANodeBASE *)0);
+	}
+	GANodeBASE *current() { return node; }
+	GANodeBASE *next()
+	{
+		return (node ? (node = node->next) : (GANodeBASE *)0);
+	}
+	GANodeBASE *next(GANodeBASE *c)
+	{
+		return (c ? (node = c->next) : (GANodeBASE *)0);
+	}
+	GANodeBASE *prev()
+	{
+		return (node ? (node = node->prev) : (GANodeBASE *)0);
+	}
+	GANodeBASE *prev(GANodeBASE *c)
+	{
+		return (c ? (node = c->prev) : (GANodeBASE *)0);
+	}
+	GANodeBASE *head() { return (list ? (node = list->hd) : (GANodeBASE *)0); }
+	GANodeBASE *tail()
+	{
+		return ((list && list->hd) ? (node = list->hd->prev) : (GANodeBASE *)0);
+	}
+	GANodeBASE *warp(unsigned int);
+	GANodeBASE *warp(const GAListIterBASE &i)
+	{
+		list = i.list;
+		node = (GANodeBASE *)0;
+		return (i.node ? (node = i.node) : (GANodeBASE *)0);
+	}
+	int size() { return (list ? list->size() : 0); }
 
-protected:
-  GANodeBASE * node;
-  const GAListBASE * list;
+  protected:
+	GANodeBASE *node;
+	const GAListBASE *list;
 };
 
 #endif
