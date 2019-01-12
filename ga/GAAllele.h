@@ -199,10 +199,4 @@ operator>> (std::istream & is, GAAlleleSet<T> & arg)
 { arg.read(is); return is; }
 #endif
 
-
-
-#ifdef GALIB_USE_BORLAND_INST
-#include <GAAllele.C>
-#endif
-
 #endif

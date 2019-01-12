@@ -155,9 +155,4 @@ protected:
   GAAlleleSet<T> * aset;
 };
 
-
-#ifdef GALIB_USE_BORLAND_INST
-#include <GA3DArrayGenome.C>
-#endif
-
 #endif

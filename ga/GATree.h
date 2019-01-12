@@ -227,9 +227,4 @@ private:
   friend class GATree<T>;
 };
 
-
-#ifdef GALIB_USE_BORLAND_INST
-#include <GATree.C>
-#endif
-
 #endif

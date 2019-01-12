@@ -171,12 +171,5 @@ protected:
   GAAlleleSet<T> * aset;		// the allele set(s) for this genome
 };
 
-
-
-
-#ifdef GALIB_USE_BORLAND_INST
-#include <GA1DArrayGenome.C>
-#endif
-
 #endif
 
