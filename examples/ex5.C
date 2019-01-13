@@ -22,6 +22,7 @@ override-able on any instance of the new genome.
  
 
 #include <iostream>
+#include <fstream>
 
 #define cout std::cout
 #define cerr std::cerr

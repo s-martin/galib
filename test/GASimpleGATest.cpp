@@ -2,7 +2,7 @@
 
 #include <GASimpleGA.h>
 #include <GA2DBinStrGenome.h>
-#include <std_stream.h>
+#include <iostream>
 
 // This is the objective function.  All it does is check for alternating 0s and
 // 1s.  If the gene is odd and contains a 1, the fitness is incremented by 1.

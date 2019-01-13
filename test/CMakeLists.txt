@@ -1,7 +1,8 @@
 
 add_executable("${PROJECT_NAME}Test" 
         "main.cpp"
-        "GASimpleGATest.cpp")
+        "GASimpleGATest.cpp"
+        "GASStateGATest.cpp")
 
 target_include_directories("${PROJECT_NAME}Test" PUBLIC "../ga")
 
