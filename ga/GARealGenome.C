@@ -153,14 +153,14 @@ int
 GARealGaussianMutator(GAGenome& g, float pmut){
   GA1DArrayAlleleGenome<float> &child=
     DYN_CAST(GA1DArrayAlleleGenome<float> &, g);
-  int n, i;
-  if(pmut <= 0.0) return(0);
+
+	if(pmut <= 0.0) return(0);
 
   float nMut = pmut * (float)(child.length());
   int length = child.length()-1;
   if(nMut < 1.0){		// we have to do a flip test on each element
     nMut = 0;
-    for(i=length; i>=0; i--){
+    for(int i=length; i>=0; i--){
       float value = child.gene(i);
       if(GAFlipCoin(pmut)){
 	if(child.alleleset(i).type() == GAAllele::ENUMERATED ||
@@ -177,7 +177,7 @@ GARealGaussianMutator(GAGenome& g, float pmut){
     }
   }
   else{				// only mutate the ones we need to
-    for(n=0; n<nMut; n++){
+    for(int n=0; n<nMut; n++){
       int idx = GARandomInt(0,length);
       float value = child.gene(idx);
       if(child.alleleset(idx).type() == GAAllele::ENUMERATED ||

@@ -52,22 +52,22 @@ public:
   static GAParameterList& registerDefaultParameters(GAParameterList&);
 
 public:
-  GAIncrementalGA(const GAGenome&);
-  GAIncrementalGA(const GAPopulation&);
+  explicit GAIncrementalGA(const GAGenome&);
+  explicit GAIncrementalGA(const GAPopulation&);
   GAIncrementalGA(const GAIncrementalGA&);
   GAIncrementalGA& operator=(const GAIncrementalGA&);
   virtual ~GAIncrementalGA();
-  virtual void copy(const GAGeneticAlgorithm &);
+  virtual void copy(const GAGeneticAlgorithm &) override;
 
-  virtual void initialize(unsigned int seed=0);
-  virtual void step();
+  virtual void initialize(unsigned int seed=0) override;
+  virtual void step() override;
   GAIncrementalGA & operator++() { step(); return *this; }
 
-  virtual int setptr(const char* name, const void* value);
-  virtual int get(const char* name, void* value) const;
+  virtual int setptr(const char* name, const void* value) override;
+  virtual int get(const char* name, void* value) const override;
 
-  virtual void objectiveFunction(GAGenome::Evaluator f);
-  virtual void objectiveData(const GAEvalData& v);
+  virtual void objectiveFunction(GAGenome::Evaluator f) override;
+  virtual void objectiveData(const GAEvalData& v) override;
 
   int nOffspring() const {return noffspr;}
   int nOffspring(unsigned int);

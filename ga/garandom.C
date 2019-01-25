@@ -65,10 +65,9 @@ void GARandomSeed(unsigned int s)
 {
 	if (s == 0 && seed == 0)
 	{
-		unsigned long int tmp;
 		while (seed == 0)
 		{
-			tmp = time(NULL) _GA_PID;
+			unsigned long int tmp = time(NULL) _GA_PID;
 			for (unsigned int i = 0;
 				 i < GALIB_BITS_IN_WORD * sizeof(unsigned int); i++)
 				seed += (tmp & (1 << i));
@@ -276,18 +275,15 @@ static long idum = 0;
 
 void gasran2(unsigned int seed)
 {
-	int j;
-	long k;
-
 	idum = STA_CAST(long, seed);
 	if (idum == 0)
 		idum = 1;
 	if (idum < 0)
 		idum = -idum;
 	idum2 = (idum);
-	for (j = NTAB + 7; j >= 0; j--)
+	for (int j = NTAB + 7; j >= 0; j--)
 	{
-		k = (idum) / IQ1;
+		long k = (idum) / IQ1;
 		idum = IA1 * (idum - k * IQ1) - k * IR1;
 		if (idum < 0)
 			idum += IM1;

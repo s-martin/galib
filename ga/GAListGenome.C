@@ -225,10 +225,10 @@ GAListGenome<T>::NodeComparator(const GAGenome& a, const GAGenome& b)
 
   float count = 0;
   GAListIter<T> biter(bro), siter(sis);
-  T *sptr, *bptr;
+
   for(int i=siter.size()-1; i>=0; i--) {
-    sptr = siter.next();
-    bptr = biter.next();
+    auto sptr = siter.next();
+    auto bptr = biter.next();
     if(sptr != 0 && bptr != 0)
       count += ((*sptr == *bptr) ? 0 : 1);
   }

@@ -445,7 +445,7 @@ int GA2DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome &c, float pmut)
 {
 	GA2DArrayGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayGenome<ARRAY_TYPE> &, c);
-	int n, i;
+	
 	if (pmut <= 0.0)
 		return (0);
 
@@ -454,7 +454,7 @@ int GA2DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome &c, float pmut)
 	if (nMut < 1.0)
 	{ // we have to do a flip test on each bit
 		nMut = 0;
-		for (i = size; i >= 0; i--)
+		for (int i = size; i >= 0; i--)
 		{
 			if (GAFlipCoin(pmut))
 			{
@@ -465,7 +465,7 @@ int GA2DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome &c, float pmut)
 	}
 	else
 	{ // only flip the number of bits we need to flip
-		for (n = 0; n < nMut; n++)
+		for (int n = 0; n < nMut; n++)
 			child.GAArray<ARRAY_TYPE>::swap(GARandomInt(0, size),
 											GARandomInt(0, size));
 	}

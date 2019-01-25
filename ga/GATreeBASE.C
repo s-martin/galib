@@ -608,11 +608,11 @@ static int _GATreeDepth(GANodeBASE *node)
 {
 	if (!node)
 		return 0;
-	int depth;
+
 	int maxdepth = 1 + _GATreeDepth(node->child);
 	for (GANodeBASE *tmp = node->next; tmp != node; tmp = tmp->next)
 	{
-		depth = 1 + _GATreeDepth(tmp->child);
+		int depth = 1 + _GATreeDepth(tmp->child);
 		maxdepth = maxdepth > depth ? maxdepth : depth;
 	}
 	return maxdepth;

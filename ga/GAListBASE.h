@@ -96,7 +96,7 @@ class GAListBASE
 		sz = 0;
 		csz = 0;
 	}
-	GAListBASE(GANodeBASE *n)
+	explicit GAListBASE(GANodeBASE *n)
 	{
 		hd = n;
 		csz = 1;
@@ -154,7 +154,7 @@ class GAListIterBASE
 		node = (GANodeBASE *)0;
 		list = (GAListBASE *)0;
 	}
-	GAListIterBASE(const GAListBASE &t)
+	explicit GAListIterBASE(const GAListBASE &t)
 	{
 		list = &t;
 		node = t.hd;

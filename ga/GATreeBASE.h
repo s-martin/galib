@@ -111,7 +111,7 @@ class GATreeBASE
 		csz = 0;
 		cdpth = 0;
 	}
-	GATreeBASE(GANodeBASE *n)
+	explicit GATreeBASE(GANodeBASE *n)
 	{
 		rt = n;
 		csz = 1;
@@ -184,7 +184,7 @@ class GATreeIterBASE
 		node = (GANodeBASE *)0;
 		tree = (GATreeBASE *)0;
 	}
-	GATreeIterBASE(const GATreeBASE &t)
+	explicit GATreeIterBASE(const GATreeBASE &t)
 	{
 		tree = &t;
 		node = t.rt;

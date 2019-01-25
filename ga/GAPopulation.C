@@ -792,14 +792,13 @@ void GAPopulation::write(std::ostream &os, SortBasis basis) const
 
 void GAPopulation::QuickSortAscendingRaw(GAGenome **c, int l, int r)
 {
-	int i, j;
-	float v;
+
 	GAGenome *t;
 	if (r > l)
 	{
-		v = c[r]->score();
-		i = l - 1;
-		j = r;
+		float v = c[r]->score();
+		int i = l - 1;
+		int j = r;
 		for (;;)
 		{
 			while (c[++i]->score() < v && i <= r)
@@ -821,14 +820,12 @@ void GAPopulation::QuickSortAscendingRaw(GAGenome **c, int l, int r)
 }
 void GAPopulation::QuickSortDescendingRaw(GAGenome **c, int l, int r)
 {
-	int i, j;
-	float v;
 	GAGenome *t;
 	if (r > l)
 	{
-		v = c[r]->score();
-		i = l - 1;
-		j = r;
+		float v = c[r]->score();
+		int i = l - 1;
+		int j = r;
 		for (;;)
 		{
 			while (c[++i]->score() > v && i <= r)
@@ -851,14 +848,12 @@ void GAPopulation::QuickSortDescendingRaw(GAGenome **c, int l, int r)
 
 void GAPopulation::QuickSortAscendingScaled(GAGenome **c, int l, int r)
 {
-	int i, j;
-	float v;
 	GAGenome *t;
 	if (r > l)
 	{
-		v = c[r]->fitness();
-		i = l - 1;
-		j = r;
+		float v = c[r]->fitness();
+		int i = l - 1;
+		int j = r;
 		for (;;)
 		{
 			while (c[++i]->fitness() < v && i <= r)
@@ -880,14 +875,12 @@ void GAPopulation::QuickSortAscendingScaled(GAGenome **c, int l, int r)
 }
 void GAPopulation::QuickSortDescendingScaled(GAGenome **c, int l, int r)
 {
-	int i, j;
-	float v;
 	GAGenome *t;
 	if (r > l)
 	{
-		v = c[r]->fitness();
-		i = l - 1;
-		j = r;
+		float v = c[r]->fitness();
+		int i = l - 1;
+		int j = r;
 		for (;;)
 		{
 			while (c[++i]->fitness() > v && i <= r)

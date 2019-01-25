@@ -18,8 +18,8 @@ public:
   GADCrowdingGA(const GAGenome& g) : GAGeneticAlgorithm(g) {}
   virtual ~GADCrowdingGA() {}
 
-  virtual void initialize(unsigned int seed=0);
-  virtual void step();
+  virtual void initialize(unsigned int seed=0) override;
+  virtual void step() override;
   GADCrowdingGA& operator++() { step(); return *this; }
 };
 

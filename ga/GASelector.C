@@ -79,12 +79,12 @@ RouletteWheelSelector
 GAGenome &
 GARouletteWheelSelector::select() const {
   float cutoff;
-  int i, upper, lower;
+  int upper, lower;
 
   cutoff = GARandomFloat();
   lower = 0; upper = pop->size()-1;
   while(upper >= lower){
-    i = lower + (upper-lower)/2;
+    int i = lower + (upper-lower)/2;
     assert(i >= 0 && i < n);
     if(psum[i] > cutoff)
       upper = i-1;
@@ -497,13 +497,14 @@ GADSSelector::update() {
 
 static void
 GAQuickSort(unsigned int *c, float *s, int l, int r) {
-  int i,j; 
-  float v;
+
   unsigned int tc;
   float ts;
 
   if(r > l){
-    v = s[r]; i = l-1; j = r;
+    float v = s[r]; 
+	int i = l-1; 
+	int j = r;
     for(;;){
       while(s[++i] < v); // might exceed max array limit here
       while(s[--j] > v && j > 0);

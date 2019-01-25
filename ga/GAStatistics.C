@@ -482,9 +482,6 @@ int GAStatistics::flushFrequency(unsigned int freq)
 // exist.
 void GAStatistics::resizeScores(unsigned int n)
 {
-	int *tmpi;
-	float *tmpf;
-
 	if (n == 0)
 	{
 		delete[] gen;
@@ -504,12 +501,12 @@ void GAStatistics::resizeScores(unsigned int n)
 	}
 	else
 	{
-		tmpi = gen;
+		int * tmpi = gen;
 		gen = new int[n];
 		memcpy(gen, tmpi, (n < Nscrs ? n : Nscrs) * sizeof(int));
 		delete[] tmpi;
 
-		tmpf = aveScore;
+		float * tmpf = aveScore;
 		aveScore = new float[n];
 		memcpy(aveScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
 		delete[] tmpf;

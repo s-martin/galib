@@ -75,7 +75,7 @@ template <class T>
 struct GANode : public GANodeBASE {
   T contents;
 //  GANode() : GANodeBASE(), contents() {}
-  GANode(const T & t) : GANodeBASE(), contents(t) {}
+  explicit GANode(const T & t) : GANodeBASE(), contents(t) {}
   virtual ~GANode() {}
   T & operator()(const T & t){contents = t; return contents;}
 };

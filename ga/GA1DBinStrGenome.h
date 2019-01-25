@@ -84,14 +84,14 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	}
 	virtual ~GA1DBinaryStringGenome();
 	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &);
+	virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
-	virtual int read(std::istream &is);
-	virtual int write(std::ostream &os) const;
+	virtual int read(std::istream &is) override;
+	virtual int write(std::ostream &os) const override;
 #endif
 
-	virtual int equal(const GAGenome &c) const;
+	virtual int equal(const GAGenome &c) const override;
 
 	short gene(unsigned int x = 0) const { return bit(x); }
 	short gene(unsigned int x, short value)

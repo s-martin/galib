@@ -53,14 +53,14 @@ template <class T> class GA3DArrayGenome : public GAArray<T>, public GAGenome
 	}
 	virtual ~GA3DArrayGenome();
 	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &chrom);
+	virtual void copy(const GAGenome &chrom) override;
 
 #ifdef GALIB_USE_STREAMS
-	virtual int read(std::istream &);
-	virtual int write(std::ostream &) const;
+	virtual int read(std::istream &) override;
+	virtual int write(std::ostream &) const override;
 #endif
 
-	virtual int equal(const GAGenome &c) const;
+	virtual int equal(const GAGenome &c) const override;
 
 	const T &gene(unsigned int x, unsigned int y, unsigned int z) const
 	{
@@ -152,16 +152,16 @@ template <class T> class GA3DArrayAlleleGenome : public GA3DArrayGenome<T>
 	}
 	virtual ~GA3DArrayAlleleGenome();
 	virtual GAGenome *
-	clone(GAGenome::CloneMethod flag = GAGenome::CONTENTS) const;
-	virtual void copy(const GAGenome &);
+	clone(GAGenome::CloneMethod flag = GAGenome::CONTENTS) const override;
+	virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
-	virtual int read(std::istream &is);
-	virtual int write(std::ostream &os) const;
+	virtual int read(std::istream &is) override;
+	virtual int write(std::ostream &os) const override;
 #endif
 
-	virtual int equal(const GAGenome &c) const;
-	virtual int resize(int x, int y, int z);
+	virtual int equal(const GAGenome &c) const override;
+	virtual int resize(int x, int y, int z) override;
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
 	{

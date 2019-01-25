@@ -43,13 +43,13 @@ public:
     {copy(orig); return *this;}
   virtual ~GAListGenome();
   virtual GAGenome *clone(GAGenome::CloneMethod flag=CONTENTS) const;
-  virtual void copy(const GAGenome &);
+  virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
-  virtual int write (std::ostream &) const;
+  virtual int write (std::ostream &) const override;
 #endif
 
-  virtual int equal(const GAGenome & c) const;
+  virtual int equal(const GAGenome & c) const override;
 
 // Here we do inlined versions of the access members of the super class.  We
 // do our own here so that we can set/unset the _evaluated flag appropriately.

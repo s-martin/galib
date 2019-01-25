@@ -227,22 +227,21 @@ template <class T>
 int GATreeGenome<T>::SwapSubtreeMutator(GAGenome &c, float pmut)
 {
 	GATreeGenome<T> &child = DYN_CAST(GATreeGenome<T> &, c);
-	int n, i;
-	int a, b;
+	
 	if (pmut <= 0.0)
 		return 0;
 
-	n = child.size();
+	int n = child.size();
 	float nMut = pmut * STA_CAST(float, n);
 	nMut *= 0.5; // swapping one node swaps another as well
 	if (nMut < 1.0)
 	{ // we have to do a flip test for each node
 		nMut = 0;
-		for (i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)
 		{
 			if (GAFlipCoin(pmut))
 			{
-				b = GARandomInt(0, n - 1);
+				int b = GARandomInt(0, n - 1);
 				if (!child.ancestral(i, b))
 					child.swaptree(i, b);
 				nMut++;
@@ -251,10 +250,10 @@ int GATreeGenome<T>::SwapSubtreeMutator(GAGenome &c, float pmut)
 	}
 	else
 	{ // only nuke the number of nodes we need to
-		for (i = 0; i < nMut; i++)
+		for (int i = 0; i < nMut; i++)
 		{
-			a = GARandomInt(0, n - 1);
-			b = GARandomInt(0, n - 1);
+			int a = GARandomInt(0, n - 1);
+			int b = GARandomInt(0, n - 1);
 			if (!child.ancestral(a, b))
 				child.swaptree(a, b);
 		}

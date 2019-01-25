@@ -126,8 +126,8 @@ class GAGeneticAlgorithm : public GAID
 	static bool TerminateUponPopConvergence(GAGeneticAlgorithm &);
 
   public:
-	GAGeneticAlgorithm(const GAGenome &);
-	GAGeneticAlgorithm(const GAPopulation &);
+	explicit GAGeneticAlgorithm(const GAGenome &);
+	explicit GAGeneticAlgorithm(const GAPopulation &);
 	GAGeneticAlgorithm(const GAGeneticAlgorithm &);
 	virtual ~GAGeneticAlgorithm();
 	virtual void copy(const GAGeneticAlgorithm &);
