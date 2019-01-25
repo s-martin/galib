@@ -6,8 +6,8 @@
  DESCRIPTION:
    This example shows how to use an order-based string genome.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

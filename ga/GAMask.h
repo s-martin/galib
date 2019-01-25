@@ -8,7 +8,7 @@
 #ifndef _ga_mask_h_
 #define _ga_mask_h_
 
-#include <string.h>
+#include <cstring>
 
 #define GA_MASK_TYPE char
 

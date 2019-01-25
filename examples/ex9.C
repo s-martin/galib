@@ -8,7 +8,7 @@
 of a continuous function in two variables.  This program uses a binary-to-
 decimal genome.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
+#include <cstdio>
 #include <ga.h>
  
 

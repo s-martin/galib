@@ -6,8 +6,8 @@
  DESCRIPTION:
    Program to test the random number generator in GAlib.
 ---------------------------------------------------------------------------- */
-#include <string.h>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 #include <garandom.h>
  
 

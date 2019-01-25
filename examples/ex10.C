@@ -13,9 +13,9 @@ the performance of the speciation methods.
 a simple genetic algorithm.  You can try using it with a steady-state 
 algorithm, but you'll get bogus results unless you modify the algorithm.
 ---------------------------------------------------------------------------- */
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cmath>
 #include <ga.h>
  
 

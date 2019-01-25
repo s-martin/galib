@@ -10,8 +10,8 @@ objective functions for details about the function itself.
 algorithm library and from the pga package.  I used a bunch of globals in this
 example - not good programming style, but it gets the job done.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

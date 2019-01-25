@@ -11,8 +11,8 @@ selector chooses only the upper half of the population (so it is very selective
 and tends to drive the convergence faster than roulette wheel selection, for
 example).
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include <ga.h>
  
 

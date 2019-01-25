@@ -11,7 +11,7 @@ use the enumerated and bounded types of allele sets.
 allele set for each element in the array.  The constructor that you use to 
 create the array determines which behaviour you'll get.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
+#include <cstdio>
 #include <ga.h>
  
 

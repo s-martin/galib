@@ -14,9 +14,9 @@ here we evolve the two genomes separately rather than as a single entity.
 cost of calculating feasibility is rather high and the feasible space is 
 sparse.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <ga.h>
  
 

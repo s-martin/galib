@@ -9,7 +9,7 @@ master-slave configuration to parallelize the genetic algorithm.  In this case,
 the master controls the evolution by specifying migrations between populations
 on various processes.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
+#include <cstdio>
 #include <iostream.h>
 #include "PVMDemeGA.h"
 #include "genome.h"

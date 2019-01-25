@@ -13,9 +13,9 @@ used with it.  All of the operators (initialization, mutation, crossover,
 comparison, and objective) are defined as member functions but are also
 override-able on any instance of the new genome.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <GABin2DecGenome.h>
 #include <GA2DBinStrGenome.h>
 #include <GASStateGA.h>

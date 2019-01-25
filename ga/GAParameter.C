@@ -12,11 +12,11 @@ a fullblown list.  The parameter list is a special purpose, stripped down list
 implementation.
 ---------------------------------------------------------------------------- */
 #include <GAParameter.h>
-#include <ctype.h>
+#include <cctype>
 #include <gaconfig.h>
 #include <gaerror.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 #include <fstream>
 

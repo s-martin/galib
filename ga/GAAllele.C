@@ -13,7 +13,7 @@
 
 #include <GAAllele.h>
 #include <gaerror.h>
-#include <string.h>
+#include <cstring>
 
 #define GA_ALLELE_CHUNK 10
 

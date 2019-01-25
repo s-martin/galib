@@ -15,7 +15,7 @@ pReplacement member function.
   This example also illustrates some of the statistics members of the genetic
 algorithm object.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
+#include <cstdio>
 
 #include <GASStateGA.h>	// include the steady-state GA header
 #include <GA3DBinStrGenome.h> // and the header for the genome we'll use

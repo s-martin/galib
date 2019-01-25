@@ -13,8 +13,8 @@ doing this already, but this example illustrates how you can modify a genetic
 algorithm to do your own thing.  For example, instead of using the "single
 child crossover" you could use your own crossover algorithm instead.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include <ga.h>
  
 

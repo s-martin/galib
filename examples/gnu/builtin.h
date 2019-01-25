@@ -30,7 +30,7 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <stddef.h>
 #include <std.h>
-#include <math.h>
+#include <cmath>
 
 #ifdef __GNUG__
 #define _VOLATILE_VOID volatile void

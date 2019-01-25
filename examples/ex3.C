@@ -12,8 +12,8 @@ scaled fitness selection and non-steady-state population generation) and
    This example also illustrates the use of the GAParameterList for setting
 default parameters on the genetic algorithm and for parsing the command line.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include <GASimpleGA.h>	// the header for the GA we'll use
 #include <GA2DBinStrGenome.h> // and the header for the genome we need

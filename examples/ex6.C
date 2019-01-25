@@ -13,8 +13,8 @@ the contents of the nodes rather than the pointers to the node contents.  You
 can specialize most functions of a template class (as long as they are not
 inlined).
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

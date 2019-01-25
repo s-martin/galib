@@ -6,7 +6,7 @@
  DESCRIPTION:
    This example shows how to do multiple populations on a single CPU.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
+#include <cstdio>
 #include <GA1DBinStrGenome.h>
 #include <GADemeGA.h>
  

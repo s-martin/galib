@@ -7,8 +7,8 @@
    This example shows how to use max/min feature of GAlib to maximize or 
 minimize your objective functions.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include <ga.h>
  
 

@@ -11,8 +11,8 @@
 #ifndef _ga_list_C_
 #define _ga_list_C_
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <GAListGenome.h>
 #include <GAMask.h>
 #include <garandom.h>

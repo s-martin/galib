@@ -7,8 +7,8 @@
    Illustration of how to use a non-trivial object in the nodes of a tree
 genome.  This example uses points in the nodes.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

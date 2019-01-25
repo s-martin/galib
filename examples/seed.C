@@ -2,8 +2,8 @@
   seed.C
   mbwall 16nov98
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include <ga.h>
  

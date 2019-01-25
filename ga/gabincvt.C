@@ -12,8 +12,8 @@
 #include <gaconfig.h>
 #include <gaerror.h>
 #include <limits.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 // These numbers are machine-specific and are a function of the word length of
 // the OS you are running.  The binary string cannot be too long or else we

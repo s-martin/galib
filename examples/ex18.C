@@ -9,8 +9,8 @@ This program reads in a 2D pattern from a data file then tries to match the
 pattern in a 2D binary string genome.  The type of GA can be specified at
 the command line.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

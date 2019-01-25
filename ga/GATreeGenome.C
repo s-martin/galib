@@ -13,8 +13,8 @@
 
 #include <GATreeGenome.h>
 #include <garandom.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 extern int _GATreeCompare(GANodeBASE *anode, GANodeBASE *bnode);
 

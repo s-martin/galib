@@ -15,7 +15,7 @@ the differences in convergence between various speciation methods.  Believe me,
 it looks much better running in real-time in 3D, but, alas, there is not yet
 any standard 3D cross-platform API, so you get this instead.)
 ---------------------------------------------------------------------------- */
-#include <math.h>
+#include <cmath>
 #include <GASStateGA.h>
 #include <GAList.h>
 #include <GA1DArrayGenome.h>

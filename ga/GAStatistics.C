@@ -10,7 +10,7 @@
 ---------------------------------------------------------------------------- */
 #include <GAStatistics.h>
 #include <gaerror.h>
-#include <string.h>
+#include <cstring>
 
 #include <fstream>
 
@@ -62,13 +62,13 @@ GAStatistics::GAStatistics()
 }
 GAStatistics::GAStatistics(const GAStatistics &orig)
 {
-	cscore = (float *)0;
-	gen = (int *)0;
-	aveScore = (float *)0;
-	maxScore = (float *)0;
-	minScore = (float *)0;
-	devScore = (float *)0;
-	divScore = (float *)0;
+	cscore = nullptr;
+	gen = nullptr;
+	aveScore = nullptr;
+	maxScore = nullptr;
+	minScore = nullptr;
+	devScore = nullptr;
+	divScore = nullptr;
 	scorefile = nullptr;
 	boa = (GAPopulation *)0;
 	copy(orig);
@@ -485,17 +485,17 @@ void GAStatistics::resizeScores(unsigned int n)
 	if (n == 0)
 	{
 		delete[] gen;
-		gen = (int *)0;
+		gen = nullptr;
 		delete[] aveScore;
-		aveScore = (float *)0;
+		aveScore = nullptr;
 		delete[] maxScore;
-		maxScore = (float *)0;
+		maxScore = nullptr;
 		delete[] minScore;
-		minScore = (float *)0;
+		minScore = nullptr;
 		delete[] devScore;
-		devScore = (float *)0;
+		devScore = nullptr;
 		delete[] divScore;
-		divScore = (float *)0;
+		divScore = nullptr;
 
 		nscrs = n;
 	}

@@ -8,8 +8,8 @@
 alleles (-1, 0, 1).  The objective function for this program tries to 
 alternate 0 and 1 then put -1 in the corners.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

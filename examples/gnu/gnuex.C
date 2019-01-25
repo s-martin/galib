@@ -19,7 +19,7 @@ simple tests I found the GAlib binary string object to be a bit faster than
 the GNU bit string (but the gnu bit string is a much more robust, more
 compact, etc implementation).
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
+#include <cstdio>
 #include <iostream.h>
 #include <ga.h>		// this is the include file for the ga library
 

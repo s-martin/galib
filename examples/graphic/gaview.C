@@ -13,8 +13,8 @@ files and understands the usual GAlib command-line options.
   You can compile this using either motif widgets or the athena widgets, 
 depending on which you have on your system.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include <ga.h>
  
 

@@ -9,8 +9,8 @@ containing a list of lists.  This example shows how to derive your own genome
 class and illustrates the use of one of the template genomes (GAListGenome) 
 from the GAlib.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

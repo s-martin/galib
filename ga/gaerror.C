@@ -8,9 +8,9 @@
  DESCRIPTION:
   This file contains all of the error messages for the library.
 ---------------------------------------------------------------------------- */
-#include <string.h>
+#include <cstring>
 #include <gaerror.h>
-#include <stdio.h>
+#include <cstdio>
 
 #include <iostream>
 #include <fstream>

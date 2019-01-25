@@ -19,7 +19,7 @@ example, many of the default GAlib methods do a fair amount of caching, so if
 you parallelize one component without doing all the others, you might end up
 slowing everything down.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
+#include <cstdio>
 #include <iostream.h>
 #include <time.h>
 #include <pvm3.h>

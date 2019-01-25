@@ -10,8 +10,8 @@
 #include <GABaseGA.h>
 #include <garandom.h>
 #include <gaversion.h> // gets the RCS string in for ident purposes
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 //#define GA_DEBUG
 

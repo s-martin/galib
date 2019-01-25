@@ -2,8 +2,8 @@
   tsp.C
   mbwall 17jan96
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include <values.h>
 #include <ga.h>
  

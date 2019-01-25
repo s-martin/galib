@@ -6,7 +6,7 @@
 
    Souce file for the deme-based genetic algorithm object.
 ---------------------------------------------------------------------------- */
-#include <string.h>
+#include <cstring>
 #include <garandom.h>
 #include "PVMDemeGA.h"
 #include "genome.h"

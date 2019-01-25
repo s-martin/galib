@@ -46,7 +46,7 @@ then these functions scale the distribution to that deviation.  Mean is still 0
 
 #include <gaconfig.h>
 #include <gatypes.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 // Here we determine which random number generator will be used.  The critical
 // parts here are the name of the random number generator (e.g. rand or random)
@@ -122,7 +122,7 @@ inline float GARandomFloat(float low, float high)
 #error these lines to go ahead and do your compilation.
 
 #include <limits.h>
-#include <math.h>
+#include <cmath>
 
 #if defined(GALIB_USE_RANDOM)
 

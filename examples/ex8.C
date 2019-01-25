@@ -15,8 +15,8 @@ inlined).
 values, depending on the genome it is evaluting.  So the example also shows how
 to use the sigma truncation scaling method to handle the mixed scores.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 

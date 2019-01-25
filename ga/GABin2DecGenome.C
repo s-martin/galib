@@ -13,11 +13,11 @@ number of bits that can represent a float - see the converters file for more
 information).
 ---------------------------------------------------------------------------- */
 #include <GABin2DecGenome.h>
-#include <ctype.h>
+#include <cctype>
 #include <gaerror.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 /* ----------------------------------------------------------------------------
    Phenotype class definitions

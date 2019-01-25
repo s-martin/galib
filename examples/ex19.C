@@ -11,9 +11,9 @@ certain that negative objective scores won't be a problem for us.
 pga-2.8 genetic algorithm package (under the terms of the GNU General Public
 License).
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <ga.h>
  
 

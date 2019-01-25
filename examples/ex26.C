@@ -18,7 +18,7 @@ genetic algorithm is doing and how well the speciation is working (or not).
 about all of the silly little inefficient aspects of the implementation.  But 
 it does get the job done.
 ---------------------------------------------------------------------------- */
-#include <math.h>
+#include <cmath>
 #include <GASStateGA.h>
 #include <GAListGenome.h>
 #include <garandom.h>

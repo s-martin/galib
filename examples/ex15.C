@@ -7,8 +7,8 @@
    This example nearly identical to example 2, but it uses convergence as the
 stopping criterion for the GA rather than number-of-generations.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include <ga.h>
  
 

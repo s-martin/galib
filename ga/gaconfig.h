@@ -451,7 +451,7 @@ incorporate it into the code base.
 // deal with assertions.  at some point we might want a proper definition of 
 // assert here for platforms that do not have it.
 #if defined(GALIB_HAVE_NOT_ASSERT)
-#include <stdlib.h>
+#include <cstdlib>
 #define assert(x) \
   { \
     if(! (x)) { \

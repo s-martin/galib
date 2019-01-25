@@ -14,9 +14,9 @@
 #include <GA2DArrayGenome.h>
 #include <GAMask.h>
 #include <garandom.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 /* ----------------------------------------------------------------------------
 2DArrayGenome

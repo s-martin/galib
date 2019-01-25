@@ -11,8 +11,8 @@ scaled fitness selection and non-steady-state population generation) and
 binary-to-decimal, 1D genomes.  We also use the userData argument to the
 objective function.
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 
 #include <GASimpleGA.h>
 #include <GABin2DecGenome.h>

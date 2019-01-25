@@ -10,12 +10,12 @@
 ---------------------------------------------------------------------------- */
 #include <GA1DBinStrGenome.h>
 #include <GAMask.h>
-#include <ctype.h>
+#include <cctype>
 #include <gaerror.h>
 #include <garandom.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #define SWAP(a, b)                                                             \
 	{                                                                          \

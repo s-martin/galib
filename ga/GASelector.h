@@ -37,7 +37,7 @@ RouletteWheel - weighted selection where individuals with better fitness have
 #define _ga_selector_h_
 
 #include <gaid.h>
-#include <string.h>
+#include <cstring>
 
 class GAGenome;
 class GAPopulation;
@@ -128,12 +128,12 @@ class GARouletteWheelSelector : public GASelectionScheme
 	explicit GARouletteWheelSelector(int w = GASelectionScheme::SCALED)
 		: GASelectionScheme(w)
 	{
-		psum = (float *)0;
+		psum = nullptr;
 		n = 0;
 	}
 	GARouletteWheelSelector(const GARouletteWheelSelector &orig)
 	{
-		psum = (float *)0;
+		psum = nullptr;
 		n = 0;
 		copy(orig);
 	}
@@ -241,13 +241,13 @@ class GASRSSelector : public GASelectionScheme
 	explicit GASRSSelector(int w = GASelectionScheme::SCALED)
 		: GASelectionScheme(w)
 	{
-		fraction = (float *)0;
+		fraction = nullptr;
 		choices = (unsigned int *)0;
 		n = 0;
 	}
 	GASRSSelector(const GASRSSelector &orig)
 	{
-		fraction = (float *)0;
+		fraction = nullptr;
 		choices = (unsigned int *)0;
 		n = 0;
 		copy(orig);
@@ -301,14 +301,14 @@ class GADSSelector : public GASelectionScheme
 	explicit GADSSelector(int w = GASelectionScheme::SCALED)
 		: GASelectionScheme(w)
 	{
-		fraction = (float *)0;
+		fraction = nullptr;
 		choices = (unsigned int *)0;
 		idx = (unsigned int *)0;
 		n = 0;
 	}
 	GADSSelector(const GADSSelector &orig)
 	{
-		fraction = (float *)0;
+		fraction = nullptr;
 		choices = (unsigned int *)0;
 		idx = (unsigned int *)0;
 		n = 0;

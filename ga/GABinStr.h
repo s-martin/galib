@@ -17,7 +17,7 @@ conditional makes it go from 7.5 seconds to 3.2 seconds (bm bl cs 1024 c 0.9)
 #ifndef _ga_binstr_h_
 #define _ga_binstr_h_
 
-#include <string.h>
+#include <cstring>
 #include <gatypes.h>
 #include <garandom.h>
 

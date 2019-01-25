@@ -8,8 +8,8 @@
 how to use some of the other member functions in the GA library.  We also do
 a few more fancy things with the genome (ie use the read/write methods).
 ---------------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <ga.h>
  
 
