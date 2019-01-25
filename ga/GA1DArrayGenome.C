@@ -376,7 +376,7 @@ int GA1DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 {
 	GA1DArrayAlleleGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA1DArrayAlleleGenome<ARRAY_TYPE> &, c);
-	int n, i;
+
 	if (pmut <= 0.0)
 		return (0);
 
@@ -384,7 +384,7 @@ int GA1DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 	if (nMut < 1.0)
 	{ // we have to do a flip test on each bit
 		nMut = 0;
-		for (i = child.length() - 1; i >= 0; i--)
+		for (int i = child.length() - 1; i >= 0; i--)
 		{
 			if (GAFlipCoin(pmut))
 			{
@@ -395,9 +395,9 @@ int GA1DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 	}
 	else
 	{ // only flip the number of bits we need to flip
-		for (n = 0; n < nMut; n++)
+		for (int n = 0; n < nMut; n++)
 		{
-			i = GARandomInt(0, child.length() - 1);
+			int i = GARandomInt(0, child.length() - 1);
 			child.gene(i, child.alleleset(i).allele());
 		}
 	}
@@ -410,7 +410,7 @@ int GA1DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome &c, float pmut)
 {
 	GA1DArrayGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA1DArrayGenome<ARRAY_TYPE> &, c);
-	int n, i;
+
 	if (pmut <= 0.0)
 		return (0);
 
@@ -419,7 +419,7 @@ int GA1DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome &c, float pmut)
 	if (nMut < 1.0)
 	{ // we have to do a flip test on each bit
 		nMut = 0;
-		for (i = length; i >= 0; i--)
+		for (int i = length; i >= 0; i--)
 		{
 			if (GAFlipCoin(pmut))
 			{
@@ -430,7 +430,7 @@ int GA1DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome &c, float pmut)
 	}
 	else
 	{ // only flip the number of bits we need to flip
-		for (n = 0; n < nMut; n++)
+		for (int n = 0; n < nMut; n++)
 			child.swap(GARandomInt(0, length), GARandomInt(0, length));
 	}
 	return (STA_CAST(int, nMut));

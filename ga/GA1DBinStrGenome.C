@@ -275,13 +275,13 @@ int
 GA1DBinaryStringGenome::FlipMutator(GAGenome & c, float pmut)
 {
   GA1DBinaryStringGenome &child=DYN_CAST(GA1DBinaryStringGenome &, c);
-  int n, i;
+
   if(pmut <= 0.0) return(0);
 
   float nMut = pmut * STA_CAST(float, child.length());
   if(nMut < 1.0){		// we have to do a flip test on each bit
     nMut = 0;
-    for(i=child.length()-1; i>=0; i--){
+    for(int i=child.length()-1; i>=0; i--){
       if(GAFlipCoin(pmut)){
 	child.gene(i, ((child.gene(i) == 0) ? 1 : 0));
 	nMut++;
@@ -289,8 +289,8 @@ GA1DBinaryStringGenome::FlipMutator(GAGenome & c, float pmut)
     }
   }
   else{				// only flip the number of bits we need to flip
-    for(n=0; n<nMut; n++){
-      i = GARandomInt(0, child.length()-1); // the index of the bit to flip
+    for(int n=0; n<nMut; n++){
+      int i = GARandomInt(0, child.length()-1); // the index of the bit to flip
       child.gene(i, ((child.gene(i) == 0) ? 1 : 0));
     }
   }

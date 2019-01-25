@@ -67,8 +67,8 @@ public:
   GANoScaling(const GANoScaling &) : GAScalingScheme() {}
   GANoScaling& operator=(const GAScalingScheme&){ return *this; }
   virtual ~GANoScaling(){}
-  virtual GAScalingScheme * clone() const {return new GANoScaling(*this);}
-  virtual void evaluate(const GAPopulation & p);
+  virtual GAScalingScheme * clone() const override {return new GANoScaling(*this);}
+  virtual void evaluate(const GAPopulation & p) override;
 };
 
 
@@ -82,14 +82,14 @@ class GALinearScaling : public GAScalingScheme {
 public:
   GADefineIdentity("GALinearScaling", GAID::LinearScaling);
 
-  GALinearScaling(float fm=gaDefLinearScalingMultiplier) {multiplier(fm);}
+  explicit GALinearScaling(float fm=gaDefLinearScalingMultiplier) {multiplier(fm);}
   GALinearScaling(const GALinearScaling & arg) {copy(arg);}
   GALinearScaling & operator=(const GAScalingScheme & arg)
     {copy(arg); return(*this);}
   virtual ~GALinearScaling(){}
-  virtual GAScalingScheme * clone() const {return new GALinearScaling(*this);}
-  virtual void evaluate(const GAPopulation & p);
-  virtual void copy(const GAScalingScheme & arg){
+  virtual GAScalingScheme * clone() const override {return new GALinearScaling(*this);}
+  virtual void evaluate(const GAPopulation & p) override;
+  virtual void copy(const GAScalingScheme & arg) override{
     if(&arg != this){
       GAScalingScheme::copy(arg);
       c=(DYN_CAST(const GALinearScaling&,arg)).c;
@@ -116,16 +116,16 @@ class GASigmaTruncationScaling : public GAScalingScheme {
 public:
   GADefineIdentity("GASigmaTruncationScaling", GAID::SigmaTruncationScaling);
 
-  GASigmaTruncationScaling(float m=gaDefSigmaTruncationMultiplier)
+  explicit GASigmaTruncationScaling(float m=gaDefSigmaTruncationMultiplier)
     {multiplier(m);}
   GASigmaTruncationScaling(const GASigmaTruncationScaling & arg){copy(arg);}
   GASigmaTruncationScaling & operator=(const GAScalingScheme & arg)
     {copy(arg); return(*this);}
   virtual ~GASigmaTruncationScaling(){}
-  virtual GAScalingScheme * clone() const 
+  virtual GAScalingScheme * clone() const override 
     {return new GASigmaTruncationScaling(*this);}
-  virtual void evaluate(const GAPopulation & p);
-  virtual void copy(const GAScalingScheme & arg){
+  virtual void evaluate(const GAPopulation & p) override;
+  virtual void copy(const GAScalingScheme & arg) override{
     if(&arg != this){
       GAScalingScheme::copy(arg);
       c=(DYN_CAST(const GASigmaTruncationScaling&,arg)).c;
@@ -152,15 +152,15 @@ class GAPowerLawScaling : public GAScalingScheme {
 public:
   GADefineIdentity("GAPowerLawScaling", GAID::PowerLawScaling);
 
-  GAPowerLawScaling(float f=gaDefPowerScalingFactor) {k = f;}
+  explicit GAPowerLawScaling(float f=gaDefPowerScalingFactor) {k = f;}
   GAPowerLawScaling(const GAPowerLawScaling & arg) {copy(arg);}
   GAPowerLawScaling & operator=(const GAScalingScheme & arg)
     {copy(arg); return(*this);}
   virtual ~GAPowerLawScaling(){}
-  virtual GAScalingScheme * clone() const 
+  virtual GAScalingScheme * clone() const override 
     {return new GAPowerLawScaling(*this);}
-  virtual void evaluate(const GAPopulation & p);
-  virtual void copy(const GAScalingScheme & arg){
+  virtual void evaluate(const GAPopulation & p) override;
+  virtual void copy(const GAScalingScheme & arg) override{
     if(&arg != this){
       GAScalingScheme::copy(arg);
       k=(DYN_CAST(const GAPowerLawScaling&,arg)).k;
@@ -245,9 +245,9 @@ public:
   GASharing(const GASharing & arg) { N=0; d=(float*)0; copy(arg); }
   GASharing & operator=(const GAScalingScheme & arg){copy(arg); return(*this);}
   virtual ~GASharing(){ delete [] d;}
-  virtual GAScalingScheme * clone() const {return new GASharing(*this);}
-  virtual void copy(const GAScalingScheme & arg);
-  virtual void evaluate(const GAPopulation & p);
+  virtual GAScalingScheme * clone() const override {return new GASharing(*this);}
+  virtual void copy(const GAScalingScheme & arg) override;
+  virtual void evaluate(const GAPopulation & p) override;
 
   GAGenome::Comparator distanceFunction(GAGenome::Comparator f){return df=f;}
   GAGenome::Comparator distanceFunction() const {return df;}

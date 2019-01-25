@@ -407,7 +407,7 @@ int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 {
 	GA2DArrayAlleleGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayAlleleGenome<ARRAY_TYPE> &, c);
-	int n, m, i, j;
+	
 	if (pmut <= 0.0)
 		return (0);
 
@@ -415,9 +415,9 @@ int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 	if (nMut < 1.0)
 	{ // we have to do a flip test on each bit
 		nMut = 0;
-		for (i = child.width() - 1; i >= 0; i--)
+		for (int i = child.width() - 1; i >= 0; i--)
 		{
-			for (j = child.height() - 1; j >= 0; j--)
+			for (int j = child.height() - 1; j >= 0; j--)
 			{
 				if (GAFlipCoin(pmut))
 				{
@@ -429,11 +429,11 @@ int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 	}
 	else
 	{ // only flip the number of bits we need to flip
-		for (n = 0; n < nMut; n++)
+		for (int n = 0; n < nMut; n++)
 		{
-			m = GARandomInt(0, child.size() - 1);
-			i = m % child.width();
-			j = m / child.width();
+			int m = GARandomInt(0, child.size() - 1);
+			int i = m % child.width();
+			int j = m / child.width();
 			child.gene(i, j, child.alleleset().allele());
 		}
 	}
