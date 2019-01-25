@@ -40,7 +40,7 @@ GAParameter::GAParameter(const char *fn, const char *sn, Type tp, const void *v)
 		strcpy(fname, fn);
 	}
 	else
-		fname = (char *)0;
+		fname = nullptr;
 
 	if (sn)
 	{
@@ -48,7 +48,7 @@ GAParameter::GAParameter(const char *fn, const char *sn, Type tp, const void *v)
 		strcpy(sname, sn);
 	}
 	else
-		sname = (char *)0;
+		sname = nullptr;
 
 	t = tp;
 	memset(&val, 0, sizeof(Value));
@@ -57,7 +57,7 @@ GAParameter::GAParameter(const char *fn, const char *sn, Type tp, const void *v)
 
 GAParameter::GAParameter(const GAParameter &orig)
 {
-	fname = sname = (char *)0;
+	fname = sname = nullptr;
 	memset(&val, 0, sizeof(Value));
 	copy(orig);
 }
@@ -75,14 +75,14 @@ void GAParameter::copy(const GAParameter &orig)
 		strcpy(fname, orig.fname);
 	}
 	else
-		fname = (char *)0;
+		fname = nullptr;
 	if (orig.sname)
 	{
 		sname = new char[strlen(orig.sname) + 1];
 		strcpy(sname, orig.sname);
 	}
 	else
-		sname = (char *)0;
+		sname = nullptr;
 
 	t = orig.t;
 	setvalue(orig.value()); // do this directly...

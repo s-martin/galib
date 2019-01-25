@@ -69,7 +69,7 @@ GAStatistics::GAStatistics(const GAStatistics &orig)
 	minScore = (float *)0;
 	devScore = (float *)0;
 	divScore = (float *)0;
-	scorefile = (char *)0;
+	scorefile = nullptr;
 	boa = (GAPopulation *)0;
 	copy(orig);
 }
@@ -150,7 +150,7 @@ void GAStatistics::copy(const GAStatistics &orig)
 		strcpy(scorefile, orig.scorefile);
 	}
 	else
-		scorefile = (char *)0;
+		scorefile = nullptr;
 
 	which = orig.which;
 
