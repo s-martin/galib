@@ -407,7 +407,7 @@ int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 {
 	GA2DArrayAlleleGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayAlleleGenome<ARRAY_TYPE> &, c);
-	
+
 	if (pmut <= 0.0)
 		return (0);
 
