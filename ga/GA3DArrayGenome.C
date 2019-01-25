@@ -198,15 +198,15 @@ GA3DArrayGenome<T>::write(std::ostream & os) const
 template <class T> int
 GA3DArrayGenome<T>::resizeBehaviour(GAGenome::Dimension which) const {
   int val = 0;
-  if(which == WIDTH) {
+  if(which == Dimension::WIDTH) {
     if(maxX == minX) val = FIXED_SIZE;
     else val = maxX;
   }
-  else if(which == HEIGHT) {
+  else if(which == Dimension::HEIGHT) {
     if(maxY == minY) val = FIXED_SIZE;
     else val = maxY;
   }
-  else if(which == DEPTH) {
+  else if(which == Dimension::DEPTH) {
     if(maxZ == minZ) val = FIXED_SIZE;
     else val = maxZ;
   }
@@ -225,19 +225,19 @@ resizeBehaviour(GAGenome::Dimension which,
   }
 
   switch(which){
-  case WIDTH:
+  case Dimension::WIDTH:
     minX = lower; maxX = upper;
     if(nx > upper) GA3DArrayGenome<T>::resize(upper,ny,nz);
     if(nx < lower) GA3DArrayGenome<T>::resize(lower,ny,nz);
     break;
 
-  case HEIGHT:
+  case Dimension::HEIGHT:
     minY = lower; maxY = upper;
     if(ny > upper) GA3DArrayGenome<T>::resize(nx,upper,nz);
     if(ny < lower) GA3DArrayGenome<T>::resize(nx,lower,nz);
     break;
 
-  case DEPTH:
+  case Dimension::DEPTH:
     minZ = lower; maxZ = upper;
     if(nz > upper) GA3DArrayGenome<T>::resize(nx,ny,upper);
     if(nz < lower) GA3DArrayGenome<T>::resize(nx,ny,lower);

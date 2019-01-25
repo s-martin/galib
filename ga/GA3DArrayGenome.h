@@ -82,9 +82,9 @@ public:
   int resizeBehaviour(unsigned int lowerX, unsigned int upperX, 
 		      unsigned int lowerY, unsigned int upperY, 
 		      unsigned int lowerZ, unsigned int upperZ){
-    return(resizeBehaviour(WIDTH,  lowerX, upperX) * 
-	   resizeBehaviour(HEIGHT, lowerY, upperY) * 
-	   resizeBehaviour(DEPTH,  lowerZ, upperZ));
+    return(resizeBehaviour(Dimension::WIDTH,  lowerX, upperX) * 
+	   resizeBehaviour(Dimension::HEIGHT, lowerY, upperY) * 
+	   resizeBehaviour(Dimension::DEPTH,  lowerZ, upperZ));
   }
   void copy(const GA3DArrayGenome &, 
 	    unsigned int, unsigned int, unsigned int,
