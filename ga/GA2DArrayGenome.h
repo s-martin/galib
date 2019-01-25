@@ -76,8 +76,8 @@ public:
   int resizeBehaviour(Dimension which, unsigned int lower, unsigned int upper);
   int resizeBehaviour(unsigned int lowerX, unsigned int upperX, 
 		      unsigned int lowerY, unsigned int upperY){
-    return(resizeBehaviour(WIDTH, lowerX, upperX) * 
-	   resizeBehaviour(HEIGHT, lowerY, upperY));
+    return(resizeBehaviour(Dimension::WIDTH, lowerX, upperX) * 
+	   resizeBehaviour(Dimension::HEIGHT, lowerY, upperY));
   }
   void copy(const GA2DArrayGenome &, 
 	    unsigned int, unsigned int,

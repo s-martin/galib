@@ -24,7 +24,7 @@ char _gaerrbuf2[120];
 static std::ostream *__gaErrStream = & std::cerr;
 #endif
 static bool __gaErrFlag = true;
-static char *__gaErrStr[] = {
+static const char *__gaErrStr[] = {
   "error reading from file: ",
   "error writing to file: ",
   "unexpected EOF encountered during read.",

@@ -168,14 +168,14 @@ template <class T>
 int GA2DArrayGenome<T>::resizeBehaviour(GAGenome::Dimension which) const
 {
 	int val = 0;
-	if (which == WIDTH)
+	if (which == Dimension::WIDTH)
 	{
 		if (maxX == minX)
 			val = FIXED_SIZE;
 		else
 			val = maxX;
 	}
-	else if (which == HEIGHT)
+	else if (which == Dimension::HEIGHT)
 	{
 		if (maxY == minY)
 			val = FIXED_SIZE;
@@ -197,7 +197,7 @@ int GA2DArrayGenome<T>::resizeBehaviour(GAGenome::Dimension which,
 
 	switch (which)
 	{
-	case WIDTH:
+	case Dimension::WIDTH:
 		minX = lower;
 		maxX = upper;
 		if (nx > upper)
@@ -206,7 +206,7 @@ int GA2DArrayGenome<T>::resizeBehaviour(GAGenome::Dimension which,
 			GA2DArrayGenome<T>::resize(lower, ny);
 		break;
 
-	case HEIGHT:
+	case Dimension::HEIGHT:
 		minY = lower;
 		maxY = upper;
 		if (ny > upper)
