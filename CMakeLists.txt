@@ -11,7 +11,7 @@ project(GAlib VERSION 3.0
                   LANGUAGES CXX)
 
 if(MSVC)
-    add_definitions("/W4 /D_CRT_SECURE_NO_WARNINGS")
+    add_definitions("/W4 /D_CRT_SECURE_NO_WARNINGS /permissive-")
 else()
     add_definitions("-Wall -Wextra")
 endif()
