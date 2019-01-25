@@ -144,7 +144,8 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 		return *this;
 	}
 	virtual ~GABin2DecGenome() { delete ptype; }
-	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	virtual GAGenome *
+	clone(GAGenome::CloneMethod flag = CONTENTS) const override;
 	virtual void copy(const GAGenome &) override;
 
 #ifdef GALIB_USE_STREAMS
