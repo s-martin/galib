@@ -72,7 +72,6 @@ class GASimpleGA : public GAGeneticAlgorithm
 	bool el; // are we elitist?
 };
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream &operator<<(std::ostream &os, GASimpleGA &arg)
 {
 	arg.write(os);
@@ -83,6 +82,5 @@ inline std::istream &operator>>(std::istream &is, GASimpleGA &arg)
 	arg.read(is);
 	return (is);
 }
-#endif
 
 #endif

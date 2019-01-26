@@ -160,10 +160,8 @@ template <class T> class GAAlleleSet
 	GAAllele::BoundType upperBoundType() const { return core->upperb; }
 	GAAllele::Type type() const { return core->type; }
 
-#ifdef GALIB_USE_STREAMS
 	int read(std::istream &);
 	int write(std::ostream &os) const;
-#endif
 
 #if defined(THINK_C)
 	friend operator==(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
@@ -211,7 +209,6 @@ template <class T> class GAAlleleSetArray
 	GAAlleleSet<T> **aset;
 };
 
-#ifdef GALIB_USE_STREAMS
 template <class T>
 std::ostream &operator<<(std::ostream &os, const GAAlleleSet<T> &arg)
 {
@@ -224,6 +221,5 @@ std::istream &operator>>(std::istream &is, GAAlleleSet<T> &arg)
 	arg.read(is);
 	return is;
 }
-#endif
 
 #endif

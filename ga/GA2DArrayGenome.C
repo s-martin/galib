@@ -143,7 +143,6 @@ template <class T> int GA2DArrayGenome<T>::resize(int w, int h)
 	return this->sz;
 }
 
-#ifdef GALIB_USE_STREAMS
 template <class T> int GA2DArrayGenome<T>::read(std::istream &)
 {
 	GAErr(GA_LOC, className(), "read", gaErrOpUndef);
@@ -162,7 +161,6 @@ template <class T> int GA2DArrayGenome<T>::write(std::ostream &os) const
 	}
 	return 0;
 }
-#endif
 
 template <class T>
 int GA2DArrayGenome<T>::resizeBehaviour(GAGenome::Dimension which) const
@@ -370,7 +368,6 @@ template <class T> int GA2DArrayAlleleGenome<T>::resize(int x, int y)
 	return this->sz;
 }
 
-#ifdef GALIB_USE_STREAMS
 template <class T> int GA2DArrayAlleleGenome<T>::read(std::istream &is)
 {
 	return GA2DArrayGenome<T>::read(is);
@@ -380,7 +377,6 @@ template <class T> int GA2DArrayAlleleGenome<T>::write(std::ostream &os) const
 {
 	return GA2DArrayGenome<T>::write(os);
 }
-#endif
 
 template <class T> int GA2DArrayAlleleGenome<T>::equal(const GAGenome &c) const
 {

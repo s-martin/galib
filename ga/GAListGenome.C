@@ -74,7 +74,6 @@ GAListGenome<T>::copy(const GAGenome & orig){
 }
 
 
-#ifdef GALIB_USE_STREAMS
 // Traverse the list (breadth-first) and dump the contents as best we can to
 // the stream.  We don't try to write the contents of the nodes - we simply 
 // write a . for each node in the list.
@@ -96,7 +95,6 @@ GAListGenome<T>::write(std::ostream & os) const
   }
   return 0;
 }
-#endif
 
 
 // Both the == and != operators assume that both operator== and operator!= are

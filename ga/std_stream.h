@@ -6,7 +6,6 @@
 
 #include <gaconfig.h>
 
-#if defined(GALIB_USE_STREAMS)
 #if defined(GALIB_USE_ANSI_HEADERS)
 
 #include <iostream>
@@ -48,8 +47,6 @@
 #define STD_ENDL        endl
 #define STD_COUT        cout
 #define STD_CERR        cerr
-
-#endif
 
 #endif
 

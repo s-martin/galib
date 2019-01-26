@@ -54,10 +54,8 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
 	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
 	virtual void copy(const GAGenome &chrom) override;
 
-#ifdef GALIB_USE_STREAMS
 	virtual int read(std::istream &is) override;
 	virtual int write(std::ostream &os) const override;
-#endif
 
 	virtual int equal(const GAGenome &c) const override;
 
@@ -145,10 +143,8 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 	clone(GAGenome::CloneMethod flag = GAGenome::CONTENTS) const override;
 	virtual void copy(const GAGenome &) override;
 
-#ifdef GALIB_USE_STREAMS
 	virtual int read(std::istream &is) override;
 	virtual int write(std::ostream &os) const override;
-#endif
 
 	int equal(const GAGenome &c) const override;
 	virtual int resize(int x, int y) override;

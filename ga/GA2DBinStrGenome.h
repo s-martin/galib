@@ -64,10 +64,8 @@ class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
 	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
 	virtual void copy(const GAGenome &chrom) override;
 
-#ifdef GALIB_USE_STREAMS
 	virtual int read(std::istream &) override;
 	virtual int write(std::ostream &) const override;
-#endif
 
 	virtual int equal(const GAGenome &c) const override;
 

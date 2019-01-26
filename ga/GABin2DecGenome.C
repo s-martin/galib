@@ -257,7 +257,6 @@ float GABin2DecGenome::phenotype(unsigned int n, float val)
 	return val;
 }
 
-#ifdef GALIB_USE_STREAMS
 // Read the incoming data as a list of phenotype values.  It would be nice to
 // do this either as binary or decimal read, but oh well...  not much need.
 int GABin2DecGenome::read(std::istream &is)
@@ -279,7 +278,6 @@ int GABin2DecGenome::write(std::ostream &os) const
 		os << phenotype(i) << " ";
 	return 0;
 }
-#endif
 
 // For two bin2dec genomes to be equal they must have the same bits AND the
 // same phenotypes.

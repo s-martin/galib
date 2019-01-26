@@ -228,7 +228,6 @@ class GAGenome : public GAID
 	virtual GAGenome *clone(CloneMethod flag = CONTENTS) const;
 	virtual void copy(const GAGenome &);
 
-#ifdef GALIB_USE_STREAMS
 	virtual int read(std::istream &)
 	{
 		GAErr(GA_LOC, className(), "read", gaErrOpUndef);
@@ -239,7 +238,6 @@ class GAGenome : public GAID
 		GAErr(GA_LOC, className(), "write", gaErrOpUndef);
 		return 0;
 	}
-#endif
 
 	virtual int equal(const GAGenome &) const
 	{
@@ -327,7 +325,6 @@ class GAGenome : public GAID
 	AsexualCrossover asexcross; // preferred asexual mating method
 };
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream &operator<<(std::ostream &os, const GAGenome &genome)
 {
 	genome.write(os);
@@ -338,7 +335,6 @@ inline std::istream &operator>>(std::istream &is, GAGenome &genome)
 	genome.read(is);
 	return (is);
 }
-#endif
 
 inline int operator==(const GAGenome &a, const GAGenome &b)
 {

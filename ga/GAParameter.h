@@ -106,19 +106,16 @@ class GAParameterList
 	GAParameter *operator()(const char *name);
 	int parse(int &argc, char **argv, bool flag = true);
 
-#ifdef GALIB_USE_STREAMS
 	int write(const char *filename) const;
 	int write(std::ostream &os) const;
 	int read(const char *filename, bool flag = true);
 	int read(std::istream &is, bool flag = true);
-#endif
 
   protected:
 	unsigned int n, N, cur;
 	GAParameter **p;
 };
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream &operator<<(std::ostream &os, const GAParameterList &plist)
 {
 	plist.write(os);
@@ -129,6 +126,5 @@ inline std::istream &operator>>(std::istream &is, GAParameterList &plist)
 	plist.read(is);
 	return is;
 }
-#endif
 
 #endif

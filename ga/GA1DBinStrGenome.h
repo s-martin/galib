@@ -86,10 +86,8 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
 	virtual void copy(const GAGenome &) override;
 
-#ifdef GALIB_USE_STREAMS
 	virtual int read(std::istream &is) override;
 	virtual int write(std::ostream &os) const override;
-#endif
 
 	virtual int equal(const GAGenome &c) const override;
 

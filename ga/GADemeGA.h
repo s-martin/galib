@@ -95,11 +95,9 @@ protected:
   unsigned int nmig;		// number to migrate from each population
 };
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream & operator<< (std::ostream & os, GADemeGA & arg)
 {arg.write(os); return(os);}
 inline std::istream & operator>> (std::istream & is, GADemeGA & arg)
 {arg.read(is); return(is);}
-#endif
 
 #endif

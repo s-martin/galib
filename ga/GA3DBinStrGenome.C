@@ -224,7 +224,6 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 	return sz;
 }
 
-#ifdef GALIB_USE_STREAMS
 int GA3DBinaryStringGenome::read(std::istream &is)
 {
 	static char c;
@@ -280,7 +279,6 @@ int GA3DBinaryStringGenome::write(std::ostream &os) const
 	}
 	return 0;
 }
-#endif
 
 int GA3DBinaryStringGenome::resizeBehaviour(GAGenome::Dimension which) const
 {

@@ -115,7 +115,6 @@ GA1DArrayAlleleGenome<float>::~GA1DArrayAlleleGenome(){
 
 
 
-#ifdef GALIB_USE_STREAMS
 // The read specialization takes in each number and stuffs it into the array.
 template <> int
 GA1DArrayAlleleGenome<float>::read(std::istream & is) {
@@ -135,7 +134,6 @@ GA1DArrayAlleleGenome<float>::read(std::istream & is) {
 }
 
 // No need to specialize the write method.
-#endif
 
 
 

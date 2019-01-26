@@ -148,10 +148,8 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 	clone(GAGenome::CloneMethod flag = CONTENTS) const override;
 	virtual void copy(const GAGenome &) override;
 
-#ifdef GALIB_USE_STREAMS
 	virtual int read(std::istream &) override;
 	virtual int write(std::ostream &) const override;
-#endif
 
 	virtual int equal(const GAGenome &) const override;
 	virtual int notequal(const GAGenome &) const override;

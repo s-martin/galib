@@ -92,12 +92,10 @@ class GAStatistics
 	const GAPopulation &bestPopulation() const { return *boa; }
 	const GAGenome &bestIndividual(unsigned int n = 0) const;
 
-#ifdef GALIB_USE_STREAMS
 	int scores(const char *filename, int which = NoScores);
 	int scores(std::ostream &os, int which = NoScores);
 	int write(const char *filename) const;
 	int write(std::ostream &os) const;
-#endif
 
 	// These should be protected (accessible only to the GA class) but for now
 	// they are publicly accessible.  Do not try to set these unless you know
@@ -228,12 +226,10 @@ inline float GAStatistics::current(int w) const
 	return val;
 }
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream &operator<<(std::ostream &os, const GAStatistics &s)
 {
 	s.write(os);
 	return os;
 }
-#endif
 
 #endif

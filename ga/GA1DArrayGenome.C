@@ -144,7 +144,6 @@ template <class T> int GA1DArrayGenome<T>::resize(int len)
 	return this->sz;
 }
 
-#ifdef GALIB_USE_STREAMS
 // We don't define this one apriori.  Do it in a specialization.
 template <class T> int GA1DArrayGenome<T>::read(std::istream &)
 {
@@ -160,7 +159,6 @@ template <class T> int GA1DArrayGenome<T>::write(std::ostream &os) const
 		os << gene(i) << " ";
 	return 0;
 }
-#endif
 
 //   Set the resize behaviour of the genome.  A genome can be fixed
 // length, resizeable with a max and min limit, or resizeable with no limits
@@ -313,7 +311,6 @@ template <class T> int GA1DArrayAlleleGenome<T>::resize(int len)
 }
 
 // Define these so they can easily be specialized as needed.
-#ifdef GALIB_USE_STREAMS
 template <class T> int GA1DArrayAlleleGenome<T>::read(std::istream &is)
 {
 	return GA1DArrayGenome<T>::read(is);
@@ -323,7 +320,6 @@ template <class T> int GA1DArrayAlleleGenome<T>::write(std::ostream &os) const
 {
 	return GA1DArrayGenome<T>::write(os);
 }
-#endif
 
 template <class T> int GA1DArrayAlleleGenome<T>::equal(const GAGenome &c) const
 {

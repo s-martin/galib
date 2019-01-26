@@ -776,7 +776,6 @@ GAGeneticAlgorithm *GAPopulation::geneticAlgorithm(GAGeneticAlgorithm &g)
 	return (ga = &g);
 }
 
-#ifdef GALIB_USE_STREAMS
 void GAPopulation::write(std::ostream &os, SortBasis basis) const
 {
 	for (unsigned int i = 0; i < n; i++)
@@ -788,7 +787,6 @@ void GAPopulation::write(std::ostream &os, SortBasis basis) const
 	}
 	os << "\n";
 }
-#endif
 
 void GAPopulation::QuickSortAscendingRaw(GAGenome **c, int l, int r)
 {

@@ -73,7 +73,6 @@ template <class T> void GATreeGenome<T>::copy(const GAGenome &orig)
 	}
 }
 
-#ifdef GALIB_USE_STREAMS
 // Traverse the tree (breadth-first) and dump the contents as best we can to
 // the stream.  We don't try to write the contents of the nodes - we simply
 // write a . for each node in the tree.
@@ -125,7 +124,6 @@ template <class T> int GATreeGenome<T>::write(std::ostream &os) const
 	_tt(os, (GANode<T> *)(this->rt));
 	return 0;
 }
-#endif
 
 template <class T> int GATreeGenome<T>::equal(const GAGenome &c) const
 {

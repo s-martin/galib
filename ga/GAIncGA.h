@@ -84,11 +84,9 @@ protected:
 
 
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream & operator<< (std::ostream & os, GAIncrementalGA & arg)
 { arg.write(os); return(os); }
 inline std::istream & operator>> (std::istream & is, GAIncrementalGA & arg)
 { arg.read(is); return(is); }
-#endif
 
 #endif

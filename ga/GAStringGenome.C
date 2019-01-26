@@ -57,7 +57,6 @@ template <> GA1DArrayAlleleGenome<char>::~GA1DArrayAlleleGenome()
 	delete[] aset;
 }
 
-#ifdef GALIB_USE_STREAMS
 // The read specialization takes in each character whether it is whitespace or
 // not and stuffs it into the genome.  This is unlike the default array read.
 template <> int GA1DArrayAlleleGenome<char>::read(std::istream &is)
@@ -88,7 +87,6 @@ template <> int GA1DArrayAlleleGenome<char>::write(std::ostream &os) const
 		os << gene(i);
 	return 0;
 }
-#endif
 
 // force instantiations of this genome type.
 //

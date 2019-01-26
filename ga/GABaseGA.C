@@ -303,7 +303,6 @@ const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv,
 	return params;
 }
 
-#ifdef GALIB_USE_STREAMS
 const GAParameterList &GAGeneticAlgorithm::parameters(const char *filename,
 													  bool flag)
 {
@@ -321,7 +320,6 @@ const GAParameterList &GAGeneticAlgorithm::parameters(std::istream &is,
 		setptr(params[i].fullname(), params[i].value());
 	return params;
 }
-#endif
 
 // Return 0 if everything is OK, non-zero if error.  If we did not set anything
 // then we return non-zero (this is not an error, but we indicate that we did

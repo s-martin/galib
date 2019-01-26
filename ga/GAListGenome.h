@@ -45,9 +45,7 @@ public:
   virtual GAGenome *clone(GAGenome::CloneMethod flag=CONTENTS) const;
   virtual void copy(const GAGenome &) override;
 
-#ifdef GALIB_USE_STREAMS
   virtual int write (std::ostream &) const override;
-#endif
 
   virtual int equal(const GAGenome & c) const override;
 

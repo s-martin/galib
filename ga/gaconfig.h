@@ -45,13 +45,6 @@ incorporate it into the code base.
 		      when referring to streams and other std components, but
 		      others do not.
 
-  GALIB_USE_STREAMS
-
-                      For systems/environments in which streams are not desired
-                      and/or required.  If this is not defined, it turns off 
-                      errors and all of the read/write routines for the 
-                      classes.
-
   GALIB_USE_PID
 
                      Define this if the system has a getpid function that
@@ -241,7 +234,6 @@ incorporate it into the code base.
 // Metrowerks' Codewarrior for MacOS, PalmOS, or Win32 (I have not tested CW
 // on other platforms yet).
 #if defined(__MWERKS__)
-#define GALIB_USE_STREAMS
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 
@@ -251,14 +243,12 @@ incorporate it into the code base.
 // so if you want to use any of the template components of GAlib then you will
 // probably have to do some hacking to get things to work.
 #elif defined(__SC__)
-#define GALIB_USE_STREAMS
 #define GALIB_USE_BORLAND_INST
 
 
 // ----------------------------------------------------------------------------
 // THINK for mac
 #elif defined(THINK_C)
-#define GALIB_USE_STREAMS
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_COMP_OPERATOR_TEMPLATES
 
@@ -281,7 +271,6 @@ incorporate it into the code base.
 #elif defined(__BORLANDC__)
 //#define GALIB_USE_RAND	// comment this if you're using a 32-bit OS
 #define GALIB_USE_BORLAND_INST
-#define GALIB_USE_STREAMS
 //#define GALIB_USE_PID
 #define GALIB_USE_EMPTY_TEMPLATES
 //#define GALIB_USE_ANSI_HEADERS
@@ -310,8 +299,6 @@ incorporate it into the code base.
 // but some vcpp6 apps are built with non-ansi headers, in which case you 
 // should build with the non-ansi headers so that you do not cross the streams.
 #define GALIB_USE_ANSI_HEADERS
-// beware of using streams in an MFC application.  many nasties lurk therein...
-#define GALIB_USE_STREAMS
 // we default to using std things in the std namespace, but depending on the
 // version of vcpp you are using and depending on the libraries with which you
 // will use GAlib, you might have to turn this one off.
@@ -342,7 +329,6 @@ incorporate it into the code base.
 // those affect us mostly with respect to the use of the std libraries.
 #elif defined(__GNUG__)
 #define GALIB_USE_BORLAND_INST
-#define GALIB_USE_STREAMS
 #define GALIB_USE_PID
 #define GALIB_USE_EMPTY_TEMPLATES
 #define GALIB_NEED_INSTANTIATION_PREFIX
@@ -356,7 +342,6 @@ incorporate it into the code base.
 // ----------------------------------------------------------------------------
 // irix 5.3 and irix 6.x
 #elif defined(__sgi)
-#define GALIB_USE_STREAMS
 #define GALIB_USE_PID
 
 #include <sgidefs.h>
@@ -377,7 +362,6 @@ incorporate it into the code base.
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 #define GALIB_USE_ANSI_HEADERS
-#define GALIB_USE_STREAMS
 #define GALIB_USE_STD_NAMESPACE
 #define GALIB_USE_PID
 #define GALIB_USE_NAMED_TEMPLATES
@@ -389,7 +373,6 @@ incorporate it into the code base.
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 //#define GALIB_USE_ANSI_HEADERS
-#define GALIB_USE_STREAMS
 //#define GALIB_USE_STD_NAMESPACE
 #define GALIB_USE_PID
 
@@ -407,7 +390,6 @@ incorporate it into the code base.
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 #define GALIB_USE_ANSI_HEADERS
-#define GALIB_USE_STREAMS
 #define GALIB_USE_STD_NAMESPACE
 #define GALIB_USE_PID
 #endif

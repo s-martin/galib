@@ -145,12 +145,10 @@ class GAGeneticAlgorithm : public GAID
 		if (stats.flushFrequency() > 0)
 			stats.flushScores();
 	}
-#ifdef GALIB_USE_STREAMS
 	virtual int write(const char *) const { return 0; }
 	virtual int write(std::ostream &) const { return 0; }
 	virtual int read(const char *) { return 0; }
 	virtual int read(std::istream &) { return 0; }
-#endif
 
 	void *userData() const { return ud; }
 	void *userData(void *d) { return ud = d; }
@@ -160,10 +158,8 @@ class GAGeneticAlgorithm : public GAID
 	const GAParameterList &parameters() const { return params; }
 	const GAParameterList &parameters(const GAParameterList &);
 	const GAParameterList &parameters(int &, char **, bool flag = false);
-#ifdef GALIB_USE_STREAMS
 	const GAParameterList &parameters(const char *filename, bool f = false);
 	const GAParameterList &parameters(std::istream &, bool flag = false);
-#endif
 	virtual int get(const char *, void *) const;
 	virtual int setptr(const char *, const void *);
 	int set(const char *s, int v) { return setptr(s, (void *)&v); }

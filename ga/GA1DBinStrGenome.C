@@ -138,7 +138,6 @@ int GA1DBinaryStringGenome::resize(int l)
 	return sz;
 }
 
-#ifdef GALIB_USE_STREAMS
 // We read data from a stream as a series of 1's and 0's.  We want a continuous
 // stream (ie no spaces) but if there are spaces then we can handle them.  We
 // ignore all whitespace.  We ignore anything that is not a digit.  If it is a
@@ -175,7 +174,6 @@ int GA1DBinaryStringGenome::write(std::ostream &os) const
 		os << gene(i);
 	return 0;
 }
-#endif
 
 //   Set the resize behaviour of the genome.  A genome can be fixed
 // length, resizeable with a max and min limit, or resizeable with no limits

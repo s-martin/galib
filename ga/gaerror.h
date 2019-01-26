@@ -119,11 +119,7 @@ void GAReportErrors(bool flag);
 
 // Provide a mechanism for redirecting the error messages.
 
-#ifdef GALIB_USE_STREAMS
 void GASetErrorStream(std::ostream &);
-#else
-inline void GASetErrorStream(){} // dummy function
-#endif
 
 // This error string contains the text of the most recent error message.  If a
 // GAlib function returns an error code, this string will contain the text of

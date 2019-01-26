@@ -318,7 +318,6 @@ GAParameter *GAParameterList::operator()(const char *name)
 	return (GAParameter *)0;
 }
 
-#ifdef GALIB_USE_STREAMS
 // Dump the parameters to the specified stream.  Just name-value pairs with a
 // tab delimiter and newline separating pairs.
 //   If there is an error, return 1, otherwise return 0.
@@ -548,7 +547,6 @@ int GAParameterList::read(const char *filename, bool flag)
 	infile.close();
 	return status;
 }
-#endif
 
 // Parse the arglist for any recognized arguments.  If we find a string we
 // know, then we set the value.  If we find a string we don't know then we

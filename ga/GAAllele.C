@@ -254,7 +254,6 @@ template <class T> T GAAlleleSet<T>::allele(unsigned int i) const
 	}
 }
 
-#ifdef GALIB_USE_STREAMS
 template <class T> int GAAlleleSet<T>::read(std::istream &)
 {
 	GAErr(GA_LOC, "GAAlleleSet", "read", gaErrOpUndef);
@@ -366,7 +365,6 @@ GAAlleleSet<T>::write(std::ostream & os) const {
   return 0;
 }
 */
-#endif
 
 // could do these with a memcmp if the type is simple...
 template <class T>

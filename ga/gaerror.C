@@ -20,9 +20,7 @@ char _gaerrbuf1[120];
 char _gaerrbuf2[120];
 
 
-#ifdef GALIB_USE_STREAMS
 static std::ostream *__gaErrStream = & std::cerr;
-#endif
 static bool __gaErrFlag = true;
 static const char *__gaErrStr[] = {
   "error reading from file: ",
@@ -96,9 +94,7 @@ GAErr(const GASourceLocator loc, const char *clss, const char *func,
   }
   sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
   strcat(gaErrMsg, _gaerrbuf1);
-#ifdef GALIB_USE_STREAMS
   if(__gaErrFlag == true) *__gaErrStream << gaErrMsg;
-#endif
 }
 
 void 
@@ -123,9 +119,7 @@ GAErr(const GASourceLocator loc, const char *clss, const char *func,
   }
   sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
   strcat(gaErrMsg, _gaerrbuf1);
-#ifdef GALIB_USE_STREAMS
   if(__gaErrFlag == true) *__gaErrStream << gaErrMsg;
-#endif
 }
 
 void 
@@ -148,9 +142,7 @@ GAErr(const GASourceLocator loc, const char *func,
   }
   sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
   strcat(gaErrMsg, _gaerrbuf1);
-#ifdef GALIB_USE_STREAMS
   if(__gaErrFlag == true) *__gaErrStream << gaErrMsg;
-#endif
 }
 
 
@@ -159,9 +151,7 @@ GAReportErrors(bool flag){
   __gaErrFlag = flag;
 }
 
-#ifdef GALIB_USE_STREAMS
 void
 GASetErrorStream(std::ostream & s){
   __gaErrStream = &s;
 }
-#endif

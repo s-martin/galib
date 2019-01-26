@@ -544,7 +544,6 @@ void GAStatistics::writeScores()
 {
 	if (!scorefile)
 		return;
-#ifdef GALIB_USE_STREAMS
 	std::ofstream outfile(scorefile,
 						  ((gen[0] == 0) ? (std::ios::out | std::ios::trunc)
 										 : (std::ios::out | std::ios::app)));
@@ -559,10 +558,8 @@ void GAStatistics::writeScores()
 	}
 	scores(outfile, which);
 	outfile.close();
-#endif
 }
 
-#ifdef GALIB_USE_STREAMS
 int GAStatistics::write(const char *filename) const
 {
 	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
@@ -655,4 +652,3 @@ int GAStatistics::scores(std::ostream &os, int w)
 	}
 	return 0;
 }
-#endif

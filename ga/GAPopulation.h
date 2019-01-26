@@ -288,10 +288,8 @@ class GAPopulation : public GAID
 	GAGenome *replace(GAGenome *newgenome, GAGenome *oldgenome);
 	void destroy(int w = WORST, SortBasis b = RAW) { delete remove(w, b); }
 
-#ifdef GALIB_USE_STREAMS
 	virtual void read(std::istream &) {}
 	virtual void write(std::ostream &os, SortBasis basis = RAW) const;
-#endif
 
   protected:
 	unsigned int neval; // number of evals since initialization
@@ -331,7 +329,6 @@ class GAPopulation : public GAID
 	static void QuickSortDescendingScaled(GAGenome **, int, int);
 };
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream &operator<<(std::ostream &os, const GAPopulation &arg)
 {
 	arg.write(os);
@@ -342,6 +339,5 @@ inline std::istream &operator>>(std::istream &is, GAPopulation &arg)
 	arg.read(is);
 	return is;
 }
-#endif
 
 #endif

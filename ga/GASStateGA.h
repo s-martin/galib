@@ -70,7 +70,6 @@ class GASteadyStateGA : public GAGeneticAlgorithm
 	short which; // 0 if prepl, 1 if nrepl
 };
 
-#ifdef GALIB_USE_STREAMS
 inline std::ostream &operator<<(std::ostream &os, GASteadyStateGA &arg)
 {
 	arg.write(os);
@@ -81,6 +80,5 @@ inline std::istream &operator>>(std::istream &is, GASteadyStateGA &arg)
 	arg.read(is);
 	return (is);
 }
-#endif
 
 #endif
