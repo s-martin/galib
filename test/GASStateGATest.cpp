@@ -4,6 +4,8 @@
 #include <GASStateGA.h>
 #include <stdio.h>
 
+// based on example 4
+
 // This is the objective function.  All it does is give one point for every
 // odd bit that is set and one point for every even bit that is not set.
 float objective(GAGenome &g)

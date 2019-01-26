@@ -4,6 +4,8 @@
 #include <GA2DBinStrGenome.h>
 #include <iostream>
 
+// based on example 1
+
 // This is the objective function.  All it does is check for alternating 0s and
 // 1s.  If the gene is odd and contains a 1, the fitness is incremented by 1.
 // If the gene is even and contains a 0, the fitness is incremented by 1.  No
