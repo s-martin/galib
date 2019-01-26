@@ -52,14 +52,6 @@ incorporate it into the code base.
                       errors and all of the read/write routines for the 
                       classes.
 
-  GALIB_USE_RTTI
-
-                      If your compiler supports RTTI, or if you turn on
-                      the RTTI abilities of your compiler, then define this
-                      macro.  Without RTTI, if improper casts are made,
-		      things will die horribly rather than dropping out in an
-		      RTTI-induced exception.
-
   GALIB_USE_PID
 
                      Define this if the system has a getpid function that
@@ -252,9 +244,6 @@ incorporate it into the code base.
 #define GALIB_USE_STREAMS
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
-#if __option(RTTI)
-#define GALIB_USE_RTTI
-#endif
 
 
 // ----------------------------------------------------------------------------
@@ -291,7 +280,6 @@ incorporate it into the code base.
 //  Use the randtest example to check GAlib's RNG after you compile everything.
 #elif defined(__BORLANDC__)
 //#define GALIB_USE_RAND	// comment this if you're using a 32-bit OS
-#define GALIB_USE_RTTI
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_STREAMS
 //#define GALIB_USE_PID
@@ -332,14 +320,6 @@ incorporate it into the code base.
 // this requires unistd.h, which you may or may not have (depending on the 
 // way that you installed the compiler).
 //#define GALIB_USE_PID
-// GAlib behaves much better in unknown conditions when rtti is enabled, but
-// you might have to disable it, depending on the linkage and compilation 
-// options you need for other components you are using with GAlib.
-#if defined(_CPPRTTI)
-#define GALIB_USE_RTTI
-#else
-#undef GALIB_USE_RTTI
-#endif
 
 // there are many warnings from vcpp, many of which we can safely ignore.
 //#pragma warning (disable : 4244)    // int-to-float warnings
@@ -361,7 +341,6 @@ incorporate it into the code base.
 // of course there are major differences between the 2.x and 3.x versions, but
 // those affect us mostly with respect to the use of the std libraries.
 #elif defined(__GNUG__)
-#define GALIB_USE_RTTI
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_STREAMS
 #define GALIB_USE_PID
@@ -382,11 +361,9 @@ incorporate it into the code base.
 
 #include <sgidefs.h>
 #if (_MIPS_SIM == _MIPS_SIM_NABI32)
-#define GALIB_USE_RTTI
 #define GALIB_USE_AUTO_INST
 #define GALIB_USE_BORLAND_INST
 #elif (_MIPS_SIM == _MIPS_SIM_ABI64)
-#define GALIB_USE_RTTI
 #elif (_MIPS_SIM == _MIPS_SIM_ABI32)
 #define GALIB_USE_AUTO_INST
 #endif
@@ -397,7 +374,6 @@ incorporate it into the code base.
 #elif defined(__IBMCPP__)
 // the -qrtti option turns rtti on and off, but i do not know the
 // corresponding preprocessor directive to sense it.
-#define GALIB_USE_RTTI
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 #define GALIB_USE_ANSI_HEADERS
@@ -410,7 +386,6 @@ incorporate it into the code base.
 // ----------------------------------------------------------------------------
 // HP aCC compiler
 #elif defined(__HP_aCC)
-#define GALIB_USE_RTTI
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 //#define GALIB_USE_ANSI_HEADERS
@@ -429,7 +404,6 @@ incorporate it into the code base.
 #else
 #error   Unknown/untested compiler/operating system!  Check these settings!
 
-#define GALIB_USE_RTTI
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 #define GALIB_USE_ANSI_HEADERS
@@ -501,17 +475,10 @@ incorporate it into the code base.
 // If the system/compiler understands C++ casts, then we use them.  Otherwise
 // we default to the C-style casts.  The macros make explicit the fact that we
 // are doing casts.
-#if defined(GALIB_USE_RTTI)
 #define DYN_CAST(type,x) (dynamic_cast<type>(x))
 #define CON_CAST(type,x) (const_cast<type>(x))
 #define STA_CAST(type,x) (static_cast<type>(x))
 #define REI_CAST(type,x) (reinterpret_cast<type>(x))
-#else
-#define DYN_CAST(type,x) ((type)(x))
-#define CON_CAST(type,x) ((type)(x))
-#define STA_CAST(type,x) ((type)(x))
-#define REI_CAST(type,x) ((type)(x))
-#endif
 
 
 // Windows is brain-dead about how to export things, so we do this to keep the
