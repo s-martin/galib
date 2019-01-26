@@ -21,14 +21,6 @@ below for the pre-defined sets.  If you come up with a compiler/platform
 configuration that is not listed here, please send it to me so that i can 
 incorporate it into the code base.
 
-  GALIB_USE_ANSI_HEADERS
-
-                      Some operating systems/compilers have old-style headers
-                      (e.g. <iostream.h>) while others have new-school
-		      headers (e.g. <iostream>).  The default is to use
-		      ANSI headers.  If you are using an older compiler,
-		      make sure this variable is not defined.
-
   GALIB_USE_NAMED_TEMPLATES
   GALIB_USE_EMPTY_TEMPLATES
   GALIB_USE_COMP_OPERATOR_TEMPLATES
@@ -38,12 +30,6 @@ incorporate it into the code base.
 		      different ways of specifying templates.  And to make it
 		      even more complicated, some depend very much on the type
 		      of instantiation method that is defined.  Sigh.
-
-  GALIB_USE_STD_NAMESPACE
-
-                      Some platforms need to explicitly use the std namespace
-		      when referring to streams and other std components, but
-		      others do not.
 
   GALIB_USE_PID
 
@@ -273,8 +259,6 @@ incorporate it into the code base.
 #define GALIB_USE_BORLAND_INST
 //#define GALIB_USE_PID
 #define GALIB_USE_EMPTY_TEMPLATES
-//#define GALIB_USE_ANSI_HEADERS
-//#define GALIB_USE_STD_NAMESPACE
 //#define GALIB_USE_COMP_OPERATOR_TEMPLATES
 
 //#pragma warning (disable : 8027)    // switch statements are not inlined
@@ -295,14 +279,9 @@ incorporate it into the code base.
 #define GALIB_USE_BORLAND_INST
 // let visual studio do its own instantations, so by default do not force them.
 #define GALIB_USE_AUTO_INST
-// use ansi headers with vcpp7.  it is a good idea to use them in vcpp6 as well
-// but some vcpp6 apps are built with non-ansi headers, in which case you 
-// should build with the non-ansi headers so that you do not cross the streams.
-#define GALIB_USE_ANSI_HEADERS
 // we default to using std things in the std namespace, but depending on the
 // version of vcpp you are using and depending on the libraries with which you
 // will use GAlib, you might have to turn this one off.
-#define GALIB_USE_STD_NAMESPACE
 // use the pid only on winnt and derivatives.  win95/98/ME do not have it.
 // this requires unistd.h, which you may or may not have (depending on the 
 // way that you installed the compiler).
@@ -333,8 +312,6 @@ incorporate it into the code base.
 #define GALIB_USE_EMPTY_TEMPLATES
 #define GALIB_NEED_INSTANTIATION_PREFIX
 #if __GNUC__ > 2
-#define GALIB_USE_ANSI_HEADERS
-#define GALIB_USE_STD_NAMESPACE
 #define GALIB_USE_COMP_OPERATOR_TEMPLATES
 #endif
 
@@ -361,8 +338,6 @@ incorporate it into the code base.
 // corresponding preprocessor directive to sense it.
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
-#define GALIB_USE_ANSI_HEADERS
-#define GALIB_USE_STD_NAMESPACE
 #define GALIB_USE_PID
 #define GALIB_USE_NAMED_TEMPLATES
 
@@ -372,8 +347,6 @@ incorporate it into the code base.
 #elif defined(__HP_aCC)
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
-//#define GALIB_USE_ANSI_HEADERS
-//#define GALIB_USE_STD_NAMESPACE
 #define GALIB_USE_PID
 
 //#pragma disable warning 829 // do not care about string literal conversions
@@ -389,8 +362,6 @@ incorporate it into the code base.
 
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
-#define GALIB_USE_ANSI_HEADERS
-#define GALIB_USE_STD_NAMESPACE
 #define GALIB_USE_PID
 #endif
 
