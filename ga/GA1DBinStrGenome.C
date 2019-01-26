@@ -11,11 +11,11 @@
 #include <GA1DBinStrGenome.h>
 #include <GAMask.h>
 #include <cctype>
-#include <gaerror.h>
-#include <garandom.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <gaerror.h>
+#include <garandom.h>
 
 #define SWAP(a, b)                                                             \
 	{                                                                          \
@@ -95,7 +95,7 @@ void GA1DBinaryStringGenome::copy(const GAGenome &orig)
 		return;
 	const GA1DBinaryStringGenome *c =
 		DYN_CAST(const GA1DBinaryStringGenome *, &orig);
-	if (c)
+	if (c != nullptr)
 	{
 		GAGenome::copy(*c);
 		GABinaryString::copy(*c);
@@ -222,7 +222,7 @@ int GA1DBinaryStringGenome::equal(const GAGenome &c) const
 	const GA1DBinaryStringGenome *b =
 		DYN_CAST(const GA1DBinaryStringGenome *, &c);
 	int eq = 0;
-	if (b)
+	if (b != nullptr)
 	{
 		eq = ((nx != b->nx) ? 0 : GABinaryString::equal(*b, 0, 0, nx));
 	}

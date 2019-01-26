@@ -34,7 +34,7 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 struct BitStrRep
 {
   unsigned int    len;          // length in bits
-  unsigned short  sz;           // allocated slots
+  uint16_t  sz;           // allocated slots
   _BS_word        s[1];         // bits start here
 };
 
@@ -248,7 +248,7 @@ public:
 //  friend const char* BitStringtoa(const BitString&, char f='0', char t='1');
   void		     printon(ostream&, char f='0', char t='1') const;
 
-  friend BitString   shorttoBitString(unsigned short);
+  friend BitString   shorttoBitString(uint16_t);
   friend BitString   longtoBitString(unsigned long);
 
   friend ostream&    operator << (ostream& s, const BitString&);
@@ -330,7 +330,7 @@ inline BitString::~BitString()
   if (rep != &_nilBitStrRep) delete rep;
 }
 
-inline BitString shorttoBitString(unsigned short w) 
+inline BitString shorttoBitString(uint16_t w) 
 { 
   BitString r;
   _BS_word ww = w;
@@ -348,8 +348,8 @@ inline BitString longtoBitString(unsigned long w)
   _BS_word u = w;
   r.rep = BStr_alloc(0, &u, 0, BITSTRBITS, BITSTRBITS);
 #else
-  unsigned short u[2];
-  u[0] = w & ((unsigned short)(~(0)));
+  uint16_t u[2];
+  u[0] = w & ((uint16_t)(~(0)));
   u[1] = w >> BITSTRBITS;
   r.rep = BStr_alloc(0, &u[0], 0, 2*BITSTRBITS, 2*BITSTRBITS);
 #endif

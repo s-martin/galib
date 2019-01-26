@@ -61,9 +61,9 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	static float BitComparator(const GAGenome &, const GAGenome &);
 
   public:
-	GA1DBinaryStringGenome(unsigned int x,
+	GA1DBinaryStringGenome(unsigned int len,
 						   GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-						   void *u = (void *)0);
+						   void *u = nullptr);
 	GA1DBinaryStringGenome(const GA1DBinaryStringGenome &orig);
 	GA1DBinaryStringGenome &operator=(const GAGenome &arg)
 	{
@@ -106,9 +106,9 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 		resize(x);
 		return nx;
 	}
-	int resize(int x);
+	int resize(int l);
 	int resizeBehaviour() const;
-	int resizeBehaviour(unsigned int lx, unsigned int ux);
+	int resizeBehaviour(unsigned int lower, unsigned int upper);
 	void copy(const GA1DBinaryStringGenome &orig, unsigned int r,
 			  unsigned int x, unsigned int length);
 	int equal(const GA1DBinaryStringGenome &orig, unsigned int r,

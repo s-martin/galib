@@ -37,7 +37,7 @@ public:
 			      GAGenome*, GAGenome*);
 
 public:
-  GAListGenome(GAGenome::Evaluator f=0, void * u=(void *)0);
+  GAListGenome(GAGenome::Evaluator f=0, void * u=nullptr);
   GAListGenome(const GAListGenome<T> &);
   GAListGenome<T> & operator=(const GAGenome & orig)
     {copy(orig); return *this;}

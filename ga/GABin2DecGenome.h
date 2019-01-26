@@ -51,8 +51,8 @@ class GABin2DecPhenotypeCore
 	unsigned int cnt; // how many references to us?
 	unsigned int csz; // how big are the chunks we allocate?
 	unsigned int n, N; // how many phenotypes do we have? (real,alloc)
-	unsigned short *nbits; // number of bits that max/min get mapped into
-	unsigned short *oset; // offset of the nth gene
+	uint16_t *nbits; // number of bits that max/min get mapped into
+	uint16_t *oset; // offset of the nth gene
 	float *minval, *maxval; // min, max value of phenotype elem
 	unsigned int sz; // total number of bits required
 };
@@ -124,7 +124,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
   public:
 	GABin2DecGenome(const GABin2DecPhenotype &p,
 					GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-					void *u = (void *)0)
+					void *u = nullptr)
 		: GA1DBinaryStringGenome(p.size(), f, u),
 		  ptype(new GABin2DecPhenotype(p))
 	{

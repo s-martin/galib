@@ -127,8 +127,8 @@ template <class T> class GATree : public GATreeBASE
 			return GATreeBASE::ERR;
 		}
 		iter.node = (t->rt ? t->rt : iter.node);
-		t->rt = (GANodeBASE *)0;
-		t->iter.node = (GANodeBASE *)0;
+		t->rt = nullptr;
+		t->iter.node = nullptr;
 		return GATreeBASE::NO_ERR;
 	}
 	int insert(const T &t, GATreeBASE::Location where = GATreeBASE::BELOW)
@@ -203,7 +203,7 @@ template <class T> class GATreeIter : public GATreeIterBASE
 	T *current() { return (node ? &((GANode<T> *)node)->contents : (T *)0); }
 	T *root()
 	{
-		return (((node = GATreeIterBASE::root()) != (GANodeBASE *)0)
+		return (((node = GATreeIterBASE::root()) != nullptr)
 					? &((GANode<T> *)GATreeIterBASE::root(node))->contents
 					: (T *)0);
 	}

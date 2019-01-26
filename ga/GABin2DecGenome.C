@@ -36,13 +36,13 @@ GABin2DecPhenotypeCore::GABin2DecPhenotypeCore()
 GABin2DecPhenotypeCore::GABin2DecPhenotypeCore(const GABin2DecPhenotypeCore &p)
 	: csz(p.csz), n(p.n), N(p.N), sz(p.sz)
 {
-	nbits = new unsigned short[N];
-	oset = new unsigned short[N];
+	nbits = new uint16_t[N];
+	oset = new uint16_t[N];
 	minval = new float[N];
 	maxval = new float[N];
 
-	memcpy(nbits, p.nbits, n * sizeof(unsigned short));
-	memcpy(oset, p.oset, n * sizeof(unsigned short));
+	memcpy(nbits, p.nbits, n * sizeof(uint16_t));
+	memcpy(oset, p.oset, n * sizeof(uint16_t));
 	memcpy(minval, p.minval, n * sizeof(float));
 	memcpy(maxval, p.maxval, n * sizeof(float));
 
@@ -75,13 +75,13 @@ operator=(const GABin2DecPhenotypeCore &p)
 	N = p.N;
 	csz = p.csz;
 
-	nbits = new unsigned short[N];
-	oset = new unsigned short[N];
+	nbits = new uint16_t[N];
+	oset = new uint16_t[N];
 	minval = new float[N];
 	maxval = new float[N];
 
-	memcpy(nbits, p.nbits, n * sizeof(unsigned short));
-	memcpy(oset, p.oset, n * sizeof(unsigned short));
+	memcpy(nbits, p.nbits, n * sizeof(uint16_t));
+	memcpy(oset, p.oset, n * sizeof(uint16_t));
 	memcpy(minval, p.minval, n * sizeof(float));
 	memcpy(maxval, p.maxval, n * sizeof(float));
 
@@ -97,14 +97,14 @@ void GABin2DecPhenotype::add(unsigned int nb, float min, float max)
 	{
 		core->N += core->csz;
 
-		unsigned short *nbtmp = core->nbits;
-		core->nbits = new unsigned short[core->N];
-		memcpy(core->nbits, nbtmp, core->n * sizeof(unsigned short));
+		uint16_t *nbtmp = core->nbits;
+		core->nbits = new uint16_t[core->N];
+		memcpy(core->nbits, nbtmp, core->n * sizeof(uint16_t));
 		delete[] nbtmp;
 
-		unsigned short *ostmp = core->oset;
-		core->oset = new unsigned short[core->N];
-		memcpy(core->oset, ostmp, core->n * sizeof(unsigned short));
+		uint16_t *ostmp = core->oset;
+		core->oset = new uint16_t[core->N];
+		memcpy(core->oset, ostmp, core->n * sizeof(uint16_t));
 		delete[] ostmp;
 
 		float *mintmp = core->minval;
@@ -134,9 +134,9 @@ void GABin2DecPhenotype::remove(unsigned int x)
 	if (x >= core->n)
 		return;
 	memmove(&(core->nbits[x]), &(core->nbits[x + 1]),
-			(core->n - x - 1) * sizeof(unsigned short));
+			(core->n - x - 1) * sizeof(uint16_t));
 	memmove(&(core->oset[x]), &(core->oset[x + 1]),
-			(core->n - x - 1) * sizeof(unsigned short));
+			(core->n - x - 1) * sizeof(uint16_t));
 	memmove(&(core->minval[x]), &(core->minval[x + 1]),
 			(core->n - x - 1) * sizeof(float));
 	memmove(&(core->maxval[x]), &(core->maxval[x + 1]),
@@ -148,9 +148,9 @@ int GABin2DecPhenotype::equal(const GABin2DecPhenotype &b) const
 {
 	if (core->sz != b.core->sz || core->n != b.core->n)
 		return false;
-	if (memcmp(core->nbits, b.core->nbits, core->n * sizeof(unsigned short)) !=
+	if (memcmp(core->nbits, b.core->nbits, core->n * sizeof(uint16_t)) !=
 			0 ||
-		memcmp(core->oset, b.core->oset, core->n * sizeof(unsigned short)) !=
+		memcmp(core->oset, b.core->oset, core->n * sizeof(uint16_t)) !=
 			0 ||
 		memcmp(core->minval, b.core->minval, core->n * sizeof(float)) != 0 ||
 		memcmp(core->maxval, b.core->maxval, core->n * sizeof(float)))
@@ -183,7 +183,7 @@ void GABin2DecGenome::copy(const GAGenome &orig)
 // end up doing it.  bummer.
 GAGenome *GABin2DecGenome::clone(GAGenome::CloneMethod flag) const
 {
-	GABin2DecGenome *cpy = new GABin2DecGenome(*ptype);
+	auto *cpy = new GABin2DecGenome(*ptype);
 	if (flag == CONTENTS)
 	{
 		cpy->copy(*this);
@@ -285,14 +285,14 @@ int GABin2DecGenome::write(std::ostream &os) const
 // same phenotypes.
 int GABin2DecGenome::equal(const GAGenome &g) const
 {
-	GABin2DecGenome &b = (GABin2DecGenome &)g;
+	auto &b = (GABin2DecGenome &)g;
 	return ((GA1DBinaryStringGenome::equal(b) && *ptype == *(b.ptype)) ? true
 																	   : false);
 }
 
 int GABin2DecGenome::notequal(const GAGenome &g) const
 {
-	GABin2DecGenome &b = (GABin2DecGenome &)g;
+	auto &b = (GABin2DecGenome &)g;
 	return ((GA1DBinaryStringGenome::notequal(b) || *ptype != *(b.ptype))
 				? true
 				: false);

@@ -24,7 +24,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
   public:
 	GADeclareIdentity();
 
-	static int SwapMutator(GAGenome &, float);
+	static int SwapMutator(const GAGenome &, float);
 	static float ElementComparator(const GAGenome &, const GAGenome &);
 	static int UniformCrossover(const GAGenome &, const GAGenome &, GAGenome *,
 								GAGenome *);
@@ -36,7 +36,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
   public:
 	GA2DArrayGenome(unsigned int x, unsigned int y,
 					GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-					void *u = (void *)0);
+					void *u = nullptr);
 	GA2DArrayGenome(const GA2DArrayGenome<T> &orig);
 	GA2DArrayGenome<T> &operator=(const GAGenome &orig)
 	{
@@ -86,7 +86,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
 		resize(nx, h);
 		return ny;
 	}
-	virtual int resize(int x, int y);
+	virtual int resize(int w, int h);
 	int resizeBehaviour(Dimension which) const;
 	int resizeBehaviour(Dimension which, unsigned int lower,
 						unsigned int upper);
@@ -117,18 +117,18 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
   public:
 	GADeclareIdentity();
 
-	static void UniformInitializer(GAGenome &);
-	static int FlipMutator(GAGenome &, float);
+	static void UniformInitializer(const GAGenome &);
+	static int FlipMutator(const GAGenome &, float);
 
   public:
 	GA2DArrayAlleleGenome(unsigned int x, unsigned int y,
 						  const GAAlleleSet<T> &a,
 						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-						  void *u = (void *)0);
+						  void *u = nullptr);
 	GA2DArrayAlleleGenome(unsigned int x, unsigned int y,
 						  const GAAlleleSetArray<T> &a,
 						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-						  void *u = (void *)0);
+						  void *u = nullptr);
 	GA2DArrayAlleleGenome(const GA2DArrayAlleleGenome<T> &orig);
 	GA2DArrayAlleleGenome<T> &operator=(const GAGenome &orig)
 	{

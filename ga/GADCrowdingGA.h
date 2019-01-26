@@ -15,7 +15,7 @@ class GADCrowdingGA : public GAGeneticAlgorithm {
 public:
   GADefineIdentity("GADeterministicCrowdingGA", 241);
 
-  GADCrowdingGA(const GAGenome& g) : GAGeneticAlgorithm(g) {}
+  explicit GADCrowdingGA(const GAGenome& g) : GAGeneticAlgorithm(g) {}
   virtual ~GADCrowdingGA() {}
 
   virtual void initialize(unsigned int seed=0) override;

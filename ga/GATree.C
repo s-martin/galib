@@ -31,7 +31,7 @@ Tree
 template <class T> GATree<T>::~GATree()
 {
 	_GATreeDestroy(DYN_CAST(GANode<T> *, rt));
-	iter.node = (GANodeBASE *)0;
+	iter.node = nullptr;
 }
 
 // Yes, this is really ugly.  We do a complete destruction of the existing tree
@@ -71,12 +71,12 @@ template <class T> GATree<T> *GATree<T>::remove()
 	else if (node->parent)
 		iter.parent();
 	else
-		iter.node = (GANodeBASE *)0;
+		iter.node = nullptr;
 
 	GANode<T> *tmpnode = DYN_CAST(GANode<T> *, GATreeBASE::remove(node));
 	tmpnode->prev = tmpnode;
 	tmpnode->next = tmpnode;
-	tmpnode->parent = (GANodeBASE *)0;
+	tmpnode->parent = nullptr;
 
 	t->insert(tmpnode, (GANode<T> *)0, GATreeBASE::ROOT);
 
@@ -136,7 +136,7 @@ template <class T> int GATree<T>::destroy()
 		if (node->parent)
 			iter.node = node->parent;
 		else
-			iter.node = (GANodeBASE *)0;
+			iter.node = nullptr;
 	else
 		iter.eldest();
 	_GATreeDestroy(DYN_CAST(GANode<T> *, node->child));
@@ -180,7 +180,7 @@ template <class T> int GATree<T>::swaptree(GATree<T> *t)
 			tmp = t->GATreeBASE::remove(t->iter.node);
 			//      tmp->next = tmp;
 			//      tmp->prev = tmp;
-			t->iter.node = (GANodeBASE *)0;
+			t->iter.node = nullptr;
 			if (insert(DYN_CAST(GANode<T> *, tmp), (GANode<T> *)0,
 					   GATreeBASE::ROOT) == GATreeBASE::ERR)
 				return GATreeBASE::ERR;
@@ -193,7 +193,7 @@ template <class T> int GATree<T>::swaptree(GATree<T> *t)
 			tmp = GATreeBASE::remove(iter.node);
 			//      tmp->next = tmp;
 			//      tmp->prev = tmp;
-			iter.node = (GANodeBASE *)0;
+			iter.node = nullptr;
 			if (t->insert(DYN_CAST(GANode<T> *, tmp), (GANode<T> *)0,
 						  GATreeBASE::ROOT) == GATreeBASE::ERR)
 				return GATreeBASE::ERR;
@@ -281,7 +281,7 @@ template <class T> void _GATreeDestroy(GANode<T> *node)
 		return;
 
 	if (node->parent)
-		node->parent->child = (GANodeBASE *)0;
+		node->parent->child = nullptr;
 	_GATreeDestroy(DYN_CAST(GANode<T> *, node->child));
 
 	GANodeBASE *tmp;

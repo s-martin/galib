@@ -145,7 +145,7 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome &g) : stats(), params()
 	pop = new GAPopulation(g, gaDefPopSize);
 	pop->geneticAlgorithm(*this);
 
-	ud = (void *)0;
+	ud = nullptr;
 	cf = GAGeneticAlgorithm::DEFAULT_TERMINATOR;
 
 	d_seed = gaDefSeed;
@@ -196,7 +196,7 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAPopulation &p)
 	pop = new GAPopulation(p);
 	pop->geneticAlgorithm(*this);
 
-	ud = (void *)0;
+	ud = nullptr;
 	cf = GAGeneticAlgorithm::DEFAULT_TERMINATOR;
 
 	d_seed = gaDefSeed;

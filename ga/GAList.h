@@ -101,8 +101,8 @@ template <class T> class GAList : public GAListBASE
 			return GAListBASE::ERR;
 		}
 		iter.node = (t->hd ? t->hd : iter.node);
-		t->hd = (GANodeBASE *)0;
-		t->iter.node = (GANodeBASE *)0;
+		t->hd = nullptr;
+		t->iter.node = nullptr;
 		return GAListBASE::NO_ERR;
 	}
 	int insert(const T &t, GAListBASE::Location where = GAListBASE::AFTER)
@@ -174,13 +174,13 @@ template <class T> class GAListIter : public GAListIterBASE
 	T *current() { return (node ? &((GANode<T> *)node)->contents : (T *)0); }
 	T *head()
 	{
-		return (((node = GAListIterBASE::head()) != (GANodeBASE *)0)
+		return (((node = GAListIterBASE::head()) != nullptr)
 					? &((GANode<T> *)GAListIterBASE::head())->contents
 					: (T *)0);
 	}
 	T *tail()
 	{
-		return (((node = GAListIterBASE::tail()) != (GANodeBASE *)0)
+		return (((node = GAListIterBASE::tail()) != nullptr)
 					? &((GANode<T> *)GAListIterBASE::tail())->contents
 					: (T *)0);
 	}

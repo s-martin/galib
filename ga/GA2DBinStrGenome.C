@@ -48,7 +48,7 @@ GA2DBinaryStringGenome::~GA2DBinaryStringGenome() {}
 
 GAGenome *GA2DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 {
-	GA2DBinaryStringGenome *cpy = new GA2DBinaryStringGenome(nx, ny);
+	auto *cpy = new GA2DBinaryStringGenome(nx, ny);
 	if (flag == CONTENTS)
 	{
 		cpy->copy(*this);
@@ -70,7 +70,7 @@ void GA2DBinaryStringGenome::copy(const GAGenome &orig)
 		return;
 	const GA2DBinaryStringGenome *c =
 		DYN_CAST(const GA2DBinaryStringGenome *, &orig);
-	if (c)
+	if (c != nullptr)
 	{
 		GAGenome::copy(*c);
 		GABinaryString::copy(*c);
@@ -355,7 +355,7 @@ int GA2DBinaryStringGenome::equal(const GAGenome &c) const
 {
 	if (this == &c)
 		return 1;
-	GA2DBinaryStringGenome &b = (GA2DBinaryStringGenome &)c;
+	auto &b = (GA2DBinaryStringGenome &)c;
 	if (nx != b.nx || ny != b.ny)
 		return 0;
 	int val = 0;

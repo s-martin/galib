@@ -122,7 +122,7 @@ int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 GANodeBASE *GAListBASE::remove(GANodeBASE *n)
 {
 	if (!n)
-		return (GANodeBASE *)0;
+		return nullptr;
 
 	if (n->next && n->next != n)
 	{ // reset links on neighbors if they exist
@@ -134,7 +134,7 @@ GANodeBASE *GAListBASE::remove(GANodeBASE *n)
 		if (n->next != n)
 			hd = n->next;
 		else
-			hd = (GANodeBASE *)0;
+			hd = nullptr;
 	}
 
 	// uncomment these to modify the node that is getting removed
@@ -243,7 +243,7 @@ int GAListBASE::size() const
 		return sz;
 	GAListBASE *This = CON_CAST(GAListBASE *, this);
 	This->csz = 0;
-	if (hd == (GANodeBASE *)0)
+	if (hd == nullptr)
 		return This->sz = 0;
 	GANodeBASE *tmp = hd;
 	This->sz = 1;
@@ -277,7 +277,7 @@ GANodeBASE *_GAListTraverse(unsigned int index, unsigned int &cur,
 							GANodeBASE *node)
 {
 	if (!node)
-		return (GANodeBASE *)0;
+		return nullptr;
 	GANodeBASE *tmp = node;
 	while (cur < index && tmp && tmp->next != node)
 	{

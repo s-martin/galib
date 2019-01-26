@@ -392,7 +392,7 @@ template <class T> int GA2DArrayAlleleGenome<T>::equal(const GAGenome &c) const
 ---------------------------------------------------------------------------- */
 // this does not handle genomes with multiple allele sets!
 template <class ARRAY_TYPE>
-void GA2DArrayAlleleGenome<ARRAY_TYPE>::UniformInitializer(GAGenome &c)
+void GA2DArrayAlleleGenome<ARRAY_TYPE>::UniformInitializer(const GAGenome &c)
 {
 	GA2DArrayAlleleGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayAlleleGenome<ARRAY_TYPE> &, c);
@@ -403,7 +403,7 @@ void GA2DArrayAlleleGenome<ARRAY_TYPE>::UniformInitializer(GAGenome &c)
 }
 
 template <class ARRAY_TYPE>
-int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
+int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(const GAGenome &c, float pmut)
 {
 	GA2DArrayAlleleGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayAlleleGenome<ARRAY_TYPE> &, c);
@@ -441,7 +441,7 @@ int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(GAGenome &c, float pmut)
 }
 
 template <class ARRAY_TYPE>
-int GA2DArrayGenome<ARRAY_TYPE>::SwapMutator(GAGenome &c, float pmut)
+int GA2DArrayGenome<ARRAY_TYPE>::SwapMutator(const GAGenome &c, float pmut)
 {
 	GA2DArrayGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayGenome<ARRAY_TYPE> &, c);

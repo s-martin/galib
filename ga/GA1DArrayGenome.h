@@ -57,7 +57,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
   public:
 	GA1DArrayGenome(unsigned int x,
 					GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-					void *u = (void *)0);
+					void *u = nullptr);
 	GA1DArrayGenome(const GA1DArrayGenome<T> &orig);
 	GA1DArrayGenome<T> &operator=(const GAGenome &orig)
 	{
@@ -97,9 +97,9 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		resize(x);
 		return nx;
 	}
-	virtual int resize(int x);
+	virtual int resize(int len);
 	int resizeBehaviour() const;
-	int resizeBehaviour(unsigned int lx, unsigned int ux);
+	int resizeBehaviour(unsigned int lower, unsigned int upper);
 	void copy(const GA1DArrayGenome<T> &orig, unsigned int r, unsigned int x,
 			  unsigned int l)
 	{
@@ -159,10 +159,10 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
   public:
 	GA1DArrayAlleleGenome(unsigned int x, const GAAlleleSet<T> &a,
 						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-						  void *u = (void *)0);
+						  void *u = nullptr);
 	GA1DArrayAlleleGenome(const GAAlleleSetArray<T> &a,
 						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-						  void *u = (void *)0);
+						  void *u = nullptr);
 	GA1DArrayAlleleGenome(const GA1DArrayAlleleGenome<T> &);
 	GA1DArrayAlleleGenome<T> &operator=(const GAGenome &arr)
 	{
@@ -185,7 +185,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 #endif
 
 	virtual int equal(const GAGenome &c) const override;
-	virtual int resize(int x) override;
+	virtual int resize(int len) override;
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
 	{

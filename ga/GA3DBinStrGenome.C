@@ -51,7 +51,7 @@ GA3DBinaryStringGenome::~GA3DBinaryStringGenome() {}
 
 GAGenome *GA3DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 {
-	GA3DBinaryStringGenome *cpy = new GA3DBinaryStringGenome(nx, ny, nz);
+	auto *cpy = new GA3DBinaryStringGenome(nx, ny, nz);
 	if (flag == CONTENTS)
 	{
 		cpy->copy(*this);

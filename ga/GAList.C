@@ -29,7 +29,7 @@ template <class T> GAList<T>::~GAList()
 {
 	while (hd)
 		delete GAListBASE::remove(DYN_CAST(GANode<T> *, hd));
-	iter.node = (GANodeBASE *)0;
+	iter.node = nullptr;
 }
 
 // Yes, this is really ugly.  We do a complete destruction of the existing list
@@ -64,7 +64,7 @@ template <class T> T *GAList<T>::remove()
 	if (node->prev != node)
 		iter.node = node->prev;
 	else
-		iter.node = (GANodeBASE *)0;
+		iter.node = nullptr;
 	node = DYN_CAST(GANode<T> *, GAListBASE::remove(node));
 	T *contents = new T(node->contents);
 	delete node;
@@ -114,7 +114,7 @@ template <class T> int GAList<T>::destroy()
 		else
 			iter.node = node->prev;
 	else
-		iter.node = (GANodeBASE *)0;
+		iter.node = nullptr;
 	delete GAListBASE::remove(node);
 	return GAListBASE::NO_ERR;
 }
@@ -125,7 +125,7 @@ template <class T> int GAList<T>::swap(unsigned int a, unsigned int b)
 {
 	if (a == b || a > (unsigned int)size() || b > (unsigned int)size())
 		return GAListBASE::NO_ERR;
-	GANodeBASE *tmp = hd, *anode = (GANodeBASE *)0, *bnode = (GANodeBASE *)0;
+	GANodeBASE *tmp = hd, *anode = nullptr, *bnode = nullptr;
 	unsigned int cur = 0;
 	while (tmp && tmp->next != hd)
 	{

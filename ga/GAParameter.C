@@ -13,15 +13,14 @@ implementation.
 ---------------------------------------------------------------------------- */
 #include <GAParameter.h>
 #include <cctype>
-#include <gaconfig.h>
-#include <gaerror.h>
 #include <cstdlib>
 #include <cstring>
+#include <gaconfig.h>
+#include <gaerror.h>
 
 #include <fstream>
 
 #include <boost/algorithm/string.hpp>
-
 
 #define PRM_CHUNKSIZE 10
 #define BUFSIZE 1024 // size of buffer for reading pairs
@@ -34,7 +33,7 @@ static int IsNumeric(const char *);
 
 GAParameter::GAParameter(const char *fn, const char *sn, Type tp, const void *v)
 {
-	if (fn)
+	if (fn != nullptr)
 	{
 		fname = new char[strlen(fn) + 1];
 		strcpy(fname, fn);
@@ -42,7 +41,7 @@ GAParameter::GAParameter(const char *fn, const char *sn, Type tp, const void *v)
 	else
 		fname = nullptr;
 
-	if (sn)
+	if (sn != nullptr)
 	{
 		sname = new char[strlen(sn) + 1];
 		strcpy(sname, sn);
@@ -69,14 +68,14 @@ void GAParameter::copy(const GAParameter &orig)
 
 	delete[] fname;
 	delete[] sname;
-	if (orig.fname)
+	if (orig.fname != nullptr)
 	{
 		fname = new char[strlen(orig.fname) + 1];
 		strcpy(fname, orig.fname);
 	}
 	else
 		fname = nullptr;
-	if (orig.sname)
+	if (orig.sname != nullptr)
 	{
 		sname = new char[strlen(orig.sname) + 1];
 		strcpy(sname, orig.sname);
