@@ -16,7 +16,7 @@ GAIncrementalGA::registerDefaultParameters(GAParameterList& p) {
   GAGeneticAlgorithm::registerDefaultParameters(p);
 
   p.add(gaNnOffspring, gaSNnOffspring,
-	GAParameter::INT, &gaDefNumOff);
+	ParType::INT, &gaDefNumOff);
 
   p.set(gaNscoreFrequency, &gaDefScoreFrequency2);
 
@@ -33,7 +33,7 @@ GAIncrementalGA::GAIncrementalGA(const GAGenome& c) : GAGeneticAlgorithm(c) {
   rf = 0;
 
   noffspr = gaDefNumOff;
-  params.add(gaNnOffspring, gaSNnOffspring, GAParameter::INT, &noffspr);
+  params.add(gaNnOffspring, gaSNnOffspring, ParType::INT, &noffspr);
 
   stats.scoreFrequency(gaDefScoreFrequency2);
   params.set(gaNscoreFrequency, &gaDefScoreFrequency2);
@@ -48,7 +48,7 @@ GAIncrementalGA::GAIncrementalGA(const GAPopulation& p): GAGeneticAlgorithm(p){
   rf = 0;
 
   noffspr = gaDefNumOff;
-  params.add(gaNnOffspring, gaSNnOffspring, GAParameter::INT, &noffspr);
+  params.add(gaNnOffspring, gaSNnOffspring, ParType::INT, &noffspr);
 
   stats.scoreFrequency(gaDefScoreFrequency2);
   params.set(gaNscoreFrequency, &gaDefScoreFrequency2);

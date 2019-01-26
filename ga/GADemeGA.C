@@ -14,17 +14,17 @@ GAParameterList&
 GADemeGA::registerDefaultParameters(GAParameterList& p) {
   GAGeneticAlgorithm::registerDefaultParameters(p);
 
-  p.add(gaNnPopulations, gaSNnPopulations, GAParameter::INT, &gaDefNPop);
-  p.add(gaNnMigration, gaSNnMigration, GAParameter::INT, &gaDefNMig);
+  p.add(gaNnPopulations, gaSNnPopulations, ParType::INT, &gaDefNPop);
+  p.add(gaNnMigration, gaSNnMigration, ParType::INT, &gaDefNMig);
 
   return p;
 }
 
 GADemeGA::GADemeGA(const GAGenome& c) : GAGeneticAlgorithm(c) {
   npop = gaDefNPop;
-  params.add(gaNnPopulations, gaSNnPopulations, GAParameter::INT, &npop);
+  params.add(gaNnPopulations, gaSNnPopulations, ParType::INT, &npop);
   nmig = gaDefNMig;
-  params.add(gaNnMigration, gaSNnMigration, GAParameter::INT, &nmig);
+  params.add(gaNnMigration, gaSNnMigration, ParType::INT, &nmig);
 
   unsigned int nr = pop->size()/2;
   nrepl = new int [npop];
@@ -44,9 +44,9 @@ GADemeGA::GADemeGA(const GAPopulation& p) : GAGeneticAlgorithm(p) {
   }
   else {
     npop = gaDefNPop;
-    params.add(gaNnPopulations, gaSNnPopulations, GAParameter::INT, &npop);
+    params.add(gaNnPopulations, gaSNnPopulations, ParType::INT, &npop);
     nmig = gaDefNMig;
-    params.add(gaNnMigration, gaSNnMigration, GAParameter::INT, &nmig);
+    params.add(gaNnMigration, gaSNnMigration, ParType::INT, &nmig);
     unsigned int nr = pop->size()/2;
 
     nrepl = new int [npop];

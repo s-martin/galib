@@ -31,7 +31,7 @@ extern char _gaerrbuf1[];
 extern char _gaerrbuf2[];
 static int IsNumeric(const char *);
 
-GAParameter::GAParameter(const char *fn, const char *sn, Type tp, const void *v)
+GAParameter::GAParameter(const char *fn, const char *sn, ParType tp, const void *v)
 {
 	if (fn != nullptr)
 	{
@@ -91,7 +91,7 @@ GAParameter::~GAParameter()
 {
 	delete[] fname;
 	delete[] sname;
-	if (t == STRING)
+	if (t == ParType::STRING)
 		delete[] val.sval;
 }
 
@@ -99,14 +99,14 @@ void GAParameter::setvalue(const void *v)
 {
 	switch (t)
 	{
-	case BOOLEAN:
-	case INT:
+	case ParType::BOOLEAN:
+	case ParType::INT:
 		val.ival = *((int *)v);
 		break;
-	case CHAR:
+	case ParType::CHAR:
 		val.cval = *((char *)v);
 		break;
-	case STRING:
+	case ParType::STRING:
 		if (v != val.sval)
 		{
 			char *ptr = 0;
@@ -119,13 +119,13 @@ void GAParameter::setvalue(const void *v)
 			val.sval = ptr;
 		}
 		break;
-	case FLOAT:
+	case ParType::FLOAT:
 		val.fval = *((float *)v);
 		break;
-	case DOUBLE:
+	case ParType::DOUBLE:
 		val.dval = *((double *)v);
 		break;
-	case POINTER:
+	case ParType::POINTER:
 	default:
 		val.pval = v;
 		break;
@@ -211,12 +211,12 @@ int GAParameterList::set(const char *name, double v)
 		if (strcmp(name, p[i]->fullname()) == 0 ||
 			strcmp(name, p[i]->shrtname()) == 0)
 		{
-			if (p[i]->type() == GAParameter::FLOAT)
+			if (p[i]->type() == ParType::FLOAT)
 			{
 				float fval = (float)v;
 				p[i]->value((void *)&fval);
 			}
-			else if (p[i]->type() == GAParameter::DOUBLE)
+			else if (p[i]->type() == ParType::DOUBLE)
 				p[i]->value((void *)&v);
 			else
 				GAErr(GA_LOC, "GAParameterList", "set", gaErrBadTypeIndicator);
@@ -237,22 +237,22 @@ int GAParameterList::get(const char *name, void *value) const
 		{
 			switch (p[i]->type())
 			{
-			case GAParameter::BOOLEAN:
-			case GAParameter::INT:
+			case ParType::BOOLEAN:
+			case ParType::INT:
 				*((int *)value) = *((int *)p[i]->value());
 				break;
-			case GAParameter::CHAR:
+			case ParType::CHAR:
 				*((char *)value) = *((char *)p[i]->value());
 				break;
-			case GAParameter::STRING:
+			case ParType::STRING:
 				break;
-			case GAParameter::FLOAT:
+			case ParType::FLOAT:
 				*((float *)value) = *((float *)p[i]->value());
 				break;
-			case GAParameter::DOUBLE:
+			case ParType::DOUBLE:
 				*((double *)value) = *((double *)p[i]->value());
 				break;
-			case GAParameter::POINTER:
+			case ParType::POINTER:
 			default:
 				break;
 			}
@@ -264,7 +264,7 @@ int GAParameterList::get(const char *name, void *value) const
 
 // Add the item to the list if it does not already exist.  Return 0 if the add
 // was OK, -1 if there was a problem.
-int GAParameterList::add(const char *fn, const char *sn, GAParameter::Type t,
+int GAParameterList::add(const char *fn, const char *sn, ParType t,
 						 const void *v)
 {
 	int status = -1;
@@ -335,34 +335,34 @@ int GAParameterList::write(std::ostream &os) const
 
 		switch (p[i]->type())
 		{
-		case GAParameter::BOOLEAN:
+		case ParType::BOOLEAN:
 			ival = *((int *)(p[i]->value()));
 			if (ival)
 				os << "1\n";
 			else
 				os << "0\n";
 			break;
-		case GAParameter::INT:
+		case ParType::INT:
 			ival = *((int *)(p[i]->value()));
 			os << ival << "\n";
 			break;
-		case GAParameter::CHAR:
+		case ParType::CHAR:
 			cval = *((char *)(p[i]->value()));
 			os << cval << "\n";
 			break;
-		case GAParameter::STRING:
+		case ParType::STRING:
 			sval = ((char *)(p[i]->value()));
 			os << sval << "\n";
 			break;
-		case GAParameter::FLOAT:
+		case ParType::FLOAT:
 			fval = *((float *)(p[i]->value()));
 			os << fval << "\n";
 			break;
-		case GAParameter::DOUBLE:
+		case ParType::DOUBLE:
 			dval = *((double *)(p[i]->value()));
 			os << dval << "\n";
 			break;
-		case GAParameter::POINTER:
+		case ParType::POINTER:
 		default:
 			os << "(pointer)\n";
 			//      os << p[i]->value() << "\n";
@@ -466,28 +466,28 @@ int GAParameterList::read(std::istream &is, bool flag)
 
 					switch (p[i]->type())
 					{
-					case GAParameter::BOOLEAN:
-					case GAParameter::INT:
+					case ParType::BOOLEAN:
+					case ParType::INT:
 						ival = atoi(buf);
 						set(name, (void *)&ival);
 						nfound += 1;
 						break;
-					case GAParameter::CHAR:
-					case GAParameter::STRING:
+					case ParType::CHAR:
+					case ParType::STRING:
 						set(name, (void *)buf);
 						nfound += 1;
 						break;
-					case GAParameter::FLOAT:
+					case ParType::FLOAT:
 						fval = (float)atof(buf);
 						set(name, (void *)&fval);
 						nfound += 1;
 						break;
-					case GAParameter::DOUBLE:
+					case ParType::DOUBLE:
 						dval = (double)atof(buf);
 						set(name, (void *)&dval);
 						nfound += 1;
 						break;
-					case GAParameter::POINTER:
+					case ParType::POINTER:
 					default:
 						break;
 					}
@@ -599,7 +599,7 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 
 					switch (p[j]->type())
 					{
-					case GAParameter::BOOLEAN:
+					case ParType::BOOLEAN:
 						if (IsNumeric(argv[i]))
 						{
 							ival = atoi(argv[i]);
@@ -614,27 +614,27 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 						set(argv[i - 1], (void *)&ival);
 						nfound += 1;
 						break;
-					case GAParameter::INT:
+					case ParType::INT:
 						ival = atoi(argv[i]);
 						set(argv[i - 1], (void *)&ival);
 						nfound += 1;
 						break;
-					case GAParameter::CHAR:
-					case GAParameter::STRING:
+					case ParType::CHAR:
+					case ParType::STRING:
 						set(argv[i - 1], (void *)argv[i]);
 						nfound += 1;
 						break;
-					case GAParameter::FLOAT:
+					case ParType::FLOAT:
 						fval = (float)atof(argv[i]);
 						set(argv[i - 1], (void *)&fval);
 						nfound += 1;
 						break;
-					case GAParameter::DOUBLE:
+					case ParType::DOUBLE:
 						dval = (double)atof(argv[i]);
 						set(argv[i - 1], (void *)&dval);
 						nfound += 1;
 						break;
-					case GAParameter::POINTER:
+					case ParType::POINTER:
 					default:
 						break;
 					}

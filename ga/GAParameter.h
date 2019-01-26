@@ -17,6 +17,17 @@
 #include <istream>
 #include <ostream>
 
+enum class ParType
+{
+	BOOLEAN,
+	CHAR,
+	STRING,
+	INT,
+	FLOAT,
+	DOUBLE,
+	POINTER
+};
+
 /* ----------------------------------------------------------------------------
    This object is used for naming the parameters.  We associate a fullname, a
 short name, and a value with each parameter.
@@ -24,19 +35,7 @@ short name, and a value with each parameter.
 class GAParameter
 {
   public:
-	enum Type
-	{
-		BOOLEAN,
-		CHAR,
-		STRING,
-		INT,
-		FLOAT,
-		DOUBLE,
-		POINTER
-	};
-
-  public:
-	GAParameter(const char *fn, const char *sn, Type tp, const void *v);
+	GAParameter(const char *fn, const char *sn, ParType tp, const void *v);
 	GAParameter(const GAParameter &orig);
 	GAParameter &operator=(const GAParameter &orig)
 	{
@@ -49,14 +48,14 @@ class GAParameter
 	char *shrtname() const { return sname; }
 	const void *value() const
 	{
-		return (t == STRING ? val.sval : (t == POINTER ? val.pval : &val));
+		return (t == ParType::STRING ? val.sval : (t == ParType::POINTER ? val.pval : &val));
 	}
 	const void *value(const void *v)
 	{
 		setvalue(v);
-		return (t == STRING ? val.sval : (t == POINTER ? val.pval : &val));
+		return (t == ParType::STRING ? val.sval : (t == ParType::POINTER ? val.pval : &val));
 	}
-	Type type() const { return t; }
+	ParType type() const { return t; }
 
   protected:
 	char *fname;
@@ -69,7 +68,7 @@ class GAParameter
 		double dval;
 		const void *pval;
 	} val;
-	Type t;
+	ParType t;
 	void setvalue(const void *);
 };
 
@@ -95,7 +94,7 @@ class GAParameterList
 	int set(const char *s, char v) { return set(s, (void *)&v); }
 	int set(const char *s, const char *v) { return set(s, (void *)v); }
 	int set(const char *s, double v);
-	int add(const char *, const char *, GAParameter::Type, const void *);
+	int add(const char *, const char *, ParType, const void *);
 	int remove();
 	GAParameter &operator[](unsigned int i) const { return *(p[i]); }
 	GAParameter &next() { return *(p[((cur > n) ? cur = 0 : ++cur)]); }

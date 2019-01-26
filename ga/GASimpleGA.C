@@ -14,7 +14,7 @@ GAParameterList &GASimpleGA::registerDefaultParameters(GAParameterList &p)
 {
 	GAGeneticAlgorithm::registerDefaultParameters(p);
 
-	p.add(gaNelitism, gaSNelitism, GAParameter::BOOLEAN, &gaDefElitism);
+	p.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &gaDefElitism);
 
 	return p;
 }
@@ -24,14 +24,14 @@ GASimpleGA::GASimpleGA(const GAGenome &c) : GAGeneticAlgorithm(c)
 	oldPop = pop->clone();
 
 	el = true;
-	params.add(gaNelitism, gaSNelitism, GAParameter::BOOLEAN, &el);
+	params.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &el);
 }
 GASimpleGA::GASimpleGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 {
 	oldPop = pop->clone();
 
 	el = true;
-	params.add(gaNelitism, gaSNelitism, GAParameter::BOOLEAN, &el);
+	params.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &el);
 }
 GASimpleGA::GASimpleGA(const GASimpleGA &ga) : GAGeneticAlgorithm(ga)
 {

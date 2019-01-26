@@ -20,8 +20,8 @@ GASteadyStateGA::registerDefaultParameters(GAParameterList& p) {
   GAGeneticAlgorithm::registerDefaultParameters(p);
 
   int ival = 1;
-  p.add(gaNnReplacement, gaSNnReplacement, GAParameter::INT, &ival);
-  p.add(gaNpReplacement, gaSNpReplacement, GAParameter::FLOAT, &gaDefPRepl);
+  p.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &ival);
+  p.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &gaDefPRepl);
 
   p.set(gaNscoreFrequency, gaDefScoreFrequency2);
 
@@ -30,13 +30,13 @@ GASteadyStateGA::registerDefaultParameters(GAParameterList& p) {
 
 GASteadyStateGA::GASteadyStateGA(const GAGenome& c) : GAGeneticAlgorithm(c) {
   pRepl = gaDefPRepl;
-  params.add(gaNpReplacement, gaSNpReplacement, GAParameter::FLOAT, &pRepl);
+  params.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &pRepl);
 
   float n = ((pRepl*(float)pop->size() < 1) ? 1 : pRepl*(float)pop->size());
   tmpPop = new GAPopulation(pop->individual(0), (unsigned int)n);
 
   nRepl = tmpPop->size();
-  params.add(gaNnReplacement, gaSNnReplacement, GAParameter::INT, &nRepl);
+  params.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &nRepl);
   stats.scoreFrequency(gaDefScoreFrequency2);
   params.set(gaNscoreFrequency, gaDefScoreFrequency2);
 
@@ -44,13 +44,13 @@ GASteadyStateGA::GASteadyStateGA(const GAGenome& c) : GAGeneticAlgorithm(c) {
 }
 GASteadyStateGA::GASteadyStateGA(const GAPopulation& p): GAGeneticAlgorithm(p){
   pRepl = gaDefPRepl;
-  params.add(gaNpReplacement, gaSNpReplacement, GAParameter::FLOAT, &pRepl);
+  params.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &pRepl);
 
   float n = ((pRepl*(float)pop->size() < 1) ? 1 : pRepl*(float)pop->size());
   tmpPop = new GAPopulation(pop->individual(0), (unsigned int)n);
 
   nRepl = tmpPop->size();
-  params.add(gaNnReplacement, gaSNnReplacement, GAParameter::INT, &nRepl);
+  params.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &nRepl);
   stats.scoreFrequency(gaDefScoreFrequency2);
   params.set(gaNscoreFrequency, gaDefScoreFrequency2);
 

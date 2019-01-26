@@ -113,26 +113,26 @@ bool GAGeneticAlgorithm::TerminateUponPopConvergence(GAGeneticAlgorithm &ga)
 GAParameterList &
 GAGeneticAlgorithm::registerDefaultParameters(GAParameterList &p)
 {
-	p.add(gaNseed, gaSNseed, GAParameter::INT, &gaDefSeed);
-	p.add(gaNminimaxi, gaSNminimaxi, GAParameter::INT, &gaDefMiniMaxi);
-	p.add(gaNnGenerations, gaSNnGenerations, GAParameter::INT, &gaDefNumGen);
-	p.add(gaNnConvergence, gaSNnConvergence, GAParameter::INT, &gaDefNConv);
-	p.add(gaNpConvergence, gaSNpConvergence, GAParameter::FLOAT, &gaDefPConv);
-	p.add(gaNpCrossover, gaSNpCrossover, GAParameter::FLOAT, &gaDefPCross);
-	p.add(gaNpMutation, gaSNpMutation, GAParameter::FLOAT, &gaDefPMut);
-	p.add(gaNpopulationSize, gaSNpopulationSize, GAParameter::INT,
+	p.add(gaNseed, gaSNseed, ParType::INT, &gaDefSeed);
+	p.add(gaNminimaxi, gaSNminimaxi, ParType::INT, &gaDefMiniMaxi);
+	p.add(gaNnGenerations, gaSNnGenerations, ParType::INT, &gaDefNumGen);
+	p.add(gaNnConvergence, gaSNnConvergence, ParType::INT, &gaDefNConv);
+	p.add(gaNpConvergence, gaSNpConvergence, ParType::FLOAT, &gaDefPConv);
+	p.add(gaNpCrossover, gaSNpCrossover, ParType::FLOAT, &gaDefPCross);
+	p.add(gaNpMutation, gaSNpMutation, ParType::FLOAT, &gaDefPMut);
+	p.add(gaNpopulationSize, gaSNpopulationSize, ParType::INT,
 		  &gaDefPopSize);
-	p.add(gaNnBestGenomes, gaSNnBestGenomes, GAParameter::INT,
+	p.add(gaNnBestGenomes, gaSNnBestGenomes, ParType::INT,
 		  &gaDefNumBestGenomes);
-	p.add(gaNscoreFrequency, gaSNscoreFrequency, GAParameter::INT,
+	p.add(gaNscoreFrequency, gaSNscoreFrequency, ParType::INT,
 		  &gaDefScoreFrequency1);
-	p.add(gaNflushFrequency, gaSNflushFrequency, GAParameter::INT,
+	p.add(gaNflushFrequency, gaSNflushFrequency, ParType::INT,
 		  &gaDefFlushFrequency);
-	p.add(gaNrecordDiversity, gaSNrecordDiversity, GAParameter::INT,
+	p.add(gaNrecordDiversity, gaSNrecordDiversity, ParType::INT,
 		  &gaDefDivFlag);
-	p.add(gaNscoreFilename, gaSNscoreFilename, GAParameter::STRING,
+	p.add(gaNscoreFilename, gaSNscoreFilename, ParType::STRING,
 		  gaDefScoreFilename);
-	p.add(gaNselectScores, gaSNselectScores, GAParameter::INT,
+	p.add(gaNselectScores, gaSNselectScores, ParType::INT,
 		  &gaDefSelectScores);
 
 	return p;
@@ -149,41 +149,41 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome &g) : stats(), params()
 	cf = GAGeneticAlgorithm::DEFAULT_TERMINATOR;
 
 	d_seed = gaDefSeed;
-	params.add(gaNseed, gaSNseed, GAParameter::INT, &d_seed);
+	params.add(gaNseed, gaSNseed, ParType::INT, &d_seed);
 
 	minmax = gaDefMiniMaxi;
-	params.add(gaNminimaxi, gaSNminimaxi, GAParameter::INT, &minmax);
+	params.add(gaNminimaxi, gaSNminimaxi, ParType::INT, &minmax);
 	ngen = gaDefNumGen;
-	params.add(gaNnGenerations, gaSNnGenerations, GAParameter::INT, &ngen);
+	params.add(gaNnGenerations, gaSNnGenerations, ParType::INT, &ngen);
 	nconv = gaDefNConv;
 	stats.nConvergence(nconv);
-	params.add(gaNnConvergence, gaSNnConvergence, GAParameter::INT, &nconv);
+	params.add(gaNnConvergence, gaSNnConvergence, ParType::INT, &nconv);
 	pconv = gaDefPConv;
-	params.add(gaNpConvergence, gaSNpConvergence, GAParameter::FLOAT, &pconv);
+	params.add(gaNpConvergence, gaSNpConvergence, ParType::FLOAT, &pconv);
 	pcross = gaDefPCross;
-	params.add(gaNpCrossover, gaSNpCrossover, GAParameter::FLOAT, &pcross);
+	params.add(gaNpCrossover, gaSNpCrossover, ParType::FLOAT, &pcross);
 	pmut = gaDefPMut;
-	params.add(gaNpMutation, gaSNpMutation, GAParameter::FLOAT, &pmut);
+	params.add(gaNpMutation, gaSNpMutation, ParType::FLOAT, &pmut);
 	int psize = pop->size();
-	params.add(gaNpopulationSize, gaSNpopulationSize, GAParameter::INT, &psize);
+	params.add(gaNpopulationSize, gaSNpopulationSize, ParType::INT, &psize);
 
 	stats.scoreFrequency(gaDefScoreFrequency1);
-	params.add(gaNscoreFrequency, gaSNscoreFrequency, GAParameter::INT,
+	params.add(gaNscoreFrequency, gaSNscoreFrequency, ParType::INT,
 			   &gaDefScoreFrequency1);
 	stats.flushFrequency(gaDefFlushFrequency);
-	params.add(gaNflushFrequency, gaSNflushFrequency, GAParameter::INT,
+	params.add(gaNflushFrequency, gaSNflushFrequency, ParType::INT,
 			   &gaDefFlushFrequency);
 	stats.recordDiversity(gaDefDivFlag);
-	params.add(gaNrecordDiversity, gaSNrecordDiversity, GAParameter::INT,
+	params.add(gaNrecordDiversity, gaSNrecordDiversity, ParType::INT,
 			   &gaDefDivFlag);
 	stats.scoreFilename(gaDefScoreFilename);
-	params.add(gaNscoreFilename, gaSNscoreFilename, GAParameter::STRING,
+	params.add(gaNscoreFilename, gaSNscoreFilename, ParType::STRING,
 			   gaDefScoreFilename);
 	stats.selectScores(gaDefSelectScores);
-	params.add(gaNselectScores, gaSNselectScores, GAParameter::INT,
+	params.add(gaNselectScores, gaSNselectScores, ParType::INT,
 			   &gaDefSelectScores);
 	stats.nBestGenomes(g, gaDefNumBestGenomes);
-	params.add(gaNnBestGenomes, gaSNnBestGenomes, GAParameter::INT,
+	params.add(gaNnBestGenomes, gaSNnBestGenomes, ParType::INT,
 			   &gaDefNumBestGenomes);
 
 	scross = g.sexual();
@@ -200,41 +200,41 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAPopulation &p)
 	cf = GAGeneticAlgorithm::DEFAULT_TERMINATOR;
 
 	d_seed = gaDefSeed;
-	params.add(gaNseed, gaSNseed, GAParameter::INT, &d_seed);
+	params.add(gaNseed, gaSNseed, ParType::INT, &d_seed);
 
 	minmax = gaDefMiniMaxi;
-	params.add(gaNminimaxi, gaSNminimaxi, GAParameter::INT, &minmax);
+	params.add(gaNminimaxi, gaSNminimaxi, ParType::INT, &minmax);
 	ngen = gaDefNumGen;
-	params.add(gaNnGenerations, gaSNnGenerations, GAParameter::INT, &ngen);
+	params.add(gaNnGenerations, gaSNnGenerations, ParType::INT, &ngen);
 	nconv = gaDefNConv;
 	stats.nConvergence(nconv);
-	params.add(gaNnConvergence, gaSNnConvergence, GAParameter::INT, &nconv);
+	params.add(gaNnConvergence, gaSNnConvergence, ParType::INT, &nconv);
 	pconv = gaDefPConv;
-	params.add(gaNpConvergence, gaSNpConvergence, GAParameter::FLOAT, &pconv);
+	params.add(gaNpConvergence, gaSNpConvergence, ParType::FLOAT, &pconv);
 	pcross = gaDefPCross;
-	params.add(gaNpCrossover, gaSNpCrossover, GAParameter::FLOAT, &pcross);
+	params.add(gaNpCrossover, gaSNpCrossover, ParType::FLOAT, &pcross);
 	pmut = gaDefPMut;
-	params.add(gaNpMutation, gaSNpMutation, GAParameter::FLOAT, &pmut);
+	params.add(gaNpMutation, gaSNpMutation, ParType::FLOAT, &pmut);
 	int psize = pop->size();
-	params.add(gaNpopulationSize, gaSNpopulationSize, GAParameter::INT, &psize);
+	params.add(gaNpopulationSize, gaSNpopulationSize, ParType::INT, &psize);
 
 	stats.scoreFrequency(gaDefScoreFrequency1);
-	params.add(gaNscoreFrequency, gaSNscoreFrequency, GAParameter::INT,
+	params.add(gaNscoreFrequency, gaSNscoreFrequency, ParType::INT,
 			   &gaDefScoreFrequency1);
 	stats.flushFrequency(gaDefFlushFrequency);
-	params.add(gaNflushFrequency, gaSNflushFrequency, GAParameter::INT,
+	params.add(gaNflushFrequency, gaSNflushFrequency, ParType::INT,
 			   &gaDefFlushFrequency);
 	stats.recordDiversity(gaDefDivFlag);
-	params.add(gaNrecordDiversity, gaSNrecordDiversity, GAParameter::INT,
+	params.add(gaNrecordDiversity, gaSNrecordDiversity, ParType::INT,
 			   &gaDefDivFlag);
 	stats.scoreFilename(gaDefScoreFilename);
-	params.add(gaNscoreFilename, gaSNscoreFilename, GAParameter::STRING,
+	params.add(gaNscoreFilename, gaSNscoreFilename, ParType::STRING,
 			   gaDefScoreFilename);
 	stats.selectScores(gaDefSelectScores);
-	params.add(gaNselectScores, gaSNselectScores, GAParameter::INT,
+	params.add(gaNselectScores, gaSNselectScores, ParType::INT,
 			   &gaDefSelectScores);
 	stats.nBestGenomes(p.individual(0), gaDefNumBestGenomes);
-	params.add(gaNnBestGenomes, gaSNnBestGenomes, GAParameter::INT,
+	params.add(gaNnBestGenomes, gaSNnBestGenomes, ParType::INT,
 			   &gaDefNumBestGenomes);
 
 	scross = p.individual(0).sexual();
@@ -478,7 +478,7 @@ int GAGeneticAlgorithm::set(const char *name, double v)
 		if (strcmp(name, params[i].fullname()) == 0 ||
 			strcmp(name, params[i].shrtname()) == 0)
 		{
-			if (params[i].type() == GAParameter::FLOAT)
+			if (params[i].type() == ParType::FLOAT)
 			{
 				float fval = (float)v;
 				status = setptr(name, (void *)&fval);
