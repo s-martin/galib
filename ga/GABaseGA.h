@@ -167,7 +167,7 @@ class GAGeneticAlgorithm : public GAID
 	int set(const char *s, char v) { return setptr(s, (void *)&v); }
 	int set(const char *s, const char *v) { return setptr(s, (void *)v); }
 	int set(const char *s, const void *v) { return setptr(s, v); }
-	int set(const char *s, double v);
+	int set(const char *name, double v);
 
 	virtual int minimaxi() const { return minmax; }
 	virtual int minimaxi(int m);
@@ -258,7 +258,7 @@ class GAGeneticAlgorithm : public GAID
 	virtual const GAPopulation &population() const { return *pop; }
 	virtual const GAPopulation &population(const GAPopulation &);
 	virtual int populationSize() const { return pop->size(); }
-	virtual int populationSize(unsigned int n);
+	virtual int populationSize(unsigned int value);
 	virtual int nBestGenomes() const { return stats.nBestGenomes(); }
 	virtual int nBestGenomes(unsigned int n)
 	{

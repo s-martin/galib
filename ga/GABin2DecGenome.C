@@ -14,10 +14,10 @@ information).
 ---------------------------------------------------------------------------- */
 #include <GABin2DecGenome.h>
 #include <cctype>
-#include <gaerror.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <gaerror.h>
 
 /* ----------------------------------------------------------------------------
    Phenotype class definitions
@@ -28,8 +28,8 @@ constexpr int GA_B2D_CHUNKSIZE = 20;
 GABin2DecPhenotypeCore::GABin2DecPhenotypeCore()
 	: csz(GA_B2D_CHUNKSIZE), n(0), N(0), sz(0)
 {
-	nbits = oset = 0;
-	minval = maxval = 0;
+	nbits = oset = nullptr;
+	minval = maxval = nullptr;
 	cnt = 1;
 }
 
@@ -148,10 +148,8 @@ int GABin2DecPhenotype::equal(const GABin2DecPhenotype &b) const
 {
 	if (core->sz != b.core->sz || core->n != b.core->n)
 		return false;
-	if (memcmp(core->nbits, b.core->nbits, core->n * sizeof(uint16_t)) !=
-			0 ||
-		memcmp(core->oset, b.core->oset, core->n * sizeof(uint16_t)) !=
-			0 ||
+	if (memcmp(core->nbits, b.core->nbits, core->n * sizeof(uint16_t)) != 0 ||
+		memcmp(core->oset, b.core->oset, core->n * sizeof(uint16_t)) != 0 ||
 		memcmp(core->minval, b.core->minval, core->n * sizeof(float)) != 0 ||
 		memcmp(core->maxval, b.core->maxval, core->n * sizeof(float)))
 		return false;

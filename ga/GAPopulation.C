@@ -580,8 +580,8 @@ GASelectionScheme &GAPopulation::selector(const GASelectionScheme &s)
 GAGenome *GAPopulation::replace(GAGenome *repl, int which, SortBasis basis)
 {
 	int i = -1;
-	GAGenome *orig = (GAGenome *)0;
-	if (repl == (GAGenome *)0)
+	GAGenome *orig = nullptr;
+	if (repl == nullptr)
 		return orig;
 
 	switch (which)
@@ -653,8 +653,8 @@ GAGenome *GAPopulation::replace(GAGenome *repl, int which, SortBasis basis)
 // same, do nothing and return a pointer to the genome.
 GAGenome *GAPopulation::replace(GAGenome *r, GAGenome *o)
 {
-	GAGenome *orig = (GAGenome *)0;
-	if (r == (GAGenome *)0 || o == (GAGenome *)0)
+	GAGenome *orig = nullptr;
+	if (r == nullptr || o == nullptr)
 		return orig;
 	if (r == o)
 		return r;
@@ -674,7 +674,7 @@ GAGenome *GAPopulation::replace(GAGenome *r, GAGenome *o)
 // affect the sort order.
 GAGenome *GAPopulation::remove(int i, SortBasis basis)
 {
-	GAGenome *removed = (GAGenome *)0;
+	GAGenome *removed = nullptr;
 	if (i == BEST)
 	{
 		sort(false, basis);
@@ -722,8 +722,8 @@ GAGenome *GAPopulation::remove(int i, SortBasis basis)
 // now the responsibility of the caller.
 GAGenome *GAPopulation::remove(GAGenome *r)
 {
-	GAGenome *removed = (GAGenome *)0;
-	if (r == (GAGenome *)0)
+	GAGenome *removed = nullptr;
+	if (r == nullptr)
 		return removed;
 	unsigned int i;
 	for (i = 0; i < n && rind[i] != r; i++)
@@ -755,7 +755,7 @@ GAGenome *GAPopulation::add(const GAGenome &g)
 // will destroy it when the population destructor is invoked.
 GAGenome *GAPopulation::add(GAGenome *c)
 {
-	if (c == (GAGenome *)0)
+	if (c == nullptr)
 		return c;
 	grow(n + 1);
 	rind[n] = sind[n] = c;

@@ -203,7 +203,7 @@ void GASimpleGA::step()
 		if (GAFlipCoin(pCrossover()))
 		{
 			stats.numcro +=
-				(*scross)(*mom, *dad, &pop->individual(i), (GAGenome *)0);
+				(*scross)(*mom, *dad, &pop->individual(i), nullptr);
 			c1 = 1;
 		}
 		else
