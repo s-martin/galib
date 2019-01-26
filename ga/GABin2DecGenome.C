@@ -23,7 +23,7 @@ information).
    Phenotype class definitions
 ---------------------------------------------------------------------------- */
 
-#define GA_B2D_CHUNKSIZE 20
+constexpr int GA_B2D_CHUNKSIZE = 20;
 
 GABin2DecPhenotypeCore::GABin2DecPhenotypeCore()
 	: csz(GA_B2D_CHUNKSIZE), n(0), N(0), sz(0)

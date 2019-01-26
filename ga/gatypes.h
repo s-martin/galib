@@ -16,7 +16,9 @@ typedef float GAProb;
 // smallest type available on your platform.
 typedef unsigned char GABit;
 
-#define GAMax(a, b) ((a) > (b) ? (a) : (b))
-#define GAMin(a, b) ((a) < (b) ? (a) : (b))
+template<typename T1, typename T2>
+constexpr auto GAMax(T1 a, T2 b) { return (((a)>(b))?(a):(b));} 
+template<typename T1, typename T2>
+constexpr auto GAMin(T1 a, T2 b) { return (((a)<(b))?(a):(b));} 
 
 #endif

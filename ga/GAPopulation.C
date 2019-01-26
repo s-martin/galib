@@ -38,7 +38,7 @@ void GAPopulation::DefaultEvaluator(GAPopulation &p)
 		p.individual(i).evaluate();
 }
 
-#define GA_POP_CHUNKSIZE 10 // allocate chrom ptrs in chunks of this many
+constexpr int GA_POP_CHUNKSIZE = 10; // allocate chrom ptrs in chunks of this many
 
 /* ----------------------------------------------------------------------------
  Population
