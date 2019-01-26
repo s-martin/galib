@@ -33,6 +33,11 @@ target_link_libraries(example7 PUBLIC GAlib)
 # target_compile_features(example8 PUBLIC cxx_std_17)
 # target_link_libraries(example8 PUBLIC GAlib)
 
+add_executable(example9 ex9.C)
+target_compile_features(example9 PUBLIC cxx_std_17)
+target_link_libraries(example9 PUBLIC GAlib)
+
+
 # add_executable(pvmpop 
 #                 ./pvmpop/genome.C 
 #                 ./pvmpop/genome.h 
