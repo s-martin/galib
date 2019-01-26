@@ -21,28 +21,10 @@ below for the pre-defined sets.  If you come up with a compiler/platform
 configuration that is not listed here, please send it to me so that i can 
 incorporate it into the code base.
 
-  GALIB_USE_NAMED_TEMPLATES
-  GALIB_USE_EMPTY_TEMPLATES
-  GALIB_USE_COMP_OPERATOR_TEMPLATES
-
-                      Some older compilers do not require strict, ansi template
-		      definitions.  And some compilers require slightly 
-		      different ways of specifying templates.  And to make it
-		      even more complicated, some depend very much on the type
-		      of instantiation method that is defined.  Sigh.
-
   GALIB_USE_PID
 
                      Define this if the system has a getpid function that
                      returns something sane and useful.
-
-  GALIB_USE_NO_TEMPLATES
-
-                      For compilers that do not do templates.  The only type
-                      of genome available when this is defined is binary 
-                      string and any derived classes.  list, tree, and array 
-		      all use templates.  You can still use the template code,
-		      but you will have to hack it yourself to make it work.
 
   GALIB_USE_BORLAND_INST
 
@@ -65,12 +47,6 @@ incorporate it into the code base.
                       instantiations.  When this flag is not defined, GAlib
 		      forces an instantiation of all of the template classes
 		      that it uses (such as real genome and string genome).
-
-  GALIB_HAVE_NOT_ASSERT
-
-                      Some platforms do not have assert.  So for those
-		      platforms we define our own simple version of it.
-
 
 
   USE_GALIB_AS_LIB       For windows shared libraries, one must define whether
@@ -233,13 +209,6 @@ incorporate it into the code base.
 
 
 // ----------------------------------------------------------------------------
-// THINK for mac
-#elif defined(THINK_C)
-#define GALIB_USE_BORLAND_INST
-#define GALIB_USE_COMP_OPERATOR_TEMPLATES
-
-
-// ----------------------------------------------------------------------------
 // borland c++ compiler
 //
 // You may or may not need the BORLAND_INST flag defined when you use a borland
@@ -258,8 +227,6 @@ incorporate it into the code base.
 //#define GALIB_USE_RAND	// comment this if you're using a 32-bit OS
 #define GALIB_USE_BORLAND_INST
 //#define GALIB_USE_PID
-#define GALIB_USE_EMPTY_TEMPLATES
-//#define GALIB_USE_COMP_OPERATOR_TEMPLATES
 
 //#pragma warning (disable : 8027)    // switch statements are not inlined
 //#pragma warning (disable : 8004)    // unused variable warnings are lame
@@ -309,11 +276,6 @@ incorporate it into the code base.
 #elif defined(__GNUG__)
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_PID
-#define GALIB_USE_EMPTY_TEMPLATES
-#define GALIB_NEED_INSTANTIATION_PREFIX
-#if __GNUC__ > 2
-#define GALIB_USE_COMP_OPERATOR_TEMPLATES
-#endif
 
 
 // ----------------------------------------------------------------------------
@@ -339,7 +301,6 @@ incorporate it into the code base.
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_AUTO_INST
 #define GALIB_USE_PID
-#define GALIB_USE_NAMED_TEMPLATES
 
 
 // ----------------------------------------------------------------------------
@@ -375,29 +336,8 @@ incorporate it into the code base.
 
 
 
-// deal with assertions.  at some point we might want a proper definition of 
-// assert here for platforms that do not have it.
-#if defined(GALIB_HAVE_NOT_ASSERT)
-#include <cstdlib>
-#define assert(x) \
-  { \
-    if(! (x)) { \
-      fprintf(stderr, "assertion failed at line %d in file %s\n", \
-	      __LINE__, __FILE__); \
-      exit(1); \
-    } \
-  }
-#else
 #include <assert.h>
-#endif
 
-
-// some compilers use one syntax, others use a different syntax.
-#if defined(GALIB_NEED_INSTANTIATION_PREFIX)
-#define GALIB_INSTANTIATION_PREFIX template class
-#else
-#define GALIB_INSTANTIATION_PREFIX
-#endif
 
 
 // If no RNG has been selected, use the ran2 generator by default

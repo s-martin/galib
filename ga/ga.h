@@ -163,18 +163,10 @@ one copy of the genome type you want to use.
 #include <GA3DBinStrGenome.h>
 #include <GABin2DecGenome.h>
 
-#ifndef GALIB_USE_NO_TEMPLATES
 #include <GA1DArrayGenome.h>
 #include <GA2DArrayGenome.h>
 #include <GA3DArrayGenome.h>
 #include <GAListGenome.h>
 #include <GATreeGenome.h>
-
-// We do *not* include the headers for template specializations.  This prevents
-// unnecessary instantiations of template objects which causes grief to some
-// compilers.
-//#include <GAStringGenome.h>
-//#include <GARealGenome.h>
-#endif
 
 #endif

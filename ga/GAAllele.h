@@ -96,11 +96,6 @@ template <class T> class GAAlleleSetCore
 	T *a;
 };
 
-#if defined(GALIB_USE_COMP_OPERATOR_TEMPLATES)
-template <class T> int operator==(const T &, const T &);
-template <class T> int operator!=(const T &, const T &);
-#endif
-
 template <class T> class GAAlleleSet
 {
   public:
@@ -163,19 +158,8 @@ template <class T> class GAAlleleSet
 	int read(std::istream &);
 	int write(std::ostream &os) const;
 
-#if defined(THINK_C)
-	friend operator==(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-	friend operator!=(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-#elif defined(GALIB_USE_EMPTY_TEMPLATES)
-	friend int operator==<>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-	friend int operator!=<>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-#elif defined(GALIB_USE_NAMED_TEMPLATES)
-	friend int operator==<T>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-	friend int operator!=<T>(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-#else
 	friend int operator==(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
 	friend int operator!=(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
-#endif
 
   protected:
 	GAAlleleSetCore<T> *core;
