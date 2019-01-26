@@ -14,6 +14,7 @@ a few more fancy things with the genome (ie use the read/write methods).
  
 
 #include <iostream>
+#include <fstream>
 
 #define cout std::cout
 #define cerr std::cerr
