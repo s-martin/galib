@@ -13,7 +13,7 @@
 
 #include <iostream>
 
-#define cout std::cout
+ 
 
 #define INSTANTIATE_STRING_GENOME
 #include <GAStringGenome.h>
@@ -31,11 +31,11 @@ void AlphabetInitializer(GAGenome &);
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 12\n\n";
-  cout << "This program illustrates the use of order-based strings.  The\n";
-  cout << "string in this problem contains 26 letters, a to z.  It tries\n";
-  cout << "to put them in alphabetic order.\n\n";
-  cout.flush();
+  std::cout << "Example 12\n\n";
+  std::cout << "This program illustrates the use of order-based strings.  The\n";
+  std::cout << "string in this problem contains 26 letters, a to z.  It tries\n";
+  std::cout << "to put them in alphabetic order.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -77,9 +77,9 @@ main(int argc, char *argv[])
   ga.evolve();
 
   genome = ga.statistics().bestIndividual();
-  cout << "the ga generated the following string (objective score is ";
-  cout << genome.score() << "):\n" << genome << "\n";
-  cout << genome.className() << "\n";
+  std::cout << "the ga generated the following string (objective score is ";
+  std::cout << genome.score() << "):\n" << genome << "\n";
+  std::cout << genome.className() << "\n";
 
   return 0;
 }

@@ -22,19 +22,19 @@ default parameters on the genetic algorithm and for parsing the command line.
 #include <iostream>
 #include <fstream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define ifstream std::ifstream
+ 
+ 
+ 
 
 float objective(GAGenome &);
 
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 3\n\n";
-  cout << "This program reads in a data file then runs a simple GA whose\n";
-  cout << "objective function tries to match the pattern of bits that are\n";
-  cout << "in the data file.\n\n";
+  std::cout << "Example 3\n\n";
+  std::cout << "This program reads in a data file then runs a simple GA whose\n";
+  std::cout << "objective function tries to match the pattern of bits that are\n";
+  std::cout << "in the data file.\n\n";
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -70,7 +70,7 @@ main(int argc, char *argv[])
   for(i=1; i<argc; i++){
     if(strcmp("file", argv[i]) == 0 || strcmp("f", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": the file option needs a filename.\n";
+         std::cerr << argv[0] << ": the file option needs a filename.\n";
         exit(1);
       }
       else{
@@ -83,10 +83,10 @@ main(int argc, char *argv[])
       continue;
     }
     else {
-      cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-      cerr << "valid arguments include standard GAlib arguments plus:\n";
-      cerr << "  f\tfilename from which to read (" << filename << ")\n";
-      cerr << "\n";
+       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+       std::cerr << "valid arguments include standard GAlib arguments plus:\n";
+       std::cerr << "  f\tfilename from which to read (" << filename << ")\n";
+       std::cerr << "\n";
       exit(1);
     }
   }
@@ -95,9 +95,9 @@ main(int argc, char *argv[])
 // two integers that give the height then width of the matrix, then the matrix
 // of 1's and 0's (with whitespace inbetween).
 
-  ifstream inStream(filename);
+   std::ifstream inStream(filename);
   if(!inStream){
-    cerr << "Cannot open " << filename << " for input.\n";
+     std::cerr << "Cannot open " << filename << " for input.\n";
     exit(1);
   }
 
@@ -116,13 +116,13 @@ main(int argc, char *argv[])
 
 // Print out the pattern to be sure we got the right one.
 
-  cout << "input pattern:\n";
+  std::cout << "input pattern:\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
-      cout << (target[i][j] == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (target[i][j] == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
 // Now create the GA and run it.
 
@@ -131,15 +131,15 @@ main(int argc, char *argv[])
   ga.parameters(params);
   ga.evolve();
 
-  cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+  std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
   genome = ga.statistics().bestIndividual();
-  cout << "the ga generated:\n";
+  std::cout << "the ga generated:\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
-      cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
   for(i=0; i<width; i++)
     delete target[i];

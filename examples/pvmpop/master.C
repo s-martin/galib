@@ -16,10 +16,10 @@ on various processes.
 
 int
 main(int argc, char** argv) {
-  cout << "This program tries to fill a 1DBinaryStringGenome with\n";
-  cout << "alternating 1s and 0s using a simple genetic algorithm.  It runs\n";
-  cout << "in parallel using PVM and a population on each process.\n\n";
-  cout.flush();
+  std::cout << "This program tries to fill a 1DBinaryStringGenome with\n";
+  std::cout << "alternating 1s and 0s using a simple genetic algorithm.  It runs\n";
+  std::cout << "in parallel using PVM and a population on each process.\n\n";
+  std::cout.flush();
 
   GA1DBinaryStringGenome genome(GENOME_LENGTH);
   PVMDemeGA ga(genome);
@@ -27,18 +27,18 @@ main(int argc, char** argv) {
   ga.parameters("settings.txt");
   if(ga.spawn("slave") < 0) exit(1);
 
-  cout << "initializing..." << endl;
+  std::cout << "initializing..." <<  std::endl;
   ga.initialize();
-  cout << ga.statistics().bestIndividual() << endl;
-  cout << "evolving..." << endl;
+  std::cout << ga.statistics().bestIndividual() <<  std::endl;
+  std::cout << "evolving..." <<  std::endl;
   while(!ga.done()){
     ga.step();
-    cout << ga.statistics().bestIndividual() << endl;
+    std::cout << ga.statistics().bestIndividual() <<  std::endl;
   }
   ga.flushScores();
 
-  cout << "\nThe GA found an individual with a score of ";
-  cout << ga.statistics().bestIndividual().score() << endl;
+  std::cout << "\nThe GA found an individual with a score of ";
+  std::cout << ga.statistics().bestIndividual().score() <<  std::endl;
 
   return 0;
 }

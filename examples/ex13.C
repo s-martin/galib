@@ -22,9 +22,9 @@ sparse.
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define ifstream std::ifstream
+ 
+ 
+ 
 
 typedef struct _UserData {
   int width, height;
@@ -40,16 +40,16 @@ float NumbersObjective(GAGenome &);
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 13\n\n";
-  cout << "This program runs a GA-within-GA.  The outer level GA tries to\n";
-  cout << "match the pattern read in from a file.  The inner level GA is\n";
-  cout << "run only when the outer GA reaches a threshhold objective score\n";
-  cout << "then it tries to match a sequence of numbers that were generated\n";
-  cout << "randomly at the beginning of the program's execution.\n\n";
-  cout << "You might have to run the primary GA for more than 5000\n";
-  cout << "generations to get a score high enough to kick in the secondary\n";
-  cout << "genetic algorithm.  Use the ngen option to do this on the\n";
-  cout << "command line.\n\n";
+  std::cout << "Example 13\n\n";
+  std::cout << "This program runs a GA-within-GA.  The outer level GA tries to\n";
+  std::cout << "match the pattern read in from a file.  The inner level GA is\n";
+  std::cout << "run only when the outer GA reaches a threshhold objective score\n";
+  std::cout << "then it tries to match a sequence of numbers that were generated\n";
+  std::cout << "randomly at the beginning of the program's execution.\n\n";
+  std::cout << "You might have to run the primary GA for more than 5000\n";
+  std::cout << "generations to get a score high enough to kick in the secondary\n";
+  std::cout << "genetic algorithm.  Use the ngen option to do this on the\n";
+  std::cout << "command line.\n\n";
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -86,9 +86,9 @@ main(int argc, char *argv[])
 // two integers that give the height then width of the matrix, then the matrix
 // of 1's and 0's (with whitespace inbetween).
 
-  ifstream inStream(filename);
+   std::ifstream inStream(filename);
   if(!inStream){
-    cerr << "Cannot open " << filename << " for input.\n";
+     std::cerr << "Cannot open " << filename << " for input.\n";
     exit(1);
   }
   inStream >> data.height >> data.width;
@@ -102,13 +102,13 @@ main(int argc, char *argv[])
 
 // Print out the pattern to be sure we got the right one.
 
-  cout << "input pattern:\n";
+  std::cout << "input pattern:\n";
   for(j=0; j<data.height; j++){
     for(i=0; i<data.width; i++)
-      cout << (data.picture_target[i][j] == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (data.picture_target[i][j] == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
 // Generate the random sequence of numbers.
 
@@ -123,12 +123,12 @@ main(int argc, char *argv[])
 
 // Print out the sequence so we'll know what we have to match.
 
-  cout << "input sequence:\n";
+  std::cout << "input sequence:\n";
   for(i=0; i<n; i++){
-    cout.width(10);
-    cout << data.numbers_target[i] << " ";
+    std::cout.width(10);
+    std::cout << data.numbers_target[i] << " ";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
 
 // Create a phenotype for the numbers to map them to a bin2dec genome.
@@ -157,22 +157,22 @@ main(int argc, char *argv[])
 // then print them out.
 
   picture_genome = ga.statistics().bestIndividual();
-  cout << "the ga generated:\n";
+  std::cout << "the ga generated:\n";
   for(j=0; j<data.height; j++){
     for(i=0; i<data.width; i++)
-      cout << (picture_genome.gene(i,j) == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (picture_genome.gene(i,j) == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
   numbers_genome = *data.numbers_genome;
   for(unsigned int jj=0; jj<map.nPhenotypes(); jj++){
-    cout.width(10);
-    cout << numbers_genome.phenotype(jj) << " ";
+    std::cout.width(10);
+    std::cout << numbers_genome.phenotype(jj) << " ";
   }
-  cout << "\n\n"; cout.flush();
+  std::cout << "\n\n"; std::cout.flush();
 
-  cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+  std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
 
 
 // free up all of the space we were using.

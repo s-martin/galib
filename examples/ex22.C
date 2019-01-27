@@ -20,9 +20,9 @@ child crossover" you could use your own crossover algorithm instead.
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define endl std::endl
+ 
+ 
+ 
 #define ofstream std::ofstream
 
 
@@ -123,11 +123,11 @@ SharedOverlapGA::step()
 int
 main(int argc, char** argv)
 {
-  cout << "Example 22\n\n";
-  cout << "This example shows how to derive your own genetic algorithm\n";
-  cout << "class.  Here we use a custom, single-child crossover and a\n";
-  cout << "modified replacement strategy with overlapping populations.\n\n";
-  cout.flush();
+  std::cout << "Example 22\n\n";
+  std::cout << "This example shows how to derive your own genetic algorithm\n";
+  std::cout << "class.  Here we use a custom, single-child crossover and a\n";
+  std::cout << "modified replacement strategy with overlapping populations.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -167,7 +167,7 @@ main(int argc, char** argv)
   ga.selectScores(GAStatistics::AllScores);
   ga.parameters(argc, argv, true); // parse commands, complain if bogus args
 
-  cout << "initializing...\n"; cout.flush();
+  std::cout << "initializing...\n"; std::cout.flush();
   ga.initialize(seed);
 
 // dump the initial population to file
@@ -183,15 +183,15 @@ main(int argc, char** argv)
 // little status indicator periodically to let us know what's going on.  After
 // the evolution we flush any remaining scores to file.
 
-  cout << "evolving"; cout.flush();
+  std::cout << "evolving"; std::cout.flush();
   while(!ga.done()){
     ga.step();
     if(ga.generation() % 50 == 0){
-      cout << ".";
-      cout.flush();
+      std::cout << ".";
+      std::cout.flush();
     }
   }
-  cout << "\n\n";
+  std::cout << "\n\n";
   ga.flushScores();
 
 // dump the final population to file
@@ -205,10 +205,10 @@ main(int argc, char** argv)
 
 // dump the function to file
 
-  cout << "dumping the function to file..." << endl;
+  std::cout << "dumping the function to file..." <<  std::endl;
   outfile.open(file, (std::ios::out | std::ios::trunc));
   if(outfile.fail()){
-    cerr << "Cannot open " << file << " for output.\n";
+     std::cerr << "Cannot open " << file << " for output.\n";
     exit(1);
   }
   for(float x=MIN_VALUE; x<=MAX_VALUE; x+=1.0)
@@ -216,10 +216,10 @@ main(int argc, char** argv)
   outfile << "\n";
   outfile.close();
 
-  cout << "initial population is in '" << ifile << "'\n";
-  cout << "final population is in '" << ffile << "'\n";
-  cout << "the function is in '" << file << "'\n";
-  cout << "parameters were:\n\n" << ga.parameters() << "\n";
+  std::cout << "initial population is in '" << ifile << "'\n";
+  std::cout << "final population is in '" << ffile << "'\n";
+  std::cout << "the function is in '" << file << "'\n";
+  std::cout << "parameters were:\n\n" << ga.parameters() << "\n";
 
   return 0;
 }
@@ -306,6 +306,6 @@ Comparator(const GAGenome& g1, const GAGenome& g2)
   GA1DArrayGenome<float>& b = (GA1DArrayGenome<float>&)g2;
 
   float val= exp( - (a.gene(0)-b.gene(0)) * (a.gene(0)-b.gene(0)) / FACTOR);
-  if(1-val < 0 || 1-val > 1) cerr << "val: " << val << "\n";
+  if(1-val < 0 || 1-val > 1)  std::cerr << "val: " << val << "\n";
   return 1-val;
 }

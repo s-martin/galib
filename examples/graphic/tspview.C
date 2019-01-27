@@ -10,11 +10,11 @@
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define endl std::endl
-#define ifstream std::ifstream
-#define ostream std::ostream
+ 
+ 
+ 
+ 
+ 
 
 // comment this line if you don't have MOTIF on your system
 //#define USE_MOTIF
@@ -136,21 +136,21 @@ static int done = 0;
 
 int
 main(int argc, char** argv) {
-  cout << "Travelling salesperson demonstration program.  Use the 'ga'\n";
-  cout << "option to specify which type of genetic algorithm you would\n";
-  cout << "like to use to do the evolution.  Options for the ga are:\n";
-  cout << "   1 - steady-state\n";
-  cout << "   2 - deterministic crowding\n";
-  cout << "   3 - simple\n";
-  cout << "\n";
-  cout.flush();
+  std::cout << "Travelling salesperson demonstration program.  Use the 'ga'\n";
+  std::cout << "option to specify which type of genetic algorithm you would\n";
+  std::cout << "like to use to do the evolution.  Options for the ga are:\n";
+  std::cout << "   1 - steady-state\n";
+  std::cout << "   2 - deterministic crowding\n";
+  std::cout << "   3 - simple\n";
+  std::cout << "\n";
+  std::cout.flush();
 
 // read in the cities and create the DISTANCE-matrix
 
   double dump;
-  ifstream in(TSP_FILE); 
+   std::ifstream in(TSP_FILE); 
   if(!in) {
-    cerr << "could not read data file " << TSP_FILE << "\n";
+     std::cerr << "could not read data file " << TSP_FILE << "\n";
     exit(1);
   }
   ntowns=0;
@@ -164,9 +164,9 @@ main(int argc, char** argv) {
   } while(!in.eof() && ntowns < MAX_TOWNS);
   in.close();
   if(ntowns >= MAX_TOWNS) {
-    cerr << "data file contains more towns than allowed for in the fixed\n";
-    cerr << "arrays.  Recompile the program with larger arrays or try a\n";
-    cerr << "smaller problem.\n";
+     std::cerr << "data file contains more towns than allowed for in the fixed\n";
+     std::cerr << "arrays.  Recompile the program with larger arrays or try a\n";
+     std::cerr << "smaller problem.\n";
     exit(1);
   }
 
@@ -199,11 +199,11 @@ main(int argc, char** argv) {
   for(int ii=1; ii<argc; ii++){
     if(strcmp("ga", argv[ii]) == 0){
       if(++ii >= argc){
-        cerr << argv[0] << ": you must specify a ga:\n";
-	cerr << "  1 - steady-state\n";
-	cerr << "  2 - deterministic crowding\n";
-	cerr << "  3 - simple\n";
-	cerr << "\n";
+         std::cerr << argv[0] << ": you must specify a ga:\n";
+	 std::cerr << "  1 - steady-state\n";
+	 std::cerr << "  2 - deterministic crowding\n";
+	 std::cerr << "  3 - simple\n";
+	 std::cerr << "\n";
         exit(1);
       }
       else{
@@ -224,7 +224,7 @@ main(int argc, char** argv) {
   case 2:
     {
       ga = new GADCrowdingGA(genome);
-      cerr << "  using deterministic crowding GA...\n";
+       std::cerr << "  using deterministic crowding GA...\n";
     }
     break;
   case 3:
@@ -232,7 +232,7 @@ main(int argc, char** argv) {
       ga = new GASimpleGA(genome);
       GASigmaTruncationScaling sigma1;
       ga->scaling(sigma1);
-      cerr << "  using simple GA...\n";
+       std::cerr << "  using simple GA...\n";
     }
     break;
   case 1:
@@ -242,7 +242,7 @@ main(int argc, char** argv) {
       GASigmaTruncationScaling sigma;
       ga->scaling(sigma);
       ga->set(gaNpReplacement, 0.5);
-      cerr << "  using steady-state GA...\n";
+       std::cerr << "  using steady-state GA...\n";
     }
     break;
   }
@@ -347,7 +347,7 @@ Evolve(int n){
   if((n < 0 && ga->done() == false) || ga->generation() < n){
     ga->step();
     if(ga->generation() % 10 == 0){
-      cerr << "generation: " << ga->generation() << "\t";
+       std::cerr << "generation: " << ga->generation() << "\t";
       cerr<<"best score is "<< ga->population().best().score()<<"\n";
     }
     Refresh();
@@ -364,7 +364,7 @@ ResetCB(Widget, XtPointer cd, XtPointer){
     XtRemoveWorkProc(procid);
     procid = 0;
   }
-  cerr << "initialized\n";
+   std::cerr << "initialized\n";
   ga->initialize();
   Refresh();
 }
@@ -674,7 +674,7 @@ Comparator(const GAGenome& g1, const GAGenome& g2)
 // called "specialization" in C++ and it lets you tailor the behaviour of a 
 // template class to better fit the type.
 int
-GAListGenome<int>::write(ostream & os) const
+GAListGenome<int>::write( std::ostream & os) const
 {
   int *cur, *head;
   GAListIter<int> iter(*this);

@@ -22,8 +22,8 @@ to use the sigma truncation scaling method to handle the mixed scores.
 
 #include <iostream>
 
-#define cout std::cout
-#define ostream std::ostream
+ 
+ 
 
 
 // Objective function and initializer declarations.
@@ -34,12 +34,12 @@ void ListInitializer(GAGenome &);
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 8\n\n";
-  cout << "This program runs a steady-state GA whose objective function\n";
-  cout << "tries to maximize the size of the list and tries to make lists\n";
-  cout << "that contain the number 101 in the nodes.  The lists contain\n";
-  cout << "ints in the nodes.\n\n";
-  cout.flush();
+  std::cout << "Example 8\n\n";
+  std::cout << "This program runs a steady-state GA whose objective function\n";
+  std::cout << "tries to maximize the size of the list and tries to make lists\n";
+  std::cout << "that contain the number 101 in the nodes.  The lists contain\n";
+  std::cout << "ints in the nodes.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -89,9 +89,9 @@ main(int argc, char *argv[])
   ga.evolve();
 
   genome = ga.statistics().bestIndividual();
-//  cout << "the ga generated the list:\n" << genome << "\n";
-  cout << "the list contains " << genome.size() << " nodes\n";
-  cout << "the ga used the parameters:\n" << ga.parameters() << "\n";
+//  std::cout << "the ga generated the list:\n" << genome << "\n";
+  std::cout << "the list contains " << genome.size() << " nodes\n";
+  std::cout << "the ga used the parameters:\n" << ga.parameters() << "\n";
 
   return 0;
 }
@@ -163,7 +163,7 @@ ListInitializer(GAGenome & c)
 // metrowerks compiler this specialization must come before the forced
 // instantiation.
 template<> int
-GAListGenome<int>::write(ostream & os) const
+GAListGenome<int>::write( std::ostream & os) const
 {
   int *cur, *head;
   GAListIter<int> tmpiter(*this);

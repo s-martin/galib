@@ -20,8 +20,8 @@ inlined).
 
 #include <iostream>
 
-#define cout std::cout
-#define ostream std::ostream
+ 
+ 
 
 
 // The objective function is declared here and defined below.
@@ -32,17 +32,17 @@ void TreeInitializer(GAGenome &);
 
 // This is a recursive function that will be used in the 'write' method for 
 // our tree genomes.
-void WriteNode(ostream & os, GANode<int> * n);
+void WriteNode( std::ostream & os, GANode<int> * n);
 
 
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 6\n\n";
-  cout << "This example uses a SteadyState GA and Tree<int> genome.  It\n";
-  cout << "tries to maximize the size of the tree genomes that it\n";
-  cout << "contains.  The genomes contain ints in its nodes.\n\n";
-  cout.flush();
+  std::cout << "Example 6\n\n";
+  std::cout << "This example uses a SteadyState GA and Tree<int> genome.  It\n";
+  std::cout << "tries to maximize the size of the tree genomes that it\n";
+  std::cout << "contains.  The genomes contain ints in its nodes.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -81,9 +81,9 @@ main(int argc, char *argv[])
   ga.evolve(seed);
 
   genome = ga.statistics().bestIndividual();
-//  cout << "the ga generated this tree:\n" << genome << "\n";
-  cout << genome.size() << " nodes, " << genome.depth() << " levels deep.\n";
-  cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+//  std::cout << "the ga generated this tree:\n" << genome << "\n";
+  std::cout << genome.size() << " nodes, " << genome.depth() << " levels deep.\n";
+  std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
 
   return 0;
 }
@@ -154,7 +154,7 @@ Here we print out the actual contents of each node.  This assumes that the
 object in our node has the operator<< defined for it.
 ---------------------------------------------------------------------------- */
 void 
-WriteNode(ostream & os, GANode<int> * n)
+WriteNode( std::ostream & os, GANode<int> * n)
 {
   if(!n) return;
   GANodeBASE * node = (GANodeBASE *)n;
@@ -195,7 +195,7 @@ WriteNode(ostream & os, GANode<int> * n)
 }
 
 template<> int
-GATreeGenome<int>::write(ostream & os) const
+GATreeGenome<int>::write( std::ostream & os) const
 {
   os << "      node     parent      child       next       prev\n";
   WriteNode(os, (GANode<int> *)rt);

@@ -22,14 +22,14 @@ that tells us to shut down and exit.
 int
 main(int argc, char** argv) {
   if(argc > 1) {
-    cerr << "\n" << argv[0] << ": This program takes no arguments.\n";
+     std::cerr << "\n" << argv[0] << ": This program takes no arguments.\n";
     exit(1);
   }
 
   int mytid = pvm_mytid();
   int masterid = pvm_parent();
   if(mytid < 0 || masterid < 0) {
-    cerr << "\n" << argv[0] << ": Couldn't get slave/master IDs.  Aborting.\n";
+     std::cerr << "\n" << argv[0] << ": Couldn't get slave/master IDs.  Aborting.\n";
     exit(1);
   }
 
@@ -62,11 +62,11 @@ main(int argc, char** argv) {
 	SendReady(masterid);
       }
       else {
-	cerr << argv[0] << ": unknown msgtag: " << msgtag << "\n";
+	 std::cerr << argv[0] << ": unknown msgtag: " << msgtag << "\n";
       }
     }
     else {
-      cerr << argv[0] << ": error from pvm_recv: " << bufid << "\n";
+       std::cerr << argv[0] << ": error from pvm_recv: " << bufid << "\n";
     }
   }
 

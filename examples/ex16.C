@@ -14,8 +14,8 @@ genome.  This example uses points in the nodes.
 
 #include <iostream>
 
-#define cout std::cout
-#define ostream std::ostream
+ 
+ 
 
 
 // This is the object that we're going to put in the nodes.  Each point has 
@@ -34,7 +34,7 @@ public:
   float y(float val) { return _y=val; }
   float z(float val) { return _z=val; }
 
-  friend ostream & operator<<(ostream & os, const Point & p){
+  friend  std::ostream & operator<<( std::ostream & os, const Point & p){
     os << "(" << p._x << ", " << p._y << ", " << p._z << ")";
     return os;
   }
@@ -53,19 +53,19 @@ protected:
 // nodes rather than pointers to the contents.
 float objective(GAGenome &);
 void TreeInitializer(GAGenome &);
-void WriteNode(ostream & os, GANode<Point> * n);
+void WriteNode( std::ostream & os, GANode<Point> * n);
 
 
 int
 main(int argc, char **argv)
 {
-  cout << "Example 16\n\n";
-  cout << "This example uses a SteadyState GA and Tree<int> genome.  It\n";
-  cout << "tries to maximize the size of the tree genomes that it\n";
-  cout << "contains.  The genomes contain points in its nodes.  Two\n";
-  cout << "different runs are made:  first with the swap subtree mutator,\n";
-  cout << "second with the destructive mutator.\n\n";
-  cout.flush();
+  std::cout << "Example 16\n\n";
+  std::cout << "This example uses a SteadyState GA and Tree<int> genome.  It\n";
+  std::cout << "tries to maximize the size of the tree genomes that it\n";
+  std::cout << "contains.  The genomes contain points in its nodes.  Two\n";
+  std::cout << "different runs are made:  first with the swap subtree mutator,\n";
+  std::cout << "second with the destructive mutator.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -95,37 +95,37 @@ main(int argc, char **argv)
 
   ga.population(swappop);
 
-  cout << "initializing...";
+  std::cout << "initializing...";
   ga.initialize(seed);
-  cout << "evolving for " << ga.nGenerations() << " generations...";
+  std::cout << "evolving for " << ga.nGenerations() << " generations...";
   while(!ga.done()){
     ga.step();
-    cout << ".";
-    cout.flush();
+    std::cout << ".";
+    std::cout.flush();
   }
-  cout << "\n";
+  std::cout << "\n";
 
   genome = ga.statistics().bestIndividual();
-  cout << "the ga generated a tree with " << genome.size();
-  cout << " nodes, " << genome.depth() << " levels deep.\n";
+  std::cout << "the ga generated a tree with " << genome.size();
+  std::cout << " nodes, " << genome.depth() << " levels deep.\n";
 
 // now do evolution with destructive swap mutator
 
   ga.population(destpop);
 
-  cout << "\ninitializing...";
+  std::cout << "\ninitializing...";
   ga.initialize();
-  cout << "evolving for " << ga.nGenerations() << " generations...";
+  std::cout << "evolving for " << ga.nGenerations() << " generations...";
   while(!ga.done()){
     ga.step();
-    cout << ".";
-    cout.flush();
+    std::cout << ".";
+    std::cout.flush();
   }
-  cout << "\n";
+  std::cout << "\n";
 
   genome = ga.statistics().bestIndividual();
-  cout << "the ga generated a tree with " << genome.size();
-  cout << " nodes, " << genome.depth() << " levels deep.\n";
+  std::cout << "the ga generated a tree with " << genome.size();
+  std::cout << " nodes, " << genome.depth() << " levels deep.\n";
 
   return 0;
 }
@@ -201,7 +201,7 @@ that it could crash your machine if your stack is limited and your trees get
 very big.
 ---------------------------------------------------------------------------- */
 void 
-WriteNode(ostream & os, GANode<Point> * n) {
+WriteNode( std::ostream & os, GANode<Point> * n) {
   if(!n) return;
   GANodeBASE * node = (GANodeBASE *)n;
 
@@ -241,7 +241,7 @@ WriteNode(ostream & os, GANode<Point> * n) {
 }
 
 template <> int
-GATreeGenome<Point>::write(ostream & os) const {
+GATreeGenome<Point>::write( std::ostream & os) const {
   os << "      node     parent      child       next       prev\n";
   WriteNode(os, (GANode<Point> *)rt);
   return os.fail() ? 1 : 0;

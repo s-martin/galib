@@ -19,7 +19,7 @@ function.  But it does work.
 
 #include <iostream>
 
-#define cout std::cout
+ 
 
 float Objective(GAGenome &);	// This is the declaration of our obj function.
 				// The definition comes later in the file.
@@ -27,9 +27,9 @@ float Objective(GAGenome &);	// This is the declaration of our obj function.
 int
 main(int argc, char **argv)
 {
-  cout << "Example 1\n\n";
-  cout << "This program tries to fill a 2DBinaryStringGenome with\n";
-  cout << "alternating 1s and 0s using a SimpleGA\n\n"; cout.flush();
+  std::cout << "Example 1\n\n";
+  std::cout << "This program tries to fill a 2DBinaryStringGenome with\n";
+  std::cout << "alternating 1s and 0s using a SimpleGA\n\n"; std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -69,7 +69,7 @@ main(int argc, char **argv)
 
 // Now we print out the best genome that the GA found.
 
-  cout << "The GA found:\n" << ga.statistics().bestIndividual() << "\n";
+  std::cout << "The GA found:\n" << ga.statistics().bestIndividual() << "\n";
 
 // That's it!
   return 0;

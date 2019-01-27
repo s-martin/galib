@@ -33,10 +33,10 @@ int ShutdownPVM(PVMData&);
 
 int
 main(int argc, char** argv) {
-  cout << "This program tries to fill a 1DBinaryStringGenome with\n";
-  cout << "alternating 1s and 0s using a simple genetic algorithm.  It runs\n";
-  cout << "in parallel using PVM.\n\n";
-  cout.flush();
+  std::cout << "This program tries to fill a 1DBinaryStringGenome with\n";
+  std::cout << "alternating 1s and 0s using a simple genetic algorithm.  It runs\n";
+  std::cout << "in parallel using PVM.\n\n";
+  std::cout.flush();
 
   GAParameterList params;
   GASimpleGA::registerDefaultParameters(params);
@@ -59,7 +59,7 @@ main(int argc, char** argv) {
     }
     else if(strcmp("len", argv[i]) == 0 || strcmp("l", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": genome length needs a value.\n";
+         std::cerr << argv[0] << ": genome length needs a value.\n";
         exit(1);
       }
       else{
@@ -69,7 +69,7 @@ main(int argc, char** argv) {
     }
     else if(strcmp("nslaves", argv[i]) == 0 || strcmp("ns", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": number of slaves needs a value.\n";
+         std::cerr << argv[0] << ": number of slaves needs a value.\n";
         exit(1);
       }
       else{
@@ -78,12 +78,12 @@ main(int argc, char** argv) {
       }
     }
     else {
-      cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-      cerr << "valid arguements include standard GAlib arguments plus:\n";
-      cerr << "  nopvm\t\tdo not use pvm\n";
-      cerr << "  nslaves n\tnumber of slave processes (" << data.nreq << ")\n";
-      cerr << "  len l\t\tlength of bit string (" << length << ")\n";
-      cerr << "\n";
+       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+       std::cerr << "valid arguements include standard GAlib arguments plus:\n";
+       std::cerr << "  nopvm\t\tdo not use pvm\n";
+       std::cerr << "  nslaves n\tnumber of slave processes (" << data.nreq << ")\n";
+       std::cerr << "  len l\t\tlength of bit string (" << length << ")\n";
+       std::cerr << "\n";
       exit(1);
     }
   }
@@ -102,14 +102,14 @@ main(int argc, char** argv) {
 
   time_t tmStart = time(NULL);
 
-  cout << "initializing the GA...\n"; cout.flush();
+  std::cout << "initializing the GA...\n"; std::cout.flush();
   ga.initialize();
-  cout << "evolving the solution "; cout.flush();
+  std::cout << "evolving the solution "; std::cout.flush();
   while(!ga.done()){
     ga.step();
     if(ga.generation() % 10 == 0){
-      cout << ga.generation() << " ";
-      cout.flush();
+      std::cout << ga.generation() << " ";
+      std::cout.flush();
     }
   }
   ga.flushScores();
@@ -117,9 +117,9 @@ main(int argc, char** argv) {
   time_t tmFinish = time(NULL);
 
   genome = ga.statistics().bestIndividual();
-  cout << "\nThe evolution took " << tmFinish-tmStart << " seconds.\n";
-  cout << "The GA found an individual with a score of "<<genome.score()<<"\n";
-  if(length < 80) cout << genome << "\n";
+  std::cout << "\nThe evolution took " << tmFinish-tmStart << " seconds.\n";
+  std::cout << "The GA found an individual with a score of "<<genome.score()<<"\n";
+  if(length < 80) std::cout << genome << "\n";
 
   if(usepvm) ShutdownPVM(data);
 
@@ -150,25 +150,25 @@ StartupPVM(const char* prog, PVMData& d) {
   d.tid = new int [d.nreq];	// task IDs for the slaves
   d.ntasks = pvm_spawn(SLAVE_NAME, (char**)0, 0, "", d.nreq, d.tid);
   if(d.ntasks <= 0) {
-    cerr << prog << ": Error spawning slaves.\n";
-    cerr << "  Error codes of failed spawns are:\n";
+     std::cerr << prog << ": Error spawning slaves.\n";
+     std::cerr << "  Error codes of failed spawns are:\n";
     for(i=0; i<d.nreq; i++) {
-      cerr << "    slave "; cerr.width(3);
-      cerr << i << ": " << d.tid[i] << "\n";
+       std::cerr << "    slave "; cerr.width(3);
+       std::cerr << i << ": " << d.tid[i] << "\n";
     }
     pvm_exit();
     return 1;
   }
   else if(d.ntasks < d.nreq) {
-    cerr << prog << ": Spawned only "<<d.ntasks<<" of "<<d.nreq<<"\n";
-    cerr << "  Error codes of failed spawns are:\n";
+     std::cerr << prog << ": Spawned only "<<d.ntasks<<" of "<<d.nreq<<"\n";
+     std::cerr << "  Error codes of failed spawns are:\n";
     for(i=0; i<d.nreq; i++) {
-      cerr << "    slave "; cerr.width(3); 
-      cerr << i << ": " << d.tid[i] << "\n";
+       std::cerr << "    slave "; cerr.width(3); 
+       std::cerr << i << ": " << d.tid[i] << "\n";
     }
   }
   else {
-    cerr << prog << ": Spawned " << d.nreq << " slave processes...\n";
+     std::cerr << prog << ": Spawned " << d.nreq << " slave processes...\n";
   }
   
   return 0;

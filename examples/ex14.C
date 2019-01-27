@@ -16,11 +16,11 @@ from the GAlib.
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define endl std::endl
-#define istream std::istream
-#define ostream std::ostream
+ 
+ 
+ 
+  
+ 
 
 
 // Here we specify how big the lists will be and how many lists will be in each
@@ -55,8 +55,8 @@ public:
   virtual GAGenome *clone(GAGenome::CloneMethod) const ;
   virtual void copy(const GAGenome & c);
   virtual int equal(const GAGenome& g) const;
-  virtual int read(istream & is);
-  virtual int write(ostream & os) const ;
+  virtual int read( std::istream & is);
+  virtual int write( std::ostream & os) const ;
 
   GAListGenome<int> & path(const int i){return *list[i];}
   int npaths() const { return n; }
@@ -124,14 +124,14 @@ RobotPathGenome::equal(const GAGenome& g) const {
 }
 
 int 
-RobotPathGenome::read(istream & is) {
+RobotPathGenome::read( std::istream & is) {
   for(int i=0; i<n; i++)
     is >> *(list[i]);
   return is.fail() ? 1 : 0;
 }
 
 int 
-RobotPathGenome::write(ostream & os) const {
+RobotPathGenome::write( std::ostream & os) const {
   for(int i=0; i<n; i++)
     os << "list " << i << ":\t" << *(list[i]) << "\n";
   return os.fail() ? 1 : 0;
@@ -266,7 +266,7 @@ RobotPathGenome::PathInitializer(GAGenome & c){
 // do almost the same thing, but print out the contents of the nodes rather
 // than the pointers to the contents.
 template <> int
-GAListGenome<int>::write(ostream & os) const {
+GAListGenome<int>::write( std::ostream & os) const {
   int *cur, *head;
   GAListIter<int> iter(*this);
   if((head=iter.head()) != 0) os << *head << " ";
@@ -291,14 +291,14 @@ GAListGenome<int>::write(ostream & os) const {
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 14\n\n";
-  cout << "This example shows how to create a genome that contains\n";
-  cout << "a list of lists.  We create a composite genome that has\n";
-  cout << "lists in it.  Each list has some nodes, only one of which\n";
-  cout << "contains the number 0.  The objective is to move the node with\n";
-  cout << "number 0 in it to the nth position where n is the number of the\n";
-  cout << "list within the composite genome.\n\n";
-  cout.flush();
+  std::cout << "Example 14\n\n";
+  std::cout << "This example shows how to create a genome that contains\n";
+  std::cout << "a list of lists.  We create a composite genome that has\n";
+  std::cout << "lists in it.  Each list has some nodes, only one of which\n";
+  std::cout << "contains the number 0.  The objective is to move the node with\n";
+  std::cout << "number 0 in it to the nth position where n is the number of the\n";
+  std::cout << "list within the composite genome.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -309,7 +309,7 @@ main(int argc, char *argv[])
   for(i=1; i<argc; i++){
     if(strcmp("nr", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": number of robots needs a value.\n";
+         std::cerr << argv[0] << ": number of robots needs a value.\n";
         exit(1);
       }
       else{
@@ -319,7 +319,7 @@ main(int argc, char *argv[])
     }
     else if(strcmp("pl", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": path length needs a value.\n";
+         std::cerr << argv[0] << ": path length needs a value.\n";
         exit(1);
       }
       else{
@@ -329,7 +329,7 @@ main(int argc, char *argv[])
     }
     else if(strcmp(argv[i],"seed") == 0) {
       if(++i >= argc){
-        cerr << argv[0] << ": seed needs a value.\n";
+         std::cerr << argv[0] << ": seed needs a value.\n";
         exit(1);
       }
       else {
@@ -337,16 +337,16 @@ main(int argc, char *argv[])
       }
     }
     else if(strcmp("help",argv[i]) == 0){
-      cerr << "valid arguements include standard GAlib arguments plus:\n";
-      cerr << "  nr\tnumber of robots (" << nrobots << ")\n";
-      cerr << "  pl\tlength of the paths (" << listsize << ")\n";
-      cerr << "\n";
+       std::cerr << "valid arguements include standard GAlib arguments plus:\n";
+       std::cerr << "  nr\tnumber of robots (" << nrobots << ")\n";
+       std::cerr << "  pl\tlength of the paths (" << listsize << ")\n";
+       std::cerr << "\n";
       exit(1);
     }
   }
 
   if(listsize < nrobots) {
-    cerr << "path length must be greater than the number of robots.\n";
+     std::cerr << "path length must be greater than the number of robots.\n";
     exit(1);
   }
 
@@ -356,8 +356,8 @@ main(int argc, char *argv[])
   ga.evolve();
 
   genome.initialize();
-  cout << "a randomly-generated set of paths:\n" << genome << endl;
-  cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
+  std::cout << "a randomly-generated set of paths:\n" << genome <<  std::endl;
+  std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
 
   return 0;
 }

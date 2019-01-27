@@ -14,8 +14,8 @@ minimize your objective functions.
 
 #include <iostream>
 
-#define cout std::cout
-#define endl std::endl
+ 
+ 
 #define ofstream std::ofstream
 
 #define INSTANTIATE_REAL_GENOME
@@ -35,12 +35,12 @@ float Comparator(const GAGenome&, const GAGenome&);
 int
 main(int argc, char** argv)
 {
-  cout << "Example 23\n\n";
-  cout << "This program tries to maximize or minimize, depending on the\n";
-  cout << "command line argument that you give it.  Use the command-line\n";
-  cout << "argument 'mm -1' to minimize (the default for this example), or\n";
-  cout << "'mm 1' to maximize.  The objective function is a simple \n";
-  cout << "sinusoidal.\n\n"; cout.flush();
+  std::cout << "Example 23\n\n";
+  std::cout << "This program tries to maximize or minimize, depending on the\n";
+  std::cout << "command line argument that you give it.  Use the command-line\n";
+  std::cout << "argument 'mm -1' to minimize (the default for this example), or\n";
+  std::cout << "'mm 1' to maximize.  The objective function is a simple \n";
+  std::cout << "sinusoidal.\n\n"; std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -75,7 +75,7 @@ main(int argc, char** argv)
 
 // dump the initial population to file
 
-  cout << "printing initial population to file..." << endl;
+  std::cout << "printing initial population to file..." <<  std::endl;
   outfile.open("popi.dat", (std::ios::out | std::ios::trunc));
   for(int ii=0; ii<ga.population().size(); ii++){
     genome = ga.population().individual(ii);
@@ -87,7 +87,7 @@ main(int argc, char** argv)
 
 // dump the final population to file
 
-  cout << "printing final population to file..." << endl;
+  std::cout << "printing final population to file..." <<  std::endl;
   outfile.open("popf.dat", (std::ios::out | std::ios::trunc));
   for(int i=0; i<ga.population().size(); i++){
     genome = ga.population().individual(i);
@@ -97,7 +97,7 @@ main(int argc, char** argv)
 
 // dump the function to file so you can plot the population on it
 
-  cout << "printing function to file..." << endl;
+  std::cout << "printing function to file..." <<  std::endl;
   outfile.open("sinusoid.dat", (std::ios::out | std::ios::trunc));
   for(float x=MIN_VALUE; x<=MAX_VALUE; x+=INC){
     outfile << genome.gene(0,x) << "\t" << genome.score() << "\n";

@@ -92,7 +92,7 @@ GASteadyStateGA::setptr(const char* name, const void* value){
   if(strcmp(name, gaNpReplacement) == 0 ||
 	  strcmp(name, gaSNpReplacement) == 0){
 #ifdef GA_DEBUG
-  cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '" << *((float*)value) << "'\n";
+   std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '" << *((float*)value) << "'\n";
 #endif
     pReplacement(*((float*)value));
     status = 0;
@@ -100,7 +100,7 @@ GASteadyStateGA::setptr(const char* name, const void* value){
   else if(strcmp(name, gaNnReplacement) == 0 ||
 	  strcmp(name, gaSNnReplacement) == 0){
 #ifdef GA_DEBUG
-  cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '" << *((int*)value) << "'\n";
+   std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '" << *((int*)value) << "'\n";
 #endif
     nReplacement(*((int*)value));
     status = 0;

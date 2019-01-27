@@ -26,11 +26,11 @@ it does get the job done.
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define endl std::endl
-#define ostream std::ostream
-#define ifstream std::ifstream
+ 
+ 
+ 
+ 
+ 
 
 // Set this up for your favorite TSP.  The sample one is a contrived problem
 // with the towns laid out in a grid (so it is easy to figure out what the 
@@ -66,8 +66,8 @@ void  ERXOneChild(const GAGenome&, const GAGenome&, GAGenome*);
 
 int
 main(int argc, char** argv) {
-  cout << "Example 26\n\n";
-  cout << "The Travelling Salesman Problem (TSP) demo program.\n" << endl;
+  std::cout << "Example 26\n\n";
+  std::cout << "The Travelling Salesman Problem (TSP) demo program.\n" <<  std::endl;
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -81,9 +81,9 @@ main(int argc, char** argv) {
   }
 
   double dump;
-  ifstream in(TSP_FILE); 
+   std::ifstream in(TSP_FILE); 
   if(!in) {
-    cerr << "could not read data file " << TSP_FILE << "\n";
+     std::cerr << "could not read data file " << TSP_FILE << "\n";
     exit(1);
   }
   ntowns=0;
@@ -95,9 +95,9 @@ main(int argc, char** argv) {
   } while(!in.eof() && ntowns < MAX_TOWNS);
   in.close();
   if(ntowns >= MAX_TOWNS) {
-    cerr << "data file contains more towns than allowed for in the fixed\n";
-    cerr << "arrays.  Recompile the program with larger arrays or try a\n";
-    cerr << "smaller problem.\n";
+     std::cerr << "data file contains more towns than allowed for in the fixed\n";
+     std::cerr << "arrays.  Recompile the program with larger arrays or try a\n";
+     std::cerr << "smaller problem.\n";
     exit(1);
   }
 
@@ -124,21 +124,21 @@ main(int argc, char** argv) {
   ga.pCrossover(1.0);
   ga.selectScores(GAStatistics::AllScores);
   ga.parameters(argc, argv);
-  cout << "initializing..."; cout.flush();
+  std::cout << "initializing..."; std::cout.flush();
   ga.initialize(seed);
-  cout << "evolving..."; cout.flush();
+  std::cout << "evolving..."; std::cout.flush();
   while(!ga.done()) {
     ga.step();
     if(ga.generation() % 10 == 0) {
-      cout << ga.generation() << " "; cout.flush();
+      std::cout << ga.generation() << " "; std::cout.flush();
     }
   }
 
   genome = ga.statistics().bestIndividual();
-  cout << "the shortest path found is " << genome.score() << "\n";
-  cout << "this is the distance from the sequence\n";
-  cout << genome << "\n\n";
-  cout << ga.statistics() << "\n";
+  std::cout << "the shortest path found is " << genome.score() << "\n";
+  std::cout << "this is the distance from the sequence\n";
+  std::cout << genome << "\n\n";
+  std::cout << ga.statistics() << "\n";
 
   return 0;
 }
@@ -408,7 +408,7 @@ Comparator(const GAGenome& g1, const GAGenome& g2) {
 // called "specialization" in C++ and it lets you tailor the behaviour of a 
 // template class to better fit the type.
 template <> int
-GAListGenome<int>::write(ostream & os) const
+GAListGenome<int>::write( std::ostream & os) const
 {
   int *cur, *head;
   GAListIter<int> tmpiter(*this);

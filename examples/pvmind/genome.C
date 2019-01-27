@@ -20,7 +20,7 @@ int id2idx(int tid, PVMData& data) {
 
 
 // When this flag is defined, the initialize and evaluate function dump a 
-// string to cerr that tells which host they're running on.  You can then look
+// string to  std::cerr that tells which host they're running on.  You can then look
 // at this info in the pvm log file.
 //#define DEBUG
 
@@ -37,7 +37,7 @@ GenomeInitializer(GAGenome& g) {
 #ifdef DEBUG
   char buf[255];
   gethostname(buf, 255);
-  cerr << "initializing on " << buf << "\n";
+   std::cerr << "initializing on " << buf << "\n";
 #endif
   GA1DBinaryStringGenome::UniformInitializer(genome);
 }
@@ -49,7 +49,7 @@ GenomeEvaluator(GAGenome& g) {
 #ifdef DEBUG
   char buf[255];
   gethostname(buf, 255);
-  cerr << "evaluating on " << buf << "\n";
+   std::cerr << "evaluating on " << buf << "\n";
 #endif
   float score=0.0;
   for(int i=0; i<genome.length(); i++){
@@ -224,17 +224,17 @@ PopulationInitializer(GAPopulation& pop) {
 	    outstanding++;
 	  }
 	  else {
-	    cerr << "PopInit: bogus tid mapping: " << tid << "\n";
+	     std::cerr << "PopInit: bogus tid mapping: " << tid << "\n";
 	  }
 	}
 	else {
-	  cerr << "PopInit: error sending initialize command to: " << tid;
-	  cerr << "  genome " << next << " will be inited by next slave\n";
-	  cerr << "  error code is: " << status << "\n";
+	   std::cerr << "PopInit: error sending initialize command to: " << tid;
+	   std::cerr << "  genome " << next << " will be inited by next slave\n";
+	   std::cerr << "  error code is: " << status << "\n";
 	}
       }
       else {
-	cerr << "PopInit: error from pvm_nrecv: " << bufid << "\n";
+	 std::cerr << "PopInit: error from pvm_nrecv: " << bufid << "\n";
       }
     }
 
@@ -252,27 +252,27 @@ PopulationInitializer(GAPopulation& pop) {
 	      outstanding--;
 	    }
 	    else {
-	      cerr << "PopInit: error receiving data from: " << tid;
-	      cerr << "  error code is: " << status << "\n";
+	       std::cerr << "PopInit: error receiving data from: " << tid;
+	       std::cerr << "  error code is: " << status << "\n";
 	    }
 	  }
 	  else {
-	    cerr << "PopInit: index conflict from tid " << tid << "\n";
+	     std::cerr << "PopInit: index conflict from tid " << tid << "\n";
 	  }
 	}
 	else {
-	  cerr << "PopInit: bogus tid mapping: " << tid << "\n";
+	   std::cerr << "PopInit: bogus tid mapping: " << tid << "\n";
 	}
       }
       else {
-	cerr << "PopInit: error from pvm_nrecv: " << bufid << "\n";
+	 std::cerr << "PopInit: error from pvm_nrecv: " << bufid << "\n";
       }
     }
 
     if(next == pop.size() && outstanding == 0) done = 1;
     if(next > pop.size()) {
-      cerr << "bogus value for next: " << next;
-      cerr << "  popsize is: " << pop.size() << "\n";
+       std::cerr << "bogus value for next: " << next;
+       std::cerr << "  popsize is: " << pop.size() << "\n";
     }
   }
 
@@ -311,16 +311,16 @@ PopulationEvaluator(GAPopulation& pop) {
 	    outstanding++;
 	  }
 	  else {
-	    cerr << "PopEval: bogus tid mapping: " << tid << "\n";
+	     std::cerr << "PopEval: bogus tid mapping: " << tid << "\n";
 	  }
 	}
 	else {
-	  cerr << "PopEval: error sending data to: " << tid;
-	  cerr << "  error code is: " << status << "\n";
+	   std::cerr << "PopEval: error sending data to: " << tid;
+	   std::cerr << "  error code is: " << status << "\n";
 	}
       }
       else {
-	cerr << "PopEval: error from pvm_nrecv: " << bufid << "\n";
+	 std::cerr << "PopEval: error from pvm_nrecv: " << bufid << "\n";
       }
     }
 
@@ -338,27 +338,27 @@ PopulationEvaluator(GAPopulation& pop) {
 	      outstanding--;
 	    }
 	    else {
-	      cerr << "PopEval: error receiving score from: " << tid;
-	      cerr << "  error code is: " << status << "\n";
+	       std::cerr << "PopEval: error receiving score from: " << tid;
+	       std::cerr << "  error code is: " << status << "\n";
 	    }
 	  }
 	  else {
-	    cerr << "PopEval: index conflict from tid " << tid << "\n";
+	     std::cerr << "PopEval: index conflict from tid " << tid << "\n";
 	  }
 	}
 	else {
-	  cerr << "PopEval: bogus tid mapping: " << tid << "\n";
+	   std::cerr << "PopEval: bogus tid mapping: " << tid << "\n";
 	}
       }
       else {
-	cerr << "PopEval: error from pvm_nrecv: " << bufid << "\n";
+	 std::cerr << "PopEval: error from pvm_nrecv: " << bufid << "\n";
       }
     }
 
     if(next == pop.size() && outstanding == 0) done = 1;
     if(next > pop.size()) {
-      cerr << "bogus value for next: " << next;
-      cerr << "  popsize is: " << pop.size() << "\n";
+       std::cerr << "bogus value for next: " << next;
+       std::cerr << "  popsize is: " << pop.size() << "\n";
     }
   }
 

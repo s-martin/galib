@@ -17,7 +17,7 @@ example - not good programming style, but it gets the job done.
 
 #include <iostream>
 
-#define cout std::cout
+ 
 
 // This is the objective function for computing Holland's 1993 ICGA version
 // of the Royal Road problem.  It has been corrected per GAList volume 7
@@ -136,18 +136,18 @@ RoyalRoad(GAGenome & c){
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 20\n\n";
-  cout << "Running Holland's Royal Road test problem with a genome that is\n";
-  cout << nbits << " bits long (" << NBLOCKS << " blocks).  The parameters ";
-  cout << "are as follows: \n\n";
-  cout << "\tblock size: " << BLOCKSIZE << "\n";
-  cout << "\t  gap size: " << GAPSIZE << "\n";
-  cout << "\t        m*: " << MSTAR << "\n";
-  cout << "\t        u*: " << USTAR << "\n";
-  cout << "\t         u: " << RR_U << "\n";
-  cout << "\t         v: " << RR_V << "\n";
-  cout << "\n\n";
-  cout.flush();
+  std::cout << "Example 20\n\n";
+  std::cout << "Running Holland's Royal Road test problem with a genome that is\n";
+  std::cout << nbits << " bits long (" << NBLOCKS << " blocks).  The parameters ";
+  std::cout << "are as follows: \n\n";
+  std::cout << "\tblock size: " << BLOCKSIZE << "\n";
+  std::cout << "\t  gap size: " << GAPSIZE << "\n";
+  std::cout << "\t        m*: " << MSTAR << "\n";
+  std::cout << "\t        u*: " << USTAR << "\n";
+  std::cout << "\t         u: " << RR_U << "\n";
+  std::cout << "\t         v: " << RR_V << "\n";
+  std::cout << "\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -174,11 +174,11 @@ main(int argc, char *argv[])
   ga.scaling(trunc);
   ga.evolve(seed);
 
-  cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
-  cout << "the highest level achieved was " << highestLevel << "\n";
-  cout << "\nthe statistics for the run are:\n" << ga.statistics();
-  cout << "\nthe parameters for the run are:\n" << ga.parameters();
-  cout.flush();
+  std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
+  std::cout << "the highest level achieved was " << highestLevel << "\n";
+  std::cout << "\nthe statistics for the run are:\n" << ga.statistics();
+  std::cout << "\nthe parameters for the run are:\n" << ga.parameters();
+  std::cout.flush();
 
   return 0;
 }

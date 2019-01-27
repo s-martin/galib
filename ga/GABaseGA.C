@@ -339,7 +339,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		strcmp(name, gaSNnBestGenomes) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		nBestGenomes(*((int *)value));
@@ -349,7 +349,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNpopulationSize) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		populationSize(*((int *)value));
@@ -358,7 +358,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 	else if (strcmp(name, gaNminimaxi) == 0 || strcmp(name, gaSNminimaxi) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		minimaxi(*((int *)value));
@@ -368,7 +368,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNnGenerations) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		nGenerations(*((int *)value));
@@ -378,7 +378,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNpConvergence) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((float *)value) << "'\n";
 #endif
 		pConvergence(*((float *)value));
@@ -388,7 +388,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNnConvergence) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		nConvergence(*((int *)value));
@@ -398,7 +398,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNpCrossover) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((float *)value) << "'\n";
 #endif
 		pCrossover(*((float *)value));
@@ -408,7 +408,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNpMutation) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((float *)value) << "'\n";
 #endif
 		pMutation(*((float *)value));
@@ -418,7 +418,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNscoreFrequency) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		stats.scoreFrequency(*((int *)value));
@@ -428,7 +428,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNflushFrequency) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		stats.flushFrequency(*((int *)value));
@@ -438,7 +438,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNrecordDiversity) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		stats.recordDiversity(*((int *)value) ? true : false);
@@ -448,7 +448,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNselectScores) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << *((int *)value) << "'\n";
 #endif
 		stats.selectScores(*((int *)value));
@@ -458,7 +458,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 			 strcmp(name, gaSNscoreFilename) == 0)
 	{
 #ifdef GA_DEBUG
-		cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
+		 std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name << "' to '"
 			 << ((char *)value) << "'\n";
 #endif
 		char tmpname[64];

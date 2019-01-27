@@ -13,8 +13,8 @@
 
 #include <iostream>
 
-#define cout std::cout
-#define ostream std::ostream
+ 
+ 
 
 // The objective function tells how good a genome is.  The Initializer defines
 // how the lists should be initialized.
@@ -25,11 +25,11 @@ void ListInitializer(GAGenome &);
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 11\n\n";
-  cout << "This program illustrates the use of order-based lists.  The\n";
-  cout << "list in this problem contains 25 numbers, 0 to 24.  It tries\n";
-  cout << "to put them in descending order from 24 to 0.\n\n";
-  cout.flush();
+  std::cout << "Example 11\n\n";
+  std::cout << "This program illustrates the use of order-based lists.  The\n";
+  std::cout << "list in this problem contains 25 numbers, 0 to 24.  It tries\n";
+  std::cout << "to put them in descending order from 24 to 0.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -78,14 +78,14 @@ main(int argc, char *argv[])
 // Assign the best that the GA found to our genome then print out the results.
 
   genome = ga.statistics().bestIndividual();
-  cout << "the ga generated the following list (objective score is ";
-  cout << genome.score() << "):\n" << genome << "\n";
-  cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
-  cout << ga.parameters() << "\n";
+  std::cout << "the ga generated the following list (objective score is ";
+  std::cout << genome.score() << "):\n" << genome << "\n";
+  std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+  std::cout << ga.parameters() << "\n";
 
 //  char *fn;
 //  ga.get(gaNscoreFilename, &fn);
-//  cout << "filename is '" << fn << "'\n";
+//  std::cout << "filename is '" << fn << "'\n";
 
   return 0;
 }
@@ -144,7 +144,7 @@ ListInitializer(GAGenome & c)
 // metrowerks compiler this specialization must come before the forced
 // instantiation.
 template<> int
-GAListGenome<int>::write(ostream & os) const
+GAListGenome<int>::write( std::ostream & os) const
 {
   int *cur, *head;
   GAListIter<int> tmpiter(*this);

@@ -16,9 +16,9 @@ the command line.
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define ifstream std::ifstream
+ 
+ 
+ 
 
 float objective(GAGenome &);
 int cntr=0;
@@ -26,12 +26,12 @@ int cntr=0;
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 18\n\n";
-  cout << "This program is designed to compare the GA types.  You can\n";
-  cout << "specify steady-state, incremental, or simple GA and tweak any\n";
-  cout << "of the parameters for each of these GA types.  The objective\n";
-  cout << "function tries to match a pattern read in from a file.\n\n";
-  cout.flush();
+  std::cout << "Example 18\n\n";
+  std::cout << "This program is designed to compare the GA types.  You can\n";
+  std::cout << "specify steady-state, incremental, or simple GA and tweak any\n";
+  std::cout << "of the parameters for each of these GA types.  The objective\n";
+  std::cout << "function tries to match a pattern read in from a file.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -70,7 +70,7 @@ main(int argc, char *argv[])
   for(i=1; i<argc; i++){
     if(strcmp("ga", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": which GA do you want? (simple, ss, or inc)\n";
+         std::cerr << argv[0] << ": which GA do you want? (simple, ss, or inc)\n";
         exit(1);
       }
       else{
@@ -81,13 +81,13 @@ main(int argc, char *argv[])
 	else if(strcmp(argv[i],"inc") == 0)
 	  whichGA = INCREMENTAL;
 	else
-	  cerr << argv[0] << ": ga must be one of: simple, ss, or inc.\n";
+	   std::cerr << argv[0] << ": ga must be one of: simple, ss, or inc.\n";
         continue;
       }
     }
     else if(strcmp("file", argv[i]) == 0 || strcmp("f", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": the file option needs a filename.\n";
+         std::cerr << argv[0] << ": the file option needs a filename.\n";
         exit(1);
       }
       else{
@@ -100,12 +100,12 @@ main(int argc, char *argv[])
       continue;
     }
     else {
-      cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-      cerr << "valid arguements include standard GAlib arguments plus:\n";
-      cerr << "  f\tfilename from which to read (" << filename << ")\n";
-      cerr << "\n";
-      cerr << "  ga simple|ss|inc\twhich GA to use (simple)\n";
-      cerr << "\n";
+       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+       std::cerr << "valid arguements include standard GAlib arguments plus:\n";
+       std::cerr << "  f\tfilename from which to read (" << filename << ")\n";
+       std::cerr << "\n";
+       std::cerr << "  ga simple|ss|inc\twhich GA to use (simple)\n";
+       std::cerr << "\n";
       exit(1);
     }
   }
@@ -114,9 +114,9 @@ main(int argc, char *argv[])
 // two integers that give the height then width of the matrix, then the matrix
 // of 1's and 0's (with whitespace inbetween).
 
-  ifstream inStream(filename);
+   std::ifstream inStream(filename);
   if(!inStream){
-    cerr << "Cannot open " << filename << " for input.\n";
+     std::cerr << "Cannot open " << filename << " for input.\n";
     exit(1);
   }
 
@@ -135,13 +135,13 @@ main(int argc, char *argv[])
 
 // Print out the pattern to be sure we got the right one.
 
-  cout << "input pattern:\n";
+  std::cout << "input pattern:\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
-      cout << (target[i][j] == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (target[i][j] == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
 // Now create the GA and run it.
 
@@ -179,17 +179,17 @@ main(int argc, char *argv[])
     break;
   }
 
-  cout << "the ga generated:\n";
+  std::cout << "the ga generated:\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++){
-      cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
+      std::cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
     }
-    cout << "\n";
+    std::cout << "\n";
   }
-  cout << "\nthe statistics for the run are:\n" << stats;
-  cout << "\nthe objective function was called " << cntr << " times\n";
-  cout << "\nbest of generation data are in 'bog.dat'\n";
-  cout.flush();
+  std::cout << "\nthe statistics for the run are:\n" << stats;
+  std::cout << "\nthe objective function was called " << cntr << " times\n";
+  std::cout << "\nbest of generation data are in 'bog.dat'\n";
+  std::cout.flush();
 
   for(i=0; i<width; i++)
     delete target[i];

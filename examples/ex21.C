@@ -17,8 +17,8 @@ create the array determines which behaviour you'll get.
 
 #include <iostream>
 
-#define cout std::cout
-#define endl std::endl
+ 
+ 
 
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
@@ -31,9 +31,9 @@ float Objective4(GAGenome &);
 int
 main(int argc, char** argv)
 {
-  cout << "Example 21\n\n";
-  cout << "This example shows various uses of the allele set object\n";
-  cout << "in combination with the real number genome.\n\n"; cout.flush();
+  std::cout << "Example 21\n\n";
+  std::cout << "This example shows various uses of the allele set object\n";
+  std::cout << "in combination with the real number genome.\n\n"; std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -124,37 +124,37 @@ main(int argc, char** argv)
   GASteadyStateGA ga1(genome1);
   ga1.parameters(params);
   ga1.set(gaNscoreFilename, "bog1.dat");
-  cout << "\nrunning ga number 1 (alternate allele(0) and allele(3))..."<<endl;
+  std::cout << "\nrunning ga number 1 (alternate allele(0) and allele(3))..."<< std::endl;
   ga1.evolve(seed);
-  cout << "the ga generated:\n" << ga1.statistics().bestIndividual() << endl;
+  std::cout << "the ga generated:\n" << ga1.statistics().bestIndividual() <<  std::endl;
 
   GASteadyStateGA ga2(genome2);
   ga2.parameters(params);
   ga2.set(gaNscoreFilename, "bog2.dat");
-  cout << "\nrunning ga number 2 (continuous descending order)..." << endl;
+  std::cout << "\nrunning ga number 2 (continuous descending order)..." <<  std::endl;
   ga2.evolve();
-  cout << "the ga generated:\n" << ga2.statistics().bestIndividual() << endl;
+  std::cout << "the ga generated:\n" << ga2.statistics().bestIndividual() <<  std::endl;
 
   GASteadyStateGA ga2a(genome2a);
   ga2a.parameters(params);
   ga2a.set(gaNscoreFilename, "bog2a.dat");
-  cout << "\nrunning ga number 2a (descending order, EXCLUSIVE)..." << endl;
+  std::cout << "\nrunning ga number 2a (descending order, EXCLUSIVE)..." <<  std::endl;
   ga2a.evolve();
-  cout << "the ga generated:\n" << ga2a.statistics().bestIndividual() << endl;
+  std::cout << "the ga generated:\n" << ga2a.statistics().bestIndividual() <<  std::endl;
 
   GASteadyStateGA ga3(genome3);
   ga3.parameters(params);
   ga3.set(gaNscoreFilename, "bog3.dat");
-  cout << "\nrunning ga number 3 (discretized ascending order)..." << endl;
+  std::cout << "\nrunning ga number 3 (discretized ascending order)..." <<  std::endl;
   ga3.evolve();
-  cout << "the ga generated:\n" << ga3.statistics().bestIndividual() << endl;
+  std::cout << "the ga generated:\n" << ga3.statistics().bestIndividual() <<  std::endl;
 
   GASteadyStateGA ga4(genome4);
   ga4.parameters(params);
   ga4.set(gaNscoreFilename, "bog4.dat");
-  cout << "\nrunning ga number 4 (maximize each gene)..." << endl;
+  std::cout << "\nrunning ga number 4 (maximize each gene)..." <<  std::endl;
   ga4.evolve();
-  cout << "the ga generated:\n" << ga4.statistics().bestIndividual() << endl;
+  std::cout << "the ga generated:\n" << ga4.statistics().bestIndividual() <<  std::endl;
 
   return 0;
 }

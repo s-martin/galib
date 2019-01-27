@@ -62,9 +62,9 @@ protected:
 };
 
 #ifndef NO_STREAMS
-inline ostream & operator<< (ostream & os, PVMDemeGA & arg)
+inline  std::ostream & operator<< ( std::ostream & os, PVMDemeGA & arg)
 {arg.write(os); return(os);}
-inline istream & operator>> (istream & is, PVMDemeGA & arg)
+inline  std::istream & operator>> ( std::istream & is, PVMDemeGA & arg)
 {arg.read(is); return(is);}
 #endif
 

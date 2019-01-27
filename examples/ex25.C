@@ -13,16 +13,16 @@
 
 #include <iostream>
 
-#define cout std::cout
-#define endl std::endl
+ 
+ 
 
 float Objective(GAGenome &);
 
 int
 main(int argc, char** argv) {
-  cout << "Example 25\n\n";
-  cout << "This example uses a genetic algorithm with multiple populations.\n";
-  cout << endl;
+  std::cout << "Example 25\n\n";
+  std::cout << "This example uses a genetic algorithm with multiple populations.\n";
+  std::cout <<  std::endl;
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -43,17 +43,17 @@ main(int argc, char** argv) {
   ga.pMutation(0.03);
   ga.pCrossover(1.0);
   ga.parameters(argc, argv);
-  cout << "initializing..."; cout.flush();
+  std::cout << "initializing..."; std::cout.flush();
   ga.initialize(seed);
-  cout << "evolving..."; cout.flush();
+  std::cout << "evolving..."; std::cout.flush();
   while(!ga.done()) {
     ga.step();
-    cout << "."; cout.flush();
+    std::cout << "."; std::cout.flush();
   }
-  cout << endl;
+  std::cout <<  std::endl;
 
-  cout << "best individual is: " << ga.statistics().bestIndividual() << "\n";
-  cout << "\n" << ga.statistics() << "\n";  
+  std::cout << "best individual is: " << ga.statistics().bestIndividual() << "\n";
+  std::cout << "\n" << ga.statistics() << "\n";  
 
   return 0;
 }

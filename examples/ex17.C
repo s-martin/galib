@@ -15,21 +15,21 @@ alternate 0 and 1 then put -1 in the corners.
 
 #include <iostream>
 
-#define cout std::cout
-#define endl std::endl
-#define ostream std::ostream
+ 
+ 
+ 
 
 float objective(GAGenome &);
 
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 17\n\n";
-  cout << "This program illustrates the use of a 2DArrayGenome with\n";
-  cout << "three alleles.  It tries to fill a 2D array with alternating\n";
-  cout << "0s and 1s, and -1s at the corners.  You will have to run it\n";
-  cout << "for something like 10000 generations to get the perfect score.\n\n";
-  cout.flush();
+  std::cout << "Example 17\n\n";
+  std::cout << "This program illustrates the use of a 2DArrayGenome with\n";
+  std::cout << "three alleles.  It tries to fill a 2D array with alternating\n";
+  std::cout << "0s and 1s, and -1s at the corners.  You will have to run it\n";
+  std::cout << "for something like 10000 generations to get the perfect score.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -61,16 +61,16 @@ main(int argc, char *argv[])
   ga.parameters(argc, argv);
   ga.initialize(seed);
 
-  cout << "evolving...";
+  std::cout << "evolving...";
   while(!ga.done()){
     ga.step();
     if(ga.generation() % 50 == 0){
-      cout << "."; cout.flush();
+      std::cout << "."; std::cout.flush();
     }
   }
-  cout << "\n\n";
+  std::cout << "\n\n";
 
-  cout << "the ga generated:\n" << ga.statistics().bestIndividual() << endl;
+  std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() <<  std::endl;
 
   return 0;
 }
@@ -111,7 +111,7 @@ objective(GAGenome & c)
 // after another.  Here we do fixed spacing so that the -1 and 1 don't screw
 // each other up.
 template <> int
-GA2DArrayAlleleGenome<int>::write(ostream & os) const 
+GA2DArrayAlleleGenome<int>::write( std::ostream & os) const 
 {
   for(unsigned int j=0; j<ny; j++){
     for(unsigned int i=0; i<nx; i++){

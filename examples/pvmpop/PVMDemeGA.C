@@ -94,7 +94,7 @@ PVMDemeGA::initialize(unsigned int seed) {
   if(_mid == 0) return;
 
 #ifdef DEBUG
-  cerr << "sending initialize command to slaves...\n";
+   std::cerr << "sending initialize command to slaves...\n";
 #endif
 
   for(int j=0; j<_ntid; j++) {
@@ -124,7 +124,7 @@ PVMDemeGA::step() {
   if(_mid == 0) return;
 
 #ifdef DEBUG
-  cerr << "sending step command to slaves...\n";
+   std::cerr << "sending step command to slaves...\n";
 #endif
 
   for(int j=0; j<_ntid; j++) {
@@ -135,7 +135,7 @@ PVMDemeGA::step() {
   }
 
 #ifdef DEBUG
-  cerr << "waiting for slaves to step...\n";
+   std::cerr << "waiting for slaves to step...\n";
 #endif
 
   int flag = _ntid;
@@ -149,19 +149,19 @@ PVMDemeGA::step() {
 	flag--;
 
 #ifdef DEBUG
-	cerr << "  tid " << tid << " has finished step\n";
+	 std::cerr << "  tid " << tid << " has finished step\n";
 #endif
 	break;
 
       default:
-	cerr << className() << ": step:\n";
-	cerr << "  unexpected msgtag: " << msgtag << "\n";
+	 std::cerr << className() << ": step:\n";
+	 std::cerr << "  unexpected msgtag: " << msgtag << "\n";
 	break;
       }
     }
     else {
-      cerr << className() << ": step:\n";
-      cerr << "  error from pvm_recv: " << bufid << "\n";
+       std::cerr << className() << ": step:\n";
+       std::cerr << "  error from pvm_recv: " << bufid << "\n";
     }
   }
 
@@ -218,8 +218,8 @@ PVMDemeGA::migrate() {
   _status = pvm_send(fromid, MSG_SEND_MIGRATION);
 
 #ifdef DEBUG
-  cerr << "told task " << fromid;
-  cerr << " to migrate " << count << " individuals to task " << toid << "\n";
+   std::cerr << "told task " << fromid;
+   std::cerr << " to migrate " << count << " individuals to task " << toid << "\n";
 #endif
 }
 
@@ -228,7 +228,7 @@ PVMDemeGA::migrate() {
 int
 PVMDemeGA::collect() {
 #ifdef DEBUG
-  cerr << "sending request for populations...\n";
+   std::cerr << "sending request for populations...\n";
 #endif
 
   for(int j=0; j<_ntid; j++) {
@@ -237,7 +237,7 @@ PVMDemeGA::collect() {
   }
 
 #ifdef DEBUG
-  cerr << "waiting for populations from slaves...\n";
+   std::cerr << "waiting for populations from slaves...\n";
 #endif
 
   int flag = _ntid;
@@ -254,19 +254,19 @@ PVMDemeGA::collect() {
 	flag--;
 
 #ifdef DEBUG
-	cerr << "  received pop from tid " << tid << " (" << which << ")\n";
+	 std::cerr << "  received pop from tid " << tid << " (" << which << ")\n";
 #endif
 	break;
 
       default:
-	cerr << className() << ": collect:\n";
-	cerr << "  unexpected msgtag: " << msgtag << "\n";
+	 std::cerr << className() << ": collect:\n";
+	 std::cerr << "  unexpected msgtag: " << msgtag << "\n";
 	break;
       }
     }
     else {
-      cerr << className() << ": collect:\n";
-      cerr << "  error from pvm_recv: " << bufid << "\n";
+       std::cerr << className() << ": collect:\n";
+       std::cerr << "  error from pvm_recv: " << bufid << "\n";
     }
   }
 
@@ -286,16 +286,16 @@ int
 PVMDemeGA::spawn(const char* slavename) {
   _mid = pvm_mytid();
   if(_mid < 0) {
-    cerr << "\n" << className() << ": spawn:\n";
-    cerr << "  Bad ID for master task. Have you started the PVM?\n";
+     std::cerr << "\n" << className() << ": spawn:\n";
+     std::cerr << "  Bad ID for master task. Have you started the PVM?\n";
     return _status = _mid;
   }
 
   struct pvmhostinfo* hostp;
   _status = pvm_config(&_nhosts, &_narch, &hostp);
   if(_status == PvmSysErr) {
-    cerr << "\n" << className() << ": spawn:\n";
-    cerr << "  PVM not responding. Have you started the PVM?\n";
+     std::cerr << "\n" << className() << ": spawn:\n";
+     std::cerr << "  PVM not responding. Have you started the PVM?\n";
     return _status;
   }
   
@@ -305,31 +305,31 @@ PVMDemeGA::spawn(const char* slavename) {
   strcpy(sn, slavename);
   _ntid = pvm_spawn(sn, (char**)0, 0, "", _Ntid, _tid);
   if(_ntid <= 0) {
-    cerr << className() << ": spawn:\n  Error spawning slaves.\n";
-    cerr << "  Error codes of failed spawns are:\n";
+     std::cerr << className() << ": spawn:\n  Error spawning slaves.\n";
+     std::cerr << "  Error codes of failed spawns are:\n";
     for(int i=0; i<_Ntid; i++) {
-      cerr << "    slave "; cerr.width(3); cerr<<i<<": "<<_tid[i]<<"\n";
+       std::cerr << "    slave "; cerr.width(3); cerr<<i<<": "<<_tid[i]<<"\n";
     }
     pvm_exit();
     return _status = -1;
   }
   else if(_ntid < _Ntid) {
-    cerr << className() << ": spawn:\n  ";
-    cerr << "  Spawned only "<<_ntid<<" of "<<_Ntid<<"\n";
-    cerr << "  Error codes of failed spawns are:\n";
+     std::cerr << className() << ": spawn:\n  ";
+     std::cerr << "  Spawned only "<<_ntid<<" of "<<_Ntid<<"\n";
+     std::cerr << "  Error codes of failed spawns are:\n";
     for(int i=0; i<_Ntid; i++) {
       if(_tid[i] < 0) {
-	cerr << "    slave "; cerr.width(3); cerr<<i<<": "<<_tid[i]<<"\n";
+	 std::cerr << "    slave "; cerr.width(3); cerr<<i<<": "<<_tid[i]<<"\n";
       }
     }
   }
   else {
-    cerr << className() << ": spawn:\n";
-    cerr << "  Spawned " << _Ntid << " slave processes...\n";
+     std::cerr << className() << ": spawn:\n";
+     std::cerr << "  Spawned " << _Ntid << " slave processes...\n";
   }
 
 #ifdef DEBUG
-  cerr << "waiting for response from slaves...\n";
+   std::cerr << "waiting for response from slaves...\n";
 #endif
 
   int flag = _ntid;
@@ -343,25 +343,25 @@ PVMDemeGA::spawn(const char* slavename) {
       switch(msgtag) {
       case MSG_READY:
 #ifdef DEBUG
-	cerr << "  slave " << tid << " (" << which << ") is alive\n";
+	 std::cerr << "  slave " << tid << " (" << which << ") is alive\n";
 #endif
 	flag--;
 	break;
 
       default:
-	cerr << className() << ": spawn:\n";
-	cerr << "  unexpected msgtag: " << msgtag << "\n";
+	 std::cerr << className() << ": spawn:\n";
+	 std::cerr << "  unexpected msgtag: " << msgtag << "\n";
 	break;
       }
     }
     else {
-      cerr << className() << ": spawn:\n";
-      cerr << "  error from pvm_recv: " << bufid << "\n";
+       std::cerr << className() << ": spawn:\n";
+       std::cerr << "  error from pvm_recv: " << bufid << "\n";
     }
   }
 
 #ifdef DEBUG
-  cerr << "slaves appear to be up and running.\n";
+   std::cerr << "slaves appear to be up and running.\n";
 #endif
 
   return _status;

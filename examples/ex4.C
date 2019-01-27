@@ -23,16 +23,16 @@ algorithm object.
 
 #include <iostream>
 
-#define cout std::cout
+ 
 
 float objective(GAGenome &);
 
 int
 main(int argc, char **argv)
 {
-  cout << "Example 4\n\n";
-  cout << "This program tries to fill a 3DBinaryStringGenome with\n";
-  cout << "alternating 1s and 0s using a SteadyStateGA\n\n"; cout.flush();
+  std::cout << "Example 4\n\n";
+  std::cout << "This program tries to fill a 3DBinaryStringGenome with\n";
+  std::cout << "alternating 1s and 0s using a SteadyStateGA\n\n"; std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -76,8 +76,8 @@ main(int argc, char **argv)
 
 // Now we print out the best genome.
 
-  cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
-  cout << "best of generation data are in 'bog.dat'\n";
+  std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
+  std::cout << "best of generation data are in 'bog.dat'\n";
 
 // That's it!
 

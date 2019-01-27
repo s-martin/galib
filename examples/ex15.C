@@ -14,18 +14,18 @@ stopping criterion for the GA rather than number-of-generations.
 
 #include <iostream>
 
-#define cout std::cout
+ 
 
 float objective(GAGenome &);
 
 int
 main(int argc, char **argv)
 {
-  cout << "Example 15\n\n";
-  cout << "This program generates a sequence of random numbers then uses\n";
-  cout << "a simple GA and binary-to-decimal genome to match the\n";
-  cout << "sequence.  It uses the convergence of the best-of-generation\n";
-  cout << "as the criterion for when to stop.\n\n";
+  std::cout << "Example 15\n\n";
+  std::cout << "This program generates a sequence of random numbers then uses\n";
+  std::cout << "a simple GA and binary-to-decimal genome to match the\n";
+  std::cout << "sequence.  It uses the convergence of the best-of-generation\n";
+  std::cout << "as the criterion for when to stop.\n\n";
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -68,12 +68,12 @@ main(int argc, char **argv)
 
 // Print out the sequence to be sure we got the right one.
 
-  cout << "input sequence:\n";
+  std::cout << "input sequence:\n";
   for(i=0; i<n; i++){
-    cout.width(10);
-    cout << target[i] << " ";
+    std::cout.width(10);
+    std::cout << target[i] << " ";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
 // Create a phenotype then fill it with the phenotypes we will need to map to
 // the values we read from the file.  The arguments to the add() method of a
@@ -111,18 +111,18 @@ main(int argc, char **argv)
 // Dump the results of the GA to the screen.
 
   genome.initialize();
-  cout << "random values in the genome:\n";;
+  std::cout << "random values in the genome:\n";;
   unsigned int jj=0;
   for(jj=0; jj<map.nPhenotypes(); jj++){
-    cout.width(10); cout << genome.phenotype(jj) << " ";
+    std::cout.width(10); std::cout << genome.phenotype(jj) << " ";
   }
-  cout << "\n";
+  std::cout << "\n";
   genome = ga.statistics().bestIndividual();
-  cout << "the ga generated:\n";
+  std::cout << "the ga generated:\n";
   for(jj=0; jj<map.nPhenotypes(); jj++){
-    cout.width(10); cout << genome.phenotype(jj) << " ";
+    std::cout.width(10); std::cout << genome.phenotype(jj) << " ";
   }
-  cout << "\n\n"; cout.flush();
+  std::cout << "\n\n"; std::cout.flush();
 
 // Clean up by freeing the memory we allocated.
 

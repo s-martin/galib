@@ -10,19 +10,19 @@
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define ifstream std::ifstream
+ 
+ 
+ 
 
 float objective(GAGenome &);
 
 int
 main(int argc, char *argv[]) {
-  cout << "Random Seed Test\n\n";
-  cout << "This program does three runs of a genetic algorithm, with the \n";
-  cout << "random seed resetting between each run.  Each of the three runs \n";
-  cout << "should be identical\n\n";
-  cout.flush();
+  std::cout << "Random Seed Test\n\n";
+  std::cout << "This program does three runs of a genetic algorithm, with the \n";
+  std::cout << "random seed resetting between each run.  Each of the three runs \n";
+  std::cout << "should be identical\n\n";
+  std::cout.flush();
 
   GAParameterList params;
   GASteadyStateGA::registerDefaultParameters(params);
@@ -39,7 +39,7 @@ main(int argc, char *argv[]) {
   for(i=1; i<argc; i++){
     if(strcmp("file", argv[i]) == 0 || strcmp("f", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": the file option needs a filename.\n";
+         std::cerr << argv[0] << ": the file option needs a filename.\n";
         exit(1);
       }
       else{
@@ -49,7 +49,7 @@ main(int argc, char *argv[]) {
     }
     else if(strcmp("seed", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": the seed option needs a filename.\n";
+         std::cerr << argv[0] << ": the seed option needs a filename.\n";
         exit(1);
       }
       else {
@@ -58,38 +58,38 @@ main(int argc, char *argv[]) {
       }
     }
     else {
-      cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-      cerr << "valid arguments include standard GAlib arguments plus:\n";
-      cerr << "  f\tfilename from which to read (" << filename << ")\n";
-      cerr << "\n";
+       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+       std::cerr << "valid arguments include standard GAlib arguments plus:\n";
+       std::cerr << "  f\tfilename from which to read (" << filename << ")\n";
+       std::cerr << "\n";
       exit(1);
     }
   }
 
   const int n=5;
 
-  cout << n << " random numbers\n";
+  std::cout << n << " random numbers\n";
   GAResetRNG(seed);
   for(i=0; i<n; i++)
-    cout << " " << GARandomFloat();
-  cout << "\n";
+    std::cout << " " << GARandomFloat();
+  std::cout << "\n";
 
-  cout << n << " random numbers\n";
+  std::cout << n << " random numbers\n";
   GAResetRNG(seed);
   for(i=0; i<n; i++)
-    cout << " " << GARandomFloat();
-  cout << "\n";
+    std::cout << " " << GARandomFloat();
+  std::cout << "\n";
 
-  cout << n << " random numbers\n";
+  std::cout << n << " random numbers\n";
   GAResetRNG(seed);
   for(i=0; i<n; i++)
-    cout << " " << GARandomFloat();
-  cout << "\n";
-  cout.flush();
+    std::cout << " " << GARandomFloat();
+  std::cout << "\n";
+  std::cout.flush();
 
-  ifstream inStream(filename);
+   std::ifstream inStream(filename);
   if(!inStream){
-    cerr << "Cannot open " << filename << " for input.\n";
+     std::cerr << "Cannot open " << filename << " for input.\n";
     exit(1);
   }
 
@@ -114,52 +114,52 @@ main(int argc, char *argv[]) {
 
   GAResetRNG(seed);
   genome.initialize();
-  cout << genome << "\n";
+  std::cout << genome << "\n";
   ga.set(gaNscoreFilename, "bog1.dat");
   ga.evolve();
 
   genome = ga.statistics().bestIndividual();
-  cout << "run 1:  the random seed is: " << GAGetRandomSeed() << "\n";
+  std::cout << "run 1:  the random seed is: " << GAGetRandomSeed() << "\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
-      cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
   // second run
 
   GAResetRNG(seed);
   genome.initialize();
-  cout << genome << "\n";
+  std::cout << genome << "\n";
   ga.set(gaNscoreFilename, "bog2.dat");
   ga.evolve();
 
   genome = ga.statistics().bestIndividual();
-  cout << "run 2:  the random seed is: " << GAGetRandomSeed() << "\n";
+  std::cout << "run 2:  the random seed is: " << GAGetRandomSeed() << "\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
-      cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
   // third run
 
   GAResetRNG(seed);
   genome.initialize();
-  cout << genome << "\n";
+  std::cout << genome << "\n";
   ga.set(gaNscoreFilename, "bog3.dat");
   ga.evolve();
 
   genome = ga.statistics().bestIndividual();
-  cout << "run 3:  the random seed is: " << GAGetRandomSeed() << "\n";
+  std::cout << "run 3:  the random seed is: " << GAGetRandomSeed() << "\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
-      cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
   for(i=0; i<width; i++)
     delete target[i];

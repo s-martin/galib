@@ -39,9 +39,9 @@ float Objective(GAGenome &);
 
 int
 main() {
-  cout << "This program tries to fill a bit string with\n";
-  cout << "alternating 1s and 0s using a steady-state GA,\n";
-  cout << "uniform crossover, and bitflip mutation.\n\n"; cout.flush();
+  std::cout << "This program tries to fill a bit string with\n";
+  std::cout << "alternating 1s and 0s using a steady-state GA,\n";
+  std::cout << "uniform crossover, and bitflip mutation.\n\n"; std::cout.flush();
 
 // Declare variables for the GA parameters and set them to some default values.
 
@@ -80,8 +80,8 @@ main() {
 #endif
   ga.evolve();
 
-  cout << "best individual is:\n" << ga.statistics().bestIndividual() << "\n";
-  cout << "generational data are in 'bog.dat'\n";
+  std::cout << "best individual is:\n" << ga.statistics().bestIndividual() << "\n";
+  std::cout << "generational data are in 'bog.dat'\n";
 
   return 0;
 }

@@ -18,8 +18,8 @@ example).
 
 #include <iostream>
 
-#define cout std::cout
-#define endl std::endl
+ 
+ 
 #define ofstream std::ofstream
 
 #define INSTANTIATE_REAL_GENOME
@@ -156,12 +156,12 @@ RestrictedMatingGA::step()
 int
 main(int argc, char** argv)
 {
-  cout << "Example 24\n\n";
-  cout << "This example illustrates how to derive your own genetic\n";
-  cout << "algorithm.  This genetic algorithm does restricted mating and\n";
-  cout << "uses a selector slightly more finicky than a uniform random\n";
-  cout << "selector.  The objective function is a simple sinusoidal.\n\n";
-  cout.flush();
+  std::cout << "Example 24\n\n";
+  std::cout << "This example illustrates how to derive your own genetic\n";
+  std::cout << "algorithm.  This genetic algorithm does restricted mating and\n";
+  std::cout << "uses a selector slightly more finicky than a uniform random\n";
+  std::cout << "selector.  The objective function is a simple sinusoidal.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -198,7 +198,7 @@ main(int argc, char** argv)
 
 // dump the final population to file
 
-  cout << "printing population to file 'population.dat'..." << endl;
+  std::cout << "printing population to file 'population.dat'..." <<  std::endl;
   outfile.open("population.dat", (std::ios::out | std::ios::trunc));
   for(int i=0; i<ga.population().size(); i++){
     genome = ga.population().individual(i);
@@ -208,7 +208,7 @@ main(int argc, char** argv)
 
 // dump the function to file so you can plot the population on it
 
-  cout << "printing function to file 'sinusoid.dat'..." << endl;
+  std::cout << "printing function to file 'sinusoid.dat'..." <<  std::endl;
   outfile.open("sinusoid.dat", (std::ios::out | std::ios::trunc));
   for(float x=MIN_VALUE; x<=MAX_VALUE; x+=INC){
     outfile << genome.gene(0,x) << "\t" << genome.score() << "\n";

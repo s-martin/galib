@@ -14,7 +14,7 @@ data as well as routines for modifying the genetic algorithm's population.
 #include "genome.h"
 
 // When this flag is defined, the initialize and evaluate function dump a 
-// string to cerr that tells which host they're running on.  You can then look
+// string to  std::cerr that tells which host they're running on.  You can then look
 // at this info in the pvm log file.
 //#define DEBUG
 
@@ -37,7 +37,7 @@ GenomeEvaluator(GAGenome& g) {
 #ifdef DEBUG
   char buf[255];
   gethostname(buf, 255);
-  cerr << "evaluating on " << buf << "\n";
+   std::cerr << "evaluating on " << buf << "\n";
 #endif
   float score=0.0;
   for(int i=0; i<genome.length(); i++){

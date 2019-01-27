@@ -19,8 +19,8 @@ License).
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
+ 
+ 
 
 double Gauss(double mean, double variance);
 
@@ -35,9 +35,9 @@ GAGenome::Evaluator objective[5] = {DeJong1,DeJong2,DeJong3,DeJong4,DeJong5};
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 19\n\n";
-  cout << "This program runs the DeJong test problems.\n\n";
-  cout.flush();
+  std::cout << "Example 19\n\n";
+  std::cout << "This program runs the DeJong test problems.\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -67,13 +67,13 @@ main(int argc, char *argv[])
   for(int i=1; i<argc; i++){
     if(strcmp("function", argv[i]) == 0 || strcmp("f", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": you must specify a function (1-5)\n";
+         std::cerr << argv[0] << ": you must specify a function (1-5)\n";
         exit(1);
       }
       else{
 	whichFunction = atoi(argv[i]) - 1;
 	if(whichFunction < 0 || whichFunction > 4){
-	  cerr << argv[0] << ": the function must be in the range [1,5]\n";
+	   std::cerr << argv[0] << ": the function must be in the range [1,5]\n";
 	  exit(1);
 	}
         continue;
@@ -84,10 +84,10 @@ main(int argc, char *argv[])
       continue;
     }
     else {
-      cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-      cerr << "valid arguements include standard GAlib arguments plus:\n";
-      cerr << "  f\twhich function to evaluate (all)\n";
-      cerr << "parameters are:\n\n" << params << "\n\n";
+       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+       std::cerr << "valid arguements include standard GAlib arguments plus:\n";
+       std::cerr << "  f\twhich function to evaluate (all)\n";
+       std::cerr << "parameters are:\n\n" << params << "\n\n";
       exit(1);
     }
   }
@@ -143,14 +143,14 @@ main(int argc, char *argv[])
   GASigmaTruncationScaling scaling;
   ga.scaling(scaling);
 
-  cout << "running DeJong function number " << (whichFunction + 1) << " ...\n";
+  std::cout << "running DeJong function number " << (whichFunction + 1) << " ...\n";
 
   ga.evolve(seed);
 
-  cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
-  cout << "\nthe statistics for the run are:\n" << ga.statistics();
-  cout << "\nbest-of-generation data are in 'bog.dat'\n";
-  cout.flush();
+  std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
+  std::cout << "\nthe statistics for the run are:\n" << ga.statistics();
+  std::cout << "\nbest-of-generation data are in 'bog.dat'\n";
+  std::cout.flush();
 
   return 0;
 }

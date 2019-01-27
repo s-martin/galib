@@ -24,11 +24,11 @@ override-able on any instance of the new genome.
 #include <iostream>
 #include <fstream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define istream std::istream
-#define ostream std::ostream
-#define ifstream std::ifstream
+ 
+ 
+  
+ 
+ 
 
 
 // This is the class definition for the new genome.  The default operators are
@@ -53,8 +53,8 @@ public:
   virtual GAGenome* clone(GAGenome::CloneMethod) const ;
   virtual void copy(const GAGenome & c);
   virtual int equal(const GAGenome& g) const;
-  virtual int read(istream & is);
-  virtual int write(ostream & os) const;
+  virtual int read( std::istream & is);
+  virtual int write( std::ostream & os) const;
 
   GA2DBinaryStringGenome & binstr() const {return *str;}
   GABin2DecGenome & bin2dec() const {return *b2d;}
@@ -115,13 +115,13 @@ CompositeGenome::equal(const GAGenome& g) const {
 }
 
 int 
-CompositeGenome::read(istream & is) {
+CompositeGenome::read( std::istream & is) {
   is >> *str >> *b2d; 
   return is.fail() ? 1 : 0; 
 }
 
 int 
-CompositeGenome::write(ostream & os) const {
+CompositeGenome::write( std::ostream & os) const {
   int i,j;
   for(j=0; j<str->height(); j++){
     for(i=0; i<str->width(); i++)
@@ -276,11 +276,11 @@ Objective(GAGenome & g) {
 int
 main(int argc, char *argv[])
 {
-  cout << "Example 5\n\n";
-  cout << "This program shows how to use a composite genome.  It reads\n";
-  cout << "a matrix from a data file and a set of values to be matched in\n";
-  cout << "a binary-to-decimal genome then uses a steady-state GA to\n";
-  cout << "match the pattern and value set.\n\n";
+  std::cout << "Example 5\n\n";
+  std::cout << "This program shows how to use a composite genome.  It reads\n";
+  std::cout << "a matrix from a data file and a set of values to be matched in\n";
+  std::cout << "a binary-to-decimal genome then uses a steady-state GA to\n";
+  std::cout << "match the pattern and value set.\n\n";
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -307,7 +307,7 @@ main(int argc, char *argv[])
   for(i=1; i<argc; i++){
     if(strcmp("graph", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": you must specify a filename.\n";
+         std::cerr << argv[0] << ": you must specify a filename.\n";
         exit(1);
       }
       else{
@@ -317,7 +317,7 @@ main(int argc, char *argv[])
     }
     else if(strcmp("values", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": you must specify a filename.\n";
+         std::cerr << argv[0] << ": you must specify a filename.\n";
         exit(1);
       }
       else{
@@ -330,16 +330,16 @@ main(int argc, char *argv[])
       continue;
     }
     else {
-      cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-      cerr << "valid arguements include standard GAlib flags plus:\n";
-      cerr << "  graph\tname of graph filename (" << filename1 << ")\n";
-      cerr << "  values\tname of values filename (" << filename2 << ")\n";
-      cerr << "\n";
+       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+       std::cerr << "valid arguements include standard GAlib flags plus:\n";
+       std::cerr << "  graph\tname of graph filename (" << filename1 << ")\n";
+       std::cerr << "  values\tname of values filename (" << filename2 << ")\n";
+       std::cerr << "\n";
       exit(1);
     }
   }
 
-  ifstream infile;
+   std::ifstream infile;
 
 // First we read in the pattern for the 2DBinStr genome.
 // File format is pretty simple:
@@ -348,7 +348,7 @@ main(int argc, char *argv[])
 
   infile.open(filename1);
   if(!infile){
-    cerr << "Cannot open " << filename1 << " for input.\n";
+     std::cerr << "Cannot open " << filename1 << " for input.\n";
     exit(1);
   }
 
@@ -373,7 +373,7 @@ main(int argc, char *argv[])
 
   infile.open(filename2);
   if(!infile){
-    cerr << "Cannot open " << filename2 << " for input.\n";
+     std::cerr << "Cannot open " << filename2 << " for input.\n";
     exit(1);
   }
   infile >> n;
@@ -384,18 +384,18 @@ main(int argc, char *argv[])
 
 // Print out the pattern and sequence.
 
-  cout << "input pattern:\n";
+  std::cout << "input pattern:\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
-      cout << (target[i][j] == 1 ? '*' : ' ') << " ";
-    cout << "\n";
+      std::cout << (target[i][j] == 1 ? '*' : ' ') << " ";
+    std::cout << "\n";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
-  cout << "input sequence:\n";
+  std::cout << "input sequence:\n";
   for(i=0; i<n; i++)
-    cout << sequence[i] << " ";
-  cout << "\n"; cout.flush();
+    std::cout << sequence[i] << " ";
+  std::cout << "\n"; std::cout.flush();
 
 // Create a phenotype then fill it with the phenotypes we will need to map to
 // the values we read from the file.  The arguments to the add() method of a
@@ -425,7 +425,7 @@ main(int argc, char *argv[])
   ga.evolve();
 
   genome = ga.statistics().bestIndividual();
-  cout << "\nthe ga generated:\n" << genome << "\n";
+  std::cout << "\nthe ga generated:\n" << genome << "\n";
 
 // Don't forget to free up the memory we allocated.
 

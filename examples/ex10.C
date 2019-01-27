@@ -21,9 +21,9 @@ algorithm, but you'll get bogus results unless you modify the algorithm.
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define endl std::endl
+ 
+ 
+ 
 #define ofstream std::ofstream
 
 #define USE_RAW_SINE
@@ -53,16 +53,16 @@ float PhenotypeDistance(const GAGenome & a, const GAGenome & b);
 int
 main(int argc, char **argv)
 {
-  cout << "Example 10\n\n";
-  cout << "This program uses sharing to do speciation.  The objective\n";
-  cout << "function has more than one optimum, so different genomes\n";
-  cout << "may have equally high scores.  Speciation keeps the population\n";
-  cout << "from clustering at one optimum.\n";
-  cout << "  Both gene-wise and phenotype-wise distance functions are used.\n";
-  cout << "  Populations from all three runs are written to the files \n";
-  cout << "pop.nospec.dat, pop.genespec.dat and pop.phenespec.dat.  The\n";
-  cout << "function is written to the file sinusoid.dat\n\n";
-  cout.flush();
+  std::cout << "Example 10\n\n";
+  std::cout << "This program uses sharing to do speciation.  The objective\n";
+  std::cout << "function has more than one optimum, so different genomes\n";
+  std::cout << "may have equally high scores.  Speciation keeps the population\n";
+  std::cout << "from clustering at one optimum.\n";
+  std::cout << "  Both gene-wise and phenotype-wise distance functions are used.\n";
+  std::cout << "  Populations from all three runs are written to the files \n";
+  std::cout << "pop.nospec.dat, pop.genespec.dat and pop.phenespec.dat.  The\n";
+  std::cout << "function is written to the file sinusoid.dat\n\n";
+  std::cout.flush();
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -108,17 +108,17 @@ main(int argc, char **argv)
 
 // Do the non-speciated and write to file the best-of-generation.
 
-  cout << "running with no speciation (fitness proportionate scaling)...\n";
-  cout.flush();
+  std::cout << "running with no speciation (fitness proportionate scaling)...\n";
+  std::cout.flush();
   GALinearScaling lin;
   ga.scaling(lin);
   ga.evolve();
   genome = ga.statistics().bestIndividual();
-  cout << "the ga found an optimum at the point "<<genome.phenotype(0)<<endl;
+  std::cout << "the ga found an optimum at the point "<<genome.phenotype(0)<< std::endl;
 
   outfile.open(popfilename1, (std::ios::out | std::ios::trunc));
   if(outfile.fail()){
-    cerr << "Cannot open " << popfilename1 << " for output.\n";
+     std::cerr << "Cannot open " << popfilename1 << " for output.\n";
     exit(1);
   }
   for(i=0; i<ga.population().size(); i++){
@@ -132,17 +132,17 @@ main(int argc, char **argv)
 
 // Now do speciation using the gene-wise distance function
 
-  cout << "running the ga with speciation (sharing using bit-wise)...\n";
-  cout.flush();
+  std::cout << "running the ga with speciation (sharing using bit-wise)...\n";
+  std::cout.flush();
   GASharing bitSharing(BitDistance);
   ga.scaling(bitSharing);
   ga.evolve();
   genome = ga.statistics().bestIndividual();
-  cout << "the ga found an optimum at the point "<<genome.phenotype(0)<<endl;
+  std::cout << "the ga found an optimum at the point "<<genome.phenotype(0)<< std::endl;
 
   outfile.open(popfilename2, (std::ios::out | std::ios::trunc));
   if(outfile.fail()){
-    cerr << "Cannot open " << popfilename2 << " for output.\n";
+     std::cerr << "Cannot open " << popfilename2 << " for output.\n";
     exit(1);
   }
   for(i=0; i<ga.population().size(); i++){
@@ -156,17 +156,17 @@ main(int argc, char **argv)
 
 // Now do speciation using the phenotype-wise distance function
 
-  cout << "running the ga with speciation (sharing using phenotype-wise)...\n";
-  cout.flush();
+  std::cout << "running the ga with speciation (sharing using phenotype-wise)...\n";
+  std::cout.flush();
   GASharing pheneSharing(PhenotypeDistance);
   ga.scaling(pheneSharing);
   ga.evolve();
   genome = ga.statistics().bestIndividual();
-  cout << "the ga found an optimum at the point "<<genome.phenotype(0)<<endl;
+  std::cout << "the ga found an optimum at the point "<<genome.phenotype(0)<< std::endl;
 
   outfile.open(popfilename3, (std::ios::out | std::ios::trunc));
   if(outfile.fail()){
-    cerr << "Cannot open " << popfilename3 << " for output.\n";
+     std::cerr << "Cannot open " << popfilename3 << " for output.\n";
     exit(1);
   }
   for(i=0; i<ga.population().size(); i++){
@@ -179,10 +179,10 @@ main(int argc, char **argv)
 
 // Now dump the function to file for comparisons
 
-  cout << "dumping the function to file..." << endl;
+  std::cout << "dumping the function to file..." <<  std::endl;
   outfile.open(filename, (std::ios::out | std::ios::trunc));
   if(outfile.fail()){
-    cerr << "Cannot open " << filename << " for output.\n";
+     std::cerr << "Cannot open " << filename << " for output.\n";
     exit(1);
   }
   float inc = MAX_VALUE - MIN_VALUE;

@@ -15,19 +15,18 @@ a few more fancy things with the genome (ie use the read/write methods).
 #include <fstream>
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define ifstream std::ifstream
+ 
+ 
+ 
 
 float objective(GAGenome &);
 
 int main(int argc, char *argv[])
 {
-	cout << "Example 7\n\n";
-	cout << "This program reads in a data file then runs a steady-state GA \n";
-	cout
-		<< "whose objective function tries to match the pattern of bits that\n";
-	cout << "are in the data file.\n\n";
+	std::cout << "Example 7\n\n";
+	std::cout << "This program reads in a data file then runs a steady-state GA \n";
+	std::cout << "whose objective function tries to match the pattern of bits that\n";
+	std::cout << "are in the data file.\n\n";
 
 	// See if we've been given a seed to use (for testing purposes).  When you
 	// specify a random seed, the evolution will be exactly the same each time
@@ -71,7 +70,7 @@ int main(int argc, char *argv[])
 		{
 			if (++i >= argc)
 			{
-				cerr << argv[0] << ": the data file option needs a filename.\n";
+				 std::cerr << argv[0] << ": the data file option needs a filename.\n";
 				exit(1);
 			}
 			else
@@ -84,7 +83,7 @@ int main(int argc, char *argv[])
 		{
 			if (++i >= argc)
 			{
-				cerr << argv[0]
+				 std::cerr << argv[0]
 					 << ": the parameters file option needs a filename.\n";
 				exit(1);
 			}
@@ -103,13 +102,13 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			cerr << argv[0] << ":  unrecognized arguement: " << argv[i]
+			 std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i]
 				 << "\n\n";
-			cerr << "valid arguements include GAlib arguments plus:\n";
-			cerr << "  dfile\tdata file from which to read (" << datafile
+			 std::cerr << "valid arguements include GAlib arguments plus:\n";
+			 std::cerr << "  dfile\tdata file from which to read (" << datafile
 				 << ")\n";
-			cerr << "  pfile\tparameters file (" << parmfile << ")\n\n";
-			cerr << "default parameters are:\n" << params << "\n\n";
+			 std::cerr << "  pfile\tparameters file (" << parmfile << ")\n\n";
+			 std::cerr << "default parameters are:\n" << params << "\n\n";
 			exit(1);
 		}
 	}
@@ -122,10 +121,10 @@ int main(int argc, char *argv[])
 	// can be useful in a population initializer when you want to bias your
 	// population)
 
-	ifstream inStream(datafile);
+	 std::ifstream inStream(datafile);
 	if (!inStream)
 	{
-		cerr << "Cannot open " << datafile << " for input.\n";
+		 std::cerr << "Cannot open " << datafile << " for input.\n";
 		exit(1);
 	}
 
@@ -137,15 +136,15 @@ int main(int argc, char *argv[])
 
 	// Print out the pattern to be sure we got the right one.
 
-	cout << "input pattern:\n";
+	std::cout << "input pattern:\n";
 	for (j = 0; j < height; j++)
 	{
 		for (i = 0; i < width; i++)
-			cout << (target.gene(i, j) == 1 ? '*' : ' ') << " ";
-		cout << "\n";
+			std::cout << (target.gene(i, j) == 1 ? '*' : ' ') << " ";
+		std::cout << "\n";
 	}
-	cout << "\n";
-	cout.flush();
+	std::cout << "\n";
+	std::cout.flush();
 
 	// Now create the first genome and the GA.  When we create the genome, we
 	// give it not only the objective function but also 'user data'.  In this
@@ -215,17 +214,17 @@ int main(int argc, char *argv[])
 	// contents of the best genome that the GA found.  Then we print it out.
 
 	genome = ga.statistics().bestIndividual();
-	cout << "the ga generated:\n";
+	std::cout << "the ga generated:\n";
 	for (j = 0; j < height; j++)
 	{
 		for (i = 0; i < width; i++)
-			cout << (genome.gene(i, j) == 1 ? '*' : ' ') << " ";
-		cout << "\n";
+			std::cout << (genome.gene(i, j) == 1 ? '*' : ' ') << " ";
+		std::cout << "\n";
 	}
-	cout << "\n";
-	cout.flush();
+	std::cout << "\n";
+	std::cout.flush();
 
-	cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
 
 	return 0;
 }

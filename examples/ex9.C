@@ -13,20 +13,20 @@ decimal genome.
 
 #include <iostream>
 
-#define cout std::cout
+ 
 
 float objective(GAGenome &);
 
 int main(int argc, char **argv)
 {
-	cout << "Example 9\n\n";
-	cout << "This program finds the maximum value in the function\n";
-	cout << "  y = - x1^2 - x2^2\n";
-	cout << "with the constraints\n";
-	cout << "     -5 <= x1 <= 5\n";
-	cout << "     -5 <= x2 <= 5\n";
-	cout << "\n\n";
-	cout.flush();
+	std::cout << "Example 9\n\n";
+	std::cout << "This program finds the maximum value in the function\n";
+	std::cout << "  y = - x1^2 - x2^2\n";
+	std::cout << "with the constraints\n";
+	std::cout << "     -5 <= x1 <= 5\n";
+	std::cout << "     -5 <= x2 <= 5\n";
+	std::cout << "\n\n";
+	std::cout.flush();
 
 	// See if we've been given a seed to use (for testing purposes).  When you
 	// specify a random seed, the evolution will be exactly the same each time
@@ -81,9 +81,9 @@ int main(int argc, char **argv)
 	// Dump the results of the GA to the screen.
 
 	genome = ga.statistics().bestIndividual();
-	cout << "the ga found an optimum at the point (";
-	cout << genome.phenotype(0) << ", " << genome.phenotype(1) << ")\n\n";
-	cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+	std::cout << "the ga found an optimum at the point (";
+	std::cout << genome.phenotype(0) << ", " << genome.phenotype(1) << ")\n\n";
+	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
 
 	return 0;
 }

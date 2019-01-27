@@ -23,9 +23,9 @@ any standard 3D cross-platform API, so you get this instead.)
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define endl std::endl
+ 
+ 
+ 
 
 // force instantiations for compilers that do not do auto instantiation
 // for some compilers (e.g. metrowerks) this must come after any
@@ -153,15 +153,15 @@ float Comparator(const GAGenome&, const GAGenome&);
 
 int
 main(int argc, char** argv) {
-  cout << "Example 27\n\n";
-  cout << "Deterministic crowding demonstration program.\n\n";
-  cout << "In addition to the standard GAlib command-line arguments,\n";
-  cout << "you can specify one of the four following functions:\n";
-  cout << "   0 - modified Himmelblau's function\n";
-  cout << "   1 - Foxholes (25)\n";
-  cout << "   2 - Schwefel's nasty (1 glob. Max bei (420.96/420.96)\n";
-  cout << "   3 - Mexican Hat (optimum at 0,0)\n";
-  cout << endl;
+  std::cout << "Example 27\n\n";
+  std::cout << "Deterministic crowding demonstration program.\n\n";
+  std::cout << "In addition to the standard GAlib command-line arguments,\n";
+  std::cout << "you can specify one of the four following functions:\n";
+  std::cout << "   0 - modified Himmelblau's function\n";
+  std::cout << "   1 - Foxholes (25)\n";
+  std::cout << "   2 - Schwefel's nasty (1 glob. Max bei (420.96/420.96)\n";
+  std::cout << "   3 - Mexican Hat (optimum at 0,0)\n";
+  std::cout <<  std::endl;
 
   int i;
 
@@ -197,7 +197,7 @@ main(int argc, char** argv) {
   for (i=1; i<argc; i++){
     if(strcmp("func", argv[i]) == 0 || strcmp("f", argv[i]) == 0){
       if(++i >= argc){
-        cerr << argv[0] << ": the function option needs a number.\n";
+         std::cerr << argv[0] << ": the function option needs a number.\n";
         exit(1);
       }
       else{
@@ -210,17 +210,17 @@ main(int argc, char** argv) {
       continue;
     }
     else {
-      cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-      cerr << "valid arguments include standard GAlib arguments plus:\n";
-      cerr << "  f\tfunction to use (" << which << ")\n";
-      cerr << "\n";
+       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+       std::cerr << "valid arguments include standard GAlib arguments plus:\n";
+       std::cerr << "  f\tfunction to use (" << which << ")\n";
+       std::cerr << "\n";
       exit(1);
     }
   }
 
   ga.evolve();
-  cout << "best individual is " << ga.statistics().bestIndividual() << "\n\n";
-  cout << ga.statistics() << "\n";
+  std::cout << "best individual is " << ga.statistics().bestIndividual() << "\n\n";
+  std::cout << ga.statistics() << "\n";
 
   return 0;
 }

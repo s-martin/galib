@@ -19,17 +19,17 @@ objective function.
  
 #include <iostream>
 
-#define cout std::cout
+ 
 
 float Objective(GAGenome &);
 
 int
 main(int argc, char **argv)
 {
-  cout << "Example 2\n\n";
-  cout << "This program generates a sequence of random numbers then uses\n";
-  cout << "a simple GA and binary-to-decimal genome to match the\n";
-  cout << "sequence.\n\n";
+  std::cout << "Example 2\n\n";
+  std::cout << "This program generates a sequence of random numbers then uses\n";
+  std::cout << "a simple GA and binary-to-decimal genome to match the\n";
+  std::cout << "sequence.\n\n";
 
 // See if we've been given a seed to use (for testing purposes).  When you
 // specify a random seed, the evolution will be exactly the same each time
@@ -66,12 +66,12 @@ main(int argc, char **argv)
 
 // Print out the sequence to see what we got.
 
-  cout << "input sequence:\n";
+  std::cout << "input sequence:\n";
   for(i=0; i<n; i++){
-    cout.width(10);
-    cout << target[i] << " ";
+    std::cout.width(10);
+    std::cout << target[i] << " ";
   }
-  cout << "\n"; cout.flush();
+  std::cout << "\n"; std::cout.flush();
 
 // Create a phenotype then fill it with the phenotypes we will need to map to
 // the values we read from the file.  The arguments to the add() method of a
@@ -111,23 +111,23 @@ main(int argc, char **argv)
 // GA was able to find.
 
   genome.initialize();
-  cout << "random values in the genome:\n";;
+  std::cout << "random values in the genome:\n";;
   for(i=0; i<map.nPhenotypes(); i++){
-    cout.width(10); cout << genome.phenotype(i) << " ";
+    std::cout.width(10); std::cout << genome.phenotype(i) << " ";
   }
-  cout << "\n";
+  std::cout << "\n";
 
   genome = ga.statistics().bestIndividual();
-  cout << "the ga generated:\n";
+  std::cout << "the ga generated:\n";
   for(i=0; i<map.nPhenotypes(); i++){
-    cout.width(10); cout << genome.phenotype(i) << " ";
+    std::cout.width(10); std::cout << genome.phenotype(i) << " ";
   }
-  cout << "\n\n"; cout.flush();
+  std::cout << "\n\n"; std::cout.flush();
 
 // We could print out the genome directly, like this:
-// cout << genome << "\n";
+// std::cout << genome << "\n";
 
-  cout << "best of generation data are in 'bog.dat'\n";
+  std::cout << "best of generation data are in 'bog.dat'\n";
 
 // Clean up by freeing the memory we allocated.
 

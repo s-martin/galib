@@ -20,9 +20,9 @@ depending on which you have on your system.
 
 #include <iostream>
 
-#define cout std::cout
-#define cerr std::cerr
-#define endl std::endl
+ 
+ 
+ 
 
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
@@ -227,24 +227,24 @@ float ai[25],bi[25];
 
 int
 main(int argc, char** argv) {
-  cout << "Graphic genetic algorithm demonstration program.\n\n";
-  cout << "This program understands the standard GAlib and Xt\n";
-  cout << "arguments plus the following:\n\n";
-  cout << "  function  which function to solve\n";
-  cout << "        0   loaf of bread with 4 smooth humps\n";
-  cout << "        1   Shekel's foxholes from DeJong\n";
-  cout << "        2   Schwefel's nasty function\n";
-  cout << "        3   concentric rings (ripple in a pond) (default)\n";
-  cout << "  ga        specify which genetic algorithm to use\n";
-  cout << "        0   incremental genetic algorithm\n";
-  cout << "        1   simple genetic algorithm\n";
-  cout << "        2   steady-state genetic algorithm (default)\n";
-  cout << "        3   deme genetic algorithm\n";
-  cout << "  genome    specify which genome to use\n";
-  cout << "        0   real number genome (default)\n";
-  cout << "        1   binary-to-decimal genome\n";
-  cout << "\n";
-  cout << endl;
+  std::cout << "Graphic genetic algorithm demonstration program.\n\n";
+  std::cout << "This program understands the standard GAlib and Xt\n";
+  std::cout << "arguments plus the following:\n\n";
+  std::cout << "  function  which function to solve\n";
+  std::cout << "        0   loaf of bread with 4 smooth humps\n";
+  std::cout << "        1   Shekel's foxholes from DeJong\n";
+  std::cout << "        2   Schwefel's nasty function\n";
+  std::cout << "        3   concentric rings (ripple in a pond) (default)\n";
+  std::cout << "  ga        specify which genetic algorithm to use\n";
+  std::cout << "        0   incremental genetic algorithm\n";
+  std::cout << "        1   simple genetic algorithm\n";
+  std::cout << "        2   steady-state genetic algorithm (default)\n";
+  std::cout << "        3   deme genetic algorithm\n";
+  std::cout << "  genome    specify which genome to use\n";
+  std::cout << "        0   real number genome (default)\n";
+  std::cout << "        1   binary-to-decimal genome\n";
+  std::cout << "\n";
+  std::cout <<  std::endl;
 
 // make the application widget, grab resource, and parse command line
 
@@ -300,7 +300,7 @@ main(int argc, char** argv) {
     if(val > MAX_POPS) {
       val = MAX_POPS;
       theAppData.ga->set(gaNnPopulations, val);
-      cerr << "this demo limits the number of populations to "<<MAX_POPS<<"\n";
+       std::cerr << "this demo limits the number of populations to "<<MAX_POPS<<"\n";
     }
   }
 
@@ -310,52 +310,52 @@ main(int argc, char** argv) {
 
 // report status
 
-  cout << "The evolution will use the following:\n";
-  cout << "   function: ";
+  std::cout << "The evolution will use the following:\n";
+  std::cout << "   function: ";
   switch(theAppData.whichFunction) {
   case 0:
-    cout << "loaf of bread";
+    std::cout << "loaf of bread";
     break;
   case 1: 
-    cout << "foxholes";
+    std::cout << "foxholes";
     break;
   case 2:
-    cout << "nasty function";
+    std::cout << "nasty function";
     break;
   case 3:
-    cout << "concentric rings";
+    std::cout << "concentric rings";
     break;
   default:
-    cout << "unrecognized function selected";
+    std::cout << "unrecognized function selected";
     break;
   }
-  cout << "\n";
-  cout << "     genome: ";
+  std::cout << "\n";
+  std::cout << "     genome: ";
   switch(theAppData.whichGenome) {
   case 1:
-    cout << "binary-to-decimal";
+    std::cout << "binary-to-decimal";
     break;
   default:
-    cout << "real number";
+    std::cout << "real number";
     break;
   }
-  cout << "\n";
-  cout << "  algorithm: ";
+  std::cout << "\n";
+  std::cout << "  algorithm: ";
   switch(theAppData.whichGA) {
   case 0:
-    cout << "incremental (immediate replacement)";
+    std::cout << "incremental (immediate replacement)";
     break;
   case 1:
-    cout << "simple (non-overlapping population)";
+    std::cout << "simple (non-overlapping population)";
     break;
   case 3:
-    cout << "deme (multiple populations)";
+    std::cout << "deme (multiple populations)";
     break;
   default:
-    cout << "steady-state (overlapping population)";
+    std::cout << "steady-state (overlapping population)";
     break;
   }
-  cout << "\n" << endl;
+  std::cout << "\n" <<  std::endl;
 
 
 // now realize all the widgets and pop 'em up
@@ -483,19 +483,19 @@ QuitCB(Widget, XtPointer, XtPointer){
 
 void
 DumpStatsCB(Widget, XtPointer cd, XtPointer){
-  cerr << "\nstatistics are:\n" << 
+   std::cerr << "\nstatistics are:\n" << 
     ((GAGeneticAlgorithm*)cd)->statistics() << "\n";
 }
 
 void
 DumpParamsCB(Widget, XtPointer cd, XtPointer){
-  cerr << "\nparameters are:\n" << 
+   std::cerr << "\nparameters are:\n" << 
     ((GAGeneticAlgorithm*)cd)->parameters() << "\n";
 }
 
 void
 DumpScoreCB(Widget, XtPointer cd, XtPointer){
-  cerr << "\nbest individual score is: " <<
+   std::cerr << "\nbest individual score is: " <<
     ((GAGeneticAlgorithm*)cd)->population().best().score() << "\n";
 }
 
