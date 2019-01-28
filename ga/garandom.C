@@ -8,9 +8,9 @@
  DESCRIPTION:
   Random number stuff for use in GAlib.
 ---------------------------------------------------------------------------- */
-#include <garandom.h>
 #include <cmath>
 #include <cstring>
+#include <garandom.h>
 #include <time.h>
 
 static void bitseed(unsigned int seed = 1);

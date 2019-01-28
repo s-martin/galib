@@ -15,17 +15,15 @@ a few more fancy things with the genome (ie use the read/write methods).
 #include <fstream>
 #include <iostream>
 
- 
- 
- 
-
 float objective(GAGenome &);
 
 int main(int argc, char *argv[])
 {
 	std::cout << "Example 7\n\n";
-	std::cout << "This program reads in a data file then runs a steady-state GA \n";
-	std::cout << "whose objective function tries to match the pattern of bits that\n";
+	std::cout
+		<< "This program reads in a data file then runs a steady-state GA \n";
+	std::cout
+		<< "whose objective function tries to match the pattern of bits that\n";
 	std::cout << "are in the data file.\n\n";
 
 	// See if we've been given a seed to use (for testing purposes).  When you
@@ -70,7 +68,8 @@ int main(int argc, char *argv[])
 		{
 			if (++i >= argc)
 			{
-				 std::cerr << argv[0] << ": the data file option needs a filename.\n";
+				std::cerr << argv[0]
+						  << ": the data file option needs a filename.\n";
 				exit(1);
 			}
 			else
@@ -83,8 +82,8 @@ int main(int argc, char *argv[])
 		{
 			if (++i >= argc)
 			{
-				 std::cerr << argv[0]
-					 << ": the parameters file option needs a filename.\n";
+				std::cerr << argv[0]
+						  << ": the parameters file option needs a filename.\n";
 				exit(1);
 			}
 			else
@@ -102,13 +101,13 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			 std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i]
-				 << "\n\n";
-			 std::cerr << "valid arguements include GAlib arguments plus:\n";
-			 std::cerr << "  dfile\tdata file from which to read (" << datafile
-				 << ")\n";
-			 std::cerr << "  pfile\tparameters file (" << parmfile << ")\n\n";
-			 std::cerr << "default parameters are:\n" << params << "\n\n";
+			std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i]
+					  << "\n\n";
+			std::cerr << "valid arguements include GAlib arguments plus:\n";
+			std::cerr << "  dfile\tdata file from which to read (" << datafile
+					  << ")\n";
+			std::cerr << "  pfile\tparameters file (" << parmfile << ")\n\n";
+			std::cerr << "default parameters are:\n" << params << "\n\n";
 			exit(1);
 		}
 	}
@@ -121,10 +120,10 @@ int main(int argc, char *argv[])
 	// can be useful in a population initializer when you want to bias your
 	// population)
 
-	 std::ifstream inStream(datafile);
+	std::ifstream inStream(datafile);
 	if (!inStream)
 	{
-		 std::cerr << "Cannot open " << datafile << " for input.\n";
+		std::cerr << "Cannot open " << datafile << " for input.\n";
 		exit(1);
 	}
 
@@ -224,7 +223,8 @@ int main(int argc, char *argv[])
 	std::cout << "\n";
 	std::cout.flush();
 
-	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+	std::cout << "best of generation data are in '" << ga.scoreFilename()
+			  << "'\n";
 
 	return 0;
 }
