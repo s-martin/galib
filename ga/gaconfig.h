@@ -325,9 +325,7 @@ incorporate it into the code base.
 
 // This defines how many bits are in a single word on your system.  Most
 // systems have a word length of 8 bits.
-#ifndef GALIB_BITS_IN_WORD
-#define GALIB_BITS_IN_WORD 8
-#endif
+constexpr int GALIB_BITS_IN_WORD = 8;
 
 // Use this to set the maximum number of bits that can be used in binary-to-
 // decimal conversions.  You should make this type the largest integer type

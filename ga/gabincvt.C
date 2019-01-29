@@ -8,12 +8,12 @@
  DESCRIPTION:
   Binary-to-decimal converters.
 ---------------------------------------------------------------------------- */
+#include <cstdio>
+#include <cstring>
 #include <gabincvt.h>
 #include <gaconfig.h>
 #include <gaerror.h>
 #include <limits.h>
-#include <cstdio>
-#include <cstring>
 
 // These numbers are machine-specific and are a function of the word length of
 // the OS you are running.  The binary string cannot be too long or else we
@@ -24,7 +24,10 @@
 #endif
 
 // Define the number of bits based on the builtin type
-#define _GA_MAX_BITS (int)(GALIB_BITS_IN_WORD * sizeof(GALIB_BITBASE))
+constexpr int _GA_MAX_BITS()
+{
+	return GALIB_BITS_IN_WORD * sizeof(GALIB_BITBASE);
+}
 
 // These are publicly available, but we don't want to advertise them.  They are
 // mostly just for testing purposes.  These are unscaled versions of the
@@ -47,12 +50,12 @@ static int _GAEncodeBase(unsigned int, unsigned BITBASE, GABit *, int, int);
 ---------------------------------------------------------------------------- */
 int GACheckDecoding(unsigned int &nbits)
 {
-	if ((int)nbits >= _GA_MAX_BITS)
+	if ((int)nbits >= _GA_MAX_BITS())
 	{
 		sprintf(_gaerrbuf1, "string is %d bits, max is %d", nbits,
-				_GA_MAX_BITS - 1);
+				_GA_MAX_BITS() - 1);
 		GAErr(GA_LOC, "GACheckDecoding", gaErrBinStrTooLong, _gaerrbuf1);
-		nbits = _GA_MAX_BITS - 1;
+		nbits = _GA_MAX_BITS() - 1;
 		return 1;
 	}
 	return 0;
@@ -62,12 +65,12 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 					unsigned BITBASE &nintervals)
 {
 	int status = 0;
-	if ((int)nbits >= _GA_MAX_BITS)
+	if ((int)nbits >= _GA_MAX_BITS())
 	{
 		sprintf(_gaerrbuf1, "string is %d bits, max is %d", nbits,
-				_GA_MAX_BITS - 1);
+				_GA_MAX_BITS() - 1);
 		GAErr(GA_LOC, "GACheckEncoding", gaErrBinStrTooLong, _gaerrbuf1);
-		nbits = _GA_MAX_BITS - 1;
+		nbits = _GA_MAX_BITS() - 1;
 		status = 1;
 	}
 
