@@ -39,3 +39,8 @@ add_subdirectory(ga)
 add_subdirectory(examples)
 add_subdirectory(test)
 
+#coverage
+#add_custom_target(coverage COMMAND "opencppcoverage --working_dir ./build/test -- ./build/test/Debug/GalibTest.exe")
+
+# copy test data
+file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)

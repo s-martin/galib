@@ -19,6 +19,20 @@ float objectiveEx7(GAGenome &c)
 	return (value);
 }
 
+// This objective function tries to maximize the value of the function
+//
+//                  y = -(x1*x1 + x2*x2)
+//
+float objectiveEx9(GAGenome &c)
+{
+	GABin2DecGenome &genome = (GABin2DecGenome &)c;
+
+	float y;
+	y = -genome.phenotype(0) * genome.phenotype(0);
+	y -= genome.phenotype(1) * genome.phenotype(1);
+	return y;
+}
+
 BOOST_AUTO_TEST_SUITE( UnitTest )
 
 BOOST_AUTO_TEST_CASE(GAex7)
@@ -155,6 +169,52 @@ BOOST_AUTO_TEST_CASE(GAex7)
     BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 217);
     BOOST_CHECK_EQUAL(ga.statistics().minEver(), 97);
     BOOST_CHECK_EQUAL(ga.statistics().generation(), 160);
+}
+
+BOOST_AUTO_TEST_CASE(GAex9)
+{
+	// Declare variables for the GA parameters and set them to some default
+	// values.
+	int popsize = 30;
+	int ngen = 100;
+	float pmut = 0.01;
+	float pcross = 0.6;
+
+	// Create a phenotype for two variables.  The number of bits you can use to
+	// represent any number is limited by the type of computer you are using. In
+	// this case, we use 16 bits to represent a floating point number whose
+	// value can range from -5 to 5, inclusive.  The bounds on x1 and x2 can be
+	// applied here and/or in the objective function.
+	GABin2DecPhenotype map;
+	map.add(16, -5, 5);
+	map.add(16, -5, 5);
+
+	// Create the template genome using the phenotype map we just made.
+	GABin2DecGenome genome(map, objectiveEx9);
+
+	// Now create the GA using the genome and run it.  We'll use sigma
+	// truncation scaling so that we can handle negative objective scores.
+	GASimpleGA ga(genome);
+	GASigmaTruncationScaling scaling;
+	ga.populationSize(popsize);
+	ga.nGenerations(ngen);
+	ga.pMutation(pmut);
+	ga.pCrossover(pcross);
+	ga.scaling(scaling);
+	ga.scoreFilename("bog.dat");
+	ga.scoreFrequency(10);
+	ga.flushFrequency(50);
+	ga.evolve(100); // static seed, so test is always the same
+
+	// Dump the results of the GA to the screen.
+
+	genome = ga.statistics().bestIndividual();
+	std::cout << "the ga found an optimum at the point (";
+	std::cout << genome.phenotype(0) << ", " << genome.phenotype(1) << ")\n\n";
+	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+
+    BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.0025177002, 0.0000001);
+    BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -0.000839233398, 0.0000001);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
