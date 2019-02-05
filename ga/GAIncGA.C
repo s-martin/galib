@@ -30,7 +30,7 @@ GAIncrementalGA::GAIncrementalGA(const GAGenome& c) : GAGeneticAlgorithm(c) {
   child2->geneticAlgorithm(*this);
 
   rs = WORST;
-  rf = 0;
+  rf = nullptr;
 
   noffspr = gaDefNumOff;
   params.add(gaNnOffspring, gaSNnOffspring, ParType::INT, &noffspr);

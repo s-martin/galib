@@ -62,7 +62,7 @@ GAPopulation::GAPopulation()
 	memset(rind, 0, N * sizeof(GAGenome *));
 	memset(sind, 0, N * sizeof(GAGenome *));
 	//  indDiv = new float[N*N];
-	indDiv = 0;
+	indDiv = nullptr;
 
 	neval = 0;
 	rawSum = rawAve = rawDev = rawVar = rawMax = rawMin = 0.0;
@@ -76,8 +76,8 @@ GAPopulation::GAPopulation()
 	slct = new DEFAULT_SELECTOR;
 	slct->assign(*this);
 	sclscm = new DEFAULT_SCALING;
-	evaldata = (GAEvalData *)0;
-	ga = (GAGeneticAlgorithm *)0;
+	evaldata = nullptr;
+	ga = nullptr;
 }
 
 GAPopulation::GAPopulation(const GAGenome &c, unsigned int popsize)
@@ -93,7 +93,7 @@ GAPopulation::GAPopulation(const GAGenome &c, unsigned int popsize)
 		rind[i] = c.clone(GAGenome::ATTRIBUTES);
 	memcpy(sind, rind, N * sizeof(GAGenome *));
 	//  indDiv = new float[N*N];
-	indDiv = 0;
+	indDiv = nullptr;
 
 	neval = 0;
 	rawSum = rawAve = rawDev = rawVar = rawMax = rawMin = 0.0;
@@ -107,18 +107,18 @@ GAPopulation::GAPopulation(const GAGenome &c, unsigned int popsize)
 	slct = new DEFAULT_SELECTOR;
 	slct->assign(*this);
 	sclscm = new DEFAULT_SCALING;
-	evaldata = (GAEvalData *)0;
-	ga = (GAGeneticAlgorithm *)0;
+	evaldata = nullptr;
+	ga = nullptr;
 }
 
 GAPopulation::GAPopulation(const GAPopulation &orig)
 {
 	n = N = 0;
-	rind = sind = (GAGenome **)0;
+	rind = sind = nullptr;
 	indDiv = nullptr;
-	sclscm = (GAScalingScheme *)0;
-	slct = (GASelectionScheme *)0;
-	evaldata = (GAEvalData *)0;
+	sclscm = nullptr;
+	slct = nullptr;
+	evaldata = nullptr;
 	copy(orig);
 }
 
@@ -165,7 +165,7 @@ void GAPopulation::copy(const GAPopulation &arg)
 	}
 	else
 	{
-		indDiv = 0;
+		indDiv = nullptr;
 	}
 
 	sclscm = arg.sclscm->clone();
@@ -182,7 +182,7 @@ void GAPopulation::copy(const GAPopulation &arg)
 	if (arg.evaldata)
 		evaldata = arg.evaldata->clone();
 	else
-		evaldata = (GAEvalData *)0;
+		evaldata = nullptr;
 
 	neval = 0; // don't copy the evaluation count!
 	rawSum = arg.rawSum;
@@ -331,7 +331,7 @@ int GAPopulation::compact()
 	if (indDiv)
 	{
 		delete[] indDiv;
-		indDiv = 0;
+		indDiv = nullptr;
 	}
 
 	return N = n;
@@ -507,7 +507,7 @@ void GAPopulation::diversity(bool flag) const
 
 	if (n > 1)
 	{
-		if (This->indDiv == 0)
+		if (This->indDiv == nullptr)
 			This->indDiv = new float[N * N];
 
 		This->popDiv = 0.0;

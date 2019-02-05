@@ -2,7 +2,7 @@
 <project version="1">
     <root name="."/>
     <platform>Unspecified</platform>
-    <importproject>../build/GAlib-NG.sln</importproject>
+    <importproject>../build/GAlib.sln</importproject>
     <analyze-all-vs-configs>true</analyze-all-vs-configs>
     <defines>
         <define name="WIN32 __x86__"/>

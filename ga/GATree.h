@@ -198,7 +198,10 @@ template <class T> class GATreeIter : public GATreeIterBASE
 {
   public:
 	GATreeIter() : GATreeIterBASE() {}
-	explicit GATreeIter(const GATree<T> &t) : GATreeIterBASE(t) { node = t.iter.node; }
+	explicit GATreeIter(const GATree<T> &t) : GATreeIterBASE(t)
+	{
+		node = t.iter.node;
+	}
 	GATreeIter(const GATreeIter<T> &i) : GATreeIterBASE(i) {}
 	T *current() { return (node ? &((GANode<T> *)node)->contents : (T *)0); }
 	T *root()

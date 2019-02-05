@@ -12,8 +12,8 @@
 #define _ga_allele_C_
 
 #include <GAAllele.h>
-#include <gaerror.h>
 #include <cstring>
+#include <gaerror.h>
 
 #define GA_ALLELE_CHUNK 10
 

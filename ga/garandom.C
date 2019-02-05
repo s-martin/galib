@@ -67,7 +67,7 @@ void GARandomSeed(unsigned int s)
 	{
 		while (seed == 0)
 		{
-			unsigned long int tmp = time(NULL) _GA_PID;
+			unsigned long int tmp = time(nullptr) _GA_PID;
 			for (unsigned int i = 0;
 				 i < GALIB_BITS_IN_WORD * sizeof(unsigned int); i++)
 				seed += (tmp & (1 << i));

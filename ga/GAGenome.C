@@ -33,29 +33,29 @@ float GAGenome::NoComparator(const GAGenome &c, const GAGenome &)
 
 GAGenome::GAGenome(Initializer i, Mutator m, Comparator c)
 {
-	if (i == 0)
+	if (i == nullptr)
 		i = NoInitializer;
-	if (m == 0)
+	if (m == nullptr)
 		m = NoMutator;
-	if (c == 0)
+	if (c == nullptr)
 		c = NoComparator;
 	_score = _fitness = 0.0;
 	_evaluated = false;
 	_neval = 0;
-	ga = 0;
-	ud = 0;
-	eval = 0;
-	evd = 0;
+	ga = nullptr;
+	ud = nullptr;
+	eval = nullptr;
+	evd = nullptr;
 	init = i;
 	mutr = m;
 	cmp = c;
-	sexcross = 0;
-	asexcross = 0;
+	sexcross = nullptr;
+	asexcross = nullptr;
 }
 
 GAGenome::GAGenome(const GAGenome &orig)
 {
-	evd = 0;
+	evd = nullptr;
 	_neval = 0;
 	GAGenome::copy(orig);
 }
