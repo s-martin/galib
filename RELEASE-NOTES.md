@@ -1,4 +1,4 @@
-release notes for GAlib
+# Release notes for GAlib #
 
 2.4.6 January 2005
 -------------------------------------------------------------------------------

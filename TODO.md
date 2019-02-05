@@ -1,6 +1,6 @@
-this is a running list of things to be done to galib.
+This is a running list of things to be done to galib.
 
-todo:
+# Todo #
 
 - make the library thread-safe
 - include rules for building both shared and static libraries

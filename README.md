@@ -1,4 +1,4 @@
-GAlib: A C++ Genetic Algorithm Library
+# GAlib: A C++ Genetic Algorithm Library #
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
 GAlib is a C++ library of genetic algorithm objects.  With GAlib you can add 
@@ -15,37 +15,37 @@ Graphic examples (XWindows/Motif and MS Windows) are available, as are
 parallel, distributed implementations using PVM.  There are about 30 examples
 that illustrate various ways to use GAlib on a variety of problems.
 
-WHERE TO GET IT ---------------------------------------------------------------
+## WHERE TO GET IT ##
 
-   http://lancet.mit.edu/ga
-    ftp://lancet.mit.edu/pub/ga/
+http://lancet.mit.edu/ga 
 
-COMPILATION -------------------------------------------------------------------
+ftp://lancet.mit.edu/pub/ga/
 
+## COMPILATION ## 
 There are two things to build: the library and the examples.  Here is the
 short version of how to build and test everything:
 
 On unix,
 
-   % make test
+> % make test
 
 On windows, with MS VC++,
 
-   > nmake /f makefile.vcpp test
+> nmake /f makefile.vcpp test
 
 On windows, with Borland,
 
-   > make -f makefile.bcc test
+> make -f makefile.bcc test
 
 If that does not work, then here are the files you might have to modify:
 
-  - ga/gaconfig.h  - this contains the macros that control library options
-  - makevars       - compiler and linker options for each compilier/os
-  - makefile       - the actual build rules for putting everything together
+- ga/gaconfig.h  - this contains the macros that control library options
+- makevars       - compiler and linker options for each compilier/os
+- makefile       - the actual build rules for putting everything together
 
 If you still have problems, look at Installation.html in the doc directory.
 
-DOCUMENTATION and MAILING LIST ------------------------------------------------
+## DOCUMENTATION and MAILING LIST  ##
 
 Complete documentation in html format is available in the doc directory.  The 
 distribution site contains PDF and PostScript(tm) versions.
