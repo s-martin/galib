@@ -2,8 +2,8 @@
 
 #include <ga.h>
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 // This objective function just tries to match the genome to the pattern in the
 // user data.
@@ -33,11 +33,11 @@ float objectiveEx9(GAGenome &c)
 	return y;
 }
 
-BOOST_AUTO_TEST_SUITE( UnitTest )
+BOOST_AUTO_TEST_SUITE(UnitTest)
 
 BOOST_AUTO_TEST_CASE(GAex7)
 {
-    GARandomSeed(100); // so test is always the same
+	GARandomSeed(100); // so test is always the same
 
 	// Set the default values of the parameters.
 	int i, j;
@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	params.set(gaNscoreFrequency, 20); // how often to record scores
 	params.set(gaNflushFrequency, 50); // how often to flush scores to file
 	params.set(gaNscoreFilename, "bog.dat");
-	//params.parse(argc, argv, false);
+	// params.parse(argc, argv, false);
 
 	char datafile[128] = "smiley.txt";
 	char parmfile[128] = "";
@@ -166,9 +166,9 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	std::cout << "best of generation data are in '" << ga.scoreFilename()
 			  << "'\n";
 
-    BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 217);
-    BOOST_CHECK_EQUAL(ga.statistics().minEver(), 97);
-    BOOST_CHECK_EQUAL(ga.statistics().generation(), 160);
+	BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 217);
+	BOOST_CHECK_EQUAL(ga.statistics().minEver(), 97);
+	BOOST_CHECK_EQUAL(ga.statistics().generation(), 160);
 }
 
 BOOST_AUTO_TEST_CASE(GAex9)
@@ -211,10 +211,11 @@ BOOST_AUTO_TEST_CASE(GAex9)
 	genome = ga.statistics().bestIndividual();
 	std::cout << "the ga found an optimum at the point (";
 	std::cout << genome.phenotype(0) << ", " << genome.phenotype(1) << ")\n\n";
-	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
+	std::cout << "best of generation data are in '" << ga.scoreFilename()
+			  << "'\n";
 
-    BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.0025177002, 0.0000001);
-    BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -0.000839233398, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.0025177002, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -0.000839233398, 0.0000001);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
