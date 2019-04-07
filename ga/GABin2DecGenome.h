@@ -96,18 +96,18 @@ class GABin2DecPhenotype
 	float max(int which) const { return core->maxval[which]; }
 	int length(int which) const { return core->nbits[which]; }
 	int offset(int which) const { return core->oset[which]; }
-	int equal(const GABin2DecPhenotype &) const;
+	bool equal(const GABin2DecPhenotype &) const;
 
   protected:
 	GABin2DecPhenotypeCore *core;
 };
 
-inline int operator==(const GABin2DecPhenotype &a, const GABin2DecPhenotype &b)
+inline bool operator==(const GABin2DecPhenotype &a, const GABin2DecPhenotype &b)
 {
 	return a.equal(b);
 }
 
-inline int operator!=(const GABin2DecPhenotype &a, const GABin2DecPhenotype &b)
+inline bool operator!=(const GABin2DecPhenotype &a, const GABin2DecPhenotype &b)
 {
 	return (a.equal(b) ? 0 : 1);
 }
@@ -151,7 +151,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 	virtual int read(std::istream &) override;
 	virtual int write(std::ostream &) const override;
 
-	virtual int equal(const GAGenome &) const override;
+	virtual bool equal(const GAGenome &) const override;
 	virtual bool notequal(const GAGenome &) const override;
 
 	const GABin2DecPhenotype &phenotypes(const GABin2DecPhenotype &p);

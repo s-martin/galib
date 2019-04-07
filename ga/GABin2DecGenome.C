@@ -144,7 +144,7 @@ void GABin2DecPhenotype::remove(unsigned int x)
 	core->n -= 1;
 }
 
-int GABin2DecPhenotype::equal(const GABin2DecPhenotype &b) const
+bool GABin2DecPhenotype::equal(const GABin2DecPhenotype &b) const
 {
 	if (core->sz != b.core->sz || core->n != b.core->n)
 		return false;
@@ -279,7 +279,7 @@ int GABin2DecGenome::write(std::ostream &os) const
 
 // For two bin2dec genomes to be equal they must have the same bits AND the
 // same phenotypes.
-int GABin2DecGenome::equal(const GAGenome &g) const
+bool GABin2DecGenome::equal(const GAGenome &g) const
 {
 	auto &b = (GABin2DecGenome &)g;
 	return ((GA1DBinaryStringGenome::equal(b) && *ptype == *(b.ptype)) ? true

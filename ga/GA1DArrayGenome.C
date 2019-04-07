@@ -13,10 +13,10 @@
 
 #include <GA1DArrayGenome.h>
 #include <GAMask.h>
-#include <garandom.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <garandom.h>
 
 template <class T>
 int GA1DArrayIsHole(const GA1DArrayGenome<T> &, const GA1DArrayGenome<T> &, int,
@@ -190,10 +190,10 @@ template <class T> int GA1DArrayGenome<T>::resizeBehaviour() const
 	return val;
 }
 
-template <class T> int GA1DArrayGenome<T>::equal(const GAGenome &c) const
+template <class T> bool GA1DArrayGenome<T>::equal(const GAGenome &c) const
 {
 	const GA1DArrayGenome<T> &b = DYN_CAST(const GA1DArrayGenome<T> &, c);
-	return ((this == &c) ? 1
+	return ((this == &c) ? true
 						 : ((nx != b.nx) ? 0 : GAArray<T>::equal(b, 0, 0, nx)));
 }
 
@@ -321,7 +321,7 @@ template <class T> int GA1DArrayAlleleGenome<T>::write(std::ostream &os) const
 	return GA1DArrayGenome<T>::write(os);
 }
 
-template <class T> int GA1DArrayAlleleGenome<T>::equal(const GAGenome &c) const
+template <class T> bool GA1DArrayAlleleGenome<T>::equal(const GAGenome &c) const
 {
 	return GA1DArrayGenome<T>::equal(c);
 }
@@ -457,12 +457,13 @@ float GA1DArrayGenome<ARRAY_TYPE>::ElementComparator(const GAGenome &a,
 	return count / sis.length();
 }
 
-#define SWAP(a, b)                                                             \
-	{                                                                          \
-		unsigned int tmp = a;                                                  \
-		a = b;                                                                 \
-		b = tmp;                                                               \
-	}
+template <typename T1, typename T2> 
+constexpr void SWAP(T1 &a, T2 &b)
+{
+	auto tmp = a;
+	a = b;
+	b = tmp;
+}
 
 // Randomly take bits from each parent.  For each bit we flip a coin to see if
 // that bit should come from the mother or the father.  If strings are

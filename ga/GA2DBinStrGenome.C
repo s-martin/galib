@@ -337,7 +337,7 @@ void GA2DBinaryStringGenome::move(unsigned int x, unsigned int y,
 	_evaluated = false;
 }
 
-int GA2DBinaryStringGenome::equal(const GA2DBinaryStringGenome &orig,
+bool GA2DBinaryStringGenome::equal(const GA2DBinaryStringGenome &orig,
 								  unsigned int x, unsigned int y,
 								  unsigned int srcx, unsigned int srcy,
 								  unsigned int w, unsigned int h) const
@@ -346,20 +346,20 @@ int GA2DBinaryStringGenome::equal(const GA2DBinaryStringGenome &orig,
 	for (unsigned int j = 0; j < h; j++)
 		eq += GABinaryString::equal(orig, (y + j) * nx + x,
 									(srcy + j) * nx + srcx, w);
-	return eq == h ? 1 : 0;
+	return eq == h ? true : false;
 }
 
-int GA2DBinaryStringGenome::equal(const GAGenome &c) const
+bool GA2DBinaryStringGenome::equal(const GAGenome &c) const
 {
 	if (this == &c)
-		return 1;
+		return true;
 	auto &b = (GA2DBinaryStringGenome &)c;
 	if (nx != b.nx || ny != b.ny)
-		return 0;
+		return false;
 	int val = 0;
 	for (unsigned int j = 0; j < ny && val == 0; j++)
 		val = GABinaryString::equal(b, j * nx, j * nx, nx) ? 0 : 1;
-	return (val ? 0 : 1);
+	return (val ? false : true);
 }
 
 /* ----------------------------------------------------------------------------

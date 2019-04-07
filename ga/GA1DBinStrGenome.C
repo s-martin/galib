@@ -213,16 +213,16 @@ int GA1DBinaryStringGenome::equal(const GA1DBinaryStringGenome &c,
 	return GABinaryString::equal(c, dest, src, len);
 }
 
-int GA1DBinaryStringGenome::equal(const GAGenome &c) const
+bool GA1DBinaryStringGenome::equal(const GAGenome &c) const
 {
 	if (this == &c)
-		return 1;
+		return true;
 	const GA1DBinaryStringGenome *b =
 		DYN_CAST(const GA1DBinaryStringGenome *, &c);
-	int eq = 0;
+	bool eq = false;
 	if (b != nullptr)
 	{
-		eq = ((nx != b->nx) ? 0 : GABinaryString::equal(*b, 0, 0, nx));
+		eq = ((nx != b->nx) ? false : GABinaryString::equal(*b, 0, 0, nx));
 	}
 	return eq;
 }

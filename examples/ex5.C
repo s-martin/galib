@@ -52,7 +52,7 @@ public:
   virtual ~CompositeGenome();
   virtual GAGenome* clone(GAGenome::CloneMethod) const ;
   virtual void copy(const GAGenome & c);
-  virtual int equal(const GAGenome& g) const;
+  virtual bool equal(const GAGenome& g) const;
   virtual int read( std::istream & is);
   virtual int write( std::ostream & os) const;
 
@@ -108,8 +108,7 @@ CompositeGenome::copy(const GAGenome & c){
   }
 }
 
-int 
-CompositeGenome::equal(const GAGenome& g) const {
+bool CompositeGenome::equal(const GAGenome& g) const {
   CompositeGenome& genome = (CompositeGenome&)g;
   return ((*str == *genome.str) && (*b2d == *genome.b2d));
 }

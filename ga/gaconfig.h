@@ -314,7 +314,7 @@ incorporate it into the code base.
 #define GALIB_USE_PID
 #endif
 
-#include <assert.h>
+#include <cassert>
 
 // If no RNG has been selected, use the ran2 generator by default
 #if !defined(GALIB_USE_RAND) && !defined(GALIB_USE_RANDOM) &&                  \
@@ -330,9 +330,7 @@ constexpr int GALIB_BITS_IN_WORD = 8;
 // Use this to set the maximum number of bits that can be used in binary-to-
 // decimal conversions.  You should make this type the largest integer type
 // that your system supports.
-#ifndef GALIB_BITBASE
-#define GALIB_BITBASE long int
-#endif
+using GALIB_BITBASE = long int;
 
 // If the system/compiler understands C++ casts, then we use them.  Otherwise
 // we default to the C-style casts.  The macros make explicit the fact that we

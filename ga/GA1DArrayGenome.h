@@ -78,7 +78,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	virtual int read(std::istream &is) override;
 	virtual int write(std::ostream &os) const override;
 
-	virtual int equal(const GAGenome &c) const override;
+	virtual bool equal(const GAGenome &c) const override;
 
 	const T &gene(unsigned int x = 0) const { return this->a[x]; }
 	T &gene(unsigned int x, const T &value)
@@ -156,7 +156,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	static int FlipMutator(GAGenome &, float);
 
   public:
-	GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<T> &a,
+	GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<T> &s,
 						  GAGenome::Evaluator f = (GAGenome::Evaluator) nullptr,
 						  void *u = nullptr);
 	explicit GA1DArrayAlleleGenome(
@@ -182,7 +182,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	virtual int read(std::istream &is) override;
 	virtual int write(std::ostream &os) const override;
 
-	virtual int equal(const GAGenome &c) const override;
+	virtual bool equal(const GAGenome &c) const override;
 	virtual int resize(int len) override;
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const

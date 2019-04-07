@@ -10,7 +10,7 @@
 
 #include <cstring>
 
-#define GA_MASK_TYPE char
+using GA_MASK_TYPE = char;
 
 class GAMask
 {
@@ -18,12 +18,12 @@ class GAMask
 	GAMask()
 	{
 		_n = 0;
-		_mask = (GA_MASK_TYPE *)0;
+		_mask = nullptr;
 	}
 	GAMask(const GAMask &m)
 	{
 		_n = 0;
-		_mask = (GA_MASK_TYPE *)0;
+		_mask = nullptr;
 		copy(m);
 	}
 	GAMask &operator=(const GAMask &m)

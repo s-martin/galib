@@ -89,7 +89,7 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	virtual int read(std::istream &is) override;
 	virtual int write(std::ostream &os) const override;
 
-	virtual int equal(const GAGenome &c) const override;
+	virtual bool equal(const GAGenome &c) const override;
 
 	short gene(unsigned int x = 0) const { return bit(x); }
 	short gene(unsigned int x, short value)

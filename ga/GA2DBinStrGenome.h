@@ -67,7 +67,7 @@ class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
 	virtual int read(std::istream &) override;
 	virtual int write(std::ostream &) const override;
 
-	virtual int equal(const GAGenome &c) const override;
+	virtual bool equal(const GAGenome &c) const override;
 
 	// specific to this class
 	short gene(unsigned int x, unsigned int y) const { return bit(x + nx * y); }
@@ -100,7 +100,7 @@ class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
 	}
 	void copy(const GA2DBinaryStringGenome &, unsigned int, unsigned int,
 			  unsigned int, unsigned int, unsigned int, unsigned int);
-	int equal(const GA2DBinaryStringGenome &, unsigned int, unsigned int,
+	bool equal(const GA2DBinaryStringGenome &, unsigned int, unsigned int,
 			  unsigned int, unsigned int, unsigned int, unsigned int) const;
 	void set(unsigned int, unsigned int, unsigned int, unsigned int);
 	void unset(unsigned int, unsigned int, unsigned int, unsigned int);

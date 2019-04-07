@@ -493,7 +493,7 @@ void GA3DBinaryStringGenome::move(unsigned int x, unsigned int y,
 	_evaluated = false;
 }
 
-int GA3DBinaryStringGenome::equal(const GA3DBinaryStringGenome &orig,
+bool GA3DBinaryStringGenome::equal(const GA3DBinaryStringGenome &orig,
 								  unsigned int x, unsigned int y,
 								  unsigned int z, unsigned int srcx,
 								  unsigned int srcy, unsigned int srcz,
@@ -506,23 +506,23 @@ int GA3DBinaryStringGenome::equal(const GA3DBinaryStringGenome &orig,
 			eq += GABinaryString::equal(
 				orig, (z + k) * ny * nx + (y + j) * nx + x,
 				(srcz + k) * ny * nx + (srcy + j) * nx + srcx, w);
-	return eq == d * h ? 1 : 0;
+	return eq == d * h ? true : false;
 }
 
-int GA3DBinaryStringGenome::equal(const GAGenome &c) const
+bool GA3DBinaryStringGenome::equal(const GAGenome &c) const
 {
 	if (this == &c)
-		return 1;
+		return true;
 	const GA3DBinaryStringGenome &b =
 		DYN_CAST(const GA3DBinaryStringGenome &, c);
 	if (nx != b.nx || ny != b.ny || nz != b.nz)
-		return 0;
+		return false;
 	int val = 0;
 	for (unsigned int k = 0; k < nz && val == 0; k++)
 		for (unsigned int j = 0; j < ny && val == 0; j++)
 			val =
 				GABinaryString::equal(b, k * ny * nx, k * ny * nx, nx) ? 0 : 1;
-	return (val ? 0 : 1);
+	return (val ? false : true);
 }
 
 /* ----------------------------------------------------------------------------
