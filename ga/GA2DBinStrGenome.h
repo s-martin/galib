@@ -49,25 +49,33 @@ class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
 	GA2DBinaryStringGenome &operator=(const short array[])
 	{
 		for (unsigned int i = 0; i < nx; i++)
+		{
 			for (unsigned int j = 0; j < ny; j++)
+			{
 				gene(i, j, *(array + j * nx + i));
+			}
+		}
 		return *this;
 	}
 	GA2DBinaryStringGenome &operator=(const int array[])
 	{
 		for (unsigned int i = 0; i < nx; i++)
+		{
 			for (unsigned int j = 0; j < ny; j++)
+			{
 				gene(i, j, *(array + j * nx + i));
+			}
+		}
 		return *this;
 	}
-	virtual ~GA2DBinaryStringGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &chrom) override;
+	~GA2DBinaryStringGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	void copy(const GAGenome &chrom) override;
 
-	virtual int read(std::istream &) override;
-	virtual int write(std::ostream &) const override;
+	int read(std::istream &) override;
+	int write(std::ostream &) const override;
 
-	virtual bool equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 
 	// specific to this class
 	short gene(unsigned int x, unsigned int y) const { return bit(x + nx * y); }
@@ -101,7 +109,7 @@ class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
 	void copy(const GA2DBinaryStringGenome &, unsigned int, unsigned int,
 			  unsigned int, unsigned int, unsigned int, unsigned int);
 	bool equal(const GA2DBinaryStringGenome &, unsigned int, unsigned int,
-			  unsigned int, unsigned int, unsigned int, unsigned int) const;
+			   unsigned int, unsigned int, unsigned int, unsigned int) const;
 	void set(unsigned int, unsigned int, unsigned int, unsigned int);
 	void unset(unsigned int, unsigned int, unsigned int, unsigned int);
 	void randomize(unsigned int, unsigned int, unsigned int, unsigned int);

@@ -95,7 +95,9 @@ void GAErr(const GASourceLocator loc, const char *clss, const char *func,
 	sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
 	strcat(gaErrMsg, _gaerrbuf1);
 	if (__gaErrFlag == true)
+	{
 		*__gaErrStream << gaErrMsg;
+	}
 }
 
 void GAErr(const GASourceLocator loc, const char *clss, const char *func,
@@ -123,7 +125,9 @@ void GAErr(const GASourceLocator loc, const char *clss, const char *func,
 	sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
 	strcat(gaErrMsg, _gaerrbuf1);
 	if (__gaErrFlag == true)
+	{
 		*__gaErrStream << gaErrMsg;
+	}
 }
 
 void GAErr(const GASourceLocator loc, const char *func, GAErrorIndex i,
@@ -149,7 +153,9 @@ void GAErr(const GASourceLocator loc, const char *func, GAErrorIndex i,
 	sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
 	strcat(gaErrMsg, _gaerrbuf1);
 	if (__gaErrFlag == true)
+	{
 		*__gaErrStream << gaErrMsg;
+	}
 }
 
 void GAReportErrors(bool flag) { __gaErrFlag = flag; }

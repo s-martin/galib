@@ -18,21 +18,24 @@ void GADCrowdingGA::initialize(unsigned int seed)
 
 	stats.reset(*pop);
 
-	if (!scross)
+	if (!scross) {
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
+}
 }
 
 void GADCrowdingGA::step()
 {
-	if (pop->size() == 0)
+	if (pop->size() == 0) {
 		return;
+}
 
 	GAGenome *child = pop->individual(0).clone();
 
 	GAList<int> indpool;
 
-	for (int i = 0; i < pop->size(); i++)
+	for (int i = 0; i < pop->size(); i++) {
 		indpool.insert(i);
+}
 
 	do
 	{

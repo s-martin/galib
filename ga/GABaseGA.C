@@ -54,16 +54,24 @@ bool GAGeneticAlgorithm::TerminateUponConvergence(GAGeneticAlgorithm &ga)
 	if (ga.minimaxi() == GAGeneticAlgorithm::MINIMIZE)
 	{
 		if (ga.convergence() == 0 || ga.convergence() > ga.pConvergence())
+		{
 			val = false;
+		}
 		else
+		{
 			val = true;
+		}
 	}
 	else
 	{
 		if (ga.convergence() < ga.pConvergence())
+		{
 			val = false;
+		}
 		else
+		{
 			val = true;
+		}
 	}
 	return val;
 }
@@ -95,16 +103,24 @@ bool GAGeneticAlgorithm::TerminateUponPopConvergence(GAGeneticAlgorithm &ga)
 	if (ga.minimaxi() == GAGeneticAlgorithm::MINIMIZE)
 	{
 		if (ratio <= ga.pConvergence())
+		{
 			val = true;
+		}
 		else
+		{
 			val = false;
+		}
 	}
 	else
 	{
 		if (ratio >= ga.pConvergence())
+		{
 			val = true;
+		}
 		else
+		{
 			val = false;
+		}
 	}
 
 	return val;
@@ -262,9 +278,13 @@ GAGeneticAlgorithm::~GAGeneticAlgorithm() { delete pop; }
 void GAGeneticAlgorithm::copy(const GAGeneticAlgorithm &ga)
 {
 	if (pop)
+	{
 		pop->copy(*(ga.pop));
+	}
 	else
+	{
 		pop = ga.pop->clone();
+	}
 	pop->geneticAlgorithm(*this);
 
 	stats = ga.stats;
@@ -287,7 +307,9 @@ const GAParameterList &
 GAGeneticAlgorithm::parameters(const GAParameterList &list)
 {
 	for (int i = 0; i < list.size(); i++)
+	{
 		setptr(list[i].fullname(), list[i].value());
+	}
 	return params;
 }
 
@@ -296,7 +318,9 @@ const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv,
 {
 	params.parse(argc, argv, flag); // get the args we understand
 	for (int i = 0; i < params.size(); i++)
+	{
 		setptr(params[i].fullname(), params[i].value());
+	}
 	return params;
 }
 
@@ -305,7 +329,9 @@ const GAParameterList &GAGeneticAlgorithm::parameters(const char *filename,
 {
 	params.read(filename, flag);
 	for (int i = 0; i < params.size(); i++)
+	{
 		setptr(params[i].fullname(), params[i].value());
+	}
 	return params;
 }
 
@@ -314,7 +340,9 @@ const GAParameterList &GAGeneticAlgorithm::parameters(std::istream &is,
 {
 	params.read(is, flag);
 	for (int i = 0; i < params.size(); i++)
+	{
 		setptr(params[i].fullname(), params[i].value());
+	}
 	return params;
 }
 
@@ -477,11 +505,13 @@ int GAGeneticAlgorithm::set(const char *name, double v)
 		{
 			if (params[i].type() == ParType::FLOAT)
 			{
-				float fval = (float)v;
+				float fval = static_cast<float>(v);
 				status = setptr(name, (void *)&fval);
 			}
 			else
+			{
 				status = setptr(name, (void *)&v);
+			}
 		}
 	}
 	return status;
@@ -493,84 +523,84 @@ int GAGeneticAlgorithm::get(const char *name, void *value) const
 
 	if (strcmp(name, gaNseed) == 0 || strcmp(name, gaSNseed) == 0)
 	{
-		*((int *)value) = d_seed;
+		*(static_cast<int *>(value)) = d_seed;
 		status = 0;
 	}
 	else if (strcmp(name, gaNnBestGenomes) == 0 ||
 			 strcmp(name, gaSNnBestGenomes) == 0)
 	{
-		*((int *)value) = stats.nBestGenomes();
+		*(static_cast<int *>(value)) = stats.nBestGenomes();
 		status = 0;
 	}
 	else if (strcmp(name, gaNpopulationSize) == 0 ||
 			 strcmp(name, gaSNpopulationSize) == 0)
 	{
-		*((int *)value) = pop->size();
+		*(static_cast<int *>(value)) = pop->size();
 		status = 0;
 	}
 	else if (strcmp(name, gaNminimaxi) == 0 || strcmp(name, gaSNminimaxi) == 0)
 	{
-		*((int *)value) = minmax;
+		*(static_cast<int *>(value)) = minmax;
 		status = 0;
 	}
 	else if (strcmp(name, gaNnGenerations) == 0 ||
 			 strcmp(name, gaSNnGenerations) == 0)
 	{
-		*((int *)value) = ngen;
+		*(static_cast<int *>(value)) = ngen;
 		status = 0;
 	}
 	else if (strcmp(name, gaNpConvergence) == 0 ||
 			 strcmp(name, gaSNpConvergence) == 0)
 	{
-		*((float *)value) = pconv;
+		*(static_cast<float *>(value)) = pconv;
 		status = 0;
 	}
 	else if (strcmp(name, gaNnConvergence) == 0 ||
 			 strcmp(name, gaSNnConvergence) == 0)
 	{
-		*((int *)value) = nconv;
+		*(static_cast<int *>(value)) = nconv;
 		status = 0;
 	}
 	else if (strcmp(name, gaNpCrossover) == 0 ||
 			 strcmp(name, gaSNpCrossover) == 0)
 	{
-		*((float *)value) = pcross;
+		*(static_cast<float *>(value)) = pcross;
 		status = 0;
 	}
 	else if (strcmp(name, gaNpMutation) == 0 ||
 			 strcmp(name, gaSNpMutation) == 0)
 	{
-		*((float *)value) = pmut;
+		*(static_cast<float *>(value)) = pmut;
 		status = 0;
 	}
 	else if (strcmp(name, gaNscoreFrequency) == 0 ||
 			 strcmp(name, gaSNscoreFrequency) == 0)
 	{
-		*((int *)value) = stats.scoreFrequency();
+		*(static_cast<int *>(value)) = stats.scoreFrequency();
 		status = 0;
 	}
 	else if (strcmp(name, gaNflushFrequency) == 0 ||
 			 strcmp(name, gaSNflushFrequency) == 0)
 	{
-		*((int *)value) = stats.flushFrequency();
+		*(static_cast<int *>(value)) = stats.flushFrequency();
 		status = 0;
 	}
 	else if (strcmp(name, gaNrecordDiversity) == 0 ||
 			 strcmp(name, gaSNrecordDiversity) == 0)
 	{
-		*((int *)value) = stats.recordDiversity();
+		*(static_cast<int *>(value)) = stats.recordDiversity();
 		status = 0;
 	}
 	else if (strcmp(name, gaNselectScores) == 0 ||
 			 strcmp(name, gaSNselectScores) == 0)
 	{
-		*((int *)value) = stats.selectScores();
+		*(static_cast<int *>(value)) = stats.selectScores();
 		status = 0;
 	}
 	else if (strcmp(name, gaNscoreFilename) == 0 ||
 			 strcmp(name, gaSNscoreFilename) == 0)
 	{
-		*((const char **)value) = stats.scoreFilename();
+		*(static_cast<const char **>(value)) = stats.scoreFilename();
 		status = 0;
 	}
 	return status;
@@ -579,13 +609,17 @@ int GAGeneticAlgorithm::get(const char *name, void *value) const
 void GAGeneticAlgorithm::objectiveFunction(GAGenome::Evaluator f)
 {
 	for (int i = 0; i < pop->size(); i++)
+	{
 		pop->individual(i).evaluator(f);
+	}
 }
 
 void GAGeneticAlgorithm::objectiveData(const GAEvalData &v)
 {
 	for (int i = 0; i < pop->size(); i++)
+	{
 		pop->individual(i).evalData(v);
+	}
 }
 
 const GAPopulation &GAGeneticAlgorithm::population(const GAPopulation &p)
@@ -612,9 +646,13 @@ int GAGeneticAlgorithm::populationSize(unsigned int value)
 int GAGeneticAlgorithm::minimaxi(int m)
 {
 	if (m == MINIMIZE)
+	{
 		pop->order(GAPopulation::LOW_IS_BEST);
+	}
 	else
+	{
 		pop->order(GAPopulation::HIGH_IS_BEST);
+	}
 	params.set(gaNminimaxi, m);
 	minmax = (m == MINIMIZE ? MINIMIZE : MAXIMIZE);
 	return minmax;

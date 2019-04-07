@@ -52,7 +52,9 @@ GABin2DecPhenotypeCore::GABin2DecPhenotypeCore(const GABin2DecPhenotypeCore &p)
 GABin2DecPhenotypeCore::~GABin2DecPhenotypeCore()
 {
 	if (cnt > 0)
+	{
 		GAErr(GA_LOC, "GABin2DecPhenotypeCore", "destructor", gaErrRefsRemain);
+	}
 	delete[] nbits;
 	delete[] oset;
 	delete[] minval;
@@ -63,7 +65,9 @@ GABin2DecPhenotypeCore &GABin2DecPhenotypeCore::
 operator=(const GABin2DecPhenotypeCore &p)
 {
 	if (&p == this)
+	{
 		return *this;
+	}
 
 	delete[] nbits;
 	delete[] oset;
@@ -119,10 +123,14 @@ void GABin2DecPhenotype::add(unsigned int nb, float min, float max)
 	}
 	core->nbits[core->n] = nb;
 	if (core->n > 0)
+	{
 		core->oset[core->n] =
 			core->oset[core->n - 1] + core->nbits[core->n - 1];
+	}
 	else
+	{
 		core->oset[core->n] = 0;
+	}
 	core->minval[core->n] = min;
 	core->maxval[core->n] = max;
 	core->n++;
@@ -132,7 +140,9 @@ void GABin2DecPhenotype::add(unsigned int nb, float min, float max)
 void GABin2DecPhenotype::remove(unsigned int x)
 {
 	if (x >= core->n)
+	{
 		return;
+	}
 	memmove(&(core->nbits[x]), &(core->nbits[x + 1]),
 			(core->n - x - 1) * sizeof(uint16_t));
 	memmove(&(core->oset[x]), &(core->oset[x + 1]),
@@ -147,12 +157,16 @@ void GABin2DecPhenotype::remove(unsigned int x)
 bool GABin2DecPhenotype::equal(const GABin2DecPhenotype &b) const
 {
 	if (core->sz != b.core->sz || core->n != b.core->n)
+	{
 		return false;
+	}
 	if (memcmp(core->nbits, b.core->nbits, core->n * sizeof(uint16_t)) != 0 ||
 		memcmp(core->oset, b.core->oset, core->n * sizeof(uint16_t)) != 0 ||
 		memcmp(core->minval, b.core->minval, core->n * sizeof(float)) != 0 ||
 		memcmp(core->maxval, b.core->maxval, core->n * sizeof(float)))
+	{
 		return false;
+	}
 	return (true);
 }
 
@@ -162,7 +176,9 @@ bool GABin2DecPhenotype::equal(const GABin2DecPhenotype &b) const
 void GABin2DecGenome::copy(const GAGenome &orig)
 {
 	if (&orig == this)
+	{
 		return;
+	}
 	const GABin2DecGenome *c = DYN_CAST(const GABin2DecGenome *, &orig);
 	if (c)
 	{
@@ -170,9 +186,13 @@ void GABin2DecGenome::copy(const GAGenome &orig)
 		encode = c->encode;
 		decode = c->decode;
 		if (ptype)
+		{
 			*ptype = *(c->ptype);
+		}
 		else
+		{
 			ptype = new GABin2DecPhenotype(*(c->ptype));
+		}
 	}
 }
 
@@ -264,7 +284,9 @@ int GABin2DecGenome::read(std::istream &is)
 	{
 		is >> value;
 		if (is.fail() || is.eof())
+		{
 			return 1;
+		}
 		phenotype(i, value);
 	}
 	return 0;
@@ -273,7 +295,9 @@ int GABin2DecGenome::read(std::istream &is)
 int GABin2DecGenome::write(std::ostream &os) const
 {
 	for (unsigned int i = 0; i < phenotypes().nPhenotypes(); i++)
+	{
 		os << phenotype(i) << " ";
+	}
 	return 0;
 }
 

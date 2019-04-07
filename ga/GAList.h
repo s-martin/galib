@@ -169,7 +169,10 @@ template <class T> class GAListIter : public GAListIterBASE
 {
   public:
 	GAListIter() : GAListIterBASE() {}
-	explicit GAListIter(const GAList<T> &t) : GAListIterBASE(t) { node = t.iter.node; }
+	explicit GAListIter(const GAList<T> &t) : GAListIterBASE(t)
+	{
+		node = t.iter.node;
+	}
 	GAListIter(const GAListIter<T> &i) : GAListIterBASE(i) {}
 	T *current() { return (node ? &((GANode<T> *)node)->contents : (T *)0); }
 	T *head()

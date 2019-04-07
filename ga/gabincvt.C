@@ -50,7 +50,7 @@ static int _GAEncodeBase(unsigned int, unsigned BITBASE, GABit *, int, int);
 ---------------------------------------------------------------------------- */
 int GACheckDecoding(unsigned int &nbits)
 {
-	if ((int)nbits >= _GA_MAX_BITS())
+	if (static_cast<int>(nbits) >= _GA_MAX_BITS())
 	{
 		sprintf(_gaerrbuf1, "string is %d bits, max is %d", nbits,
 				_GA_MAX_BITS() - 1);
@@ -65,7 +65,7 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 					unsigned BITBASE &nintervals)
 {
 	int status = 0;
-	if ((int)nbits >= _GA_MAX_BITS())
+	if (static_cast<int>(nbits) >= _GA_MAX_BITS())
 	{
 		sprintf(_gaerrbuf1, "string is %d bits, max is %d", nbits,
 				_GA_MAX_BITS() - 1);
@@ -78,11 +78,11 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 	nintervals <<= nbits;
 	nintervals--;
 
-	double interval = (maxval - minval) / (double)nintervals;
+	double interval = (maxval - minval) / static_cast<double>(nintervals);
 	double actual = (val - minval) / interval; // how many intervals we need
-	nintervals = (unsigned BITBASE)actual; // make it an integer
+	nintervals = static_cast<unsigned BITBASE>(actual); // make it an integer
 	actual =
-		minval + (double)nintervals * interval; // get value we can represent
+		minval + static_cast<double>(nintervals) * interval; // get value we can represent
 
 	if (actual != val)
 	{
@@ -91,7 +91,7 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 		sprintf(_gaerrbuf2, "  nbits: %d\t\tmin: %f\t\tmax: %f", nbits, minval,
 				maxval);
 		GAErr(GA_LOC, "GACheckEncoding", gaErrDataLost, _gaerrbuf1, _gaerrbuf2);
-		val = (float)actual;
+		val = static_cast<float>(actual);
 		status = 1;
 	}
 	return status;
@@ -108,14 +108,16 @@ static int _GAEncodeBase(unsigned int base, unsigned BITBASE val, GABit *binstr,
 						 int n, int c)
 {
 	int status = 0;
-	if (c < 0)
+	if (c < 0) {
 		return 1; // if this happens we should post an error
+}
 				  // it means we didn't get a perfect encoding
 	unsigned BITBASE modval = val % base;
 	binstr[c] = STA_CAST(GABit, modval); // the case is ok since module is small
 	unsigned BITBASE quotient = val / base;
-	if (quotient)
+	if (quotient) {
 		status = _GAEncodeBase(base, quotient, binstr, n, c - 1);
+}
 	return status;
 }
 
@@ -141,8 +143,9 @@ int GABinaryDecode(float &result, const GABit *bits, unsigned int nbits)
 	for (int i = nbits - 1; i > (-1); i--)
 	{ // most significant bit first
 		//  for(int i=0; i<nbits; i++){ // least significant bit first
-		if (bits[i] != 0)
+		if (bits[i] != 0) {
 			sum += STA_CAST(float, maxint);
+}
 		maxint <<= 1;
 	}
 	result = sum;
@@ -168,12 +171,13 @@ int GABinaryDecode(float &result, const GABit *bits, unsigned int nbits,
 	for (int i = nbits - 1; i > (-1); i--)
 	{ // 0th bit is most significant
 		//  for(int i=0; i<nbits; i++){        // least significant bit first
-		if (bits[i])
+		if (bits[i]) {
 			sum += STA_CAST(float, maxint);
+}
 		maxint <<= 1;
 	}
 	maxint--;
-	result = minval + (maxval - minval) * sum / (float)maxint;
+	result = minval + (maxval - minval) * sum / static_cast<float>(maxint);
 	return status;
 }
 
@@ -189,8 +193,9 @@ could not represent it perfectly.
 ---------------------------------------------------------------------------- */
 int GABinaryEncode(unsigned BITBASE d, GABit *binstr, unsigned int nbits)
 {
-	if (binstr == (GABit *)0 || nbits == 0)
+	if (binstr == (GABit *)0 || nbits == 0) {
 		return 1;
+}
 	memset(binstr, 0, nbits * sizeof(GABit));
 	return _GAEncodeBase(2, d, binstr, 0, nbits - 1);
 }
@@ -222,10 +227,12 @@ the highest floating precision number on the system.
 int GABinaryEncode(float &val, GABit *binstr, unsigned int nbits, float minval,
 				   float maxval)
 {
-	if (binstr == (GABit *)NULL || nbits == 0)
+	if (binstr == (GABit *)NULL || nbits == 0) {
 		return 1;
-	if (val < minval || maxval < val)
+}
+	if (val < minval || maxval < val) {
 		return 1;
+}
 
 	unsigned BITBASE nintervals = 1;
 	int status = GACheckEncoding(val, nbits, minval, maxval, nintervals);
@@ -249,18 +256,21 @@ int GAGrayDecode(float &value, const GABit *bits, unsigned int nbits,
 	int status = GACheckDecoding(nbits);
 
 	unsigned BITBASE gray = 0;
-	for (unsigned int i = 0; i < nbits; i++)
-		if (bits[nbits - i - 1])
+	for (unsigned int i = 0; i < nbits; i++) {
+		if (bits[nbits - i - 1]) {
 			gray |= (1 << i);
+}
+}
 
 	unsigned BITBASE bin = gray;
 	for (unsigned int j = 1; j < GALIB_BITS_IN_WORD * sizeof(GALIB_BITBASE);
-		 j <<= 1)
+		 j <<= 1) {
 		bin ^= (bin >> j);
+}
 
 	unsigned BITBASE maxint = 1 << nbits;
 	maxint--;
-	value = minval + (maxval - minval) * (float)bin / (float)maxint;
+	value = minval + (maxval - minval) * static_cast<float>(bin) / static_cast<float>(maxint);
 
 	return status;
 }
@@ -271,10 +281,12 @@ int GAGrayDecode(float &value, const GABit *bits, unsigned int nbits,
 int GAGrayEncode(float &value, GABit *bits, unsigned int nbits, float minval,
 				 float maxval)
 {
-	if (bits == (GABit *)NULL || nbits == 0)
+	if (bits == (GABit *)NULL || nbits == 0) {
 		return 1;
-	if (value < minval || maxval < value)
+}
+	if (value < minval || maxval < value) {
 		return 1;
+}
 
 	unsigned BITBASE nintervals = 1;
 	int status = GACheckEncoding(value, nbits, minval, maxval, nintervals);
@@ -283,13 +295,16 @@ int GAGrayEncode(float &value, GABit *bits, unsigned int nbits, float minval,
 	status = (_GAEncodeBase(2, nintervals, bits, 0, nbits - 1) ? 1 : status);
 
 	unsigned BITBASE bin = 0;
-	for (unsigned int j = 0; j < nbits; j++)
-		if (bits[nbits - j - 1])
+	for (unsigned int j = 0; j < nbits; j++) {
+		if (bits[nbits - j - 1]) {
 			bin |= (1 << j);
+}
+}
 
 	unsigned BITBASE gray = bin ^ (bin >> 1);
-	for (unsigned int i = 0; i < nbits; i++)
+	for (unsigned int i = 0; i < nbits; i++) {
 		bits[nbits - i - 1] = (gray & (1 << i)) ? 1 : 0;
+}
 
 	return status;
 }

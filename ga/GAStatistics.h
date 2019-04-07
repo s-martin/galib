@@ -168,10 +168,11 @@ inline const char *GAStatistics::scoreFilename(const char *filename)
 inline float GAStatistics::convergence() const
 {
 	double cnv = 0.0;
-	if (nconv >= Nconv - 1 && cscore[nconv % Nconv] != 0)
-		cnv = (double)(cscore[(nconv + 1) % Nconv]) /
-			  (double)(cscore[nconv % Nconv]);
-	return (float)cnv;
+	if (nconv >= Nconv - 1 && cscore[nconv % Nconv] != 0) {
+		cnv = static_cast<double>(cscore[(nconv + 1) % Nconv]) /
+			  static_cast<double>(cscore[nconv % Nconv]);
+}
+	return static_cast<float>(cnv);
 }
 
 inline float GAStatistics::initial(int w) const

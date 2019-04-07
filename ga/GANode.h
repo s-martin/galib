@@ -74,7 +74,7 @@ struct GANode : public GANodeBASE {
   T contents;
 //  GANode() : GANodeBASE(), contents() {}
   explicit GANode(const T & t) : GANodeBASE(), contents(t) {}
-  virtual ~GANode() {}
+  ~GANode() override {}
   T & operator()(const T & t){contents = t; return contents;}
 };
 

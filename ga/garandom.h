@@ -93,7 +93,7 @@ float garan3();
 inline int GARandomInt() { return _GA_RND() > 0.5 ? 1 : 0; }
 inline int GARandomInt(int low, int high)
 {
-	float val = STA_CAST(float, high) - STA_CAST(float, low) + (float)1;
+	float val = STA_CAST(float, high) - STA_CAST(float, low) + static_cast<float>(1);
 	val *= _GA_RND();
 	return (STA_CAST(int, val) + low);
 }
@@ -197,7 +197,7 @@ inline bool GAFlipCoin(float p)
 
 inline float GAGaussianFloat(float dev)
 {
-	return (float)GAUnitGaussian() * dev;
+	return static_cast<float>(GAUnitGaussian()) * dev;
 }
 inline double GAGaussianDouble(double dev) { return GAUnitGaussian() * dev; }
 

@@ -12,9 +12,9 @@
 #define _ga_tree_C_
 
 #include <GATreeGenome.h>
-#include <garandom.h>
 #include <cstdio>
 #include <cstdlib>
+#include <garandom.h>
 
 extern int _GATreeCompare(GANodeBASE *anode, GANodeBASE *bnode);
 
@@ -125,12 +125,12 @@ template <class T> int GATreeGenome<T>::write(std::ostream &os) const
 	return 0;
 }
 
-template <class T> int GATreeGenome<T>::equal(const GAGenome &c) const
+template <class T> bool GATreeGenome<T>::equal(const GAGenome &c) const
 {
 	if (this == &c)
-		return 1;
+		return true;
 	const GATreeGenome<T> &b = DYN_CAST(const GATreeGenome<T> &, c);
-	return _GATreeCompare(this->rt, b.rt) ? 0 : 1;
+	return _GATreeCompare(this->rt, b.rt) ? false : true;
 }
 
 /* ----------------------------------------------------------------------------
@@ -225,7 +225,7 @@ template <class T>
 int GATreeGenome<T>::SwapSubtreeMutator(GAGenome &c, float pmut)
 {
 	GATreeGenome<T> &child = DYN_CAST(GATreeGenome<T> &, c);
-	
+
 	if (pmut <= 0.0)
 		return 0;
 

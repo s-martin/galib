@@ -17,12 +17,12 @@
 #include <gaerror.h>
 #include <garandom.h>
 
-#define SWAP(a, b)                                                             \
-	{                                                                          \
-		unsigned int tmp = a;                                                  \
-		a = b;                                                                 \
-		b = tmp;                                                               \
-	}
+template <typename T1, typename T2> constexpr void SWAP(T1 &a, T2 &b)
+{
+	auto tmp = a;
+	a = b;
+	b = tmp;
+}
 
 /* ----------------------------------------------------------------------------
    Genome class definition
@@ -59,7 +59,7 @@ GA1DBinaryStringGenome::GA1DBinaryStringGenome(
 	GA1DBinaryStringGenome::copy(orig);
 }
 
-GA1DBinaryStringGenome::~GA1DBinaryStringGenome() {}
+GA1DBinaryStringGenome::~GA1DBinaryStringGenome() = default;
 
 // The clone member creates a duplicate (exact or just attributes, depending
 // on the flag).  The caller is responsible for freeing the memory that is
@@ -92,7 +92,9 @@ GAGenome *GA1DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 void GA1DBinaryStringGenome::copy(const GAGenome &orig)
 {
 	if (&orig == this)
+	{
 		return;
+	}
 	const GA1DBinaryStringGenome *c =
 		DYN_CAST(const GA1DBinaryStringGenome *, &orig);
 	if (c != nullptr)
@@ -113,26 +115,42 @@ void GA1DBinaryStringGenome::copy(const GAGenome &orig)
 int GA1DBinaryStringGenome::resize(int l)
 {
 	if (l == STA_CAST(int, nx))
+	{
 		return nx;
+	}
 
 	if (l == GAGenome::ANY_SIZE)
+	{
 		l = GARandomInt(minX, maxX);
+	}
 	else if (l < 0)
+	{
 		return nx; // do nothing
+	}
 	else if (minX == maxX)
+	{
 		minX = maxX = l;
+	}
 	else
 	{
 		if (l < STA_CAST(int, minX))
+		{
 			l = minX;
+		}
 		if (l > STA_CAST(int, maxX))
+		{
 			l = maxX;
+		}
 	}
 
 	GABinaryString::resize(l);
 	if (l > STA_CAST(int, nx))
+	{
 		for (int i = nx; i < l; i++)
+		{
 			bit(i, GARandomBit());
+		}
+	}
 	nx = l;
 	_evaluated = false;
 	return sz;
@@ -151,7 +169,9 @@ int GA1DBinaryStringGenome::read(std::istream &is)
 	{
 		is >> c;
 		if (isdigit(c))
+		{
 			gene(i++, ((c == '0') ? 0 : 1));
+		}
 	}
 
 	_evaluated = false;
@@ -171,7 +191,9 @@ int GA1DBinaryStringGenome::read(std::istream &is)
 int GA1DBinaryStringGenome::write(std::ostream &os) const
 {
 	for (unsigned int i = 0; i < nx; i++)
+	{
 		os << gene(i);
+	}
 	return 0;
 }
 
@@ -192,9 +214,13 @@ int GA1DBinaryStringGenome::resizeBehaviour(unsigned int lower,
 	minX = lower;
 	maxX = upper;
 	if (nx > upper)
+	{
 		resize(upper);
+	}
 	if (nx < lower)
+	{
 		resize(lower);
+	}
 	return resizeBehaviour();
 }
 
@@ -202,7 +228,9 @@ int GA1DBinaryStringGenome::resizeBehaviour() const
 {
 	int val = maxX;
 	if (maxX == minX)
+	{
 		val = FIXED_SIZE;
+	}
 	return val;
 }
 
@@ -216,7 +244,9 @@ int GA1DBinaryStringGenome::equal(const GA1DBinaryStringGenome &c,
 bool GA1DBinaryStringGenome::equal(const GAGenome &c) const
 {
 	if (this == &c)
+	{
 		return true;
+	}
 	const GA1DBinaryStringGenome *b =
 		DYN_CAST(const GA1DBinaryStringGenome *, &c);
 	bool eq = false;
@@ -239,7 +269,9 @@ void GA1DBinaryStringGenome::UniformInitializer(GAGenome &c)
 	GA1DBinaryStringGenome &child = DYN_CAST(GA1DBinaryStringGenome &, c);
 	child.resize(GAGenome::ANY_SIZE); // let chrom resize if it can
 	for (int i = child.length() - 1; i >= 0; i--)
+	{
 		child.gene(i, GARandomBit()); // initial values are all random
+	}
 }
 
 //   Unset all of the bits in the genome.
@@ -273,7 +305,9 @@ int GA1DBinaryStringGenome::FlipMutator(GAGenome &c, float pmut)
 	GA1DBinaryStringGenome &child = DYN_CAST(GA1DBinaryStringGenome &, c);
 
 	if (pmut <= 0.0)
+	{
 		return (0);
+	}
 
 	float nMut = pmut * STA_CAST(float, child.length());
 	if (nMut < 1.0)
@@ -318,12 +352,18 @@ float GA1DBinaryStringGenome::BitComparator(const GAGenome &a,
 	const GA1DBinaryStringGenome &bro =
 		DYN_CAST(const GA1DBinaryStringGenome &, b);
 	if (sis.length() != bro.length())
+	{
 		return -1;
+	}
 	if (sis.length() == 0)
+	{
 		return 0;
+	}
 	float count = 0.0;
 	for (int i = sis.length() - 1; i >= 0; i--)
+	{
 		count += ((sis.gene(i) == bro.gene(i)) ? 0 : 1);
+	}
 	return count / sis.length();
 }
 
@@ -375,13 +415,19 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 				(mom.length() < dad.length()) ? mom.length() : dad.length();
 			mask.size(max);
 			for (i = 0; i < max; i++)
+			{
 				mask[i] = GARandomBit();
+			}
 			start = (sis.length() < min) ? sis.length() - 1 : min - 1;
 			for (i = start; i >= 0; i--)
+			{
 				sis.gene(i, (mask[i] ? mom.gene(i) : dad.gene(i)));
+			}
 			start = (bro.length() < min) ? bro.length() - 1 : min - 1;
 			for (i = start; i >= 0; i--)
+			{
 				bro.gene(i, (mask[i] ? dad.gene(i) : mom.gene(i)));
+			}
 		}
 		n = 2;
 	}
@@ -394,7 +440,9 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 		if (mom.length() == dad.length() && sis.length() == mom.length())
 		{
 			for (i = sis.length() - 1; i >= 0; i--)
+			{
 				sis.gene(i, (GARandomBit() ? mom.gene(i) : dad.gene(i)));
+			}
 		}
 		else
 		{
@@ -402,7 +450,9 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 				(mom.length() < dad.length()) ? mom.length() : dad.length();
 			min = (sis.length() < min) ? sis.length() : min;
 			for (i = min - 1; i >= 0; i--)
+			{
 				sis.gene(i, (GARandomBit() ? mom.gene(i) : dad.gene(i)));
+			}
 		}
 		n = 1;
 	}
@@ -550,7 +600,9 @@ int GA1DBinaryStringGenome::TwoPointCrossover(const GAGenome &p1,
 			momsite[0] = GARandomInt(0, mom.length());
 			momsite[1] = GARandomInt(0, mom.length());
 			if (momsite[0] > momsite[1])
+			{
 				SWAP(momsite[0], momsite[1]);
+			}
 			momlen[0] = momsite[1] - momsite[0];
 			momlen[1] = mom.length() - momsite[1];
 
@@ -571,14 +623,18 @@ int GA1DBinaryStringGenome::TwoPointCrossover(const GAGenome &p1,
 			momsite[0] = GARandomInt(0, mom.length());
 			momsite[1] = GARandomInt(0, mom.length());
 			if (momsite[0] > momsite[1])
+			{
 				SWAP(momsite[0], momsite[1]);
+			}
 			momlen[0] = momsite[1] - momsite[0];
 			momlen[1] = mom.length() - momsite[1];
 
 			dadsite[0] = GARandomInt(0, dad.length());
 			dadsite[1] = GARandomInt(0, dad.length());
 			if (dadsite[0] > dadsite[1])
+			{
 				SWAP(dadsite[0], dadsite[1]);
+			}
 			dadlen[0] = dadsite[1] - dadsite[0];
 			dadlen[1] = dad.length() - dadsite[1];
 
@@ -612,7 +668,9 @@ int GA1DBinaryStringGenome::TwoPointCrossover(const GAGenome &p1,
 			momsite[0] = GARandomInt(0, mom.length());
 			momsite[1] = GARandomInt(0, mom.length());
 			if (momsite[0] > momsite[1])
+			{
 				SWAP(momsite[0], momsite[1]);
+			}
 			momlen[0] = momsite[1] - momsite[0];
 			momlen[1] = mom.length() - momsite[1];
 
@@ -626,14 +684,18 @@ int GA1DBinaryStringGenome::TwoPointCrossover(const GAGenome &p1,
 			momsite[0] = GARandomInt(0, mom.length());
 			momsite[1] = GARandomInt(0, mom.length());
 			if (momsite[0] > momsite[1])
+			{
 				SWAP(momsite[0], momsite[1]);
+			}
 			momlen[0] = momsite[1] - momsite[0];
 			momlen[1] = mom.length() - momsite[1];
 
 			dadsite[0] = GARandomInt(0, dad.length());
 			dadsite[1] = GARandomInt(0, dad.length());
 			if (dadsite[0] > dadsite[1])
+			{
 				SWAP(dadsite[0], dadsite[1]);
+			}
 			dadlen[0] = dadsite[1] - dadsite[0];
 			dadlen[1] = dad.length() - dadsite[1];
 
@@ -703,10 +765,14 @@ int GA1DBinaryStringGenome::EvenOddCrossover(const GAGenome &p1,
 				(mom.length() < dad.length()) ? mom.length() : dad.length();
 			start = (sis.length() < min) ? sis.length() - 1 : min - 1;
 			for (i = start; i >= 0; i--)
+			{
 				sis.gene(i, ((i % 2 == 0) ? mom.gene(i) : dad.gene(i)));
+			}
 			start = (bro.length() < min) ? bro.length() - 1 : min - 1;
 			for (i = start; i >= 0; i--)
+			{
 				bro.gene(i, ((i % 2 == 0) ? dad.gene(i) : mom.gene(i)));
+			}
 		}
 
 		n = 2;
@@ -735,7 +801,9 @@ int GA1DBinaryStringGenome::EvenOddCrossover(const GAGenome &p1,
 				(mom.length() < dad.length()) ? mom.length() : dad.length();
 			min = (sis.length() < min) ? sis.length() - 1 : min - 1;
 			for (i = min; i >= 0; i--)
+			{
 				sis.gene(i, ((i % 2 == 0) ? mom.gene(i) : dad.gene(i)));
+			}
 		}
 
 		n = 1;

@@ -64,11 +64,12 @@ class GASelectionScheme : public GAID
 	GASelectionScheme(const GASelectionScheme &orig) { copy(orig); }
 	GASelectionScheme &operator=(const GASelectionScheme &orig)
 	{
-		if (&orig != this)
+		if (&orig != this) {
 			copy(orig);
+}
 		return *this;
 	}
-	virtual ~GASelectionScheme() {}
+	~GASelectionScheme() override {}
 	virtual GASelectionScheme *clone() const = 0;
 	virtual void copy(const GASelectionScheme &orig)
 	{
@@ -102,16 +103,17 @@ class GARankSelector : public GASelectionScheme
 	GARankSelector(const GARankSelector &orig) { copy(orig); }
 	GARankSelector &operator=(const GASelectionScheme &orig)
 	{
-		if (&orig != this)
+		if (&orig != this) {
 			copy(orig);
+}
 		return *this;
 	}
-	virtual ~GARankSelector() {}
-	virtual GASelectionScheme *clone() const override
+	~GARankSelector() override {}
+	GASelectionScheme *clone() const override
 	{
 		return new GARankSelector;
 	}
-	virtual GAGenome &select() const override;
+	GAGenome &select() const override;
 };
 #endif
 
@@ -139,16 +141,17 @@ class GARouletteWheelSelector : public GASelectionScheme
 	}
 	GARouletteWheelSelector &operator=(const GASelectionScheme &orig)
 	{
-		if (&orig != this)
+		if (&orig != this) {
 			copy(orig);
+}
 		return *this;
 	}
-	virtual ~GARouletteWheelSelector() { delete[] psum; }
-	virtual GASelectionScheme *clone() const override
+	~GARouletteWheelSelector() override { delete[] psum; }
+	GASelectionScheme *clone() const override
 	{
 		return new GARouletteWheelSelector;
 	}
-	virtual void copy(const GASelectionScheme &orig) override
+	void copy(const GASelectionScheme &orig) override
 	{
 		GASelectionScheme::copy(orig);
 		const GARouletteWheelSelector &sel =
@@ -158,8 +161,8 @@ class GARouletteWheelSelector : public GASelectionScheme
 		psum = new float[n];
 		memcpy(psum, sel.psum, n * sizeof(float));
 	}
-	virtual GAGenome &select() const override;
-	virtual void update() override;
+	GAGenome &select() const override;
+	void update() override;
 
   protected:
 	int n;
@@ -185,16 +188,17 @@ class GATournamentSelector : public GARouletteWheelSelector
 	GATournamentSelector(const GATournamentSelector &orig) { copy(orig); }
 	GATournamentSelector &operator=(const GASelectionScheme &orig)
 	{
-		if (&orig != this)
+		if (&orig != this) {
 			copy(orig);
+}
 		return *this;
 	}
-	virtual ~GATournamentSelector() {}
-	virtual GASelectionScheme *clone() const override
+	~GATournamentSelector() override {}
+	GASelectionScheme *clone() const override
 	{
 		return new GATournamentSelector;
 	}
-	virtual GAGenome &select() const override;
+	GAGenome &select() const override;
 };
 #endif
 
@@ -216,16 +220,17 @@ class GAUniformSelector : public GASelectionScheme
 	GAUniformSelector(const GAUniformSelector &orig) { copy(orig); }
 	GAUniformSelector &operator=(const GASelectionScheme &orig)
 	{
-		if (&orig != this)
+		if (&orig != this) {
 			copy(orig);
+}
 		return *this;
 	}
-	virtual ~GAUniformSelector() {}
-	virtual GASelectionScheme *clone() const override
+	~GAUniformSelector() override {}
+	GASelectionScheme *clone() const override
 	{
 		return new GAUniformSelector;
 	}
-	virtual GAGenome &select() const override;
+	GAGenome &select() const override;
 };
 #endif
 
@@ -254,20 +259,21 @@ class GASRSSelector : public GASelectionScheme
 	}
 	GASRSSelector &operator=(const GASelectionScheme &orig)
 	{
-		if (&orig != this)
+		if (&orig != this) {
 			copy(orig);
+}
 		return *this;
 	}
-	virtual ~GASRSSelector()
+	~GASRSSelector() override
 	{
 		delete[] fraction;
 		delete[] choices;
 	}
-	virtual GASelectionScheme *clone() const override
+	GASelectionScheme *clone() const override
 	{
 		return new GASRSSelector;
 	}
-	virtual void copy(const GASelectionScheme &orig) override
+	void copy(const GASelectionScheme &orig) override
 	{
 		GASelectionScheme::copy(orig);
 		const GASRSSelector &sel = DYN_CAST(const GASRSSelector &, orig);
@@ -279,8 +285,8 @@ class GASRSSelector : public GASelectionScheme
 		memcpy(fraction, sel.fraction, n * sizeof(float));
 		memcpy(choices, sel.choices, n * sizeof(unsigned int));
 	}
-	virtual GAGenome &select() const override;
-	virtual void update() override;
+	GAGenome &select() const override;
+	void update() override;
 
   protected:
 	float *fraction;
@@ -316,21 +322,22 @@ class GADSSelector : public GASelectionScheme
 	}
 	GADSSelector &operator=(const GASelectionScheme &orig)
 	{
-		if (&orig != this)
+		if (&orig != this) {
 			copy(orig);
+}
 		return *this;
 	}
-	virtual ~GADSSelector()
+	~GADSSelector() override
 	{
 		delete[] fraction;
 		delete[] choices;
 		delete[] idx;
 	}
-	virtual GASelectionScheme *clone() const override
+	GASelectionScheme *clone() const override
 	{
 		return new GADSSelector;
 	}
-	virtual void copy(const GASelectionScheme &orig) override
+	void copy(const GASelectionScheme &orig) override
 	{
 		GASelectionScheme::copy(orig);
 		const GADSSelector &sel = DYN_CAST(const GADSSelector &, orig);
@@ -345,8 +352,8 @@ class GADSSelector : public GASelectionScheme
 		memcpy(choices, sel.choices, n * sizeof(unsigned int));
 		memcpy(idx, sel.idx, n * sizeof(unsigned int));
 	}
-	virtual GAGenome &select() const override;
-	virtual void update() override;
+	GAGenome &select() const override;
+	void update() override;
 
   protected:
 	float *fraction;

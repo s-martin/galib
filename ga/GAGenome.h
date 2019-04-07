@@ -47,7 +47,8 @@ selected to cross with itself, and self-copying is not out of the question)
 	   virtual int read(istream&)
 	   virtual int write(ostream&) const
 	   virtual int equal(const GAGenome&) const
-  
+  
+
 
 
 	When you derive a genome, don't forget to use the _evaluated flag to
@@ -76,7 +77,8 @@ initialize
   should first clean up as needed, then do its thing.  The initializer may be
   called any number of times (unlike a class constructor which is called only
   once for a given instance).
- 
+ 
+
 
 
 mutate
@@ -219,14 +221,15 @@ class GAGenome : public GAID
 	// The GNU compiler sucks.  It won't recognize No*** as a member of the
 	// genome class.  So we have to use 0 as the defaults then check in the
 	// constructor.
-	explicit GAGenome(Initializer i = nullptr, Mutator m = nullptr, Comparator c = nullptr);
+	explicit GAGenome(Initializer i = nullptr, Mutator m = nullptr,
+					  Comparator c = nullptr);
 	GAGenome(const GAGenome &);
 	GAGenome &operator=(const GAGenome &arg)
 	{
 		copy(arg);
 		return *this;
 	}
-	virtual ~GAGenome();
+	~GAGenome() override;
 	virtual GAGenome *clone(CloneMethod flag = CONTENTS) const;
 	virtual void copy(const GAGenome &);
 
@@ -341,7 +344,7 @@ inline std::istream &operator>>(std::istream &is, GAGenome &genome)
 	return (is);
 }
 
-inline int operator==(const GAGenome &a, const GAGenome &b)
+inline bool operator==(const GAGenome &a, const GAGenome &b)
 {
 	return a.equal(b);
 }

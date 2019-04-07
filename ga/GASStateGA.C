@@ -34,8 +34,8 @@ GASteadyStateGA::GASteadyStateGA(const GAGenome &c) : GAGeneticAlgorithm(c)
 	params.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &pRepl);
 
 	float n =
-		((pRepl * (float)pop->size() < 1) ? 1 : pRepl * (float)pop->size());
-	tmpPop = new GAPopulation(pop->individual(0), (unsigned int)n);
+		((pRepl * static_cast<float>(pop->size()) < 1) ? 1 : pRepl * static_cast<float>(pop->size()));
+	tmpPop = new GAPopulation(pop->individual(0), static_cast<unsigned int>(n));
 
 	nRepl = tmpPop->size();
 	params.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &nRepl);
@@ -50,8 +50,8 @@ GASteadyStateGA::GASteadyStateGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 	params.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &pRepl);
 
 	float n =
-		((pRepl * (float)pop->size() < 1) ? 1 : pRepl * (float)pop->size());
-	tmpPop = new GAPopulation(pop->individual(0), (unsigned int)n);
+		((pRepl * static_cast<float>(pop->size()) < 1) ? 1 : pRepl * static_cast<float>(pop->size()));
+	tmpPop = new GAPopulation(pop->individual(0), static_cast<unsigned int>(n));
 
 	nRepl = tmpPop->size();
 	params.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &nRepl);
@@ -69,8 +69,9 @@ GASteadyStateGA::GASteadyStateGA(const GASteadyStateGA &ga)
 GASteadyStateGA::~GASteadyStateGA() { delete tmpPop; }
 GASteadyStateGA &GASteadyStateGA::operator=(const GASteadyStateGA &ga)
 {
-	if (&ga != this)
+	if (&ga != this) {
 		copy(ga);
+}
 	return *this;
 }
 void GASteadyStateGA::copy(const GAGeneticAlgorithm &g)
@@ -81,10 +82,11 @@ void GASteadyStateGA::copy(const GAGeneticAlgorithm &g)
 	pRepl = ga.pRepl;
 	nRepl = ga.nRepl;
 
-	if (tmpPop)
+	if (tmpPop) {
 		tmpPop->copy(*(ga.tmpPop));
-	else
+	} else {
 		tmpPop = ga.tmpPop->clone();
+}
 	tmpPop->geneticAlgorithm(*this);
 
 	which = ga.which;
@@ -124,13 +126,13 @@ int GASteadyStateGA::get(const char *name, void *value) const
 	if (strcmp(name, gaNpReplacement) == 0 ||
 		strcmp(name, gaSNpReplacement) == 0)
 	{
-		*((float *)value) = pRepl;
+		*(static_cast<float *>(value)) = pRepl;
 		status = 0;
 	}
 	else if (strcmp(name, gaNnReplacement) == 0 ||
 			 strcmp(name, gaSNnReplacement) == 0)
 	{
-		*((int *)value) = nRepl;
+		*(static_cast<int *>(value)) = nRepl;
 		status = 0;
 	}
 	return status;
@@ -139,15 +141,17 @@ int GASteadyStateGA::get(const char *name, void *value) const
 void GASteadyStateGA::objectiveFunction(GAGenome::Evaluator f)
 {
 	GAGeneticAlgorithm::objectiveFunction(f);
-	for (int i = 0; i < tmpPop->size(); i++)
+	for (int i = 0; i < tmpPop->size(); i++) {
 		tmpPop->individual(i).evaluator(f);
+}
 }
 
 void GASteadyStateGA::objectiveData(const GAEvalData &v)
 {
 	GAGeneticAlgorithm::objectiveData(v);
-	for (int i = 0; i < tmpPop->size(); i++)
+	for (int i = 0; i < tmpPop->size(); i++) {
 		tmpPop->individual(i).evalData(v);
+}
 }
 
 const GAPopulation &GASteadyStateGA::population(const GAPopulation &p)
@@ -164,17 +168,20 @@ const GAPopulation &GASteadyStateGA::population(const GAPopulation &p)
 	if (which == USE_PREPL)
 	{
 		float n = pRepl * pop->size();
-		if (n < 1)
+		if (n < 1) {
 			n = 1.0;
-		nRepl = (unsigned int)n;
+}
+		nRepl = static_cast<unsigned int>(n);
 		params.set(gaNnReplacement, nRepl);
 	}
 	else
 	{
-		if (nRepl > (unsigned int)(pop->size()))
+		if (nRepl > static_cast<unsigned int>(pop->size())) {
 			nRepl = pop->size();
-		if (nRepl < 1)
+}
+		if (nRepl < 1) {
 			nRepl = 1;
+}
 	}
 	tmpPop = new GAPopulation(pop->individual(0), nRepl);
 	tmpPop->geneticAlgorithm(*this);
@@ -188,9 +195,9 @@ int GASteadyStateGA::populationSize(unsigned int value)
 	if (which == USE_PREPL)
 	{
 		float n =
-			((pRepl * (float)pop->size() < 1) ? 1 : pRepl * (float)pop->size());
-		nRepl = (unsigned int)n;
-		params.set(gaNnReplacement, (unsigned int)nRepl);
+			((pRepl * static_cast<float>(pop->size()) < 1) ? 1 : pRepl * static_cast<float>(pop->size()));
+		nRepl = static_cast<unsigned int>(n);
+		params.set(gaNnReplacement, nRepl);
 		tmpPop->size(nRepl);
 	}
 	else
@@ -208,8 +215,9 @@ int GASteadyStateGA::populationSize(unsigned int value)
 // measure instead.
 float GASteadyStateGA::pReplacement(float value)
 {
-	if (value == pRepl)
+	if (value == pRepl) {
 		return pRepl;
+}
 	if (value <= 0 || value > 1)
 	{
 		GAErr(GA_LOC, className(), "pReplacement", gaErrBadPRepl);
@@ -217,13 +225,13 @@ float GASteadyStateGA::pReplacement(float value)
 		return pRepl;
 	}
 
-	params.set(gaNpReplacement, (double)value);
+	params.set(gaNpReplacement, static_cast<double>(value));
 	pRepl = value;
 
 	float n =
-		((value * (float)pop->size() < 1) ? 1 : value * (float)pop->size());
-	nRepl = (unsigned int)n;
-	params.set(gaNnReplacement, (unsigned int)nRepl);
+		((value * static_cast<float>(pop->size()) < 1) ? 1 : value * static_cast<float>(pop->size()));
+	nRepl = static_cast<unsigned int>(n);
+	params.set(gaNnReplacement, nRepl);
 
 	which = USE_PREPL;
 
@@ -234,20 +242,21 @@ float GASteadyStateGA::pReplacement(float value)
 
 int GASteadyStateGA::nReplacement(unsigned int value)
 {
-	if (value == nRepl)
+	if (value == nRepl) {
 		return nRepl;
-	if (value == 0 || value > (unsigned int)(pop->size()))
+}
+	if (value == 0 || value > static_cast<unsigned int>(pop->size()))
 	{
 		GAErr(GA_LOC, className(), "nReplacement", gaErrBadNRepl);
 		params.set(gaNnReplacement, nRepl); // force it back
 		return nRepl;
 	}
 
-	params.set(gaNnReplacement, (unsigned int)value);
+	params.set(gaNnReplacement, value);
 	nRepl = value;
 
-	pRepl = (float)nRepl / (float)pop->size();
-	params.set(gaNpReplacement, (double)pRepl);
+	pRepl = static_cast<float>(nRepl) / static_cast<float>(pop->size());
+	params.set(gaNpReplacement, static_cast<double>(pRepl));
 
 	which = USE_NREPL;
 
@@ -259,10 +268,11 @@ int GASteadyStateGA::nReplacement(unsigned int value)
 int GASteadyStateGA::minimaxi(int m)
 {
 	GAGeneticAlgorithm::minimaxi(m);
-	if (m == MINIMIZE)
+	if (m == MINIMIZE) {
 		tmpPop->order(GAPopulation::LOW_IS_BEST);
-	else
+	} else {
 		tmpPop->order(GAPopulation::HIGH_IS_BEST);
+}
 	return minmax;
 }
 
@@ -279,8 +289,9 @@ void GASteadyStateGA::initialize(unsigned int seed)
 
 	stats.reset(*pop);
 
-	if (!scross)
+	if (!scross) {
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
+}
 }
 
 //   Evolve a new generation of genomes.  A steady-state GA has no 'old'
@@ -316,11 +327,13 @@ void GASteadyStateGA::step()
 			tmpPop->individual(i + 1).copy(*dad);
 		}
 		stats.nummut += (mut = tmpPop->individual(i).mutate(pMutation()));
-		if (mut > 0)
+		if (mut > 0) {
 			c1 = 1;
+}
 		stats.nummut += (mut = tmpPop->individual(i + 1).mutate(pMutation()));
-		if (mut > 0)
+		if (mut > 0) {
 			c2 = 1;
+}
 
 		stats.numeval += c1 + c2;
 	}
@@ -339,14 +352,16 @@ void GASteadyStateGA::step()
 		}
 		else
 		{
-			if (GARandomBit())
+			if (GARandomBit()) {
 				tmpPop->individual(i).copy(*mom);
-			else
+			} else {
 				tmpPop->individual(i).copy(*dad);
+}
 		}
 		stats.nummut += (mut = tmpPop->individual(i).mutate(pMutation()));
-		if (mut > 0)
+		if (mut > 0) {
 			c1 = 1;
+}
 
 		stats.numeval += c1;
 	}
@@ -357,17 +372,19 @@ void GASteadyStateGA::step()
 	// force a clone of the genome - we just let the population take over.  Then
 	// we take it back by doing a remove then a replace in the tmp population.
 
-	for (i = 0; i < tmpPop->size(); i++)
+	for (i = 0; i < tmpPop->size(); i++) {
 		pop->add(&tmpPop->individual(i));
+}
 	pop->evaluate(); // get info about current pop for next time
 	pop->scale(); // remind the population to do its scaling
 
 	// the individuals in tmpPop are all owned by pop, but tmpPop does not know
 	// that.  so we use replace to take the individuals from the pop and stick
 	// them back into tmpPop
-	for (i = 0; i < tmpPop->size(); i++)
+	for (i = 0; i < tmpPop->size(); i++) {
 		tmpPop->replace(pop->remove(GAPopulation::WORST, GAPopulation::SCALED),
 						i);
+}
 
 	stats.numrep += tmpPop->size();
 

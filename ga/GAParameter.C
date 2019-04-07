@@ -38,16 +38,18 @@ GAParameter::GAParameter(const char *fn, const char *sn, ParType tp, const void 
 		fname = new char[strlen(fn) + 1];
 		strcpy(fname, fn);
 	}
-	else
+	else {
 		fname = nullptr;
+}
 
 	if (sn != nullptr)
 	{
 		sname = new char[strlen(sn) + 1];
 		strcpy(sname, sn);
 	}
-	else
+	else {
 		sname = nullptr;
+}
 
 	t = tp;
 	memset(&val, 0, sizeof(Value));
@@ -63,8 +65,9 @@ GAParameter::GAParameter(const GAParameter &orig)
 
 void GAParameter::copy(const GAParameter &orig)
 {
-	if (&orig == this)
+	if (&orig == this) {
 		return;
+}
 
 	delete[] fname;
 	delete[] sname;
@@ -73,15 +76,17 @@ void GAParameter::copy(const GAParameter &orig)
 		fname = new char[strlen(orig.fname) + 1];
 		strcpy(fname, orig.fname);
 	}
-	else
+	else {
 		fname = nullptr;
+}
 	if (orig.sname != nullptr)
 	{
 		sname = new char[strlen(orig.sname) + 1];
 		strcpy(sname, orig.sname);
 	}
-	else
+	else {
 		sname = nullptr;
+}
 
 	t = orig.t;
 	setvalue(orig.value()); // do this directly...
@@ -91,8 +96,9 @@ GAParameter::~GAParameter()
 {
 	delete[] fname;
 	delete[] sname;
-	if (t == ParType::STRING)
+	if (t == ParType::STRING) {
 		delete[] val.sval;
+}
 }
 
 void GAParameter::setvalue(const void *v)
@@ -146,8 +152,9 @@ GAParameterList::GAParameterList(const GAParameterList &list)
 	n = list.n;
 	cur = list.cur;
 	p = new GAParameter *[N];
-	for (unsigned int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++) {
 		p[i] = new GAParameter(*(list.p[i]));
+}
 }
 
 // This is a rather stupid operator= implementation.  Instead of doing a copy
@@ -156,28 +163,32 @@ GAParameterList::GAParameterList(const GAParameterList &list)
 // doing copies on already-allocated memory).
 GAParameterList &GAParameterList::operator=(const GAParameterList &list)
 {
-	if (&list == this)
+	if (&list == this) {
 		return *this;
+}
 
 	unsigned int i;
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n; i++) {
 		delete p[i];
+}
 	delete[] p;
 
 	N = list.N;
 	n = list.n;
 	cur = list.cur;
 	p = new GAParameter *[N];
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n; i++) {
 		p[i] = new GAParameter(*(list.p[i]));
+}
 
 	return *this;
 }
 
 GAParameterList::~GAParameterList()
 {
-	for (unsigned int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++) {
 		delete p[i];
+}
 	delete[] p;
 }
 
@@ -213,13 +224,14 @@ int GAParameterList::set(const char *name, double v)
 		{
 			if (p[i]->type() == ParType::FLOAT)
 			{
-				float fval = (float)v;
+				float fval = static_cast<float>(v);
 				p[i]->value((void *)&fval);
 			}
-			else if (p[i]->type() == ParType::DOUBLE)
+			else if (p[i]->type() == ParType::DOUBLE) {
 				p[i]->value((void *)&v);
-			else
+			} else {
 				GAErr(GA_LOC, "GAParameterList", "set", gaErrBadTypeIndicator);
+}
 			found = 1;
 		}
 	}
@@ -239,18 +251,18 @@ int GAParameterList::get(const char *name, void *value) const
 			{
 			case ParType::BOOLEAN:
 			case ParType::INT:
-				*((int *)value) = *((int *)p[i]->value());
+				*(static_cast<int *>(value)) = *((int *)p[i]->value());
 				break;
 			case ParType::CHAR:
-				*((char *)value) = *((char *)p[i]->value());
+				*(static_cast<char *>(value)) = *((char *)p[i]->value());
 				break;
 			case ParType::STRING:
 				break;
 			case ParType::FLOAT:
-				*((float *)value) = *((float *)p[i]->value());
+				*(static_cast<float *>(value)) = *((float *)p[i]->value());
 				break;
 			case ParType::DOUBLE:
-				*((double *)value) = *((double *)p[i]->value());
+				*(static_cast<double *>(value)) = *((double *)p[i]->value());
 				break;
 			case ParType::POINTER:
 			default:
@@ -280,8 +292,9 @@ int GAParameterList::add(const char *fn, const char *sn, ParType t,
 	for (unsigned int i = 0; i < n && !found; i++)
 	{
 		if (strcmp(fn, p[i]->fullname()) == 0 &&
-			strcmp(sn, p[i]->shrtname()) == 0)
+			strcmp(sn, p[i]->shrtname()) == 0) {
 			found = 1;
+}
 	}
 	if (!found)
 	{
@@ -298,23 +311,27 @@ int GAParameterList::add(const char *fn, const char *sn, ParType t,
 int GAParameterList::remove()
 {
 	int status = -1;
-	if (cur > n)
+	if (cur > n) {
 		return status;
+}
 	delete p[cur];
 	memmove(&(p[cur]), &(p[cur + 1]), (n - cur - 1) * sizeof(GAParameter *));
 	n--;
-	if (cur > n)
+	if (cur > n) {
 		cur = n;
+}
 	status = 0;
 	return status;
 }
 
 GAParameter *GAParameterList::operator()(const char *name)
 {
-	for (unsigned int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++) {
 		if (strcmp(name, p[i]->fullname()) == 0 ||
-			strcmp(name, p[i]->shrtname()) == 0)
+			strcmp(name, p[i]->shrtname()) == 0) {
 			return p[i];
+}
+}
 	return (GAParameter *)0;
 }
 
@@ -337,10 +354,11 @@ int GAParameterList::write(std::ostream &os) const
 		{
 		case ParType::BOOLEAN:
 			ival = *((int *)(p[i]->value()));
-			if (ival)
+			if (ival) {
 				os << "1\n";
-			else
+			} else {
 				os << "0\n";
+}
 			break;
 		case ParType::INT:
 			ival = *((int *)(p[i]->value()));
@@ -409,8 +427,9 @@ int GAParameterList::write(const char *filename) const
 int GAParameterList::read(std::istream &is, bool flag)
 {
 	int nfound = 0;
-	if (n == 0)
+	if (n == 0) {
 		return nfound;
+}
 
 	char buf[BUFSIZE];
 	char name[NAMESIZE];
@@ -478,12 +497,12 @@ int GAParameterList::read(std::istream &is, bool flag)
 						nfound += 1;
 						break;
 					case ParType::FLOAT:
-						fval = (float)atof(buf);
+						fval = static_cast<float>(atof(buf));
 						set(name, (void *)&fval);
 						nfound += 1;
 						break;
 					case ParType::DOUBLE:
-						dval = (double)atof(buf);
+						dval = atof(buf);
 						set(name, (void *)&dval);
 						nfound += 1;
 						break;
@@ -565,8 +584,9 @@ int GAParameterList::read(const char *filename, bool flag)
 int GAParameterList::parse(int &argc, char *argv[], bool flag)
 {
 	int nfound = 0;
-	if (n == 0)
+	if (n == 0) {
 		return nfound;
+}
 
 	char **argvout = new char *[argc];
 	int argcu = argc - 1;
@@ -608,8 +628,9 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 						else
 						{
 							if (boost::iequals(argv[i], "true") ||
-								boost::iequals(argv[i], "t"))
+								boost::iequals(argv[i], "t")) {
 								ival = 1;
+}
 						}
 						set(argv[i - 1], (void *)&ival);
 						nfound += 1;
@@ -625,12 +646,12 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 						nfound += 1;
 						break;
 					case ParType::FLOAT:
-						fval = (float)atof(argv[i]);
+						fval = static_cast<float>(atof(argv[i]));
 						set(argv[i - 1], (void *)&fval);
 						nfound += 1;
 						break;
 					case ParType::DOUBLE:
-						dval = (double)atof(argv[i]);
+						dval = atof(argv[i]);
 						set(argv[i - 1], (void *)&dval);
 						nfound += 1;
 						break;
@@ -687,8 +708,10 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 
 static int IsNumeric(const char *str)
 {
-	for (int i = strlen(str) - 1; i >= 0; i--)
-		if (!isdigit(str[i]) && str[i] != '.')
+	for (int i = strlen(str) - 1; i >= 0; i--) {
+		if (!isdigit(str[i]) && str[i] != '.') {
 			return 0;
+}
+}
 	return 1;
 }

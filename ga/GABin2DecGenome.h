@@ -76,7 +76,9 @@ class GABin2DecPhenotype
 	GABin2DecPhenotype &operator=(const GABin2DecPhenotype &p)
 	{
 		if (&p != this)
+		{
 			*core = *(p.core);
+		}
 		return *this;
 	}
 	GABin2DecPhenotype *clone() const { return new GABin2DecPhenotype(*this); }
@@ -84,7 +86,9 @@ class GABin2DecPhenotype
 	{
 		core->cnt -= 1;
 		if (core->cnt == 0)
+		{
 			delete core;
+		}
 		core = p.core;
 		core->cnt += 1;
 	}
@@ -109,7 +113,7 @@ inline bool operator==(const GABin2DecPhenotype &a, const GABin2DecPhenotype &b)
 
 inline bool operator!=(const GABin2DecPhenotype &a, const GABin2DecPhenotype &b)
 {
-	return (a.equal(b) ? 0 : 1);
+	return (a.equal(b) ? false : true);
 }
 
 /* ----------------------------------------------------------------------------
@@ -123,8 +127,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 
   public:
 	GABin2DecGenome(const GABin2DecPhenotype &p,
-					GAGenome::Evaluator f = (GAGenome::Evaluator)0,
-					void *u = nullptr)
+					GAGenome::Evaluator f = nullptr, void *u = nullptr)
 		: GA1DBinaryStringGenome(p.size(), f, u),
 		  ptype(new GABin2DecPhenotype(p))
 	{
@@ -135,7 +138,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 	GABin2DecGenome(const GABin2DecGenome &orig)
 		: GA1DBinaryStringGenome(orig.sz)
 	{
-		ptype = (GABin2DecPhenotype *)0;
+		ptype = nullptr;
 		copy(orig);
 	}
 	GABin2DecGenome &operator=(const GAGenome &arg)
@@ -143,16 +146,15 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 		copy(arg);
 		return *this;
 	}
-	virtual ~GABin2DecGenome() { delete ptype; }
-	virtual GAGenome *
-	clone(GAGenome::CloneMethod flag = CONTENTS) const override;
-	virtual void copy(const GAGenome &) override;
+	~GABin2DecGenome() override { delete ptype; }
+	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	void copy(const GAGenome &) override;
 
-	virtual int read(std::istream &) override;
-	virtual int write(std::ostream &) const override;
+	int read(std::istream &) override;
+	int write(std::ostream &) const override;
 
-	virtual bool equal(const GAGenome &) const override;
-	virtual bool notequal(const GAGenome &) const override;
+	bool equal(const GAGenome &) const override;
+	bool notequal(const GAGenome &) const override;
 
 	const GABin2DecPhenotype &phenotypes(const GABin2DecPhenotype &p);
 	const GABin2DecPhenotype &phenotypes() const { return *ptype; }

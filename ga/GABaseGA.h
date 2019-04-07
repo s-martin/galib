@@ -129,7 +129,7 @@ class GAGeneticAlgorithm : public GAID
 	explicit GAGeneticAlgorithm(const GAGenome &);
 	explicit GAGeneticAlgorithm(const GAPopulation &);
 	GAGeneticAlgorithm(const GAGeneticAlgorithm &);
-	virtual ~GAGeneticAlgorithm();
+	~GAGeneticAlgorithm() override;
 	virtual void copy(const GAGeneticAlgorithm &);
 
 	bool done() { return (*cf)(*this); }
@@ -143,7 +143,9 @@ class GAGeneticAlgorithm : public GAID
 			step();
 		}
 		if (stats.flushFrequency() > 0)
+		{
 			stats.flushScores();
+		}
 	}
 	virtual int write(const char *) const { return 0; }
 	virtual int write(std::ostream &) const { return 0; }
@@ -221,7 +223,9 @@ class GAGeneticAlgorithm : public GAID
 	void flushScores()
 	{
 		if (stats.flushFrequency() > 0)
+		{
 			stats.flushScores();
+		}
 	}
 
 	int scoreFrequency() const { return stats.scoreFrequency(); }
@@ -251,7 +255,7 @@ class GAGeneticAlgorithm : public GAID
 	bool recordDiversity() const { return stats.recordDiversity(); }
 	bool recordDiversity(bool f)
 	{
-		params.set(gaNrecordDiversity, (int)f);
+		params.set(gaNrecordDiversity, static_cast<int>(f));
 		return stats.recordDiversity(f);
 	}
 

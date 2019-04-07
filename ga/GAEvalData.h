@@ -22,7 +22,9 @@ class GAEvalData
 	GAEvalData &operator=(const GAEvalData &orig)
 	{
 		if (&orig != this)
+		{
 			copy(orig);
+		}
 		return *this;
 	}
 	virtual GAEvalData *clone() const = 0;

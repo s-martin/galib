@@ -33,12 +33,15 @@ float GAGenome::NoComparator(const GAGenome &c, const GAGenome &)
 
 GAGenome::GAGenome(Initializer i, Mutator m, Comparator c)
 {
-	if (i == nullptr)
+	if (i == nullptr) {
 		i = NoInitializer;
-	if (m == nullptr)
+}
+	if (m == nullptr) {
 		m = NoMutator;
-	if (c == nullptr)
+}
+	if (c == nullptr) {
 		c = NoComparator;
+}
 	_score = _fitness = 0.0;
 	_evaluated = false;
 	_neval = 0;
@@ -72,8 +75,9 @@ GAGenome *GAGenome::clone(CloneMethod) const
 // count.
 void GAGenome::copy(const GAGenome &orig)
 {
-	if (&orig == this)
+	if (&orig == this) {
 		return;
+}
 	_score = orig._score;
 	_fitness = orig._fitness;
 	_evaluated = orig._evaluated;
@@ -89,10 +93,11 @@ void GAGenome::copy(const GAGenome &orig)
 
 	if (orig.evd)
 	{
-		if (evd)
+		if (evd) {
 			evd->copy(*orig.evd);
-		else
+		} else {
 			evd = orig.evd->clone();
+}
 	} // don't delete if c doesn't have one
 }
 
@@ -100,7 +105,7 @@ float GAGenome::evaluate(bool flag) const
 {
 	if (_evaluated == false || flag == true)
 	{
-		GAGenome *This = (GAGenome *)this;
+		GAGenome *This = const_cast<GAGenome *>(this);
 		if (eval)
 		{
 			This->_neval++;

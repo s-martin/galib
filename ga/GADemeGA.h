@@ -33,36 +33,36 @@ public:
   explicit GADemeGA(const GAPopulation&);
   GADemeGA(const GADemeGA&);
   GADemeGA& operator=(const GADemeGA&);
-  virtual ~GADemeGA();
-  virtual void copy(const GAGeneticAlgorithm&) override;
+  ~GADemeGA() override;
+  void copy(const GAGeneticAlgorithm&) override;
 
 
-  virtual void initialize(unsigned int seed=0) override;
-  virtual void step() override;
+  void initialize(unsigned int seed=0) override;
+  void step() override;
   virtual void migrate();	// new for this derived class
   GADemeGA & operator++() { step(); return *this; }
 
-  virtual int setptr(const char* name, const void* value) override;
-  virtual int get(const char* name, void* value) const override;
+  int setptr(const char* name, const void* value) override;
+  int get(const char* name, void* value) const override;
 
-  virtual int minimaxi() const override {return minmax;}
-  virtual int minimaxi(int m) override;
+  int minimaxi() const override {return minmax;}
+  int minimaxi(int m) override;
 
-  virtual const GAPopulation& population() const override {return *pop;}
-  virtual const GAPopulation& population(const GAPopulation& p) override
+  const GAPopulation& population() const override {return *pop;}
+  const GAPopulation& population(const GAPopulation& p) override
     { GAGeneticAlgorithm::population(p); return population(ALL,p); }
-  virtual int populationSize() const override {return pop->size();}
-  virtual int populationSize(unsigned int n)  override
+  int populationSize() const override {return pop->size();}
+  int populationSize(unsigned int n)  override
     { GAGeneticAlgorithm::populationSize(n); return populationSize(ALL,n); }
-  virtual GAScalingScheme& scaling() const override {return pop->scaling();}
-  virtual GAScalingScheme& scaling(const GAScalingScheme & s) override
+  GAScalingScheme& scaling() const override {return pop->scaling();}
+  GAScalingScheme& scaling(const GAScalingScheme & s) override
     { GAGeneticAlgorithm::scaling(s); return scaling(ALL,s);}
-  virtual GASelectionScheme& selector() const override {return pop->selector(); }
-  virtual GASelectionScheme& selector(const GASelectionScheme& s) override
+  GASelectionScheme& selector() const override {return pop->selector(); }
+  GASelectionScheme& selector(const GASelectionScheme& s) override
     { GAGeneticAlgorithm::selector(s); return selector(ALL,s);}
-  virtual void objectiveFunction(GAGenome::Evaluator f) override
+  void objectiveFunction(GAGenome::Evaluator f) override
     { GAGeneticAlgorithm::objectiveFunction(f); objectiveFunction(ALL,f); }
-  virtual void objectiveData(const GAEvalData& v) override
+  void objectiveData(const GAEvalData& v) override
     { GAGeneticAlgorithm::objectiveData(v); objectiveData(ALL,v); }
 
   const GAPopulation& population(unsigned int i) const {return *deme[i];}

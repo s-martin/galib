@@ -98,13 +98,13 @@ template <class T> class GAArray
 		a = tmp;
 		return sz = n;
 	}
-	int equal(const GAArray<T> &b, unsigned int dest, unsigned int src,
-			  unsigned int length) const
+	bool equal(const GAArray<T> &b, unsigned int dest, unsigned int src,
+			   unsigned int length) const
 	{
 		for (unsigned int i = 0; i < length; i++)
 			if (a[dest + i] != b.a[src + i])
-				return 0;
-		return 1;
+				return false;
+		return true;
 	}
 
   protected:

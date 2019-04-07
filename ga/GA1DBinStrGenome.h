@@ -73,23 +73,27 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	GA1DBinaryStringGenome &operator=(const short array[]) // no err checks!
 	{
 		for (unsigned int i = 0; i < sz; i++)
+		{
 			gene(i, *(array + i));
+		}
 		return *this;
 	}
 	GA1DBinaryStringGenome &operator=(const int array[]) // no err checks!
 	{
 		for (unsigned int i = 0; i < sz; i++)
+		{
 			gene(i, *(array + i));
+		}
 		return *this;
 	}
-	virtual ~GA1DBinaryStringGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &) override;
+	~GA1DBinaryStringGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	void copy(const GAGenome &) override;
 
-	virtual int read(std::istream &is) override;
-	virtual int write(std::ostream &os) const override;
+	int read(std::istream &is) override;
+	int write(std::ostream &os) const override;
 
-	virtual bool equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 
 	short gene(unsigned int x = 0) const { return bit(x); }
 	short gene(unsigned int x, short value)
@@ -130,9 +134,13 @@ inline void GA1DBinaryStringGenome::copy(const GA1DBinaryStringGenome &orig,
 	if (l > 0 && x < orig.nx && r < nx)
 	{
 		if (x + l > orig.nx)
+		{
 			l = orig.nx - x;
+		}
 		if (r + l > nx)
+		{
 			l = nx - r;
+		}
 		GABinaryString::copy(orig, r, x, l);
 	}
 	_evaluated = false;
@@ -140,21 +148,27 @@ inline void GA1DBinaryStringGenome::copy(const GA1DBinaryStringGenome &orig,
 inline void GA1DBinaryStringGenome::set(unsigned int x, unsigned int l)
 {
 	if (x + l > nx)
+	{
 		l = nx - x;
+	}
 	GABinaryString::set(x, l);
 	_evaluated = false;
 }
 inline void GA1DBinaryStringGenome::unset(unsigned int x, unsigned int l)
 {
 	if (x + l > nx)
+	{
 		l = nx - x;
+	}
 	GABinaryString::unset(x, l);
 	_evaluated = false;
 }
 inline void GA1DBinaryStringGenome::randomize(unsigned int x, unsigned int l)
 {
 	if (x + l > nx)
+	{
 		l = nx - x;
+	}
 	GABinaryString::randomize(x, l);
 	_evaluated = false;
 }
@@ -162,9 +176,13 @@ inline void GA1DBinaryStringGenome::move(unsigned int x, unsigned int srcx,
 										 unsigned int l)
 {
 	if (srcx + l > nx)
+	{
 		l = nx - srcx;
+	}
 	if (x + l > nx)
+	{
 		l = nx - x;
+	}
 	GABinaryString::move(x, srcx, l);
 	_evaluated = false;
 }

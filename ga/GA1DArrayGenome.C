@@ -457,8 +457,7 @@ float GA1DArrayGenome<ARRAY_TYPE>::ElementComparator(const GAGenome &a,
 	return count / sis.length();
 }
 
-template <typename T1, typename T2> 
-constexpr void SWAP(T1 &a, T2 &b)
+template <typename T1, typename T2> constexpr void SWAP(T1 &a, T2 &b)
 {
 	auto tmp = a;
 	a = b;

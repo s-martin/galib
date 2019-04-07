@@ -24,7 +24,9 @@ BinaryStringGenome
 void GABinaryString::copy(const GABinaryString &orig)
 {
 	if (&orig == this)
+	{
 		return;
+	}
 	resize(orig.sz);
 	memcpy(data, orig.data, SZ * sizeof(GABit));
 }
@@ -38,11 +40,15 @@ void GABinaryString::copy(const GABinaryString &orig)
 int GABinaryString::resize(unsigned int x)
 {
 	if (sz == x)
+	{
 		return sz;
+	}
 	if (SZ < x)
 	{
 		while (SZ < x)
+		{
 			SZ += csz;
+		}
 		if (!data)
 		{
 			data = new GABit[SZ];

@@ -43,8 +43,9 @@ GA1DArrayAlleleGenome<char>::GA1DArrayAlleleGenome(
 {
 	naset = sa.size();
 	aset = new GAAlleleSet<char>[naset];
-	for (int i = 0; i < naset; i++)
+	for (int i = 0; i < naset; i++) {
 		aset[i] = sa.set(i);
+}
 
 	initializer(DEFAULT_STRING_INITIALIZER);
 	mutator(DEFAULT_STRING_MUTATOR);
@@ -66,8 +67,9 @@ template <> int GA1DArrayAlleleGenome<char>::read(std::istream &is)
 	do
 	{
 		is.get(c);
-		if (!is.fail())
+		if (!is.fail()) {
 			gene(i++, c);
+}
 	} while (!is.fail() && !is.eof() && i < nx);
 
 	if (is.eof() && i < nx)
@@ -83,8 +85,9 @@ template <> int GA1DArrayAlleleGenome<char>::read(std::istream &is)
 // whitespace between genes.  No newline at end of it all.
 template <> int GA1DArrayAlleleGenome<char>::write(std::ostream &os) const
 {
-	for (unsigned int i = 0; i < nx; i++)
+	for (unsigned int i = 0; i < nx; i++) {
 		os << gene(i);
+}
 	return 0;
 }
 

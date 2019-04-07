@@ -13,10 +13,10 @@
 
 #include <GA3DArrayGenome.h>
 #include <GAMask.h>
-#include <garandom.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <garandom.h>
 
 /* ----------------------------------------------------------------------------
 3DArrayGenome
@@ -326,18 +326,19 @@ void GA3DArrayGenome<T>::copy(const GA3DArrayGenome<T> &orig, unsigned int r,
 	_evaluated = false;
 }
 
-template <class T> int GA3DArrayGenome<T>::equal(const GAGenome &c) const
+template <class T> bool GA3DArrayGenome<T>::equal(const GAGenome &c) const
 {
 	if (this == &c)
-		return 1;
+		return true;
 	GA3DArrayGenome<T> &b = (GA3DArrayGenome<T> &)c;
 	if (nx != b.nx || ny != b.ny || nz != b.nz)
-		return 0;
-	int val = 0;
+		return false;
+	bool val = false;
 	for (unsigned int k = 0; k < nz && val == 0; k++)
 		for (unsigned int j = 0; j < ny && val == 0; j++)
-			val = GAArray<T>::equal(b, k * ny * nx, k * ny * nx, nx) ? 0 : 1;
-	return (val ? 0 : 1);
+			val = GAArray<T>::equal(b, k * ny * nx, k * ny * nx, nx) ? false
+																	 : true;
+	return (val ? false : true);
 }
 
 /* ----------------------------------------------------------------------------

@@ -42,13 +42,13 @@ template <class T> class GATreeGenome : public GATree<T>, public GAGenome
 		copy(orig);
 		return *this;
 	}
-	virtual ~GATreeGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &) override;
+	~GATreeGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	void copy(const GAGenome &) override;
 
-	virtual int write(std::ostream &) const override;
+	int write(std::ostream &) const override;
 
-	virtual int equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 
 	// Here we do inlined versions of the access members of the super class.  We
 	// do our own here so that we can set/unset the _evaluated flag

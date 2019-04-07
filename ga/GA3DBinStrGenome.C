@@ -11,11 +11,11 @@
 #include <GA3DBinStrGenome.h>
 #include <GAMask.h>
 #include <cctype>
-#include <gaerror.h>
-#include <garandom.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <gaerror.h>
+#include <garandom.h>
 
 /* ----------------------------------------------------------------------------
    Genome class definition
@@ -72,7 +72,9 @@ GAGenome *GA3DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 void GA3DBinaryStringGenome::copy(const GAGenome &orig)
 {
 	if (&orig == this)
+	{
 		return;
+	}
 	const GA3DBinaryStringGenome *c =
 		DYN_CAST(const GA3DBinaryStringGenome *, &orig);
 	if (c)
@@ -95,73 +97,117 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 {
 	if (w == STA_CAST(int, nx) && h == STA_CAST(int, ny) &&
 		d == STA_CAST(int, nz))
+	{
 		return sz;
+	}
 
 	if (w == GAGenome::ANY_SIZE)
+	{
 		w = GARandomInt(minX, maxX);
+	}
 	else if (w < 0)
+	{
 		w = nx; // do nothing
+	}
 	else if (minX == maxX)
+	{
 		minX = maxX = w;
+	}
 	else
 	{
 		if (w < STA_CAST(int, minX))
+		{
 			w = minX;
+		}
 		if (w > STA_CAST(int, maxX))
+		{
 			w = maxX;
+		}
 	}
 
 	if (h == GAGenome::ANY_SIZE)
+	{
 		h = GARandomInt(minY, maxY);
+	}
 	else if (h < 0)
+	{
 		h = ny; // do nothing
+	}
 	else if (minY == maxY)
+	{
 		minY = maxY = h;
+	}
 	else
 	{
 		if (h < STA_CAST(int, minY))
+		{
 			h = minY;
+		}
 		if (h > STA_CAST(int, maxY))
+		{
 			h = maxY;
+		}
 	}
 
 	if (d == GAGenome::ANY_SIZE)
+	{
 		d = GARandomInt(minZ, maxZ);
+	}
 	else if (d < 0)
+	{
 		d = nz; // do nothing
+	}
 	else if (minZ == maxZ)
+	{
 		minZ = maxZ = d;
+	}
 	else
 	{
 		if (d < STA_CAST(int, minZ))
+		{
 			d = minZ;
+		}
 		if (d > STA_CAST(int, maxZ))
+		{
 			d = maxZ;
+		}
 	}
 
 	if (w < STA_CAST(int, nx) && h < STA_CAST(int, ny))
 	{
 		int z = GAMin(STA_CAST(int, nz), d);
 		for (int k = 0; k < z; k++)
+		{
 			for (int j = 0; j < h; j++)
+			{
 				GABinaryString::move(k * h * w + j * w, k * ny * nx + j * nx,
 									 w);
+			}
+		}
 	}
 	else if (w < STA_CAST(int, nx))
 	{
 		int z = GAMin(STA_CAST(int, nz), d);
 		for (int k = 0; k < z; k++)
+		{
 			for (int j = 0; j < STA_CAST(int, ny); j++)
+			{
 				GABinaryString::move(k * ny * w + j * w, k * ny * nx + j * nx,
 									 w);
+			}
+		}
 	}
 	else if (h < STA_CAST(int, ny))
 	{
 		int z = GAMin(STA_CAST(int, nz), d);
 		for (int k = 0; k < z; k++)
+		{
 			for (int j = 0; j < h; j++)
+			{
 				GABinaryString::move(k * h * nx + j * nx, k * ny * nx + j * nx,
 									 nx);
+			}
+		}
 	}
 
 	GABinaryString::resize(w * h * d);
@@ -177,11 +223,17 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 				GABinaryString::move(k * h * w + j * w, k * ny * nx + j * nx,
 									 nx);
 				for (int i = nx; i < w; i++)
+				{
 					bit(k * h * w + j * w + i, GARandomBit());
+				}
 			}
 			for (j = ny; j < h; j++)
+			{
 				for (int i = 0; i < w; i++)
+				{
 					bit(k * h * w + j * w + i, GARandomBit());
+				}
+			}
 		}
 	}
 	else if (w > STA_CAST(int, nx))
@@ -194,7 +246,9 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 				GABinaryString::move(k * h * w + j * w, k * h * nx + j * nx,
 									 nx);
 				for (int i = nx; i < w; i++)
+				{
 					bit(k * h * w + j * w + i, GARandomBit());
+				}
 			}
 		}
 	}
@@ -205,16 +259,24 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 		{
 			int j;
 			for (j = ny - 1; j >= 0; j--)
+			{
 				GABinaryString::move(k * h * w + j * w, k * ny * w + j * w, w);
+			}
 			for (j = ny; j < h; j++)
+			{
 				for (int i = 0; i < w; i++)
+				{
 					bit(k * h * w + j * w + i, GARandomBit());
+				}
+			}
 		}
 	}
 	if (d > STA_CAST(int, nz))
 	{ // change in depth is always new bits
 		for (int i = w * h * nz; i < w * h * d; i++)
+		{
 			bit(i, GARandomBit());
+		}
 	}
 
 	nx = w;
@@ -286,23 +348,35 @@ int GA3DBinaryStringGenome::resizeBehaviour(GAGenome::Dimension which) const
 	if (which == Dimension::WIDTH)
 	{
 		if (maxX == minX)
+		{
 			val = FIXED_SIZE;
+		}
 		else
+		{
 			val = maxX;
+		}
 	}
 	else if (which == Dimension::HEIGHT)
 	{
 		if (maxY == minY)
+		{
 			val = FIXED_SIZE;
+		}
 		else
+		{
 			val = maxY;
+		}
 	}
 	else if (which == Dimension::DEPTH)
 	{
 		if (maxZ == minZ)
+		{
 			val = FIXED_SIZE;
+		}
 		else
+		{
 			val = maxZ;
+		}
 	}
 	return val;
 }
@@ -322,27 +396,39 @@ int GA3DBinaryStringGenome::resizeBehaviour(Dimension which, unsigned int lower,
 		minX = lower;
 		maxX = upper;
 		if (nx > upper)
+		{
 			resize(upper, ny, nz);
+		}
 		if (nx < lower)
+		{
 			resize(lower, ny, nz);
+		}
 		break;
 
 	case Dimension::HEIGHT:
 		minY = lower;
 		maxY = upper;
 		if (ny > upper)
+		{
 			resize(nx, upper, nz);
+		}
 		if (ny < lower)
+		{
 			resize(nx, lower, nz);
+		}
 		break;
 
 	case Dimension::DEPTH:
 		minZ = lower;
 		maxZ = upper;
 		if (nz > upper)
+		{
 			resize(nx, ny, upper);
+		}
 		if (nz < lower)
+		{
 			resize(nx, ny, lower);
+		}
 		break;
 
 	default:
@@ -361,25 +447,43 @@ void GA3DBinaryStringGenome::copy(const GA3DBinaryStringGenome &orig,
 {
 	if (w == 0 || x >= orig.nx || r >= nx || h == 0 || y >= orig.ny ||
 		s >= ny || d == 0 || z >= orig.nz || t >= nz)
+	{
 		return;
+	}
 	if (x + w > orig.nx)
+	{
 		w = orig.nx - x;
+	}
 	if (y + h > orig.ny)
+	{
 		h = orig.ny - y;
+	}
 	if (z + d > orig.nz)
+	{
 		d = orig.nz - z;
+	}
 	if (r + w > nx)
+	{
 		w = nx - r;
+	}
 	if (s + h > ny)
+	{
 		h = ny - s;
+	}
 	if (t + d > nz)
+	{
 		d = nz - t;
+	}
 
 	for (unsigned int k = 0; k < d; k++)
+	{
 		for (unsigned int j = 0; j < h; j++)
+		{
 			GABinaryString::copy(
 				orig, (t + k) * ny * nx + (s + j) * nx + r,
 				(z + k) * orig.ny * orig.nx + (y + j) * orig.nx + x, w);
+		}
+	}
 	_evaluated = false;
 }
 
@@ -387,15 +491,25 @@ void GA3DBinaryStringGenome::set(unsigned int x, unsigned int y, unsigned int z,
 								 unsigned int w, unsigned int h, unsigned int d)
 {
 	if (x + w > nx)
+	{
 		w = nx - x;
+	}
 	if (y + h > ny)
+	{
 		h = ny - y;
+	}
 	if (z + d > nz)
+	{
 		d = nz - z;
+	}
 
 	for (unsigned int k = 0; k < d; k++)
+	{
 		for (unsigned int j = 0; j < h; j++)
+		{
 			GABinaryString::set((z + k) * ny * nx + (y + j) * nx + x, w);
+		}
+	}
 	_evaluated = false;
 }
 
@@ -404,15 +518,25 @@ void GA3DBinaryStringGenome::unset(unsigned int x, unsigned int y,
 								   unsigned int h, unsigned int d)
 {
 	if (x + w > nx)
+	{
 		w = nx - x;
+	}
 	if (y + h > ny)
+	{
 		h = ny - y;
+	}
 	if (z + d > nz)
+	{
 		d = nz - z;
+	}
 
 	for (unsigned int k = 0; k < d; k++)
+	{
 		for (unsigned int j = 0; j < h; j++)
+		{
 			GABinaryString::unset((z + k) * ny * nx + (y + j) * nx + x, w);
+		}
+	}
 	_evaluated = false;
 }
 
@@ -421,15 +545,25 @@ void GA3DBinaryStringGenome::randomize(unsigned int x, unsigned int y,
 									   unsigned int h, unsigned int d)
 {
 	if (x + w > nx)
+	{
 		w = nx - x;
+	}
 	if (y + h > ny)
+	{
 		h = ny - y;
+	}
 	if (z + d > nz)
+	{
 		d = nz - z;
+	}
 
 	for (unsigned int k = 0; k < d; k++)
+	{
 		for (unsigned int j = 0; j < h; j++)
+		{
 			GABinaryString::randomize((z + k) * ny * nx + (y + j) * nx + x, w);
+		}
+	}
 	_evaluated = false;
 }
 
@@ -440,35 +574,55 @@ void GA3DBinaryStringGenome::move(unsigned int x, unsigned int y,
 								  unsigned int d)
 {
 	if (srcx + w > nx)
+	{
 		w = nx - srcx;
+	}
 	if (x + w > nx)
+	{
 		w = nx - x;
+	}
 	if (srcy + h > ny)
+	{
 		h = ny - srcy;
+	}
 	if (y + h > ny)
+	{
 		h = ny - y;
+	}
 	if (srcz + d > nz)
+	{
 		d = nz - srcz;
+	}
 	if (z + d > nz)
+	{
 		d = nz - z;
+	}
 
 	if (srcz < z)
 	{
 		if (srcy < y)
 		{
 			for (int k = d - 1; k >= 0; k--)
+			{
 				for (int j = h - 1; j >= 0; j--)
+				{
 					GABinaryString::move(
 						(z + k) * ny * nx + (y + j) * nx + x,
 						(srcz + k) * ny * nx + (srcy + j) * nx + srcx, w);
+				}
+			}
 		}
 		else
 		{
 			for (int k = d - 1; k >= 0; k--)
+			{
 				for (unsigned int j = 0; j < h; j++)
+				{
 					GABinaryString::move(
 						(z + k) * ny * nx + (y + j) * nx + x,
 						(srcz + k) * ny * nx + (srcy + j) * nx + srcx, w);
+				}
+			}
 		}
 	}
 	else
@@ -476,52 +630,72 @@ void GA3DBinaryStringGenome::move(unsigned int x, unsigned int y,
 		if (srcy < y)
 		{
 			for (unsigned int k = 0; k < d; k++)
+			{
 				for (int j = h - 1; j >= 0; j--)
+				{
 					GABinaryString::move(
 						(z + k) * ny * nx + (y + j) * nx + x,
 						(srcz + k) * ny * nx + (srcy + j) * nx + srcx, w);
+				}
+			}
 		}
 		else
 		{
 			for (unsigned int k = 0; k < d; k++)
+			{
 				for (unsigned int j = 0; j < h; j++)
+				{
 					GABinaryString::move(
 						(z + k) * ny * nx + (y + j) * nx + x,
 						(srcz + k) * ny * nx + (srcy + j) * nx + srcx, w);
+				}
+			}
 		}
 	}
 	_evaluated = false;
 }
 
 bool GA3DBinaryStringGenome::equal(const GA3DBinaryStringGenome &orig,
-								  unsigned int x, unsigned int y,
-								  unsigned int z, unsigned int srcx,
-								  unsigned int srcy, unsigned int srcz,
-								  unsigned int w, unsigned int h,
-								  unsigned int d) const
+								   unsigned int x, unsigned int y,
+								   unsigned int z, unsigned int srcx,
+								   unsigned int srcy, unsigned int srcz,
+								   unsigned int w, unsigned int h,
+								   unsigned int d) const
 {
 	unsigned int eq = 0;
 	for (unsigned int k = 0; k < d; k++)
+	{
 		for (unsigned int j = 0; j < h; j++)
+		{
 			eq += GABinaryString::equal(
 				orig, (z + k) * ny * nx + (y + j) * nx + x,
 				(srcz + k) * ny * nx + (srcy + j) * nx + srcx, w);
+		}
+	}
 	return eq == d * h ? true : false;
 }
 
 bool GA3DBinaryStringGenome::equal(const GAGenome &c) const
 {
 	if (this == &c)
+	{
 		return true;
+	}
 	const GA3DBinaryStringGenome &b =
 		DYN_CAST(const GA3DBinaryStringGenome &, c);
 	if (nx != b.nx || ny != b.ny || nz != b.nz)
+	{
 		return false;
+	}
 	int val = 0;
 	for (unsigned int k = 0; k < nz && val == 0; k++)
+	{
 		for (unsigned int j = 0; j < ny && val == 0; j++)
+		{
 			val =
 				GABinaryString::equal(b, k * ny * nx, k * ny * nx, nx) ? 0 : 1;
+		}
+	}
 	return (val ? false : true);
 }
 
@@ -539,9 +713,15 @@ void GA3DBinaryStringGenome::UniformInitializer(GAGenome &c)
 	GA3DBinaryStringGenome &child = DYN_CAST(GA3DBinaryStringGenome &, c);
 	child.resize(GAGenome::ANY_SIZE, GAGenome::ANY_SIZE, GAGenome::ANY_SIZE);
 	for (int i = child.width() - 1; i >= 0; i--)
+	{
 		for (int j = child.height() - 1; j >= 0; j--)
+		{
 			for (int k = child.depth() - 1; k >= 0; k--)
+			{
 				child.gene(i, j, k, GARandomBit());
+			}
+		}
+	}
 }
 
 void GA3DBinaryStringGenome::UnsetInitializer(GAGenome &c)
@@ -563,7 +743,9 @@ int GA3DBinaryStringGenome::FlipMutator(GAGenome &c, float pmut)
 	GA3DBinaryStringGenome &child = DYN_CAST(GA3DBinaryStringGenome &, c);
 
 	if (pmut <= 0.0)
+	{
 		return (0);
+	}
 
 	float nMut = pmut * STA_CAST(float, child.size());
 	if (nMut < 1.0)
@@ -608,14 +790,24 @@ float GA3DBinaryStringGenome::BitComparator(const GAGenome &a,
 	const GA3DBinaryStringGenome &bro =
 		DYN_CAST(const GA3DBinaryStringGenome &, b);
 	if (sis.size() != bro.size())
+	{
 		return -1;
+	}
 	if (sis.size() == 0)
+	{
 		return 0;
+	}
 	float count = 0.0;
 	for (int i = sis.width() - 1; i >= 0; i--)
+	{
 		for (int j = sis.height() - 1; j >= 0; j--)
+		{
 			for (int k = sis.depth() - 1; k >= 0; k--)
+			{
 				count += ((sis.gene(i, j, k) == bro.gene(i, j, k)) ? 0 : 1);
+			}
+		}
+	}
 	return count / sis.size();
 }
 
@@ -679,29 +871,47 @@ int GA3DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 			int minz = GAMin(mom.depth(), dad.depth());
 			mask.size(maxx * maxy * maxz);
 			for (i = 0; i < maxx; i++)
+			{
 				for (j = 0; j < maxy; j++)
+				{
 					for (k = 0; k < maxz; k++)
+					{
 						mask[i * maxy * maxz + j * maxz + k] = GARandomBit();
+					}
+				}
+			}
 			minx = GAMin(sis.width(), minx);
 			miny = GAMin(sis.height(), miny);
 			minz = GAMin(sis.depth(), minz);
 			for (i = minx - 1; i >= 0; i--)
+			{
 				for (j = miny - 1; j >= 0; j--)
+				{
 					for (k = minz - 1; k >= 0; k--)
+					{
 						sis.gene(i, j, k,
 								 (mask[i * miny * minz + j * minz + k]
 									  ? mom.gene(i, j, k)
 									  : dad.gene(i, j, k)));
+					}
+				}
+			}
 			minx = GAMin(bro.width(), minx);
 			miny = GAMin(bro.height(), miny);
 			minz = GAMin(bro.depth(), minz);
 			for (i = minx - 1; i >= 0; i--)
+			{
 				for (j = miny - 1; j >= 0; j--)
+				{
 					for (k = minz - 1; k >= 0; k--)
+					{
 						bro.gene(i, j, k,
 								 (mask[i * miny * minz + j * minz + k]
 									  ? dad.gene(i, j, k)
 									  : mom.gene(i, j, k)));
+					}
+				}
+			}
 		}
 
 		nc = 2;
@@ -717,11 +927,17 @@ int GA3DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 			sis.height() == mom.height() && sis.depth() == mom.depth())
 		{
 			for (i = sis.width() - 1; i >= 0; i--)
+			{
 				for (j = sis.height() - 1; j >= 0; j--)
+				{
 					for (k = sis.depth() - 1; k >= 0; k--)
+					{
 						sis.gene(i, j, k,
 								 (GARandomBit() ? mom.gene(i, j, k)
 												: dad.gene(i, j, k)));
+					}
+				}
+			}
 		}
 		else
 		{
@@ -732,11 +948,17 @@ int GA3DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 			miny = GAMin(sis.height(), miny);
 			minz = GAMin(sis.depth(), minz);
 			for (i = minx - 1; i >= 0; i--)
+			{
 				for (j = miny - 1; j >= 0; j--)
+				{
 					for (k = minz - 1; k >= 0; k--)
+					{
 						sis.gene(i, j, k,
 								 (GARandomBit() ? mom.gene(i, j, k)
 												: dad.gene(i, j, k)));
+					}
+				}
+			}
 		}
 
 		nc = 1;
@@ -807,22 +1029,34 @@ int GA3DBinaryStringGenome::EvenOddCrossover(const GAGenome &p1,
 			miny = GAMin(sis.height(), miny);
 			minz = GAMin(sis.depth(), minz);
 			for (i = minx - 1; i >= 0; i--)
+			{
 				for (j = miny - 1; j >= 0; j--)
+				{
 					for (k = minz - 1; k >= 0; k--)
+					{
 						sis.gene(i, j, k,
 								 (((i * miny * minz + j * minz + k) % 2 == 0)
 									  ? mom.gene(i, j, k)
 									  : dad.gene(i, j, k)));
+					}
+				}
+			}
 			minx = (bro.width() < minx) ? bro.width() : minx;
 			miny = (bro.height() < miny) ? bro.height() : miny;
 			minz = (bro.depth() < minz) ? bro.depth() : minz;
 			for (i = minx - 1; i >= 0; i--)
+			{
 				for (j = miny - 1; j >= 0; j--)
+				{
 					for (k = minz - 1; k >= 0; k--)
+					{
 						bro.gene(i, j, k,
 								 (((i * miny * minz + j * minz + k) % 2 == 0)
 									  ? dad.gene(i, j, k)
 									  : mom.gene(i, j, k)));
+					}
+				}
+			}
 		}
 
 		nc = 2;
@@ -861,12 +1095,18 @@ int GA3DBinaryStringGenome::EvenOddCrossover(const GAGenome &p1,
 			miny = GAMin(sis.height(), miny);
 			minz = GAMin(sis.depth(), minz);
 			for (i = minx - 1; i >= 0; i--)
+			{
 				for (j = miny - 1; j >= 0; j--)
+				{
 					for (k = minz - 1; k >= 0; k--)
+					{
 						sis.gene(i, j,
 								 (((i * miny * minz + j * minz + k) % 2 == 0)
 									  ? mom.gene(i, j, k)
 									  : dad.gene(i, j, k)));
+					}
+				}
+			}
 		}
 
 		nc = 1;

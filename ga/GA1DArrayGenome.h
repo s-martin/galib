@@ -71,14 +71,14 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			gene(i, *(array + i));
 		return *this;
 	}
-	virtual ~GA1DArrayGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &) override;
+	~GA1DArrayGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	void copy(const GAGenome &) override;
 
-	virtual int read(std::istream &is) override;
-	virtual int write(std::ostream &os) const override;
+	int read(std::istream &is) override;
+	int write(std::ostream &os) const override;
 
-	virtual bool equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 
 	const T &gene(unsigned int x = 0) const { return this->a[x]; }
 	T &gene(unsigned int x, const T &value)
@@ -174,16 +174,16 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		GA1DArrayGenome<T>::operator=(array);
 		return *this;
 	}
-	virtual ~GA1DArrayAlleleGenome();
-	virtual GAGenome *
+	~GA1DArrayAlleleGenome() override;
+	GAGenome *
 	clone(GAGenome::CloneMethod flag = GAGenome::CONTENTS) const override;
-	virtual void copy(const GAGenome &) override;
+	void copy(const GAGenome &) override;
 
-	virtual int read(std::istream &is) override;
-	virtual int write(std::ostream &os) const override;
+	int read(std::istream &is) override;
+	int write(std::ostream &os) const override;
 
-	virtual bool equal(const GAGenome &c) const override;
-	virtual int resize(int len) override;
+	bool equal(const GAGenome &c) const override;
+	int resize(int len) override;
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
 	{

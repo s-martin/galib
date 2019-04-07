@@ -28,8 +28,9 @@ inline GANodeBASE *_GARootOfNode(GANodeBASE *n)
 	GANodeBASE *tmp = nullptr;
 	if ((tmp = n) != nullptr)
 	{
-		while (tmp->parent)
+		while (tmp->parent) {
 			tmp = tmp->parent;
+}
 	}
 	return tmp;
 }
@@ -57,13 +58,14 @@ TreeBASE
 // on a root node.
 int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 {
-	if (!n)
+	if (!n) {
 		return NO_ERR;
+}
 	if (!idx)
 	{
-		if (!rt)
+		if (!rt) {
 			where = ROOT;
-		else if (where != ROOT)
+		} else if (where != ROOT)
 		{
 			GAErr(GA_LOC, "GATreeBASE", "insert", gaErrCannotInsertOnNilNode);
 			return ERR;
@@ -117,8 +119,9 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 		n->prev = idx->prev;
 		idx->prev->next = n;
 		idx->prev = n;
-		if (idx->parent && idx->parent->child == idx)
+		if (idx->parent && idx->parent->child == idx) {
 			n->parent->child = n;
+}
 		break;
 
 	case AFTER:
@@ -172,8 +175,9 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 //   If the removal is on the root node, set the root node to NULL.
 GANodeBASE *GATreeBASE::remove(GANodeBASE *n)
 {
-	if (!n)
+	if (!n) {
 		return nullptr;
+}
 
 	if (!n->next || !n->prev || n->prev->next != n || n->next->prev != n)
 	{
@@ -183,19 +187,22 @@ GANodeBASE *GATreeBASE::remove(GANodeBASE *n)
 
 	if (n->next == n || !n->next)
 	{
-		if (n->parent && n->parent->child == n)
+		if (n->parent && n->parent->child == n) {
 			n->parent->child = nullptr;
+}
 	}
 	else
 	{
-		if (n->parent && n->parent->child == n)
+		if (n->parent && n->parent->child == n) {
 			n->parent->child = n->next;
+}
 		n->prev->next = n->next;
 		n->next->prev = n->prev;
 	}
 
-	if (n == rt)
+	if (n == rt) {
 		rt = nullptr;
+}
 
 	// uncomment these to modify the node that is getting removed
 	n->prev = n;
@@ -234,8 +241,9 @@ GANodeBASE *GATreeBASE::remove(GANodeBASE *n)
 // traverse the tree multiple times, for example.
 int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 {
-	if (!a || !b || a == b)
+	if (!a || !b || a == b) {
 		return NO_ERR;
+}
 
 	GANodeBASE *aprev = a->prev;
 	GANodeBASE *anext = a->next;
@@ -246,10 +254,11 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 
 	if (anext == b || bnext == a)
 	{ // a & b are adjacent
-		if (aparent && aparent->child == a)
+		if (aparent && aparent->child == a) {
 			aparent->child = b;
-		else if (bparent && bparent->child == b)
+		} else if (bparent && bparent->child == b) {
 			bparent->child = a;
+}
 
 		if (anext == b && bnext != a)
 		{ // same as b->prev = a
@@ -269,10 +278,11 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 			anext->prev = b;
 			bprev->next = a;
 		}
-		if (rt == a)
+		if (rt == a) {
 			rt = b;
-		else if (rt == b)
+		} else if (rt == b) {
 			rt = a;
+}
 	}
 	else
 	{ // check for same tree then ancestry
@@ -280,16 +290,18 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 		GANodeBASE *broot = _GARootOfNode(b);
 		if (aroot == broot)
 		{ // check ancestry
-			while (aparent && aparent != b)
+			while (aparent && aparent != b) {
 				aparent = aparent->parent;
+}
 			if (aparent == b)
 			{
 				GAErr(GA_LOC, "GATreeBASE", "swaptree",
 					  gaErrCannotSwapAncestors);
 				return ERR;
 			}
-			while (bparent && bparent != a)
+			while (bparent && bparent != a) {
 				bparent = bparent->parent;
+}
 			if (bparent == a)
 			{
 				GAErr(GA_LOC, "GATreeBASE", "swaptree",
@@ -301,17 +313,20 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 		} // if not in same tree, we don't bother to check the ancestry
 		if (aparent == bparent)
 		{
-			if (aparent && aparent->child == a)
+			if (aparent && aparent->child == a) {
 				aparent->child = b;
-			else if (bparent && bparent->child == b)
+			} else if (bparent && bparent->child == b) {
 				bparent->child = a;
+}
 		}
 		else
 		{
-			if (aparent && aparent->child == a)
+			if (aparent && aparent->child == a) {
 				aparent->child = b;
-			if (bparent && bparent->child == b)
+}
+			if (bparent && bparent->child == b) {
 				bparent->child = a;
+}
 		}
 		a->parent = bparent;
 		b->parent = aparent;
@@ -342,10 +357,11 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 
 		if (aroot != broot)
 		{
-			if (rt == a)
+			if (rt == a) {
 				rt = b;
-			else if (rt == b)
+			} else if (rt == b) {
 				rt = a;
+}
 			// We could lose the other node here, but we have no way of knowing
 			// what the root node in the other tree is, so its up to the caller
 			// of this routine to take care of this!
@@ -374,8 +390,9 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 // tree, so I won't worry about the different trees case.
 int GATreeBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 {
-	if (!a || !b || a == b)
+	if (!a || !b || a == b) {
 		return NO_ERR;
+}
 
 	GANodeBASE *aprev = a->prev;
 	GANodeBASE *anext = a->next;
@@ -388,23 +405,26 @@ int GATreeBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 
 	if (anext == b || bnext == a)
 	{ // a & b are adjacent
-		if (aparent && aparent->child == a)
+		if (aparent && aparent->child == a) {
 			aparent->child = b;
-		else if (bparent && bparent->child == b)
+		} else if (bparent && bparent->child == b) {
 			bparent->child = a;
+}
 		a->child = bchild;
 		b->child = achild;
 		if (achild)
 		{
 			achild->parent = b;
-			for (GANodeBASE *n = achild->next; n && n != achild; n = n->next)
+			for (GANodeBASE *n = achild->next; n && n != achild; n = n->next) {
 				n->parent = b;
+}
 		}
 		if (bchild)
 		{
 			bchild->parent = a;
-			for (GANodeBASE *n = bchild->next; n && n != bchild; n = n->next)
+			for (GANodeBASE *n = bchild->next; n && n != bchild; n = n->next) {
 				n->parent = a;
+}
 		}
 
 		if (anext == b && bnext != a)
@@ -459,16 +479,19 @@ int GATreeBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 			a->child = bchild;
 			b->parent = aparent;
 			b->child = a;
-			if (aparent && aparent->child == a)
+			if (aparent && aparent->child == a) {
 				aparent->child = b;
-			for (GANodeBASE *n = a->next; n && n != a; n = n->next)
+}
+			for (GANodeBASE *n = a->next; n && n != a; n = n->next) {
 				n->parent = b;
+}
 			if (bchild)
 			{
 				bchild->parent = a;
 				for (GANodeBASE *n = bchild->next; n && n != bchild;
-					 n = n->next)
+					 n = n->next) {
 					n->parent = a;
+}
 			}
 		}
 		else if (bchild == a)
@@ -477,17 +500,20 @@ int GATreeBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 			a->child = b;
 			b->parent = a;
 			b->child = achild;
-			if (bparent && bparent->child == b)
+			if (bparent && bparent->child == b) {
 				bparent->child = a;
+}
 			if (achild)
 			{
 				achild->parent = b;
 				for (GANodeBASE *n = achild->next; n && n != achild;
-					 n = n->next)
+					 n = n->next) {
 					n->parent = b;
+}
 			}
-			for (GANodeBASE *n = b->next; n && n != b; n = n->next)
+			for (GANodeBASE *n = b->next; n && n != b; n = n->next) {
 				n->parent = a;
+}
 		}
 		else
 		{ // a and b are not adjacent nor parent-child
@@ -497,39 +523,45 @@ int GATreeBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 			b->child = achild;
 			if (aparent == bparent)
 			{
-				if (aparent && aparent->child == a)
+				if (aparent && aparent->child == a) {
 					aparent->child = b;
-				else if (bparent && bparent->child == b)
+				} else if (bparent && bparent->child == b) {
 					bparent->child = a;
+}
 			}
 			else
 			{
-				if (aparent && aparent->child == a)
+				if (aparent && aparent->child == a) {
 					aparent->child = b;
-				if (bparent && bparent->child == b)
+}
+				if (bparent && bparent->child == b) {
 					bparent->child = a;
+}
 			}
 			if (achild)
 			{
 				achild->parent = b;
 				for (GANodeBASE *n = achild->next; n && n != achild;
-					 n = n->next)
+					 n = n->next) {
 					n->parent = b;
+}
 			}
 			if (bchild)
 			{
 				bchild->parent = a;
 				for (GANodeBASE *n = bchild->next; n && n != bchild;
-					 n = n->next)
+					 n = n->next) {
 					n->parent = a;
+}
 			}
 		}
 	}
 
-	if (rt == a)
+	if (rt == a) {
 		rt = b; // this only works if they're in the same tree!
-	else if (rt == b)
+	} else if (rt == b) {
 		rt = a;
+}
 
 	return NO_ERR;
 }
@@ -545,8 +577,9 @@ int GATreeBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 // const specifier, we do a little pointer magic and cast this to be non-const.
 int GATreeBASE::size() const
 {
-	if (!csz)
+	if (!csz) {
 		return sz;
+}
 	GATreeBASE *This = CON_CAST(GATreeBASE *, this);
 	This->csz = 0;
 	return (This->sz = _GATreeSize(rt));
@@ -558,8 +591,9 @@ int GATreeBASE::size() const
 // traversals...
 int GATreeBASE::depth() const
 {
-	if (!cdpth)
+	if (!cdpth) {
 		return dpth;
+}
 	GATreeBASE *This = CON_CAST(GATreeBASE *, this);
 	This->cdpth = 0;
 	return (This->dpth = _GATreeDepth(rt));
@@ -576,14 +610,18 @@ int GATreeBASE::ancestral(unsigned int i, unsigned int j) const
 	aparent = a = aiter.warp(i);
 	bparent = b = biter.warp(j);
 
-	while (aparent && aparent != b)
+	while (aparent && aparent != b) {
 		aparent = aparent->parent;
-	if (aparent == b)
+}
+	if (aparent == b) {
 		return 1;
-	while (bparent && bparent != a)
+}
+	while (bparent && bparent != a) {
 		bparent = bparent->parent;
-	if (bparent == a)
+}
+	if (bparent == a) {
 		return 1;
+}
 
 	return 0;
 }
@@ -593,8 +631,9 @@ Recursive routines for the TreeBASE objects
 ---------------------------------------------------------------------------- */
 static int _GATreeSize(GANodeBASE *node)
 {
-	if (!node)
+	if (!node) {
 		return 0;
+}
 	int count = 1 + _GATreeSize(node->child);
 	for (GANodeBASE *tmp = node->next; tmp && tmp != node; tmp = tmp->next)
 	{
@@ -606,8 +645,9 @@ static int _GATreeSize(GANodeBASE *node)
 
 static int _GATreeDepth(GANodeBASE *node)
 {
-	if (!node)
+	if (!node) {
 		return 0;
+}
 
 	int maxdepth = 1 + _GATreeDepth(node->child);
 	for (GANodeBASE *tmp = node->next; tmp != node; tmp = tmp->next)
@@ -624,10 +664,12 @@ TreeIterBASE
 // Return the root of the specified node.
 GANodeBASE *GATreeIterBASE::root(GANodeBASE *c)
 {
-	if (!c)
+	if (!c) {
 		return nullptr;
-	while (c->parent != nullptr)
+}
+	while (c->parent != nullptr) {
 		c = c->parent;
+}
 	return (node = c);
 }
 
@@ -639,15 +681,18 @@ GANodeBASE *GATreeIterBASE::root(GANodeBASE *c)
 //   Remember to set the current node to the one we found.
 GANodeBASE *GATreeIterBASE::eldest(GANodeBASE *c)
 {
-	if (!c)
+	if (!c) {
 		return nullptr;
-	if (!c->parent)
+}
+	if (!c->parent) {
 		return (node = c);
+}
 
 	GANodeBASE *tmp = c;
 
-	while (tmp->parent->child != tmp)
+	while (tmp->parent->child != tmp) {
 		tmp = tmp->next;
+}
 	return (node = tmp);
 }
 
@@ -657,15 +702,18 @@ GANodeBASE *GATreeIterBASE::eldest(GANodeBASE *c)
 //   Remember to set the current node to the one we found.
 GANodeBASE *GATreeIterBASE::youngest(GANodeBASE *c)
 {
-	if (!c)
+	if (!c) {
 		return nullptr;
-	if (!c->parent)
+}
+	if (!c->parent) {
 		return (node = c);
+}
 
 	GANodeBASE *tmp = c;
 
-	while (tmp->parent->child != tmp)
+	while (tmp->parent->child != tmp) {
 		tmp = tmp->next;
+}
 	return (node = tmp->prev);
 }
 
@@ -675,8 +723,9 @@ int GATreeIterBASE::nsiblings(GANodeBASE *c)
 {
 	GANodeBASE *tmp = c;
 	int n = 1;
-	while (tmp->next && ((tmp = tmp->next) != c))
+	while (tmp->next && ((tmp = tmp->next) != c)) {
 		n++;
+}
 	return n;
 }
 
@@ -685,12 +734,14 @@ int GATreeIterBASE::nsiblings(GANodeBASE *c)
 // not the node itself.
 int GATreeIterBASE::nchildren(GANodeBASE *c)
 {
-	if (!c->child)
+	if (!c->child) {
 		return 0;
+}
 	GANodeBASE *tmp = c->child;
 	int n = 1;
-	while (tmp->next && ((tmp = tmp->next) != c->child))
+	while (tmp->next && ((tmp = tmp->next) != c->child)) {
 		n++;
+}
 	return n;
 }
 
@@ -702,8 +753,9 @@ GANodeBASE *GATreeIterBASE::warp(unsigned int x)
 {
 	unsigned int w = 0;
 	GANodeBASE *tmp = _GATreeTraverse(x, w, root());
-	if (tmp)
+	if (tmp) {
 		node = tmp;
+}
 	return (tmp);
 }
 
@@ -720,23 +772,28 @@ int GATreeIterBASE::depth(GANodeBASE *n) { return (_GATreeDepth(n)); }
 GANodeBASE *_GATreeTraverse(unsigned int index, unsigned int &cur,
 							GANodeBASE *node)
 {
-	if (!node)
+	if (!node) {
 		return nullptr;
-	if (cur == index)
+}
+	if (cur == index) {
 		return node;
+}
 	cur++;
 
 	GANodeBASE *n;
-	if ((n = _GATreeTraverse(index, cur, node->child)) != nullptr)
+	if ((n = _GATreeTraverse(index, cur, node->child)) != nullptr) {
 		return n;
+}
 
 	for (GANodeBASE *tmp = node->next; tmp && tmp != node; tmp = tmp->next)
 	{
-		if (cur == index)
+		if (cur == index) {
 			return tmp;
+}
 		cur++;
-		if ((n = _GATreeTraverse(index, cur, tmp->child)) != nullptr)
+		if ((n = _GATreeTraverse(index, cur, tmp->child)) != nullptr) {
 			return n;
+}
 	}
 	return nullptr;
 }
@@ -754,10 +811,12 @@ GANodeBASE *_GATreeTraverse(unsigned int index, unsigned int &cur,
 // structure, not the node contents.
 int _GATreeCompare(GANodeBASE *anode, GANodeBASE *bnode)
 {
-	if (anode == 0 && bnode == 0)
+	if (anode == 0 && bnode == 0) {
 		return 0;
-	if (anode == 0 || bnode == 0)
+}
+	if (anode == 0 || bnode == 0) {
 		return 1;
+}
 	int count = _GATreeCompare(anode->child, bnode->child);
 	for (GANodeBASE *atmp = anode->next, *btmp = bnode->next;
 		 atmp && atmp != anode; atmp = atmp->next, btmp = btmp->next)

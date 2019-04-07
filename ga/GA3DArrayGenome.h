@@ -51,14 +51,14 @@ template <class T> class GA3DArrayGenome : public GAArray<T>, public GAGenome
 					gene(i, j, k, *(array + k * ny * nx + j * nx + i));
 		return *this;
 	}
-	virtual ~GA3DArrayGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &chrom) override;
+	~GA3DArrayGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	void copy(const GAGenome &chrom) override;
 
-	virtual int read(std::istream &) override;
-	virtual int write(std::ostream &) const override;
+	int read(std::istream &) override;
+	int write(std::ostream &) const override;
 
-	virtual int equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 
 	const T &gene(unsigned int x, unsigned int y, unsigned int z) const
 	{
@@ -149,15 +149,15 @@ template <class T> class GA3DArrayAlleleGenome : public GA3DArrayGenome<T>
 		return *this;
 	}
 	virtual ~GA3DArrayAlleleGenome();
-	virtual GAGenome *
+	GAGenome *
 	clone(GAGenome::CloneMethod flag = GAGenome::CONTENTS) const override;
-	virtual void copy(const GAGenome &) override;
+	void copy(const GAGenome &) override;
 
-	virtual int read(std::istream &is) override;
-	virtual int write(std::ostream &os) const override;
+	int read(std::istream &is) override;
+	int write(std::ostream &os) const override;
 
-	virtual int equal(const GAGenome &c) const override;
-	virtual int resize(int x, int y, int z) override;
+	int equal(const GAGenome &c) const override;
+	int resize(int x, int y, int z) override;
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
 	{

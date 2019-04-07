@@ -11,16 +11,21 @@
 
 #include <GABaseGA.h>
 
-class GADCrowdingGA : public GAGeneticAlgorithm {
-public:
-  GADefineIdentity("GADeterministicCrowdingGA", 241);
+class GADCrowdingGA : public GAGeneticAlgorithm
+{
+  public:
+	GADefineIdentity("GADeterministicCrowdingGA", 241);
 
-  explicit GADCrowdingGA(const GAGenome& g) : GAGeneticAlgorithm(g) {}
-  virtual ~GADCrowdingGA() {}
+	explicit GADCrowdingGA(const GAGenome &g) : GAGeneticAlgorithm(g) {}
+	~GADCrowdingGA() override = default;
 
-  virtual void initialize(unsigned int seed=0) override;
-  virtual void step() override;
-  GADCrowdingGA& operator++() { step(); return *this; }
+	void initialize(unsigned int seed = 0) override;
+	void step() override;
+	GADCrowdingGA &operator++()
+	{
+		step();
+		return *this;
+	}
 };
 
 #endif

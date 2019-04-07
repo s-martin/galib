@@ -37,8 +37,9 @@ NoScaling
 // the individuals in the population.
 void 
 GANoScaling::evaluate(const GAPopulation& p) {
-  for(int i=0; i<p.size(); i++)
+  for(int i=0; i<p.size(); i++) {
     p.individual(i).fitness(p.individual(i).score());
+}
 }
 
 
@@ -66,10 +67,10 @@ GALinearScaling::evaluate(const GAPopulation & p) {
     a = 1.0; 
     b = 0.0;
   }
-  else if(pmin > ((double)c * pave - pmax)/((double)c - 1.0)){
+  else if(pmin > (static_cast<double>(c) * pave - pmax)/(static_cast<double>(c) - 1.0)){
     delta = pmax - pave;
-    a = ((double)c - 1.0) * pave / delta;
-    b = pave * (pmax - (double)c * pave) / delta;
+    a = (static_cast<double>(c) - 1.0) * pave / delta;
+    b = pave * (pmax - static_cast<double>(c) * pave) / delta;
   }
   else{				// stretch to make min be 0
     delta = pave - pmin;
@@ -85,13 +86,15 @@ GALinearScaling::evaluate(const GAPopulation & p) {
     double f = p.individual(i).score();
     if(f < 0.0){
       GAErr(GA_LOC, className(), "evaluate", gaErrNegFitness);
-      for(int ii=0; ii<p.size(); ii++)
+      for(int ii=0; ii<p.size(); ii++) {
 	p.individual(ii).fitness(0.0);
+}
       return;
     }
     f = f * a + b;
-    if(f < 0) f = 0.0;	// truncate if necessary (only due to roundoff error)
-    p.individual(i).fitness((float)f);       // might lose information here!
+    if(f < 0) { f = 0.0;	// truncate if necessary (only due to roundoff error)
+}
+    p.individual(i).fitness(static_cast<float>(f));       // might lose information here!
   }
 }
 
@@ -121,10 +124,11 @@ SigmaTruncationScaling
 void 
 GASigmaTruncationScaling::evaluate(const GAPopulation & p) {
   for(int i=0; i<p.size(); i++){
-    double f = (double)(p.individual(i).score()) - (double)(p.ave());
-    f += (double)c * (double)(p.dev());
-    if(f < 0) f = 0.0;
-    p.individual(i).fitness((float)f);       // might lose information here!
+    double f = static_cast<double>(p.individual(i).score()) - static_cast<double>(p.ave());
+    f += static_cast<double>(c) * static_cast<double>(p.dev());
+    if(f < 0) { f = 0.0;
+}
+    p.individual(i).fitness(static_cast<float>(f));       // might lose information here!
   }
 }
 
@@ -158,12 +162,13 @@ GAPowerLawScaling::evaluate(const GAPopulation & p) {
     double f = p.individual(i).score();
     if(f < 0.0){
       GAErr(GA_LOC, className(), "evaluate", gaErrPowerNegFitness);
-      for(int ii=0; ii<p.size(); ii++)
+      for(int ii=0; ii<p.size(); ii++) {
 	p.individual(ii).fitness(0.0);
+}
       return;
     }
-    f = pow(f,(double)k);
-    p.individual(i).fitness((float)f);       // might lose information here!
+    f = pow(f,static_cast<double>(k));
+    p.individual(i).fitness(static_cast<float>(f));       // might lose information here!
   }
 }
 #endif
@@ -199,7 +204,7 @@ Sharing
 // *** probably should use the diversity built-in to the population...
 void 
 GASharing::evaluate(const GAPopulation& p) {
-  if(p.size() > (int)N){
+  if(p.size() > static_cast<int>(N)){
     delete [] d;
     N = p.size();
     d = new float[N*N];
@@ -210,25 +215,28 @@ GASharing::evaluate(const GAPopulation& p) {
   if(df) {
     for(i=0; i<n; i++){		// calculate and cache the distances
       d[i*n+i] = 0.0;		// each genome is same as itself
-      for(j=i+1; j<n; j++)
+      for(j=i+1; j<n; j++) {
 	d[i*n+j] = d[j*n+i] = (*df)(p.individual(i), p.individual(j));
+}
     }
   }
   else {
     for(i=0; i<n; i++){		// calculate and cache the distances
       d[i*n+i] = 0.0;		// each genome is same as itself
-      for(j=i+1; j<n; j++)
+      for(j=i+1; j<n; j++) {
 	d[i*n+j] = d[j*n+i] = p.individual(i).compare(p.individual(j));
+}
     }
   }
 
   int mm;
   if(_minmax == 0) {
-    if(p.geneticAlgorithm())
+    if(p.geneticAlgorithm()) {
       mm = p.geneticAlgorithm()->minimaxi();
-    else
+    } else {
       mm = ((p.order() == GAPopulation::HIGH_IS_BEST) ? 
 	    GAGeneticAlgorithm::MAXIMIZE : GAGeneticAlgorithm::MINIMIZE);
+}
   }
   else {
     mm = _minmax;
@@ -238,24 +246,27 @@ GASharing::evaluate(const GAPopulation& p) {
     double sum = 0.0;
     for(j=0; j<n; j++) {
       if(d[i*n+j] < _sigma) {
-	if(_alpha == 1)
+	if(_alpha == 1) {
 	  sum += ((d[i*n+j] >= _sigma) ? 0.0 : 1.0 - d[i*n+j]/_sigma);
-	else
+	} else {
 	  sum += ((d[i*n+j]>=_sigma) ? 0.0 : 1.0-pow(d[i*n+j]/_sigma,_alpha));
+}
       }
     }
     double f;
-    if(mm == GAGeneticAlgorithm::MINIMIZE)
+    if(mm == GAGeneticAlgorithm::MINIMIZE) {
       f = p.individual(i).score() * sum;
-    else
+    } else {
       f = p.individual(i).score() / sum;
-    p.individual(i).fitness((float)f);       // might lose information here!
+}
+    p.individual(i).fitness(static_cast<float>(f));       // might lose information here!
   }
 }
 
 void 
 GASharing::copy(const GAScalingScheme & arg){
-  if(&arg == this) return;
+  if(&arg == this) { return;
+}
 
   GAScalingScheme::copy(arg);
   const GASharing& s = DYN_CAST(const GASharing&, arg);
@@ -282,12 +293,13 @@ GASharing::sigma(float c) {
 
 int
 GASharing::minimaxi(int i) { 
-  if(i == GAGeneticAlgorithm::MAXIMIZE)      
+  if(i == GAGeneticAlgorithm::MAXIMIZE) {      
     _minmax = GAGeneticAlgorithm::MAXIMIZE;
-  else if(i == GAGeneticAlgorithm::MINIMIZE) 
+  } else if(i == GAGeneticAlgorithm::MINIMIZE) { 
     _minmax = GAGeneticAlgorithm::MINIMIZE;
-  else                       
+  } else {                       
     _minmax = 0;
+}
   return _minmax;
 }
 

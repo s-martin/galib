@@ -25,8 +25,9 @@
 //   The population object takes care of setting/unsetting the status flags.
 void GAPopulation::DefaultInitializer(GAPopulation &p)
 {
-	for (int i = 0; i < p.size(); i++)
+	for (int i = 0; i < p.size(); i++) {
 		p.individual(i).initialize();
+}
 }
 
 //  The default evaluator simply calls the evaluate member of each genome in
@@ -34,8 +35,9 @@ void GAPopulation::DefaultInitializer(GAPopulation &p)
 // status flags for indicating when the population needs to be updated again.
 void GAPopulation::DefaultEvaluator(GAPopulation &p)
 {
-	for (int i = 0; i < p.size(); i++)
+	for (int i = 0; i < p.size(); i++) {
 		p.individual(i).evaluate();
+}
 }
 
 constexpr int GA_POP_CHUNKSIZE = 10; // allocate chrom ptrs in chunks of this many
@@ -54,8 +56,9 @@ GAPopulation::GAPopulation()
 {
 	csz = N = GA_POP_CHUNKSIZE;
 	n = 0;
-	while (N < n)
+	while (N < n) {
 		N += csz;
+}
 
 	rind = new GAGenome *[N];
 	sind = new GAGenome *[N];
@@ -84,13 +87,15 @@ GAPopulation::GAPopulation(const GAGenome &c, unsigned int popsize)
 {
 	csz = N = GA_POP_CHUNKSIZE;
 	n = (popsize < 1 ? 1 : popsize);
-	while (N < n)
+	while (N < n) {
 		N += csz;
+}
 
 	rind = new GAGenome *[N];
 	sind = new GAGenome *[N];
-	for (unsigned int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++) {
 		rind[i] = c.clone(GAGenome::ATTRIBUTES);
+}
 	memcpy(sind, rind, N * sizeof(GAGenome *));
 	//  indDiv = new float[N*N];
 	indDiv = nullptr;
@@ -124,8 +129,9 @@ GAPopulation::GAPopulation(const GAPopulation &orig)
 
 GAPopulation::~GAPopulation()
 {
-	for (unsigned int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++) {
 		delete rind[i];
+}
 	delete[] rind;
 	delete[] sind;
 	delete[] indDiv;
@@ -140,8 +146,9 @@ GAPopulation::~GAPopulation()
 void GAPopulation::copy(const GAPopulation &arg)
 {
 	unsigned int i;
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n; i++) {
 		delete rind[i];
+}
 	delete[] rind;
 	delete[] sind;
 	delete[] indDiv;
@@ -153,8 +160,9 @@ void GAPopulation::copy(const GAPopulation &arg)
 	N = arg.N;
 	n = arg.n;
 	rind = new GAGenome *[N];
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n; i++) {
 		rind[i] = arg.rind[i]->clone();
+}
 	sind = new GAGenome *[N];
 	memcpy(sind, rind, N * sizeof(GAGenome *));
 
@@ -170,19 +178,22 @@ void GAPopulation::copy(const GAPopulation &arg)
 
 	sclscm = arg.sclscm->clone();
 	scaled = false;
-	if (arg.scaled == true)
+	if (arg.scaled == true) {
 		scale();
+}
 
 	slct = arg.slct->clone();
 	slct->assign(*this);
 	selectready = false;
-	if (arg.selectready == true)
+	if (arg.selectready == true) {
 		prepselect();
+}
 
-	if (arg.evaldata)
+	if (arg.evaldata) {
 		evaldata = arg.evaldata->clone();
-	else
+	} else {
 		evaldata = nullptr;
+}
 
 	neval = 0; // don't copy the evaluation count!
 	rawSum = arg.rawSum;
@@ -229,8 +240,9 @@ void GAPopulation::copy(const GAPopulation &arg)
 //   Resizing to a bigger size is the same as a batch 'add'
 int GAPopulation::size(unsigned int popsize)
 {
-	if (popsize == n)
+	if (popsize == n) {
 		return n;
+}
 	if (n == 0 && popsize > 0)
 	{
 		GAErr(GA_LOC, "GAPopuluation", "size", gaErrNoIndividuals);
@@ -240,23 +252,26 @@ int GAPopulation::size(unsigned int popsize)
 	if (popsize > n)
 	{
 		grow(popsize);
-		for (unsigned int i = n; i < popsize; i++)
+		for (unsigned int i = n; i < popsize; i++) {
 			rind[i] = rind[GARandomInt(0, n - 1)]->clone(GAGenome::CONTENTS);
+}
 		rsorted = false;
 	}
 	else
 	{
 		for (unsigned int i = popsize; i < n;
-			 i++) // trash the worst ones (if sorted)
+			 i++) { // trash the worst ones (if sorted)
 			delete rind[i]; // may not be sorted!!!!
+}
 	}
 
 	memcpy(sind, rind, N * sizeof(GAGenome *));
 	ssorted = scaled = statted = divved = selectready = false;
 	n = popsize;
 
-	if (evaluated == true)
+	if (evaluated == true) {
 		evaluate(true);
+}
 
 	return n;
 }
@@ -270,12 +285,14 @@ int GAPopulation::size(unsigned int popsize)
 //   We return the total amount allocated (not the amount used).
 int GAPopulation::grow(unsigned int s)
 {
-	if (s <= N)
+	if (s <= N) {
 		return N;
+}
 
 	int oldsize = N;
-	while (N < s)
+	while (N < s) {
 		N += csz;
+}
 
 	GAGenome **tmp;
 
@@ -292,9 +309,10 @@ int GAPopulation::grow(unsigned int s)
 	{
 		float *tmpd = indDiv;
 		indDiv = new float[N * N];
-		for (int i = 0; i < oldsize; i++)
+		for (int i = 0; i < oldsize; i++) {
 			memcpy(&(indDiv[i * N]), &(tmpd[i * oldsize]),
 				   oldsize * sizeof(float));
+}
 		delete[] tmpd;
 	}
 
@@ -306,8 +324,9 @@ int GAPopulation::grow(unsigned int s)
 // allocated (which is also the amount used).
 int GAPopulation::compact()
 {
-	if (n == N)
+	if (n == N) {
 		return N;
+}
 
 	GAGenome **tmp;
 
@@ -339,8 +358,9 @@ int GAPopulation::compact()
 
 GAPopulation::SortOrder GAPopulation::order(GAPopulation::SortOrder flag)
 {
-	if (sortorder == flag)
+	if (sortorder == flag) {
 		return flag;
+}
 	sortorder = flag;
 	rsorted = ssorted = false;
 	return flag;
@@ -353,15 +373,16 @@ GAPopulation::SortOrder GAPopulation::order(GAPopulation::SortOrder flag)
 // or the array sorted by scaled scores.
 void GAPopulation::sort(bool flag, SortBasis basis) const
 {
-	GAPopulation *This = (GAPopulation *)this;
+	GAPopulation *This = const_cast<GAPopulation *>(this);
 	if (basis == RAW)
 	{
 		if (rsorted == false || flag == true)
 		{
-			if (sortorder == LOW_IS_BEST)
+			if (sortorder == LOW_IS_BEST) {
 				GAPopulation::QuickSortAscendingRaw(This->rind, 0, n - 1);
-			else
+			} else {
 				GAPopulation::QuickSortDescendingRaw(This->rind, 0, n - 1);
+}
 			This->selectready = false;
 		}
 		This->rsorted = true;
@@ -370,10 +391,11 @@ void GAPopulation::sort(bool flag, SortBasis basis) const
 	{
 		if (ssorted == false || flag == true)
 		{
-			if (sortorder == LOW_IS_BEST)
+			if (sortorder == LOW_IS_BEST) {
 				GAPopulation::QuickSortAscendingScaled(This->sind, 0, n - 1);
-			else
+			} else {
 				GAPopulation::QuickSortDescendingScaled(This->sind, 0, n - 1);
+}
 			This->selectready = false;
 		}
 		This->ssorted = true;
@@ -390,9 +412,10 @@ void GAPopulation::sort(bool flag, SortBasis basis) const
 // of the partial sums add to 1.0.
 void GAPopulation::statistics(bool flag) const
 {
-	if (statted == true && flag != true)
+	if (statted == true && flag != true) {
 		return;
-	GAPopulation *This = (GAPopulation *)this;
+}
+	GAPopulation *This = const_cast<GAPopulation *>(this);
 
 	if (n > 0)
 	{
@@ -422,7 +445,7 @@ void GAPopulation::statistics(bool flag) const
 			}
 			tmpvar /= (n - 1);
 		}
-		This->rawDev = (float)sqrt(tmpvar);
+		This->rawDev = sqrt(tmpvar);
 		This->rawVar = tmpvar; // could lose data if huge variance
 	}
 	else
@@ -440,9 +463,10 @@ void GAPopulation::statistics(bool flag) const
 // a const population.
 void GAPopulation::scale(bool flag) const
 {
-	if (scaled == true && flag != true)
+	if (scaled == true && flag != true) {
 		return;
-	GAPopulation *This = (GAPopulation *)this;
+}
+	GAPopulation *This = const_cast<GAPopulation *>(this);
 
 	if (n > 0)
 	{
@@ -473,7 +497,7 @@ void GAPopulation::scale(bool flag) const
 			}
 			tmpvar /= (n - 1);
 		}
-		This->fitDev = (float)sqrt(tmpvar);
+		This->fitDev = sqrt(tmpvar);
 		This->fitVar = tmpvar; // could lose data if huge variance
 	}
 	else
@@ -501,14 +525,16 @@ void GAPopulation::scale(bool flag) const
 // diversity measure.  0 means minimal diversity means all the same.
 void GAPopulation::diversity(bool flag) const
 {
-	if (divved == true && flag != true)
+	if (divved == true && flag != true) {
 		return;
-	GAPopulation *This = (GAPopulation *)this;
+}
+	GAPopulation *This = const_cast<GAPopulation *>(this);
 
 	if (n > 1)
 	{
-		if (This->indDiv == nullptr)
+		if (This->indDiv == nullptr) {
 			This->indDiv = new float[N * N];
+}
 
 		This->popDiv = 0.0;
 		for (unsigned int i = 0; i < n; i++)
@@ -533,9 +559,10 @@ void GAPopulation::diversity(bool flag) const
 
 void GAPopulation::prepselect(bool flag) const
 {
-	if (selectready == true && flag != true)
+	if (selectready == true && flag != true) {
 		return;
-	GAPopulation *This = (GAPopulation *)this;
+}
+	GAPopulation *This = const_cast<GAPopulation *>(this);
 	This->slct->update();
 	This->selectready = true;
 }
@@ -581,8 +608,9 @@ GAGenome *GAPopulation::replace(GAGenome *repl, int which, SortBasis basis)
 {
 	int i = -1;
 	GAGenome *orig = nullptr;
-	if (repl == nullptr)
+	if (repl == nullptr) {
 		return orig;
+}
 
 	switch (which)
 	{
@@ -601,8 +629,9 @@ GAGenome *GAPopulation::replace(GAGenome *repl, int which, SortBasis basis)
 		break;
 
 	default:
-		if (0 <= which && which < (int)n)
+		if (0 <= which && which < static_cast<int>(n)) {
 			i = which;
+}
 		break;
 	}
 
@@ -640,8 +669,9 @@ GAGenome *GAPopulation::replace(GAGenome *repl, int which, SortBasis basis)
 		selectready = false;
 
 		// make sure the genome has the correct genetic algorithm pointer
-		if (ga)
+		if (ga) {
 			repl->geneticAlgorithm(*ga);
+}
 	}
 
 	return orig;
@@ -654,15 +684,19 @@ GAGenome *GAPopulation::replace(GAGenome *repl, int which, SortBasis basis)
 GAGenome *GAPopulation::replace(GAGenome *r, GAGenome *o)
 {
 	GAGenome *orig = nullptr;
-	if (r == nullptr || o == nullptr)
+	if (r == nullptr || o == nullptr) {
 		return orig;
-	if (r == o)
+}
+	if (r == o) {
 		return r;
+}
 	unsigned int i;
-	for (i = 0; i < n && rind[i] != o; i++)
+	for (i = 0; i < n && rind[i] != o; i++) {
 		;
-	if (i < n)
+}
+	if (i < n) {
 		orig = replace(r, i, RAW);
+}
 	return orig;
 }
 
@@ -685,10 +719,11 @@ GAGenome *GAPopulation::remove(int i, SortBasis basis)
 		sort(false, basis);
 		i = n - 1;
 	}
-	else if (i == RANDOM)
+	else if (i == RANDOM) {
 		i = GARandomInt(0, n - 1);
-	else if (i < 0 || i >= (int)n)
+	} else if (i < 0 || i >= static_cast<int>(n)) {
 		return removed;
+}
 
 	if (basis == RAW)
 	{
@@ -704,8 +739,9 @@ GAGenome *GAPopulation::remove(int i, SortBasis basis)
 		memcpy(rind, sind, N * sizeof(GAGenome *));
 		rsorted = false;
 	}
-	else
+	else {
 		return removed;
+}
 
 	n--;
 	evaluated = false;
@@ -723,13 +759,16 @@ GAGenome *GAPopulation::remove(int i, SortBasis basis)
 GAGenome *GAPopulation::remove(GAGenome *r)
 {
 	GAGenome *removed = nullptr;
-	if (r == nullptr)
+	if (r == nullptr) {
 		return removed;
+}
 	unsigned int i;
-	for (i = 0; i < n && rind[i] != r; i++)
+	for (i = 0; i < n && rind[i] != r; i++) {
 		;
-	if (i < n)
+}
+	if (i < n) {
 		removed = remove(i, RAW);
+}
 	return removed;
 }
 
@@ -755,12 +794,14 @@ GAGenome *GAPopulation::add(const GAGenome &g)
 // will destroy it when the population destructor is invoked.
 GAGenome *GAPopulation::add(GAGenome *c)
 {
-	if (c == nullptr)
+	if (c == nullptr) {
 		return c;
+}
 	grow(n + 1);
 	rind[n] = sind[n] = c;
-	if (ga)
+	if (ga) {
 		rind[n]->geneticAlgorithm(*ga);
+}
 	n++;
 
 	rsorted = ssorted = false; // may or may not be true, but must be sure
@@ -771,8 +812,9 @@ GAGenome *GAPopulation::add(GAGenome *c)
 
 GAGeneticAlgorithm *GAPopulation::geneticAlgorithm(GAGeneticAlgorithm &g)
 {
-	for (unsigned int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++) {
 		rind[i]->geneticAlgorithm(g);
+}
 	return (ga = &g);
 }
 
@@ -780,10 +822,11 @@ void GAPopulation::write(std::ostream &os, SortBasis basis) const
 {
 	for (unsigned int i = 0; i < n; i++)
 	{
-		if (basis == RAW)
+		if (basis == RAW) {
 			os << *rind[i] << "\n";
-		else
+		} else {
 			os << *sind[i] << "\n";
+}
 	}
 	os << "\n";
 }
@@ -799,12 +842,15 @@ void GAPopulation::QuickSortAscendingRaw(GAGenome **c, int l, int r)
 		int j = r;
 		for (;;)
 		{
-			while (c[++i]->score() < v && i <= r)
+			while (c[++i]->score() < v && i <= r) {
 				;
-			while (c[--j]->score() > v && j > 0)
+}
+			while (c[--j]->score() > v && j > 0) {
 				;
-			if (i >= j)
+}
+			if (i >= j) {
 				break;
+}
 			t = c[i];
 			c[i] = c[j];
 			c[j] = t;
@@ -826,12 +872,15 @@ void GAPopulation::QuickSortDescendingRaw(GAGenome **c, int l, int r)
 		int j = r;
 		for (;;)
 		{
-			while (c[++i]->score() > v && i <= r)
+			while (c[++i]->score() > v && i <= r) {
 				;
-			while (c[--j]->score() < v && j > 0)
+}
+			while (c[--j]->score() < v && j > 0) {
 				;
-			if (i >= j)
+}
+			if (i >= j) {
 				break;
+}
 			t = c[i];
 			c[i] = c[j];
 			c[j] = t;
@@ -854,12 +903,15 @@ void GAPopulation::QuickSortAscendingScaled(GAGenome **c, int l, int r)
 		int j = r;
 		for (;;)
 		{
-			while (c[++i]->fitness() < v && i <= r)
+			while (c[++i]->fitness() < v && i <= r) {
 				;
-			while (c[--j]->fitness() > v && j > 0)
+}
+			while (c[--j]->fitness() > v && j > 0) {
 				;
-			if (i >= j)
+}
+			if (i >= j) {
 				break;
+}
 			t = c[i];
 			c[i] = c[j];
 			c[j] = t;
@@ -881,12 +933,15 @@ void GAPopulation::QuickSortDescendingScaled(GAGenome **c, int l, int r)
 		int j = r;
 		for (;;)
 		{
-			while (c[++i]->fitness() > v && i <= r)
+			while (c[++i]->fitness() > v && i <= r) {
 				;
-			while (c[--j]->fitness() < v && j > 0)
+}
+			while (c[--j]->fitness() < v && j > 0) {
 				;
-			if (i >= j)
+}
+			if (i >= j) {
 				break;
+}
 			t = c[i];
 			c[i] = c[j];
 			c[j] = t;

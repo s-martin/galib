@@ -126,17 +126,25 @@ template <class T> class GAAlleleSet
 		{
 			core->cnt -= 1;
 			if (core->cnt == 0)
+			{
 				delete core;
+			}
 		}
 	}
 	GAAlleleSet<T> &operator=(const GAAlleleSet<T> &set)
 	{
 		if (this == &set)
+		{
 			return *this;
+		}
 		if (core)
+		{
 			*core = *set.core;
+		}
 		else
+		{
 			core = new GAAlleleSetCore<T>(*(set.core));
+		}
 		return *this;
 	}
 	GAAlleleSet<T> *clone() const { return new GAAlleleSet<T>(*this); }

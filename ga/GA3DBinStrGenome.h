@@ -48,27 +48,39 @@ class GA3DBinaryStringGenome : public GABinaryString, public GAGenome
 	GA3DBinaryStringGenome &operator=(const short array[])
 	{
 		for (unsigned int i = 0; i < nx; i++)
+		{
 			for (unsigned int j = 0; j < ny; j++)
+			{
 				for (unsigned int k = 0; k < nz; k++)
+				{
 					gene(i, j, k, *(array + k * ny * nx + j * nx + i));
+				}
+			}
+		}
 		return *this;
 	}
 	GA3DBinaryStringGenome &operator=(const int array[])
 	{
 		for (unsigned int i = 0; i < nx; i++)
+		{
 			for (unsigned int j = 0; j < ny; j++)
+			{
 				for (unsigned int k = 0; k < nz; k++)
+				{
 					gene(i, j, k, *(array + k * ny * nx + j * nx + i));
+				}
+			}
+		}
 		return *this;
 	}
-	virtual ~GA3DBinaryStringGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const;
-	virtual void copy(const GAGenome &chrom) override;
+	~GA3DBinaryStringGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	void copy(const GAGenome &chrom) override;
 
-	virtual int read(std::istream &) override;
-	virtual int write(std::ostream &) const override;
+	int read(std::istream &) override;
+	int write(std::ostream &) const override;
 
-	virtual bool equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 
 	// specific to this class
 	short gene(unsigned int x, unsigned int y, unsigned int z) const
@@ -115,8 +127,8 @@ class GA3DBinaryStringGenome : public GABinaryString, public GAGenome
 			  unsigned int, unsigned int, unsigned int, unsigned int,
 			  unsigned int, unsigned int, unsigned int);
 	bool equal(const GA3DBinaryStringGenome &, unsigned int, unsigned int,
-			  unsigned int, unsigned int, unsigned int, unsigned int,
-			  unsigned int, unsigned int, unsigned int) const;
+			   unsigned int, unsigned int, unsigned int, unsigned int,
+			   unsigned int, unsigned int, unsigned int) const;
 	void set(unsigned int, unsigned int, unsigned int, unsigned int,
 			 unsigned int, unsigned int);
 	void unset(unsigned int, unsigned int, unsigned int, unsigned int,

@@ -13,10 +13,10 @@
 
 #include <GA2DArrayGenome.h>
 #include <GAMask.h>
-#include <garandom.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <garandom.h>
 
 /* ----------------------------------------------------------------------------
 2DArrayGenome
@@ -242,17 +242,17 @@ void GA2DArrayGenome<T>::copy(const GA2DArrayGenome<T> &orig, unsigned int r,
 	_evaluated = false;
 }
 
-template <class T> int GA2DArrayGenome<T>::equal(const GAGenome &c) const
+template <class T> bool GA2DArrayGenome<T>::equal(const GAGenome &c) const
 {
 	if (this == &c)
-		return 1;
+		return true;
 	GA2DArrayGenome<T> &b = (GA2DArrayGenome<T> &)c;
 	if (nx != b.nx || ny != b.ny)
-		return 0;
-	int val = 0;
+		return false;
+	bool val = false;
 	for (unsigned int j = 0; j < ny && val == 0; j++)
-		val = GAArray<T>::equal(b, j * nx, j * nx, nx) ? 0 : 1;
-	return (val ? 0 : 1);
+		val = GAArray<T>::equal(b, j * nx, j * nx, nx) ? false : true;
+	return (val ? false : true);
 }
 
 /* ----------------------------------------------------------------------------
@@ -399,7 +399,8 @@ void GA2DArrayAlleleGenome<ARRAY_TYPE>::UniformInitializer(const GAGenome &c)
 }
 
 template <class ARRAY_TYPE>
-int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(const GAGenome &c, float pmut)
+int GA2DArrayAlleleGenome<ARRAY_TYPE>::FlipMutator(const GAGenome &c,
+												   float pmut)
 {
 	GA2DArrayAlleleGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayAlleleGenome<ARRAY_TYPE> &, c);
@@ -441,7 +442,7 @@ int GA2DArrayGenome<ARRAY_TYPE>::SwapMutator(const GAGenome &c, float pmut)
 {
 	GA2DArrayGenome<ARRAY_TYPE> &child =
 		DYN_CAST(GA2DArrayGenome<ARRAY_TYPE> &, c);
-	
+
 	if (pmut <= 0.0)
 		return (0);
 

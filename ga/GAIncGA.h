@@ -56,18 +56,18 @@ public:
   explicit GAIncrementalGA(const GAPopulation&);
   GAIncrementalGA(const GAIncrementalGA&);
   GAIncrementalGA& operator=(const GAIncrementalGA&);
-  virtual ~GAIncrementalGA();
-  virtual void copy(const GAGeneticAlgorithm &) override;
+  ~GAIncrementalGA() override;
+  void copy(const GAGeneticAlgorithm &) override;
 
-  virtual void initialize(unsigned int seed=0) override;
-  virtual void step() override;
+  void initialize(unsigned int seed=0) override;
+  void step() override;
   GAIncrementalGA & operator++() { step(); return *this; }
 
-  virtual int setptr(const char* name, const void* value) override;
-  virtual int get(const char* name, void* value) const override;
+  int setptr(const char* name, const void* value) override;
+  int get(const char* name, void* value) const override;
 
-  virtual void objectiveFunction(GAGenome::Evaluator f) override;
-  virtual void objectiveData(const GAEvalData& v) override;
+  void objectiveFunction(GAGenome::Evaluator f) override;
+  void objectiveData(const GAEvalData& v) override;
 
   int nOffspring() const {return noffspr;}
   int nOffspring(unsigned int);
