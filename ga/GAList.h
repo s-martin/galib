@@ -215,7 +215,7 @@ template <class T> class GAListIter : public GAListIterBASE
 	T *warp(unsigned int i)
 	{
 		GANodeBASE *n = GAListIterBASE::warp(i);
-		return (n ? &((GANode<T> *)(node = n))->contents : (T *)0);
+		return (n != nullptr ? &((GANode<T> *)(node = n))->contents : (T *)nullptr);
 	}
 
   private:

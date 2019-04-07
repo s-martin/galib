@@ -45,7 +45,7 @@ GAIncrementalGA::GAIncrementalGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 	child2->geneticAlgorithm(*this);
 
 	rs = WORST;
-	rf = 0;
+	rf = nullptr;
 
 	noffspr = gaDefNumOff;
 	params.add(gaNnOffspring, gaSNnOffspring, ParType::INT, &noffspr);
@@ -82,7 +82,7 @@ void GAIncrementalGA::copy(const GAGeneticAlgorithm &g)
 	rf = ga.rf;
 	noffspr = ga.noffspr;
 
-	if (child1)
+	if (child1 != nullptr)
 	{
 		child1->copy(*ga.child1);
 	}
@@ -90,7 +90,7 @@ void GAIncrementalGA::copy(const GAGeneticAlgorithm &g)
 	{
 		child1 = ga.child1->clone();
 	}
-	if (child2)
+	if (child2 != nullptr)
 	{
 		child2->copy(*ga.child2);
 	}
@@ -153,7 +153,7 @@ GAIncrementalGA::replacement(GAIncrementalGA::ReplacementScheme n,
 		rs = n;
 		break;
 	case CUSTOM:
-		if (f)
+		if (f != nullptr)
 		{
 			rs = n;
 			rf = f;
@@ -197,7 +197,7 @@ void GAIncrementalGA::initialize(unsigned int seed)
 
 	stats.reset(*pop);
 
-	if (!scross)
+	if (scross == nullptr)
 	{
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
 	}
@@ -221,12 +221,12 @@ void GAIncrementalGA::step()
 		c1 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
-			stats.numcro += (*scross)(*mom, *dad, child1, (GAGenome *)0);
+			stats.numcro += (*scross)(*mom, *dad, child1, (GAGenome *)nullptr);
 			c1 = 1;
 		}
 		else
 		{
-			if (GARandomBit())
+			if (GARandomBit() != 0)
 			{
 				child1->copy(*mom);
 			}

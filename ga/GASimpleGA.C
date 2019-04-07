@@ -35,7 +35,7 @@ GASimpleGA::GASimpleGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 }
 GASimpleGA::GASimpleGA(const GASimpleGA &ga) : GAGeneticAlgorithm(ga)
 {
-	oldPop = (GAPopulation *)0;
+	oldPop = (GAPopulation *)nullptr;
 	copy(ga);
 }
 GASimpleGA::~GASimpleGA() { delete oldPop; }
@@ -51,7 +51,7 @@ void GASimpleGA::copy(const GAGeneticAlgorithm &g)
 	GAGeneticAlgorithm::copy(g);
 	const GASimpleGA &ga = DYN_CAST(const GASimpleGA &, g);
 	el = ga.el;
-	if (oldPop) {
+	if (oldPop != nullptr) {
 		oldPop->copy(*(ga.oldPop));
 	} else {
 		oldPop = ga.oldPop->clone();
@@ -147,7 +147,7 @@ void GASimpleGA::initialize(unsigned int seed)
 
 	stats.reset(*pop);
 
-	if (!scross) {
+	if (scross == nullptr) {
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
 }
 }
@@ -216,7 +216,7 @@ void GASimpleGA::step()
 		}
 		else
 		{
-			if (GARandomBit()) {
+			if (GARandomBit() != 0) {
 				pop->individual(i).copy(*mom);
 			} else {
 				pop->individual(i).copy(*dad);

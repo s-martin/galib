@@ -115,7 +115,7 @@ void GAParameter::setvalue(const void *v)
 	case ParType::STRING:
 		if (v != val.sval)
 		{
-			char *ptr = 0;
+			char *ptr = nullptr;
 			if (strlen((char *)v) > 0)
 			{
 				ptr = new char[strlen((char *)v) + 1];
@@ -143,7 +143,7 @@ void GAParameter::setvalue(const void *v)
 GAParameterList::GAParameterList()
 {
 	N = n = cur = 0;
-	p = (GAParameter **)0;
+	p = (GAParameter **)nullptr;
 }
 
 GAParameterList::GAParameterList(const GAParameterList &list)
@@ -197,7 +197,7 @@ GAParameterList::~GAParameterList()
 int GAParameterList::set(const char *name, const void *v)
 {
 	int found = 0;
-	for (unsigned int i = 0; i < n && !found; i++)
+	for (unsigned int i = 0; i < n && (found == 0); i++)
 	{
 		if (strcmp(name, p[i]->fullname()) == 0 ||
 			strcmp(name, p[i]->shrtname()) == 0)
@@ -206,7 +206,7 @@ int GAParameterList::set(const char *name, const void *v)
 			found = 1;
 		}
 	}
-	return found ? 0 : -1;
+	return found != 0 ? 0 : -1;
 }
 
 // Must do a special case for double/float.  Any floats that get passed to this
@@ -235,7 +235,7 @@ int GAParameterList::set(const char *name, double v)
 			found = 1;
 		}
 	}
-	return found ? 0 : -1;
+	return found != 0 ? 0 : -1;
 }
 
 // This allocates space for strings, so be sure to free it!
@@ -289,14 +289,14 @@ int GAParameterList::add(const char *fn, const char *sn, ParType t,
 		delete[] tmp;
 	}
 	int found = 0;
-	for (unsigned int i = 0; i < n && !found; i++)
+	for (unsigned int i = 0; i < n && (found == 0); i++)
 	{
 		if (strcmp(fn, p[i]->fullname()) == 0 &&
 			strcmp(sn, p[i]->shrtname()) == 0) {
 			found = 1;
 }
 	}
-	if (!found)
+	if (found == 0)
 	{
 		cur = n;
 		p[n++] = new GAParameter(fn, sn, t, v);
@@ -332,7 +332,7 @@ GAParameter *GAParameterList::operator()(const char *name)
 			return p[i];
 }
 }
-	return (GAParameter *)0;
+	return (GAParameter *)nullptr;
 }
 
 // Dump the parameters to the specified stream.  Just name-value pairs with a
@@ -354,7 +354,7 @@ int GAParameterList::write(std::ostream &os) const
 		{
 		case ParType::BOOLEAN:
 			ival = *((int *)(p[i]->value()));
-			if (ival) {
+			if (ival != 0) {
 				os << "1\n";
 			} else {
 				os << "0\n";
@@ -442,7 +442,7 @@ int GAParameterList::read(std::istream &is, bool flag)
 		is >> buf;
 		if (npairs == -1)
 		{
-			if (IsNumeric(buf))
+			if (IsNumeric(buf) != 0)
 			{
 				npairs = atoi(buf);
 				is >> buf;
@@ -472,7 +472,7 @@ int GAParameterList::read(std::istream &is, bool flag)
 			count += 1;
 			toggle = 0;
 
-			for (unsigned int i = 0; i < n && !found; i++)
+			for (unsigned int i = 0; i < n && (found == 0); i++)
 			{
 				if (strcmp(name, p[i]->fullname()) == 0 ||
 					strcmp(name, p[i]->shrtname()) == 0)
@@ -528,7 +528,7 @@ int GAParameterList::read(std::istream &is, bool flag)
 				}
 			}
 
-			if (!found && flag == true)
+			if ((found == 0) && flag == true)
 			{
 				strcpy(_gaerrbuf1, "");
 				strcat(_gaerrbuf1, "unrecognized variable name '");
@@ -620,7 +620,7 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 					switch (p[j]->type())
 					{
 					case ParType::BOOLEAN:
-						if (IsNumeric(argv[i]))
+						if (IsNumeric(argv[i]) != 0)
 						{
 							ival = atoi(argv[i]);
 							ival = (ival == 0) ? 0 : 1;
@@ -684,7 +684,7 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 				}
 			}
 		}
-		if (!found)
+		if (found == 0)
 		{
 			if (flag && i != 0)
 			{
@@ -709,7 +709,7 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 static int IsNumeric(const char *str)
 {
 	for (int i = strlen(str) - 1; i >= 0; i--) {
-		if (!isdigit(str[i]) && str[i] != '.') {
+		if ((isdigit(str[i]) == 0) && str[i] != '.') {
 			return 0;
 }
 }

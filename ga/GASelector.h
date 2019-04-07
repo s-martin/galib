@@ -247,13 +247,13 @@ class GASRSSelector : public GASelectionScheme
 		: GASelectionScheme(w)
 	{
 		fraction = nullptr;
-		choices = (unsigned int *)0;
+		choices = (unsigned int *)nullptr;
 		n = 0;
 	}
 	GASRSSelector(const GASRSSelector &orig)
 	{
 		fraction = nullptr;
-		choices = (unsigned int *)0;
+		choices = (unsigned int *)nullptr;
 		n = 0;
 		copy(orig);
 	}
@@ -308,15 +308,15 @@ class GADSSelector : public GASelectionScheme
 		: GASelectionScheme(w)
 	{
 		fraction = nullptr;
-		choices = (unsigned int *)0;
-		idx = (unsigned int *)0;
+		choices = (unsigned int *)nullptr;
+		idx = (unsigned int *)nullptr;
 		n = 0;
 	}
 	GADSSelector(const GADSSelector &orig)
 	{
 		fraction = nullptr;
-		choices = (unsigned int *)0;
-		idx = (unsigned int *)0;
+		choices = (unsigned int *)nullptr;
+		idx = (unsigned int *)nullptr;
 		n = 0;
 		copy(orig);
 	}

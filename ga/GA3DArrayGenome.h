@@ -35,7 +35,7 @@ template <class T> class GA3DArrayGenome : public GAArray<T>, public GAGenome
 
   public:
 	GA3DArrayGenome(unsigned int x, unsigned int y, unsigned int z,
-					GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+					GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 					void *u = nullptr);
 	GA3DArrayGenome(const GA3DArrayGenome &orig);
 	GA3DArrayGenome &operator=(const GAGenome &orig)
@@ -131,11 +131,11 @@ template <class T> class GA3DArrayAlleleGenome : public GA3DArrayGenome<T>
   public:
 	GA3DArrayAlleleGenome(unsigned int x, unsigned int y, unsigned int z,
 						  const GAAlleleSet<T> &a,
-						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+						  GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 						  void *u = nullptr);
 	GA3DArrayAlleleGenome(unsigned int x, unsigned int y, unsigned int z,
 						  const GAAlleleSetArray<T> &a,
-						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+						  GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 						  void *u = nullptr);
 	GA3DArrayAlleleGenome(const GA3DArrayAlleleGenome<T> &orig);
 	GA3DArrayAlleleGenome<T> &operator=(const GAGenome &orig)

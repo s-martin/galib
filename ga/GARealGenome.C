@@ -256,7 +256,7 @@ int GARealArithmeticCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	int n = 0;
 
-	if (c1 && c2)
+	if ((c1 != nullptr) && (c2 != nullptr))
 	{
 		GA1DArrayGenome<float> &sis = DYN_CAST(GA1DArrayGenome<float> &, *c1);
 		GA1DArrayGenome<float> &bro = DYN_CAST(GA1DArrayGenome<float> &, *c2);
@@ -269,10 +269,10 @@ int GARealArithmeticCrossover(const GAGenome &p1, const GAGenome &p2,
 		}
 		n = 2;
 	}
-	else if (c1 || c2)
+	else if ((c1 != nullptr) || (c2 != nullptr))
 	{
 		GA1DArrayGenome<float> &sis =
-			(c1 ? DYN_CAST(GA1DArrayGenome<float> &, *c1)
+			(c1 != nullptr ? DYN_CAST(GA1DArrayGenome<float> &, *c1)
 				: DYN_CAST(GA1DArrayGenome<float> &, *c2));
 
 		int len = GAMax(mom.length(), dad.length());
@@ -299,7 +299,7 @@ int GARealBlendCrossover(const GAGenome &p1, const GAGenome &p2, GAGenome *c1,
 
 	int n = 0;
 
-	if (c1 && c2)
+	if ((c1 != nullptr) && (c2 != nullptr))
 	{
 		GA1DArrayGenome<float> &sis = DYN_CAST(GA1DArrayGenome<float> &, *c1);
 		GA1DArrayGenome<float> &bro = DYN_CAST(GA1DArrayGenome<float> &, *c2);
@@ -323,10 +323,10 @@ int GARealBlendCrossover(const GAGenome &p1, const GAGenome &p2, GAGenome *c1,
 		}
 		n = 2;
 	}
-	else if (c1 || c2)
+	else if ((c1 != nullptr) || (c2 != nullptr))
 	{
 		GA1DArrayGenome<float> &sis =
-			(c1 ? DYN_CAST(GA1DArrayGenome<float> &, *c1)
+			(c1 != nullptr ? DYN_CAST(GA1DArrayGenome<float> &, *c1)
 				: DYN_CAST(GA1DArrayGenome<float> &, *c2));
 
 		int len = GAMax(mom.length(), dad.length());

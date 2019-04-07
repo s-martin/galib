@@ -18,7 +18,7 @@ void GADCrowdingGA::initialize(unsigned int seed)
 
 	stats.reset(*pop);
 
-	if (!scross) {
+	if (scross == nullptr) {
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
 }
 }
@@ -51,7 +51,7 @@ void GADCrowdingGA::step()
 		delete ip;
 
 		stats.numsel += 2; // create child
-		stats.numcro += (*scross)(*mom, *dad, child, 0);
+		stats.numcro += (*scross)(*mom, *dad, child, nullptr);
 		stats.nummut += child->mutate(pMutation());
 		stats.numeval += 1;
 

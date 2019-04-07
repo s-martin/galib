@@ -74,7 +74,7 @@ class GAStatistics
 	int nConvergence() const { return Nconv; }
 	int nConvergence(unsigned int);
 	int nBestGenomes(const GAGenome &, unsigned int);
-	int nBestGenomes() const { return (boa ? boa->size() : 0); }
+	int nBestGenomes() const { return (boa != nullptr ? boa->size() : 0); }
 	int scoreFrequency(unsigned int x) { return (scoreFreq = x); }
 	int scoreFrequency() const { return scoreFreq; }
 	int flushFrequency(unsigned int x);
@@ -156,8 +156,8 @@ class GAStatistics
 inline const char *GAStatistics::scoreFilename(const char *filename)
 {
 	delete[] scorefile;
-	scorefile = 0;
-	if (filename)
+	scorefile = nullptr;
+	if (filename != nullptr)
 	{
 		scorefile = new char[strlen(filename) + 1];
 		strcpy(scorefile, filename);

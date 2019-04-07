@@ -36,7 +36,7 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 							  GAGenome *);
 
   public:
-	GAListGenome(GAGenome::Evaluator f = 0, void *u = nullptr);
+	GAListGenome(GAGenome::Evaluator f = nullptr, void *u = nullptr);
 	GAListGenome(const GAListGenome<T> &);
 	GAListGenome<T> &operator=(const GAGenome &orig)
 	{

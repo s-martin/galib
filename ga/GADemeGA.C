@@ -44,10 +44,10 @@ GADemeGA::GADemeGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 	{
 		GAErr(GA_LOC, className(), "GADemeGA(GAPopulation&)",
 			  gaErrNoIndividuals);
-		pop = 0;
-		nrepl = 0;
-		tmppop = 0;
-		pstats = 0;
+		pop = nullptr;
+		nrepl = nullptr;
+		tmppop = nullptr;
+		pstats = nullptr;
 	}
 	else
 	{
@@ -71,10 +71,10 @@ GADemeGA::GADemeGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 }
 GADemeGA::GADemeGA(const GADemeGA &orig) : GAGeneticAlgorithm(orig)
 {
-	deme = 0;
-	nrepl = 0;
-	tmppop = 0;
-	pstats = 0;
+	deme = nullptr;
+	nrepl = nullptr;
+	tmppop = nullptr;
+	pstats = nullptr;
 	copy(orig);
 }
 GADemeGA::~GADemeGA()
@@ -431,7 +431,7 @@ void GADemeGA::initialize(unsigned int seed)
 	pop->touch();
 	stats.reset(*pop);
 
-	if (!scross)
+	if (scross == nullptr)
 	{
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
 	}
@@ -449,7 +449,7 @@ void GADemeGA::step()
 	GAGenome *mom, *dad;
 	float pc;
 
-	if (!scross)
+	if (scross == nullptr)
 	{
 		pc = 0.0;
 	}
@@ -501,12 +501,12 @@ void GADemeGA::step()
 			if (GAFlipCoin(pc))
 			{
 				pstats[ii].numcro += (*scross)(
-					*mom, *dad, &tmppop->individual(i), (GAGenome *)0);
+					*mom, *dad, &tmppop->individual(i), (GAGenome *)nullptr);
 				c1 = 1;
 			}
 			else
 			{
-				if (GARandomBit())
+				if (GARandomBit() != 0)
 				{
 					tmppop->individual(i).copy(*mom);
 				}

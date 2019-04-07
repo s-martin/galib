@@ -277,7 +277,7 @@ GAGeneticAlgorithm::~GAGeneticAlgorithm() { delete pop; }
 
 void GAGeneticAlgorithm::copy(const GAGeneticAlgorithm &ga)
 {
-	if (pop)
+	if (pop != nullptr)
 	{
 		pop->copy(*(ga.pop));
 	}
@@ -466,7 +466,7 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
 				  << "' to '" << *((int *)value) << "'\n";
 #endif
-		stats.recordDiversity(*((int *)value) ? true : false);
+		stats.recordDiversity(*((int *)value) != 0 ? true : false);
 		status = 0;
 	}
 	else if (strcmp(name, gaNselectScores) == 0 ||
@@ -588,7 +588,7 @@ int GAGeneticAlgorithm::get(const char *name, void *value) const
 	else if (strcmp(name, gaNrecordDiversity) == 0 ||
 			 strcmp(name, gaSNrecordDiversity) == 0)
 	{
-		*(static_cast<int *>(value)) = stats.recordDiversity();
+		*(static_cast<int *>(value)) = static_cast<int>(stats.recordDiversity());
 		status = 0;
 	}
 	else if (strcmp(name, gaNselectScores) == 0 ||

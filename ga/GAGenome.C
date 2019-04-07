@@ -91,9 +91,9 @@ void GAGenome::copy(const GAGenome &orig)
 	asexcross = orig.asexcross;
 	_neval = 0;
 
-	if (orig.evd)
+	if (orig.evd != nullptr)
 	{
-		if (evd) {
+		if (evd != nullptr) {
 			evd->copy(*orig.evd);
 		} else {
 			evd = orig.evd->clone();
@@ -106,7 +106,7 @@ float GAGenome::evaluate(bool flag) const
 	if (_evaluated == false || flag == true)
 	{
 		GAGenome *This = const_cast<GAGenome *>(this);
-		if (eval)
+		if (eval != nullptr)
 		{
 			This->_neval++;
 			This->_score = (*eval)(*This);

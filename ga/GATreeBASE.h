@@ -182,7 +182,7 @@ class GATreeIterBASE
 	GATreeIterBASE()
 	{
 		node = nullptr;
-		tree = (GATreeBASE *)0;
+		tree = (GATreeBASE *)nullptr;
 	}
 	explicit GATreeIterBASE(const GATreeBASE &t)
 	{
@@ -201,51 +201,51 @@ class GATreeIterBASE
 	}
 	GANodeBASE *current(GANodeBASE *c)
 	{
-		return (c ? (node = c) : nullptr);
+		return (c != nullptr ? (node = c) : nullptr);
 	}
 	GANodeBASE *current() { return node; }
 	GANodeBASE *next()
 	{
-		return (node ? (node = node->next) : nullptr);
+		return (node != nullptr ? (node = node->next) : nullptr);
 	}
 	GANodeBASE *next(GANodeBASE *c)
 	{
-		return (c ? (node = c->next) : nullptr);
+		return (c != nullptr ? (node = c->next) : nullptr);
 	}
 	GANodeBASE *prev()
 	{
-		return (node ? (node = node->prev) : nullptr);
+		return (node != nullptr ? (node = node->prev) : nullptr);
 	}
 	GANodeBASE *prev(GANodeBASE *c)
 	{
-		return (c ? (node = c->prev) : nullptr);
+		return (c != nullptr ? (node = c->prev) : nullptr);
 	}
 	GANodeBASE *parent()
 	{
-		return (node ? (node = node->parent) : nullptr);
+		return (node != nullptr ? (node = node->parent) : nullptr);
 	}
 	GANodeBASE *parent(GANodeBASE *c)
 	{
-		return (c ? (node = c->parent) : nullptr);
+		return (c != nullptr ? (node = c->parent) : nullptr);
 	}
 	GANodeBASE *child()
 	{
-		return (node ? (node = node->child) : nullptr);
+		return (node != nullptr ? (node = node->child) : nullptr);
 	}
 	GANodeBASE *child(GANodeBASE *c)
 	{
-		return (c ? (node = c->child) : nullptr);
+		return (c != nullptr ? (node = c->child) : nullptr);
 	}
-	GANodeBASE *root() { return (tree ? (node = tree->rt) : nullptr); }
+	GANodeBASE *root() { return (tree != nullptr ? (node = tree->rt) : nullptr); }
 	GANodeBASE *root(GANodeBASE *c);
 	GANodeBASE *eldest()
 	{
-		return (node ? (node = eldest(node)) : nullptr);
+		return (node != nullptr ? (node = eldest(node)) : nullptr);
 	}
 	GANodeBASE *eldest(GANodeBASE *c);
 	GANodeBASE *youngest()
 	{
-		return (node ? (node = youngest(node)) : nullptr);
+		return (node != nullptr ? (node = youngest(node)) : nullptr);
 	}
 	GANodeBASE *youngest(GANodeBASE *c);
 	GANodeBASE *warp(unsigned int);
@@ -253,15 +253,15 @@ class GATreeIterBASE
 	{
 		tree = i.tree;
 		node = nullptr;
-		return (i.node ? (node = i.node) : nullptr);
+		return (i.node != nullptr ? (node = i.node) : nullptr);
 	}
-	int size() { return (node ? size(node) : 0); }
+	int size() { return (node != nullptr ? size(node) : 0); }
 	int size(GANodeBASE *c);
-	int depth() { return (node ? depth(node) : 0); }
+	int depth() { return (node != nullptr ? depth(node) : 0); }
 	int depth(GANodeBASE *c);
-	int nchildren() { return (node ? nchildren(node) : 0); }
+	int nchildren() { return (node != nullptr ? nchildren(node) : 0); }
 	int nchildren(GANodeBASE *c);
-	int nsiblings() { return (node ? nsiblings(node) : 0); }
+	int nsiblings() { return (node != nullptr ? nsiblings(node) : 0); }
 	int nsiblings(GANodeBASE *c);
 
   protected:

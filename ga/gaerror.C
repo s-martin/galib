@@ -80,13 +80,13 @@ void GAErr(const GASourceLocator loc, const char *clss, const char *func,
 	strcat(gaErrMsg, ":\n  ");
 	strcat(gaErrMsg, msg1);
 	strcat(gaErrMsg, "\n");
-	if (msg2)
+	if (msg2 != nullptr)
 	{
 		strcat(gaErrMsg, "  ");
 		strcat(gaErrMsg, msg2);
 		strcat(gaErrMsg, "\n");
 	}
-	if (msg3)
+	if (msg3 != nullptr)
 	{
 		strcat(gaErrMsg, "  ");
 		strcat(gaErrMsg, msg3);
@@ -110,13 +110,13 @@ void GAErr(const GASourceLocator loc, const char *clss, const char *func,
 	strcat(gaErrMsg, ":\n  ");
 	strcat(gaErrMsg, __gaErrStr[i]);
 	strcat(gaErrMsg, "\n");
-	if (msg2)
+	if (msg2 != nullptr)
 	{
 		strcat(gaErrMsg, "  ");
 		strcat(gaErrMsg, msg2);
 		strcat(gaErrMsg, "\n");
 	}
-	if (msg3)
+	if (msg3 != nullptr)
 	{
 		strcat(gaErrMsg, "  ");
 		strcat(gaErrMsg, msg3);
@@ -138,13 +138,13 @@ void GAErr(const GASourceLocator loc, const char *func, GAErrorIndex i,
 	strcat(gaErrMsg, ":\n  ");
 	strcat(gaErrMsg, __gaErrStr[i]);
 	strcat(gaErrMsg, "\n");
-	if (msg2)
+	if (msg2 != nullptr)
 	{
 		strcat(gaErrMsg, "  ");
 		strcat(gaErrMsg, msg2);
 		strcat(gaErrMsg, "\n");
 	}
-	if (msg3)
+	if (msg3 != nullptr)
 	{
 		strcat(gaErrMsg, "  ");
 		strcat(gaErrMsg, msg3);

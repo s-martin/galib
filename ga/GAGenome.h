@@ -47,7 +47,10 @@ selected to cross with itself, and self-copying is not out of the question)
 	   virtual int read(istream&)
 	   virtual int write(ostream&) const
 	   virtual int equal(const GAGenome&) const
-  
+  
+
+
+
 
 
 
@@ -77,7 +80,10 @@ initialize
   should first clean up as needed, then do its thing.  The initializer may be
   called any number of times (unlike a class constructor which is called only
   once for a given instance).
- 
+ 
+
+
+
 
 
 

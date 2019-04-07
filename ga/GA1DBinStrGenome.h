@@ -62,7 +62,7 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 
   public:
 	GA1DBinaryStringGenome(unsigned int len,
-						   GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+						   GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 						   void *u = nullptr);
 	GA1DBinaryStringGenome(const GA1DBinaryStringGenome &orig);
 	GA1DBinaryStringGenome &operator=(const GAGenome &arg)
@@ -113,7 +113,7 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	int resizeBehaviour(unsigned int lower, unsigned int upper);
 	void copy(const GA1DBinaryStringGenome &orig, unsigned int r,
 			  unsigned int x, unsigned int length);
-	int equal(const GA1DBinaryStringGenome &orig, unsigned int r,
+	bool equal(const GA1DBinaryStringGenome &orig, unsigned int r,
 			  unsigned int x, unsigned int length) const;
 	void set(unsigned int x, unsigned int length);
 	void unset(unsigned int x, unsigned int length);

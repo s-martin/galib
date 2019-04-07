@@ -212,7 +212,7 @@ GASharing::evaluate(const GAPopulation& p) {
   int n = p.size();
 
   int i, j;
-  if(df) {
+  if(df != nullptr) {
     for(i=0; i<n; i++){		// calculate and cache the distances
       d[i*n+i] = 0.0;		// each genome is same as itself
       for(j=i+1; j<n; j++) {
@@ -231,7 +231,7 @@ GASharing::evaluate(const GAPopulation& p) {
 
   int mm;
   if(_minmax == 0) {
-    if(p.geneticAlgorithm()) {
+    if(p.geneticAlgorithm() != nullptr) {
       mm = p.geneticAlgorithm()->minimaxi();
     } else {
       mm = ((p.order() == GAPopulation::HIGH_IS_BEST) ? 

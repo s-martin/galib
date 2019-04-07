@@ -166,7 +166,7 @@ void GAPopulation::copy(const GAPopulation &arg)
 	sind = new GAGenome *[N];
 	memcpy(sind, rind, N * sizeof(GAGenome *));
 
-	if (arg.indDiv)
+	if (arg.indDiv != nullptr)
 	{
 		indDiv = new float[N * N];
 		memcpy(indDiv, arg.indDiv, (N * N * sizeof(float)));
@@ -189,7 +189,7 @@ void GAPopulation::copy(const GAPopulation &arg)
 		prepselect();
 }
 
-	if (arg.evaldata) {
+	if (arg.evaldata != nullptr) {
 		evaldata = arg.evaldata->clone();
 	} else {
 		evaldata = nullptr;
@@ -305,7 +305,7 @@ int GAPopulation::grow(unsigned int s)
 	memcpy(sind, tmp, oldsize * sizeof(GAGenome *));
 	delete[] tmp;
 
-	if (indDiv)
+	if (indDiv != nullptr)
 	{
 		float *tmpd = indDiv;
 		indDiv = new float[N * N];
@@ -347,7 +347,7 @@ int GAPopulation::compact()
 	//    delete [] tmpd;
 	//  }
 
-	if (indDiv)
+	if (indDiv != nullptr)
 	{
 		delete[] indDiv;
 		indDiv = nullptr;
@@ -669,7 +669,7 @@ GAGenome *GAPopulation::replace(GAGenome *repl, int which, SortBasis basis)
 		selectready = false;
 
 		// make sure the genome has the correct genetic algorithm pointer
-		if (ga) {
+		if (ga != nullptr) {
 			repl->geneticAlgorithm(*ga);
 }
 	}
@@ -799,7 +799,7 @@ GAGenome *GAPopulation::add(GAGenome *c)
 }
 	grow(n + 1);
 	rind[n] = sind[n] = c;
-	if (ga) {
+	if (ga != nullptr) {
 		rind[n]->geneticAlgorithm(*ga);
 }
 	n++;

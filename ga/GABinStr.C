@@ -49,7 +49,7 @@ int GABinaryString::resize(unsigned int x)
 		{
 			SZ += csz;
 		}
-		if (!data)
+		if (data == nullptr)
 		{
 			data = new GABit[SZ];
 			memset(data, 0, SZ * sizeof(GABit));

@@ -153,7 +153,7 @@ void bitseed(unsigned int seed) { iseed = seed; }
 
 int GARandomBit()
 {
-	if (iseed & IB18)
+	if ((iseed & IB18) != 0u)
 	{
 		iseed = ((iseed ^ MASK) << 1) | IB1;
 		return 1;

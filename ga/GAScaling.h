@@ -269,7 +269,7 @@ class GASharing : public GAScalingScheme
 			  float a = 1.0)
 	{
 		N = 0;
-		d = (float *)0;
+		d = (float *)nullptr;
 		df = func;
 		_sigma = cut;
 		_alpha = a;
@@ -278,8 +278,8 @@ class GASharing : public GAScalingScheme
 	GASharing(float cut = gaDefSharingCutoff, float a = 1.0)
 	{
 		N = 0;
-		d = (float *)0;
-		df = 0;
+		d = (float *)nullptr;
+		df = nullptr;
 		_sigma = cut;
 		_alpha = a;
 		_minmax = 0;
@@ -287,7 +287,7 @@ class GASharing : public GAScalingScheme
 	GASharing(const GASharing &arg)
 	{
 		N = 0;
-		d = (float *)0;
+		d = (float *)nullptr;
 		copy(arg);
 	}
 	GASharing &operator=(const GAScalingScheme &arg)

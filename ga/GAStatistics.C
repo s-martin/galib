@@ -58,7 +58,7 @@ GAStatistics::GAStatistics()
 	strcpy(scorefile, gaDefScoreFilename);
 	which = Maximum;
 
-	boa = (GAPopulation *)0;
+	boa = (GAPopulation *)nullptr;
 }
 GAStatistics::GAStatistics(const GAStatistics &orig)
 {
@@ -70,7 +70,7 @@ GAStatistics::GAStatistics(const GAStatistics &orig)
 	devScore = nullptr;
 	divScore = nullptr;
 	scorefile = nullptr;
-	boa = (GAPopulation *)0;
+	boa = (GAPopulation *)nullptr;
 	copy(orig);
 }
 GAStatistics::~GAStatistics()
@@ -145,7 +145,7 @@ void GAStatistics::copy(const GAStatistics &orig)
 	memcpy(divScore, orig.divScore, Nscrs * sizeof(float));
 
 	delete[] scorefile;
-	if (orig.scorefile)
+	if (orig.scorefile != nullptr)
 	{
 		scorefile = new char[strlen(orig.scorefile) + 1];
 		strcpy(scorefile, orig.scorefile);
@@ -157,7 +157,7 @@ void GAStatistics::copy(const GAStatistics &orig)
 	which = orig.which;
 
 	delete boa;
-	if (orig.boa) {
+	if (orig.boa != nullptr) {
 		boa = orig.boa->clone();
 }
 }
@@ -184,7 +184,7 @@ void GAStatistics::copy(const GAStatistics &orig)
 // comparator to do the comparison.
 void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 {
-	if (boa == (GAPopulation *)0 || boa->size() == 0) {
+	if (boa == (GAPopulation *)nullptr || boa->size() == 0) {
 		return; // do nothing
 }
 	if (pop.order() != boa->order()) {
@@ -450,9 +450,9 @@ int GAStatistics::nBestGenomes(const GAGenome &genome, unsigned int n)
 	if (n == 0)
 	{
 		delete boa;
-		boa = (GAPopulation *)0;
+		boa = (GAPopulation *)nullptr;
 	}
-	else if (boa == (GAPopulation *)0)
+	else if (boa == (GAPopulation *)nullptr)
 	{
 		boa = new GAPopulation(genome, n);
 	}
@@ -465,7 +465,7 @@ int GAStatistics::nBestGenomes(const GAGenome &genome, unsigned int n)
 
 const GAGenome &GAStatistics::bestIndividual(unsigned int n) const
 {
-	if (boa == 0 || static_cast<int>(n) >= boa->size())
+	if (boa == nullptr || static_cast<int>(n) >= boa->size())
 	{
 		GAErr(GA_LOC, "GAStatistics", "bestIndividual", gaErrBadPopIndex);
 		n = 0;
@@ -564,7 +564,7 @@ void GAStatistics::resizeScores(unsigned int n)
 // We give no notice that we're overwriting the existing file!!
 void GAStatistics::writeScores()
 {
-	if (!scorefile) {
+	if (scorefile == nullptr) {
 		return;
 }
 	std::ofstream outfile(scorefile,
@@ -662,19 +662,19 @@ int GAStatistics::scores(std::ostream &os, int w)
 	for (unsigned int i = 0; i < nscrs; i++)
 	{
 		os << gen[i];
-		if (w & Mean) {
+		if ((w & Mean) != 0) {
 			os << "\t" << aveScore[i];
 }
-		if (w & Maximum) {
+		if ((w & Maximum) != 0) {
 			os << "\t" << maxScore[i];
 }
-		if (w & Minimum) {
+		if ((w & Minimum) != 0) {
 			os << "\t" << minScore[i];
 }
-		if (w & Deviation) {
+		if ((w & Deviation) != 0) {
 			os << "\t" << devScore[i];
 }
-		if (w & Diversity) {
+		if ((w & Diversity) != 0) {
 			os << "\t" << divScore[i];
 }
 		os << "\n";

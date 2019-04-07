@@ -152,7 +152,7 @@ class GAListIterBASE
 	GAListIterBASE()
 	{
 		node = nullptr;
-		list = (GAListBASE *)0;
+		list = (GAListBASE *)nullptr;
 	}
 	explicit GAListIterBASE(const GAListBASE &t)
 	{
@@ -171,38 +171,38 @@ class GAListIterBASE
 	}
 	GANodeBASE *current(GANodeBASE *c)
 	{
-		return (c ? (node = c) : nullptr);
+		return (c != nullptr ? (node = c) : nullptr);
 	}
 	GANodeBASE *current() { return node; }
 	GANodeBASE *next()
 	{
-		return (node ? (node = node->next) : nullptr);
+		return (node != nullptr ? (node = node->next) : nullptr);
 	}
 	GANodeBASE *next(GANodeBASE *c)
 	{
-		return (c ? (node = c->next) : nullptr);
+		return (c != nullptr ? (node = c->next) : nullptr);
 	}
 	GANodeBASE *prev()
 	{
-		return (node ? (node = node->prev) : nullptr);
+		return (node != nullptr ? (node = node->prev) : nullptr);
 	}
 	GANodeBASE *prev(GANodeBASE *c)
 	{
-		return (c ? (node = c->prev) : nullptr);
+		return (c != nullptr ? (node = c->prev) : nullptr);
 	}
-	GANodeBASE *head() { return (list ? (node = list->hd) : nullptr); }
+	GANodeBASE *head() { return (list != nullptr ? (node = list->hd) : nullptr); }
 	GANodeBASE *tail()
 	{
-		return ((list && list->hd) ? (node = list->hd->prev) : nullptr);
+		return (((list != nullptr) && (list->hd != nullptr)) ? (node = list->hd->prev) : nullptr);
 	}
 	GANodeBASE *warp(unsigned int);
 	GANodeBASE *warp(const GAListIterBASE &i)
 	{
 		list = i.list;
 		node = nullptr;
-		return (i.node ? (node = i.node) : nullptr);
+		return (i.node != nullptr ? (node = i.node) : nullptr);
 	}
-	int size() { return (list ? list->size() : 0); }
+	int size() { return (list != nullptr ? list->size() : 0); }
 
   protected:
 	GANodeBASE *node;

@@ -73,7 +73,7 @@ public:
   int nOffspring(unsigned int);
 
   ReplacementScheme replacement() const {return rs;}
-  ReplacementScheme replacement(ReplacementScheme, ReplacementFunction f=0);
+  ReplacementScheme replacement(ReplacementScheme, ReplacementFunction f=nullptr);
 
 protected:
   GAGenome *child1, *child2;	// children that will be generated each gen

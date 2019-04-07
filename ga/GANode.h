@@ -25,7 +25,7 @@ for tree and list nodes, but decided for now to make them the same.
 struct GANodeBASE {
   GANodeBASE *next, *prev, *parent, *child;
   GANodeBASE()
-    {next=0; prev=0; parent=0; child=0;}
+    {next=nullptr; prev=nullptr; parent=nullptr; child=nullptr;}
   GANodeBASE(GANodeBASE *n, GANodeBASE *p, GANodeBASE *par, GANodeBASE *chi)
     {next=n; prev=p; parent=par; child=chi;}
   virtual ~GANodeBASE() {}

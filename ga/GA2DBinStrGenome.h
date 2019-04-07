@@ -38,7 +38,7 @@ class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
 
   public:
 	GA2DBinaryStringGenome(unsigned int x, unsigned int y,
-						   GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+						   GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 						   void *u = nullptr);
 	GA2DBinaryStringGenome(const GA2DBinaryStringGenome &orig);
 	GA2DBinaryStringGenome &operator=(const GAGenome &arg)

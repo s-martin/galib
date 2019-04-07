@@ -37,12 +37,12 @@ ListBASE
 // idx is the head node, we post an error.
 int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 {
-	if (!n) {
+	if (n == nullptr) {
 		return NO_ERR;
 }
-	if (!idx)
+	if (idx == nullptr)
 	{
-		if (!hd) {
+		if (hd == nullptr) {
 			where = HEAD;
 		} else if (where != HEAD && where != TAIL)
 		{
@@ -51,12 +51,12 @@ int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 		}
 	}
 
-	GANodeBASE *last = (n->prev && n->prev != n) ? n->prev : n;
+	GANodeBASE *last = ((n->prev != nullptr) && n->prev != n) ? n->prev : n;
 
 	switch (where)
 	{
 	case HEAD:
-		if (hd)
+		if (hd != nullptr)
 		{
 			last->next = hd;
 			n->prev = hd->prev;
@@ -64,16 +64,16 @@ int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 			hd->prev = last;
 		}
 		hd = n;
-		if (!hd->next) {
+		if (hd->next == nullptr) {
 			hd->next = hd;
 }
-		if (!hd->prev) {
+		if (hd->prev == nullptr) {
 			hd->prev = hd;
 }
 		break;
 
 	case TAIL:
-		if (hd)
+		if (hd != nullptr)
 		{
 			last->next = hd;
 			n->prev = hd->prev;
@@ -83,10 +83,10 @@ int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 		else
 		{
 			hd = n;
-			if (!hd->next) {
+			if (hd->next == nullptr) {
 				hd->next = hd;
 }
-			if (!hd->prev) {
+			if (hd->prev == nullptr) {
 				hd->prev = hd;
 }
 		}
@@ -126,11 +126,11 @@ int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 //   If the removal is on the head node, set the head node to the next node.
 GANodeBASE *GAListBASE::remove(GANodeBASE *n)
 {
-	if (!n) {
+	if (n == nullptr) {
 		return nullptr;
 }
 
-	if (n->next && n->next != n)
+	if ((n->next != nullptr) && n->next != n)
 	{ // reset links on neighbors if they exist
 		n->prev->next = n->next;
 		n->next->prev = n->prev;
@@ -169,7 +169,7 @@ GANodeBASE *GAListBASE::remove(GANodeBASE *n)
 // that...
 int GAListBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 {
-	if (!a || !b || a == b) {
+	if ((a == nullptr) || (b == nullptr) || a == b) {
 		return NO_ERR;
 }
 
@@ -248,7 +248,7 @@ int GAListBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 // const specifier, we do a little pointer magic and cast this to be non-const.
 int GAListBASE::size() const
 {
-	if (!csz) {
+	if (csz == 0) {
 		return sz;
 }
 	GAListBASE *This = CON_CAST(GAListBASE *, this);
@@ -258,7 +258,7 @@ int GAListBASE::size() const
 }
 	GANodeBASE *tmp = hd;
 	This->sz = 1;
-	while (tmp && tmp->next != hd)
+	while ((tmp != nullptr) && tmp->next != hd)
 	{
 		tmp = tmp->next;
 		This->sz++;
@@ -287,17 +287,17 @@ utilities
 GANodeBASE *_GAListTraverse(unsigned int index, unsigned int &cur,
 							GANodeBASE *node)
 {
-	if (!node) {
+	if (node == nullptr) {
 		return nullptr;
 }
 	GANodeBASE *tmp = node;
-	while (cur < index && tmp && tmp->next != node)
+	while (cur < index && (tmp != nullptr) && tmp->next != node)
 	{
 		tmp = tmp->next;
 		cur++;
 	}
 	if (cur != index) {
-		tmp = 0; // we didn't find the right node
+		tmp = nullptr; // we didn't find the right node
 }
 	return tmp;
 }

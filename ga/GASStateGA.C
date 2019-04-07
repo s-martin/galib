@@ -82,7 +82,7 @@ void GASteadyStateGA::copy(const GAGeneticAlgorithm &g)
 	pRepl = ga.pRepl;
 	nRepl = ga.nRepl;
 
-	if (tmpPop) {
+	if (tmpPop != nullptr) {
 		tmpPop->copy(*(ga.tmpPop));
 	} else {
 		tmpPop = ga.tmpPop->clone();
@@ -289,7 +289,7 @@ void GASteadyStateGA::initialize(unsigned int seed)
 
 	stats.reset(*pop);
 
-	if (!scross) {
+	if (scross == nullptr) {
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
 }
 }
@@ -352,7 +352,7 @@ void GASteadyStateGA::step()
 		}
 		else
 		{
-			if (GARandomBit()) {
+			if (GARandomBit() != 0) {
 				tmpPop->individual(i).copy(*mom);
 			} else {
 				tmpPop->individual(i).copy(*dad);

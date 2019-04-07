@@ -37,7 +37,7 @@ class GA3DBinaryStringGenome : public GABinaryString, public GAGenome
 
   public:
 	GA3DBinaryStringGenome(unsigned int x, unsigned int y, unsigned int z,
-						   GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+						   GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 						   void *u = nullptr);
 	GA3DBinaryStringGenome(const GA3DBinaryStringGenome &orig);
 	GA3DBinaryStringGenome &operator=(const GAGenome &arg)

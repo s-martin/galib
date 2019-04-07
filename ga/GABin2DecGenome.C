@@ -163,7 +163,7 @@ bool GABin2DecPhenotype::equal(const GABin2DecPhenotype &b) const
 	if (memcmp(core->nbits, b.core->nbits, core->n * sizeof(uint16_t)) != 0 ||
 		memcmp(core->oset, b.core->oset, core->n * sizeof(uint16_t)) != 0 ||
 		memcmp(core->minval, b.core->minval, core->n * sizeof(float)) != 0 ||
-		memcmp(core->maxval, b.core->maxval, core->n * sizeof(float)))
+		(memcmp(core->maxval, b.core->maxval, core->n * sizeof(float)) != 0))
 	{
 		return false;
 	}
@@ -180,12 +180,12 @@ void GABin2DecGenome::copy(const GAGenome &orig)
 		return;
 	}
 	const GABin2DecGenome *c = DYN_CAST(const GABin2DecGenome *, &orig);
-	if (c)
+	if (c != nullptr)
 	{
 		GA1DBinaryStringGenome::copy(*c);
 		encode = c->encode;
 		decode = c->decode;
-		if (ptype)
+		if (ptype != nullptr)
 		{
 			*ptype = *(c->ptype);
 		}

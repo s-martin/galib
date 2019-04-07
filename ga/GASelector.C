@@ -416,7 +416,7 @@ void GASRSSelector::update()
 			}
 			i = 0;
 			int flag = 1;
-			while (k < pop->size() && flag)
+			while (k < pop->size() && (flag != 0))
 			{
 				if (i >= pop->size())
 				{

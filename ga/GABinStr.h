@@ -50,12 +50,12 @@ class GABinaryString
 	short bit(unsigned int a) const { return (data[a]); }
 	short bit(unsigned int a, short val)
 	{ // set/unset the bit
-		return (data[a] = (val ? 1 : 0));
+		return (data[a] = (val != 0 ? 1 : 0));
 	}
 	bool equal(const GABinaryString &b, unsigned int r, unsigned int x,
 			   unsigned int l) const
 	{
-		return (memcmp(&(data[r]), &(b.data[x]), l * sizeof(GABit)) ? false
+		return (memcmp(&(data[r]), &(b.data[x]), l * sizeof(GABit)) != 0 ? false
 																	: true);
 	}
 	void copy(const GABinaryString &orig, unsigned int r, unsigned int x,
