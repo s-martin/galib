@@ -286,7 +286,7 @@ int GABin2DecGenome::equal(const GAGenome &g) const
 																	   : false);
 }
 
-int GABin2DecGenome::notequal(const GAGenome &g) const
+bool GABin2DecGenome::notequal(const GAGenome &g) const
 {
 	auto &b = (GABin2DecGenome &)g;
 	return ((GA1DBinaryStringGenome::notequal(b) || *ptype != *(b.ptype))

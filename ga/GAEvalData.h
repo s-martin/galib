@@ -16,9 +16,9 @@ respective evaluation methods.
 class GAEvalData
 {
   public:
-	GAEvalData() {}
-	GAEvalData(const GAEvalData &) {}
-	virtual ~GAEvalData() {}
+	GAEvalData() = default;
+	GAEvalData(const GAEvalData &) = default;
+	virtual ~GAEvalData() = default;
 	GAEvalData &operator=(const GAEvalData &orig)
 	{
 		if (&orig != this)

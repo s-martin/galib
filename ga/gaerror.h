@@ -100,13 +100,13 @@ enum GAErrorIndex
 //
 
 void GAErr(const GASourceLocator loc, const char *clss,
-		   const char *function_name, GAErrorIndex i, const char *msg2 = 0,
-		   const char *msg3 = 0);
+		   const char *function_name, GAErrorIndex i, const char *msg2 = nullptr,
+		   const char *msg3 = nullptr);
 void GAErr(const GASourceLocator loc, const char *clss,
-		   const char *function_name, const char *msg1, const char *msg2 = 0,
-		   const char *msg3 = 0);
+		   const char *function_name, const char *msg1, const char *msg2 = nullptr,
+		   const char *msg3 = nullptr);
 void GAErr(const GASourceLocator loc, const char *function_name, GAErrorIndex i,
-		   const char *msg2 = 0, const char *msg3 = 0);
+		   const char *msg2 = nullptr, const char *msg3 = nullptr);
 
 // Use this function to turn on/off the error reporting.  If you turn off the
 // error reporting, the messages will still get stuck into the global error

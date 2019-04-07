@@ -152,7 +152,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 	virtual int write(std::ostream &) const override;
 
 	virtual int equal(const GAGenome &) const override;
-	virtual int notequal(const GAGenome &) const override;
+	virtual bool notequal(const GAGenome &) const override;
 
 	const GABin2DecPhenotype &phenotypes(const GABin2DecPhenotype &p);
 	const GABin2DecPhenotype &phenotypes() const { return *ptype; }

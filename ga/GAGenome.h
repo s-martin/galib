@@ -217,7 +217,7 @@ class GAGenome : public GAID
 	// The GNU compiler sucks.  It won't recognize No*** as a member of the
 	// genome class.  So we have to use 0 as the defaults then check in the
 	// constructor.
-	GAGenome(Initializer i = 0, Mutator m = 0, Comparator c = 0);
+	GAGenome(Initializer i = 0, Mutator m = nullptr, Comparator c = nullptr);
 	GAGenome(const GAGenome &);
 	GAGenome &operator=(const GAGenome &arg)
 	{
@@ -244,7 +244,7 @@ class GAGenome : public GAID
 		GAErr(GA_LOC, className(), "equal", gaErrOpUndef);
 		return 1;
 	}
-	virtual int notequal(const GAGenome &g) const { return (equal(g) ? 0 : 1); }
+	virtual bool notequal(const GAGenome &g) const { return (equal(g) ? false : true); }
 
   public:
 	int nevals() const { return _neval; }

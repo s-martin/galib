@@ -55,8 +55,8 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 							  GAGenome *);
 
   public:
-	GA1DArrayGenome(unsigned int x,
-					GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+	explicit GA1DArrayGenome(unsigned int length,
+					GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 					void *u = nullptr);
 	GA1DArrayGenome(const GA1DArrayGenome<T> &orig);
 	GA1DArrayGenome<T> &operator=(const GAGenome &orig)
@@ -155,11 +155,11 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	static int FlipMutator(GAGenome &, float);
 
   public:
-	GA1DArrayAlleleGenome(unsigned int x, const GAAlleleSet<T> &a,
-						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+	GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<T> &a,
+						  GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 						  void *u = nullptr);
-	GA1DArrayAlleleGenome(const GAAlleleSetArray<T> &a,
-						  GAGenome::Evaluator f = (GAGenome::Evaluator)0,
+	explicit GA1DArrayAlleleGenome(const GAAlleleSetArray<T> &a,
+						  GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
 						  void *u = nullptr);
 	GA1DArrayAlleleGenome(const GA1DArrayAlleleGenome<T> &);
 	GA1DArrayAlleleGenome<T> &operator=(const GAGenome &arr)

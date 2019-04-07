@@ -99,7 +99,7 @@ template <class T> class GAAlleleSetCore
 template <class T> class GAAlleleSet
 {
   public:
-	GAAlleleSet() : core(0) {}
+	GAAlleleSet() : core(nullptr) {}
 	GAAlleleSet(unsigned int n, const T a[])
 		: core(new GAAlleleSetCore<T>(n, a))
 	{
@@ -122,7 +122,7 @@ template <class T> class GAAlleleSet
 	}
 	virtual ~GAAlleleSet()
 	{
-		if (core != 0)
+		if (core != nullptr)
 		{
 			core->cnt -= 1;
 			if (core->cnt == 0)
@@ -170,7 +170,7 @@ template <class T> class GAAlleleSetArray
   public:
 	GAAlleleSetArray();
 	explicit GAAlleleSetArray(const GAAlleleSet<T> &s);
-	explicit GAAlleleSetArray(const GAAlleleSetArray<T> &);
+	GAAlleleSetArray(const GAAlleleSetArray<T> &);
 	virtual ~GAAlleleSetArray();
 	GAAlleleSetArray<T> &operator=(const GAAlleleSetArray<T> &);
 
