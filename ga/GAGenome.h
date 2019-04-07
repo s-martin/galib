@@ -47,7 +47,7 @@ selected to cross with itself, and self-copying is not out of the question)
 	   virtual int read(istream&)
 	   virtual int write(ostream&) const
 	   virtual int equal(const GAGenome&) const
-  
+  
 
 	When you derive a genome, don't forget to use the _evaluated flag to
   indicate when the state of the genome has changed and an evaluation is
@@ -75,7 +75,7 @@ initialize
   should first clean up as needed, then do its thing.  The initializer may be
   called any number of times (unlike a class constructor which is called only
   once for a given instance).
- 
+ 
 
 mutate
   Mutate the genome with probability as specified.  What mutation means
@@ -244,7 +244,10 @@ class GAGenome : public GAID
 		GAErr(GA_LOC, className(), "equal", gaErrOpUndef);
 		return 1;
 	}
-	virtual bool notequal(const GAGenome &g) const { return (equal(g) ? false : true); }
+	virtual bool notequal(const GAGenome &g) const
+	{
+		return (equal(g) ? false : true);
+	}
 
   public:
 	int nevals() const { return _neval; }

@@ -100,11 +100,11 @@ enum GAErrorIndex
 //
 
 void GAErr(const GASourceLocator loc, const char *clss,
-		   const char *function_name, GAErrorIndex i, const char *msg2 = nullptr,
-		   const char *msg3 = nullptr);
+		   const char *function_name, GAErrorIndex i,
+		   const char *msg2 = nullptr, const char *msg3 = nullptr);
 void GAErr(const GASourceLocator loc, const char *clss,
-		   const char *function_name, const char *msg1, const char *msg2 = nullptr,
-		   const char *msg3 = nullptr);
+		   const char *function_name, const char *msg1,
+		   const char *msg2 = nullptr, const char *msg3 = nullptr);
 void GAErr(const GASourceLocator loc, const char *function_name, GAErrorIndex i,
 		   const char *msg2 = nullptr, const char *msg3 = nullptr);
 
