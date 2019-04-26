@@ -107,7 +107,7 @@ template <class T> class GAList : public GAListBASE
 	}
 	int insert(const T &t, GAListBASE::Location where = GAListBASE::AFTER)
 	{
-		GANode<T> *c = new GANode<T>(t);
+		auto *c = new GANode<T>(t);
 		if (GAListBASE::insert(c, iter.node, where) == GAListBASE::ERR)
 		{
 			delete c;

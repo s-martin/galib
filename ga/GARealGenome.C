@@ -72,7 +72,7 @@ template <> float GAAlleleSet<float>::allele(unsigned int i) const
 	else if (core->type == GAAllele::DISCRETIZED)
 	{
 		float n = (core->a[1] - core->a[0]) / core->a[2];
-		unsigned int m =
+		auto m =
 			static_cast<unsigned int>(n); // what about bogus limits?
 		if (core->lowerb == GAAllele::EXCLUSIVE)
 		{

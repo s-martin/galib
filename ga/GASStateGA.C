@@ -10,10 +10,9 @@
 #include <GASStateGA.h>
 #include <garandom.h>
 
-//#define GA_DEBUG
 
-#define USE_PREPL 0
-#define USE_NREPL 1
+constexpr auto USE_PREPL = 0;
+constexpr auto USE_NREPL = 1;
 
 GAParameterList &GASteadyStateGA::registerDefaultParameters(GAParameterList &p)
 {

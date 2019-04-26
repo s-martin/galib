@@ -105,7 +105,7 @@ float GAGenome::evaluate(bool flag) const
 {
 	if (_evaluated == false || flag == true)
 	{
-		GAGenome *This = const_cast<GAGenome *>(this);
+		auto *This = const_cast<GAGenome *>(this);
 		if (eval != nullptr)
 		{
 			This->_neval++;

@@ -223,7 +223,7 @@ int GAParameterList::set(const char *name, double v)
 		{
 			if (p[i]->type() == ParType::FLOAT)
 			{
-				float fval = static_cast<float>(v);
+				auto fval = static_cast<float>(v);
 				p[i]->value((void *)&fval);
 			}
 			else if (p[i]->type() == ParType::DOUBLE) {

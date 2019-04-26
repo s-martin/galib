@@ -22,48 +22,48 @@
 // used on the command line).  When specifying parameters in your code you can
 // use a string, or use the predefined macros below (kind of like using the
 // resource/class names in Motif for you Xt jocks).
-#define gaNnGenerations "number_of_generations"
-#define gaSNnGenerations "ngen"
-#define gaNpConvergence "convergence_percentage"
-#define gaSNpConvergence "pconv"
-#define gaNnConvergence "generations_to_convergence"
-#define gaSNnConvergence "nconv"
-#define gaNpCrossover "crossover_probability"
-#define gaSNpCrossover "pcross"
-#define gaNpMutation "mutation_probability"
-#define gaSNpMutation "pmut"
-#define gaNpopulationSize "population_size"
-#define gaSNpopulationSize "popsize"
-#define gaNnPopulations "number_of_populations"
-#define gaSNnPopulations "npop"
-#define gaNpReplacement "replacement_percentage"
-#define gaSNpReplacement "prepl"
-#define gaNnReplacement "replacement_number"
-#define gaSNnReplacement "nrepl"
-#define gaNnBestGenomes "number_of_best"
-#define gaSNnBestGenomes "nbest"
-#define gaNscoreFrequency "score_frequency"
-#define gaSNscoreFrequency "sfreq"
-#define gaNflushFrequency "flush_frequency"
-#define gaSNflushFrequency "ffreq"
-#define gaNscoreFilename "score_filename"
-#define gaSNscoreFilename "sfile"
-#define gaNselectScores "select_scores"
-#define gaSNselectScores "sscores"
-#define gaNelitism "elitism"
-#define gaSNelitism "el"
-#define gaNnOffspring "number_of_offspring"
-#define gaSNnOffspring "noffspr"
-#define gaNrecordDiversity "record_diversity"
-#define gaSNrecordDiversity "recdiv"
-#define gaNpMigration "migration_percentage"
-#define gaSNpMigration "pmig"
-#define gaNnMigration "migration_number"
-#define gaSNnMigration "nmig"
-#define gaNminimaxi "minimaxi"
-#define gaSNminimaxi "mm"
-#define gaNseed "seed"
-#define gaSNseed "seed"
+constexpr auto gaNnGenerations = "number_of_generations";
+constexpr auto gaSNnGenerations = "ngen";
+constexpr auto gaNpConvergence = "convergence_percentage";
+constexpr auto gaSNpConvergence = "pconv";
+constexpr auto gaNnConvergence = "generations_to_convergence";
+constexpr auto gaSNnConvergence = "nconv";
+constexpr auto gaNpCrossover = "crossover_probability";
+constexpr auto gaSNpCrossover = "pcross";
+constexpr auto gaNpMutation = "mutation_probability";
+constexpr auto gaSNpMutation = "pmut";
+constexpr auto gaNpopulationSize = "population_size";
+constexpr auto gaSNpopulationSize = "popsize";
+constexpr auto gaNnPopulations = "number_of_populations";
+constexpr auto gaSNnPopulations = "npop";
+constexpr auto gaNpReplacement = "replacement_percentage";
+constexpr auto gaSNpReplacement = "prepl";
+constexpr auto gaNnReplacement = "replacement_number";
+constexpr auto gaSNnReplacement = "nrepl";
+constexpr auto gaNnBestGenomes = "number_of_best";
+constexpr auto gaSNnBestGenomes = "nbest";
+constexpr auto gaNscoreFrequency = "score_frequency";
+constexpr auto gaSNscoreFrequency = "sfreq";
+constexpr auto gaNflushFrequency = "flush_frequency";
+constexpr auto gaSNflushFrequency = "ffreq";
+constexpr auto gaNscoreFilename = "score_filename";
+constexpr auto gaSNscoreFilename = "sfile";
+constexpr auto gaNselectScores = "select_scores";
+constexpr auto gaSNselectScores = "sscores";
+constexpr auto gaNelitism = "elitism";
+constexpr auto gaSNelitism = "el";
+constexpr auto gaNnOffspring = "number_of_offspring";
+constexpr auto gaSNnOffspring = "noffspr";
+constexpr auto gaNrecordDiversity = "record_diversity";
+constexpr auto gaSNrecordDiversity = "recdiv";
+constexpr auto gaNpMigration = "migration_percentage";
+constexpr auto gaSNpMigration = "pmig";
+constexpr auto gaNnMigration = "migration_number";
+constexpr auto gaSNnMigration = "nmig";
+constexpr auto gaNminimaxi = "minimaxi";
+constexpr auto gaSNminimaxi = "mm";
+constexpr auto gaNseed = "seed";
+constexpr auto gaSNseed = "seed";
 
 extern int gaDefNumGen;
 extern float gaDefPConv;

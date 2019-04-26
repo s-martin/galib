@@ -373,7 +373,7 @@ GAPopulation::SortOrder GAPopulation::order(GAPopulation::SortOrder flag)
 // or the array sorted by scaled scores.
 void GAPopulation::sort(bool flag, SortBasis basis) const
 {
-	GAPopulation *This = const_cast<GAPopulation *>(this);
+	auto *This = const_cast<GAPopulation *>(this);
 	if (basis == RAW)
 	{
 		if (rsorted == false || flag == true)
@@ -415,7 +415,7 @@ void GAPopulation::statistics(bool flag) const
 	if (statted == true && flag != true) {
 		return;
 }
-	GAPopulation *This = const_cast<GAPopulation *>(this);
+	auto *This = const_cast<GAPopulation *>(this);
 
 	if (n > 0)
 	{
@@ -466,7 +466,7 @@ void GAPopulation::scale(bool flag) const
 	if (scaled == true && flag != true) {
 		return;
 }
-	GAPopulation *This = const_cast<GAPopulation *>(this);
+	auto *This = const_cast<GAPopulation *>(this);
 
 	if (n > 0)
 	{
@@ -528,7 +528,7 @@ void GAPopulation::diversity(bool flag) const
 	if (divved == true && flag != true) {
 		return;
 }
-	GAPopulation *This = const_cast<GAPopulation *>(this);
+	auto *This = const_cast<GAPopulation *>(this);
 
 	if (n > 1)
 	{
@@ -562,7 +562,7 @@ void GAPopulation::prepselect(bool flag) const
 	if (selectready == true && flag != true) {
 		return;
 }
-	GAPopulation *This = const_cast<GAPopulation *>(this);
+	auto *This = const_cast<GAPopulation *>(this);
 	This->slct->update();
 	This->selectready = true;
 }

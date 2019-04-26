@@ -505,7 +505,7 @@ int GAGeneticAlgorithm::set(const char *name, double v)
 		{
 			if (params[i].type() == ParType::FLOAT)
 			{
-				float fval = static_cast<float>(v);
+				auto fval = static_cast<float>(v);
 				status = setptr(name, (void *)&fval);
 			}
 			else

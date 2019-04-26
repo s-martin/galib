@@ -66,7 +66,7 @@ GA1DBinaryStringGenome::~GA1DBinaryStringGenome() = default;
 // allocated by this method.
 GAGenome *GA1DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 {
-	GA1DBinaryStringGenome *cpy = new GA1DBinaryStringGenome(nx);
+	auto *cpy = new GA1DBinaryStringGenome(nx);
 	if (flag == CONTENTS)
 	{
 		cpy->copy(*this);

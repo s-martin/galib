@@ -258,7 +258,7 @@ class GAPopulation : public GAID
 	GASelectionScheme &selector(const GASelectionScheme &);
 	GAScalingScheme &scaling() const
 	{
-		GAPopulation *This = const_cast<GAPopulation *>(this);
+		auto *This = const_cast<GAPopulation *>(this);
 		This->scaled = false;
 		return *sclscm;
 	}
