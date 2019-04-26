@@ -46,7 +46,7 @@ public:
 				GAGenome*, GAGenome*);
 public:
   CompositeGenome(int, int, GABin2DecPhenotype&, 
-		  GAGenome::Evaluator f=NULL, void* u=NULL);
+		  GAGenome::Evaluator f=nullptr, void* u=nullptr);
   CompositeGenome(const CompositeGenome & orig);
   CompositeGenome& operator=(const GAGenome& g);
   virtual ~CompositeGenome();

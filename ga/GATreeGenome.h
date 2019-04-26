@@ -35,7 +35,7 @@ template <class T> class GATreeGenome : public GATree<T>, public GAGenome
 	//  static float NodeComparator(const GAGenome&, const GAGenome&);
 
   public:
-	GATreeGenome(GAGenome::Evaluator f = NULL, void *u = NULL);
+	GATreeGenome(GAGenome::Evaluator f = nullptr, void *u = nullptr);
 	GATreeGenome(const GATreeGenome<T> &);
 	GATreeGenome<T> &operator=(const GAGenome &orig)
 	{

@@ -230,7 +230,7 @@ the highest floating precision number on the system.
 int GABinaryEncode(float &val, GABit *binstr, unsigned int nbits, float minval,
 				   float maxval)
 {
-	if (binstr == (GABit *)NULL || nbits == 0) {
+	if (binstr == nullptr || nbits == 0) {
 		return 1;
 }
 	if (val < minval || maxval < val) {
@@ -284,7 +284,7 @@ int GAGrayDecode(float &value, const GABit *bits, unsigned int nbits,
 int GAGrayEncode(float &value, GABit *bits, unsigned int nbits, float minval,
 				 float maxval)
 {
-	if (bits == (GABit *)NULL || nbits == 0) {
+	if (bits == nullptr || nbits == 0) {
 		return 1;
 }
 	if (value < minval || maxval < value) {

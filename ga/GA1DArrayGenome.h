@@ -29,6 +29,8 @@ that for common instantiations (float, char).
 #include <GAArray.h>
 #include <GAGenome.h>
 
+#include <vector>
+
 /* ----------------------------------------------------------------------------
 1DArrayGenome
 ---------------------------------------------------------------------------- */
@@ -192,7 +194,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 
   protected:
 	int naset;
-	GAAlleleSet<T> *aset; // the allele set(s) for this genome
+	std::vector<GAAlleleSet<T>> aset; // the allele set(s) for this genome
 };
 
 #endif

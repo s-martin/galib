@@ -125,10 +125,6 @@ template <class T> class GAAlleleSet
 		if (core != nullptr)
 		{
 			core->cnt -= 1;
-			if (core->cnt == 0)
-			{
-				delete core;
-			}
 		}
 	}
 	GAAlleleSet<T> &operator=(const GAAlleleSet<T> &set)
@@ -143,7 +139,7 @@ template <class T> class GAAlleleSet
 		}
 		else
 		{
-			core = new GAAlleleSetCore<T>(*(set.core));
+			core = std::make_unique<GAAlleleSetCore<T>>(*(set.core));
 		}
 		return *this;
 	}
@@ -170,7 +166,7 @@ template <class T> class GAAlleleSet
 	friend int operator!=(const GAAlleleSet<T> &, const GAAlleleSet<T> &);
 
   protected:
-	GAAlleleSetCore<T> *core;
+	std::unique_ptr<GAAlleleSetCore<T>> core;
 };
 
 template <class T> class GAAlleleSetArray
