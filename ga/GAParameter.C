@@ -19,6 +19,7 @@ implementation.
 #include <gaerror.h>
 
 #include <fstream>
+#include <sstream>
 
 #include <boost/algorithm/string.hpp>
 
@@ -27,8 +28,6 @@ constexpr int BUFSIZE = 1024; // size of buffer for reading pairs
 constexpr int MAX_PAIRS = 5000; // max number of name-value pairs in stream
 constexpr int NAMESIZE = 128; // max length of name in name-value pair
 
-extern char _gaerrbuf1[];
-extern char _gaerrbuf2[];
 static int IsNumeric(const char *);
 
 GAParameter::GAParameter(const char *fn, const char *sn, ParType tp, const void *v)
@@ -530,23 +529,19 @@ int GAParameterList::read(std::istream &is, bool flag)
 
 			if ((found == 0) && flag == true)
 			{
-				strcpy(_gaerrbuf1, "");
-				strcat(_gaerrbuf1, "unrecognized variable name '");
-				strcat(_gaerrbuf1, name);
-				strcat(_gaerrbuf1, "'");
-				GAErr(GA_LOC, "GAParameterList", "read", _gaerrbuf1);
+				std::stringstream str;
+				str << "unrecognized variable name '" << name << "'";
+				GAErr(GA_LOC, "GAParameterList", "read", str.str());
 			}
 		}
 	} while (!is.eof() && count < npairs);
 
 	if (toggle == 1)
 	{
-		strcpy(_gaerrbuf1, "");
-		strcat(_gaerrbuf1, "variable ");
-		strcat(_gaerrbuf1, name);
-		strcat(_gaerrbuf1, " has no value");
-		strcat(_gaerrbuf2, "be sure there is a newline at end of the file");
-		GAErr(GA_LOC, "GAParameterList", "read", _gaerrbuf1, _gaerrbuf2);
+		std::stringstream str;
+		str << "variable " << name << " has no value";
+	
+		GAErr(GA_LOC, "GAParameterList", "read", str.str(), "be sure there is a newline at end of the file");
 
 		is.clear(std::ios::badbit | is.rdstate());
 	}
@@ -688,10 +683,10 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 		{
 			if (flag && i != 0)
 			{
-				_gaerrbuf1[0] = '\0';
-				strcat(_gaerrbuf1, "unrecognized name ");
-				strcat(_gaerrbuf1, argv[i]);
-				GAErr(GA_LOC, "GAParameterList", "parse", _gaerrbuf1);
+				std::stringstream str;
+				str << "unrecognized name " << argv[i];
+	
+				GAErr(GA_LOC, "GAParameterList", "parse", str.str());
 			}
 			argvout[argcl] = argv[i];
 			argcl++;

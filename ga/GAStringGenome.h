@@ -13,11 +13,11 @@
 #include <GA1DArrayGenome.h>
 #include <GAAllele.h>
 
-typedef GAAlleleSet<char> GAStringAlleleSet;
-typedef GAAlleleSet<char> GACharacterAlleleSet;
-typedef GAAlleleSetArray<char> GAStringAlleleSetArray;
+using GAStringAlleleSet = GAAlleleSet<char>;
+using GACharacterAlleleSet = GAAlleleSet<char>;
+using GAStringAlleleSetArray = GAAlleleSetArray<char>;
 
-typedef GA1DArrayAlleleGenome<char> GAStringGenome;
+using GAStringGenome = GA1DArrayAlleleGenome<char>;
 
 // in one (and only one) place in the code that uses the string genome, you
 // should define INSTANTIATE_STRING_GENOME in order to force the specialization

@@ -14,14 +14,13 @@
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <vector>
 
-char gaErrMsg[512];
-char _gaerrbuf1[120];
-char _gaerrbuf2[120];
 
 static std::ostream *__gaErrStream = &std::cerr;
 static bool __gaErrFlag = true;
-static const char *__gaErrStr[] = {
+static std::vector<std::string> __gaErrStr = {
 	"error reading from file: ",
 	"error writing to file: ",
 	"unexpected EOF encountered during read.",
@@ -70,88 +69,80 @@ static const char *__gaErrStr[] = {
 	"cannot insert before a root node (only below).",
 	"cannot insert after a root node (only below)."};
 
-void GAErr(const GASourceLocator loc, const char *clss, const char *func,
-		   const char *msg1, const char *msg2, const char *msg3)
+void GAErr(const GASourceLocator loc, const std::string &clss,
+		   const std::string &func, const std::string &msg1,
+		   const std::string &msg2, const std::string &msg3)
 {
-	gaErrMsg[0] = '\0';
-	strcat(gaErrMsg, clss);
-	strcat(gaErrMsg, "::");
-	strcat(gaErrMsg, func);
-	strcat(gaErrMsg, ":\n  ");
-	strcat(gaErrMsg, msg1);
-	strcat(gaErrMsg, "\n");
-	if (msg2 != nullptr)
+	std::stringstream errstr;
+	errstr << clss << "::" << func << ":" << std::endl;
+	errstr << msg1 << std::endl;
+	
+	if (!msg2.empty())
 	{
-		strcat(gaErrMsg, "  ");
-		strcat(gaErrMsg, msg2);
-		strcat(gaErrMsg, "\n");
+		errstr << "  " << msg2 << std::endl;
 	}
-	if (msg3 != nullptr)
+	if (!msg3.empty())
 	{
-		strcat(gaErrMsg, "  ");
-		strcat(gaErrMsg, msg3);
-		strcat(gaErrMsg, "\n");
+		errstr << "  " << msg3 << std::endl;
 	}
-	sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
-	strcat(gaErrMsg, _gaerrbuf1);
+
+	errstr << "  " << loc.file << " : " << loc.line << std::endl;
+	
+	gaErrMsg = errstr.str();
+
 	if (__gaErrFlag == true)
 	{
 		*__gaErrStream << gaErrMsg;
 	}
 }
 
-void GAErr(const GASourceLocator loc, const char *clss, const char *func,
-		   GAErrorIndex i, const char *msg2, const char *msg3)
+void GAErr(const GASourceLocator loc, const std::string &clss,
+		   const std::string &func,
+		   GAErrorIndex i, const std::string &msg2, const std::string &msg3)
 {
-	gaErrMsg[0] = '\0';
-	strcat(gaErrMsg, clss);
-	strcat(gaErrMsg, "::");
-	strcat(gaErrMsg, func);
-	strcat(gaErrMsg, ":\n  ");
-	strcat(gaErrMsg, __gaErrStr[i]);
-	strcat(gaErrMsg, "\n");
-	if (msg2 != nullptr)
+	std::stringstream errstr;
+	errstr << clss << "::" << func << ":" << std::endl;
+	errstr << __gaErrStr.at(i) << std::endl;
+
+	if (!msg2.empty())
 	{
-		strcat(gaErrMsg, "  ");
-		strcat(gaErrMsg, msg2);
-		strcat(gaErrMsg, "\n");
+		errstr << "  " << msg2 << std::endl;
 	}
-	if (msg3 != nullptr)
+	if (!msg3.empty())
 	{
-		strcat(gaErrMsg, "  ");
-		strcat(gaErrMsg, msg3);
-		strcat(gaErrMsg, "\n");
+		errstr << "  " << msg3 << std::endl;
 	}
-	sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
-	strcat(gaErrMsg, _gaerrbuf1);
+	
+	errstr << "  " << loc.file << " : " << loc.line << std::endl;
+
+	gaErrMsg = errstr.str();
+
 	if (__gaErrFlag == true)
 	{
 		*__gaErrStream << gaErrMsg;
 	}
 }
 
-void GAErr(const GASourceLocator loc, const char *func, GAErrorIndex i,
-		   const char *msg2, const char *msg3)
+void GAErr(const GASourceLocator loc, const std::string &func, GAErrorIndex i,
+		   const std::string &msg2, const std::string &msg3)
 {
-	gaErrMsg[0] = '\0';
-	strcat(gaErrMsg, func);
-	strcat(gaErrMsg, ":\n  ");
-	strcat(gaErrMsg, __gaErrStr[i]);
-	strcat(gaErrMsg, "\n");
-	if (msg2 != nullptr)
+	std::stringstream errstr;
+	errstr << func << ":" << std::endl;
+	errstr << __gaErrStr.at(i) << std::endl;
+
+	if (!msg2.empty())
 	{
-		strcat(gaErrMsg, "  ");
-		strcat(gaErrMsg, msg2);
-		strcat(gaErrMsg, "\n");
+		errstr << "  " << msg2 << std::endl;
 	}
-	if (msg3 != nullptr)
+	if (msg3.empty())
 	{
-		strcat(gaErrMsg, "  ");
-		strcat(gaErrMsg, msg3);
-		strcat(gaErrMsg, "\n");
+		errstr << "  " << msg3 << std::endl;
 	}
-	sprintf(_gaerrbuf1, "  %s : %ld\n", loc.file, loc.line);
-	strcat(gaErrMsg, _gaerrbuf1);
+
+	errstr << "  " << loc.file << " : " << loc.line << std::endl;
+	
+	gaErrMsg = errstr.str();
+
 	if (__gaErrFlag == true)
 	{
 		*__gaErrStream << gaErrMsg;

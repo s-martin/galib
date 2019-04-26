@@ -14,6 +14,7 @@
 #include <gaconfig.h>
 #include <gaerror.h>
 #include <limits.h>
+#include <sstream>
 
 // These numbers are machine-specific and are a function of the word length of
 // the OS you are running.  The binary string cannot be too long or else we
@@ -41,8 +42,6 @@ int GACheckEncoding(float &, unsigned int &, float, float, unsigned BITBASE &);
 int GACheckDecoding(unsigned int &);
 
 // This stuff is private.
-extern char _gaerrbuf1[];
-extern char _gaerrbuf2[];
 static int _GAEncodeBase(unsigned int, unsigned BITBASE, GABit *, int, int);
 
 /* ----------------------------------------------------------------------------
@@ -51,10 +50,11 @@ static int _GAEncodeBase(unsigned int, unsigned BITBASE, GABit *, int, int);
 int GACheckDecoding(unsigned int &nbits)
 {
 	if (static_cast<int>(nbits) >= _GA_MAX_BITS())
-	{
-		sprintf(_gaerrbuf1, "string is %d bits, max is %d", nbits,
-				_GA_MAX_BITS() - 1);
-		GAErr(GA_LOC, "GACheckDecoding", gaErrBinStrTooLong, _gaerrbuf1);
+	{	
+		std::stringstream errstr;
+		errstr << "string is " << nbits << ", max is " << (_GA_MAX_BITS() - 1);
+
+		GAErr(GA_LOC, "GACheckDecoding", gaErrBinStrTooLong, errstr.str());
 		nbits = _GA_MAX_BITS() - 1;
 		return 1;
 	}
@@ -67,9 +67,10 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 	int status = 0;
 	if (static_cast<int>(nbits) >= _GA_MAX_BITS())
 	{
-		sprintf(_gaerrbuf1, "string is %d bits, max is %d", nbits,
-				_GA_MAX_BITS() - 1);
-		GAErr(GA_LOC, "GACheckEncoding", gaErrBinStrTooLong, _gaerrbuf1);
+		std::stringstream errstr;
+		errstr << "string is " << nbits << ", max is " << (_GA_MAX_BITS() - 1);
+
+		GAErr(GA_LOC, "GACheckEncoding", gaErrBinStrTooLong, errstr.str());
 		nbits = _GA_MAX_BITS() - 1;
 		status = 1;
 	}
@@ -86,11 +87,13 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 
 	if (actual != val)
 	{
-		sprintf(_gaerrbuf1, "desired: %f\tactual: %f\tdiscretization: %f", val,
-				actual, interval);
-		sprintf(_gaerrbuf2, "  nbits: %d\t\tmin: %f\t\tmax: %f", nbits, minval,
-				maxval);
-		GAErr(GA_LOC, "GACheckEncoding", gaErrDataLost, _gaerrbuf1, _gaerrbuf2);
+		std::stringstream errstr;
+		errstr << "desired: " << val << "\tactual: " << actual << "\tdiscretization: " << interval;
+
+		std::stringstream errstr2;
+		errstr2 << "  nbits: " << nbits << "\t\tmin: " << minval << "\t\tmax: " << maxval;
+
+		GAErr(GA_LOC, "GACheckEncoding", gaErrDataLost, errstr.str(), errstr2.str());
 		val = static_cast<float>(actual);
 		status = 1;
 	}

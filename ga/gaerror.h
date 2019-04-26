@@ -99,14 +99,16 @@ enum GAErrorIndex
 //   /usr/people/algore/distribute_your_intelligence.C : XXX
 //
 
-void GAErr(const GASourceLocator loc, const char *clss,
-		   const char *function_name, GAErrorIndex i,
-		   const char *msg2 = nullptr, const char *msg3 = nullptr);
-void GAErr(const GASourceLocator loc, const char *clss,
-		   const char *function_name, const char *msg1,
-		   const char *msg2 = nullptr, const char *msg3 = nullptr);
-void GAErr(const GASourceLocator loc, const char *function_name, GAErrorIndex i,
-		   const char *msg2 = nullptr, const char *msg3 = nullptr);
+void GAErr(const GASourceLocator loc, const std::string &clss,
+		   const std::string &function_name, GAErrorIndex i,
+		   const std::string &msg2 = "",
+		   const std::string &msg3 = "");
+void GAErr(const GASourceLocator loc, const std::string &clss,
+		   const std::string &func, const std::string &msg1, const std::string &msg2 = "",
+		   const std::string &msg3 = "");
+void GAErr(const GASourceLocator loc, const std::string &function_name,
+		   GAErrorIndex i,
+		   const std::string &msg2 = "", const std::string &msg3 = "");
 
 // Use this function to turn on/off the error reporting.  If you turn off the
 // error reporting, the messages will still get stuck into the global error
@@ -121,6 +123,6 @@ void GASetErrorStream(std::ostream &);
 // This error string contains the text of the most recent error message.  If a
 // GAlib function returns an error code, this string will contain the text of
 // the explanation for the error.
-extern char gaErrMsg[];
+static std::string gaErrMsg;
 
 #endif

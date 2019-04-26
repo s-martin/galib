@@ -13,7 +13,7 @@ using GAProb = float;
 
 // This defines what type to use for the bitstream data storage.  Use the
 // smallest type available on your platform.
-typedef unsigned char GABit;
+using GABit = unsigned char;
 
 template <typename T1, typename T2> constexpr auto GAMax(T1 a, T2 b)
 {
