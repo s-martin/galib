@@ -47,7 +47,7 @@ GA3DBinaryStringGenome::GA3DBinaryStringGenome(
 	GA3DBinaryStringGenome::copy(orig);
 }
 
-GA3DBinaryStringGenome::~GA3DBinaryStringGenome() {}
+GA3DBinaryStringGenome::~GA3DBinaryStringGenome() = default;
 
 GAGenome *GA3DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 {

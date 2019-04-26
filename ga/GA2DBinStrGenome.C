@@ -44,7 +44,7 @@ GA2DBinaryStringGenome::GA2DBinaryStringGenome(
 	GA2DBinaryStringGenome::copy(orig);
 }
 
-GA2DBinaryStringGenome::~GA2DBinaryStringGenome() {}
+GA2DBinaryStringGenome::~GA2DBinaryStringGenome() = default;
 
 GAGenome *GA2DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 {

@@ -28,7 +28,7 @@ struct GANodeBASE {
     {next=nullptr; prev=nullptr; parent=nullptr; child=nullptr;}
   GANodeBASE(GANodeBASE *n, GANodeBASE *p, GANodeBASE *par, GANodeBASE *chi)
     {next=n; prev=p; parent=par; child=chi;}
-  virtual ~GANodeBASE() {}
+  virtual ~GANodeBASE() = default;
 };
 
 
@@ -74,7 +74,7 @@ struct GANode : public GANodeBASE {
   T contents;
 //  GANode() : GANodeBASE(), contents() {}
   explicit GANode(const T & t) : GANodeBASE(), contents(t) {}
-  ~GANode() override {}
+  ~GANode() override = default;
   T & operator()(const T & t){contents = t; return contents;}
 };
 

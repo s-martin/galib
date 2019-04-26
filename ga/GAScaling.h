@@ -27,10 +27,10 @@ it does know how to update itself, but it must be told when.
 
 class GAPopulation;
 
-extern float gaDefLinearScalingMultiplier;
-extern float gaDefSigmaTruncationMultiplier;
-extern float gaDefPowerScalingFactor;
-extern float gaDefSharingCutoff;
+constexpr float gaDefLinearScalingMultiplier = 1.2;
+constexpr float gaDefSigmaTruncationMultiplier = 2.0;
+constexpr float gaDefPowerScalingFactor = 1.0005;
+constexpr float gaDefSharingCutoff = 1.0;
 
 /* ----------------------------------------------------------------------------
 Scaling
@@ -46,14 +46,14 @@ class GAScalingScheme : public GAID
   public:
 	GADefineIdentity("GAScalingScheme", GAID::Scaling);
 
-	GAScalingScheme() {}
+	GAScalingScheme() = default;
 	GAScalingScheme(const GAScalingScheme &s) { copy(s); }
 	GAScalingScheme &operator=(const GAScalingScheme &s)
 	{
 		copy(s);
 		return *this;
 	}
-	~GAScalingScheme() override {}
+	~GAScalingScheme() override = default;
 	virtual GAScalingScheme *clone() const = 0;
 	virtual void copy(const GAScalingScheme &) {}
 	virtual void evaluate(const GAPopulation &p) = 0;
@@ -70,7 +70,7 @@ class GANoScaling : public GAScalingScheme
 	GANoScaling() : GAScalingScheme() {}
 	GANoScaling(const GANoScaling &) : GAScalingScheme() {}
 	GANoScaling &operator=(const GAScalingScheme &) { return *this; }
-	~GANoScaling() override {}
+	~GANoScaling() override = default;
 	GAScalingScheme *clone() const override { return new GANoScaling(*this); }
 	void evaluate(const GAPopulation &p) override;
 };
@@ -96,7 +96,7 @@ class GALinearScaling : public GAScalingScheme
 		copy(arg);
 		return (*this);
 	}
-	~GALinearScaling() override {}
+	~GALinearScaling() override = default;
 	GAScalingScheme *clone() const override
 	{
 		return new GALinearScaling(*this);
@@ -140,7 +140,7 @@ class GASigmaTruncationScaling : public GAScalingScheme
 		copy(arg);
 		return (*this);
 	}
-	~GASigmaTruncationScaling() override {}
+	~GASigmaTruncationScaling() override = default;
 	GAScalingScheme *clone() const override
 	{
 		return new GASigmaTruncationScaling(*this);
@@ -181,7 +181,7 @@ class GAPowerLawScaling : public GAScalingScheme
 		copy(arg);
 		return (*this);
 	}
-	~GAPowerLawScaling() override {}
+	~GAPowerLawScaling() override = default;
 	GAScalingScheme *clone() const override
 	{
 		return new GAPowerLawScaling(*this);

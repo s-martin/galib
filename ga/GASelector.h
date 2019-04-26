@@ -69,7 +69,7 @@ class GASelectionScheme : public GAID
 }
 		return *this;
 	}
-	~GASelectionScheme() override {}
+	~GASelectionScheme() override = default;
 	virtual GASelectionScheme *clone() const = 0;
 	virtual void copy(const GASelectionScheme &orig)
 	{
@@ -108,7 +108,7 @@ class GARankSelector : public GASelectionScheme
 }
 		return *this;
 	}
-	~GARankSelector() override {}
+	~GARankSelector() override = default;
 	GASelectionScheme *clone() const override
 	{
 		return new GARankSelector;
@@ -193,7 +193,7 @@ class GATournamentSelector : public GARouletteWheelSelector
 }
 		return *this;
 	}
-	~GATournamentSelector() override {}
+	~GATournamentSelector() override = default;
 	GASelectionScheme *clone() const override
 	{
 		return new GATournamentSelector;
@@ -225,7 +225,7 @@ class GAUniformSelector : public GASelectionScheme
 }
 		return *this;
 	}
-	~GAUniformSelector() override {}
+	~GAUniformSelector() override = default;
 	GASelectionScheme *clone() const override
 	{
 		return new GAUniformSelector;
