@@ -58,7 +58,7 @@ GAStatistics::GAStatistics()
 	strcpy(scorefile, gaDefScoreFilename);
 	which = Maximum;
 
-	boa = (GAPopulation *)nullptr;
+	boa = nullptr;
 }
 GAStatistics::GAStatistics(const GAStatistics &orig)
 {
@@ -70,7 +70,7 @@ GAStatistics::GAStatistics(const GAStatistics &orig)
 	devScore = nullptr;
 	divScore = nullptr;
 	scorefile = nullptr;
-	boa = (GAPopulation *)nullptr;
+	boa = nullptr;
 	copy(orig);
 }
 GAStatistics::~GAStatistics()
@@ -184,7 +184,7 @@ void GAStatistics::copy(const GAStatistics &orig)
 // comparator to do the comparison.
 void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 {
-	if (boa == (GAPopulation *)nullptr || boa->size() == 0) {
+	if (boa == nullptr || boa->size() == 0) {
 		return; // do nothing
 }
 	if (pop.order() != boa->order()) {
@@ -452,7 +452,7 @@ int GAStatistics::nBestGenomes(const GAGenome &genome, unsigned int n)
 		delete boa;
 		boa = (GAPopulation *)nullptr;
 	}
-	else if (boa == (GAPopulation *)nullptr)
+	else if (boa == nullptr)
 	{
 		boa = new GAPopulation(genome, n);
 	}

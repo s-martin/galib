@@ -9,6 +9,7 @@
 ---------------------------------------------------------------------------- */
 #include <GAIncGA.h>
 #include <garandom.h>
+#include <boost/algorithm/string.hpp>
 
 GAParameterList &GAIncrementalGA::registerDefaultParameters(GAParameterList &p)
 {
@@ -102,11 +103,11 @@ void GAIncrementalGA::copy(const GAGeneticAlgorithm &g)
 	child2->geneticAlgorithm(*this);
 }
 
-int GAIncrementalGA::setptr(const char *name, const void *value)
+int GAIncrementalGA::setptr(const std::string &name, const void *value)
 {
 	int status = GAGeneticAlgorithm::setptr(name, value);
 
-	if (strcmp(name, gaNnOffspring) == 0 || strcmp(name, gaSNnOffspring) == 0)
+	if (boost::equals (name, gaNnOffspring) || boost::equals (name, gaSNnOffspring))
 	{
 		nOffspring(*((int *)value));
 		status = 0;

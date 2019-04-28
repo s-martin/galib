@@ -15,6 +15,7 @@
 #include <gatypes.h>
 
 #include <istream>
+#include <list>
 #include <ostream>
 
 enum class ParType
@@ -35,7 +36,7 @@ short name, and a value with each parameter.
 class GAParameter
 {
   public:
-	GAParameter(const char *fn, const char *sn, ParType tp, const void *v);
+	GAParameter(const std::string &fn, const std::string &sn, ParType tp, const void *v);
 	GAParameter(const GAParameter &orig);
 	GAParameter &operator=(const GAParameter &orig)
 	{
@@ -44,22 +45,26 @@ class GAParameter
 	}
 	virtual ~GAParameter();
 	void copy(const GAParameter &);
-	char *fullname() const { return fname; }
-	char *shrtname() const { return sname; }
+	std::string fullname() const { return fname; }
+	std::string shrtname() const { return sname; }
 	const void *value() const
 	{
-		return (t == ParType::STRING ? val.sval : (t == ParType::POINTER ? val.pval : &val));
+		return (t == ParType::STRING
+					? val.sval
+					: (t == ParType::POINTER ? val.pval : &val));
 	}
 	const void *value(const void *v)
 	{
 		setvalue(v);
-		return (t == ParType::STRING ? val.sval : (t == ParType::POINTER ? val.pval : &val));
+		return (t == ParType::STRING
+					? val.sval
+					: (t == ParType::POINTER ? val.pval : &val));
 	}
 	ParType type() const { return t; }
 
   protected:
-	char *fname;
-	char *sname;
+	std::string fname;
+	std::string sname;
 	union Value {
 		int ival;
 		char cval;
@@ -78,41 +83,23 @@ list.  Don't ask.  You can traverse through the list to get the parameters that
 you need.  Be sure to check the type before you try to extract the value for
 any specific parameter in the list.
 ---------------------------------------------------------------------------- */
-class GAParameterList
+class GAParameterList : public std::list<GAParameter>
 {
   public:
-	GAParameterList();
-	GAParameterList(const GAParameterList &);
-	GAParameterList &operator=(const GAParameterList &);
-	virtual ~GAParameterList();
+	bool get(const std::string &name, void *) const;
+	bool set(const std::string &name, const void *);
+	bool set(const std::string &name, int v) { return set(name, (void *)&v); }
+	bool set(const std::string &name, unsigned int v) { return set(name, (void *)&v); }
+	bool set(const std::string &name, char v) { return set(name, (void *)&v); }
+	bool set(const std::string &name, const char *v) { return set(name, (void *)v); }
+	bool set(const std::string &name, double v);
+	bool add(const std::string &fn, const std::string &sn, ParType, const void *);
+	bool parse(int &argc, char **argv, bool flag = true);
 
-	int size() const { return n; }
-	int get(const char *, void *) const;
-	int set(const char *, const void *);
-	int set(const char *s, int v) { return set(s, (void *)&v); }
-	int set(const char *s, unsigned int v) { return set(s, (void *)&v); }
-	int set(const char *s, char v) { return set(s, (void *)&v); }
-	int set(const char *s, const char *v) { return set(s, (void *)v); }
-	int set(const char *s, double v);
-	int add(const char *, const char *, ParType, const void *);
-	int remove();
-	GAParameter &operator[](unsigned int i) const { return *(p[i]); }
-	GAParameter &next() { return *(p[((cur > n) ? cur = 0 : ++cur)]); }
-	GAParameter &prev() { return *(p[((cur == 0) ? cur = n - 1 : --cur)]); }
-	GAParameter &current() const { return *(p[cur]); }
-	GAParameter &first() { return *(p[cur = 0]); }
-	GAParameter &last() { return *(p[cur = n - 1]); }
-	GAParameter *operator()(const char *name);
-	int parse(int &argc, char **argv, bool flag = true);
-
-	int write(const char *filename) const;
-	int write(std::ostream &os) const;
-	int read(const char *filename, bool flag = true);
-	int read(std::istream &is, bool flag = true);
-
-  protected:
-	unsigned int n, N, cur;
-	GAParameter **p;
+	bool write(const char *filename) const;
+	bool write(std::ostream &os) const;
+	bool read(const char *filename, bool flag = true);
+	bool read(std::istream &is, bool flag = true);
 };
 
 inline std::ostream &operator<<(std::ostream &os, const GAParameterList &plist)

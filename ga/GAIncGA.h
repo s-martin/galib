@@ -63,7 +63,7 @@ public:
   void step() override;
   GAIncrementalGA & operator++() { step(); return *this; }
 
-  int setptr(const char* name, const void* value) override;
+  int setptr(const std::string &name, const void* value) override;
   int get(const char* name, void* value) const override;
 
   void objectiveFunction(GAGenome::Evaluator f) override;

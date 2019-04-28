@@ -19,7 +19,6 @@ implementation.
 #include <gaerror.h>
 
 #include <fstream>
-#include <sstream>
 
 #include <boost/algorithm/string.hpp>
 
@@ -28,27 +27,14 @@ constexpr int BUFSIZE = 1024; // size of buffer for reading pairs
 constexpr int MAX_PAIRS = 5000; // max number of name-value pairs in stream
 constexpr int NAMESIZE = 128; // max length of name in name-value pair
 
-static int IsNumeric(const char *);
+static bool IsNumeric(const char *);
 
-GAParameter::GAParameter(const char *fn, const char *sn, ParType tp, const void *v)
+GAParameter::GAParameter(const std::string &fn, const std::string &sn,
+						 ParType tp,
+						 const void *v)
 {
-	if (fn != nullptr)
-	{
-		fname = new char[strlen(fn) + 1];
-		strcpy(fname, fn);
-	}
-	else {
-		fname = nullptr;
-}
-
-	if (sn != nullptr)
-	{
-		sname = new char[strlen(sn) + 1];
-		strcpy(sname, sn);
-	}
-	else {
-		sname = nullptr;
-}
+	fname = fn;
+	sname = sn;
 
 	t = tp;
 	memset(&val, 0, sizeof(Value));
@@ -57,47 +43,30 @@ GAParameter::GAParameter(const char *fn, const char *sn, ParType tp, const void 
 
 GAParameter::GAParameter(const GAParameter &orig)
 {
-	fname = sname = nullptr;
+	fname = sname = "";
 	memset(&val, 0, sizeof(Value));
 	copy(orig);
 }
 
 void GAParameter::copy(const GAParameter &orig)
 {
-	if (&orig == this) {
+	if (&orig == this)
+	{
 		return;
-}
-
-	delete[] fname;
-	delete[] sname;
-	if (orig.fname != nullptr)
-	{
-		fname = new char[strlen(orig.fname) + 1];
-		strcpy(fname, orig.fname);
 	}
-	else {
-		fname = nullptr;
-}
-	if (orig.sname != nullptr)
-	{
-		sname = new char[strlen(orig.sname) + 1];
-		strcpy(sname, orig.sname);
-	}
-	else {
-		sname = nullptr;
-}
 
+	fname = orig.fname;
+	sname = orig.sname;
 	t = orig.t;
 	setvalue(orig.value()); // do this directly...
 }
 
 GAParameter::~GAParameter()
 {
-	delete[] fname;
-	delete[] sname;
-	if (t == ParType::STRING) {
+	if (t == ParType::STRING)
+	{
 		delete[] val.sval;
-}
+	}
 }
 
 void GAParameter::setvalue(const void *v)
@@ -137,75 +106,21 @@ void GAParameter::setvalue(const void *v)
 	}
 }
 
-// The default parameter list is empty.  Allocate space for the pointers, but
-// don't allocate any parameters at this point.
-GAParameterList::GAParameterList()
-{
-	N = n = cur = 0;
-	p = (GAParameter **)nullptr;
-}
-
-GAParameterList::GAParameterList(const GAParameterList &list)
-{
-	N = list.N;
-	n = list.n;
-	cur = list.cur;
-	p = new GAParameter *[N];
-	for (unsigned int i = 0; i < n; i++) {
-		p[i] = new GAParameter(*(list.p[i]));
-}
-}
-
-// This is a rather stupid operator= implementation.  Instead of doing a copy
-// we just nuke everything the reallocate new stuff.  If this were called a lot
-// then we could end up with some fragmentation this way (rather than just
-// doing copies on already-allocated memory).
-GAParameterList &GAParameterList::operator=(const GAParameterList &list)
-{
-	if (&list == this) {
-		return *this;
-}
-
-	unsigned int i;
-	for (i = 0; i < n; i++) {
-		delete p[i];
-}
-	delete[] p;
-
-	N = list.N;
-	n = list.n;
-	cur = list.cur;
-	p = new GAParameter *[N];
-	for (i = 0; i < n; i++) {
-		p[i] = new GAParameter(*(list.p[i]));
-}
-
-	return *this;
-}
-
-GAParameterList::~GAParameterList()
-{
-	for (unsigned int i = 0; i < n; i++) {
-		delete p[i];
-}
-	delete[] p;
-}
-
 // Set the specified parameter (if we have it).  If we don't recognize the name
 // (ie it has not been added to the list) then we return the error code.
-int GAParameterList::set(const char *name, const void *v)
+bool GAParameterList::set(const std::string &name, const void *v)
 {
-	int found = 0;
-	for (unsigned int i = 0; i < n && (found == 0); i++)
+	auto param = std::find_if(this->begin(), this->end(),
+							  [=](const GAParameter &p) -> bool {
+								  return (name == p.fullname() || name == p.shrtname());
+							  });
+
+	if (param != this->end())
 	{
-		if (strcmp(name, p[i]->fullname()) == 0 ||
-			strcmp(name, p[i]->shrtname()) == 0)
-		{
-			p[i]->value(v);
-			found = 1;
-		}
+		param->value(v);
+		return true;
 	}
-	return found != 0 ? 0 : -1;
+	return false;
 }
 
 // Must do a special case for double/float.  Any floats that get passed to this
@@ -213,170 +128,134 @@ int GAParameterList::set(const char *name, const void *v)
 // float if FLOAT is the type that is expected.  Kind of sucks, eh?
 //   We could check the parameter type against the type here, but we don't.
 // (could do it for all of the 'set' members).  Maybe in a later release.
-int GAParameterList::set(const char *name, double v)
+bool GAParameterList::set(const std::string &name, double v)
 {
-	int found = 0;
-	for (unsigned int i = 0; i < n; i++)
+	auto param = std::find_if(this->begin(), this->end(),
+							  [=](const GAParameter &p) -> bool {
+									return (name == p.fullname() || name == p.shrtname());
+							  });
+
+	if (param != this->end())
 	{
-		if (strcmp(name, p[i]->fullname()) == 0 ||
-			strcmp(name, p[i]->shrtname()) == 0)
+		if (param->type() == ParType::FLOAT)
 		{
-			if (p[i]->type() == ParType::FLOAT)
-			{
-				auto fval = static_cast<float>(v);
-				p[i]->value((void *)&fval);
-			}
-			else if (p[i]->type() == ParType::DOUBLE) {
-				p[i]->value((void *)&v);
-			} else {
-				GAErr(GA_LOC, "GAParameterList", "set", gaErrBadTypeIndicator);
-}
-			found = 1;
+			auto fval = static_cast<float>(v);
+			param->value((void *)&fval);
 		}
+		else if (param->type() == ParType::DOUBLE)
+		{
+			param->value((void *)&v);
+		}
+		else
+		{
+			GAErr(GA_LOC, "GAParameterList", "set", gaErrBadTypeIndicator);
+		}
+		return true;
 	}
-	return found != 0 ? 0 : -1;
+	return false;
 }
 
 // This allocates space for strings, so be sure to free it!
-int GAParameterList::get(const char *name, void *value) const
+bool GAParameterList::get(const std::string &name, void *value) const
 {
-	int status = 1;
-	for (unsigned int i = 0; i < n; i++)
+	auto param = std::find_if(this->begin(), this->end(),
+							  [=](const GAParameter &p) -> bool {
+									return (name == p.fullname() || name == p.shrtname());
+							  });
+
+	if (param != this->end())
 	{
-		if (strcmp(name, p[i]->fullname()) == 0 ||
-			strcmp(name, p[i]->shrtname()) == 0)
+		switch (param->type())
 		{
-			switch (p[i]->type())
-			{
-			case ParType::BOOLEAN:
-			case ParType::INT:
-				*(static_cast<int *>(value)) = *((int *)p[i]->value());
-				break;
-			case ParType::CHAR:
-				*(static_cast<char *>(value)) = *((char *)p[i]->value());
-				break;
-			case ParType::STRING:
-				break;
-			case ParType::FLOAT:
-				*(static_cast<float *>(value)) = *((float *)p[i]->value());
-				break;
-			case ParType::DOUBLE:
-				*(static_cast<double *>(value)) = *((double *)p[i]->value());
-				break;
-			case ParType::POINTER:
-			default:
-				break;
-			}
-			status = 0;
+		case ParType::BOOLEAN:
+		case ParType::INT:
+			*(static_cast<int *>(value)) = *((int *)param->value());
+			break;
+		case ParType::CHAR:
+			*(static_cast<char *>(value)) = *((char *)param->value());
+			break;
+		case ParType::STRING:
+			break;
+		case ParType::FLOAT:
+			*(static_cast<float *>(value)) = *((float *)param->value());
+			break;
+		case ParType::DOUBLE:
+			*(static_cast<double *>(value)) = *((double *)param->value());
+			break;
+		case ParType::POINTER:
+		default:
+			break;
 		}
+		return true;
 	}
-	return status;
+	return false;
 }
 
 // Add the item to the list if it does not already exist.  Return 0 if the add
 // was OK, -1 if there was a problem.
-int GAParameterList::add(const char *fn, const char *sn, ParType t,
-						 const void *v)
+bool GAParameterList::add(const std::string &fn, const std::string &sn,
+						  ParType t,
+						  const void *v)
 {
-	int status = -1;
-	if (n == N)
-	{
-		N += PRM_CHUNKSIZE;
-		GAParameter **tmp = p;
-		p = new GAParameter *[N];
-		memcpy(p, tmp, n * sizeof(GAParameter *));
-		delete[] tmp;
-	}
-	int found = 0;
-	for (unsigned int i = 0; i < n && (found == 0); i++)
-	{
-		if (strcmp(fn, p[i]->fullname()) == 0 &&
-			strcmp(sn, p[i]->shrtname()) == 0) {
-			found = 1;
-}
-	}
-	if (found == 0)
-	{
-		cur = n;
-		p[n++] = new GAParameter(fn, sn, t, v);
-	}
-	return status;
-}
+	auto param = std::find_if(this->begin(), this->end(),
+							  [=](const GAParameter &p) -> bool {
+									return (fn == p.fullname() && sn == p.shrtname());
+							  });
 
-// When you remove a parameter from the list, the iterator is left pointing
-// at the same location.  If the item was the last in the list, then the
-// iterator moves to the new last item in the list.
-//   Return 0 if everything was OK, -1 if error.
-int GAParameterList::remove()
-{
-	int status = -1;
-	if (cur > n) {
-		return status;
-}
-	delete p[cur];
-	memmove(&(p[cur]), &(p[cur + 1]), (n - cur - 1) * sizeof(GAParameter *));
-	n--;
-	if (cur > n) {
-		cur = n;
-}
-	status = 0;
-	return status;
-}
-
-GAParameter *GAParameterList::operator()(const char *name)
-{
-	for (unsigned int i = 0; i < n; i++) {
-		if (strcmp(name, p[i]->fullname()) == 0 ||
-			strcmp(name, p[i]->shrtname()) == 0) {
-			return p[i];
-}
-}
-	return (GAParameter *)nullptr;
+	if (param == this->end())
+	{
+		this->emplace_back(GAParameter(fn, sn, t, v));
+	}
+	return true;
 }
 
 // Dump the parameters to the specified stream.  Just name-value pairs with a
 // tab delimiter and newline separating pairs.
 //   If there is an error, return 1, otherwise return 0.
-int GAParameterList::write(std::ostream &os) const
+bool GAParameterList::write(std::ostream &os) const
 {
-	for (unsigned int i = 0; i < n; i++)
+	for (auto it = this->begin(); it != this->end(); ++it)
 	{
+		auto p = *it;
 		int ival;
 		float fval;
 		double dval;
 		char cval;
 		char *sval;
 
-		os << p[i]->fullname() << "\t";
+		os << p.fullname() << "\t";
 
-		switch (p[i]->type())
+		switch (p.type())
 		{
 		case ParType::BOOLEAN:
-			ival = *((int *)(p[i]->value()));
-			if (ival != 0) {
+			ival = *((int *)(p.value()));
+			if (ival != 0)
+			{
 				os << "1\n";
-			} else {
+			}
+			else
+			{
 				os << "0\n";
-}
+			}
 			break;
 		case ParType::INT:
-			ival = *((int *)(p[i]->value()));
+			ival = *((int *)(p.value()));
 			os << ival << "\n";
 			break;
 		case ParType::CHAR:
-			cval = *((char *)(p[i]->value()));
+			cval = *((char *)(p.value()));
 			os << cval << "\n";
 			break;
 		case ParType::STRING:
-			sval = ((char *)(p[i]->value()));
+			sval = ((char *)(p.value()));
 			os << sval << "\n";
 			break;
 		case ParType::FLOAT:
-			fval = *((float *)(p[i]->value()));
+			fval = *((float *)(p.value()));
 			os << fval << "\n";
 			break;
 		case ParType::DOUBLE:
-			dval = *((double *)(p[i]->value()));
+			dval = *((double *)(p.value()));
 			os << dval << "\n";
 			break;
 		case ParType::POINTER:
@@ -386,10 +265,10 @@ int GAParameterList::write(std::ostream &os) const
 			break;
 		}
 	}
-	return 0;
+	return true;
 }
 
-int GAParameterList::write(const char *filename) const
+bool GAParameterList::write(const char *filename) const
 {
 	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
 	// should be done this way, but SGI systems (and others?) don't do it
@@ -398,9 +277,9 @@ int GAParameterList::write(const char *filename) const
 	if (outfile.fail())
 	{
 		GAErr(GA_LOC, "GAParameterList", "write", gaErrWriteError, filename);
-		return 1;
+		return false;
 	}
-	int status = write(outfile);
+	bool status = write(outfile);
 	outfile.close();
 	return status;
 }
@@ -423,17 +302,17 @@ int GAParameterList::write(const char *filename) const
 // whose name we do not know about, we ignore the pair and go on to the next.
 // There's no global list to tell us what type things are, and we don't assume.
 //   We don't allow setting pointers using this method.
-int GAParameterList::read(std::istream &is, bool flag)
+bool GAParameterList::read(std::istream &is, bool flag)
 {
-	int nfound = 0;
-	if (n == 0) {
-		return nfound;
-}
+	if (this->empty())
+	{
+		return false;
+	}
 
 	char buf[BUFSIZE];
 	char name[NAMESIZE];
 	int toggle = 0, count = 0, npairs = -1;
-
+	int nfound = 0;
 	is.width(sizeof(buf)); // don't allow to overrun buffer
 
 	do
@@ -466,98 +345,77 @@ int GAParameterList::read(std::istream &is, bool flag)
 		}
 		else if (toggle == 1)
 		{
-			int found = 0;
-
 			count += 1;
 			toggle = 0;
 
-			for (unsigned int i = 0; i < n && (found == 0); i++)
+			auto param = std::find_if(
+				this->begin(), this->end(), [=](const GAParameter &p) -> bool {
+					return (name == p.fullname() || name == p.shrtname());
+				});
+
+			if (param != this->end())
 			{
-				if (strcmp(name, p[i]->fullname()) == 0 ||
-					strcmp(name, p[i]->shrtname()) == 0)
+				int ival;
+				float fval;
+				double dval;
+
+				switch (param->type())
 				{
-					found = 1;
-
-					int ival;
-					float fval;
-					double dval;
-
-					switch (p[i]->type())
-					{
-					case ParType::BOOLEAN:
-					case ParType::INT:
-						ival = atoi(buf);
-						set(name, (void *)&ival);
-						nfound += 1;
-						break;
-					case ParType::CHAR:
-					case ParType::STRING:
-						set(name, (void *)buf);
-						nfound += 1;
-						break;
-					case ParType::FLOAT:
-						fval = static_cast<float>(atof(buf));
-						set(name, (void *)&fval);
-						nfound += 1;
-						break;
-					case ParType::DOUBLE:
-						dval = atof(buf);
-						set(name, (void *)&dval);
-						nfound += 1;
-						break;
-					case ParType::POINTER:
-					default:
-						break;
-					}
-
-					// Move this parameter to the front of the list
-
-					//	  if(i > 0) {
-					//	    GAParameter *tmpptr = p[i];
-					//	    memmove(&(p[1]), &(p[0]), i * sizeof(GAParameter*));
-					//	    p[0] = tmpptr;
-					//	  }
-					if (i < n - 1)
-					{
-						GAParameter *tmpptr = p[i];
-						memmove(&(p[i]), &(p[i + 1]),
-								(n - i - 1) * sizeof(GAParameter *));
-						p[n - 1] = tmpptr;
-					}
+				case ParType::BOOLEAN:
+				case ParType::INT:
+					ival = atoi(buf);
+					set(name, (void *)&ival);
+					nfound += 1;
+					break;
+				case ParType::CHAR:
+				case ParType::STRING:
+					set(name, (void *)buf);
+					nfound += 1;
+					break;
+				case ParType::FLOAT:
+					fval = static_cast<float>(atof(buf));
+					set(name, (void *)&fval);
+					nfound += 1;
+					break;
+				case ParType::DOUBLE:
+					dval = atof(buf);
+					set(name, (void *)&dval);
+					nfound += 1;
+					break;
+				case ParType::POINTER:
+				default:
+					break;
 				}
-			}
 
-			if ((found == 0) && flag == true)
-			{
-				std::stringstream str;
-				str << "unrecognized variable name '" << name << "'";
-				GAErr(GA_LOC, "GAParameterList", "read", str.str());
+				std::string str =
+					"unrecognized variable name '" + std::string(name) + "'";
+				GAErr(GA_LOC, "GAParameterList", "read", str);
 			}
 		}
 	} while (!is.eof() && count < npairs);
 
 	if (toggle == 1)
 	{
-		std::stringstream str;
-		str << "variable " << name << " has no value";
-	
-		GAErr(GA_LOC, "GAParameterList", "read", str.str(), "be sure there is a newline at end of the file");
+		std::string str = "variable " + std::string(name) + " has no value";
+
+		GAErr(GA_LOC, "GAParameterList", "read", str,
+			  "be sure there is a newline at end of the file");
 
 		is.clear(std::ios::badbit | is.rdstate());
 	}
 
-	return nfound;
+	return true;
 }
 
-int GAParameterList::read(const char *filename, bool flag)
+bool GAParameterList::read(const char *filename, bool flag)
 {
 	std::ifstream infile(filename, std::ios::in);
 	if (!infile)
 	{
 		GAErr(GA_LOC, "GAParameterList", "read", gaErrReadError, filename);
-		return 1;
+		return false;
 	}
-	int status = read(infile, flag);
+	bool status = read(infile, flag);
 	infile.close();
 	return status;
 }
@@ -576,16 +434,17 @@ int GAParameterList::read(const char *filename, bool flag)
 // maintained.
 //   We assume that argv[0] is the name of the program, so we don't barf on
 // it if it is not a recognized name.
-int GAParameterList::parse(int &argc, char *argv[], bool flag)
+bool GAParameterList::parse(int &argc, char *argv[], bool flag)
 {
-	int nfound = 0;
-	if (n == 0) {
-		return nfound;
-}
+	if (this->empty())
+	{
+		return false;
+	}
 
 	char **argvout = new char *[argc];
 	int argcu = argc - 1;
 	int argcl = 0;
+	int nfound = 0;
 
 	for (int i = 0; i < argc; i++)
 	{
@@ -594,99 +453,85 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 		// Loop through all of the parameters to see if we got a match.  If
 		// there is no value for the name, complain.  Otherwise, set the value.
 
-		for (unsigned int j = 0; j < n && found == 0; j++)
+		auto param = std::find_if(
+			this->begin(), this->end(), [=](const GAParameter &p) -> bool {
+				return (argv[i] == p.fullname() || argv[i] == p.shrtname());
+			});
+
+		if (param != this->end())
 		{
-			if (strcmp(p[j]->shrtname(), argv[i]) == 0 ||
-				strcmp(p[j]->fullname(), argv[i]) == 0)
+			found = 1;
+			argvout[argcu] = argv[i];
+			argcu--;
+			if (++i >= argc)
 			{
-				found = 1;
+				GAErr(GA_LOC, argv[0], argv[i - 1], " needs a value");
+			}
+			else
+			{
+				int ival;
+				float fval;
+				double dval;
+
+				switch (param->type())
+				{
+				case ParType::BOOLEAN:
+					if (IsNumeric(argv[i]) != 0)
+					{
+						ival = atoi(argv[i]);
+						ival = (ival == 0) ? 0 : 1;
+					}
+					else
+					{
+						if (boost::iequals(argv[i], "true") ||
+							boost::iequals(argv[i], "t"))
+						{
+							ival = 1;
+						}
+					}
+					set(argv[i - 1], (void *)&ival);
+					nfound += 1;
+					break;
+				case ParType::INT:
+					ival = atoi(argv[i]);
+					set(argv[i - 1], (void *)&ival);
+					nfound += 1;
+					break;
+				case ParType::CHAR:
+				case ParType::STRING:
+					set(argv[i - 1], (void *)argv[i]);
+					nfound += 1;
+					break;
+				case ParType::FLOAT:
+					fval = static_cast<float>(atof(argv[i]));
+					set(argv[i - 1], (void *)&fval);
+					nfound += 1;
+					break;
+				case ParType::DOUBLE:
+					dval = atof(argv[i]);
+					set(argv[i - 1], (void *)&dval);
+					nfound += 1;
+					break;
+				case ParType::POINTER:
+				default:
+					break;
+				}
+
+				// Now update the argv array and argc count to indicate we
+				// understood this one
+
 				argvout[argcu] = argv[i];
 				argcu--;
-				if (++i >= argc)
-				{
-					GAErr(GA_LOC, argv[0], argv[i - 1], " needs a value");
-				}
-				else
-				{
-					int ival;
-					float fval;
-					double dval;
-
-					switch (p[j]->type())
-					{
-					case ParType::BOOLEAN:
-						if (IsNumeric(argv[i]) != 0)
-						{
-							ival = atoi(argv[i]);
-							ival = (ival == 0) ? 0 : 1;
-						}
-						else
-						{
-							if (boost::iequals(argv[i], "true") ||
-								boost::iequals(argv[i], "t")) {
-								ival = 1;
-}
-						}
-						set(argv[i - 1], (void *)&ival);
-						nfound += 1;
-						break;
-					case ParType::INT:
-						ival = atoi(argv[i]);
-						set(argv[i - 1], (void *)&ival);
-						nfound += 1;
-						break;
-					case ParType::CHAR:
-					case ParType::STRING:
-						set(argv[i - 1], (void *)argv[i]);
-						nfound += 1;
-						break;
-					case ParType::FLOAT:
-						fval = static_cast<float>(atof(argv[i]));
-						set(argv[i - 1], (void *)&fval);
-						nfound += 1;
-						break;
-					case ParType::DOUBLE:
-						dval = atof(argv[i]);
-						set(argv[i - 1], (void *)&dval);
-						nfound += 1;
-						break;
-					case ParType::POINTER:
-					default:
-						break;
-					}
-
-					// Move this parameter to the front of the list
-
-					//	  if(j > 0) {
-					//	    GAParameter *tmpptr = p[j];
-					//	    memmove(&(p[1]), &(p[0]), j * sizeof(GAParameter*));
-					//	    p[0] = tmpptr;
-					//	  }
-					if (j < n - 1)
-					{
-						GAParameter *tmpptr = p[j];
-						memmove(&(p[j]), &(p[j + 1]),
-								(n - j - 1) * sizeof(GAParameter *));
-						p[n - 1] = tmpptr;
-					}
-
-					// Now update the argv array and argc count to indicate we
-					// understood this one
-
-					argvout[argcu] = argv[i];
-					argcu--;
-					continue;
-				}
 			}
 		}
+
 		if (found == 0)
 		{
 			if (flag && i != 0)
 			{
-				std::stringstream str;
-				str << "unrecognized name " << argv[i];
-	
-				GAErr(GA_LOC, "GAParameterList", "parse", str.str());
+				std::string str = "unrecognized name " + std::string(argv[i]);
+
+				GAErr(GA_LOC, "GAParameterList", "parse", str);
 			}
 			argvout[argcl] = argv[i];
 			argcl++;
@@ -698,15 +543,17 @@ int GAParameterList::parse(int &argc, char *argv[], bool flag)
 	argc = argcl;
 	delete[] argvout;
 
-	return nfound;
+	return true;
 }
 
-static int IsNumeric(const char *str)
+static bool IsNumeric(const char *str)
 {
-	for (int i = strlen(str) - 1; i >= 0; i--) {
-		if ((isdigit(str[i]) == 0) && str[i] != '.') {
-			return 0;
-}
-}
-	return 1;
+	for (int i = strlen(str) - 1; i >= 0; i--)
+	{
+		if ((isdigit(str[i]) == 0) && str[i] != '.')
+		{
+			return true;
+		}
+	}
+	return false;
 }

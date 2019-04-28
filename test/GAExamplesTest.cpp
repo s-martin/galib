@@ -40,7 +40,6 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	GARandomSeed(100); // so test is always the same
 
 	// Set the default values of the parameters.
-	int i, j;
 	GAParameterList params;
 	GASteadyStateGA::registerDefaultParameters(params);
 	params.set(gaNpopulationSize, 50); // number of individuals in population
@@ -78,9 +77,9 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	// Print out the pattern to be sure we got the right one.
 
 	std::cout << "input pattern:\n";
-	for (j = 0; j < height; j++)
+	for (int j = 0; j < height; j++)
 	{
-		for (i = 0; i < width; i++)
+		for (int i = 0; i < width; i++)
 			std::cout << (target.gene(i, j) == 1 ? '*' : ' ') << " ";
 		std::cout << "\n";
 	}
@@ -154,9 +153,9 @@ BOOST_AUTO_TEST_CASE(GAex7)
 
 	genome = ga.statistics().bestIndividual();
 	std::cout << "the ga generated:\n";
-	for (j = 0; j < height; j++)
+	for (int j = 0; j < height; j++)
 	{
-		for (i = 0; i < width; i++)
+		for (int i = 0; i < width; i++)
 			std::cout << (genome.gene(i, j) == 1 ? '*' : ' ') << " ";
 		std::cout << "\n";
 	}

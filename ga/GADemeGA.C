@@ -9,6 +9,8 @@
 #include <GADemeGA.h>
 #include <garandom.h>
 
+#include <boost/algorithm/string.hpp>
+
 GAParameterList &GADemeGA::registerDefaultParameters(GAParameterList &p)
 {
 	GAGeneticAlgorithm::registerDefaultParameters(p);
@@ -134,18 +136,18 @@ void GADemeGA::copy(const GAGeneticAlgorithm &g)
 // the percentage replacement is specified then we use that to determine the
 // size of the tmp pop.  Otherwise we use the absolute number of individuals.
 // If we're using absolute number then we don't have to resize the tmp pop.
-int GADemeGA::setptr(const char *name, const void *value)
+int GADemeGA::setptr(const std::string &name, const void *value)
 {
 	int status = GAGeneticAlgorithm::setptr(name, value);
 
-	if (strcmp(name, gaNnPopulations) == 0 ||
-		strcmp(name, gaSNnPopulations) == 0)
+	if (boost::equals(name, gaNnPopulations) ||
+		boost::equals(name, gaSNnPopulations))
 	{
 		nPopulations(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNnMigration) == 0 ||
-			 strcmp(name, gaSNnMigration) == 0)
+	else if (boost::equals(name, gaNnMigration) ||
+			 boost::equals(name, gaSNnMigration))
 	{
 		nMigration(*((int *)value));
 		status = 0;

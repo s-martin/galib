@@ -8,6 +8,7 @@
   Source file for the simple genetic algorithm object.
 ---------------------------------------------------------------------------- */
 #include <GASimpleGA.h>
+#include <boost/algorithm/string.hpp>
 #include <garandom.h>
 
 GAParameterList &GASimpleGA::registerDefaultParameters(GAParameterList &p)
@@ -35,15 +36,16 @@ GASimpleGA::GASimpleGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 }
 GASimpleGA::GASimpleGA(const GASimpleGA &ga) : GAGeneticAlgorithm(ga)
 {
-	oldPop = (GAPopulation *)nullptr;
+	oldPop = nullptr;
 	copy(ga);
 }
 GASimpleGA::~GASimpleGA() { delete oldPop; }
 GASimpleGA &GASimpleGA::operator=(const GASimpleGA &ga)
 {
-	if (&ga != this) {
+	if (&ga != this)
+	{
 		copy(ga);
-}
+	}
 	return *this;
 }
 void GASimpleGA::copy(const GAGeneticAlgorithm &g)
@@ -51,19 +53,22 @@ void GASimpleGA::copy(const GAGeneticAlgorithm &g)
 	GAGeneticAlgorithm::copy(g);
 	const GASimpleGA &ga = DYN_CAST(const GASimpleGA &, g);
 	el = ga.el;
-	if (oldPop != nullptr) {
+	if (oldPop != nullptr)
+	{
 		oldPop->copy(*(ga.oldPop));
-	} else {
+	}
+	else
+	{
 		oldPop = ga.oldPop->clone();
-}
+	}
 	oldPop->geneticAlgorithm(*this);
 }
 
-int GASimpleGA::setptr(const char *name, const void *value)
+int GASimpleGA::setptr(const std::string &name, const void *value)
 {
 	int status = GAGeneticAlgorithm::setptr(name, value);
 
-	if (strcmp(name, gaNelitism) == 0 || strcmp(name, gaSNelitism) == 0)
+	if (boost::equals(name, gaNelitism) || boost::equals(name, gaSNelitism))
 	{
 		el = (*((int *)value) != 0 ? true : false);
 		status = 0;
@@ -86,17 +91,19 @@ int GASimpleGA::get(const char *name, void *value) const
 void GASimpleGA::objectiveFunction(GAGenome::Evaluator f)
 {
 	GAGeneticAlgorithm::objectiveFunction(f);
-	for (int i = 0; i < pop->size(); i++) {
+	for (int i = 0; i < pop->size(); i++)
+	{
 		oldPop->individual(i).evaluator(f);
-}
+	}
 }
 
 void GASimpleGA::objectiveData(const GAEvalData &v)
 {
 	GAGeneticAlgorithm::objectiveData(v);
-	for (int i = 0; i < pop->size(); i++) {
+	for (int i = 0; i < pop->size(); i++)
+	{
 		pop->individual(i).evalData(v);
-}
+	}
 }
 
 const GAPopulation &GASimpleGA::population(const GAPopulation &p)
@@ -124,11 +131,14 @@ int GASimpleGA::populationSize(unsigned int n)
 int GASimpleGA::minimaxi(int m)
 {
 	GAGeneticAlgorithm::minimaxi(m);
-	if (m == MINIMIZE) {
+	if (m == MINIMIZE)
+	{
 		oldPop->order(GAPopulation::LOW_IS_BEST);
-	} else {
+	}
+	else
+	{
 		oldPop->order(GAPopulation::HIGH_IS_BEST);
-}
+	}
 	return minmax;
 }
 
@@ -147,9 +157,10 @@ void GASimpleGA::initialize(unsigned int seed)
 
 	stats.reset(*pop);
 
-	if (scross == nullptr) {
+	if (scross == nullptr)
+	{
 		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
-}
+	}
 }
 
 //   Evolve a new generation of genomes.  When we start this routine, pop
@@ -191,13 +202,15 @@ void GASimpleGA::step()
 			pop->individual(i + 1).copy(*dad);
 		}
 		stats.nummut += (mut = pop->individual(i).mutate(pMutation()));
-		if (mut > 0) {
+		if (mut > 0)
+		{
 			c1 = 1;
-}
+		}
 		stats.nummut += (mut = pop->individual(i + 1).mutate(pMutation()));
-		if (mut > 0) {
+		if (mut > 0)
+		{
 			c2 = 1;
-}
+		}
 
 		stats.numeval += c1 + c2;
 	}
@@ -210,22 +223,25 @@ void GASimpleGA::step()
 		c1 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
-			stats.numcro +=
-				(*scross)(*mom, *dad, &pop->individual(i), nullptr);
+			stats.numcro += (*scross)(*mom, *dad, &pop->individual(i), nullptr);
 			c1 = 1;
 		}
 		else
 		{
-			if (GARandomBit() != 0) {
+			if (GARandomBit() != 0)
+			{
 				pop->individual(i).copy(*mom);
-			} else {
+			}
+			else
+			{
 				pop->individual(i).copy(*dad);
-}
+			}
 		}
 		stats.nummut += (mut = pop->individual(i).mutate(pMutation()));
-		if (mut > 0) {
+		if (mut > 0)
+		{
 			c1 = 1;
-}
+		}
 
 		stats.numeval += c1;
 	}
@@ -239,19 +255,21 @@ void GASimpleGA::step()
 
 	if (minimaxi() == GAGeneticAlgorithm::MAXIMIZE)
 	{
-		if (el && oldPop->best().score() > pop->best().score()) {
+		if (el && oldPop->best().score() > pop->best().score())
+		{
 			oldPop->replace(
 				pop->replace(&(oldPop->best()), GAPopulation::WORST),
 				GAPopulation::BEST);
-}
+		}
 	}
 	else
 	{
-		if (el && oldPop->best().score() < pop->best().score()) {
+		if (el && oldPop->best().score() < pop->best().score())
+		{
 			oldPop->replace(
 				pop->replace(&(oldPop->best()), GAPopulation::WORST),
 				GAPopulation::BEST);
-}
+		}
 	}
 
 	stats.update(*pop); // update the statistics by one generation

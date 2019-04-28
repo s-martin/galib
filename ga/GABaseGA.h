@@ -163,13 +163,13 @@ class GAGeneticAlgorithm : public GAID
 	const GAParameterList &parameters(const char *filename, bool f = false);
 	const GAParameterList &parameters(std::istream &, bool flag = false);
 	virtual int get(const char *, void *) const;
-	virtual int setptr(const char *, const void *);
-	int set(const char *s, int v) { return setptr(s, (void *)&v); }
-	int set(const char *s, unsigned int v) { return setptr(s, (void *)&v); }
-	int set(const char *s, char v) { return setptr(s, (void *)&v); }
-	int set(const char *s, const char *v) { return setptr(s, (void *)v); }
-	int set(const char *s, const void *v) { return setptr(s, v); }
-	int set(const char *name, double v);
+	virtual int setptr(const std::string &name, const void *);
+	int set(const std::string &s, int v) { return setptr(s, (void *)&v); }
+	int set(const std::string &s, unsigned int v) { return setptr(s, (void *)&v); }
+	int set(const std::string &s, char v) { return setptr(s, (void *)&v); }
+	int set(const std::string &s, const char *v) { return setptr(s, (void *)v); }
+	int set(const std::string &s, const void *v) { return setptr(s, v); }
+	int set(const std::string &name, double v);
 
 	virtual int minimaxi() const { return minmax; }
 	virtual int minimaxi(int m);

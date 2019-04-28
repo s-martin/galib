@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
 
 	// Set the default values of the parameters.
 
-	int i, j;
 	GAParameterList params;
 	GASteadyStateGA::registerDefaultParameters(params);
 	params.set(gaNpopulationSize, 50); // number of individuals in population
@@ -62,7 +61,7 @@ int main(int argc, char *argv[])
 	// parameters file will override the defaults above AND any entered on the
 	// command line.
 
-	for (i = 1; i < argc; i++)
+	for (int i = 1; i < argc; i++)
 	{
 		if (strcmp("dfile", argv[i]) == 0)
 		{
@@ -136,9 +135,9 @@ int main(int argc, char *argv[])
 	// Print out the pattern to be sure we got the right one.
 
 	std::cout << "input pattern:\n";
-	for (j = 0; j < height; j++)
+	for (int j = 0; j < height; j++)
 	{
-		for (i = 0; i < width; i++)
+		for (int i = 0; i < width; i++)
 			std::cout << (target.gene(i, j) == 1 ? '*' : ' ') << " ";
 		std::cout << "\n";
 	}
@@ -214,9 +213,9 @@ int main(int argc, char *argv[])
 
 	genome = ga.statistics().bestIndividual();
 	std::cout << "the ga generated:\n";
-	for (j = 0; j < height; j++)
+	for (int j = 0; j < height; j++)
 	{
-		for (i = 0; i < width; i++)
+		for (int i = 0; i < width; i++)
 			std::cout << (genome.gene(i, j) == 1 ? '*' : ' ') << " ";
 		std::cout << "\n";
 	}

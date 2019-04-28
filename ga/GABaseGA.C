@@ -13,7 +13,7 @@
 #include <garandom.h>
 #include <gaversion.h> // gets the RCS string in for ident purposes
 
-//#define GA_DEBUG
+#include <boost/algorithm/string.hpp>
 
 // Here we assign the default values of the GAlib default parameters.
 int gaDefNumGen = 250;
@@ -306,9 +306,9 @@ void GAGeneticAlgorithm::copy(const GAGeneticAlgorithm &ga)
 const GAParameterList &
 GAGeneticAlgorithm::parameters(const GAParameterList &list)
 {
-	for (int i = 0; i < list.size(); i++)
+	for (const auto p : list)
 	{
-		setptr(list[i].fullname(), list[i].value());
+		setptr(p.fullname(), p.value());
 	}
 	return params;
 }
@@ -317,9 +317,9 @@ const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv,
 													  bool flag)
 {
 	params.parse(argc, argv, flag); // get the args we understand
-	for (int i = 0; i < params.size(); i++)
+	for (const auto p : params)
 	{
-		setptr(params[i].fullname(), params[i].value());
+		setptr(p.fullname(), p.value());
 	}
 	return params;
 }
@@ -328,9 +328,9 @@ const GAParameterList &GAGeneticAlgorithm::parameters(const char *filename,
 													  bool flag)
 {
 	params.read(filename, flag);
-	for (int i = 0; i < params.size(); i++)
+	for (const auto p : params)
 	{
-		setptr(params[i].fullname(), params[i].value());
+		setptr(p.fullname(), p.value());
 	}
 	return params;
 }
@@ -339,9 +339,9 @@ const GAParameterList &GAGeneticAlgorithm::parameters(std::istream &is,
 													  bool flag)
 {
 	params.read(is, flag);
-	for (int i = 0; i < params.size(); i++)
+	for (const auto p : params)
 	{
-		setptr(params[i].fullname(), params[i].value());
+		setptr(p.fullname(), p.value());
 	}
 	return params;
 }
@@ -354,14 +354,14 @@ const GAParameterList &GAGeneticAlgorithm::parameters(std::istream &is,
 // oh well).  The call to set on params is redundant for the times when this
 // method is called *after* the parameter list has been updated, but it is
 // necessary when this method is called directly by the user.
-int GAGeneticAlgorithm::setptr(const char *name, const void *value)
+int GAGeneticAlgorithm::setptr(const std::string &name, const void *value)
 {
 	int status = 1;
 
 	params.set(name, value); // redundant for some cases, but not others
 
-	if (strcmp(name, gaNnBestGenomes) == 0 ||
-		strcmp(name, gaSNnBestGenomes) == 0)
+	if (boost::equals(name, gaNnBestGenomes) ||
+		boost::equals(name, gaSNnBestGenomes))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -370,8 +370,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		nBestGenomes(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNpopulationSize) == 0 ||
-			 strcmp(name, gaSNpopulationSize) == 0)
+	else if (boost::equals(name, gaNpopulationSize) ||
+			 boost::equals(name, gaSNpopulationSize))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -380,7 +380,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		populationSize(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNminimaxi) == 0 || strcmp(name, gaSNminimaxi) == 0)
+	else if (boost::equals(name, gaNminimaxi) ||
+			 boost::equals(name, gaSNminimaxi))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -389,8 +390,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		minimaxi(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNnGenerations) == 0 ||
-			 strcmp(name, gaSNnGenerations) == 0)
+	else if (boost::equals(name, gaNnGenerations) ||
+			 boost::equals(name, gaSNnGenerations))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -399,8 +400,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		nGenerations(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNpConvergence) == 0 ||
-			 strcmp(name, gaSNpConvergence) == 0)
+	else if (boost::equals(name, gaNpConvergence) ||
+			 boost::equals(name, gaSNpConvergence))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -409,8 +410,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		pConvergence(*((float *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNnConvergence) == 0 ||
-			 strcmp(name, gaSNnConvergence) == 0)
+	else if (boost::equals(name, gaNnConvergence) ||
+			 boost::equals(name, gaSNnConvergence))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -419,8 +420,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		nConvergence(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNpCrossover) == 0 ||
-			 strcmp(name, gaSNpCrossover) == 0)
+	else if (boost::equals(name, gaNpCrossover) ||
+			 boost::equals(name, gaSNpCrossover))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -429,8 +430,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		pCrossover(*((float *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNpMutation) == 0 ||
-			 strcmp(name, gaSNpMutation) == 0)
+	else if (boost::equals(name, gaNpMutation) ||
+			 boost::equals(name, gaSNpMutation))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -439,8 +440,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		pMutation(*((float *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNscoreFrequency) == 0 ||
-			 strcmp(name, gaSNscoreFrequency) == 0)
+	else if (boost::equals(name, gaNscoreFrequency) ||
+			 boost::equals(name, gaSNscoreFrequency))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -449,8 +450,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		stats.scoreFrequency(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNflushFrequency) == 0 ||
-			 strcmp(name, gaSNflushFrequency) == 0)
+	else if (boost::equals(name, gaNflushFrequency) ||
+			 boost::equals(name, gaSNflushFrequency))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -459,8 +460,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		stats.flushFrequency(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNrecordDiversity) == 0 ||
-			 strcmp(name, gaSNrecordDiversity) == 0)
+	else if (boost::equals(name, gaNrecordDiversity) ||
+			 boost::equals(name, gaSNrecordDiversity))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -469,8 +470,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		stats.recordDiversity(*((int *)value) != 0 ? true : false);
 		status = 0;
 	}
-	else if (strcmp(name, gaNselectScores) == 0 ||
-			 strcmp(name, gaSNselectScores) == 0)
+	else if (boost::equals(name, gaNselectScores) ||
+			 boost::equals(name, gaSNselectScores))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -479,8 +480,8 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 		stats.selectScores(*((int *)value));
 		status = 0;
 	}
-	else if (strcmp(name, gaNscoreFilename) == 0 ||
-			 strcmp(name, gaSNscoreFilename) == 0)
+	else if (boost::equals(name, gaNscoreFilename) ||
+			 boost::equals(name, gaSNscoreFilename))
 	{
 #ifdef GA_DEBUG
 		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
@@ -495,15 +496,14 @@ int GAGeneticAlgorithm::setptr(const char *name, const void *value)
 }
 
 // This is a pretty ugly little hack to make doubles/floats work transparently.
-int GAGeneticAlgorithm::set(const char *name, double v)
+int GAGeneticAlgorithm::set(const std::string &name, double v)
 {
 	int status = 1;
-	for (int i = 0; i < params.size(); i++)
+	for (auto p : params)
 	{
-		if (strcmp(name, params[i].fullname()) == 0 ||
-			strcmp(name, params[i].shrtname()) == 0)
+		if (name == p.fullname() || name == p.shrtname())
 		{
-			if (params[i].type() == ParType::FLOAT)
+			if (p.type() == ParType::FLOAT)
 			{
 				auto fval = static_cast<float>(v);
 				status = setptr(name, (void *)&fval);
