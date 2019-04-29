@@ -90,7 +90,7 @@ class GALinearScaling : public GAScalingScheme
 	{
 		multiplier(fm);
 	}
-	GALinearScaling(const GALinearScaling &arg) { copy(arg); }
+	GALinearScaling(const GALinearScaling &arg) : GAScalingScheme(arg) { copy(arg); }
 	GALinearScaling &operator=(const GAScalingScheme &arg)
 	{
 		copy(arg);
@@ -134,7 +134,11 @@ class GASigmaTruncationScaling : public GAScalingScheme
 	{
 		multiplier(m);
 	}
-	GASigmaTruncationScaling(const GASigmaTruncationScaling &arg) { copy(arg); }
+	GASigmaTruncationScaling(const GASigmaTruncationScaling &arg)
+		: GAScalingScheme(arg)
+	{
+		copy(arg);
+	}
 	GASigmaTruncationScaling &operator=(const GAScalingScheme &arg)
 	{
 		copy(arg);
@@ -175,7 +179,10 @@ class GAPowerLawScaling : public GAScalingScheme
 	GADefineIdentity("GAPowerLawScaling", GAID::PowerLawScaling);
 
 	explicit GAPowerLawScaling(float f = gaDefPowerScalingFactor) { k = f; }
-	GAPowerLawScaling(const GAPowerLawScaling &arg) { copy(arg); }
+	GAPowerLawScaling(const GAPowerLawScaling &arg) : GAScalingScheme(arg)
+	{
+		copy(arg);
+	}
 	GAPowerLawScaling &operator=(const GAScalingScheme &arg)
 	{
 		copy(arg);
@@ -284,7 +291,7 @@ class GASharing : public GAScalingScheme
 		_alpha = a;
 		_minmax = 0;
 	}
-	GASharing(const GASharing &arg)
+	GASharing(const GASharing &arg) : GAScalingScheme(arg) 
 	{
 		N = 0;
 		d = (float *)nullptr;

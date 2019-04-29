@@ -70,7 +70,7 @@ CompositeGenome::CompositeGenome(int element, int bond, GABin2DecPhenotype &p,
 	b2d = new GABin2DecGenome(p, f, u);
 }
 
-CompositeGenome::CompositeGenome(const CompositeGenome &orig)
+CompositeGenome::CompositeGenome(const CompositeGenome &orig) : GAGenome(orig)
 {
 	str = new GA2DBinaryStringGenome(orig.binstr());
 	b2d = new GABin2DecGenome(orig.bin2dec());

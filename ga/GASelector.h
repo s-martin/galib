@@ -100,7 +100,10 @@ class GARankSelector : public GASelectionScheme
 		: GASelectionScheme(w)
 	{
 	}
-	GARankSelector(const GARankSelector &orig) { copy(orig); }
+	GARankSelector(const GARankSelector &orig) : GASelectionScheme(orig)
+	{
+		copy(orig);
+	}
 	GARankSelector &operator=(const GASelectionScheme &orig)
 	{
 		if (&orig != this) {
@@ -134,6 +137,7 @@ class GARouletteWheelSelector : public GASelectionScheme
 		n = 0;
 	}
 	GARouletteWheelSelector(const GARouletteWheelSelector &orig)
+		: GASelectionScheme(orig)
 	{
 		psum = nullptr;
 		n = 0;
@@ -185,7 +189,11 @@ class GATournamentSelector : public GARouletteWheelSelector
 		: GARouletteWheelSelector(w)
 	{
 	}
-	GATournamentSelector(const GATournamentSelector &orig) { copy(orig); }
+	GATournamentSelector(const GATournamentSelector &orig)
+		: GARouletteWheelSelector(orig)
+	{
+		copy(orig);
+	}
 	GATournamentSelector &operator=(const GASelectionScheme &orig)
 	{
 		if (&orig != this) {
@@ -217,7 +225,10 @@ class GAUniformSelector : public GASelectionScheme
 		: GASelectionScheme(w)
 	{
 	}
-	GAUniformSelector(const GAUniformSelector &orig) { copy(orig); }
+	GAUniformSelector(const GAUniformSelector &orig) : GASelectionScheme(orig)
+	{
+		copy(orig);
+	}
 	GAUniformSelector &operator=(const GASelectionScheme &orig)
 	{
 		if (&orig != this) {
@@ -250,7 +261,7 @@ class GASRSSelector : public GASelectionScheme
 		choices = (unsigned int *)nullptr;
 		n = 0;
 	}
-	GASRSSelector(const GASRSSelector &orig)
+	GASRSSelector(const GASRSSelector &orig) : GASelectionScheme(orig)
 	{
 		fraction = nullptr;
 		choices = (unsigned int *)nullptr;
@@ -312,7 +323,7 @@ class GADSSelector : public GASelectionScheme
 		idx = (unsigned int *)nullptr;
 		n = 0;
 	}
-	GADSSelector(const GADSSelector &orig)
+	GADSSelector(const GADSSelector &orig) : GASelectionScheme(orig)
 	{
 		fraction = nullptr;
 		choices = (unsigned int *)nullptr;

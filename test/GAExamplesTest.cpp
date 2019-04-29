@@ -52,7 +52,6 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	// params.parse(argc, argv, false);
 
 	char datafile[128] = "smiley.txt";
-	char parmfile[128] = "";
 
 	// Read in the pattern from the specified file.  File format is pretty
 	// simple: two integers that give the height then width of the matrix, then
