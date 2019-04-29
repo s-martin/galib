@@ -94,7 +94,7 @@ template <class T> void GA1DArrayGenome<T>::copy(const GAGenome &orig)
 template <class T>
 GAGenome *GA1DArrayGenome<T>::clone(GAGenome::CloneMethod flag) const
 {
-	auto cpy = std::make_unique<GA1DArrayGenome<T>>(nx);
+	GA1DArrayGenome<T> *cpy = new GA1DArrayGenome<T>(nx);
 	if (flag == CONTENTS)
 	{
 		cpy->copy(*this);
@@ -224,7 +224,8 @@ GA1DArrayAlleleGenome<T>::GA1DArrayAlleleGenome(unsigned int length,
 	: GA1DArrayGenome<T>(length, f, u)
 {
 	naset = 1;
-	aset.push_back(s);
+	aset = new GAAlleleSet<T>[1];
+	aset[0] = s;
 
 	initializer(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
 	mutator(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_MUTATOR);

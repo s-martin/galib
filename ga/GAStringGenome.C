@@ -27,7 +27,8 @@ GA1DArrayAlleleGenome<char>::GA1DArrayAlleleGenome(unsigned int length,
 	: GA1DArrayGenome<char>(length, f, u)
 {
 	naset = 1;
-	aset.push_back(s);
+	aset = new GAAlleleSet<char>[1];
+	aset[0] = s;
 
 	initializer(DEFAULT_STRING_INITIALIZER);
 	mutator(DEFAULT_STRING_MUTATOR);
@@ -41,9 +42,9 @@ GA1DArrayAlleleGenome<char>::GA1DArrayAlleleGenome(
 	: GA1DArrayGenome<char>(sa.size(), f, u)
 {
 	naset = sa.size();
-	
+	aset = new GAAlleleSet<char>[naset];
 	for (int i = 0; i < naset; i++) {
-		aset.push_back(sa.set(i));
+		aset[i] = sa.set(i);
 }
 
 	initializer(DEFAULT_STRING_INITIALIZER);
@@ -54,6 +55,7 @@ GA1DArrayAlleleGenome<char>::GA1DArrayAlleleGenome(
 
 template <> GA1DArrayAlleleGenome<char>::~GA1DArrayAlleleGenome()
 {
+	delete[] aset;
 }
 
 // The read specialization takes in each character whether it is whitespace or
