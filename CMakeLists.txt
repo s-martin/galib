@@ -13,13 +13,14 @@ project(GAlib VERSION 3.0
 if(MSVC)
     add_definitions("/W4 /D_CRT_SECURE_NO_WARNINGS /permissive-")
 else()
-    add_definitions("-Wall -Wextra")
+    add_definitions("-Wall -Wextra -fpermissive")
+	add_compile_definitions(_G_NO_NRV)
 endif()
 
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost 1.65 REQUIRED COMPONENTS filesystem unit_test_framework)
+find_package(Boost 1.65 REQUIRED COMPONENTS unit_test_framework) # filesystem)
 message(STATUS "Boost version: ${Boost_VERSION}")
 
 include_directories( ${Boost_INCLUDE_DIRS})
@@ -31,6 +32,14 @@ include_directories( ${Boost_INCLUDE_DIRS})
 #    set_property(TARGET Boost::filesystem PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 #    set_property(TARGET Boost::filesystem PROPERTY INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
 #endif()
+
+find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
+
+#doxygen_add_docs(doc ${CMAKE_SOURCE_DIR}/ga)
+
+if(NOT MSVC) 
+	find_package(X11 REQUIRED)
+endif()
 
 enable_testing()
 include(CTest)

@@ -37,6 +37,43 @@ add_executable(example9 ex9.C)
 target_compile_features(example9 PUBLIC cxx_std_17)
 target_link_libraries(example9 PUBLIC GAlib)
 
+if(NOT MSVC) 
+	add_executable(gnuex 
+					./gnu/gnuex.C 
+					./gnu/bitstr.C
+					./gnu/AllocRing.cc 
+					./gnu/Obstack.cc 
+					./gnu/BitString.cc 
+					./gnu/builtin.cc 
+					./gnu/bitand.c 
+					./gnu/bitany.c 
+					./gnu/bitblt.c 
+					./gnu/bitclear.c 
+					./gnu/bitcopy.c 
+					./gnu/bitcount.c 
+					./gnu/bitinvert.c 
+					./gnu/bitlcomp.c 
+					./gnu/bitset1.c 
+					./gnu/bitxor.c 
+					./gnu/error.cc )
+	target_compile_features(gnuex PUBLIC cxx_std_17)
+	target_link_libraries(gnuex GAlib)
+	target_include_directories(gnuex PUBLIC ${CMAKE_SOURCE_DIR}/examples/gnu)
+endif()
+
+if(X11_FOUND) 
+	add_executable(gaview 
+					./graphic/gaview.C )
+	target_compile_features(gaview PUBLIC cxx_std_17)
+	target_link_libraries(gaview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
+	target_include_directories(gaview PUBLIC ${X11_INCLUDE_DIR})
+	
+	#add_executable(tspview  
+	#				./graphic/tspview.C)
+	#target_compile_features(tspview PUBLIC cxx_std_17)
+	#target_link_libraries(tspview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
+	#target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
+endif()
 
 # add_executable(pvmpop 
 #                 ./pvmpop/genome.C 

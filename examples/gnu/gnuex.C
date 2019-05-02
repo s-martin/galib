@@ -20,7 +20,7 @@ the GNU bit string (but the gnu bit string is a much more robust, more
 compact, etc implementation).
 ---------------------------------------------------------------------------- */
 #include <cstdio>
-#include <iostream.h>
+#include <iostream>
 #include <ga.h>		// this is the include file for the ga library
 
 // When this is defined, use the GNU BitString otherwise we use the 

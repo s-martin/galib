@@ -306,7 +306,7 @@ void GAGeneticAlgorithm::copy(const GAGeneticAlgorithm &ga)
 const GAParameterList &
 GAGeneticAlgorithm::parameters(const GAParameterList &list)
 {
-	for (const auto p : list)
+	for (const auto &p : list)
 	{
 		setptr(p.fullname(), p.value());
 	}
@@ -317,7 +317,7 @@ const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv,
 													  bool flag)
 {
 	params.parse(argc, argv, flag); // get the args we understand
-	for (const auto p : params)
+	for (const auto &p : params)
 	{
 		setptr(p.fullname(), p.value());
 	}
@@ -328,7 +328,7 @@ const GAParameterList &GAGeneticAlgorithm::parameters(const char *filename,
 													  bool flag)
 {
 	params.read(filename, flag);
-	for (const auto p : params)
+	for (const auto &p : params)
 	{
 		setptr(p.fullname(), p.value());
 	}
@@ -339,7 +339,7 @@ const GAParameterList &GAGeneticAlgorithm::parameters(std::istream &is,
 													  bool flag)
 {
 	params.read(is, flag);
-	for (const auto p : params)
+	for (const auto &p : params)
 	{
 		setptr(p.fullname(), p.value());
 	}
@@ -499,7 +499,7 @@ int GAGeneticAlgorithm::setptr(const std::string &name, const void *value)
 int GAGeneticAlgorithm::set(const std::string &name, double v)
 {
 	int status = 1;
-	for (auto p : params)
+	for (const auto &p : params)
 	{
 		if (name == p.fullname() || name == p.shrtname())
 		{

@@ -4,12 +4,12 @@ Copyright (C) 1988 Free Software Foundation
     written by Doug Lea (dl@rocky.oswego.edu)
 
 This file is part of the GNU C++ Library.  This library is free
-software; you can redistribute it and/or modify it under the terms of
+software; you can redistribute it _and/_or modify it under the terms of
 the GNU Library General Public License as published by the Free
-Software Foundation; either version 2 of the License, or (at your
+Software Foundation; either version 2 of the License, _or (at your
 option) any later version.  This library is distributed in the hope
 that it will be useful, but WITHOUT ANY WARRANTY; without even the
-implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+implied warranty of MERCHANTABILITY _or FITNESS FOR A PARTICULAR
 PURPOSE.  See the GNU Library General Public License for more details.
 You should have received a copy of the GNU Library General Public
 License along with this library; if not, write to the Free Software
@@ -23,7 +23,7 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #define _BitString_h 1
 
-#include <stream.h>
+#include <sstream>
 #include <limits.h>
 
 #undef OK
@@ -42,9 +42,9 @@ extern BitStrRep*  BStr_alloc(BitStrRep*, const _BS_word*, int, int,int);
 extern BitStrRep*  BStr_resize(BitStrRep*, int);
 extern BitStrRep*  BStr_copy(BitStrRep*, const BitStrRep*);
 extern BitStrRep*  cmpl(const BitStrRep*, BitStrRep*);
-extern BitStrRep*  and(const BitStrRep*, const BitStrRep*, BitStrRep*);
-extern BitStrRep*  or(const BitStrRep*, const BitStrRep*, BitStrRep*);
-extern BitStrRep*  xor(const BitStrRep*, const BitStrRep*, BitStrRep*);
+extern BitStrRep*  _and(const BitStrRep*, const BitStrRep*, BitStrRep*);
+extern BitStrRep*  _or(const BitStrRep*, const BitStrRep*, BitStrRep*);
+extern BitStrRep*  _xor(const BitStrRep*, const BitStrRep*, BitStrRep*);
 extern BitStrRep*  diff(const BitStrRep*, const BitStrRep*, BitStrRep*);
 extern BitStrRep*  cat(const BitStrRep*, const BitStrRep*, BitStrRep*);
 extern BitStrRep*  cat(const BitStrRep*, unsigned int, BitStrRep*);
@@ -129,9 +129,9 @@ public:
 // procedural versions of operators
 
 
-  friend void        and(const BitString&, const BitString&, BitString&);
-  friend void        or(const BitString&, const BitString&, BitString&);
-  friend void        xor(const BitString&, const BitString&, BitString&);
+  friend void        _and(const BitString&, const BitString&, BitString&);
+  friend void        _or(const BitString&, const BitString&, BitString&);
+  friend void        _xor(const BitString&, const BitString&, BitString&);
   friend void        diff(const BitString&, const BitString&, BitString&);
   friend void        cat(const BitString&, const BitString&, BitString&);
   friend void        cat(const BitString&, unsigned int, BitString&);
@@ -246,12 +246,12 @@ public:
   friend BitString   atoBitString(const char* s, char f='0', char t='1');
   // BitStringtoa is deprecated; do not use in new programs!
 //  friend const char* BitStringtoa(const BitString&, char f='0', char t='1');
-  void		     printon(ostream&, char f='0', char t='1') const;
+  void		     printon(std::ostream&, char f='0', char t='1') const;
 
   friend BitString   shorttoBitString(uint16_t);
   friend BitString   longtoBitString(unsigned long);
 
-  friend ostream&    operator << (ostream& s, const BitString&);
+  friend std::ostream&    operator << (std::ostream& s, const BitString&);
 
 // misc
 
@@ -281,9 +281,9 @@ public:
 
   friend const char* BitPatterntoa(const BitPattern& p, 
                                  char f/*='0'*/,char t/*='1'*/,char x/*='X'*/);
-  void		     printon(ostream&, char f='0',char t='1',char x='X') const;
+  void		     printon(std::ostream&, char f='0',char t='1',char x='X') const;
   friend BitPattern atoBitPattern(const char* s, char f,char t, char x);
-  friend ostream&   operator << (ostream& s, const BitPattern&);
+  friend std::ostream&   operator << (std::ostream& s, const BitPattern&);
 
   int               search(const _BS_word*, int, int) const;
   int               match(const _BS_word* xs, int, int, int) const;
@@ -395,19 +395,19 @@ inline BitPattern::~BitPattern() {}
 
 // procedural versions of operators
 
-inline void and(const BitString& x, const BitString& y, BitString& r)
+inline void _and(const BitString& x, const BitString& y, BitString& r)
 {
-  r.rep = and(x.rep, y.rep, r.rep);
+  r.rep = _and(x.rep, y.rep, r.rep);
 }
 
-inline void or(const BitString& x, const BitString& y, BitString& r)
+inline void _or(const BitString& x, const BitString& y, BitString& r)
 {
-  r.rep = or(x.rep, y.rep, r.rep);
+  r.rep = _or(x.rep, y.rep, r.rep);
 }
 
-inline void xor(const BitString& x, const BitString& y, BitString& r)
+inline void _xor(const BitString& x, const BitString& y, BitString& r)
 {
-  r.rep = xor(x.rep, y.rep, r.rep);
+  r.rep = _xor(x.rep, y.rep, r.rep);
 }
 
 inline void diff(const BitString& x, const BitString& y, BitString& r)
@@ -445,20 +445,20 @@ inline void complement(const BitString& x, BitString& r)
 
 inline BitString& BitString::operator &= (const BitString& y)
 {
-  and(*this, y, *this);
+  _and(*this, y, *this);
   return *this;
 }
 
 
 inline BitString& BitString::operator |= (const BitString& y)
 {
-  or(*this, y, *this);
+  _or(*this, y, *this);
   return *this;
 }
 
 inline BitString& BitString::operator ^= (const BitString& y)
 {
-  xor(*this, y, *this);
+  _xor(*this, y, *this);
   return *this;
 }
 
@@ -501,17 +501,17 @@ inline void BitString::complement()
 
 inline BitString  operator & (const BitString& x, const BitString& y) return r
 {
-  and(x, y, r);
+  _and(x, y, r);
 }
 
 inline BitString  operator | (const BitString& x, const BitString& y) return r
 {
-  or(x, y, r);
+  _or(x, y, r);
 }
 
 inline BitString  operator ^ (const BitString& x, const BitString& y) return r
 {
-  xor(x, y, r);
+  _xor(x, y, r);
 }
 
 inline BitString  operator << (const BitString& x, int y) return r
@@ -548,17 +548,17 @@ inline BitString  operator ~ (const BitString& x) return r
 
 inline BitString  operator & (const BitString& x, const BitString& y) 
 {
-  BitString r; and(x, y, r); return r;
+  BitString r; _and(x, y, r); return r;
 }
 
 inline BitString  operator | (const BitString& x, const BitString& y) 
 {
-  BitString r; or(x, y, r); return r;
+  BitString r; _or(x, y, r); return r;
 }
 
 inline BitString  operator ^ (const BitString& x, const BitString& y) 
 {
-  BitString r; xor(x, y, r); return r;
+  BitString r; _xor(x, y, r); return r;
 }
 
 inline BitString  operator << (const BitString& x, int y) 

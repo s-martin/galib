@@ -14,7 +14,7 @@ we define the genome and all of the basic operators that it needs to function.
 #ifndef _bitstr_h_
 #define _bitstr_h_
 
-#include <genome.h>
+#include "GAGenome.h"
 #include "BitString.h"
 
 // This is the class definition for the BitString genome.  It is derived from
@@ -47,10 +47,10 @@ public:
   virtual GAGenome *clone(GAGenome::CloneMethod) const;
   virtual void copy(const GAGenome&);
 
-  int write (ostream& os) const { printon(os); return os.fail() ? 1 : 0; }
-  int equal(const GAGenome & c) const {
+  int write (std::ostream& os) const { printon(os); return os.fail() ? 1 : 0; }
+  bool equal(const GAGenome & c) const {
     BitStringGenome & b = (BitStringGenome&)c;
-    return ((BitString&)*this == (BitString&)b ? 1 : 0);
+    return ((BitString&)*this == (BitString&)b);
   }
 
   int gene(unsigned int x) const { return test(x); }

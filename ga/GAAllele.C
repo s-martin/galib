@@ -15,7 +15,7 @@
 #include <cstring>
 #include <gaerror.h>
 
-#define GA_ALLELE_CHUNK 10
+constexpr auto GA_ALLELE_CHUNK = 10;
 
 template <class T>
 GAAlleleSetCore<T>::GAAlleleSetCore()
