@@ -40,17 +40,19 @@ GAGenome &GARankSelector::select() const
 	{
 		for (i = 1; i < pop->size() && pop->best(i, basis).fitness() ==
 										   pop->best(0, basis).fitness();
-			 i++) {
+			 i++)
+		{
 			count++;
-}
+		}
 	}
 	else
 	{
 		for (i = 1; i < pop->size() &&
 					pop->best(i, basis).score() == pop->best(0, basis).score();
-			 i++) {
+			 i++)
+		{
 			count++;
-}
+		}
 	}
 	return pop->best(GARandomInt(0, count - 1), basis);
 }
@@ -91,11 +93,14 @@ GAGenome &GARouletteWheelSelector::select() const
 	{
 		int i = lower + (upper - lower) / 2;
 		assert(i >= 0 && i < n);
-		if (psum[i] > cutoff) {
+		if (psum[i] > cutoff)
+		{
 			upper = i - 1;
-		} else {
+		}
+		else
+		{
 			lower = i + 1;
-}
+		}
 	}
 	lower = GAMin(pop->size() - 1, lower);
 	lower = GAMax(0, lower);
@@ -123,9 +128,11 @@ void GARouletteWheelSelector::update()
 	{
 		if (pop->max() == pop->min())
 		{
-			for (i = 0; i < n; i++) {
-				psum[i] = static_cast<float>(i + 1) / static_cast<float>(n); // equal likelihoods
-}
+			for (i = 0; i < n; i++)
+			{
+				psum[i] = static_cast<float>(i + 1) /
+						  static_cast<float>(n); // equal likelihoods
+			}
 		}
 		else if ((pop->max() > 0 && pop->min() >= 0) ||
 				 (pop->max() <= 0 && pop->min() < 0))
@@ -134,25 +141,29 @@ void GARouletteWheelSelector::update()
 			if (pop->order() == GAPopulation::HIGH_IS_BEST)
 			{
 				psum[0] = pop->individual(0, GAPopulation::RAW).score();
-				for (i = 1; i < n; i++) {
+				for (i = 1; i < n; i++)
+				{
 					psum[i] = pop->individual(i, GAPopulation::RAW).score() +
 							  psum[i - 1];
-}
-				for (i = 0; i < n; i++) {
+				}
+				for (i = 0; i < n; i++)
+				{
 					psum[i] /= psum[n - 1];
-}
+				}
 			}
 			else
 			{
 				psum[0] = -pop->individual(0, GAPopulation::RAW).score() +
 						  pop->max() + pop->min();
-				for (i = 1; i < n; i++) {
+				for (i = 1; i < n; i++)
+				{
 					psum[i] = -pop->individual(i, GAPopulation::RAW).score() +
 							  pop->max() + pop->min() + psum[i - 1];
-}
-				for (i = 0; i < n; i++) {
+				}
+				for (i = 0; i < n; i++)
+				{
 					psum[i] /= psum[n - 1];
-}
+				}
 			}
 		}
 		else
@@ -167,9 +178,11 @@ void GARouletteWheelSelector::update()
 	{
 		if (pop->fitmax() == pop->fitmin())
 		{
-			for (i = 0; i < n; i++) {
-				psum[i] = static_cast<float>(i + 1) / static_cast<float>(n); // equal likelihoods
-}
+			for (i = 0; i < n; i++)
+			{
+				psum[i] = static_cast<float>(i + 1) /
+						  static_cast<float>(n); // equal likelihoods
+			}
 		}
 		else if ((pop->fitmax() > 0 && pop->fitmin() >= 0) ||
 				 (pop->fitmax() <= 0 && pop->fitmin() < 0))
@@ -178,27 +191,31 @@ void GARouletteWheelSelector::update()
 			if (pop->order() == GAPopulation::HIGH_IS_BEST)
 			{
 				psum[0] = pop->individual(0, GAPopulation::SCALED).fitness();
-				for (i = 1; i < n; i++) {
+				for (i = 1; i < n; i++)
+				{
 					psum[i] =
 						pop->individual(i, GAPopulation::SCALED).fitness() +
 						psum[i - 1];
-}
-				for (i = 0; i < n; i++) {
+				}
+				for (i = 0; i < n; i++)
+				{
 					psum[i] /= psum[n - 1];
-}
+				}
 			}
 			else
 			{
 				psum[0] = -pop->individual(0, GAPopulation::SCALED).fitness() +
 						  pop->fitmax() + pop->fitmin();
-				for (i = 1; i < n; i++) {
+				for (i = 1; i < n; i++)
+				{
 					psum[i] =
 						-pop->individual(i, GAPopulation::SCALED).fitness() +
 						pop->fitmax() + pop->fitmin() + psum[i - 1];
-}
-				for (i = 0; i < n; i++) {
+				}
+				for (i = 0; i < n; i++)
+				{
 					psum[i] /= psum[n - 1];
-}
+				}
 			}
 		}
 		else
@@ -234,11 +251,14 @@ GAGenome &GATournamentSelector::select() const
 	{
 		i = lower + (upper - lower) / 2;
 		assert(i >= 0 && i < n);
-		if (psum[i] > cutoff) {
+		if (psum[i] > cutoff)
+		{
 			upper = i - 1;
-		} else {
+		}
+		else
+		{
 			lower = i + 1;
-}
+		}
 	}
 	lower = GAMin(pop->size() - 1, lower);
 	lower = GAMax(0, lower);
@@ -251,11 +271,14 @@ GAGenome &GATournamentSelector::select() const
 	{
 		i = lower + (upper - lower) / 2;
 		assert(i >= 0 && i < n);
-		if (psum[i] > cutoff) {
+		if (psum[i] > cutoff)
+		{
 			upper = i - 1;
-		} else {
+		}
+		else
+		{
 			lower = i + 1;
-}
+		}
 	}
 	lower = GAMin(pop->size() - 1, lower);
 	lower = GAMax(0, lower);
@@ -265,16 +288,18 @@ GAGenome &GATournamentSelector::select() const
 	if (pop->order() == GAPopulation::LOW_IS_BEST)
 	{
 		if (pop->individual(lower, basis).score() <
-			pop->individual(picked, basis).score()) {
+			pop->individual(picked, basis).score())
+		{
 			picked = lower;
-}
+		}
 	}
 	else
 	{
 		if (pop->individual(lower, basis).score() >
-			pop->individual(picked, basis).score()) {
+			pop->individual(picked, basis).score())
+		{
 			picked = lower;
-}
+		}
 	}
 
 	return pop->individual(picked, basis);
@@ -327,9 +352,10 @@ void GASRSSelector::update()
 	{
 		if (pop->ave() == 0 || pop->max() == pop->min())
 		{
-			for (i = 0; static_cast<unsigned int>(i) < n; i++) {
+			for (i = 0; static_cast<unsigned int>(i) < n; i++)
+			{
 				choices[i] = GARandomInt(0, n - 1);
-}
+			}
 		}
 		else if ((pop->max() >= 0 && pop->min() >= 0) ||
 				 (pop->max() <= 0 && pop->min() <= 0))
@@ -337,14 +363,17 @@ void GASRSSelector::update()
 			float expected;
 			for (i = 0; i < pop->size(); i++)
 			{
-				if (pop->order() == GAPopulation::HIGH_IS_BEST) {
+				if (pop->order() == GAPopulation::HIGH_IS_BEST)
+				{
 					expected = pop->individual(i, GAPopulation::RAW).score() /
 							   pop->ave();
-				} else {
+				}
+				else
+				{
 					expected = (-pop->individual(i, GAPopulation::RAW).score() +
 								pop->max() + pop->min()) /
 							   pop->ave();
-}
+				}
 				ne = static_cast<int>(expected);
 				fraction[i] = expected - ne;
 				while (ne > 0 && k < static_cast<int>(n))
@@ -367,9 +396,10 @@ void GASRSSelector::update()
 					k++;
 				}
 				i++;
-				if (i >= pop->size()) {
+				if (i >= pop->size())
+				{
 					i = 0;
-}
+				}
 			}
 		}
 		else
@@ -384,9 +414,10 @@ void GASRSSelector::update()
 	{
 		if (pop->fitave() == 0 || pop->fitmax() == pop->fitmin())
 		{
-			for (i = 0; static_cast<unsigned int>(i) < n; i++) {
+			for (i = 0; static_cast<unsigned int>(i) < n; i++)
+			{
 				choices[i] = GARandomInt(0, n - 1);
-}
+			}
 		}
 		else if ((pop->fitmax() >= 0 && pop->fitmin() >= 0) ||
 				 (pop->fitmax() <= 0 && pop->fitmin() <= 0))
@@ -394,16 +425,19 @@ void GASRSSelector::update()
 			float expected;
 			for (i = 0; i < pop->size(); i++)
 			{
-				if (pop->order() == GAPopulation::HIGH_IS_BEST) {
+				if (pop->order() == GAPopulation::HIGH_IS_BEST)
+				{
 					expected =
 						pop->individual(i, GAPopulation::SCALED).fitness() /
 						pop->fitave();
-				} else {
+				}
+				else
+				{
 					expected =
 						(-pop->individual(i, GAPopulation::SCALED).fitness() +
 						 pop->fitmax() + pop->fitmin()) /
 						pop->fitave();
-}
+				}
 				ne = static_cast<int>(expected);
 				fraction[i] = expected - ne;
 				while (ne > 0 && k < static_cast<int>(n))
@@ -436,9 +470,10 @@ void GASRSSelector::update()
 			}
 			if (k < pop->size())
 			{
-				for (; k < pop->size(); k++) {
+				for (; k < pop->size(); k++)
+				{
 					choices[k] = GARandomInt(0, pop->size() - 1);
-}
+				}
 			}
 		}
 		else
@@ -494,9 +529,10 @@ void GADSSelector::update()
 	{
 		if (pop->ave() == 0 || pop->max() == pop->min())
 		{
-			for (i = 0; static_cast<unsigned int>(i) < n; i++) {
+			for (i = 0; static_cast<unsigned int>(i) < n; i++)
+			{
 				choices[i] = GARandomInt(0, n - 1);
-}
+			}
 		}
 		else if ((pop->max() >= 0 && pop->min() >= 0) ||
 				 (pop->max() <= 0 && pop->min() <= 0))
@@ -505,14 +541,17 @@ void GADSSelector::update()
 			for (i = 0; i < pop->size(); i++)
 			{
 				idx[i] = i;
-				if (pop->order() == GAPopulation::HIGH_IS_BEST) {
+				if (pop->order() == GAPopulation::HIGH_IS_BEST)
+				{
 					expected = pop->individual(i, GAPopulation::RAW).score() /
 							   pop->ave();
-				} else {
+				}
+				else
+				{
 					expected = (-pop->individual(i, GAPopulation::RAW).score() +
 								pop->max() + pop->min()) /
 							   pop->ave();
-}
+				}
 				ne = static_cast<int>(expected);
 				fraction[i] = expected - ne;
 
@@ -526,9 +565,10 @@ void GADSSelector::update()
 			}
 
 			GAQuickSort(idx, fraction, 0, n - 1);
-			for (i = pop->size() - 1; k < pop->size(); k++, i--) {
+			for (i = pop->size() - 1; k < pop->size(); k++, i--)
+			{
 				choices[k] = idx[i];
-}
+			}
 		}
 		else
 		{
@@ -542,9 +582,10 @@ void GADSSelector::update()
 	{
 		if (pop->fitave() == 0 || pop->fitmax() == pop->fitmin())
 		{
-			for (i = 0; static_cast<unsigned int>(i) < n; i++) {
+			for (i = 0; static_cast<unsigned int>(i) < n; i++)
+			{
 				choices[i] = GARandomInt(0, n - 1);
-}
+			}
 		}
 		else if ((pop->fitmax() >= 0 && pop->fitmin() >= 0) ||
 				 (pop->fitmax() <= 0 && pop->fitmin() <= 0))
@@ -553,16 +594,19 @@ void GADSSelector::update()
 			for (i = 0; i < pop->size(); i++)
 			{
 				idx[i] = i;
-				if (pop->order() == GAPopulation::HIGH_IS_BEST) {
+				if (pop->order() == GAPopulation::HIGH_IS_BEST)
+				{
 					expected =
 						pop->individual(i, GAPopulation::SCALED).fitness() /
 						pop->fitave();
-				} else {
+				}
+				else
+				{
 					expected =
 						(-pop->individual(i, GAPopulation::SCALED).fitness() +
 						 pop->fitmax() + pop->fitmin()) /
 						pop->fitave();
-}
+				}
 				ne = static_cast<int>(expected);
 				fraction[i] = expected - ne;
 
@@ -576,9 +620,10 @@ void GADSSelector::update()
 			}
 
 			GAQuickSort(idx, fraction, 0, n - 1);
-			for (i = pop->size() - 1; k < pop->size(); k++, i--) {
+			for (i = pop->size() - 1; k < pop->size(); k++, i--)
+			{
 				choices[k] = idx[i];
-}
+			}
 		}
 		else
 		{
@@ -601,15 +646,18 @@ static void GAQuickSort(unsigned int *c, float *s, int l, int r)
 		int j = r;
 		for (;;)
 		{
-			while (s[++i] < v) {
+			while (s[++i] < v)
+			{
 				; // might exceed max array limit here
-}
-			while (s[--j] > v && j > 0) {
+			}
+			while (s[--j] > v && j > 0)
+			{
 				;
-}
-			if (i >= j) {
+			}
+			if (i >= j)
+			{
 				break;
-}
+			}
 			tc = c[i];
 			c[i] = c[j];
 			c[j] = tc;
