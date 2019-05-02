@@ -407,7 +407,7 @@ bool GAParameterList::read(std::istream &is, bool flag)
 	return true;
 }
 
-bool GAParameterList::read(const char *filename, bool flag)
+bool GAParameterList::read(const std::string &filename, bool flag)
 {
 	std::ifstream infile(filename, std::ios::in);
 	if (!infile)

@@ -98,7 +98,7 @@ class GAParameterList : public std::list<GAParameter>
 
 	bool write(const char *filename) const;
 	bool write(std::ostream &os) const;
-	bool read(const char *filename, bool flag = true);
+	bool read(const std::string &filename, bool flag = true);
 	bool read(std::istream &is, bool flag = true);
 };
 

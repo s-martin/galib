@@ -145,7 +145,7 @@ GAGeneticAlgorithm::registerDefaultParameters(GAParameterList &p)
 		  &gaDefFlushFrequency);
 	p.add(gaNrecordDiversity, gaSNrecordDiversity, ParType::INT, &gaDefDivFlag);
 	p.add(gaNscoreFilename, gaSNscoreFilename, ParType::STRING,
-		  gaDefScoreFilename);
+		  gaDefScoreFilename.c_str());
 	p.add(gaNselectScores, gaSNselectScores, ParType::INT, &gaDefSelectScores);
 
 	return p;
@@ -191,7 +191,7 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome &g) : stats(), params()
 			   &gaDefDivFlag);
 	stats.scoreFilename(gaDefScoreFilename);
 	params.add(gaNscoreFilename, gaSNscoreFilename, ParType::STRING,
-			   gaDefScoreFilename);
+			   gaDefScoreFilename.c_str());
 	stats.selectScores(gaDefSelectScores);
 	params.add(gaNselectScores, gaSNselectScores, ParType::INT,
 			   &gaDefSelectScores);
@@ -242,7 +242,7 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAPopulation &p)
 			   &gaDefDivFlag);
 	stats.scoreFilename(gaDefScoreFilename);
 	params.add(gaNscoreFilename, gaSNscoreFilename, ParType::STRING,
-			   gaDefScoreFilename);
+			   gaDefScoreFilename.c_str());
 	stats.selectScores(gaDefSelectScores);
 	params.add(gaNselectScores, gaSNselectScores, ParType::INT,
 			   &gaDefSelectScores);
@@ -324,7 +324,7 @@ const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv,
 	return params;
 }
 
-const GAParameterList &GAGeneticAlgorithm::parameters(const char *filename,
+const GAParameterList &GAGeneticAlgorithm::parameters(const std::string &filename,
 													  bool flag)
 {
 	params.read(filename, flag);
@@ -600,7 +600,7 @@ int GAGeneticAlgorithm::get(const char *name, void *value) const
 	else if (strcmp(name, gaNscoreFilename) == 0 ||
 			 strcmp(name, gaSNscoreFilename) == 0)
 	{
-		*(static_cast<const char **>(value)) = stats.scoreFilename();
+		*(static_cast<const char **>(value)) = stats.scoreFilename().c_str();
 		status = 0;
 	}
 	return status;

@@ -21,7 +21,7 @@ extern int gaDefNumBestGenomes;
 extern int gaDefScoreFrequency1;
 extern int gaDefScoreFrequency2;
 extern int gaDefFlushFrequency;
-extern char gaDefScoreFilename[];
+extern std::string gaDefScoreFilename;
 
 /* ----------------------------------------------------------------------------
 Statistics class
@@ -79,8 +79,8 @@ class GAStatistics
 	int scoreFrequency() const { return scoreFreq; }
 	int flushFrequency(unsigned int x);
 	int flushFrequency() const { return Nscrs; }
-	const char *scoreFilename(const char *filename);
-	const char *scoreFilename() const { return scorefile; }
+	std::string scoreFilename(const std::string &filename);
+	std::string scoreFilename() const { return scorefile; }
 	int selectScores(int w) { return which = w; }
 	int selectScores() const { return which; }
 	bool recordDiversity(bool flag) { return dodiv = flag; }
@@ -92,9 +92,9 @@ class GAStatistics
 	const GAPopulation &bestPopulation() const { return *boa; }
 	const GAGenome &bestIndividual(unsigned int n = 0) const;
 
-	int scores(const char *filename, int which = NoScores);
+	int scores(const std::string &filename, int which = NoScores);
 	int scores(std::ostream &os, int which = NoScores);
-	int write(const char *filename) const;
+	int write(const std::string &filename) const;
 	int write(std::ostream &os) const;
 
 	// These should be protected (accessible only to the GA class) but for now
@@ -140,7 +140,7 @@ class GAStatistics
 	float *minScore; // worst scores of each generation
 	float *devScore; // stddev of each generation
 	float *divScore; // diversity of each generation
-	char *scorefile; // name of file to which scores get written
+	std::string scorefile; // name of file to which scores get written
 	int which; // which data to write to file
 	GAPopulation *boa; // keep a copy of the best genomes
 
@@ -153,15 +153,9 @@ class GAStatistics
 	friend class GA;
 };
 
-inline const char *GAStatistics::scoreFilename(const char *filename)
+inline std::string GAStatistics::scoreFilename(const std::string &filename)
 {
-	delete[] scorefile;
-	scorefile = nullptr;
-	if (filename != nullptr)
-	{
-		scorefile = new char[strlen(filename) + 1];
-		strcpy(scorefile, filename);
-	}
+	scorefile = filename;
 	return scorefile;
 }
 

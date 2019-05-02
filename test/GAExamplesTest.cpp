@@ -42,15 +42,14 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	// Set the default values of the parameters.
 	GAParameterList params;
 	GASteadyStateGA::registerDefaultParameters(params);
-	params.set(gaNpopulationSize, 50); // number of individuals in population
-	params.set(gaNpCrossover, 0.8); // likelihood of doing crossover
-	params.set(gaNpMutation, 0.001); // probability of mutation
-	params.set(gaNnGenerations, 200); // number of generations
-	params.set(gaNscoreFrequency, 20); // how often to record scores
-	params.set(gaNflushFrequency, 50); // how often to flush scores to file
-	params.set(gaNscoreFilename, "bog.dat");
+	BOOST_REQUIRE(params.set(gaNpopulationSize, 50)); // number of individuals in population
+	BOOST_REQUIRE(params.set(gaNpCrossover, 0.8)); // likelihood of doing crossover
+	BOOST_REQUIRE(params.set(gaNpMutation, 0.001)); // probability of mutation
+	BOOST_REQUIRE(params.set(gaNnGenerations, 200)); // number of generations
+	BOOST_REQUIRE(params.set(gaNscoreFrequency, 20)); // how often to record scores
+	BOOST_REQUIRE(params.set(gaNflushFrequency, 50)); // how often to flush scores to file
+	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
 	// params.parse(argc, argv, false);
-
 	char datafile[128] = "smiley.txt";
 
 	// Read in the pattern from the specified file.  File format is pretty

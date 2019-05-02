@@ -9,8 +9,8 @@
   Definition of the statistics object.
 ---------------------------------------------------------------------------- */
 #include <GAStatistics.h>
-#include <gaerror.h>
 #include <cstring>
+#include <gaerror.h>
 
 #include <fstream>
 
@@ -19,7 +19,7 @@ int gaDefNumBestGenomes = 1;
 int gaDefScoreFrequency1 = 1;
 int gaDefScoreFrequency2 = 100;
 int gaDefFlushFrequency = 0;
-char gaDefScoreFilename[] = "generations.dat";
+std::string gaDefScoreFilename = "generations.dat";
 
 GAStatistics::GAStatistics()
 {
@@ -54,8 +54,7 @@ GAStatistics::GAStatistics()
 	memset(devScore, 0, Nscrs * sizeof(float));
 	divScore = new float[Nscrs];
 	memset(divScore, 0, Nscrs * sizeof(float));
-	scorefile = new char[strlen(gaDefScoreFilename) + 1];
-	strcpy(scorefile, gaDefScoreFilename);
+	scorefile = gaDefScoreFilename;
 	which = Maximum;
 
 	boa = nullptr;
@@ -82,14 +81,14 @@ GAStatistics::~GAStatistics()
 	delete[] minScore;
 	delete[] devScore;
 	delete[] divScore;
-	delete[] scorefile;
 	delete boa;
 }
 void GAStatistics::copy(const GAStatistics &orig)
 {
-	if (&orig == this) {
+	if (&orig == this)
+	{
 		return;
-}
+	}
 
 	curgen = orig.curgen;
 	numsel = orig.numsel;
@@ -144,22 +143,15 @@ void GAStatistics::copy(const GAStatistics &orig)
 	divScore = new float[Nscrs];
 	memcpy(divScore, orig.divScore, Nscrs * sizeof(float));
 
-	delete[] scorefile;
-	if (orig.scorefile != nullptr)
-	{
-		scorefile = new char[strlen(orig.scorefile) + 1];
-		strcpy(scorefile, orig.scorefile);
-	}
-	else {
-		scorefile = nullptr;
-}
+	scorefile = orig.scorefile;
 
 	which = orig.which;
 
 	delete boa;
-	if (orig.boa != nullptr) {
+	if (orig.boa != nullptr)
+	{
 		boa = orig.boa->clone();
-}
+	}
 }
 
 // Update the genomes in the 'best of all' population to reflect any
@@ -184,12 +176,14 @@ void GAStatistics::copy(const GAStatistics &orig)
 // comparator to do the comparison.
 void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 {
-	if (boa == nullptr || boa->size() == 0) {
+	if (boa == nullptr || boa->size() == 0)
+	{
 		return; // do nothing
-}
-	if (pop.order() != boa->order()) {
+	}
+	if (pop.order() != boa->order())
+	{
 		boa->order(pop.order());
-}
+	}
 
 	if (flag == true)
 	{ // reset the BOA array
@@ -197,9 +191,10 @@ void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 		for (int i = 0; i < boa->size(); i++)
 		{
 			boa->best(i).copy(pop.best(j));
-			if (j < pop.size() - 1) {
+			if (j < pop.size() - 1)
+			{
 				j++;
-}
+			}
 		}
 		return;
 	}
@@ -207,13 +202,15 @@ void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 	if (boa->size() == 1)
 	{ // there's only one boa so replace it with bop
 		if (boa->order() == GAPopulation::HIGH_IS_BEST &&
-			pop.best().score() > boa->best().score()) {
+			pop.best().score() > boa->best().score())
+		{
 			boa->best().copy(pop.best());
-}
+		}
 		if (boa->order() == GAPopulation::LOW_IS_BEST &&
-			pop.best().score() < boa->best().score()) {
+			pop.best().score() < boa->best().score())
+		{
 			boa->best().copy(pop.best());
-}
+		}
 	}
 	else
 	{
@@ -224,14 +221,16 @@ void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 			{
 				for (k = 0; pop.best(i).score() < boa->best(k).score() &&
 							k < boa->size();
-					 k++) {
+					 k++)
+				{
 					;
-}
+				}
 				for (j = k; j < boa->size(); j++)
 				{
-					if (pop.best(i) == boa->best(j)) {
+					if (pop.best(i) == boa->best(j))
+					{
 						break;
-}
+					}
 					if (pop.best(i).score() > boa->best(j).score())
 					{
 						boa->worst().copy(
@@ -250,14 +249,16 @@ void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 			{
 				for (k = 0; pop.best(i).score() > boa->best(k).score() &&
 							k < boa->size();
-					 k++) {
+					 k++)
+				{
 					;
-}
+				}
 				for (j = k; j < boa->size(); j++)
 				{
-					if (pop.best(i) == boa->best(j)) {
+					if (pop.best(i) == boa->best(j))
+					{
 						break;
-}
+					}
 					if (pop.best(i).score() < boa->best(j).score())
 					{
 						boa->worst().copy(
@@ -282,12 +283,14 @@ void GAStatistics::updateBestIndividual(const GAPopulation &pop, bool flag)
 void GAStatistics::update(const GAPopulation &pop)
 {
 	++curgen; // must do this first so no divide-by-zero
-	if (scoreFreq > 0 && (curgen % scoreFreq == 0)) {
+	if (scoreFreq > 0 && (curgen % scoreFreq == 0))
+	{
 		setScore(pop);
-}
-	if (Nscrs > 0 && nscrs >= Nscrs) {
+	}
+	if (Nscrs > 0 && nscrs >= Nscrs)
+	{
 		flushScores();
-}
+	}
 	maxever = (pop.max() > maxever) ? pop.max() : maxever;
 	minever = (pop.min() < minever) ? pop.min() : minever;
 	float tmpval;
@@ -319,9 +322,10 @@ void GAStatistics::reset(const GAPopulation &pop)
 	memset(divScore, 0, Nscrs * sizeof(float));
 	nscrs = 0;
 	setScore(pop);
-	if (Nscrs > 0) {
+	if (Nscrs > 0)
+	{
 		flushScores();
-}
+	}
 
 	memset(cscore, 0, Nconv * sizeof(float));
 	nconv = 0; // should set to -1 then call setConv
@@ -341,16 +345,18 @@ void GAStatistics::reset(const GAPopulation &pop)
 	offmax = pop.max();
 	offmin = pop.min();
 	numpeval = pop.nevals();
-	for (int i = 0; i < pop.size(); i++) {
+	for (int i = 0; i < pop.size(); i++)
+	{
 		numeval += pop.individual(i).nevals();
-}
+	}
 }
 
 void GAStatistics::flushScores()
 {
-	if (nscrs == 0) {
+	if (nscrs == 0)
+	{
 		return;
-}
+	}
 	writeScores();
 	memset(gen, 0, Nscrs * sizeof(int));
 	memset(aveScore, 0, Nscrs * sizeof(float));
@@ -370,9 +376,10 @@ void GAStatistics::setScore(const GAPopulation &pop)
 	devCur = pop.dev();
 	divCur = ((dodiv == true) ? pop.div() : static_cast<float>(-1.0));
 
-	if (Nscrs == 0) {
+	if (Nscrs == 0)
+	{
 		return;
-}
+	}
 	gen[nscrs] = curgen;
 	aveScore[nscrs] = aveCur;
 	maxScore[nscrs] = maxCur;
@@ -398,9 +405,10 @@ void GAStatistics::setConvergence(float s)
 //   If someone passes us a zero then we set to 1.
 int GAStatistics::nConvergence(unsigned int n)
 {
-	if (n == 0) {
+	if (n == 0)
+	{
 		n = 1;
-}
+	}
 	float *tmp = cscore;
 	cscore = new float[n];
 	if (Nconv < n)
@@ -479,9 +487,10 @@ int GAStatistics::flushFrequency(unsigned int freq)
 {
 	if (freq == 0)
 	{
-		if (nscrs > 0) {
+		if (nscrs > 0)
+		{
 			flushScores();
-}
+		}
 		resizeScores(freq);
 	}
 	else if (freq > Nscrs)
@@ -490,9 +499,10 @@ int GAStatistics::flushFrequency(unsigned int freq)
 	}
 	else if (freq < Nscrs)
 	{
-		if (nscrs > freq) {
+		if (nscrs > freq)
+		{
 			flushScores();
-}
+		}
 		resizeScores(freq);
 	}
 	Nscrs = freq;
@@ -522,12 +532,12 @@ void GAStatistics::resizeScores(unsigned int n)
 	}
 	else
 	{
-		int * tmpi = gen;
+		int *tmpi = gen;
 		gen = new int[n];
 		memcpy(gen, tmpi, (n < Nscrs ? n : Nscrs) * sizeof(int));
 		delete[] tmpi;
 
-		float * tmpf = aveScore;
+		float *tmpf = aveScore;
 		aveScore = new float[n];
 		memcpy(aveScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
 		delete[] tmpf;
@@ -552,9 +562,10 @@ void GAStatistics::resizeScores(unsigned int n)
 		memcpy(divScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
 		delete[] tmpf;
 
-		if (nscrs > n) {
+		if (nscrs > n)
+		{
 			nscrs = n;
-}
+		}
 	}
 	Nscrs = n;
 }
@@ -564,9 +575,10 @@ void GAStatistics::resizeScores(unsigned int n)
 // We give no notice that we're overwriting the existing file!!
 void GAStatistics::writeScores()
 {
-	if (scorefile == nullptr) {
+	if (scorefile.empty())
+	{
 		return;
-}
+	}
 	std::ofstream outfile(scorefile,
 						  ((gen[0] == 0) ? (std::ios::out | std::ios::trunc)
 										 : (std::ios::out | std::ios::app)));
@@ -583,7 +595,7 @@ void GAStatistics::writeScores()
 	outfile.close();
 }
 
-int GAStatistics::write(const char *filename) const
+int GAStatistics::write(const std::string &filename) const
 {
 	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
 	// should be done this way, but SGI systems (and others?) don't do it
@@ -608,7 +620,8 @@ int GAStatistics::write(std::ostream &os) const
 	os << nummut << "\t# number of mutations since initialization\n";
 	os << numrep << "\t# number of replacements since initialization\n";
 	os << numeval << "\t# number of genome evaluations since initialization\n";
-	os << numpeval << "\t# number of population evaluations since initialization\n";
+	os << numpeval
+	   << "\t# number of population evaluations since initialization\n";
 	os << maxever << "\t# maximum score since initialization\n";
 	os << minever << "\t# minimum score since initialization\n";
 	os << on << "\t# average of all scores ('on-line' performance)\n";
@@ -619,13 +632,15 @@ int GAStatistics::write(std::ostream &os) const
 	os << maxInit << "\t# maximum score in initial population\n";
 	os << minInit << "\t# minimum score in initial population\n";
 	os << devInit << "\t# standard deviation of initial population\n";
-	os << divInit << "\t# diversity of initial population (0=identical,-1=unset)\n";
+	os << divInit
+	   << "\t# diversity of initial population (0=identical,-1=unset)\n";
 	os << "\n";
 	os << aveCur << "\t# mean score in current population\n";
 	os << maxCur << "\t# maximum score in current population\n";
 	os << minCur << "\t# minimum score in current population\n";
 	os << devCur << "\t# standard deviation of current population\n";
-	os << divCur << "\t# diversity of current population (0=identical,-1=unset)\n";
+	os << divCur
+	   << "\t# diversity of current population (0=identical,-1=unset)\n";
 	os << "\n";
 	os << Nconv << "\t# how far back to look for convergence\n";
 	os << scoreFreq << "\t# how often to record scores\n";
@@ -637,7 +652,7 @@ int GAStatistics::write(std::ostream &os) const
 // You can specify the data that you want to dump out when you call this
 // routine, or you can just let it use the selection from the object.  If you
 // specify a data set, that will be used rather than the 'which' in the object.
-int GAStatistics::scores(const char *filename, int w)
+int GAStatistics::scores(const std::string &filename, int w)
 {
 	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
 	// should be done this way, but SGI systems (and others?) don't do it
@@ -655,28 +670,34 @@ int GAStatistics::scores(const char *filename, int w)
 
 int GAStatistics::scores(std::ostream &os, int w)
 {
-	if (w == NoScores) {
+	if (w == NoScores)
+	{
 		w = which;
-}
+	}
 
 	for (unsigned int i = 0; i < nscrs; i++)
 	{
 		os << gen[i];
-		if ((w & Mean) != 0) {
+		if ((w & Mean) != 0)
+		{
 			os << "\t" << aveScore[i];
-}
-		if ((w & Maximum) != 0) {
+		}
+		if ((w & Maximum) != 0)
+		{
 			os << "\t" << maxScore[i];
-}
-		if ((w & Minimum) != 0) {
+		}
+		if ((w & Minimum) != 0)
+		{
 			os << "\t" << minScore[i];
-}
-		if ((w & Deviation) != 0) {
+		}
+		if ((w & Deviation) != 0)
+		{
 			os << "\t" << devScore[i];
-}
-		if ((w & Diversity) != 0) {
+		}
+		if ((w & Diversity) != 0)
+		{
 			os << "\t" << divScore[i];
-}
+		}
 		os << "\n";
 	}
 	return 0;

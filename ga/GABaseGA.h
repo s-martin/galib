@@ -160,7 +160,7 @@ class GAGeneticAlgorithm : public GAID
 	const GAParameterList &parameters() const { return params; }
 	const GAParameterList &parameters(const GAParameterList &);
 	const GAParameterList &parameters(int &, char **, bool flag = false);
-	const GAParameterList &parameters(const char *filename, bool f = false);
+	const GAParameterList &parameters(const std::string &filename, bool f = false);
 	const GAParameterList &parameters(std::istream &, bool flag = false);
 	virtual int get(const char *, void *) const;
 	virtual int setptr(const std::string &name, const void *);
@@ -240,10 +240,10 @@ class GAGeneticAlgorithm : public GAID
 		params.set(gaNflushFrequency, x);
 		return stats.flushFrequency(x);
 	}
-	const char *scoreFilename() const { return stats.scoreFilename(); }
-	const char *scoreFilename(const char *fn)
+	std::string scoreFilename() const { return stats.scoreFilename(); }
+	std::string scoreFilename(const std::string &fn)
 	{
-		params.set(gaNscoreFilename, fn);
+		params.set(gaNscoreFilename, fn.c_str());
 		return stats.scoreFilename(fn);
 	}
 	int selectScores() { return stats.selectScores(); }
