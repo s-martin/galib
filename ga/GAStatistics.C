@@ -68,7 +68,6 @@ GAStatistics::GAStatistics(const GAStatistics &orig)
 	minScore = nullptr;
 	devScore = nullptr;
 	divScore = nullptr;
-	scorefile = nullptr;
 	boa = nullptr;
 	copy(orig);
 }

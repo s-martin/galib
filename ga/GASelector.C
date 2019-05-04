@@ -93,7 +93,7 @@ GAGenome &GARouletteWheelSelector::select() const
 	{
 		int i = lower + (upper - lower) / 2;
 		assert(i >= 0 && i < n);
-		if (psum[i] > cutoff)
+		if (psum.at(i) > cutoff)
 		{
 			upper = i - 1;
 		}
@@ -118,9 +118,8 @@ void GARouletteWheelSelector::update()
 {
 	if (pop->size() != n)
 	{
-		delete[] psum;
+		psum.assign(pop->size(), 0);
 		n = pop->size();
-		psum = new float[n];
 	}
 
 	int i;
@@ -130,8 +129,7 @@ void GARouletteWheelSelector::update()
 		{
 			for (i = 0; i < n; i++)
 			{
-				psum[i] = static_cast<float>(i + 1) /
-						  static_cast<float>(n); // equal likelihoods
+				psum.at(i) = static_cast<float>(i + 1) / static_cast<float>(n); // equal likelihoods
 			}
 		}
 		else if ((pop->max() > 0 && pop->min() >= 0) ||
@@ -140,29 +138,28 @@ void GARouletteWheelSelector::update()
 			pop->sort(false, GAPopulation::RAW);
 			if (pop->order() == GAPopulation::HIGH_IS_BEST)
 			{
-				psum[0] = pop->individual(0, GAPopulation::RAW).score();
+				psum.at(0) = pop->individual(0, GAPopulation::RAW).score();
 				for (i = 1; i < n; i++)
 				{
-					psum[i] = pop->individual(i, GAPopulation::RAW).score() +
-							  psum[i - 1];
+					psum.at(i) = pop->individual(i, GAPopulation::RAW).score() + psum.at(i - 1);
 				}
 				for (i = 0; i < n; i++)
 				{
-					psum[i] /= psum[n - 1];
+					psum.at(i) /= psum.at(n - 1);
 				}
 			}
 			else
 			{
-				psum[0] = -pop->individual(0, GAPopulation::RAW).score() +
+				psum.at(0) = -pop->individual(0, GAPopulation::RAW).score() +
 						  pop->max() + pop->min();
 				for (i = 1; i < n; i++)
 				{
-					psum[i] = -pop->individual(i, GAPopulation::RAW).score() +
-							  pop->max() + pop->min() + psum[i - 1];
+					psum.at(i) = -pop->individual(i, GAPopulation::RAW).score() +
+							  pop->max() + pop->min() + psum.at(i - 1);
 				}
 				for (i = 0; i < n; i++)
 				{
-					psum[i] /= psum[n - 1];
+					psum.at(i) /= psum.at(n - 1);
 				}
 			}
 		}
@@ -180,7 +177,7 @@ void GARouletteWheelSelector::update()
 		{
 			for (i = 0; i < n; i++)
 			{
-				psum[i] = static_cast<float>(i + 1) /
+				psum.at(i) = static_cast<float>(i + 1) /
 						  static_cast<float>(n); // equal likelihoods
 			}
 		}
@@ -190,31 +187,31 @@ void GARouletteWheelSelector::update()
 			pop->sort(false, GAPopulation::SCALED);
 			if (pop->order() == GAPopulation::HIGH_IS_BEST)
 			{
-				psum[0] = pop->individual(0, GAPopulation::SCALED).fitness();
+				psum.at(0) = pop->individual(0, GAPopulation::SCALED).fitness();
 				for (i = 1; i < n; i++)
 				{
-					psum[i] =
+					psum.at(i) =
 						pop->individual(i, GAPopulation::SCALED).fitness() +
 						psum[i - 1];
 				}
 				for (i = 0; i < n; i++)
 				{
-					psum[i] /= psum[n - 1];
+					psum.at(i) /= psum[n - 1];
 				}
 			}
 			else
 			{
-				psum[0] = -pop->individual(0, GAPopulation::SCALED).fitness() +
+				psum.at(0) = -pop->individual(0, GAPopulation::SCALED).fitness() +
 						  pop->fitmax() + pop->fitmin();
 				for (i = 1; i < n; i++)
 				{
-					psum[i] =
+					psum.at(i) =
 						-pop->individual(i, GAPopulation::SCALED).fitness() +
-						pop->fitmax() + pop->fitmin() + psum[i - 1];
+						pop->fitmax() + pop->fitmin() + psum.at(i - 1);
 				}
 				for (i = 0; i < n; i++)
 				{
-					psum[i] /= psum[n - 1];
+					psum.at(i) /= psum.at(n - 1);
 				}
 			}
 		}
@@ -251,7 +248,7 @@ GAGenome &GATournamentSelector::select() const
 	{
 		i = lower + (upper - lower) / 2;
 		assert(i >= 0 && i < n);
-		if (psum[i] > cutoff)
+		if (psum.at(i) > cutoff)
 		{
 			upper = i - 1;
 		}
@@ -271,7 +268,7 @@ GAGenome &GATournamentSelector::select() const
 	{
 		i = lower + (upper - lower) / 2;
 		assert(i >= 0 && i < n);
-		if (psum[i] > cutoff)
+		if (psum.at(i) > cutoff)
 		{
 			upper = i - 1;
 		}

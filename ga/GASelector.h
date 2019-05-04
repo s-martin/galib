@@ -38,6 +38,7 @@ RouletteWheel - weighted selection where individuals with better fitness have
 
 #include <gaid.h>
 #include <cstring>
+#include <vector>
 
 class GAGenome;
 class GAPopulation;
@@ -133,13 +134,13 @@ class GARouletteWheelSelector : public GASelectionScheme
 	explicit GARouletteWheelSelector(int w = GASelectionScheme::SCALED)
 		: GASelectionScheme(w)
 	{
-		psum = nullptr;
+		psum.clear();
 		n = 0;
 	}
 	GARouletteWheelSelector(const GARouletteWheelSelector &orig)
 		: GASelectionScheme(orig)
 	{
-		psum = nullptr;
+		psum.clear();
 		n = 0;
 		copy(orig);
 	}
@@ -150,7 +151,7 @@ class GARouletteWheelSelector : public GASelectionScheme
 }
 		return *this;
 	}
-	~GARouletteWheelSelector() override { delete[] psum; }
+	~GARouletteWheelSelector() override { }
 	GASelectionScheme *clone() const override
 	{
 		return new GARouletteWheelSelector;
@@ -160,17 +161,14 @@ class GARouletteWheelSelector : public GASelectionScheme
 		GASelectionScheme::copy(orig);
 		const GARouletteWheelSelector &sel =
 			DYN_CAST(const GARouletteWheelSelector &, orig);
-		delete[] psum;
-		n = sel.n;
-		psum = new float[n];
-		memcpy(psum, sel.psum, n * sizeof(float));
+		psum = sel.psum;
 	}
 	GAGenome &select() const override;
 	void update() override;
 
   protected:
 	int n;
-	float *psum;
+	std::vector<float> psum;
 };
 #endif
 
