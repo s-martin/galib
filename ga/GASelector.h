@@ -255,14 +255,10 @@ class GASRSSelector : public GASelectionScheme
 	explicit GASRSSelector(int w = GASelectionScheme::SCALED)
 		: GASelectionScheme(w)
 	{
-		fraction = nullptr;
-		choices = (unsigned int *)nullptr;
 		n = 0;
 	}
 	GASRSSelector(const GASRSSelector &orig) : GASelectionScheme(orig)
 	{
-		fraction = nullptr;
-		choices = (unsigned int *)nullptr;
 		n = 0;
 		copy(orig);
 	}
@@ -275,8 +271,6 @@ class GASRSSelector : public GASelectionScheme
 	}
 	~GASRSSelector() override
 	{
-		delete[] fraction;
-		delete[] choices;
 	}
 	GASelectionScheme *clone() const override
 	{
@@ -286,20 +280,16 @@ class GASRSSelector : public GASelectionScheme
 	{
 		GASelectionScheme::copy(orig);
 		const GASRSSelector &sel = DYN_CAST(const GASRSSelector &, orig);
-		delete[] fraction;
-		delete[] choices;
 		n = sel.n;
-		fraction = new float[n];
-		choices = new unsigned int[n];
-		memcpy(fraction, sel.fraction, n * sizeof(float));
-		memcpy(choices, sel.choices, n * sizeof(unsigned int));
+		fraction = sel.fraction;
+		choices = sel.choices;
 	}
 	GAGenome &select() const override;
 	void update() override;
 
   protected:
-	float *fraction;
-	unsigned int *choices;
+	std::vector<float> fraction;
+	std::vector<unsigned int> choices;
 	unsigned int n;
 };
 #endif
@@ -316,16 +306,10 @@ class GADSSelector : public GASelectionScheme
 	explicit GADSSelector(int w = GASelectionScheme::SCALED)
 		: GASelectionScheme(w)
 	{
-		fraction = nullptr;
-		choices = (unsigned int *)nullptr;
-		idx = (unsigned int *)nullptr;
 		n = 0;
 	}
 	GADSSelector(const GADSSelector &orig) : GASelectionScheme(orig)
 	{
-		fraction = nullptr;
-		choices = (unsigned int *)nullptr;
-		idx = (unsigned int *)nullptr;
 		n = 0;
 		copy(orig);
 	}
@@ -338,9 +322,6 @@ class GADSSelector : public GASelectionScheme
 	}
 	~GADSSelector() override
 	{
-		delete[] fraction;
-		delete[] choices;
-		delete[] idx;
 	}
 	GASelectionScheme *clone() const override
 	{
@@ -350,24 +331,18 @@ class GADSSelector : public GASelectionScheme
 	{
 		GASelectionScheme::copy(orig);
 		const GADSSelector &sel = DYN_CAST(const GADSSelector &, orig);
-		delete[] fraction;
-		delete[] choices;
-		delete[] idx;
 		n = sel.n;
-		fraction = new float[n];
-		choices = new unsigned int[n];
-		idx = new unsigned int[n];
-		memcpy(fraction, sel.fraction, n * sizeof(float));
-		memcpy(choices, sel.choices, n * sizeof(unsigned int));
-		memcpy(idx, sel.idx, n * sizeof(unsigned int));
+		fraction = sel.fraction;
+		choices = sel.choices;
+		idx = sel.idx;
 	}
 	GAGenome &select() const override;
 	void update() override;
 
   protected:
-	float *fraction;
-	unsigned int *choices;
-	unsigned int *idx;
+	std::vector<float> fraction;
+	std::vector<unsigned int> choices;
+	std::vector<unsigned int> idx;
 	unsigned int n;
 };
 #endif

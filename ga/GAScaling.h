@@ -24,6 +24,7 @@ it does know how to update itself, but it must be told when.
 #include <gaconfig.h>
 #include <gaid.h>
 #include <gatypes.h>
+#include <vector>
 
 class GAPopulation;
 
@@ -272,11 +273,10 @@ class GASharing : public GAScalingScheme
   public:
 	GADefineIdentity("GASharing", GAID::Sharing);
 
-	GASharing(GAGenome::Comparator func, float cut = gaDefSharingCutoff,
+	explicit GASharing(GAGenome::Comparator func, float cut = gaDefSharingCutoff,
 			  float a = 1.0)
 	{
 		N = 0;
-		d = (float *)nullptr;
 		df = func;
 		_sigma = cut;
 		_alpha = a;
@@ -285,7 +285,6 @@ class GASharing : public GAScalingScheme
 	GASharing(float cut = gaDefSharingCutoff, float a = 1.0)
 	{
 		N = 0;
-		d = (float *)nullptr;
 		df = nullptr;
 		_sigma = cut;
 		_alpha = a;
@@ -294,7 +293,6 @@ class GASharing : public GAScalingScheme
 	GASharing(const GASharing &arg) : GAScalingScheme(arg) 
 	{
 		N = 0;
-		d = (float *)nullptr;
 		copy(arg);
 	}
 	GASharing &operator=(const GAScalingScheme &arg)
@@ -302,7 +300,7 @@ class GASharing : public GAScalingScheme
 		copy(arg);
 		return (*this);
 	}
-	~GASharing() override { delete[] d; }
+	~GASharing() override { }
 	GAScalingScheme *clone() const override { return new GASharing(*this); }
 	void copy(const GAScalingScheme &arg) override;
 	void evaluate(const GAPopulation &p) override;
@@ -325,7 +323,7 @@ class GASharing : public GAScalingScheme
   protected:
 	GAGenome::Comparator df; // the user-defined distance function
 	unsigned int N; // how many do we have? (n of n-by-n)
-	float *d; // the distances for each genome pair
+	std::vector<float> d; // the distances for each genome pair
 	float _sigma; // absolute cutoff from central point
 	float _alpha; // controls the curvature of sharing f
 	int _minmax; // should we minimize or maximize?

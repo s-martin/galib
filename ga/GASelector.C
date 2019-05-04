@@ -16,7 +16,8 @@
 #include <garandom.h>
 
 #if USE_DS_SELECTOR == 1
-static void GAQuickSort(unsigned int *, float *, int, int);
+static void GAQuickSort(std::vector<unsigned int> &c, std::vector<float> &s,
+						int l, int r);
 #endif
 
 /* ----------------------------------------------------------------------------
@@ -129,7 +130,8 @@ void GARouletteWheelSelector::update()
 		{
 			for (i = 0; i < n; i++)
 			{
-				psum.at(i) = static_cast<float>(i + 1) / static_cast<float>(n); // equal likelihoods
+				psum.at(i) = static_cast<float>(i + 1) /
+							 static_cast<float>(n); // equal likelihoods
 			}
 		}
 		else if ((pop->max() > 0 && pop->min() >= 0) ||
@@ -141,7 +143,8 @@ void GARouletteWheelSelector::update()
 				psum.at(0) = pop->individual(0, GAPopulation::RAW).score();
 				for (i = 1; i < n; i++)
 				{
-					psum.at(i) = pop->individual(i, GAPopulation::RAW).score() + psum.at(i - 1);
+					psum.at(i) = pop->individual(i, GAPopulation::RAW).score() +
+								 psum.at(i - 1);
 				}
 				for (i = 0; i < n; i++)
 				{
@@ -151,11 +154,12 @@ void GARouletteWheelSelector::update()
 			else
 			{
 				psum.at(0) = -pop->individual(0, GAPopulation::RAW).score() +
-						  pop->max() + pop->min();
+							 pop->max() + pop->min();
 				for (i = 1; i < n; i++)
 				{
-					psum.at(i) = -pop->individual(i, GAPopulation::RAW).score() +
-							  pop->max() + pop->min() + psum.at(i - 1);
+					psum.at(i) =
+						-pop->individual(i, GAPopulation::RAW).score() +
+						pop->max() + pop->min() + psum.at(i - 1);
 				}
 				for (i = 0; i < n; i++)
 				{
@@ -178,7 +182,7 @@ void GARouletteWheelSelector::update()
 			for (i = 0; i < n; i++)
 			{
 				psum.at(i) = static_cast<float>(i + 1) /
-						  static_cast<float>(n); // equal likelihoods
+							 static_cast<float>(n); // equal likelihoods
 			}
 		}
 		else if ((pop->fitmax() > 0 && pop->fitmin() >= 0) ||
@@ -201,8 +205,9 @@ void GARouletteWheelSelector::update()
 			}
 			else
 			{
-				psum.at(0) = -pop->individual(0, GAPopulation::SCALED).fitness() +
-						  pop->fitmax() + pop->fitmin();
+				psum.at(0) =
+					-pop->individual(0, GAPopulation::SCALED).fitness() +
+					pop->fitmax() + pop->fitmin();
 				for (i = 1; i < n; i++)
 				{
 					psum.at(i) =
@@ -336,11 +341,9 @@ void GASRSSelector::update()
 {
 	if (n != static_cast<unsigned int>(pop->size()))
 	{
-		delete[] fraction;
-		delete[] choices;
 		n = pop->size();
-		fraction = new float[n];
-		choices = new unsigned int[n];
+		fraction.assign(pop->size(), 0);
+		choices.assign(pop->size(), 0);
 	}
 
 	int i, ne, k = 0;
@@ -351,7 +354,7 @@ void GASRSSelector::update()
 		{
 			for (i = 0; static_cast<unsigned int>(i) < n; i++)
 			{
-				choices[i] = GARandomInt(0, n - 1);
+				choices.at(i) = GARandomInt(0, n - 1);
 			}
 		}
 		else if ((pop->max() >= 0 && pop->min() >= 0) ||
@@ -372,11 +375,11 @@ void GASRSSelector::update()
 							   pop->ave();
 				}
 				ne = static_cast<int>(expected);
-				fraction[i] = expected - ne;
+				fraction.at(i) = expected - ne;
 				while (ne > 0 && k < static_cast<int>(n))
 				{
 					assert(k >= 0 && k < (int)n);
-					choices[k] = i;
+					choices.at(k) = i;
 					k++;
 					ne--;
 				}
@@ -384,12 +387,12 @@ void GASRSSelector::update()
 			i = 0;
 			while (k < pop->size())
 			{
-				if (fraction[i] > 0.0 && GAFlipCoin(fraction[i]))
+				if (fraction.at(i) > 0.0 && GAFlipCoin(fraction.at(i)))
 				{
 					assert(k >= 0 && k < (int)n);
 					assert(i >= 0 && i < (int)n);
-					choices[k] = i;
-					fraction[i] -= 1.0;
+					choices.at(k) = i;
+					fraction.at(i) -= 1.0;
 					k++;
 				}
 				i++;
@@ -413,7 +416,7 @@ void GASRSSelector::update()
 		{
 			for (i = 0; static_cast<unsigned int>(i) < n; i++)
 			{
-				choices[i] = GARandomInt(0, n - 1);
+				choices.at(i) = GARandomInt(0, n - 1);
 			}
 		}
 		else if ((pop->fitmax() >= 0 && pop->fitmin() >= 0) ||
@@ -436,11 +439,11 @@ void GASRSSelector::update()
 						pop->fitave();
 				}
 				ne = static_cast<int>(expected);
-				fraction[i] = expected - ne;
+				fraction.at(i) = expected - ne;
 				while (ne > 0 && k < static_cast<int>(n))
 				{
 					assert(k >= 0 && k < (int)n);
-					choices[k] = i;
+					choices.at(k) = i;
 					k++;
 					ne--;
 				}
@@ -454,12 +457,12 @@ void GASRSSelector::update()
 					i = 0;
 					flag = 0;
 				}
-				if (fraction[i] > 0.0 && GAFlipCoin(fraction[i]))
+				if (fraction.at(i) > 0.0 && GAFlipCoin(fraction.at(i)))
 				{
 					assert(k >= 0 && k < (int)n);
 					assert(i >= 0 && i < (int)n);
-					choices[k] = i;
-					fraction[i] -= 1.0;
+					choices.at(k) = i;
+					fraction.at(i) -= 1.0;
 					k++;
 					flag = 1;
 				}
@@ -469,7 +472,7 @@ void GASRSSelector::update()
 			{
 				for (; k < pop->size(); k++)
 				{
-					choices[k] = GARandomInt(0, pop->size() - 1);
+					choices.at(k) = GARandomInt(0, pop->size() - 1);
 				}
 			}
 		}
@@ -511,13 +514,10 @@ void GADSSelector::update()
 {
 	if (n != static_cast<unsigned int>(pop->size()))
 	{
-		delete[] fraction;
-		delete[] choices;
-		delete[] idx;
+		fraction.assign(pop->size(), 0);
+		choices.assign(pop->size(), 0);
+		idx.assign(pop->size(), 0);
 		n = pop->size();
-		fraction = new float[n];
-		choices = new unsigned int[n];
-		idx = new unsigned int[n];
 	}
 
 	int i, ne, k = 0;
@@ -528,7 +528,7 @@ void GADSSelector::update()
 		{
 			for (i = 0; static_cast<unsigned int>(i) < n; i++)
 			{
-				choices[i] = GARandomInt(0, n - 1);
+				choices.at(i) = GARandomInt(0, n - 1);
 			}
 		}
 		else if ((pop->max() >= 0 && pop->min() >= 0) ||
@@ -537,7 +537,7 @@ void GADSSelector::update()
 			float expected;
 			for (i = 0; i < pop->size(); i++)
 			{
-				idx[i] = i;
+				idx.at(i) = i;
 				if (pop->order() == GAPopulation::HIGH_IS_BEST)
 				{
 					expected = pop->individual(i, GAPopulation::RAW).score() /
@@ -550,12 +550,12 @@ void GADSSelector::update()
 							   pop->ave();
 				}
 				ne = static_cast<int>(expected);
-				fraction[i] = expected - ne;
+				fraction.at(i) = expected - ne;
 
 				while (ne > 0 && k < static_cast<int>(n))
 				{
 					assert(k >= 0 && k < (int)n);
-					choices[k] = i;
+					choices.at(k) = i;
 					k++;
 					ne--;
 				}
@@ -564,7 +564,7 @@ void GADSSelector::update()
 			GAQuickSort(idx, fraction, 0, n - 1);
 			for (i = pop->size() - 1; k < pop->size(); k++, i--)
 			{
-				choices[k] = idx[i];
+				choices.at(k) = idx.at(i);
 			}
 		}
 		else
@@ -581,7 +581,7 @@ void GADSSelector::update()
 		{
 			for (i = 0; static_cast<unsigned int>(i) < n; i++)
 			{
-				choices[i] = GARandomInt(0, n - 1);
+				choices.at(i) = GARandomInt(0, n - 1);
 			}
 		}
 		else if ((pop->fitmax() >= 0 && pop->fitmin() >= 0) ||
@@ -590,7 +590,7 @@ void GADSSelector::update()
 			float expected;
 			for (i = 0; i < pop->size(); i++)
 			{
-				idx[i] = i;
+				idx.at(i) = i;
 				if (pop->order() == GAPopulation::HIGH_IS_BEST)
 				{
 					expected =
@@ -605,12 +605,12 @@ void GADSSelector::update()
 						pop->fitave();
 				}
 				ne = static_cast<int>(expected);
-				fraction[i] = expected - ne;
+				fraction.at(i) = expected - ne;
 
 				while (ne > 0 && k < static_cast<int>(n))
 				{
 					assert(k >= 0 && k < (int)n);
-					choices[k] = i;
+					choices.at(k) = i;
 					k++;
 					ne--;
 				}
@@ -619,7 +619,7 @@ void GADSSelector::update()
 			GAQuickSort(idx, fraction, 0, n - 1);
 			for (i = pop->size() - 1; k < pop->size(); k++, i--)
 			{
-				choices[k] = idx[i];
+				choices.at(k) = idx.at(i);
 			}
 		}
 		else
@@ -632,22 +632,23 @@ void GADSSelector::update()
 	}
 }
 
-static void GAQuickSort(unsigned int *c, float *s, int l, int r)
+static void GAQuickSort(std::vector<unsigned int> &c, std::vector<float> &s,
+						int l, int r)
 {
 	if (r > l)
 	{
 		unsigned int tc;
 		float ts;
-		float v = s[r];
+		float v = s.at(r);
 		int i = l - 1;
 		int j = r;
 		for (;;)
 		{
-			while (s[++i] < v)
+			while (s.at(++i) < v)
 			{
 				; // might exceed max array limit here
 			}
-			while (s[--j] > v && j > 0)
+			while (s.at(--j) > v && j > 0)
 			{
 				;
 			}
@@ -655,19 +656,19 @@ static void GAQuickSort(unsigned int *c, float *s, int l, int r)
 			{
 				break;
 			}
-			tc = c[i];
-			c[i] = c[j];
-			c[j] = tc;
-			ts = s[i];
-			s[i] = s[j];
-			s[j] = ts;
+			tc = c.at(i);
+			c.at(i) = c.at(j);
+			c.at(j) = tc;
+			ts = s.at(i);
+			s.at(i) = s.at(j);
+			s.at(j) = ts;
 		}
-		tc = c[i];
-		c[i] = c[r];
-		c[r] = tc;
-		ts = s[i];
-		s[i] = s[r];
-		s[r] = ts;
+		tc = c.at(i);
+		c.at(i) = c.at(r);
+		c.at(r) = tc;
+		ts = s.at(i);
+		s.at(i) = s.at(r);
+		s.at(r) = ts;
 		GAQuickSort(c, s, l, i - 1);
 		GAQuickSort(c, s, i + 1, r);
 	}

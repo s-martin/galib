@@ -211,9 +211,8 @@ void GASharing::evaluate(const GAPopulation &p)
 {
 	if (p.size() > static_cast<int>(N))
 	{
-		delete[] d;
 		N = p.size();
-		d = new float[N * N];
+		d.assign((N * N), 0);
 	}
 	int n = p.size();
 
@@ -222,11 +221,10 @@ void GASharing::evaluate(const GAPopulation &p)
 	{
 		for (i = 0; i < n; i++)
 		{ // calculate and cache the distances
-			d[i * n + i] = 0.0; // each genome is same as itself
+			d.at(i * n + i) = 0.0; // each genome is same as itself
 			for (j = i + 1; j < n; j++)
 			{
-				d[i * n + j] = d[j * n + i] =
-					(*df)(p.individual(i), p.individual(j));
+				d.at(i * n + j) = d.at(j * n + i) = (*df)(p.individual(i), p.individual(j));
 			}
 		}
 	}
@@ -234,11 +232,10 @@ void GASharing::evaluate(const GAPopulation &p)
 	{
 		for (i = 0; i < n; i++)
 		{ // calculate and cache the distances
-			d[i * n + i] = 0.0; // each genome is same as itself
+			d.at(i * n + i) = 0.0; // each genome is same as itself
 			for (j = i + 1; j < n; j++)
 			{
-				d[i * n + j] = d[j * n + i] =
-					p.individual(i).compare(p.individual(j));
+				d.at(i * n + j) = d.at(j * n + i) =	p.individual(i).compare(p.individual(j));
 			}
 		}
 	}
@@ -267,19 +264,19 @@ void GASharing::evaluate(const GAPopulation &p)
 		double sum = 0.0;
 		for (j = 0; j < n; j++)
 		{
-			if (d[i * n + j] < _sigma)
+			if (d.at(i * n + j) < _sigma)
 			{
 				if (_alpha == 1)
 				{
-					sum += ((d[i * n + j] >= _sigma)
+					sum += ((d.at(i * n + j) >= _sigma)
 								? 0.0
-								: 1.0 - d[i * n + j] / _sigma);
+								: 1.0 - d.at(i * n + j) / _sigma);
 				}
 				else
 				{
-					sum += ((d[i * n + j] >= _sigma)
+					sum += ((d.at(i * n + j) >= _sigma)
 								? 0.0
-								: 1.0 - pow(d[i * n + j] / _sigma, _alpha));
+								: 1.0 - pow(d.at(i * n + j) / _sigma, _alpha));
 				}
 			}
 		}
@@ -306,14 +303,12 @@ void GASharing::copy(const GAScalingScheme &arg)
 
 	GAScalingScheme::copy(arg);
 	const GASharing &s = DYN_CAST(const GASharing &, arg);
-	delete[] d;
 	_minmax = s._minmax;
 	_sigma = s._sigma;
 	_alpha = s._alpha;
 	df = s.df;
 	N = s.N;
-	d = new float[N * N];
-	memcpy(d, s.d, N * N * sizeof(float));
+	d = s.d;
 }
 
 // The cutoff for triangular sharing must always be greater than 0
