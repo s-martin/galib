@@ -29,7 +29,7 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #define _builtin_h 1
 
 #include <stddef.h>
-#include <std.h>
+#include <stdlib.h>
 #include <cmath>
 
 #ifdef __GNUG__
@@ -67,23 +67,23 @@ extern two_arg_error_handler_t
 #if !defined(IV)
 
 #if ! _G_MATH_H_INLINES /* hpux and SCO define this in math.h */
-inline double abs(double arg) 
+inline double _abs(double arg) 
 {
   return (arg < 0.0)? -arg : arg;
 }
 #endif
 
-inline float abs(float arg) 
+inline float _abs(float arg) 
 {
   return (arg < 0.0)? -arg : arg;
 }
 
-inline short abs(short arg) 
+inline short _abs(short arg) 
 {
   return (arg < 0)? -arg : arg;
 }
 
-inline long abs(long arg) 
+inline long _abs(long arg) 
 {
   return (arg < 0)? -arg : arg;
 }

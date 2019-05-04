@@ -23,7 +23,7 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #endif
 #define _Obstack_h 1
 
-#include <std.h>
+#include <stdlib.h>
 #include <cstring>
 
 #undef OK

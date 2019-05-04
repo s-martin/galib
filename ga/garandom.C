@@ -10,8 +10,8 @@
 ---------------------------------------------------------------------------- */
 #include <cmath>
 #include <cstring>
+#include <ctime>
 #include <garandom.h>
-#include <time.h>
 
 static void bitseed(unsigned int seed = 1);
 
@@ -69,9 +69,10 @@ void GARandomSeed(unsigned int s)
 		{
 			unsigned long int tmp = time(nullptr) _GA_PID;
 			for (unsigned int i = 0;
-				 i < GALIB_BITS_IN_WORD * sizeof(unsigned int); i++) {
+				 i < GALIB_BITS_IN_WORD * sizeof(unsigned int); i++)
+			{
 				seed += (tmp & (1 << i));
-}
+			}
 		}
 		_GA_RND_SEED(seed);
 		bitseed(seed);
@@ -125,11 +126,14 @@ double GAUnitGaussian()
 	} while (rsquare >= 1.0 || rsquare == 0.0);
 
 	double val = -2.0 * log(rsquare) / rsquare;
-	if (val > 0.0) {
+	if (val > 0.0)
+	{
 		factor = sqrt(val);
-	} else {
+	}
+	else
+	{
 		factor = 0.0; // should not happen, but might due to roundoff
-}
+	}
 
 	cachevalue = var1 * factor;
 	cached = true;
@@ -278,23 +282,27 @@ static long idum = 0;
 void gasran2(unsigned int seed)
 {
 	idum = STA_CAST(long, seed);
-	if (idum == 0) {
+	if (idum == 0)
+	{
 		idum = 1;
-}
-	if (idum < 0) {
+	}
+	if (idum < 0)
+	{
 		idum = -idum;
-}
+	}
 	idum2 = (idum);
 	for (int j = NTAB + 7; j >= 0; j--)
 	{
 		long k = (idum) / IQ1;
 		idum = IA1 * (idum - k * IQ1) - k * IR1;
-		if (idum < 0) {
+		if (idum < 0)
+		{
 			idum += IM1;
-}
-		if (j < NTAB) {
+		}
+		if (j < NTAB)
+		{
 			iv[j] = idum;
-}
+		}
 	}
 	iy = iv[0];
 }
@@ -307,25 +315,31 @@ float garan2()
 
 	k = (idum) / IQ1;
 	idum = IA1 * (idum - k * IQ1) - k * IR1;
-	if (idum < 0) {
+	if (idum < 0)
+	{
 		idum += IM1;
-}
+	}
 	k = idum2 / IQ2;
 	idum2 = IA2 * (idum2 - k * IQ2) - k * IR2;
-	if (idum2 < 0) {
+	if (idum2 < 0)
+	{
 		idum2 += IM2;
-}
+	}
 	j = iy / NDIV;
 	iy = iv[j] - idum2;
 	iv[j] = idum;
-	if (iy < 1) {
+	if (iy < 1)
+	{
 		iy += IMM1;
-}
-	if ((temp = AM * iy) > RNMX) {
+	}
+	if ((temp = AM * iy) > RNMX)
+	{
 		return RNMX;
-	} else {
+	}
+	else
+	{
 		return temp;
-}
+	}
 }
 
 #undef IM1

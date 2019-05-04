@@ -23,13 +23,13 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #pragma implementation
 #endif
 #include <BitString.h>
-#include <std.h>
+#include <stdlib.h>
 #include <limits.h>
 #include <Obstack.h>
 #include <AllocRing.h>
-#include <new.h>
+#include <new>
 #include <builtin.h>
-#include <strstream.h>
+#include <sstream>
 
 #undef OK
 
@@ -333,7 +333,7 @@ BitStrRep* cmpl(const BitStrRep* src, BitStrRep* r)
 }
 
 
-BitStrRep* and(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
+BitStrRep* _and(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
 {
   int xrsame = x == r;
   int yrsame = y == r;
@@ -354,7 +354,7 @@ BitStrRep* and(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
   return r;
 }
 
-BitStrRep* or(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
+BitStrRep* _or(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
 {
   unsigned int  xl = x->len;
   unsigned int  yl = y->len;
@@ -385,7 +385,7 @@ BitStrRep* or(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
 }
 
 
-BitStrRep* xor(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
+BitStrRep* _xor(const BitStrRep* x, const BitStrRep* y, BitStrRep* r)
 {
   unsigned int  xl = x->len;
   unsigned int  yl = y->len;
@@ -1499,11 +1499,11 @@ atoBitPattern (const char* s, char f,char t,char x)
 
 //extern AllocRing _libgxx_fmtq;
 
-void BitString::printon (ostream& os, char f, char t) const
+void BitString::printon (std::ostream& os, char f, char t) const
 {
   unsigned int  xl = rep->len;
   const _BS_word* ptr = rep->s;
-  register streambuf *sb = os.rdbuf();
+  register std::streambuf *sb = os.rdbuf();
   _BS_word a = 0;
 
   for (unsigned int  i = 0; i < xl; ++i)
@@ -1528,10 +1528,9 @@ const char* BitStringtoa(const BitString& x, char f, char t)
 }
 */
 
-ostream& operator << (ostream& s, const BitString& x)
+std::ostream& operator << (std::ostream& s, const BitString& x)
 {
-  if (s.opfx())
-    x.printon(s);
+  x.printon(s);
   return s;
 }
 
@@ -1552,12 +1551,12 @@ const char* BitPatterntoa(const BitPattern& p, char f,char t,char x)
 }
 */
 
-void BitPattern::printon(ostream& s, char f,char t,char x) const
+void BitPattern::printon(std::ostream& s, char f,char t,char x) const
 {
   unsigned int  pl = pattern.rep->len;
   unsigned int  ml = mask.rep->len;
   unsigned int  l = (pl <= ml)? pl : ml;
-  register streambuf *sb = s.rdbuf();
+  register std::streambuf *sb = s.rdbuf();
 
   const _BS_word* ps = pattern.rep->s;
   const _BS_word* ms = mask.rep->s;
@@ -1580,10 +1579,9 @@ void BitPattern::printon(ostream& s, char f,char t,char x) const
   }
 }
 
-ostream& operator << (ostream& s, const BitPattern& x)
+std::ostream& operator << (std::ostream& s, const BitPattern& x)
 {
-  if (s.opfx())
-    x.printon(s);
+  x.printon(s);
   return s;
 }
 

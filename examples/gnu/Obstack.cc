@@ -21,7 +21,7 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <limits.h>
 #include <builtin.h>
 #include <Obstack.h>
-#include <new.h>
+#include <new>
 
 /* We use subtraction of (char *)0 instead of casting to int
    because on word-addressable machines a simple cast to int
