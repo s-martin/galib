@@ -320,7 +320,7 @@ bool GAParameterList::read(std::istream &is, bool flag)
 		is >> buf;
 		if (npairs == -1)
 		{
-			if (IsNumeric(buf) != 0)
+			if (IsNumeric(buf))
 			{
 				npairs = atoi(buf);
 				is >> buf;
@@ -476,7 +476,7 @@ bool GAParameterList::parse(int &argc, char *argv[], bool flag)
 				switch (param->type())
 				{
 				case ParType::BOOLEAN:
-					if (IsNumeric(argv[i]) != 0)
+					if (IsNumeric(argv[i]))
 					{
 						ival = atoi(argv[i]);
 						ival = (ival == 0) ? 0 : 1;

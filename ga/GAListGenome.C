@@ -253,12 +253,12 @@ float GAListGenome<T>::NodeComparator(const GAGenome &a, const GAGenome &b)
 	return count;
 }
 
-#define SWAP(a, b)                                                             \
-	{                                                                          \
-		unsigned int tmp = a;                                                  \
-		a = b;                                                                 \
-		b = tmp;                                                               \
-	}
+template <typename T1, typename T2> constexpr void SWAP(T1 &a, T2 &b)
+{
+	auto tmp = a;
+	a = b;
+	b = tmp;
+}
 
 // This crossover picks a site between nodes in each parent.  It is the same
 // as single point crossover on a resizeable binary string genome.  The site

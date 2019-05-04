@@ -90,7 +90,7 @@ void GAErr(const GASourceLocator loc, const std::string &clss,
 	
 	gaErrMsg = errstr.str();
 
-	if (__gaErrFlag == true)
+	if (__gaErrFlag)
 	{
 		*__gaErrStream << gaErrMsg;
 	}
@@ -117,7 +117,7 @@ void GAErr(const GASourceLocator loc, const std::string &clss,
 
 	gaErrMsg = errstr.str();
 
-	if (__gaErrFlag == true)
+	if (__gaErrFlag)
 	{
 		*__gaErrStream << gaErrMsg;
 	}
@@ -143,7 +143,7 @@ void GAErr(const GASourceLocator loc, const std::string &func, GAErrorIndex i,
 	
 	gaErrMsg = errstr.str();
 
-	if (__gaErrFlag == true)
+	if (__gaErrFlag)
 	{
 		*__gaErrStream << gaErrMsg;
 	}

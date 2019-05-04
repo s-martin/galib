@@ -151,7 +151,7 @@ class GARouletteWheelSelector : public GASelectionScheme
 }
 		return *this;
 	}
-	~GARouletteWheelSelector() override { }
+	~GARouletteWheelSelector() override = default;
 	GASelectionScheme *clone() const override
 	{
 		return new GARouletteWheelSelector;
@@ -269,9 +269,7 @@ class GASRSSelector : public GASelectionScheme
 }
 		return *this;
 	}
-	~GASRSSelector() override
-	{
-	}
+	~GASRSSelector() override = default;
 	GASelectionScheme *clone() const override
 	{
 		return new GASRSSelector;
@@ -320,9 +318,7 @@ class GADSSelector : public GASelectionScheme
 }
 		return *this;
 	}
-	~GADSSelector() override
-	{
-	}
+	~GADSSelector() override = default;
 	GASelectionScheme *clone() const override
 	{
 		return new GADSSelector;

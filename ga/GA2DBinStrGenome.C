@@ -37,7 +37,7 @@ GA2DBinaryStringGenome::GA2DBinaryStringGenome(unsigned int width,
 
 GA2DBinaryStringGenome::GA2DBinaryStringGenome(
 	const GA2DBinaryStringGenome &orig)
-	: GABinaryString(orig.GABinaryString::size()), GAGenome()
+	: GABinaryString(orig.GABinaryString::size()), GAGenome(orig)
 {
 	nx = minX = maxX = 0;
 	ny = minY = maxY = 0;

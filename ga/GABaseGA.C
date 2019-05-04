@@ -153,7 +153,7 @@ GAGeneticAlgorithm::registerDefaultParameters(GAParameterList &p)
 
 // When we create a GA, we stuff the parameters with the basics that will be
 // needed by most genetic algorithms - num generations, p convergence, etc.
-GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome &g) : stats(), params()
+GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome &g)
 {
 	pop = new GAPopulation(g, gaDefPopSize);
 	pop->geneticAlgorithm(*this);
@@ -204,7 +204,6 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome &g) : stats(), params()
 }
 
 GAGeneticAlgorithm::GAGeneticAlgorithm(const GAPopulation &p)
-	: stats(), params()
 {
 	pop = new GAPopulation(p);
 	pop->geneticAlgorithm(*this);

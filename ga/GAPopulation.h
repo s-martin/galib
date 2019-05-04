@@ -93,7 +93,7 @@ class GAPopulation : public GAID
 
   public:
 	GAPopulation();
-	GAPopulation(const GAGenome &c, unsigned int psize = 1);
+	explicit GAPopulation(const GAGenome &c, unsigned int psize = 1);
 	GAPopulation(const GAPopulation &arg);
 	GAPopulation &operator=(const GAPopulation &arg)
 	{

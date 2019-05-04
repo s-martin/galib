@@ -68,8 +68,8 @@ class GANoScaling : public GAScalingScheme
   public:
 	GADefineIdentity("GANoScaling", GAID::NoScaling);
 
-	GANoScaling() : GAScalingScheme() {}
-	GANoScaling(const GANoScaling &) : GAScalingScheme() {}
+	GANoScaling() {}
+	GANoScaling(const GANoScaling &) {}
 	GANoScaling &operator=(const GAScalingScheme &) { return *this; }
 	~GANoScaling() override = default;
 	GAScalingScheme *clone() const override { return new GANoScaling(*this); }
@@ -282,7 +282,7 @@ class GASharing : public GAScalingScheme
 		_alpha = a;
 		_minmax = 0;
 	}
-	GASharing(float cut = gaDefSharingCutoff, float a = 1.0)
+	explicit GASharing(float cut = gaDefSharingCutoff, float a = 1.0)
 	{
 		N = 0;
 		df = nullptr;
@@ -300,7 +300,7 @@ class GASharing : public GAScalingScheme
 		copy(arg);
 		return (*this);
 	}
-	~GASharing() override { }
+	~GASharing() override = default;
 	GAScalingScheme *clone() const override { return new GASharing(*this); }
 	void copy(const GAScalingScheme &arg) override;
 	void evaluate(const GAPopulation &p) override;

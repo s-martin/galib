@@ -39,7 +39,7 @@ GA3DBinaryStringGenome::GA3DBinaryStringGenome(unsigned int width,
 
 GA3DBinaryStringGenome::GA3DBinaryStringGenome(
 	const GA3DBinaryStringGenome &orig)
-	: GABinaryString(orig.GABinaryString::size()), GAGenome()
+	: GABinaryString(orig.GABinaryString::size()), GAGenome(orig)
 {
 	nx = minX = maxX = 0;
 	ny = minY = maxY = 0;

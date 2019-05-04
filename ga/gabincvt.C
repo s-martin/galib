@@ -13,7 +13,7 @@
 #include <gabincvt.h>
 #include <gaconfig.h>
 #include <gaerror.h>
-#include <limits.h>
+#include <climits>
 #include <string>
 
 // These numbers are machine-specific and are a function of the word length of

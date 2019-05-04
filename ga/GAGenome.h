@@ -229,7 +229,7 @@ class GAGenome : public GAID
 	// constructor.
 	explicit GAGenome(Initializer i = nullptr, Mutator m = nullptr,
 					  Comparator c = nullptr);
-	GAGenome(const GAGenome &);
+	GAGenome(const GAGenome &orig);
 	GAGenome &operator=(const GAGenome &arg)
 	{
 		copy(arg);

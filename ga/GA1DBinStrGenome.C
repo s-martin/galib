@@ -53,7 +53,7 @@ GA1DBinaryStringGenome::GA1DBinaryStringGenome(unsigned int len,
 // the data and sz members.
 GA1DBinaryStringGenome::GA1DBinaryStringGenome(
 	const GA1DBinaryStringGenome &orig)
-	: GABinaryString(orig.GABinaryString::size()), GAGenome()
+	: GABinaryString(orig.GABinaryString::size()), GAGenome(orig)
 {
 	nx = minX = maxX = 0;
 	GA1DBinaryStringGenome::copy(orig);

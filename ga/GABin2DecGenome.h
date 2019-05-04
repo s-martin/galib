@@ -126,7 +126,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 	GADefineIdentity("GABin2DecGenome", GAID::Bin2DecGenome);
 
   public:
-	GABin2DecGenome(const GABin2DecPhenotype &p,
+	explicit GABin2DecGenome(const GABin2DecPhenotype &p,
 					GAGenome::Evaluator f = nullptr, void *u = nullptr)
 		: GA1DBinaryStringGenome(p.size(), f, u),
 		  ptype(new GABin2DecPhenotype(p))

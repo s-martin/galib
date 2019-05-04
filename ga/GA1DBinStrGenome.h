@@ -61,9 +61,7 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	static float BitComparator(const GAGenome &, const GAGenome &);
 
   public:
-	GA1DBinaryStringGenome(unsigned int len,
-						   GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
-						   void *u = nullptr);
+	explicit GA1DBinaryStringGenome(unsigned int len, GAGenome::Evaluator f = nullptr, void *u = nullptr);
 	GA1DBinaryStringGenome(const GA1DBinaryStringGenome &orig);
 	GA1DBinaryStringGenome &operator=(const GAGenome &arg)
 	{
