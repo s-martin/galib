@@ -22,9 +22,7 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost 1.65 REQUIRED COMPONENTS unit_test_framework) # filesystem)
 message(STATUS "Boost version: ${Boost_VERSION}")
-
-include_directories( ${Boost_INCLUDE_DIRS})
-                  
+             
 # This is needed if your Boost version is newer than your CMake version
 # or if you have an old version of CMake (<3.5)
 #if(NOT TARGET Boost::filesystem)
@@ -33,7 +31,7 @@ include_directories( ${Boost_INCLUDE_DIRS})
 #    set_property(TARGET Boost::filesystem PROPERTY INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
 #endif()
 
-find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
+#find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
 
 #doxygen_add_docs(doc ${CMAKE_SOURCE_DIR}/ga)
 

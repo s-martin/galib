@@ -1,4 +1,5 @@
 include_directories(${CMAKE_SOURCE_DIR}/ga)
+include_directories(${Boost_INCLUDE_DIRS})
 set_property(DIRECTORY PROPERTY CXX_EXTENSIONS OFF)
 
 add_executable(example1 ex1.C)

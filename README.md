@@ -23,7 +23,8 @@ ftp://lancet.mit.edu/pub/ga/
 
 ## COMPILATION ##
 
-CMake is used for compilation
+CMake is used for compilation. There are two things to build: the library and the examples.  Here is the
+short version of how to build and test everything:
 
 ### Windows ###
 
@@ -47,20 +48,7 @@ Open in Visual Studio as CMake project.
 
 > make
 
-There are two things to build: the library and the examples.  Here is the
-short version of how to build and test everything:
-
-On unix,
-
-> % make test
-
-On windows, with MS VC++,
-
-> nmake /f makefile.vcpp test
-
-On windows, with Borland,
-
-> make -f makefile.bcc test
+### Common Errors
 
 If that does not work, then here are the files you might have to modify:
 
