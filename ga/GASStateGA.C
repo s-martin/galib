@@ -14,48 +14,32 @@
 constexpr auto USE_PREPL = 0;
 constexpr auto USE_NREPL = 1;
 
-GAParameterList &GASteadyStateGA::registerDefaultParameters(GAParameterList &p)
+GASteadyStateGA::GASteadyStateGA(const GAGenome &c, const std::shared_ptr<GAParameterList>& _params) : GAGeneticAlgorithm(c, _params)
 {
-	GAGeneticAlgorithm::registerDefaultParameters(p);
-
-	int ival = 1;
-	p.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &ival);
-	p.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &gaDefPRepl);
-
-	p.set(gaNscoreFrequency, gaDefScoreFrequency2);
-
-	return p;
-}
-
-GASteadyStateGA::GASteadyStateGA(const GAGenome &c) : GAGeneticAlgorithm(c)
-{
-	pRepl = gaDefPRepl;
-	params.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &pRepl);
+	pRepl = params->replacementPercentage;
 
 	float n =
 		((pRepl * static_cast<float>(pop->size()) < 1) ? 1 : pRepl * static_cast<float>(pop->size()));
 	tmpPop = new GAPopulation(pop->individual(0), static_cast<unsigned int>(n));
 
 	nRepl = tmpPop->size();
-	params.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &nRepl);
 	stats.scoreFrequency(gaDefScoreFrequency2);
-	params.set(gaNscoreFrequency, gaDefScoreFrequency2);
+	params->set(gaNscoreFrequency, gaDefScoreFrequency2);
 
 	which = USE_PREPL;
 }
-GASteadyStateGA::GASteadyStateGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
+GASteadyStateGA::GASteadyStateGA(const GAPopulation &p, const std::shared_ptr<GAParameterList> &_params) : 
+	GAGeneticAlgorithm(p, _params)
 {
-	pRepl = gaDefPRepl;
-	params.add(gaNpReplacement, gaSNpReplacement, ParType::FLOAT, &pRepl);
+	pRepl = params->replacementPercentage;
 
 	float n =
 		((pRepl * static_cast<float>(pop->size()) < 1) ? 1 : pRepl * static_cast<float>(pop->size()));
 	tmpPop = new GAPopulation(pop->individual(0), static_cast<unsigned int>(n));
 
 	nRepl = tmpPop->size();
-	params.add(gaNnReplacement, gaSNnReplacement, ParType::INT, &nRepl);
 	stats.scoreFrequency(gaDefScoreFrequency2);
-	params.set(gaNscoreFrequency, gaDefScoreFrequency2);
+	params->set(gaNscoreFrequency, gaDefScoreFrequency2);
 
 	which = USE_PREPL;
 }
@@ -95,52 +79,6 @@ void GASteadyStateGA::copy(const GAGeneticAlgorithm &g)
 	which = ga.which;
 }
 
-int GASteadyStateGA::setptr(const std::string &name, const void *value)
-{
-	int status = GAGeneticAlgorithm::setptr(name, value);
-
-	if (boost::equals(name, gaNpReplacement) ||
-		boost::equals(name, gaSNpReplacement))
-	{
-#ifdef GA_DEBUG
-		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
-				  << "' to '" << *((float *)value) << "'\n";
-#endif
-		pReplacement(*((float *)value));
-		status = 0;
-	}
-	else if (boost::equals(name, gaNnReplacement) ||
-			 boost::equals(name, gaSNnReplacement))
-	{
-#ifdef GA_DEBUG
-		std::cerr << "GAGeneticAlgorithm::setptr\n  setting '" << name
-				  << "' to '" << *((int *)value) << "'\n";
-#endif
-		nReplacement(*((int *)value));
-		status = 0;
-	}
-	return status;
-}
-
-int GASteadyStateGA::get(const char *name, void *value) const
-{
-	int status = GAGeneticAlgorithm::get(name, value);
-
-	if (strcmp(name, gaNpReplacement) == 0 ||
-		strcmp(name, gaSNpReplacement) == 0)
-	{
-		*(static_cast<float *>(value)) = pRepl;
-		status = 0;
-	}
-	else if (strcmp(name, gaNnReplacement) == 0 ||
-			 strcmp(name, gaSNnReplacement) == 0)
-	{
-		*(static_cast<int *>(value)) = nRepl;
-		status = 0;
-	}
-	return status;
-}
-
 void GASteadyStateGA::objectiveFunction(GAGenome::Evaluator f)
 {
 	GAGeneticAlgorithm::objectiveFunction(f);
@@ -178,7 +116,7 @@ const GAPopulation &GASteadyStateGA::population(const GAPopulation &p)
 			n = 1.0;
 		}
 		nRepl = static_cast<unsigned int>(n);
-		params.set(gaNnReplacement, nRepl);
+		params->set(gaNnReplacement, nRepl);
 	}
 	else
 	{
@@ -206,7 +144,7 @@ int GASteadyStateGA::populationSize(unsigned int value)
 					   ? 1
 					   : pRepl * static_cast<float>(pop->size()));
 		nRepl = static_cast<unsigned int>(n);
-		params.set(gaNnReplacement, nRepl);
+		params->set(gaNnReplacement, nRepl);
 		tmpPop->size(nRepl);
 	}
 	else
@@ -231,18 +169,18 @@ float GASteadyStateGA::pReplacement(float value)
 	if (value <= 0 || value > 1)
 	{
 		GAErr(GA_LOC, className(), "pReplacement", gaErrBadPRepl);
-		params.set(gaNpReplacement, pRepl); // force it back
+		params->set(gaNpReplacement, pRepl); // force it back
 		return pRepl;
 	}
 
-	params.set(gaNpReplacement, static_cast<double>(value));
+	params->set(gaNpReplacement, static_cast<double>(value));
 	pRepl = value;
 
 	float n = ((value * static_cast<float>(pop->size()) < 1)
 				   ? 1
 				   : value * static_cast<float>(pop->size()));
 	nRepl = static_cast<unsigned int>(n);
-	params.set(gaNnReplacement, nRepl);
+	params->set(gaNnReplacement, nRepl);
 
 	which = USE_PREPL;
 
@@ -260,15 +198,15 @@ int GASteadyStateGA::nReplacement(unsigned int value)
 	if (value == 0 || value > static_cast<unsigned int>(pop->size()))
 	{
 		GAErr(GA_LOC, className(), "nReplacement", gaErrBadNRepl);
-		params.set(gaNnReplacement, nRepl); // force it back
+		params->set(gaNnReplacement, nRepl); // force it back
 		return nRepl;
 	}
 
-	params.set(gaNnReplacement, value);
+	params->set(gaNnReplacement, value);
 	nRepl = value;
 
 	pRepl = static_cast<float>(nRepl) / static_cast<float>(pop->size());
-	params.set(gaNpReplacement, static_cast<double>(pRepl));
+	params->set(gaNpReplacement, static_cast<double>(pRepl));
 
 	which = USE_NREPL;
 

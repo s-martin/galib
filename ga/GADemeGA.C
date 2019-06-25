@@ -11,22 +11,12 @@
 
 #include <boost/algorithm/string.hpp>
 
-GAParameterList &GADemeGA::registerDefaultParameters(GAParameterList &p)
+
+GADemeGA::GADemeGA(const GAGenome &c, const std::shared_ptr<GAParameterList>& _params) : 
+	GAGeneticAlgorithm(c, _params)
 {
-	GAGeneticAlgorithm::registerDefaultParameters(p);
-
-	p.add(gaNnPopulations, gaSNnPopulations, ParType::INT, &gaDefNPop);
-	p.add(gaNnMigration, gaSNnMigration, ParType::INT, &gaDefNMig);
-
-	return p;
-}
-
-GADemeGA::GADemeGA(const GAGenome &c) : GAGeneticAlgorithm(c)
-{
-	npop = gaDefNPop;
-	params.add(gaNnPopulations, gaSNnPopulations, ParType::INT, &npop);
-	nmig = gaDefNMig;
-	params.add(gaNnMigration, gaSNnMigration, ParType::INT, &nmig);
+	npop = params->numPopulations;
+	nmig = params->migrationNumber;
 
 	unsigned int nr = pop->size() / 2;
 	nrepl = new int[npop];
@@ -40,7 +30,8 @@ GADemeGA::GADemeGA(const GAGenome &c) : GAGeneticAlgorithm(c)
 		deme[i] = new GAPopulation(*pop);
 	}
 }
-GADemeGA::GADemeGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
+GADemeGA::GADemeGA(const GAPopulation &p, const std::shared_ptr<GAParameterList>& _params) : 
+	GAGeneticAlgorithm(p, _params)
 {
 	if (p.size() < 1)
 	{
@@ -53,10 +44,8 @@ GADemeGA::GADemeGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 	}
 	else
 	{
-		npop = gaDefNPop;
-		params.add(gaNnPopulations, gaSNnPopulations, ParType::INT, &npop);
-		nmig = gaDefNMig;
-		params.add(gaNnMigration, gaSNnMigration, ParType::INT, &nmig);
+		npop = params->numPopulations;
+		nmig = params->migrationNumber;
 		unsigned int nr = pop->size() / 2;
 
 		nrepl = new int[npop];
@@ -132,49 +121,6 @@ void GADemeGA::copy(const GAGeneticAlgorithm &g)
 	}
 }
 
-// We make sure that the replacement pop is always at least one individual.  If
-// the percentage replacement is specified then we use that to determine the
-// size of the tmp pop.  Otherwise we use the absolute number of individuals.
-// If we're using absolute number then we don't have to resize the tmp pop.
-int GADemeGA::setptr(const std::string &name, const void *value)
-{
-	int status = GAGeneticAlgorithm::setptr(name, value);
-
-	if (boost::equals(name, gaNnPopulations) ||
-		boost::equals(name, gaSNnPopulations))
-	{
-		nPopulations(*((int *)value));
-		status = 0;
-	}
-	else if (boost::equals(name, gaNnMigration) ||
-			 boost::equals(name, gaSNnMigration))
-	{
-		nMigration(*((int *)value));
-		status = 0;
-	}
-
-	return status;
-}
-
-int GADemeGA::get(const char *name, void *value) const
-{
-	int status = GAGeneticAlgorithm::get(name, value);
-
-	if (strcmp(name, gaNnPopulations) == 0 ||
-		strcmp(name, gaSNnPopulations) == 0)
-	{
-		*(static_cast<int *>(value)) = npop;
-		status = 0;
-	}
-	else if (strcmp(name, gaNnMigration) == 0 ||
-			 strcmp(name, gaSNnMigration) == 0)
-	{
-		*(static_cast<int *>(value)) = nmig;
-		status = 0;
-	}
-
-	return status;
-}
 
 void GADemeGA::objectiveFunction(int i, GAGenome::Evaluator f)
 {
@@ -267,7 +213,7 @@ int GADemeGA::nReplacement(int i, unsigned int value)
 			}
 			else
 			{
-				params.set(gaNnReplacement, value);
+				params->set(gaNnReplacement, value);
 				nrepl[ii] = value;
 			}
 		}
@@ -324,7 +270,7 @@ GASelectionScheme &GADemeGA::selector(int i, const GASelectionScheme &s)
 
 int GADemeGA::nMigration(unsigned int n)
 {
-	params.set(gaNnMigration, n);
+	params->set(gaNnMigration, n);
 	return nmig = n;
 }
 
@@ -391,7 +337,7 @@ int GADemeGA::nPopulations(unsigned int n)
 
 		npop = n;
 	}
-	params.set(gaNnPopulations, n);
+	params->set(gaNnPopulations, n);
 	pop->size(npop);
 	return npop;
 }

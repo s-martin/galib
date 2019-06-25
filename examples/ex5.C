@@ -266,13 +266,12 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	params.set(gaNpReplacement, 0.5);
-	params.set(gaNscoreFilename, "bog.dat");
-	params.set(gaNflushFrequency, 10);
-	params.set(gaNnGenerations, 800);
-	params.parse(argc, argv, false);
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNpReplacement, 0.5);
+	params->set(gaNscoreFilename, "bog.dat");
+	params->set(gaNflushFrequency, 10);
+	params->set(gaNnGenerations, 800);
+	params->parse(argc, argv, false);
 
 	char filename1[128] = "smiley.txt";
 	char filename2[128] = "values.txt";
@@ -316,7 +315,7 @@ int main(int argc, char *argv[])
 			std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i]
 					  << "\n\n";
 			std::cerr
-				<< "valid arguements include standard GAlib flags plus:\n";
+				<< "valid arguments include standard GAlib flags plus:\n";
 			std::cerr << "  graph\tname of graph filename (" << filename1
 					  << ")\n";
 			std::cerr << "  values\tname of values filename (" << filename2
@@ -413,9 +412,7 @@ int main(int argc, char *argv[])
 
 	// Now create the GA and run it.  First a genome, then the GA.
 	CompositeGenome genome(width, height, map, Objective, (void *)&mydata);
-	GASteadyStateGA ga(genome);
-	ga.parameters(params);
-	ga.parameters(argc, argv);
+	GASteadyStateGA ga(genome, params);
 	ga.evolve();
 
 	genome = ga.statistics().bestIndividual();

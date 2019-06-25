@@ -17,11 +17,9 @@ class GASteadyStateGA : public GAGeneticAlgorithm
   public:
 	GADefineIdentity("GASteadyStateGA", GAID::SteadyStateGA);
 
-	static GAParameterList &registerDefaultParameters(GAParameterList &);
-
   public:
-	explicit GASteadyStateGA(const GAGenome &);
-	explicit GASteadyStateGA(const GAPopulation &);
+	explicit GASteadyStateGA(const GAGenome &, const std::shared_ptr<GAParameterList>& _params);
+	explicit GASteadyStateGA(const GAPopulation &, const std::shared_ptr<GAParameterList>& _params);
 	GASteadyStateGA(const GASteadyStateGA &);
 	GASteadyStateGA &operator=(const GASteadyStateGA &);
 	~GASteadyStateGA() override;
@@ -34,9 +32,6 @@ class GASteadyStateGA : public GAGeneticAlgorithm
 		step();
 		return *this;
 	}
-
-	int setptr(const std::string &name, const void *value) override;
-	int get(const char *name, void *value) const override;
 
 	int minimaxi() const override { return minmax; }
 	int minimaxi(int m) override;

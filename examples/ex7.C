@@ -40,16 +40,15 @@ int main(int argc, char *argv[])
 
 	// Set the default values of the parameters.
 
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	params.set(gaNpopulationSize, 50); // number of individuals in population
-	params.set(gaNpCrossover, 0.8); // likelihood of doing crossover
-	params.set(gaNpMutation, 0.001); // probability of mutation
-	params.set(gaNnGenerations, 200); // number of generations
-	params.set(gaNscoreFrequency, 20); // how often to record scores
-	params.set(gaNflushFrequency, 50); // how often to flush scores to file
-	params.set(gaNscoreFilename, "bog.dat");
-	params.parse(argc, argv, false);
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNpopulationSize, 50); // number of individuals in population
+	params->set(gaNpCrossover, 0.8); // likelihood of doing crossover
+	params->set(gaNpMutation, 0.001); // probability of mutation
+	params->set(gaNnGenerations, 200); // number of generations
+	params->set(gaNscoreFrequency, 20); // how often to record scores
+	params->set(gaNflushFrequency, 50); // how often to flush scores to file
+	params->set(gaNscoreFilename, "bog.dat");
+	params->parse(argc, argv, false);
 
 	char datafile[128] = "smiley.txt";
 	char parmfile[128] = "";
@@ -88,7 +87,7 @@ int main(int argc, char *argv[])
 			else
 			{
 				sprintf(parmfile, argv[i]);
-				params.read(parmfile);
+				params->read(parmfile);
 				continue;
 			}
 		}
@@ -152,7 +151,7 @@ int main(int argc, char *argv[])
 	// the user-data.
 
 	GA2DBinaryStringGenome genome(width, height, objective, (void *)&target);
-	GASteadyStateGA ga(genome);
+	GASteadyStateGA ga(genome, params);
 
 	// When you use a GA with overlapping populations, the default score
 	// frequency (how often the best of generation score is recorded) defaults
@@ -162,7 +161,7 @@ int main(int argc, char *argv[])
 	// the GA.  Each of the parameters can be set individually if you like.
 	//   Here we just use the values that were set in the parameter list.
 
-	ga.parameters(params);
+	//ga.parameters(params);
 
 	// The default selection method is RouletteWheel.  Here we set the selection
 	// method to TournamentSelection.

@@ -16,7 +16,9 @@ class GADCrowdingGA : public GAGeneticAlgorithm
   public:
 	GADefineIdentity("GADeterministicCrowdingGA", 241);
 
-	explicit GADCrowdingGA(const GAGenome &g) : GAGeneticAlgorithm(g) {}
+	explicit GADCrowdingGA(const GAGenome &g, const std::shared_ptr<GAParameterList>& _params) : 
+		GAGeneticAlgorithm(g, _params)
+	{}
 	~GADCrowdingGA() override = default;
 
 	void initialize(unsigned int seed = 0) override;

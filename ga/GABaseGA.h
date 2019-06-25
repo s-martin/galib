@@ -17,71 +17,7 @@
 #include <gaconfig.h>
 #include <gaid.h>
 
-// When specifying parameters for a GAlib object, you can use the fullname (the
-// name used in parameters data files) or the short name (the name typically
-// used on the command line).  When specifying parameters in your code you can
-// use a string, or use the predefined macros below (kind of like using the
-// resource/class names in Motif for you Xt jocks).
-constexpr auto gaNnGenerations = "number_of_generations";
-constexpr auto gaSNnGenerations = "ngen";
-constexpr auto gaNpConvergence = "convergence_percentage";
-constexpr auto gaSNpConvergence = "pconv";
-constexpr auto gaNnConvergence = "generations_to_convergence";
-constexpr auto gaSNnConvergence = "nconv";
-constexpr auto gaNpCrossover = "crossover_probability";
-constexpr auto gaSNpCrossover = "pcross";
-constexpr auto gaNpMutation = "mutation_probability";
-constexpr auto gaSNpMutation = "pmut";
-constexpr auto gaNpopulationSize = "population_size";
-constexpr auto gaSNpopulationSize = "popsize";
-constexpr auto gaNnPopulations = "number_of_populations";
-constexpr auto gaSNnPopulations = "npop";
-constexpr auto gaNpReplacement = "replacement_percentage";
-constexpr auto gaSNpReplacement = "prepl";
-constexpr auto gaNnReplacement = "replacement_number";
-constexpr auto gaSNnReplacement = "nrepl";
-constexpr auto gaNnBestGenomes = "number_of_best";
-constexpr auto gaSNnBestGenomes = "nbest";
-constexpr auto gaNscoreFrequency = "score_frequency";
-constexpr auto gaSNscoreFrequency = "sfreq";
-constexpr auto gaNflushFrequency = "flush_frequency";
-constexpr auto gaSNflushFrequency = "ffreq";
-constexpr auto gaNscoreFilename = "score_filename";
-constexpr auto gaSNscoreFilename = "sfile";
-constexpr auto gaNselectScores = "select_scores";
-constexpr auto gaSNselectScores = "sscores";
-constexpr auto gaNelitism = "elitism";
-constexpr auto gaSNelitism = "el";
-constexpr auto gaNnOffspring = "number_of_offspring";
-constexpr auto gaSNnOffspring = "noffspr";
-constexpr auto gaNrecordDiversity = "record_diversity";
-constexpr auto gaSNrecordDiversity = "recdiv";
-constexpr auto gaNpMigration = "migration_percentage";
-constexpr auto gaSNpMigration = "pmig";
-constexpr auto gaNnMigration = "migration_number";
-constexpr auto gaSNnMigration = "nmig";
-constexpr auto gaNminimaxi = "minimaxi";
-constexpr auto gaSNminimaxi = "mm";
-constexpr auto gaNseed = "seed";
-constexpr auto gaSNseed = "seed";
-
-extern int gaDefNumGen;
-extern float gaDefPConv;
-extern int gaDefNConv;
-extern float gaDefPMut;
-extern float gaDefPCross;
-extern int gaDefPopSize;
-extern int gaDefNPop;
-extern float gaDefPRepl;
-extern int gaDefNRepl;
-extern int gaDefNumOff;
-extern float gaDefPMig;
-extern int gaDefNMig;
-extern int gaDefSelectScores;
-extern int gaDefMiniMaxi;
-extern bool gaDefDivFlag;
-extern bool gaDefElitism;
-extern int gaDefSeed;
+constexpr int gaDefScoreFrequency2 = 100;
 
 /* ----------------------------------------------------------------------------
    The base GA class is virtual - it defines the core data elements and parts
@@ -119,15 +55,13 @@ class GAGeneticAlgorithm : public GAID
 		MAXIMIZE = 1
 	};
 
-	static GAParameterList &registerDefaultParameters(GAParameterList &);
-
 	static bool TerminateUponGeneration(GAGeneticAlgorithm &);
 	static bool TerminateUponConvergence(GAGeneticAlgorithm &);
 	static bool TerminateUponPopConvergence(GAGeneticAlgorithm &);
 
   public:
-	explicit GAGeneticAlgorithm(const GAGenome &);
-	explicit GAGeneticAlgorithm(const GAPopulation &);
+	explicit GAGeneticAlgorithm(const GAGenome &, const std::shared_ptr<GAParameterList> &_params);
+	explicit GAGeneticAlgorithm(const GAPopulation &, const std::shared_ptr<GAParameterList> &_params);
 	GAGeneticAlgorithm(const GAGeneticAlgorithm &);
 	~GAGeneticAlgorithm() override;
 	virtual void copy(const GAGeneticAlgorithm &);
@@ -157,20 +91,6 @@ class GAGeneticAlgorithm : public GAID
 	Terminator terminator() const { return cf; }
 	Terminator terminator(Terminator f) { return cf = f; }
 
-	const GAParameterList &parameters() const { return params; }
-	const GAParameterList &parameters(const GAParameterList &);
-	const GAParameterList &parameters(int &, char **, bool flag = false);
-	const GAParameterList &parameters(const std::string &filename, bool f = false);
-	const GAParameterList &parameters(std::istream &, bool flag = false);
-	virtual int get(const char *, void *) const;
-	virtual int setptr(const std::string &name, const void *);
-	int set(const std::string &s, int v) { return setptr(s, (void *)&v); }
-	int set(const std::string &s, unsigned int v) { return setptr(s, (void *)&v); }
-	int set(const std::string &s, char v) { return setptr(s, (void *)&v); }
-	int set(const std::string &s, const char *v) { return setptr(s, (void *)v); }
-	int set(const std::string &s, const void *v) { return setptr(s, v); }
-	int set(const std::string &name, double v);
-
 	virtual int minimaxi() const { return minmax; }
 	virtual int minimaxi(int m);
 	int minimize() { return minimaxi(MINIMIZE); }
@@ -178,31 +98,31 @@ class GAGeneticAlgorithm : public GAID
 	int nGenerations() const { return ngen; }
 	int nGenerations(unsigned int n)
 	{
-		params.set(gaNnGenerations, n);
+		params->set(gaNnGenerations, n);
 		return ngen = n;
 	}
 	int nConvergence() const { return nconv; }
 	int nConvergence(unsigned int n)
 	{
-		params.set(gaNnConvergence, n);
+		params->set(gaNnConvergence, n);
 		return nconv = stats.nConvergence(n);
 	}
 	float pConvergence() const { return pconv; }
 	float pConvergence(float p)
 	{
-		params.set(gaNpConvergence, p);
+		params->set(gaNpConvergence, p);
 		return pconv = p;
 	}
 	float pCrossover() const { return pcross; }
 	float pCrossover(float p)
 	{
-		params.set(gaNpCrossover, p);
+		params->set(gaNpCrossover, p);
 		return pcross = p;
 	}
 	float pMutation() const { return pmut; }
 	float pMutation(float p)
 	{
-		params.set(gaNpMutation, p);
+		params->set(gaNpMutation, p);
 		return pmut = p;
 	}
 
@@ -231,31 +151,31 @@ class GAGeneticAlgorithm : public GAID
 	int scoreFrequency() const { return stats.scoreFrequency(); }
 	int scoreFrequency(unsigned int x)
 	{
-		params.set(gaNscoreFrequency, x);
+		params->set(gaNscoreFrequency, x);
 		return stats.scoreFrequency(x);
 	}
 	int flushFrequency() const { return stats.flushFrequency(); }
 	int flushFrequency(unsigned int x)
 	{
-		params.set(gaNflushFrequency, x);
+		params->set(gaNflushFrequency, x);
 		return stats.flushFrequency(x);
 	}
 	std::string scoreFilename() const { return stats.scoreFilename(); }
 	std::string scoreFilename(const std::string &fn)
 	{
-		params.set(gaNscoreFilename, fn.c_str());
+		params->set(gaNscoreFilename, fn.c_str());
 		return stats.scoreFilename(fn);
 	}
 	int selectScores() { return stats.selectScores(); }
 	int selectScores(int w)
 	{
-		params.set(gaNselectScores, w);
+		params->set(gaNselectScores, w);
 		return stats.selectScores(w);
 	}
 	bool recordDiversity() const { return stats.recordDiversity(); }
 	bool recordDiversity(bool f)
 	{
-		params.set(gaNrecordDiversity, static_cast<int>(f));
+		params->set(gaNrecordDiversity, static_cast<int>(f));
 		return stats.recordDiversity(f);
 	}
 
@@ -266,7 +186,7 @@ class GAGeneticAlgorithm : public GAID
 	virtual int nBestGenomes() const { return stats.nBestGenomes(); }
 	virtual int nBestGenomes(unsigned int n)
 	{
-		params.set(gaNnBestGenomes, n);
+		params->set(gaNnBestGenomes, n);
 		return stats.nBestGenomes(pop->individual(0), n);
 	}
 
@@ -285,10 +205,12 @@ class GAGeneticAlgorithm : public GAID
 
   protected:
 	GAStatistics stats;
-	GAParameterList params;
+	std::shared_ptr<GAParameterList> params;
 	GAPopulation *pop;
-	Terminator cf; // function for determining done-ness
-	void *ud; // pointer to user data structure
+	/// function for determining done-ness
+	Terminator cf; 
+	/// pointer to user data structure
+	void *ud; 
 
 	int d_seed;
 	unsigned int ngen;
@@ -297,8 +219,10 @@ class GAGeneticAlgorithm : public GAID
 	float pcross;
 	float pmut;
 	int minmax;
-	GAGenome::SexualCrossover scross; // sexual crossover to use
-	GAGenome::AsexualCrossover across; // asexual crossover to use
+	/// sexual crossover to use
+	GAGenome::SexualCrossover scross; 
+	/// asexual crossover to use
+	GAGenome::AsexualCrossover across; 
 };
 
 #endif

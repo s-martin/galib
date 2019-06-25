@@ -96,7 +96,8 @@ main(int argc, char **argv)
 
 // Now create the GA using the genome, set the parameters, and run it.
 
-  GASimpleGA ga(genome);
+  auto params = std::make_shared<GAParameterList>();
+  GASimpleGA ga(genome, params);
   ga.populationSize(popsize);
   ga.nGenerations(ngen);
   ga.pMutation(pmut);

@@ -17,11 +17,9 @@ class GASimpleGA : public GAGeneticAlgorithm
   public:
 	GADefineIdentity("GASimpleGA", GAID::SimpleGA);
 
-	static GAParameterList &registerDefaultParameters(GAParameterList &);
-
   public:
-	explicit GASimpleGA(const GAGenome &);
-	explicit GASimpleGA(const GAPopulation &);
+	explicit GASimpleGA(const GAGenome &, const std::shared_ptr<GAParameterList>& _params);
+	explicit GASimpleGA(const GAPopulation &, const std::shared_ptr<GAParameterList>& _params);
 	GASimpleGA(const GASimpleGA &);
 	GASimpleGA &operator=(const GASimpleGA &);
 	~GASimpleGA() override;
@@ -35,13 +33,10 @@ class GASimpleGA : public GAGeneticAlgorithm
 		return *this;
 	}
 
-	int setptr(const std::string &name, const void *value) override;
-	int get(const char *name, void *value) const override;
-
 	bool elitist() const { return el; }
 	bool elitist(bool flag)
 	{
-		params.set(gaNelitism, static_cast<int>(flag));
+		params->set(gaNelitism, static_cast<int>(flag));
 		return el = flag;
 	}
 

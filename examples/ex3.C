@@ -56,13 +56,12 @@ int main(int argc, char *argv[])
 	// that are different than the GAlib defaults.  Then we parse the command
 	// line.
 
-	GAParameterList params;
-	GASimpleGA::registerDefaultParameters(params);
-	params.set(gaNscoreFilename, "bog.dat");
-	params.set(gaNflushFrequency, 50);
-	params.set(gaNpMutation, 0.001);
-	params.set(gaNpCrossover, 0.8);
-	params.parse(argc, argv, false);
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNscoreFilename, "bog.dat");
+	params->set(gaNflushFrequency, 50);
+	params->set(gaNpMutation, 0.001);
+	params->set(gaNpCrossover, 0.8);
+	params->parse(argc, argv, false);
 
 	char filename[128] = "smiley.txt";
 
@@ -141,8 +140,7 @@ int main(int argc, char *argv[])
 	// Now create the GA and run it.
 
 	GA2DBinaryStringGenome genome(width, height, objective, (void *)target);
-	GASimpleGA ga(genome);
-	ga.parameters(params);
+	GASimpleGA ga(genome, params);
 	ga.evolve();
 
 	std::cout << "best of generation data are in '" << ga.scoreFilename()

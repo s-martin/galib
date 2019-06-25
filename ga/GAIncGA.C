@@ -11,18 +11,9 @@
 #include <garandom.h>
 #include <boost/algorithm/string.hpp>
 
-GAParameterList &GAIncrementalGA::registerDefaultParameters(GAParameterList &p)
-{
-	GAGeneticAlgorithm::registerDefaultParameters(p);
 
-	p.add(gaNnOffspring, gaSNnOffspring, ParType::INT, &gaDefNumOff);
-
-	p.set(gaNscoreFrequency, &gaDefScoreFrequency2);
-
-	return p;
-}
-
-GAIncrementalGA::GAIncrementalGA(const GAGenome &c) : GAGeneticAlgorithm(c)
+GAIncrementalGA::GAIncrementalGA(const GAGenome &c, const std::shared_ptr<GAParameterList>& _params) : 
+	GAGeneticAlgorithm(c, _params)
 {
 	child1 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
 	child2 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
@@ -32,13 +23,13 @@ GAIncrementalGA::GAIncrementalGA(const GAGenome &c) : GAGeneticAlgorithm(c)
 	rs = WORST;
 	rf = nullptr;
 
-	noffspr = gaDefNumOff;
-	params.add(gaNnOffspring, gaSNnOffspring, ParType::INT, &noffspr);
+	noffspr = params->numOffspring;
 
 	stats.scoreFrequency(gaDefScoreFrequency2);
-	params.set(gaNscoreFrequency, &gaDefScoreFrequency2);
+	params->set(gaNscoreFrequency, &gaDefScoreFrequency2);
 }
-GAIncrementalGA::GAIncrementalGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
+GAIncrementalGA::GAIncrementalGA(const GAPopulation &p, const std::shared_ptr<GAParameterList>& _params) : 
+	GAGeneticAlgorithm(p, _params)
 {
 	child1 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
 	child2 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
@@ -48,11 +39,10 @@ GAIncrementalGA::GAIncrementalGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 	rs = WORST;
 	rf = nullptr;
 
-	noffspr = gaDefNumOff;
-	params.add(gaNnOffspring, gaSNnOffspring, ParType::INT, &noffspr);
+	noffspr = params->numOffspring;
 
 	stats.scoreFrequency(gaDefScoreFrequency2);
-	params.set(gaNscoreFrequency, &gaDefScoreFrequency2);
+	params->set(gaNscoreFrequency, &gaDefScoreFrequency2);
 }
 GAIncrementalGA::GAIncrementalGA(const GAIncrementalGA &ga)
 	: GAGeneticAlgorithm(ga)
@@ -101,30 +91,6 @@ void GAIncrementalGA::copy(const GAGeneticAlgorithm &g)
 	}
 	child1->geneticAlgorithm(*this);
 	child2->geneticAlgorithm(*this);
-}
-
-int GAIncrementalGA::setptr(const std::string &name, const void *value)
-{
-	int status = GAGeneticAlgorithm::setptr(name, value);
-
-	if (boost::equals (name, gaNnOffspring) || boost::equals (name, gaSNnOffspring))
-	{
-		nOffspring(*((int *)value));
-		status = 0;
-	}
-	return status;
-}
-
-int GAIncrementalGA::get(const char *name, void *value) const
-{
-	int status = GAGeneticAlgorithm::get(name, value);
-
-	if (strcmp(name, gaNnOffspring) == 0 || strcmp(name, gaSNnOffspring) == 0)
-	{
-		*(static_cast<int *>(value)) = noffspr;
-		status = 0;
-	}
-	return status;
 }
 
 void GAIncrementalGA::objectiveFunction(GAGenome::Evaluator f)
@@ -182,7 +148,7 @@ int GAIncrementalGA::nOffspring(unsigned int value)
 	{
 		noffspr = value;
 	}
-	params.set(gaNnOffspring, value);
+	params->set(gaNnOffspring, value);
 	return noffspr;
 }
 

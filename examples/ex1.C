@@ -60,7 +60,8 @@ main(int argc, char **argv)
 // its parameters - number of generations, mutation probability, and crossover
 // probability.  And finally we tell it to evolve itself.
 
-  GASimpleGA ga(genome);
+  auto params = std::make_shared<GAParameterList>();
+  GASimpleGA ga(genome, params);
   ga.populationSize(popsize);
   ga.nGenerations(ngen);
   ga.pMutation(pmut);

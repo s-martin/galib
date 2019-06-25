@@ -40,15 +40,14 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	GARandomSeed(100); // so test is always the same
 
 	// Set the default values of the parameters.
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	BOOST_REQUIRE(params.set(gaNpopulationSize, 50)); // number of individuals in population
-	BOOST_REQUIRE(params.set(gaNpCrossover, 0.8)); // likelihood of doing crossover
-	BOOST_REQUIRE(params.set(gaNpMutation, 0.001)); // probability of mutation
-	BOOST_REQUIRE(params.set(gaNnGenerations, 200)); // number of generations
-	BOOST_REQUIRE(params.set(gaNscoreFrequency, 20)); // how often to record scores
-	BOOST_REQUIRE(params.set(gaNflushFrequency, 50)); // how often to flush scores to file
-	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
+	auto params = std::make_shared<GAParameterList>();
+	BOOST_REQUIRE(params->set(gaNpopulationSize, 50)); // number of individuals in population
+	BOOST_REQUIRE(params->set(gaNpCrossover, 0.8)); // likelihood of doing crossover
+	BOOST_REQUIRE(params->set(gaNpMutation, 0.001)); // probability of mutation
+	BOOST_REQUIRE(params->set(gaNnGenerations, 200)); // number of generations
+	BOOST_REQUIRE(params->set(gaNscoreFrequency, 20)); // how often to record scores
+	BOOST_REQUIRE(params->set(gaNflushFrequency, 50)); // how often to flush scores to file
+	BOOST_REQUIRE(params->set(gaNscoreFilename, "bog.dat"));
 	// params.parse(argc, argv, false);
 	char datafile[128] = "smiley.txt";
 
@@ -92,7 +91,7 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	// the user-data.
 
 	GA2DBinaryStringGenome genome(width, height, objectiveEx7, (void *)&target);
-	GASteadyStateGA ga(genome);
+	GASteadyStateGA ga(genome, params);
 
 	// When you use a GA with overlapping populations, the default score
 	// frequency (how often the best of generation score is recorded) defaults
@@ -101,7 +100,7 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	// change the score frequency using the scoreFrequency member function of
 	// the GA.  Each of the parameters can be set individually if you like.
 	//   Here we just use the values that were set in the parameter list.
-	ga.parameters(params);
+	//ga.parameters(params);
 
 	// The default selection method is RouletteWheel.  Here we set the selection
 	// method to TournamentSelection.
@@ -118,7 +117,7 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	// percentage must be high enough to have at least one individual produced
 	// in each generation.  If not, the GA will post a warning message.
 
-	//  ga.pReplacement(0.3);
+	// ga.pReplacement(0.3);
 
 	// Often we use the number of generations as the criterion for terminating
 	// the GA run.  Here we override that and tell the GA to use convergence as
@@ -130,8 +129,8 @@ BOOST_AUTO_TEST_CASE(GAex7)
 
 	ga.terminator(GAGeneticAlgorithm::TerminateUponConvergence);
 
-	//  ga.pConvergence(0.99);	        // converge to within 1%
-	//  ga.nConvergence(100);		// within the last 100 generations
+	// ga.pConvergence(0.99);	        // converge to within 1%
+	// ga.nConvergence(100);		// within the last 100 generations
 
 	// Evolve the GA 'by hand'.  When you use this method, be sure to initialize
 	// the GA before you start to evolve it.  You can print out the status of
@@ -191,7 +190,8 @@ BOOST_AUTO_TEST_CASE(GAex9)
 
 	// Now create the GA using the genome and run it.  We'll use sigma
 	// truncation scaling so that we can handle negative objective scores.
-	GASimpleGA ga(genome);
+	auto params = std::make_shared<GAParameterList>();
+	GASimpleGA ga(genome, params);
 	GASigmaTruncationScaling scaling;
 	ga.populationSize(popsize);
 	ga.nGenerations(ngen);
