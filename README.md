@@ -21,7 +21,30 @@ http://lancet.mit.edu/ga
 
 ftp://lancet.mit.edu/pub/ga/
 
-## COMPILATION ## 
+## COMPILATION ##
+
+CMake is used for compilation
+
+### Windows ###
+
+Please use vcpkg to install dependencies:
+> vcpkg install boost-test boost-program-options
+
+md build && cd build
+cmake ../ -DCMAKE_TOOLCHAIN_FILE=<path to vcpkg>/scripts/buildsystems/vcpkg.cmake
+
+Open in Visual Studio as CMake project.
+
+
+### Linux (Ubuntu) ###
+
+> sudo apt libboost-test-dev libboost-program-options-dev install libx11-dev libxt-dev libxaw7-dev 
+(maybe remove again: xaw3dg-dev?)
+
+mkdir build && cd build
+cmake ../
+make
+
 There are two things to build: the library and the examples.  Here is the
 short version of how to build and test everything:
 

@@ -7,7 +7,4 @@
     <defines>
         <define name="WIN32 __x86__"/>
     </defines>
-    <tools>
-        <tool>clang-tidy</tool>
-    </tools>
 </project>
