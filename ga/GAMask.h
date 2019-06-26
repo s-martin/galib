@@ -9,54 +9,55 @@
 #define _ga_mask_h_
 
 #include <cstring>
+#include <vector>
 
 using GA_MASK_TYPE = char;
 
 class GAMask
 {
-  public:
+public:
 	GAMask()
 	{
 		_n = 0;
-		_mask = nullptr;
 	}
-	GAMask(const GAMask &m)
+	GAMask(const GAMask& m)
 	{
 		_n = 0;
-		_mask = nullptr;
 		copy(m);
 	}
-	GAMask &operator=(const GAMask &m)
+	GAMask& operator=(const GAMask& m)
 	{
 		copy(m);
 		return *this;
 	}
-	~GAMask() { delete[] _mask; }
-	void copy(const GAMask &m)
+	~GAMask() = default;
+	void copy(const GAMask& m)
 	{
 		size(m.size());
-		memcpy(_mask, m._mask, _n * sizeof(GA_MASK_TYPE));
+		_mask = m._mask;
 	}
 
-	void clear() { memset(_mask, 0, _n * sizeof(GA_MASK_TYPE)); }
+	void clear()
+	{
+		_mask.assign(_n, 0);
+	}
 	int size() const { return _n; }
 	int size(unsigned int s)
 	{
 		if (s > _n)
 		{
 			_n = s;
-			delete[] _mask;
-			_mask = new GA_MASK_TYPE[_n];
+			_mask.assign(_n, 0);
 		}
 		return _n;
 	}
-	GA_MASK_TYPE mask(unsigned int i) const { return _mask[i]; }
-	GA_MASK_TYPE &mask(unsigned int i) { return _mask[i]; }
-	GA_MASK_TYPE operator[](unsigned int i) const { return _mask[i]; }
-	GA_MASK_TYPE &operator[](unsigned int i) { return _mask[i]; }
+	GA_MASK_TYPE mask(unsigned int i) const { return _mask.at(i); }
+	GA_MASK_TYPE& mask(unsigned int i) { return _mask.at(i); }
+	GA_MASK_TYPE operator[](unsigned int i) const { return _mask.at(i); }
+	GA_MASK_TYPE& operator[](unsigned int i) { return _mask.at(i); }
 
-  protected:
-	GA_MASK_TYPE *_mask;
+protected:
+	std::vector<GA_MASK_TYPE> _mask;
 	unsigned int _n;
 };
 
