@@ -457,13 +457,6 @@ float GA1DArrayGenome<ARRAY_TYPE>::ElementComparator(const GAGenome &a,
 	return count / sis.length();
 }
 
-template <typename T1, typename T2> constexpr void SWAP(T1 &a, T2 &b)
-{
-	auto tmp = a;
-	a = b;
-	b = tmp;
-}
-
 // Randomly take bits from each parent.  For each bit we flip a coin to see if
 // that bit should come from the mother or the father.  If strings are
 // different lengths then we need to use the mask to get things right.
@@ -1259,7 +1252,5 @@ int GA1DArrayGenome<T>::CycleCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	return nc;
 }
-
-#undef SWAP
 
 #endif

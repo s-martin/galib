@@ -11,8 +11,6 @@
 #include <cstring>
 #include <vector>
 
-using GA_MASK_TYPE = char;
-
 class GAMask
 {
 public:
@@ -51,13 +49,13 @@ public:
 		}
 		return _n;
 	}
-	GA_MASK_TYPE mask(unsigned int i) const { return _mask.at(i); }
-	GA_MASK_TYPE& mask(unsigned int i) { return _mask.at(i); }
-	GA_MASK_TYPE operator[](unsigned int i) const { return _mask.at(i); }
-	GA_MASK_TYPE& operator[](unsigned int i) { return _mask.at(i); }
+	char mask(unsigned int i) const { return _mask.at(i); }
+	char& mask(unsigned int i) { return _mask.at(i); }
+	char operator[](unsigned int i) const { return _mask.at(i); }
+	char& operator[](unsigned int i) { return _mask.at(i); }
 
 protected:
-	std::vector<GA_MASK_TYPE> _mask;
+	std::vector<char> _mask;
 	unsigned int _n;
 };
 

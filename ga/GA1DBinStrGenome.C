@@ -17,13 +17,6 @@
 #include <gaerror.h>
 #include <garandom.h>
 
-template <typename T1, typename T2> constexpr void SWAP(T1 &a, T2 &b)
-{
-	auto tmp = a;
-	a = b;
-	b = tmp;
-}
-
 /* ----------------------------------------------------------------------------
    Genome class definition
 ---------------------------------------------------------------------------- */
