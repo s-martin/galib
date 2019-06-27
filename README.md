@@ -24,7 +24,7 @@ Modernized GAlib:
 
 https://github.com/s-martin/galib
 
-Original GAlib 2.47:
+Original GAlib 2.4.7:
 
 http://lancet.mit.edu/ga 
 
@@ -33,7 +33,7 @@ ftp://lancet.mit.edu/pub/ga/
 ## COMPILATION ##
 
 CMake is used for compilation. There are three things to build: the library, the examples
-and the uni tests. Here is the
+and the unit tests. Here is the
 short version of how to build and test everything:
 
 ### Windows ###
