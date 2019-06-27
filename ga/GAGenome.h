@@ -248,18 +248,18 @@ class GAGenome : public GAID
 
 	virtual int read(std::istream &)
 	{
-		GAErr(GA_LOC, className(), "read", gaErrOpUndef);
+		GAErr(GA_LOC, className(), "read", GAError::OpUndef);
 		return 0;
 	}
 	virtual int write(std::ostream &) const
 	{
-		GAErr(GA_LOC, className(), "write", gaErrOpUndef);
+		GAErr(GA_LOC, className(), "write", GAError::OpUndef);
 		return 0;
 	}
 
 	virtual bool equal(const GAGenome &) const
 	{
-		GAErr(GA_LOC, className(), "equal", gaErrOpUndef);
+		GAErr(GA_LOC, className(), "equal", GAError::OpUndef);
 		return true;
 	}
 	virtual bool notequal(const GAGenome &g) const

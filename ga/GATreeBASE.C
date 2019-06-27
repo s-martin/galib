@@ -67,7 +67,7 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 			where = ROOT;
 		} else if (where != ROOT)
 		{
-			GAErr(GA_LOC, "GATreeBASE", "insert", gaErrCannotInsertOnNilNode);
+			GAErr(GA_LOC, "GATreeBASE", "insert", GAError::CannotInsertOnNilNode);
 			return ERR;
 		}
 	}
@@ -77,7 +77,7 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 		if (((n->prev != nullptr) && n->prev != n) || ((n->next != nullptr) && n->next != n))
 		{
 			GAErr(GA_LOC, "GATreeBASE", "insert",
-				  gaErrCannotInsertWithSiblings);
+				  GAError::CannotInsertWithSiblings);
 			return ERR;
 		}
 		if (rt != nullptr)
@@ -111,7 +111,7 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 	case BEFORE:
 		if (idx->parent == nullptr)
 		{
-			GAErr(GA_LOC, "GATreeBASE", "insert", gaErrCannotInsertBeforeRoot);
+			GAErr(GA_LOC, "GATreeBASE", "insert", GAError::CannotInsertBeforeRoot);
 			return ERR;
 		}
 		n->parent = idx->parent;
@@ -127,7 +127,7 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 	case AFTER:
 		if (idx->parent == nullptr)
 		{
-			GAErr(GA_LOC, "GATreeBASE", "insert", gaErrCannotInsertAfterRoot);
+			GAErr(GA_LOC, "GATreeBASE", "insert", GAError::CannotInsertAfterRoot);
 			return ERR;
 		}
 		n->parent = idx->parent;
@@ -155,7 +155,7 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 		break;
 
 	default:
-		GAErr(GA_LOC, "GATreeBASE", "insert", gaErrBadWhereIndicator);
+		GAErr(GA_LOC, "GATreeBASE", "insert", GAError::BadWhereIndicator);
 		break;
 	}
 
@@ -181,7 +181,7 @@ GANodeBASE *GATreeBASE::remove(GANodeBASE *n)
 
 	if ((n->next == nullptr) || (n->prev == nullptr) || n->prev->next != n || n->next->prev != n)
 	{
-		GAErr(GA_LOC, "GATreeBASE", "remove", gaErrBadTreeLinks);
+		GAErr(GA_LOC, "GATreeBASE", "remove", GAError::BadTreeLinks);
 		return nullptr;
 	}
 
@@ -296,7 +296,7 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 			if (aparent == b)
 			{
 				GAErr(GA_LOC, "GATreeBASE", "swaptree",
-					  gaErrCannotSwapAncestors);
+					  GAError::CannotSwapAncestors);
 				return ERR;
 			}
 			while ((bparent != nullptr) && bparent != a) {
@@ -305,7 +305,7 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 			if (bparent == a)
 			{
 				GAErr(GA_LOC, "GATreeBASE", "swaptree",
-					  gaErrCannotSwapAncestors);
+					  GAError::CannotSwapAncestors);
 				return ERR;
 			}
 			aparent = a->parent; // reset the values

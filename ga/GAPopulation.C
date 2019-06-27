@@ -245,7 +245,7 @@ int GAPopulation::size(unsigned int popsize)
 }
 	if (n == 0 && popsize > 0)
 	{
-		GAErr(GA_LOC, "GAPopuluation", "size", gaErrNoIndividuals);
+		GAErr(GA_LOC, "GAPopuluation", "size", GAError::NoIndividuals);
 		return n;
 	}
 

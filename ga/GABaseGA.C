@@ -625,7 +625,7 @@ const GAPopulation &GAGeneticAlgorithm::population(const GAPopulation &p)
 {
 	if (p.size() < 1)
 	{
-		GAErr(GA_LOC, className(), "population", gaErrNoIndividuals);
+		GAErr(GA_LOC, className(), "population", GAError::NoIndividuals);
 		return *pop;
 	}
 

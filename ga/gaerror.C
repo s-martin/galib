@@ -98,11 +98,11 @@ void GAErr(const GASourceLocator loc, const std::string &clss,
 
 void GAErr(const GASourceLocator loc, const std::string &clss,
 		   const std::string &func,
-		   GAErrorIndex i, const std::string &msg2, const std::string &msg3)
+		   GAError i, const std::string &msg2, const std::string &msg3)
 {
 	std::stringstream errstr;
 	errstr << clss << "::" << func << ":" << std::endl;
-	errstr << __gaErrStr.at(i) << std::endl;
+	errstr << __gaErrStr.at(static_cast<int>(i)) << std::endl;
 
 	if (!msg2.empty())
 	{
@@ -123,12 +123,12 @@ void GAErr(const GASourceLocator loc, const std::string &clss,
 	}
 }
 
-void GAErr(const GASourceLocator loc, const std::string &func, GAErrorIndex i,
+void GAErr(const GASourceLocator loc, const std::string &func, GAError i,
 		   const std::string &msg2, const std::string &msg3)
 {
 	std::stringstream errstr;
 	errstr << func << ":" << std::endl;
-	errstr << __gaErrStr.at(i) << std::endl;
+	errstr << __gaErrStr.at(static_cast<int>(i)) << std::endl;
 
 	if (!msg2.empty())
 	{

@@ -93,7 +93,7 @@ template <class T> class GAList : public GAListBASE
 	{
 		if (this == t)
 		{
-			GAErr(GA_LOC, "GAList", "insert", gaErrCannotInsertIntoSelf);
+			GAErr(GA_LOC, "GAList", "insert", GAError::CannotInsertIntoSelf);
 			return GAListBASE::ERR;
 		}
 		if (GAListBASE::insert(t->hd, iter.node, where) == GAListBASE::ERR)

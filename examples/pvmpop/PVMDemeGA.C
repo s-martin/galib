@@ -56,7 +56,7 @@ PVMDemeGA::copy(const GAGeneticAlgorithm& g){
 int
 GADemeGA::populationSize(int i, unsigned int value){
   if(value < 1){
-    GAErr(className(), "populationSize", gaErrBadPopSize);
+    GAErr(className(), "populationSize", GAError::BadPopSize);
     value = 1;
   }
   if(i == ALL)

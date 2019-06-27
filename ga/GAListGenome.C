@@ -361,7 +361,7 @@ int GAListGenome<T>::PartialMatchCrossover(const GAGenome &p1,
 
 	if (mom.size() != dad.size())
 	{
-		GAErr(GA_LOC, mom.className(), "cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "cross", GAError::BadParentLength);
 		return 0;
 	}
 
@@ -449,7 +449,7 @@ int GAListGenome<T>::OrderCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	if (mom.size() != dad.size())
 	{
-		GAErr(GA_LOC, mom.className(), "cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "cross", GAError::BadParentLength);
 		return 0;
 	}
 
@@ -575,7 +575,7 @@ int GAListGenome<T>::CycleCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	if (mom.size() != dad.size())
 	{
-		GAErr(GA_LOC, mom.className(), "cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "cross", GAError::BadParentLength);
 		return 0;
 	}
 

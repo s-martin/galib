@@ -205,7 +205,7 @@ int GA2DBinaryStringGenome::read(std::istream &is)
 	if (is.eof() && ((j < ny) || // didn't get some lines
 					 (i < nx && i != 0)))
 	{ // stopped early on a row
-		GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
+		GAErr(GA_LOC, className(), "read", GAError::UnexpectedEOF);
 		is.clear(std::ios::badbit | is.rdstate());
 		return 1;
 	}
@@ -261,7 +261,7 @@ int GA2DBinaryStringGenome::resizeBehaviour(Dimension which, unsigned int lower,
 {
 	if (upper < lower)
 	{
-		GAErr(GA_LOC, className(), "resizeBehaviour", gaErrBadResizeBehaviour);
+		GAErr(GA_LOC, className(), "resizeBehaviour", GAError::BadResizeBehaviour);
 		return resizeBehaviour(which);
 	}
 
@@ -711,7 +711,7 @@ int GA2DBinaryStringGenome::OnePointCrossover(const GAGenome &p1,
 				sis.width() != mom.width())
 			{
 				GAErr(GA_LOC, mom.className(), "one-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			sitex = momsitex = dadsitex = GARandomInt(0, mom.width());
@@ -722,7 +722,7 @@ int GA2DBinaryStringGenome::OnePointCrossover(const GAGenome &p1,
 				 bro.resizeBehaviour(Dimension::WIDTH) == GAGenome::FIXED_SIZE)
 		{
 			GAErr(GA_LOC, mom.className(), "one-point cross",
-				  gaErrSameBehavReqd);
+				  GAError::SameBehavReqd);
 			return nc;
 		}
 		else
@@ -742,7 +742,7 @@ int GA2DBinaryStringGenome::OnePointCrossover(const GAGenome &p1,
 				sis.height() != mom.height())
 			{
 				GAErr(GA_LOC, mom.className(), "one-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			sitey = momsitey = dadsitey = GARandomInt(0, mom.height());
@@ -753,7 +753,7 @@ int GA2DBinaryStringGenome::OnePointCrossover(const GAGenome &p1,
 				 bro.resizeBehaviour(Dimension::HEIGHT) == GAGenome::FIXED_SIZE)
 		{
 			GAErr(GA_LOC, mom.className(), "one-point cross",
-				  gaErrSameBehavReqd);
+				  GAError::SameBehavReqd);
 			return nc;
 		}
 		else
@@ -792,7 +792,7 @@ int GA2DBinaryStringGenome::OnePointCrossover(const GAGenome &p1,
 			if (mom.width() != dad.width() || sis.width() != mom.width())
 			{
 				GAErr(GA_LOC, mom.className(), "one-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			sitex = momsitex = dadsitex = GARandomInt(0, mom.width());
@@ -813,7 +813,7 @@ int GA2DBinaryStringGenome::OnePointCrossover(const GAGenome &p1,
 			if (mom.height() != dad.height() || sis.height() != mom.height())
 			{
 				GAErr(GA_LOC, mom.className(), "one-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			sitey = momsitey = dadsitey = GARandomInt(0, mom.height());

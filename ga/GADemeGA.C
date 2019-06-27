@@ -45,7 +45,7 @@ GADemeGA::GADemeGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 	if (p.size() < 1)
 	{
 		GAErr(GA_LOC, className(), "GADemeGA(GAPopulation&)",
-			  gaErrNoIndividuals);
+			  GAError::NoIndividuals);
 		pop = nullptr;
 		nrepl = nullptr;
 		tmppop = nullptr;
@@ -238,7 +238,7 @@ int GADemeGA::populationSize(int i, unsigned int value)
 {
 	if (value < 1)
 	{
-		GAErr(GA_LOC, className(), "populationSize", gaErrBadPopSize);
+		GAErr(GA_LOC, className(), "populationSize", GAError::BadPopSize);
 		value = 1;
 	}
 	if (i == ALL)
@@ -263,7 +263,7 @@ int GADemeGA::nReplacement(int i, unsigned int value)
 		{
 			if (value > static_cast<unsigned int>(deme[ii]->size()))
 			{
-				GAErr(GA_LOC, className(), "nReplacement", gaErrBadPRepl);
+				GAErr(GA_LOC, className(), "nReplacement", GAError::BadPRepl);
 			}
 			else
 			{
@@ -276,7 +276,7 @@ int GADemeGA::nReplacement(int i, unsigned int value)
 	{
 		if (value > static_cast<unsigned int>(deme[i]->size()))
 		{
-			GAErr(GA_LOC, className(), "nReplacement", gaErrBadNRepl);
+			GAErr(GA_LOC, className(), "nReplacement", GAError::BadNRepl);
 		}
 		else
 		{
@@ -435,7 +435,7 @@ void GADemeGA::initialize(unsigned int seed)
 
 	if (scross == nullptr)
 	{
-		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
+		GAErr(GA_LOC, className(), "initialize", GAError::NoSexualMating);
 	}
 }
 

@@ -148,7 +148,7 @@ bool GAParameterList::set(const std::string &name, double v)
 		}
 		else
 		{
-			GAErr(GA_LOC, "GAParameterList", "set", gaErrBadTypeIndicator);
+			GAErr(GA_LOC, "GAParameterList", "set", GAError::BadTypeIndicator);
 		}
 		return true;
 	}
@@ -276,7 +276,7 @@ bool GAParameterList::write(const char *filename) const
 	//  if(! outfile.is_open()){
 	if (outfile.fail())
 	{
-		GAErr(GA_LOC, "GAParameterList", "write", gaErrWriteError, filename);
+		GAErr(GA_LOC, "GAParameterList", "write", GAError::WriteError, filename);
 		return false;
 	}
 	bool status = write(outfile);
@@ -412,7 +412,7 @@ bool GAParameterList::read(const std::string &filename, bool flag)
 	std::ifstream infile(filename, std::ios::in);
 	if (!infile)
 	{
-		GAErr(GA_LOC, "GAParameterList", "read", gaErrReadError, filename);
+		GAErr(GA_LOC, "GAParameterList", "read", GAError::ReadError, filename);
 		return false;
 	}
 	bool status = read(infile, flag);

@@ -119,7 +119,7 @@ template <class T> class GATree : public GATreeBASE
 	{
 		if (this == t)
 		{
-			GAErr(GA_LOC, "GATree", "insert", gaErrCannotInsertIntoSelf);
+			GAErr(GA_LOC, "GATree", "insert", GAError::CannotInsertIntoSelf);
 			return GATreeBASE::ERR;
 		}
 		if (GATreeBASE::insert(t->rt, iter.node, where) == GATreeBASE::ERR)

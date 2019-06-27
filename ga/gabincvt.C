@@ -53,7 +53,7 @@ int GACheckDecoding(unsigned int &nbits)
 	{	
 		std::string errstr = "string is " + std::to_string(nbits) + ", max is " + std::to_string(_GA_MAX_BITS() - 1);
 
-		GAErr(GA_LOC, "GACheckDecoding", gaErrBinStrTooLong, errstr);
+		GAErr(GA_LOC, "GACheckDecoding", GAError::BinStrTooLong, errstr);
 		nbits = _GA_MAX_BITS() - 1;
 		return 1;
 	}
@@ -68,7 +68,7 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 	{
 		std::string errstr = "string is " + std::to_string(nbits) + ", max is " + std::to_string(_GA_MAX_BITS() - 1);
 
-		GAErr(GA_LOC, "GACheckEncoding", gaErrBinStrTooLong, errstr);
+		GAErr(GA_LOC, "GACheckEncoding", GAError::BinStrTooLong, errstr);
 		nbits = _GA_MAX_BITS() - 1;
 		status = 1;
 	}
@@ -89,7 +89,7 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 
 		std::string errstr2 = "  nbits: " + std::to_string(nbits) + "\t\tmin: " + std::to_string(minval) + "\t\tmax: " + std::to_string(maxval);
 
-		GAErr(GA_LOC, "GACheckEncoding", gaErrDataLost, errstr, errstr2);
+		GAErr(GA_LOC, "GACheckEncoding", GAError::DataLost, errstr, errstr2);
 		val = static_cast<float>(actual);
 		status = 1;
 	}

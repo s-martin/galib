@@ -147,7 +147,7 @@ template <class T> int GA1DArrayGenome<T>::resize(int len)
 // We don't define this one apriori.  Do it in a specialization.
 template <class T> int GA1DArrayGenome<T>::read(std::istream &)
 {
-	GAErr(GA_LOC, className(), "read", gaErrOpUndef);
+	GAErr(GA_LOC, className(), "read", GAError::OpUndef);
 	return 1;
 }
 
@@ -170,7 +170,7 @@ int GA1DArrayGenome<T>::resizeBehaviour(unsigned int lower, unsigned int upper)
 {
 	if (upper < lower)
 	{
-		GAErr(GA_LOC, className(), "resizeBehaviour", gaErrBadResizeBehaviour);
+		GAErr(GA_LOC, className(), "resizeBehaviour", GAError::BadResizeBehaviour);
 		return resizeBehaviour();
 	}
 	minX = lower;
@@ -567,7 +567,7 @@ int GA1DArrayGenome<T>::OnePointCrossover(const GAGenome &p1,
 				sis.length() != mom.length())
 			{
 				GAErr(GA_LOC, mom.className(), "one-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			momsite = dadsite = GARandomInt(0, mom.length());
@@ -577,7 +577,7 @@ int GA1DArrayGenome<T>::OnePointCrossover(const GAGenome &p1,
 				 bro.resizeBehaviour() == GAGenome::FIXED_SIZE)
 		{
 			GAErr(GA_LOC, mom.className(), "one-point cross",
-				  gaErrSameBehavReqd);
+				  GAError::SameBehavReqd);
 			return nc;
 		}
 		else
@@ -607,7 +607,7 @@ int GA1DArrayGenome<T>::OnePointCrossover(const GAGenome &p1,
 			if (mom.length() != dad.length() || sis.length() != mom.length())
 			{
 				GAErr(GA_LOC, mom.className(), "one-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			momsite = dadsite = GARandomInt(0, mom.length());
@@ -669,7 +669,7 @@ int GA1DArrayGenome<T>::TwoPointCrossover(const GAGenome &p1,
 				sis.length() != mom.length())
 			{
 				GAErr(GA_LOC, mom.className(), "two-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			momsite[0] = GARandomInt(0, mom.length());
@@ -728,7 +728,7 @@ int GA1DArrayGenome<T>::TwoPointCrossover(const GAGenome &p1,
 			if (mom.length() != dad.length() || sis.length() != mom.length())
 			{
 				GAErr(GA_LOC, mom.className(), "two-point cross",
-					  gaErrSameLengthReqd);
+					  GAError::SameLengthReqd);
 				return nc;
 			}
 			momsite[0] = GARandomInt(0, mom.length());
@@ -885,7 +885,7 @@ int GA1DArrayGenome<T>::PartialMatchCrossover(const GAGenome &p1,
 	if (mom.length() != dad.length())
 	{
 		GAErr(GA_LOC, mom.className(), "parial match cross",
-			  gaErrBadParentLength);
+			  GAError::BadParentLength);
 		return nc;
 	}
 
@@ -984,7 +984,7 @@ int GA1DArrayGenome<T>::OrderCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	if (mom.length() != dad.length())
 	{
-		GAErr(GA_LOC, mom.className(), "order cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "order cross", GAError::BadParentLength);
 		return nc;
 	}
 
@@ -1150,7 +1150,7 @@ int GA1DArrayGenome<T>::CycleCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	if (mom.length() != dad.length())
 	{
-		GAErr(GA_LOC, mom.className(), "cycle cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "cycle cross", GAError::BadParentLength);
 		return nc;
 	}
 
