@@ -1,21 +1,30 @@
-# GAlib: A C++ Genetic Algorithm Library #
+# Modern GAlib: A (modernized) C++ Genetic Algorithm Library #
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
 GAlib is a C++ library of genetic algorithm objects.  With GAlib you can add 
 evolutionary algorithm optimization to almost any program using any data 
 representation and standard or custom selection, crossover, mutation, 
-scaling, and termination methods.  
+scaling, and termination methods.
 
-The library requires reasonable C++ compiler.  I have tested GAlib on MacOS
-using Metrowerks and Symantec development environments, MacOSX using gcc2/3,
-DOS/Windows using Borland C++ and MS VC++, and various UNIX platforms using 
-g++, egcs, CC, DCC, xlC, and aCC.
+GAlib was originally developed by Matthew Wall. From version 3.0 onwards
+it was modernized using latest C++17 technology.  
+
+The library requires a C++ compiler conforming to C++17. It has been tested with
+- Visual Studio 2019
+- GCC 8.3
 
 Graphic examples (XWindows/Motif and MS Windows) are available, as are 
 parallel, distributed implementations using PVM.  There are about 30 examples
 that illustrate various ways to use GAlib on a variety of problems.
+In addition many unit tests are available.
 
 ## WHERE TO GET IT ##
+
+Modernized GAlib:
+
+https://github.com/s-martin/galib
+
+Original GAlib 2.47:
 
 http://lancet.mit.edu/ga 
 
@@ -23,12 +32,13 @@ ftp://lancet.mit.edu/pub/ga/
 
 ## COMPILATION ##
 
-CMake is used for compilation. There are two things to build: the library and the examples.  Here is the
+CMake is used for compilation. There are three things to build: the library, the examples
+and the uni tests. Here is the
 short version of how to build and test everything:
 
 ### Windows ###
 
-Please use vcpkg to install dependencies:
+Using vcpkg to install dependencies is recommended:
 > vcpkg install boost-test boost-program-options
 
 > mkdir build && cd build
@@ -53,8 +63,6 @@ Open in Visual Studio as CMake project.
 If that does not work, then here are the files you might have to modify:
 
 - ga/gaconfig.h  - this contains the macros that control library options
-- makevars       - compiler and linker options for each compilier/os
-- makefile       - the actual build rules for putting everything together
 
 If you still have problems, look at Installation.html in the doc directory.
 
