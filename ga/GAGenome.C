@@ -18,16 +18,16 @@ specific details about base class member functions.
 // function by itself).
 void GAGenome::NoInitializer(GAGenome &c)
 {
-	GAErr(GA_LOC, c.className(), "initializer", gaErrOpUndef);
+	GAErr(GA_LOC, c.className(), "initializer", GAError::OpUndef);
 }
 int GAGenome::NoMutator(GAGenome &c, float)
 {
-	GAErr(GA_LOC, c.className(), "mutator", gaErrOpUndef);
+	GAErr(GA_LOC, c.className(), "mutator", GAError::OpUndef);
 	return 0;
 }
 float GAGenome::NoComparator(const GAGenome &c, const GAGenome &)
 {
-	GAErr(GA_LOC, c.className(), "comparator", gaErrOpUndef);
+	GAErr(GA_LOC, c.className(), "comparator", GAError::OpUndef);
 	return -1.0;
 }
 
@@ -70,7 +70,7 @@ GAGenome::~GAGenome() { delete evd; }
 
 GAGenome *GAGenome::clone(CloneMethod) const
 {
-	GAErr(GA_LOC, className(), "clone", gaErrOpUndef);
+	GAErr(GA_LOC, className(), "clone", GAError::OpUndef);
 	return new GAGenome(*this);
 }
 

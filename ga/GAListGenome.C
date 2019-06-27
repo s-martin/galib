@@ -253,13 +253,6 @@ float GAListGenome<T>::NodeComparator(const GAGenome &a, const GAGenome &b)
 	return count;
 }
 
-template <typename T1, typename T2> constexpr void SWAP(T1 &a, T2 &b)
-{
-	auto tmp = a;
-	a = b;
-	b = tmp;
-}
-
 // This crossover picks a site between nodes in each parent.  It is the same
 // as single point crossover on a resizeable binary string genome.  The site
 // in the mother is not necessarily the same as the site in the father!
@@ -368,7 +361,7 @@ int GAListGenome<T>::PartialMatchCrossover(const GAGenome &p1,
 
 	if (mom.size() != dad.size())
 	{
-		GAErr(GA_LOC, mom.className(), "cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "cross", GAError::BadParentLength);
 		return 0;
 	}
 
@@ -456,7 +449,7 @@ int GAListGenome<T>::OrderCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	if (mom.size() != dad.size())
 	{
-		GAErr(GA_LOC, mom.className(), "cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "cross", GAError::BadParentLength);
 		return 0;
 	}
 
@@ -582,7 +575,7 @@ int GAListGenome<T>::CycleCrossover(const GAGenome &p1, const GAGenome &p2,
 
 	if (mom.size() != dad.size())
 	{
-		GAErr(GA_LOC, mom.className(), "cross", gaErrBadParentLength);
+		GAErr(GA_LOC, mom.className(), "cross", GAError::BadParentLength);
 		return 0;
 	}
 

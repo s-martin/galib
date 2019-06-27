@@ -83,7 +83,7 @@ void GALinearScaling::evaluate(const GAPopulation &p)
 		double f = p.individual(i).score();
 		if (f < 0.0)
 		{
-			GAErr(GA_LOC, className(), "evaluate", gaErrNegFitness);
+			GAErr(GA_LOC, className(), "evaluate", GAError::NegFitness);
 			for (int ii = 0; ii < p.size(); ii++)
 			{
 				p.individual(ii).fitness(0.0);
@@ -106,7 +106,7 @@ float GALinearScaling::multiplier(float fm)
 {
 	if (fm <= 1.0)
 	{
-		GAErr(GA_LOC, className(), "multiplier", gaErrBadLinearScalingMult);
+		GAErr(GA_LOC, className(), "multiplier", GAError::BadLinearScalingMult);
 		return c;
 	}
 	return c = fm;
@@ -143,7 +143,7 @@ float GASigmaTruncationScaling::multiplier(float fm)
 {
 	if (fm < 0.0)
 	{
-		GAErr(GA_LOC, className(), "multiplier", gaErrBadSigmaTruncationMult);
+		GAErr(GA_LOC, className(), "multiplier", GAError::BadSigmaTruncationMult);
 		return c;
 	}
 	return c = fm;
@@ -166,7 +166,7 @@ void GAPowerLawScaling::evaluate(const GAPopulation &p)
 		double f = p.individual(i).score();
 		if (f < 0.0)
 		{
-			GAErr(GA_LOC, className(), "evaluate", gaErrPowerNegFitness);
+			GAErr(GA_LOC, className(), "evaluate", GAError::PowerNegFitness);
 			for (int ii = 0; ii < p.size(); ii++)
 			{
 				p.individual(ii).fitness(0.0);
@@ -316,7 +316,7 @@ float GASharing::sigma(float c)
 {
 	if (c <= 0.0)
 	{
-		GAErr(GA_LOC, className(), "sigma", gaErrBadSharingCutoff);
+		GAErr(GA_LOC, className(), "sigma", GAError::BadSharingCutoff);
 		return _sigma;
 	}
 	return _sigma = c;

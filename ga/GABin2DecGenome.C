@@ -53,7 +53,7 @@ GABin2DecPhenotypeCore::~GABin2DecPhenotypeCore()
 {
 	if (cnt > 0)
 	{
-		GAErr(GA_LOC, "GABin2DecPhenotypeCore", "destructor", gaErrRefsRemain);
+		GAErr(GA_LOC, "GABin2DecPhenotypeCore", "destructor", GAError::RefsRemain);
 	}
 	delete[] nbits;
 	delete[] oset;
@@ -239,7 +239,7 @@ float GABin2DecGenome::phenotype(unsigned int n) const
 {
 	if (n >= ptype->nPhenotypes())
 	{
-		GAErr(GA_LOC, className(), "phenotype", gaErrBadPhenotypeID);
+		GAErr(GA_LOC, className(), "phenotype", GAError::BadPhenotypeID);
 		return (0.0);
 	}
 	float val = 0.0;
@@ -262,12 +262,12 @@ float GABin2DecGenome::phenotype(unsigned int n, float val)
 {
 	if (n >= ptype->nPhenotypes())
 	{
-		GAErr(GA_LOC, className(), "phenotype", gaErrBadPhenotypeID);
+		GAErr(GA_LOC, className(), "phenotype", GAError::BadPhenotypeID);
 		return val;
 	}
 	if (val < ptype->min(n) || val > ptype->max(n))
 	{
-		GAErr(GA_LOC, className(), "phenotype", gaErrBadPhenotypeValue);
+		GAErr(GA_LOC, className(), "phenotype", GAError::BadPhenotypeValue);
 		val = ((val < ptype->min(n)) ? ptype->min(n) : ptype->max(n));
 	}
 	encode(val, &(data[ptype->offset(n)]), ptype->length(n), ptype->min(n),

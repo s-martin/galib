@@ -37,7 +37,7 @@ void
 BitStringGenome::copy(const GAGenome & orig) {
   if(&orig == this) return;
   if(!sameClass(orig)){
-    GAErr(GA_LOC, className(), "copy", gaErrObjectTypeMismatch);
+    GAErr(GA_LOC, className(), "copy", GAError::ObjectTypeMismatch);
     return;
   }
   GAGenome::copy(orig);

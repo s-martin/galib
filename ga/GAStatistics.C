@@ -468,7 +468,7 @@ const GAGenome &GAStatistics::bestIndividual(unsigned int n) const
 {
 	if (boa == nullptr || static_cast<int>(n) >= boa->size())
 	{
-		GAErr(GA_LOC, "GAStatistics", "bestIndividual", gaErrBadPopIndex);
+		GAErr(GA_LOC, "GAStatistics", "bestIndividual", GAError::BadPopIndex);
 		n = 0;
 	}
 	return boa->best(n); // this will crash if no boa
@@ -580,7 +580,7 @@ void GAStatistics::writeScores()
 	//  if(! outfile.is_open()){
 	if (outfile.fail())
 	{
-		GAErr(GA_LOC, "GAStatistics", "writeScores", gaErrWriteError,
+		GAErr(GA_LOC, "GAStatistics", "writeScores", GAError::WriteError,
 			  scorefile);
 		return;
 	}
@@ -596,7 +596,7 @@ int GAStatistics::write(const std::string &filename) const
 	//  if(! outfile.is_open()){
 	if (outfile.fail())
 	{
-		GAErr(GA_LOC, "GAStatistics", "write", gaErrWriteError, filename);
+		GAErr(GA_LOC, "GAStatistics", "write", GAError::WriteError, filename);
 		return 1;
 	}
 	write(outfile);
@@ -653,7 +653,7 @@ int GAStatistics::scores(const std::string &filename, int w)
 	//  if(! outfile.is_open()){
 	if (outfile.fail())
 	{
-		GAErr(GA_LOC, "GAStatistics", "scores", gaErrWriteError, filename);
+		GAErr(GA_LOC, "GAStatistics", "scores", GAError::WriteError, filename);
 		return 1;
 	}
 	scores(outfile, w);

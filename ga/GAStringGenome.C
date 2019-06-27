@@ -74,7 +74,7 @@ template <> int GA1DArrayAlleleGenome<char>::read(std::istream &is)
 
 	if (is.eof() && i < nx)
 	{
-		GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
+		GAErr(GA_LOC, className(), "read", GAError::UnexpectedEOF);
 		is.clear(std::ios::badbit | is.rdstate());
 		return 1;
 	}

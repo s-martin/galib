@@ -101,7 +101,7 @@ const GAPopulation &GASteadyStateGA::population(const GAPopulation &p)
 {
 	if (p.size() < 1)
 	{
-		GAErr(GA_LOC, className(), "population", gaErrNoIndividuals);
+		GAErr(GA_LOC, className(), "population", GAError::NoIndividuals);
 		return *pop;
 	}
 
@@ -168,7 +168,7 @@ float GASteadyStateGA::pReplacement(float value)
 	}
 	if (value <= 0 || value > 1)
 	{
-		GAErr(GA_LOC, className(), "pReplacement", gaErrBadPRepl);
+		GAErr(GA_LOC, className(), "pReplacement", GAError::BadPRepl);
 		params->set(gaNpReplacement, pRepl); // force it back
 		return pRepl;
 	}
@@ -197,7 +197,7 @@ int GASteadyStateGA::nReplacement(unsigned int value)
 	}
 	if (value == 0 || value > static_cast<unsigned int>(pop->size()))
 	{
-		GAErr(GA_LOC, className(), "nReplacement", gaErrBadNRepl);
+		GAErr(GA_LOC, className(), "nReplacement", GAError::BadNRepl);
 		params->set(gaNnReplacement, nRepl); // force it back
 		return nRepl;
 	}
@@ -244,7 +244,7 @@ void GASteadyStateGA::initialize(unsigned int seed)
 
 	if (scross == nullptr)
 	{
-		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
+		GAErr(GA_LOC, className(), "initialize", GAError::NoSexualMating);
 	}
 }
 

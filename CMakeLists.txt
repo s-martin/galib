@@ -22,9 +22,7 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost 1.65 REQUIRED COMPONENTS unit_test_framework program_options)
 message(STATUS "Boost version: ${Boost_VERSION}")
-
-#include_directories( ${Boost_INCLUDE_DIRS})
-                  
+             
 # This is needed if your Boost version is newer than your CMake version
 # or if you have an old version of CMake (<3.5)
 #if(NOT TARGET Boost::filesystem)

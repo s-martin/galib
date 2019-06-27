@@ -127,11 +127,11 @@ GAIncrementalGA::replacement(GAIncrementalGA::ReplacementScheme n,
 		}
 		else
 		{
-			GAErr(GA_LOC, className(), "replacement", gaErrNeedRS);
+			GAErr(GA_LOC, className(), "replacement", GAError::NeedRS);
 		}
 		break;
 	default:
-		GAErr(GA_LOC, className(), "replacement", gaErrBadRS);
+		GAErr(GA_LOC, className(), "replacement", GAError::BadRS);
 		break;
 	}
 	return rs;
@@ -141,7 +141,7 @@ int GAIncrementalGA::nOffspring(unsigned int value)
 {
 	if (value != 1 && value != 2)
 	{
-		GAErr(GA_LOC, className(), "numCrossStrategy", gaErrBadCS);
+		GAErr(GA_LOC, className(), "numCrossStrategy", GAError::BadCS);
 		noffspr = 1;
 	}
 	else
@@ -166,7 +166,7 @@ void GAIncrementalGA::initialize(unsigned int seed)
 
 	if (scross == nullptr)
 	{
-		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
+		GAErr(GA_LOC, className(), "initialize", GAError::NoSexualMating);
 	}
 }
 

@@ -94,7 +94,7 @@ GAAlleleSetCore<T>::GAAlleleSetCore(const GAAlleleSetCore<T> &orig)
 template <class T> GAAlleleSetCore<T>::~GAAlleleSetCore()
 {
 	if (cnt > 0)
-		GAErr(GA_LOC, "GAAlleleSetCore", "destructor", gaErrRefsRemain);
+		GAErr(GA_LOC, "GAAlleleSetCore", "destructor", GAError::RefsRemain);
 	delete[] a;
 }
 
@@ -222,12 +222,12 @@ template <class T> T GAAlleleSet<T>::allele() const
 		return core->a[GARandomInt(0, core->sz - 1)];
 	else if (core->type == GAAllele::DISCRETIZED)
 	{
-		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", gaErrOpUndef);
+		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", GAError::OpUndef);
 		return core->a[0];
 	}
 	else
 	{
-		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", gaErrOpUndef);
+		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", GAError::OpUndef);
 		return core->a[0];
 	}
 }
@@ -243,25 +243,25 @@ template <class T> T GAAlleleSet<T>::allele(unsigned int i) const
 		return core->a[i % core->sz];
 	else if (core->type == GAAllele::DISCRETIZED)
 	{
-		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", gaErrOpUndef);
+		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", GAError::OpUndef);
 		return core->a[0];
 	}
 	else
 	{
 		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)",
-			  gaErrNoAlleleIndex);
+			  GAError::NoAlleleIndex);
 		return core->a[0];
 	}
 }
 
 template <class T> int GAAlleleSet<T>::read(std::istream &)
 {
-	GAErr(GA_LOC, "GAAlleleSet", "read", gaErrOpUndef);
+	GAErr(GA_LOC, "GAAlleleSet", "read", GAError::OpUndef);
 	return 1;
 }
 template <class T> int GAAlleleSet<T>::write(std::ostream &) const
 {
-	GAErr(GA_LOC, "GAAlleleSet", "write", gaErrOpUndef);
+	GAErr(GA_LOC, "GAAlleleSet", "write", GAError::OpUndef);
 	return 1;
 }
 

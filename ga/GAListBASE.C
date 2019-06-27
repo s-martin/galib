@@ -46,7 +46,7 @@ int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 			where = HEAD;
 		} else if (where != HEAD && where != TAIL)
 		{
-			GAErr(GA_LOC, "GAListBASE", "insert", gaErrCannotInsertOnNilNode);
+			GAErr(GA_LOC, "GAListBASE", "insert", GAError::CannotInsertOnNilNode);
 			return ERR;
 		}
 	}
@@ -107,7 +107,7 @@ int GAListBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 		break;
 
 	default:
-		GAErr(GA_LOC, "GAListBASE", "insert", gaErrBadWhereIndicator);
+		GAErr(GA_LOC, "GAListBASE", "insert", GAError::BadWhereIndicator);
 		break;
 	}
 

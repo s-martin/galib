@@ -25,6 +25,13 @@ it should operate on the data.  See comments below for further details.
 class GAGeneticAlgorithm;
 class GAGenome;
 
+template <typename T1, typename T2> constexpr void SWAP(T1& a, T2& b)
+{
+	auto tmp = a;
+	a = b;
+	b = tmp;
+}
+
 /* ----------------------------------------------------------------------------
 Genome
 -------------------------------------------------------------------------------
@@ -241,18 +248,18 @@ class GAGenome : public GAID
 
 	virtual int read(std::istream &)
 	{
-		GAErr(GA_LOC, className(), "read", gaErrOpUndef);
+		GAErr(GA_LOC, className(), "read", GAError::OpUndef);
 		return 0;
 	}
 	virtual int write(std::ostream &) const
 	{
-		GAErr(GA_LOC, className(), "write", gaErrOpUndef);
+		GAErr(GA_LOC, className(), "write", GAError::OpUndef);
 		return 0;
 	}
 
 	virtual bool equal(const GAGenome &) const
 	{
-		GAErr(GA_LOC, className(), "equal", gaErrOpUndef);
+		GAErr(GA_LOC, className(), "equal", GAError::OpUndef);
 		return true;
 	}
 	virtual bool notequal(const GAGenome &g) const

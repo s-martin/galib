@@ -76,7 +76,7 @@ const GAPopulation &GASimpleGA::population(const GAPopulation &p)
 {
 	if (p.size() < 1)
 	{
-		GAErr(GA_LOC, className(), "population", gaErrNoIndividuals);
+		GAErr(GA_LOC, className(), "population", GAError::NoIndividuals);
 		return *pop;
 	}
 
@@ -125,7 +125,7 @@ void GASimpleGA::initialize(unsigned int seed)
 
 	if (scross == nullptr)
 	{
-		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
+		GAErr(GA_LOC, className(), "initialize", GAError::NoSexualMating);
 	}
 }
 

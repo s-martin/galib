@@ -94,7 +94,7 @@ template <> float GAAlleleSet<float>::allele(unsigned int i) const
 	}
 	else
 	{
-		GAErr(GA_LOC, "GAAlleleSet", "allele", gaErrNoAlleleIndex);
+		GAErr(GA_LOC, "GAAlleleSet", "allele", GAError::NoAlleleIndex);
 		value = core->a[0];
 	}
 	return value;
@@ -167,7 +167,7 @@ template <> int GA1DArrayAlleleGenome<float>::read(std::istream &is)
 
 	if (is.eof() && i < nx)
 	{
-		GAErr(GA_LOC, className(), "read", gaErrUnexpectedEOF);
+		GAErr(GA_LOC, className(), "read", GAError::UnexpectedEOF);
 		is.clear(std::ios::badbit | is.rdstate());
 		return 1;
 	}

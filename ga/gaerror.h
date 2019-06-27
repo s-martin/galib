@@ -28,58 +28,58 @@ class GASourceLocator
 #define GA_LOC GASourceLocator(__FILE__, __LINE__)
 
 // These are the indices for all of the error messages used in the library.
-enum GAErrorIndex
+enum class GAError
 {
 	// general errors
-	gaErrReadError = 0,
-	gaErrWriteError,
-	gaErrUnexpectedEOF,
-	gaErrBadProbValue,
-	gaErrObjectTypeMismatch,
-	gaErrOpUndef,
-	gaErrRefsRemain,
+	ReadError = 0,
+	WriteError,
+	UnexpectedEOF,
+	BadProbValue,
+	ObjectTypeMismatch,
+	OpUndef,
+	RefsRemain,
 
 	// errors for the GA objects
-	gaErrNeedRS,
-	gaErrBadRS,
-	gaErrBadCS,
-	gaErrBadPRepl,
-	gaErrBadNRepl,
-	gaErrBadPopIndex,
-	gaErrNoIndividuals,
-	gaErrBadPopSize,
-	gaErrNoSexualMating,
-	gaErrNoAsexualMating,
+	NeedRS,
+	BadRS,
+	BadCS,
+	BadPRepl,
+	BadNRepl,
+	BadPopIndex,
+	NoIndividuals,
+	BadPopSize,
+	NoSexualMating,
+	NoAsexualMating,
 
 	// errors for the genome and crossover objects
-	gaErrSameBehavReqd,
-	gaErrSameLengthReqd,
-	gaErrBadParentLength,
-	gaErrBadResizeBehaviour,
-	gaErrBadPhenotypeID,
-	gaErrBadPhenotypeValue,
-	gaErrBadBndsDim,
+	SameBehavReqd,
+	SameLengthReqd,
+	BadParentLength,
+	BadResizeBehaviour,
+	BadPhenotypeID,
+	BadPhenotypeValue,
+	BadBndsDim,
 
 	// scaling scheme error messages
-	gaErrBadLinearScalingMult,
-	gaErrBadSigmaTruncationMult,
-	gaErrNegFitness,
-	gaErrPowerNegFitness,
-	gaErrBadSharingCutoff,
+	BadLinearScalingMult,
+	BadSigmaTruncationMult,
+	NegFitness,
+	PowerNegFitness,
+	BadSharingCutoff,
 
 	// miscellaneous error messages from various data objects
-	gaErrNoAlleleIndex,
-	gaErrBinStrTooLong,
-	gaErrDataLost,
-	gaErrBadWhereIndicator,
-	gaErrBadTypeIndicator,
-	gaErrBadTreeLinks,
-	gaErrCannotSwapAncestors,
-	gaErrCannotInsertIntoSelf,
-	gaErrCannotInsertOnNilNode,
-	gaErrCannotInsertWithSiblings,
-	gaErrCannotInsertBeforeRoot,
-	gaErrCannotInsertAfterRoot
+	NoAlleleIndex,
+	BinStrTooLong,
+	DataLost,
+	BadWhereIndicator,
+	BadTypeIndicator,
+	BadTreeLinks,
+	CannotSwapAncestors,
+	CannotInsertIntoSelf,
+	CannotInsertOnNilNode,
+	CannotInsertWithSiblings,
+	CannotInsertBeforeRoot,
+	CannotInsertAfterRoot
 };
 
 // Error messages will look like this: (assuming that you use streams)
@@ -100,14 +100,14 @@ enum GAErrorIndex
 //
 
 void GAErr(const GASourceLocator loc, const std::string &clss,
-		   const std::string &function_name, GAErrorIndex i,
+		   const std::string &function_name, GAError i,
 		   const std::string &msg2 = "",
 		   const std::string &msg3 = "");
 void GAErr(const GASourceLocator loc, const std::string &clss,
 		   const std::string &func, const std::string &msg1, const std::string &msg2 = "",
 		   const std::string &msg3 = "");
 void GAErr(const GASourceLocator loc, const std::string &function_name,
-		   GAErrorIndex i,
+		   GAError i,
 		   const std::string &msg2 = "", const std::string &msg3 = "");
 
 // Use this function to turn on/off the error reporting.  If you turn off the

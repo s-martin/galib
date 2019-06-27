@@ -19,7 +19,7 @@ void GADCrowdingGA::initialize(unsigned int seed)
 	stats.reset(*pop);
 
 	if (scross == nullptr) {
-		GAErr(GA_LOC, className(), "initialize", gaErrNoSexualMating);
+		GAErr(GA_LOC, className(), "initialize", GAError::NoSexualMating);
 }
 }
 

@@ -229,6 +229,21 @@ bool GAParameterList::parse(int &argc, char **argv, bool)
 //	outfile.close();
 //	return status;
 //}
+bool GAParameterList::write(const char *filename) const
+{
+	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
+	// should be done this way, but SGI systems (and others?) don't do it
+	// right...
+	//  if(! outfile.is_open()){
+	if (outfile.fail())
+	{
+		GAErr(GA_LOC, "GAParameterList", "write", GAError::WriteError, filename);
+		return false;
+	}
+	bool status = write(outfile);
+	outfile.close();
+	return status;
+}
 
 // Read name-value pairs from the stream.  If the first item is a number, then
 // we expect that many name-value pairs.  If not, then we read until the end
@@ -260,7 +275,7 @@ bool GAParameterList::read(const std::string &filename, bool flag)
 	std::ifstream infile(filename, std::ios::in);
 	if (!infile)
 	{
-		GAErr(GA_LOC, "GAParameterList", "read", gaErrReadError, filename);
+		GAErr(GA_LOC, "GAParameterList", "read", GAError::ReadError, filename);
 		return false;
 	}
 	bool status = read(infile, flag);
