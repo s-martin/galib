@@ -95,7 +95,7 @@ template <class T>
 GAGenome *GA1DArrayGenome<T>::clone(GAGenome::CloneMethod flag) const
 {
 	GA1DArrayGenome<T> *cpy = new GA1DArrayGenome<T>(nx);
-	if (flag == CONTENTS)
+	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
 	}

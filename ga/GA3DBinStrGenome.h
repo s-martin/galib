@@ -74,7 +74,7 @@ class GA3DBinaryStringGenome : public GABinaryString, public GAGenome
 		return *this;
 	}
 	~GA3DBinaryStringGenome() override;
-	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override;
 	void copy(const GAGenome &chrom) override;
 
 	int read(std::istream &) override;

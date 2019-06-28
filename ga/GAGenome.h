@@ -219,7 +219,7 @@ class GAGenome : public GAID
 		HEIGHT = 1,
 		DEPTH = 2
 	};
-	enum CloneMethod
+	enum class CloneMethod
 	{
 		CONTENTS = 0,
 		ATTRIBUTES = 1
@@ -243,7 +243,7 @@ class GAGenome : public GAID
 		return *this;
 	}
 	~GAGenome() override;
-	virtual GAGenome *clone(CloneMethod flag = CONTENTS) const;
+	virtual GAGenome *clone(CloneMethod flag = CloneMethod::CONTENTS) const;
 	virtual void copy(const GAGenome &);
 
 	virtual int read(std::istream &)

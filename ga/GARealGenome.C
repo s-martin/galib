@@ -17,32 +17,32 @@
 template <> float GAAlleleSet<float>::allele() const
 {
 	float value = 0.0;
-	if (core->type == GAAllele::ENUMERATED)
+	if (core->type == GAAllele::Type::ENUMERATED)
 	{
 		value = core->a[GARandomInt(0, core->sz - 1)];
 	}
-	else if (core->type == GAAllele::DISCRETIZED)
+	else if (core->type == GAAllele::Type::DISCRETIZED)
 	{
 		float n = (core->a[1] - core->a[0]) / core->a[2];
 		int m = static_cast<int>(n);
-		if (core->lowerb == GAAllele::EXCLUSIVE)
+		if (core->lowerb == GAAllele::BoundType::EXCLUSIVE)
 		{
 			m -= 1;
 		}
-		if (core->upperb == GAAllele::EXCLUSIVE)
+		if (core->upperb == GAAllele::BoundType::EXCLUSIVE)
 		{
 			m -= 1;
 		}
 		value = core->a[0] + GARandomInt(0, m) * core->a[2];
-		if (core->lowerb == GAAllele::EXCLUSIVE)
+		if (core->lowerb == GAAllele::BoundType::EXCLUSIVE)
 		{
 			value += core->a[2];
 		}
 	}
 	else
 	{
-		if (core->a[0] == core->a[1] && core->lowerb == GAAllele::EXCLUSIVE &&
-			core->upperb == GAAllele::EXCLUSIVE)
+		if (core->a[0] == core->a[1] && core->lowerb == GAAllele::BoundType::EXCLUSIVE &&
+			core->upperb == GAAllele::BoundType::EXCLUSIVE)
 		{
 			value = core->a[0];
 		}
@@ -52,8 +52,8 @@ template <> float GAAlleleSet<float>::allele() const
 			{
 				value = GARandomFloat(core->a[0], core->a[1]);
 			} while (
-				(core->lowerb == GAAllele::EXCLUSIVE && value == core->a[0]) ||
-				(core->upperb == GAAllele::EXCLUSIVE && value == core->a[1]));
+				(core->lowerb == GAAllele::BoundType::EXCLUSIVE && value == core->a[0]) ||
+				(core->upperb == GAAllele::BoundType::EXCLUSIVE && value == core->a[1]));
 		}
 	}
 	return value;
@@ -65,20 +65,20 @@ template <> float GAAlleleSet<float>::allele() const
 template <> float GAAlleleSet<float>::allele(unsigned int i) const
 {
 	float value = 0.0;
-	if (core->type == GAAllele::ENUMERATED)
+	if (core->type == GAAllele::Type::ENUMERATED)
 	{
 		value = core->a[i % core->sz];
 	}
-	else if (core->type == GAAllele::DISCRETIZED)
+	else if (core->type == GAAllele::Type::DISCRETIZED)
 	{
 		float n = (core->a[1] - core->a[0]) / core->a[2];
 		auto m =
 			static_cast<unsigned int>(n); // what about bogus limits?
-		if (core->lowerb == GAAllele::EXCLUSIVE)
+		if (core->lowerb == GAAllele::BoundType::EXCLUSIVE)
 		{
 			m -= 1;
 		}
-		if (core->upperb == GAAllele::EXCLUSIVE)
+		if (core->upperb == GAAllele::BoundType::EXCLUSIVE)
 		{
 			m -= 1;
 		}
@@ -87,7 +87,7 @@ template <> float GAAlleleSet<float>::allele(unsigned int i) const
 			i = static_cast<int>(m);
 		}
 		value = core->a[0] + i * core->a[2];
-		if (core->lowerb == GAAllele::EXCLUSIVE)
+		if (core->lowerb == GAAllele::BoundType::EXCLUSIVE)
 		{
 			value += core->a[2];
 		}
@@ -202,12 +202,12 @@ int GARealGaussianMutator(GAGenome &g, float pmut)
 			float value = child.gene(i);
 			if (GAFlipCoin(pmut))
 			{
-				if (child.alleleset(i).type() == GAAllele::ENUMERATED ||
-					child.alleleset(i).type() == GAAllele::DISCRETIZED)
+				if (child.alleleset(i).type() == GAAllele::Type::ENUMERATED ||
+					child.alleleset(i).type() == GAAllele::Type::DISCRETIZED)
 				{
 					value = child.alleleset(i).allele();
 				}
-				else if (child.alleleset(i).type() == GAAllele::BOUNDED)
+				else if (child.alleleset(i).type() == GAAllele::Type::BOUNDED)
 				{
 					value += GAUnitGaussian();
 					value = GAMax(child.alleleset(i).lower(), value);
@@ -224,12 +224,12 @@ int GARealGaussianMutator(GAGenome &g, float pmut)
 		{
 			int idx = GARandomInt(0, length);
 			float value = child.gene(idx);
-			if (child.alleleset(idx).type() == GAAllele::ENUMERATED ||
-				child.alleleset(idx).type() == GAAllele::DISCRETIZED)
+			if (child.alleleset(idx).type() == GAAllele::Type::ENUMERATED ||
+				child.alleleset(idx).type() == GAAllele::Type::DISCRETIZED)
 			{
 				value = child.alleleset(idx).allele();
 			}
-			else if (child.alleleset(idx).type() == GAAllele::BOUNDED)
+			else if (child.alleleset(idx).type() == GAAllele::Type::BOUNDED)
 			{
 				value += GAUnitGaussian();
 				value = GAMax(child.alleleset(idx).lower(), value);

@@ -53,7 +53,7 @@ template <class T>
 GAGenome *GAListGenome<T>::clone(GAGenome::CloneMethod flag) const
 {
 	GAListGenome<T> *cpy = new GAListGenome<T>();
-	if (flag == (int)CONTENTS)
+	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
 	} // the cast is for metrowerks...

@@ -50,7 +50,7 @@ template <class T>
 GAGenome *GATreeGenome<T>::clone(GAGenome::CloneMethod flag) const
 {
 	GATreeGenome<T> *cpy = new GATreeGenome<T>();
-	if (flag == (int)CONTENTS)
+	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
 	} // cast is for metrowerks...

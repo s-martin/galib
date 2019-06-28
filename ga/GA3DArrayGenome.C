@@ -80,7 +80,7 @@ template <class T>
 GAGenome *GA3DArrayGenome<T>::clone(GAGenome::CloneMethod flag) const
 {
 	GA3DArrayGenome<T> *cpy = new GA3DArrayGenome<T>(nx, ny, nz);
-	if (flag == CONTENTS)
+	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
 	}

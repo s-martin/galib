@@ -94,7 +94,7 @@ GAPopulation::GAPopulation(const GAGenome &c, unsigned int popsize)
 	rind = new GAGenome *[N];
 	sind = new GAGenome *[N];
 	for (unsigned int i = 0; i < n; i++) {
-		rind[i] = c.clone(GAGenome::ATTRIBUTES);
+		rind[i] = c.clone(GAGenome::CloneMethod::ATTRIBUTES);
 }
 	memcpy(sind, rind, N * sizeof(GAGenome *));
 	//  indDiv = new float[N*N];
@@ -253,7 +253,7 @@ int GAPopulation::size(unsigned int popsize)
 	{
 		grow(popsize);
 		for (unsigned int i = n; i < popsize; i++) {
-			rind[i] = rind[GARandomInt(0, n - 1)]->clone(GAGenome::CONTENTS);
+			rind[i] = rind[GARandomInt(0, n - 1)]->clone(GAGenome::CloneMethod::CONTENTS);
 }
 		rsorted = false;
 	}

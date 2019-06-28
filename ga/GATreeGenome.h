@@ -43,7 +43,7 @@ template <class T> class GATreeGenome : public GATree<T>, public GAGenome
 		return *this;
 	}
 	~GATreeGenome() override;
-	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override;
 	void copy(const GAGenome &) override;
 
 	int write(std::ostream &) const override;

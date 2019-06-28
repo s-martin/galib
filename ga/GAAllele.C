@@ -19,7 +19,7 @@ constexpr auto GA_ALLELE_CHUNK = 10;
 
 template <class T>
 GAAlleleSetCore<T>::GAAlleleSetCore()
-	: type(GAAllele::ENUMERATED), csz(GA_ALLELE_CHUNK), sz(0), SZ(0), a(0)
+	: type(GAAllele::Type::ENUMERATED), csz(GA_ALLELE_CHUNK), sz(0), SZ(0), a(0)
 {
 	lowerb = GAAllele::NONE;
 	upperb = GAAllele::NONE;
@@ -29,7 +29,7 @@ GAAlleleSetCore<T>::GAAlleleSetCore()
 
 template <class T>
 GAAlleleSetCore<T>::GAAlleleSetCore(unsigned int n, const T array[])
-	: type(GAAllele::ENUMERATED), csz(GA_ALLELE_CHUNK), sz(n),
+	: type(GAAllele::Type::ENUMERATED), csz(GA_ALLELE_CHUNK), sz(n),
 	  SZ(GA_ALLELE_CHUNK)
 {
 	while (SZ < sz)
@@ -48,7 +48,7 @@ template <class T>
 GAAlleleSetCore<T>::GAAlleleSetCore(const T &lower, const T &upper,
 									GAAllele::BoundType lb,
 									GAAllele::BoundType ub)
-	: type(GAAllele::BOUNDED), csz(GA_ALLELE_CHUNK), sz(2), SZ(2), a(new T[2])
+	: type(GAAllele::Type::BOUNDED), csz(GA_ALLELE_CHUNK), sz(2), SZ(2), a(new T[2])
 {
 	a[0] = lower;
 	a[1] = upper;
@@ -62,7 +62,7 @@ template <class T>
 GAAlleleSetCore<T>::GAAlleleSetCore(const T &lower, const T &upper,
 									const T &increment, GAAllele::BoundType lb,
 									GAAllele::BoundType ub)
-	: type(GAAllele::DISCRETIZED), csz(GA_ALLELE_CHUNK), sz(3), SZ(3),
+	: type(GAAllele::Type::DISCRETIZED), csz(GA_ALLELE_CHUNK), sz(3), SZ(3),
 	  a(new T[3])
 {
 	a[0] = lower;
@@ -161,7 +161,7 @@ template <class T> int GAAlleleSet<T>::add(const T &alle)
 {
 	if (core == 0)
 		core = new GAAlleleSetCore<T>;
-	if (core->type != GAAllele::ENUMERATED)
+	if (core->type != GAAllele::Type::ENUMERATED)
 		return 1;
 	if (core->sz >= core->SZ)
 	{
@@ -182,7 +182,7 @@ template <class T> int GAAlleleSet<T>::remove(const T &allele)
 {
 	if (core == 0)
 		core = new GAAlleleSetCore<T>;
-	if (core->type != GAAllele::ENUMERATED)
+	if (core->type != GAAllele::Type::ENUMERATED)
 		return 1;
 	for (unsigned int i = 0; i < core->sz; i++)
 	{
@@ -218,9 +218,9 @@ template <class T> int GAAlleleSet<T>::remove(unsigned int x)
 // example of how to do this)
 template <class T> T GAAlleleSet<T>::allele() const
 {
-	if (core->type == GAAllele::ENUMERATED)
+	if (core->type == GAAllele::Type::ENUMERATED)
 		return core->a[GARandomInt(0, core->sz - 1)];
-	else if (core->type == GAAllele::DISCRETIZED)
+	else if (core->type == GAAllele::Type::DISCRETIZED)
 	{
 		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", GAError::OpUndef);
 		return core->a[0];
@@ -239,9 +239,9 @@ template <class T> T GAAlleleSet<T>::allele() const
 // is significantly larger than the allele set that defines its contents.
 template <class T> T GAAlleleSet<T>::allele(unsigned int i) const
 {
-	if (core->type == GAAllele::ENUMERATED)
+	if (core->type == GAAllele::Type::ENUMERATED)
 		return core->a[i % core->sz];
-	else if (core->type == GAAllele::DISCRETIZED)
+	else if (core->type == GAAllele::Type::DISCRETIZED)
 	{
 		GAErr(GA_LOC, "GAAlleleSet", "allele(unsigned int)", GAError::OpUndef);
 		return core->a[0];
@@ -278,7 +278,7 @@ GAAlleleSet<T>::read(std::istream& is){
   is.width(sizeof(buf));	// don't allow to overflow buffer
   is >> buf;
   if(strcmp(buf, "ENUMERATED") == 0){
-	core->type = GAAllele::ENUMERATED;
+	core->type = GAAllele::Type::ENUMERATED;
 	is >> n;
 	if(is.fail() || is.eof()) return 1;
 	core->sz = n;
@@ -293,32 +293,32 @@ GAAlleleSet<T>::read(std::istream& is){
 	}
   }
   else if(strcmp(buf, "BOUNDED") == 0){
-	core->type = GAAllele::BOUNDED;
+	core->type = GAAllele::Type::BOUNDED;
 	delete [] core->a;
 	core->SZ = 2;
 	core->sz = 2;
 	core->a = new T [core->SZ];
 	is >> buf;
-	if(strcmp(buf, "INCL") == 0) core->lowerb = GAAllele::INCLUSIVE;
-	else core->lowerb = GAAllele::EXCLUSIVE;
+	if(strcmp(buf, "INCL") == 0) core->lowerb = GAAllele::BoundType::INCLUSIVE;
+	else core->lowerb = GAAllele::BoundType::EXCLUSIVE;
 	is >> buf;
-	if(strcmp(buf, "INCL") == 0) core->upperb = GAAllele::INCLUSIVE;
-	else core->upperb = GAAllele::EXCLUSIVE;
+	if(strcmp(buf, "INCL") == 0) core->upperb = GAAllele::BoundType::INCLUSIVE;
+	else core->upperb = GAAllele::BoundType::EXCLUSIVE;
 	is >> core->a[0] >> core->a[1];
 	if(is.fail() || is.eof()) return 1;
   }
   else if(strcmp(buf, "DISCRETIZED") == 0){
-	core->type = GAAllele::DISCRETIZED;
+	core->type = GAAllele::Type::DISCRETIZED;
 	delete [] core->a;
 	core->SZ = 3;
 	core->sz = 3;
 	core->a = new T [core->SZ];
 	is >> buf;
-	if(strcmp(buf, "INCL") == 0) core->lowerb = GAAllele::INCLUSIVE;
-	else core->lowerb = GAAllele::EXCLUSIVE;
+	if(strcmp(buf, "INCL") == 0) core->lowerb = GAAllele::BoundType::INCLUSIVE;
+	else core->lowerb = GAAllele::BoundType::EXCLUSIVE;
 	is >> buf;
-	if(strcmp(buf, "INCL") == 0) core->upperb = GAAllele::INCLUSIVE;
-	else core->upperb = GAAllele::EXCLUSIVE;
+	if(strcmp(buf, "INCL") == 0) core->upperb = GAAllele::BoundType::INCLUSIVE;
+	else core->upperb = GAAllele::BoundType::EXCLUSIVE;
 	is >> core->a[0] >> core->a[1];
 	if(is.fail() || is.eof()) return 1;
   }
@@ -337,7 +337,7 @@ GAAlleleSet<T>::read(std::istream& is){
 template <class T> int
 GAAlleleSet<T>::write(std::ostream & os) const {
   switch(core->type){
-  case GAAllele::ENUMERATED:
+  case GAAllele::Type::ENUMERATED:
 	os << "ENUMERATED ";
 	os << core->sz << "\n";
 	for(int i=0; i<core->sz; i++)
@@ -345,17 +345,17 @@ GAAlleleSet<T>::write(std::ostream & os) const {
 	os << "\n";
 	break;
 
-  case GAAllele::BOUNDED:
+  case GAAllele::Type::BOUNDED:
 	os << "BOUNDED ";
-	os << ((core->lowerb == GAAllele::INCLUSIVE) ? "INCL" : "EXCL") << " ";
-	os << ((core->upperb == GAAllele::INCLUSIVE) ? "INCL" : "EXCL") << "\n";
+	os << ((core->lowerb == GAAllele::BoundType::INCLUSIVE) ? "INCL" : "EXCL") << " ";
+	os << ((core->upperb == GAAllele::BoundType::INCLUSIVE) ? "INCL" : "EXCL") << "\n";
 	os << core->a[0] << " " << core->a[1] << "\n";
 	break;
 
-  case GAAllele::DISCRETIZED:
+  case GAAllele::Type::DISCRETIZED:
 	os << "DISCRETIZED ";
-	os << ((core->lowerb == GAAllele::INCLUSIVE) ? "INCL" : "EXCL") << " ";
-	os << ((core->upperb == GAAllele::INCLUSIVE) ? "INCL" : "EXCL") << "\n";
+	os << ((core->lowerb == GAAllele::BoundType::INCLUSIVE) ? "INCL" : "EXCL") << " ";
+	os << ((core->upperb == GAAllele::BoundType::INCLUSIVE) ? "INCL" : "EXCL") << "\n";
 	os << core->a[0] << " " << core->a[1] << " " << core->a[2] << "\n";
 	break;
 

@@ -72,7 +72,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		return *this;
 	}
 	~GA1DArrayGenome() override;
-	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override;
 	void copy(const GAGenome &) override;
 
 	int read(std::istream &is) override;
@@ -176,7 +176,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	}
 	~GA1DArrayAlleleGenome() override;
 	GAGenome *
-	clone(GAGenome::CloneMethod flag = GAGenome::CONTENTS) const override;
+	clone(GAGenome::CloneMethod flag = GAGenome::CloneMethod::CONTENTS) const override;
 	void copy(const GAGenome &) override;
 
 	int read(std::istream &is) override;

@@ -24,8 +24,8 @@ GAParameterList &GAIncrementalGA::registerDefaultParameters(GAParameterList &p)
 
 GAIncrementalGA::GAIncrementalGA(const GAGenome &c) : GAGeneticAlgorithm(c)
 {
-	child1 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
-	child2 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
+	child1 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
+	child2 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
 	child1->geneticAlgorithm(*this);
 	child2->geneticAlgorithm(*this);
 
@@ -40,8 +40,8 @@ GAIncrementalGA::GAIncrementalGA(const GAGenome &c) : GAGeneticAlgorithm(c)
 }
 GAIncrementalGA::GAIncrementalGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 {
-	child1 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
-	child2 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
+	child1 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
+	child2 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
 	child1->geneticAlgorithm(*this);
 	child2->geneticAlgorithm(*this);
 

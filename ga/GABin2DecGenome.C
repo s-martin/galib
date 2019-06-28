@@ -202,7 +202,7 @@ void GABin2DecGenome::copy(const GAGenome &orig)
 GAGenome *GABin2DecGenome::clone(GAGenome::CloneMethod flag) const
 {
 	auto *cpy = new GABin2DecGenome(*ptype);
-	if (flag == CONTENTS)
+	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
 	}

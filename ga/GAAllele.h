@@ -22,13 +22,13 @@ imply the specific implementation of the container class).
 class GAAllele
 {
   public:
-	enum Type
+	enum class Type
 	{
 		ENUMERATED = 1,
 		BOUNDED = 2,
 		DISCRETIZED
 	};
-	enum BoundType
+	enum class BoundType
 	{
 		NONE,
 		INCLUSIVE,
@@ -78,11 +78,11 @@ template <class T> class GAAlleleSetCore
 	GAAlleleSetCore();
 	GAAlleleSetCore(unsigned int n, const T array[]);
 	GAAlleleSetCore(const T &lower, const T &upper,
-					GAAllele::BoundType lb = GAAllele::INCLUSIVE,
-					GAAllele::BoundType ub = GAAllele::INCLUSIVE);
+					GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
+					GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE);
 	GAAlleleSetCore(const T &lower, const T &upper, const T &increment,
-					GAAllele::BoundType lb = GAAllele::INCLUSIVE,
-					GAAllele::BoundType ub = GAAllele::INCLUSIVE);
+					GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
+					GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE);
 	GAAlleleSetCore(const GAAlleleSetCore<T> &);
 	virtual ~GAAlleleSetCore();
 	GAAlleleSetCore<T> &operator=(const GAAlleleSetCore<T> &);
@@ -105,14 +105,14 @@ template <class T> class GAAlleleSet
 	{
 	}
 	GAAlleleSet(const T &lower, const T &upper,
-				GAAllele::BoundType lb = GAAllele::INCLUSIVE,
-				GAAllele::BoundType ub = GAAllele::INCLUSIVE)
+				GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
+				GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE)
 		: core(new GAAlleleSetCore<T>(lower, upper, lb, ub))
 	{
 	}
 	GAAlleleSet(const T &lower, const T &upper, const T &increment,
-				GAAllele::BoundType lb = GAAllele::INCLUSIVE,
-				GAAllele::BoundType ub = GAAllele::INCLUSIVE)
+				GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
+				GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE)
 		: core(new GAAlleleSetCore<T>(lower, upper, increment, lb, ub))
 	{
 	}
@@ -187,11 +187,11 @@ template <class T> class GAAlleleSetArray
 	int add(const GAAlleleSet<T> &s);
 	int add(unsigned int n, const T a[]);
 	int add(const T &lower, const T &upper,
-			GAAllele::BoundType lb = GAAllele::INCLUSIVE,
-			GAAllele::BoundType ub = GAAllele::INCLUSIVE);
+			GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
+			GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE);
 	int add(const T &lower, const T &upper, const T &increment,
-			GAAllele::BoundType lb = GAAllele::INCLUSIVE,
-			GAAllele::BoundType ub = GAAllele::INCLUSIVE);
+			GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
+			GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE);
 	int remove(unsigned int);
 
   protected:

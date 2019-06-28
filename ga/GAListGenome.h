@@ -44,7 +44,7 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 		return *this;
 	}
 	~GAListGenome() override;
-	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override;
 	void copy(const GAGenome &) override;
 
 	int write(std::ostream &) const override;
