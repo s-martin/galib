@@ -16,26 +16,26 @@
 #include <cstdlib>
 #include <garandom.h>
 
-extern int _GATreeCompare(GANodeBASE *anode, GANodeBASE *bnode);
+//extern int _GATreeCompare(GANodeBASE *anode, GANodeBASE *bnode);
 
-template <class T> const char *GATreeGenome<T>::className() const
-{
-	return "GATreeGenome";
-}
-template <class T> int GATreeGenome<T>::classID() const
-{
-	return GAID::TreeGenome;
-}
+//template <class T> const char *GATreeGenome<T>::className() const
+//{
+//	return "GATreeGenome";
+//}
+//template <class T> int GATreeGenome<T>::classID() const
+//{
+//	return GAID::TreeGenome;
+//}
 
-template <class T>
-GATreeGenome<T>::GATreeGenome(GAGenome::Evaluator f, void *u)
-	: GATree<T>(), GAGenome(DEFAULT_TREE_INITIALIZER, DEFAULT_TREE_MUTATOR,
-							DEFAULT_TREE_COMPARATOR)
-{
-	evaluator(f);
-	userData(u);
-	crossover(DEFAULT_TREE_CROSSOVER);
-}
+//template <class T>
+//GATreeGenome<T>::GATreeGenome(GAGenome::Evaluator f, void *u)
+//	: GATree<T>(), GAGenome(DEFAULT_TREE_INITIALIZER, DEFAULT_TREE_MUTATOR,
+//							DEFAULT_TREE_COMPARATOR)
+//{
+//	evaluator(f);
+//	userData(u);
+//	crossover(DEFAULT_TREE_CROSSOVER);
+//}
 
 template <class T>
 GATreeGenome<T>::GATreeGenome(const GATreeGenome<T> &orig)
@@ -44,34 +44,34 @@ GATreeGenome<T>::GATreeGenome(const GATreeGenome<T> &orig)
 	GATreeGenome<T>::copy(orig);
 }
 
-template <class T> GATreeGenome<T>::~GATreeGenome() {}
+//template <class T> GATreeGenome<T>::~GATreeGenome() {}
 
-template <class T>
-GAGenome *GATreeGenome<T>::clone(GAGenome::CloneMethod flag) const
-{
-	GATreeGenome<T> *cpy = new GATreeGenome<T>();
-	if (flag == CloneMethod::CONTENTS)
-	{
-		cpy->copy(*this);
-	} // cast is for metrowerks...
-	else
-	{
-		cpy->GAGenome::copy(*this);
-	}
-	return cpy;
-}
-
-template <class T> void GATreeGenome<T>::copy(const GAGenome &orig)
-{
-	if (&orig == this)
-		return;
-	const GATreeGenome<T> *c = DYN_CAST(const GATreeGenome<T> *, &orig);
-	if (c)
-	{
-		GAGenome::copy(*c);
-		GATree<T>::copy(*c);
-	}
-}
+//template <class T>
+//GAGenome *GATreeGenome<T>::clone(GAGenome::CloneMethod flag) const
+//{
+//	GATreeGenome<T> *cpy = new GATreeGenome<T>();
+//	if (flag == CloneMethod::CONTENTS)
+//	{
+//		cpy->copy(*this);
+//	} // cast is for metrowerks...
+//	else
+//	{
+//		cpy->GAGenome::copy(*this);
+//	}
+//	return cpy;
+//}
+//
+//template <class T> void GATreeGenome<T>::copy(const GAGenome &orig)
+//{
+//	if (&orig == this)
+//		return;
+//	const GATreeGenome<T> *c = DYN_CAST(const GATreeGenome<T> *, &orig);
+//	if (c)
+//	{
+//		GAGenome::copy(*c);
+//		GATree<T>::copy(*c);
+//	}
+//}
 
 // Traverse the tree (breadth-first) and dump the contents as best we can to
 // the stream.  We don't try to write the contents of the nodes - we simply
@@ -125,13 +125,13 @@ template <class T> int GATreeGenome<T>::write(std::ostream &os) const
 	return 0;
 }
 
-template <class T> bool GATreeGenome<T>::equal(const GAGenome &c) const
-{
-	if (this == &c)
-		return true;
-	const GATreeGenome<T> &b = DYN_CAST(const GATreeGenome<T> &, c);
-	return _GATreeCompare(this->rt, b.rt) ? false : true;
-}
+//template <class T> bool GATreeGenome<T>::equal(const GAGenome &c) const
+//{
+//	if (this == &c)
+//		return true;
+//	const GATreeGenome<T> &b = DYN_CAST(const GATreeGenome<T> &, c);
+//	return _GATreeCompare(this->rt, b.rt) ? false : true;
+//}
 
 /* ----------------------------------------------------------------------------
    Operator definitions
@@ -213,53 +213,53 @@ template <class T> int GATreeGenome<T>::SwapNodeMutator(GAGenome &c, float pmut)
 	return (STA_CAST(int, nMut * 2));
 }
 
-// This is a rearranging mutation operator with subtree swap.  It does the same
-// thing as the rearranging mutator above, but swaps subtrees as well as the
-// nodes that are selected.
-//   After the mutation the iterator is left at the root of the tree.
-//   We check to make sure that we don't try to swap ancestral nodes.  If it is
-// an ancestral swap, we give up and don't do anything to the tree.  This could
-// result in mutation rates that are lower than the specified rate!
-// *** mutation rates are not exact!
-template <class T>
-int GATreeGenome<T>::SwapSubtreeMutator(GAGenome &c, float pmut)
-{
-	GATreeGenome<T> &child = DYN_CAST(GATreeGenome<T> &, c);
-
-	if (pmut <= 0.0)
-		return 0;
-
-	int n = child.size();
-	float nMut = pmut * STA_CAST(float, n);
-	nMut *= 0.5; // swapping one node swaps another as well
-	if (nMut < 1.0)
-	{ // we have to do a flip test for each node
-		nMut = 0;
-		for (int i = 0; i < n; i++)
-		{
-			if (GAFlipCoin(pmut))
-			{
-				int b = GARandomInt(0, n - 1);
-				if (!child.ancestral(i, b))
-					child.swaptree(i, b);
-				nMut++;
-			}
-		}
-	}
-	else
-	{ // only nuke the number of nodes we need to
-		for (int i = 0; i < nMut; i++)
-		{
-			int a = GARandomInt(0, n - 1);
-			int b = GARandomInt(0, n - 1);
-			if (!child.ancestral(a, b))
-				child.swaptree(a, b);
-		}
-	}
-	child.root(); // set iterator to root node
-
-	return (STA_CAST(int, nMut * 2));
-}
+//// This is a rearranging mutation operator with subtree swap.  It does the same
+//// thing as the rearranging mutator above, but swaps subtrees as well as the
+//// nodes that are selected.
+////   After the mutation the iterator is left at the root of the tree.
+////   We check to make sure that we don't try to swap ancestral nodes.  If it is
+//// an ancestral swap, we give up and don't do anything to the tree.  This could
+//// result in mutation rates that are lower than the specified rate!
+//// *** mutation rates are not exact!
+//template <class T>
+//int GATreeGenome<T>::SwapSubtreeMutator(GAGenome &c, float pmut)
+//{
+//	GATreeGenome<T> &child = DYN_CAST(GATreeGenome<T> &, c);
+//
+//	if (pmut <= 0.0)
+//		return 0;
+//
+//	int n = child.size();
+//	float nMut = pmut * STA_CAST(float, n);
+//	nMut *= 0.5; // swapping one node swaps another as well
+//	if (nMut < 1.0)
+//	{ // we have to do a flip test for each node
+//		nMut = 0;
+//		for (int i = 0; i < n; i++)
+//		{
+//			if (GAFlipCoin(pmut))
+//			{
+//				int b = GARandomInt(0, n - 1);
+//				if (!child.ancestral(i, b))
+//					child.swaptree(i, b);
+//				nMut++;
+//			}
+//		}
+//	}
+//	else
+//	{ // only nuke the number of nodes we need to
+//		for (int i = 0; i < nMut; i++)
+//		{
+//			int a = GARandomInt(0, n - 1);
+//			int b = GARandomInt(0, n - 1);
+//			if (!child.ancestral(a, b))
+//				child.swaptree(a, b);
+//		}
+//	}
+//	child.root(); // set iterator to root node
+//
+//	return (STA_CAST(int, nMut * 2));
+//}
 
 // We use the recursive tree function to compare the tree structures.  This
 // does not compare the contents of the nodes.
