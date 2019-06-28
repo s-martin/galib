@@ -261,107 +261,107 @@ template <class T> int GATreeGenome<T>::SwapNodeMutator(GAGenome &c, float pmut)
 //	return (STA_CAST(int, nMut * 2));
 //}
 
-// We use the recursive tree function to compare the tree structures.  This
-// does not compare the contents of the nodes.
-template <class T>
-float GATreeGenome<T>::TopologyComparator(const GAGenome &a, const GAGenome &b)
-{
-	if (&a == &b)
-		return 0;
-	const GATreeGenome<T> &sis = DYN_CAST(const GATreeGenome<T> &, a);
-	const GATreeGenome<T> &bro = DYN_CAST(const GATreeGenome<T> &, b);
+//// We use the recursive tree function to compare the tree structures.  This
+//// does not compare the contents of the nodes.
+//template <class T>
+//float GATreeGenome<T>::TopologyComparator(const GAGenome &a, const GAGenome &b)
+//{
+//	if (&a == &b)
+//		return 0;
+//	const GATreeGenome<T> &sis = DYN_CAST(const GATreeGenome<T> &, a);
+//	const GATreeGenome<T> &bro = DYN_CAST(const GATreeGenome<T> &, b);
+//
+//	return STA_CAST(float, _GATreeCompare(sis.rt, bro.rt));
+//}
 
-	return STA_CAST(float, _GATreeCompare(sis.rt, bro.rt));
-}
-
-// The default crossover operator takes a node from parent a (with its entire
-// sub-tree) and replaces it with a node from parent b (with its entire sub-
-// tree).  If the crossover site is not set, then we pick a random site based
-// on the trees in the genomes we're going to cross.  Once we have a valid
-// crossover site, we copy the trees from the two genomes.
-//   If the crossover site is out of bounds (ie refers to a node not in the
-// tree) then we don't do anything to the child.
-//   We allow crossover at ANY site in the genomes (including at the root
-// node).
-// *** we should be able to speed this up.  there is an extra traversal when we
-//     do the check to see if the crossover site is valid.
-template <class T>
-int GATreeGenome<T>::OnePointCrossover(const GAGenome &p1, const GAGenome &p2,
-									   GAGenome *c1, GAGenome *c2)
-{
-	const GATreeGenome<T> &mom = DYN_CAST(const GATreeGenome<T> &, p1);
-	const GATreeGenome<T> &dad = DYN_CAST(const GATreeGenome<T> &, p2);
-
-	int nc = 0;
-	unsigned int a = GARandomInt(0, mom.size() - 1);
-	unsigned int b = GARandomInt(0, dad.size() - 1);
-	GATreeIter<T> momiter(mom), daditer(dad);
-	GATree<T> *tree;
-
-	if (c1 && c2)
-	{
-		GATreeGenome<T> &sis = DYN_CAST(GATreeGenome<T> &, *c1);
-		GATreeGenome<T> &bro = DYN_CAST(GATreeGenome<T> &, *c2);
-
-		// first do the sister...
-
-		if (momiter.warp(a) && daditer.warp(b))
-		{
-			sis.GATree<T>::copy(mom);
-			tree = dad.GATree<T>::clone(b);
-			sis.warp(a);
-			sis.swaptree(tree);
-			delete tree;
-			sis.warp(0);
-		}
-
-		// ...now do the brother.
-
-		if (momiter.warp(a) && daditer.warp(b))
-		{
-			bro.GATree<T>::copy(dad);
-			tree = mom.GATree<T>::clone(a);
-			bro.warp(b);
-			bro.swaptree(tree);
-			delete tree;
-			bro.warp(0);
-		}
-
-		nc = 2;
-	}
-	else if (c1)
-	{
-		GATreeGenome<T> &sis = DYN_CAST(GATreeGenome<T> &, *c1);
-
-		if (GARandomBit())
-		{
-			if (momiter.warp(a) && daditer.warp(b))
-			{
-				sis.GATree<T>::copy(mom);
-				tree = dad.GATree<T>::clone(b);
-				sis.warp(a);
-				sis.swaptree(tree);
-				delete tree;
-				sis.warp(0);
-			}
-		}
-		else
-		{
-			if (momiter.warp(a) && daditer.warp(b))
-			{
-				sis.GATree<T>::copy(dad);
-				tree = mom.GATree<T>::clone(a);
-				sis.warp(b);
-				sis.swaptree(tree);
-				delete tree;
-				sis.warp(0);
-			}
-		}
-
-		nc = 1;
-	}
-
-	return nc;
-}
+//// The default crossover operator takes a node from parent a (with its entire
+//// sub-tree) and replaces it with a node from parent b (with its entire sub-
+//// tree).  If the crossover site is not set, then we pick a random site based
+//// on the trees in the genomes we're going to cross.  Once we have a valid
+//// crossover site, we copy the trees from the two genomes.
+////   If the crossover site is out of bounds (ie refers to a node not in the
+//// tree) then we don't do anything to the child.
+////   We allow crossover at ANY site in the genomes (including at the root
+//// node).
+//// *** we should be able to speed this up.  there is an extra traversal when we
+////     do the check to see if the crossover site is valid.
+//template <class T>
+//int GATreeGenome<T>::OnePointCrossover(const GAGenome &p1, const GAGenome &p2,
+//									   GAGenome *c1, GAGenome *c2)
+//{
+//	const GATreeGenome<T> &mom = DYN_CAST(const GATreeGenome<T> &, p1);
+//	const GATreeGenome<T> &dad = DYN_CAST(const GATreeGenome<T> &, p2);
+//
+//	int nc = 0;
+//	unsigned int a = GARandomInt(0, mom.size() - 1);
+//	unsigned int b = GARandomInt(0, dad.size() - 1);
+//	GATreeIter<T> momiter(mom), daditer(dad);
+//	GATree<T> *tree;
+//
+//	if (c1 && c2)
+//	{
+//		GATreeGenome<T> &sis = DYN_CAST(GATreeGenome<T> &, *c1);
+//		GATreeGenome<T> &bro = DYN_CAST(GATreeGenome<T> &, *c2);
+//
+//		// first do the sister...
+//
+//		if (momiter.warp(a) && daditer.warp(b))
+//		{
+//			sis.GATree<T>::copy(mom);
+//			tree = dad.GATree<T>::clone(b);
+//			sis.warp(a);
+//			sis.swaptree(tree);
+//			delete tree;
+//			sis.warp(0);
+//		}
+//
+//		// ...now do the brother.
+//
+//		if (momiter.warp(a) && daditer.warp(b))
+//		{
+//			bro.GATree<T>::copy(dad);
+//			tree = mom.GATree<T>::clone(a);
+//			bro.warp(b);
+//			bro.swaptree(tree);
+//			delete tree;
+//			bro.warp(0);
+//		}
+//
+//		nc = 2;
+//	}
+//	else if (c1)
+//	{
+//		GATreeGenome<T> &sis = DYN_CAST(GATreeGenome<T> &, *c1);
+//
+//		if (GARandomBit())
+//		{
+//			if (momiter.warp(a) && daditer.warp(b))
+//			{
+//				sis.GATree<T>::copy(mom);
+//				tree = dad.GATree<T>::clone(b);
+//				sis.warp(a);
+//				sis.swaptree(tree);
+//				delete tree;
+//				sis.warp(0);
+//			}
+//		}
+//		else
+//		{
+//			if (momiter.warp(a) && daditer.warp(b))
+//			{
+//				sis.GATree<T>::copy(dad);
+//				tree = mom.GATree<T>::clone(a);
+//				sis.warp(b);
+//				sis.swaptree(tree);
+//				delete tree;
+//				sis.warp(0);
+//			}
+//		}
+//
+//		nc = 1;
+//	}
+//
+//	return nc;
+//}
 
 #endif

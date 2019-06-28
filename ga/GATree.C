@@ -50,69 +50,69 @@ Tree
 //	cdpth = orig.cdpth;
 //}
 
-// This remove method returns a tree with the removed node as its root.  The
-// node we remove is the current node.  We allocate memory for the tree, but
-// we don't allocate any memory for the node or its children.  That is taken
-// from the previous (this) tree and it no longer has to worry about it.  It
-// is the responsibility of the new tree to delete that memory.
-//   The iterator gets set to the elder child of the node that was removed.  If
-// there is no elder child, then it gets set to the parent.  If no parent, then
-// it gets set to NULL.
-//   Thank you to Uli Bubenheimer (uli@aisun1.ai.uga.edu) for the bug fix here.
-// I forgot to fix the pointers in the root node of the sub-tree.
-template <class T> GATree<T> *GATree<T>::remove()
-{
-	GATree<T> *t = new GATree<T>;
-	GANode<T> *node = DYN_CAST(GANode<T> *, iter.node);
-	if (!node)
-		return t;
+//// This remove method returns a tree with the removed node as its root.  The
+//// node we remove is the current node.  We allocate memory for the tree, but
+//// we don't allocate any memory for the node or its children.  That is taken
+//// from the previous (this) tree and it no longer has to worry about it.  It
+//// is the responsibility of the new tree to delete that memory.
+////   The iterator gets set to the elder child of the node that was removed.  If
+//// there is no elder child, then it gets set to the parent.  If no parent, then
+//// it gets set to NULL.
+////   Thank you to Uli Bubenheimer (uli@aisun1.ai.uga.edu) for the bug fix here.
+//// I forgot to fix the pointers in the root node of the sub-tree.
+//template <class T> GATree<T> *GATree<T>::remove()
+//{
+//	GATree<T> *t = new GATree<T>;
+//	GANode<T> *node = DYN_CAST(GANode<T> *, iter.node);
+//	if (!node)
+//		return t;
+//
+//	if (node->prev != node)
+//		iter.eldest();
+//	else if (node->parent)
+//		iter.parent();
+//	else
+//		iter.node = nullptr;
+//
+//	GANode<T> *tmpnode = DYN_CAST(GANode<T> *, GATreeBASE::remove(node));
+//	tmpnode->prev = tmpnode;
+//	tmpnode->next = tmpnode;
+//	tmpnode->parent = nullptr;
+//
+//	t->insert(tmpnode, (GANode<T> *)0, GATreeBASE::ROOT);
+//
+//	return t;
+//}
 
-	if (node->prev != node)
-		iter.eldest();
-	else if (node->parent)
-		iter.parent();
-	else
-		iter.node = nullptr;
-
-	GANode<T> *tmpnode = DYN_CAST(GANode<T> *, GATreeBASE::remove(node));
-	tmpnode->prev = tmpnode;
-	tmpnode->next = tmpnode;
-	tmpnode->parent = nullptr;
-
-	t->insert(tmpnode, (GANode<T> *)0, GATreeBASE::ROOT);
-
-	return t;
-}
-
-// Recursively duplicate a subtree given a base node.  This uses the _copy
-// method (which does a deep and wide copy).  Here we just copy a node, then
-// sic the _copy method on the child if it exists.  The parent of the new node
-// is set to NULL - this makes it a root node in the new tree object.
-//   We do the cloning based on the valued passed to the routine.  0 is the
-// root node and makes a clone of the entire tree.  This routine has no effect
-// on the iterator in the original tree.
-//   The iterator in the clone is left pointing to the root node of the clone.
-template <class T> GATree<T> *GATree<T>::clone(unsigned int i) const
-{
-	GATree<T> *t = new GATree<T>;
-	GANode<T> *node;
-	unsigned int w = 0;
-	if (i == 0)
-		node = DYN_CAST(GANode<T> *, rt);
-	else
-		node = DYN_CAST(GANode<T> *, _GATreeTraverse(i, w, rt));
-	if (!node)
-		return t;
-
-	GANode<T> *newnode = new GANode<T>(node->contents);
-	newnode->child = _GATreeCopy(DYN_CAST(GANode<T> *, node->child), newnode);
-	if (newnode->child)
-		newnode->child->parent = newnode;
-
-	t->insert(newnode, (GANode<T> *)0, GATreeBASE::ROOT);
-
-	return t;
-}
+//// Recursively duplicate a subtree given a base node.  This uses the _copy
+//// method (which does a deep and wide copy).  Here we just copy a node, then
+//// sic the _copy method on the child if it exists.  The parent of the new node
+//// is set to NULL - this makes it a root node in the new tree object.
+////   We do the cloning based on the valued passed to the routine.  0 is the
+//// root node and makes a clone of the entire tree.  This routine has no effect
+//// on the iterator in the original tree.
+////   The iterator in the clone is left pointing to the root node of the clone.
+//template <class T> GATree<T> *GATree<T>::clone(unsigned int i) const
+//{
+//	GATree<T> *t = new GATree<T>;
+//	GANode<T> *node;
+//	unsigned int w = 0;
+//	if (i == 0)
+//		node = DYN_CAST(GANode<T> *, rt);
+//	else
+//		node = DYN_CAST(GANode<T> *, _GATreeTraverse(i, w, rt));
+//	if (!node)
+//		return t;
+//
+//	GANode<T> *newnode = new GANode<T>(node->contents);
+//	newnode->child = _GATreeCopy(DYN_CAST(GANode<T> *, node->child), newnode);
+//	if (newnode->child)
+//		newnode->child->parent = newnode;
+//
+//	t->insert(newnode, (GANode<T> *)0, GATreeBASE::ROOT);
+//
+//	return t;
+//}
 
 //// Destroy the specified node and all nodes attached to it looking downward.
 //// This does NOT destroy any nodes above the specified node.  If this node is
@@ -220,15 +220,15 @@ template <class T> GATree<T> *GATree<T>::clone(unsigned int i) const
 //	return GATreeBASE::swaptree(anode, bnode);
 //}
 
-// Swap two nodes in a tree, leave their subtrees intact.  This routine does
-// not affect the iterator or the size or depth of the tree.
-template <class T> int GATree<T>::swap(unsigned int a, unsigned int b)
-{
-	unsigned int aw = 0, bw = 0;
-	GANodeBASE *anode = _GATreeTraverse(a, aw, rt);
-	GANodeBASE *bnode = _GATreeTraverse(b, bw, rt);
-	return GATreeBASE::swapnode(anode, bnode);
-}
+//// Swap two nodes in a tree, leave their subtrees intact.  This routine does
+//// not affect the iterator or the size or depth of the tree.
+//template <class T> int GATree<T>::swap(unsigned int a, unsigned int b)
+//{
+//	unsigned int aw = 0, bw = 0;
+//	GANodeBASE *anode = _GATreeTraverse(a, aw, rt);
+//	GANodeBASE *bnode = _GATreeTraverse(b, bw, rt);
+//	return GATreeBASE::swapnode(anode, bnode);
+//}
 
 ///* ----------------------------------------------------------------------------
 //Recursive routines for the Tree objects
