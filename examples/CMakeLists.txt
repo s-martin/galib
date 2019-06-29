@@ -19,17 +19,20 @@ target_link_libraries(example4 PUBLIC GAlib)
 add_executable(example5 ex5.C)
 target_link_libraries(example5 PUBLIC GAlib)
 
-# add_executable(example6 ex6.C)
-# target_link_libraries(example6 PUBLIC GAlib)
+add_executable(example6 ex6.C)
+target_link_libraries(example6 PUBLIC GAlib)
 
 add_executable(example7 ex7.C)
 target_link_libraries(example7 PUBLIC GAlib)
 
-# add_executable(example8 ex8.C)
-# target_link_libraries(example8 PUBLIC GAlib)
+add_executable(example8 ex8.C)
+target_link_libraries(example8 PUBLIC GAlib)
 
 add_executable(example9 ex9.C)
 target_link_libraries(example9 PUBLIC GAlib)
+
+add_executable(example10 ex10.C)
+target_link_libraries(example10 PUBLIC GAlib)
 
 if(NOT MSVC) 
 	add_executable(gnuex 

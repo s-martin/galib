@@ -65,6 +65,41 @@ current, head, tail, next, prev, warp
 ---------------------------------------------------------------------------- */
 template <class T> class GAListIter;
 
+extern GANodeBASE *_GAListTraverse(unsigned int index, unsigned int &cur,
+								   GANodeBASE *node);
+
+// Copy a node, including all of its siblings up to the end of the list.  We do
+// NOT wrap around the list until we return the first node - we stop at the
+// tail of the list.  Return the pointer to the first node in the list.
+template <class T> GANode<T> *_GAListCopy(GANode<T> *node, GANode<T> *head)
+{
+	if (!node)
+		return (GANode<T> *)0;
+	GANode<T> *newnode = new GANode<T>(node->contents);
+	GANode<T> *lasttmp = newnode, *newtmp = (GANode<T> *)0;
+	GANode<T> *tmp = DYN_CAST(GANode<T> *, node->next);
+	while (tmp && tmp != head)
+	{
+		newtmp = new GANode<T>(tmp->contents);
+		newtmp->prev = lasttmp;
+		lasttmp->next = newtmp;
+
+		lasttmp = newtmp;
+		tmp = DYN_CAST(GANode<T> *, tmp->next);
+	}
+	if (newtmp)
+	{
+		newtmp->next = newnode;
+		newnode->prev = newtmp;
+	}
+	else
+	{
+		newnode->next = newnode;
+		newnode->prev = newnode;
+	}
+	return newnode;
+}
+
 template <class T> class GAList : public GAListBASE
 {
   public:
@@ -81,14 +116,132 @@ template <class T> class GAList : public GAListBASE
 			copy(orig);
 		return *this;
 	}
-	virtual ~GAList();
-	GAList<T> *clone(unsigned int i = 0) const;
+
+	// The destructor just goes through the list and deletes every node.
+	virtual ~GAList()
+	{
+		while (hd)
+			delete GAListBASE::remove(DYN_CAST(GANode<T> *, hd));
+		iter.node = nullptr;
+	}
+
+	// Make a copy of a list and return the pointer to the new list.  The
+	// cloning
+	// is based on the value passed to this routine.  A value of 0 will clone
+	// the entire list.  Any other value will clone the list from the index to
+	// the end of the list.  This routine has no effect on the iterator in the
+	// original list.
+	GAList<T> *clone(unsigned int i = 0) const
+	{
+		GAList<T> *t = new GAList<T>;
+		GANode<T> *node;
+		unsigned int w = 0;
+		if (i == 0)
+			node = DYN_CAST(GANode<T> *, hd);
+		else
+			node = DYN_CAST(GANode<T> *, _GAListTraverse(i, w, hd));
+		if (!node)
+			return t;
+
+		GANode<T> *newnode = _GAListCopy(node, DYN_CAST(GANode<T> *, hd));
+
+		t->insert(newnode, (GANode<T> *)0, GAListBASE::HEAD);
+
+		// need to set iterator to right spot in the clone!!  for now its at the
+		// head
+
+		return t;
+	}
 
 	// methods that modify the state of the list
-	void copy(const GAList<T> &orig);
-	int destroy();
-	int swap(unsigned int, unsigned int);
-	T *remove();
+
+	// Yes, this is really ugly.  We do a complete destruction of the existing
+	// list
+	// then we copy the new one.  No caching, no nothing.  Oh well.  We set the
+	// iterator to the head node - it should be set to the corresponding node,
+	// but I won't do that right now.  THIS IS A BUG!
+	void copy(const GAList<T> &orig)
+	{
+		while (hd)
+			delete GAListBASE::remove(DYN_CAST(GANode<T> *, hd));
+		hd = _GAListCopy(DYN_CAST(GANode<T> *, orig.hd),
+						 DYN_CAST(GANode<T> *, orig.hd));
+		iter.node = hd;
+		sz = orig.sz;
+		csz = orig.csz;
+	}
+
+	// Destroy the specified node.  This uses the current node as the one to
+	// destroy, so be sure to use the iteration methods to move to the node you
+	// want to destroy.  Once the node is gone, we set the current node to the
+	// prev node of the one that was destroyed.  If the node that was nuked was
+	// the head node then we set the current node to the new head.
+	int destroy()
+	{
+		GANodeBASE *node = iter.node;
+		if (!node)
+			return GAListBASE::NO_ERR;
+		if (node->prev && node->prev != node)
+			if (hd == node)
+				iter.node = node->next;
+			else
+				iter.node = node->prev;
+		else
+			iter.node = nullptr;
+		delete GAListBASE::remove(node);
+		return GAListBASE::NO_ERR;
+	}
+
+	// Swap two nodes in the list.  This has no effect on the size or the
+	// iterator. If either index is out of bounds then we don't do anything.
+	int swap(unsigned int a, unsigned int b)
+	{
+		if (a == b || a > (unsigned int)size() || b > (unsigned int)size())
+			return GAListBASE::NO_ERR;
+		GANodeBASE *tmp = hd, *anode = nullptr, *bnode = nullptr;
+		unsigned int cur = 0;
+		while (tmp && tmp->next != hd)
+		{
+			if (a == cur)
+				anode = tmp;
+			if (b == cur)
+				bnode = tmp;
+			tmp = tmp->next;
+			cur++;
+		}
+		if (a == cur)
+			anode = tmp;
+		if (b == cur)
+			bnode = tmp;
+		return GAListBASE::swapnode(anode, bnode);
+	}
+
+	// This remove method returns a pointer to the contents of the node that was
+	// removed.  The node itself is destroyed.
+	//   The iterator gets set to the next node toward the head of the list.
+	//   This routine makes a copy of the node contents using the copy
+	//   initializer
+	// of the T object, so the copy initializer MUST be defined and accessible.
+	//   We return a pointer to the contents rather than the contenst for the
+	//   same
+	// reason we return a pointer from all the iter routines - we don't want to
+	// pass big objects around.
+	T *remove()
+	{
+		GANode<T> *node = DYN_CAST(GANode<T> *, iter.node);
+		if (!node)
+			return (T *)0;
+
+		if (node->prev != node)
+			iter.node = node->prev;
+		else
+			iter.node = nullptr;
+		node = DYN_CAST(GANode<T> *, GAListBASE::remove(node));
+		T *contents = new T(node->contents);
+		delete node;
+		return contents;
+	}
+
 	int insert(GAList<T> *t, GAListBASE::Location where = GAListBASE::AFTER)
 	{
 		if (this == t)
@@ -215,7 +368,8 @@ template <class T> class GAListIter : public GAListIterBASE
 	T *warp(unsigned int i)
 	{
 		GANodeBASE *n = GAListIterBASE::warp(i);
-		return (n != nullptr ? &((GANode<T> *)(node = n))->contents : (T *)nullptr);
+		return (n != nullptr ? &((GANode<T> *)(node = n))->contents
+							 : (T *)nullptr);
 	}
 
   private:
