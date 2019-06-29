@@ -16,7 +16,6 @@ This is a running list of things to be done to galib.
     by a factor of 8
 - enable concurrent builds on the same source tree
 - make galib 64-bit clean (remove the dangerous casts)
-- doxygen for all the documentation
 
 completed:
 
