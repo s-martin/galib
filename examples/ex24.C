@@ -17,10 +17,8 @@ example).
  
 
 #include <iostream>
-
+#include <fstream>
  
- 
-#define ofstream std::ofstream
 
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
@@ -194,7 +192,7 @@ main(int argc, char** argv)
   ga.parameters(argc, argv, true); // parse commands, complain if bogus args
   ga.evolve(seed);
 
-  ofstream outfile;
+  std::ofstream outfile;
 
 // dump the final population to file
 

@@ -19,12 +19,9 @@ child crossover" you could use your own crossover algorithm instead.
  
 
 #include <iostream>
-
+#include <fstream>
  
  
- 
-#define ofstream std::ofstream
-
 
 // force instantiations for compilers that do not do auto instantiation
 // for some compilers (e.g. metrowerks) this must come after any
@@ -140,7 +137,7 @@ main(int argc, char** argv)
     }
   }
 
-  ofstream outfile;
+  std::ofstream outfile;
   char file[] = "sinusoid.dat";
   char ifile[] = "pop.initial.dat";
   char ffile[] = "pop.final.dat";

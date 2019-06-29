@@ -13,11 +13,9 @@ minimize your objective functions.
  
 
 #include <iostream>
-
+#include <fstream>
  
  
-#define ofstream std::ofstream
-
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
 
@@ -52,7 +50,7 @@ main(int argc, char** argv)
     }
   }
 
-  ofstream outfile;
+  std::ofstream outfile;
 
   GARealAlleleSet alleles(MIN_VALUE, MAX_VALUE);
   GARealGenome genome(1, alleles, Objective);
