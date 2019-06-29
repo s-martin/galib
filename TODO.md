@@ -7,7 +7,6 @@ This is a running list of things to be done to galib.
 - remove ancient pseudo rtti cruft
 - remove accommodations for ancient compilers
 - xml input and output for saving the state of genomes and evolutions
-- proper use of namespaces
 - use double rather than float
 - allow run-time modification of the random number generator
 - get rid of all the casts (e.g. GASelector.C) for signed/unsigned
