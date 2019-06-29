@@ -21,8 +21,8 @@ template <class T>
 GAAlleleSetCore<T>::GAAlleleSetCore()
 	: type(GAAllele::Type::ENUMERATED), csz(GA_ALLELE_CHUNK), sz(0), SZ(0), a(0)
 {
-	lowerb = GAAllele::NONE;
-	upperb = GAAllele::NONE;
+	lowerb = GAAllele::BoundType::NONE;
+	upperb = GAAllele::BoundType::NONE;
 
 	cnt = 1;
 }
@@ -38,8 +38,8 @@ GAAlleleSetCore<T>::GAAlleleSetCore(unsigned int n, const T array[])
 	//  memcpy(a, array, n*sizeof(T));
 	for (unsigned int i = 0; i < sz; i++)
 		a[i] = *(array + i);
-	lowerb = GAAllele::NONE;
-	upperb = GAAllele::NONE;
+	lowerb = GAAllele::BoundType::NONE;
+	upperb = GAAllele::BoundType::NONE;
 
 	cnt = 1;
 }
