@@ -71,7 +71,7 @@ swaptree - tree
 swaptree - indices
   Swap the subtrees referenced by the integer values.  Indices must not be
   related (ie one cannot be ancestor of the other).  Iterator is not changed.
-  
+  
 
 insert - tree
   Inserts the contents of tree in to the current tree and removes it from the
@@ -95,27 +95,27 @@ Recursive routines for the Tree objects
 // Recursively copy a node, including all of its siblings.  This routine copies
 // a row, then it calls itself to copy the next generation if it finds a next
 // generation in the next node.
-template <class T> GANode<T>* _GATreeCopy(GANode<T>* node, GANode<T>* parent)
+template <class T> GANode<T> *_GATreeCopy(GANode<T> *node, GANode<T> *parent)
 {
 	if (!node)
-		return (GANode<T>*)0;
+		return (GANode<T> *)0;
 
-	GANode<T>* newnode = new GANode<T>(node->contents);
+	GANode<T> *newnode = new GANode<T>(node->contents);
 	newnode->parent = parent;
-	newnode->child = _GATreeCopy(DYN_CAST(GANode<T>*, node->child), newnode);
+	newnode->child = _GATreeCopy(DYN_CAST(GANode<T> *, node->child), newnode);
 
-	GANode<T>* lasttmp = newnode, * newtmp = (GANode<T>*)0;
-	GANode<T>* tmp = DYN_CAST(GANode<T>*, node->next);
+	GANode<T> *lasttmp = newnode, *newtmp = (GANode<T> *)0;
+	GANode<T> *tmp = DYN_CAST(GANode<T> *, node->next);
 	while (tmp && tmp != node)
 	{
 		newtmp = new GANode<T>(tmp->contents);
 		newtmp->parent = parent;
-		newtmp->child = _GATreeCopy(DYN_CAST(GANode<T>*, tmp->child), newtmp);
+		newtmp->child = _GATreeCopy(DYN_CAST(GANode<T> *, tmp->child), newtmp);
 		newtmp->prev = lasttmp;
 		lasttmp->next = newtmp;
 
 		lasttmp = newtmp;
-		tmp = DYN_CAST(GANode<T>*, tmp->next);
+		tmp = DYN_CAST(GANode<T> *, tmp->next);
 	}
 
 	if (newtmp)
@@ -135,30 +135,28 @@ template <class T> GANode<T>* _GATreeCopy(GANode<T>* node, GANode<T>* parent)
 // This routine destroys the specified node, its children, its siblings, and
 // all of their children, their childrens' siblings, etc.  Since we kill off
 // all of the siblings, we need to set the parent's link to its child to NULL.
-template <class T> void _GATreeDestroy(GANode<T>* node)
+template <class T> void _GATreeDestroy(GANode<T> *node)
 {
 	if (!node)
 		return;
 
 	if (node->parent)
 		node->parent->child = nullptr;
-	_GATreeDestroy(DYN_CAST(GANode<T>*, node->child));
+	_GATreeDestroy(DYN_CAST(GANode<T> *, node->child));
 
-	GANodeBASE* tmp;
+	GANodeBASE *tmp;
 	while (node->next && node->next != node)
 	{
 		tmp = node->next;
 		node->next = tmp->next;
 		tmp->next->prev = node;
-		_GATreeDestroy(DYN_CAST(GANode<T>*, tmp->child));
+		_GATreeDestroy(DYN_CAST(GANode<T> *, tmp->child));
 		delete tmp;
 	}
 	delete node;
 }
 
-extern GANodeBASE* _GATreeTraverse(unsigned int, unsigned int&, GANodeBASE*);
-
-
+extern GANodeBASE *_GATreeTraverse(unsigned int, unsigned int &, GANodeBASE *);
 
 template <class T> class GATree : public GATreeBASE
 {
@@ -176,83 +174,82 @@ template <class T> class GATree : public GATreeBASE
 			copy(orig);
 		return *this;
 	}
-	// The destructor just goes through the tree and deletes every node.  As with
-// any method that uses the BASE tree, we have to use its members so it doesn't
-// get messed up.
+	// The destructor just goes through the tree and deletes every node.  As
+	// with
+	// any method that uses the BASE tree, we have to use its members so it
+	// doesn't get messed up.
 	~GATree()
 	{
-		_GATreeDestroy(DYN_CAST(GANode<T>*, rt));
+		_GATreeDestroy(DYN_CAST(GANode<T> *, rt));
 		iter.node = nullptr;
 	}
 
 	// Recursively duplicate a subtree given a base node.  This uses the _copy
-// method (which does a deep and wide copy).  Here we just copy a node, then
-// sic the _copy method on the child if it exists.  The parent of the new node
-// is set to NULL - this makes it a root node in the new tree object.
-//   We do the cloning based on the valued passed to the routine.  0 is the
-// root node and makes a clone of the entire tree.  This routine has no effect
-// on the iterator in the original tree.
-//   The iterator in the clone is left pointing to the root node of the clone.
-	GATree<T>* clone(unsigned int i = 0) const
+	// method (which does a deep and wide copy).  Here we just copy a node, then
+	// sic the _copy method on the child if it exists.  The parent of the new
+	// node is set to NULL - this makes it a root node in the new tree object.
+	//   We do the cloning based on the valued passed to the routine.  0 is the
+	// root node and makes a clone of the entire tree.  This routine has no
+	// effect on the iterator in the original tree.
+	//   The iterator in the clone is left pointing to the root node of the
+	//   clone.
+	GATree<T> *clone(unsigned int i = 0) const
 	{
-		GATree<T>* t = new GATree<T>;
-		GANode<T>* node;
+		GATree<T> *t = new GATree<T>;
+		GANode<T> *node;
 		unsigned int w = 0;
 		if (i == 0)
-			node = DYN_CAST(GANode<T>*, rt);
+			node = DYN_CAST(GANode<T> *, rt);
 		else
-			node = DYN_CAST(GANode<T>*, _GATreeTraverse(i, w, rt));
+			node = DYN_CAST(GANode<T> *, _GATreeTraverse(i, w, rt));
 		if (!node)
 			return t;
 
-		GANode<T>* newnode = new GANode<T>(node->contents);
-		newnode->child = _GATreeCopy(DYN_CAST(GANode<T>*, node->child), newnode);
+		GANode<T> *newnode = new GANode<T>(node->contents);
+		newnode->child =
+			_GATreeCopy(DYN_CAST(GANode<T> *, node->child), newnode);
 		if (newnode->child)
 			newnode->child->parent = newnode;
 
-		t->insert(newnode, (GANode<T>*)0, GATreeBASE::ROOT);
+		t->insert(newnode, (GANode<T> *)0, GATreeBASE::ROOT);
 
 		return t;
 	}
 
-
 	// methods that modify the state of the tree
 
-
-
-// Yes, this is really ugly.  We do a complete destruction of the existing tree
-// then we copy the new one.  No caching, no nothing.  Oh well.  The iterator
-// is set to the root node - it should be set to the corresponding node, but
-// I won't do that for now.  THIS IS A BUG!
- void copy(const GATree<T> &orig)
-{
-	_GATreeDestroy(DYN_CAST(GANode<T> *, rt));
-	rt = _GATreeCopy(DYN_CAST(GANode<T> *, orig.rt), (GANode<T> *)0);
-	iter.node = rt;
-	sz = orig.sz;
-	csz = orig.csz;
-	dpth = orig.dpth;
-	cdpth = orig.cdpth;
-}
-
+	// Yes, this is really ugly.  We do a complete destruction of the existing
+	// tree then we copy the new one.  No caching, no nothing.  Oh well.  The
+	// iterator is set to the root node - it should be set to the corresponding
+	// node, but I won't do that for now.  THIS IS A BUG!
+	void copy(const GATree<T> &orig)
+	{
+		_GATreeDestroy(DYN_CAST(GANode<T> *, rt));
+		rt = _GATreeCopy(DYN_CAST(GANode<T> *, orig.rt), (GANode<T> *)0);
+		iter.node = rt;
+		sz = orig.sz;
+		csz = orig.csz;
+		dpth = orig.dpth;
+		cdpth = orig.cdpth;
+	}
 
 	// Destroy the specified node and all nodes attached to it looking downward.
-// This does NOT destroy any nodes above the specified node.  If this node is
-// in a tree, it will be removed before the nuking occurs.  This gives the tree
-// object a chance to flag for any recalculations it might need.  The destroy
-// method effect on the tree as a remove, but it is destructive (it frees up
-// the memory as well).
-//   We do the nuking recursively, so its not really that efficient.  I'll
-// figure out a better way to track these nodes one of these days.
-//   We use the _destroy routine to do the recursion.  _destroy kills all of
-// the siblings of the node whereas this routine kills only descendents.
-//   This uses the current node as the one to destroy, so be sure to use the
-// iteration methods to move to the node you want to destroy.  Once the node is
-// gone, we set the current node to the eldest child or parent of the node that
-// was destroyed.
+	// This does NOT destroy any nodes above the specified node.  If this node
+	// is in a tree, it will be removed before the nuking occurs.  This gives
+	// the tree object a chance to flag for any recalculations it might need.
+	// The destroy method effect on the tree as a remove, but it is destructive
+	// (it frees up the memory as well).
+	//   We do the nuking recursively, so its not really that efficient.  I'll
+	// figure out a better way to track these nodes one of these days.
+	//   We use the _destroy routine to do the recursion.  _destroy kills all of
+	// the siblings of the node whereas this routine kills only descendents.
+	//   This uses the current node as the one to destroy, so be sure to use the
+	// iteration methods to move to the node you want to destroy.  Once the node
+	// is gone, we set the current node to the eldest child or parent of the
+	// node that was destroyed.
 	int destroy()
 	{
-		GANodeBASE* node = iter.node;
+		GANodeBASE *node = iter.node;
 		if (!node)
 			return GATreeBASE::NO_ERR;
 		if (node->prev == node || !node->prev)
@@ -262,28 +259,31 @@ template <class T> class GATree : public GATreeBASE
 				iter.node = nullptr;
 		else
 			iter.eldest();
-		_GATreeDestroy(DYN_CAST(GANode<T>*, node->child));
+		_GATreeDestroy(DYN_CAST(GANode<T> *, node->child));
 		delete GATreeBASE::remove(node);
 		return GATreeBASE::NO_ERR;
 	}
 
 	// Swap two subtrees.  We use the nodes pointed to by the iterators in the
-// current tree and the one that was passed to us.  The TreeBASE swaptree
-// changes the next, prev, parent, child pointers on the nodes we pass it as
-// well as the nodes that those nodes point to.
-//   Notice that this routine uses the current location of the iterators to
-// do its job, so be sure to set them properly before you call this routine!
-//   The iterators are reset to the nodes where the swaps occurred.  Sizes and
-// depths are possibly changed - the insert method flags them for a recalc.
-//   If an iterator is NULL then we do an insert ONLY if the root node of that
-// iterator's tree is NULL.  If the tree's root is non-NULL, we don't do
-// anything (most likely the iterator was unset or badly set).
-	int swaptree(GATree<T>* t)
+	// current tree and the one that was passed to us.  The TreeBASE swaptree
+	// changes the next, prev, parent, child pointers on the nodes we pass it as
+	// well as the nodes that those nodes point to.
+	//   Notice that this routine uses the current location of the iterators to
+	// do its job, so be sure to set them properly before you call this routine!
+	//   The iterators are reset to the nodes where the swaps occurred.  Sizes
+	//   and
+	// depths are possibly changed - the insert method flags them for a recalc.
+	//   If an iterator is NULL then we do an insert ONLY if the root node of
+	//   that
+	// iterator's tree is NULL.  If the tree's root is non-NULL, we don't do
+	// anything (most likely the iterator was unset or badly set).
+	int swaptree(GATree<T> *t)
 	{
-		GANodeBASE* tmp;
+		GANodeBASE *tmp;
 		if (t->iter.node && iter.node)
 		{
-			if (GATreeBASE::swaptree(t->iter.node, iter.node) == GATreeBASE::ERR)
+			if (GATreeBASE::swaptree(t->iter.node, iter.node) ==
+				GATreeBASE::ERR)
 				return GATreeBASE::ERR;
 			if (t->rt == t->iter.node)
 				t->rt = iter.node;
@@ -304,8 +304,8 @@ template <class T> class GATree : public GATreeBASE
 				//      tmp->next = tmp;
 				//      tmp->prev = tmp;
 				t->iter.node = nullptr;
-				if (insert(DYN_CAST(GANode<T>*, tmp), (GANode<T>*)0,
-					GATreeBASE::ROOT) == GATreeBASE::ERR)
+				if (insert(DYN_CAST(GANode<T> *, tmp), (GANode<T> *)0,
+						   GATreeBASE::ROOT) == GATreeBASE::ERR)
 					return GATreeBASE::ERR;
 			}
 		}
@@ -317,8 +317,8 @@ template <class T> class GATree : public GATreeBASE
 				//      tmp->next = tmp;
 				//      tmp->prev = tmp;
 				iter.node = nullptr;
-				if (t->insert(DYN_CAST(GANode<T>*, tmp), (GANode<T>*)0,
-					GATreeBASE::ROOT) == GATreeBASE::ERR)
+				if (t->insert(DYN_CAST(GANode<T> *, tmp), (GANode<T> *)0,
+							  GATreeBASE::ROOT) == GATreeBASE::ERR)
 					return GATreeBASE::ERR;
 			}
 		}
@@ -327,47 +327,49 @@ template <class T> class GATree : public GATreeBASE
 	}
 
 	// Same as the swaptree above, but this routine uses the node indices to do
-	// the swap.  This can be dangerous:  if one of the nodes is a decendent of the
-	// other then we could end up with a fragmented tree, so we'll have to check
-	// for that situation.  Unfortunately this check slows things down quite a bit.
-	// If one is the ancestor of the other, then we don't do the swap.
-	//   This routine does not affect the size of the tree, but it could change the
-	// depth of the tree.  We leave the iterator where it was pointing before the
+	// the swap.  This can be dangerous:  if one of the nodes is a decendent of
+	// the other then we could end up with a fragmented tree, so we'll have to
+	// check for that situation.  Unfortunately this check slows things down
+	// quite a bit. If one is the ancestor of the other, then we don't do the
 	// swap.
+	//   This routine does not affect the size of the tree, but it could change
+	//   the
+	// depth of the tree.  We leave the iterator where it was pointing before
+	// the swap.
 	int swaptree(unsigned int a, unsigned int b)
 	{
 		unsigned int aw = 0, bw = 0;
-		GANodeBASE* anode = _GATreeTraverse(a, aw, rt);
-		GANodeBASE* bnode = _GATreeTraverse(b, bw, rt);
+		GANodeBASE *anode = _GATreeTraverse(a, aw, rt);
+		GANodeBASE *bnode = _GATreeTraverse(b, bw, rt);
 		return GATreeBASE::swaptree(anode, bnode);
 	}
 
 	// Swap two nodes in a tree, leave their subtrees intact.  This routine does
-// not affect the iterator or the size or depth of the tree.
+	// not affect the iterator or the size or depth of the tree.
 	int swap(unsigned int a, unsigned int b)
 	{
 		unsigned int aw = 0, bw = 0;
-		GANodeBASE* anode = _GATreeTraverse(a, aw, rt);
-		GANodeBASE* bnode = _GATreeTraverse(b, bw, rt);
+		GANodeBASE *anode = _GATreeTraverse(a, aw, rt);
+		GANodeBASE *bnode = _GATreeTraverse(b, bw, rt);
 		return GATreeBASE::swapnode(anode, bnode);
 	}
 
-
-
 	// This remove method returns a tree with the removed node as its root.  The
-// node we remove is the current node.  We allocate memory for the tree, but
-// we don't allocate any memory for the node or its children.  That is taken
-// from the previous (this) tree and it no longer has to worry about it.  It
-// is the responsibility of the new tree to delete that memory.
-//   The iterator gets set to the elder child of the node that was removed.  If
-// there is no elder child, then it gets set to the parent.  If no parent, then
-// it gets set to NULL.
-//   Thank you to Uli Bubenheimer (uli@aisun1.ai.uga.edu) for the bug fix here.
-// I forgot to fix the pointers in the root node of the sub-tree.
-	GATree<T>* remove()
+	// node we remove is the current node.  We allocate memory for the tree, but
+	// we don't allocate any memory for the node or its children.  That is taken
+	// from the previous (this) tree and it no longer has to worry about it.  It
+	// is the responsibility of the new tree to delete that memory.
+	//   The iterator gets set to the elder child of the node that was removed.
+	//   If
+	// there is no elder child, then it gets set to the parent.  If no parent,
+	// then it gets set to NULL.
+	//   Thank you to Uli Bubenheimer (uli@aisun1.ai.uga.edu) for the bug fix
+	//   here.
+	// I forgot to fix the pointers in the root node of the sub-tree.
+	GATree<T> *remove()
 	{
-		GATree<T>* t = new GATree<T>;
-		GANode<T>* node = DYN_CAST(GANode<T>*, iter.node);
+		GATree<T> *t = new GATree<T>;
+		GANode<T> *node = DYN_CAST(GANode<T> *, iter.node);
 		if (!node)
 			return t;
 
@@ -378,12 +380,12 @@ template <class T> class GATree : public GATreeBASE
 		else
 			iter.node = nullptr;
 
-		GANode<T>* tmpnode = DYN_CAST(GANode<T>*, GATreeBASE::remove(node));
+		GANode<T> *tmpnode = DYN_CAST(GANode<T> *, GATreeBASE::remove(node));
 		tmpnode->prev = tmpnode;
 		tmpnode->next = tmpnode;
 		tmpnode->parent = nullptr;
 
-		t->insert(tmpnode, (GANode<T>*)0, GATreeBASE::ROOT);
+		t->insert(tmpnode, (GANode<T> *)0, GATreeBASE::ROOT);
 
 		return t;
 	}

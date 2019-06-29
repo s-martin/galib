@@ -20,17 +20,12 @@ algorithm, but you'll get bogus results unless you modify the algorithm.
  
 
 #include <iostream>
+#include <fstream>
 
  
- 
- 
-#define ofstream std::ofstream
-
 #define USE_RAW_SINE
 
-#ifndef M_PI
-#define M_PI            3.14159265358979323846
-#endif
+const auto M_PI = 3.14159265358979323846;
 
 #define NBITS     8
 
@@ -79,7 +74,7 @@ main(int argc, char **argv)
   char popfilename1[32] = "pop.nospec.dat";
   char popfilename2[32] = "pop.genespec.dat";
   char popfilename3[32] = "pop.phenespec.dat";
-  ofstream outfile;
+  std::ofstream outfile;
 
 // Create a phenotype for two variables.  The number of bits you can use to
 // represent any number is limited by the type of computer you are using.  In
