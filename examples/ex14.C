@@ -54,7 +54,7 @@ public:
   virtual ~RobotPathGenome();
   virtual GAGenome *clone(GAGenome::CloneMethod) const ;
   virtual void copy(const GAGenome & c);
-  virtual int equal(const GAGenome& g) const;
+  virtual bool equal(const GAGenome& g) const;
   virtual int read( std::istream & is);
   virtual int write( std::ostream & os) const ;
 
@@ -114,10 +114,10 @@ RobotPathGenome::clone(GAGenome::CloneMethod) const {
   return new RobotPathGenome(*this); 
 }
 
-int 
+bool 
 RobotPathGenome::equal(const GAGenome& g) const {
   RobotPathGenome& genome = (RobotPathGenome&)g;
-  int flag=0;
+  bool flag=false;
   for(int i=0; i<n && flag==0; i++)
     flag = list[i]->equal(*genome.list[i]);
   return flag;

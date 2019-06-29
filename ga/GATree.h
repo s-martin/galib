@@ -71,7 +71,8 @@ swaptree - tree
 swaptree - indices
   Swap the subtrees referenced by the integer values.  Indices must not be
   related (ie one cannot be ancestor of the other).  Iterator is not changed.
-  
+  
+
 
 insert - tree
   Inserts the contents of tree in to the current tree and removes it from the

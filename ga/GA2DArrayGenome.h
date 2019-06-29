@@ -146,7 +146,7 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 	int read(std::istream &is) override;
 	int write(std::ostream &os) const override;
 
-	int equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 	int resize(int x, int y) override;
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const

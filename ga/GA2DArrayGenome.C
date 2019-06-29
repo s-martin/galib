@@ -378,7 +378,7 @@ template <class T> int GA2DArrayAlleleGenome<T>::write(std::ostream &os) const
 	return GA2DArrayGenome<T>::write(os);
 }
 
-template <class T> int GA2DArrayAlleleGenome<T>::equal(const GAGenome &c) const
+template <class T> bool GA2DArrayAlleleGenome<T>::equal(const GAGenome &c) const
 {
 	return GA2DArrayGenome<T>::equal(c);
 }
