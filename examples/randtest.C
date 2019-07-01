@@ -12,6 +12,7 @@
  
 
 #include <iostream>
+#include <fstream>
 
  
  
@@ -45,7 +46,7 @@ main(int argc, char **argv)
    std::cerr << "               tells the lib to pick its own seed based upon the\n";
    std::cerr << "               current time.\n";
    std::cerr << "\n"; 
-  cerr.flush();
+  //cerr.flush();
 
   int dohist = 0;
   int dobnds = 0;
@@ -234,7 +235,7 @@ main(int argc, char **argv)
     std::cout.flush();
     
     memset(histogram, 0, HIST_SIZE*sizeof(int));
-    cout<<"\n10000 random integers in [-20, -10] with GARandomInt(-20,-10):\n";
+    std::cout<<"\n10000 random integers in [-20, -10] with GARandomInt(-20,-10):\n";
     for(i=0; i<10000; i++)
       histogram[GARandomInt(-20,-10)+20]++;
     for(i=0; i<=10; i++){
@@ -270,7 +271,7 @@ main(int argc, char **argv)
     std::cout.flush();
     
     memset(histogram, 0, HIST_SIZE*sizeof(int));
-    cout<<"\n10000 random integers in [-10, 100] with GARandomInt(-10,100):\n";
+    std::cout<<"\n10000 random integers in [-10, 100] with GARandomInt(-10,100):\n";
     for(i=0; i<10000; i++)
       histogram[GARandomInt(-10,100)+10]++;
     for(i=0; i<=110; i++){

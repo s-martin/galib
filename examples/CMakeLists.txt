@@ -85,6 +85,9 @@ target_link_libraries(example26 PUBLIC GAlib)
 #add_executable(example27 ex27.C)
 #target_link_libraries(example27 PUBLIC GAlib)
 
+add_executable(randtest randtest.C)
+target_link_libraries(randtest PUBLIC GAlib)
+
 if(NOT MSVC) 
 	add_executable(gnuex 
 					./gnu/gnuex.C 
