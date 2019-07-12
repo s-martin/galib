@@ -10,6 +10,8 @@
 #ifndef _ga_config_h_
 #define _ga_config_h_
 
+#include <boost/predef.h>
+
 /* ----------------------------------------------------------------------------
 PREPROCESSOR DIRECTIVES
 
@@ -94,90 +96,44 @@ incorporate it into the code base.
 //   GALIB_COMPILER
 
 // determine the operating system
-#if defined(__linux__)
+#if BOOST_OS_LINUX
 #define GALIB_OS "linux"
-#elif defined(__sgi)
+#elif BOOST_OS_IRIX
 #define GALIB_OS "irix"
-#elif defined(WIN32)
+#elif BOOST_OS_WINDOWS
 #define GALIB_OS "win32"
-#elif defined(sun)
+#elif BOOST_OS_SOLARIS
 #define GALIB_OS "solaris"
-#elif defined(__APPLE__) && defined(__MACH__) && defined(__ppc__)
-#define GALIB_OS "macosx"
-#elif defined(macintosh)
+#elif BOOST_OS_MACOS
 #define GALIB_OS "macos"
-#elif defined(HPUX10)
-#define GALIB_OS "hpux10"
-#elif defined(HPUX11)
-#define GALIB_OS "hpux11"
-#elif defined(_AIX) || defined(AIX)
+#elif BOOST_OS_HPUX
+#define GALIB_OS "hpux"
+#elif BOOST_OS_AIX
 #define GALIB_OS "aix"
 #else
 #define GALIB_OS "unknown"
 #endif
 
 // determine the cpu
-#if defined(__INTEL__) || defined(__i386__) || defined(__x86__) ||             \
-	defined(_M_IX86)
+#if BOOST_ARCH_X86_32
 #define GALIB_CPU "i386"
-#elif defined(__POWERPC__) || defined(__PPC__) || defined(__powerpc__) ||      \
-	defined(__ppc__) || defined(_POWER)
+#elif BOOST_ARCH_X86_64
+#define GALIB_CPU "amd64"
+#elif BOOST_ARCH_PPC
 #define GALIB_CPU "ppc"
-#elif defined(__m68k__)
-#define GALIB_CPU "68k"
-#elif defined(__sgi)
-#define GALIB_CPU "mips"
-#elif defined(sparc) || defined(__sparc__)
-#define GALIB_CPU "sparc"
-#elif defined(__HP_aCC)
-#define GALIB_CPU "hppa"
 #else
 #define GALIB_CPU "unknown"
 #endif
 
 // determine the compiler
-#if defined(__GNUG__) || defined(__GNUC__)
-#if __GNUC__ == 4
-#define GALIB_COMPILER "gcc4"
-#elif __GNUC__ == 3
-#define GALIB_COMPILER "gcc3"
-#elif __GNUC__ == 2
-#define GALIB_COMPILER "gcc2"
-#else
+#if BOOST_COMP_GNUC
 #define GALIB_COMPILER "gcc"
-#endif
-#elif defined(__BORLANDC__)
-#if __BORLANDC__ < 0x500
-#define GALIB_COMPILER "bcc4"
-#elif __BORLANDC__ < 0x530
-#define GALIB_COMPILER "bcc52"
-#elif __BORLANDC__ < 0x540
-#define GALIB_COMPILER "bcc53"
-#elif __BORLANDC__ < 0x550
-#define GALIB_COMPILER "bcc54"
-#elif __BORLANDC__ < 0x560
-#define GALIB_COMPILER "bcc55"
-#else
+#elif BOOST_COMP_CLANG
+#define GALIB_COMPILER "clang"
+#elif BOOST_COMP_BORLAND
 #define GALIB_COMPILER "bcc"
-#endif
-#elif defined(__WATCOMC__)
-#define GALIB_COMPILER "watcom"
-#elif defined(_MIPS_SIM)
-#define GALIB_COMPILER "mipscc"
-#elif defined(__MWERKS__)
-#define GALIB_COMPILER "mwerks"
-#elif defined(_MSC_VER)
-#if _MSC_VER == 1300
-#define GALIB_COMPILER "vcpp7"
-#elif _MSC_VER == 1200
-#define GALIB_COMPILER "vcpp6"
-#else
-#define GALIB_COMPILER "vcpp"
-#endif
-#elif defined(__HP_aCC)
-#define GALIB_COMPILER "acc"
-#elif defined(__IBMCPP__)
-#define GALIB_COMPILER "xlc"
+#elif BOOST_COMP_MSVC
+#define GALIB_COMPILER "msvc"
 #else
 #define GALIB_COMPILER "unknown"
 #endif
@@ -187,20 +143,6 @@ incorporate it into the code base.
 // been able to test the GA library.  You may have to remove and/or modify
 // these to get things to work on your system.
 // ----------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------
-// Metrowerks' Codewarrior for MacOS, PalmOS, or Win32 (I have not tested CW
-// on other platforms yet).
-#if defined(__MWERKS__)
-#define GALIB_USE_BORLAND_INST
-#define GALIB_USE_AUTO_INST
-
-// ----------------------------------------------------------------------------
-// Symantec C++ for mac.  This compiler does not handle templates very well,
-// so if you want to use any of the template components of GAlib then you will
-// probably have to do some hacking to get things to work.
-#elif defined(__SC__)
-#define GALIB_USE_BORLAND_INST
 
 // ----------------------------------------------------------------------------
 // borland c++ compiler
@@ -217,7 +159,7 @@ incorporate it into the code base.
 // All of the RNGs work fine under all of the 32-bit OSes I've tried, but they
 // don't do so well in a 16-bit OS.
 //  Use the randtest example to check GAlib's RNG after you compile everything.
-#elif defined(__BORLANDC__)
+#if BOOST_COMP_BORLAND
 //#define GALIB_USE_RAND	// comment this if you're using a 32-bit OS
 #define GALIB_USE_BORLAND_INST
 //#define GALIB_USE_PID
@@ -227,14 +169,7 @@ incorporate it into the code base.
 
 // ----------------------------------------------------------------------------
 // MicroSoft's Visual C++ programming environment.
-//
-// this has been test with:
-//   vcpp6 (12.00.8804)
-//   vcpp6 (12.00.8168)
-//   vcpp7 (13.00.9466)
-//   vcpp7 (13.10.3077)
-//
-#elif defined(_MSC_VER)
+#elif BOOST_COMP_MSVC
 // visual studio uses the borland model of template instantiation.
 #define GALIB_USE_BORLAND_INST
 // let visual studio do its own instantations, so by default do not force them.
@@ -249,8 +184,8 @@ incorporate it into the code base.
 
 // there are many warnings from vcpp, many of which we can safely ignore.
 //#pragma warning (disable : 4244)    // int-to-float warnings
-#pragma warning(disable : 4305) // double-to-float warnings
-#pragma warning(disable : 4355) // allow us to use this in constructors
+//#pragma warning(disable : 4305) // double-to-float warnings
+//#pragma warning(disable : 4355) // allow us to use this in constructors
 //#pragma warning (disable : 4250)    // dominated multiple inherits
 
 // ----------------------------------------------------------------------------
@@ -261,45 +196,9 @@ incorporate it into the code base.
 // strictly adherant to the c++ standards, although you can relax that with
 // the permissive option.  we try to build this library without the use of the
 // permissive option.
-//
-// there are significant changes between the 3.3 and 3.4 releases of gcc.  and
-// of course there are major differences between the 2.x and 3.x versions, but
-// those affect us mostly with respect to the use of the std libraries.
-#elif defined(__GNUG__)
+#elif BOOST_COMP_GNUC || BOOST_COMP_CLANG
 #define GALIB_USE_BORLAND_INST
 #define GALIB_USE_PID
-
-// ----------------------------------------------------------------------------
-// irix 5.3 and irix 6.x
-#elif defined(__sgi)
-#define GALIB_USE_PID
-
-#include <sgidefs.h>
-#if (_MIPS_SIM == _MIPS_SIM_NABI32)
-#define GALIB_USE_AUTO_INST
-#define GALIB_USE_BORLAND_INST
-#elif (_MIPS_SIM == _MIPS_SIM_ABI64)
-#elif (_MIPS_SIM == _MIPS_SIM_ABI32)
-#define GALIB_USE_AUTO_INST
-#endif
-
-// ----------------------------------------------------------------------------
-// IBM visual age c++ compiler
-#elif defined(__IBMCPP__)
-// the -qrtti option turns rtti on and off, but i do not know the
-// corresponding preprocessor directive to sense it.
-#define GALIB_USE_BORLAND_INST
-#define GALIB_USE_AUTO_INST
-#define GALIB_USE_PID
-
-// ----------------------------------------------------------------------------
-// HP aCC compiler
-#elif defined(__HP_aCC)
-#define GALIB_USE_BORLAND_INST
-#define GALIB_USE_AUTO_INST
-#define GALIB_USE_PID
-
-//#pragma disable warning 829 // do not care about string literal conversions
 
 // ----------------------------------------------------------------------------
 // This is an unknown/untested platform and/or compiler.  The defaults below

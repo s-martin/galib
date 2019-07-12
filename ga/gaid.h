@@ -14,14 +14,6 @@ messages so you'll know where things are happening.
 the derived classes are completely unrelated.  But this is a convenient way to
 enumerate the built-in classes, and they DO share the polymorphic behaviour
 (even if they do NOT share any other attributes).
-
- TO DO:
-  I leave the id/classname implementation for backward compatibility.  Also,
-as of fall98 there are still some systems that do not support RTTI (or environs
-that do not want to use RTTI for some reason or another).
-  This whole thing will be replaced with a proper RTTI implementation as soon
-as RTTI is stable on all the platforms (and as soon as I have time to do the
-update).  So for now, I apologize for the 'hack'iness of this implementation.
 ---------------------------------------------------------------------------- */
 #ifndef _ga_id_h_
 #define _ga_id_h_
