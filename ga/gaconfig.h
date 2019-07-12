@@ -50,17 +50,6 @@ incorporate it into the code base.
 			  that it uses (such as real genome and string genome).
 
 
-  USE_GALIB_AS_LIB       For windows shared libraries, one must define whether
-  USE_GALIB_AS_DLL       static member data are imported or exported.  You
-						 define one or the other of these, but not both.  The
-			 default is USE_GALIB_AS_LIB (if you define neither).
-
-  COMPILE_GALIB_AS_LIB   If you are compiling the dome library, define one of
-  COMPILE_GLAIB_AS_DLL   these to indicate the windows exports.  The default
-						 is USE_GALIB_AS_LIB (if you define neither).
-
-
-
   GALIB_USE_RAN1      These specify which random number function to use.  Only
   GALIB_USE_RAN2      one of these may be specified.  You may have to tweak
   GALIB_USE_RAN3      random.h a bit as well (these functions are not defined
