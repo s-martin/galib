@@ -6,7 +6,8 @@ add_executable("${PROJECT_NAME}Test"
         "main.cpp"
         "GASimpleGATest.cpp"
         "GASStateGATest.cpp"
-        "GAExamplesTest.cpp")
+        "GAExamplesTest.cpp"
+		"GARandTest.cpp")
 
 target_include_directories("${PROJECT_NAME}Test" PUBLIC "../ga")
 target_include_directories(${PROJECT_NAME}Test PUBLIC ${Boost_INCLUDE_DIRS})
