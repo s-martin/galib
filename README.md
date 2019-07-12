@@ -40,7 +40,7 @@ short version of how to build and test everything:
 ### Windows ###
 
 Using vcpkg to install dependencies is recommended:
-> vcpkg install boost-test boost-program-options
+> vcpkg install boost-test boost-program-options boost-predef
 
 > md build && cd build
 
