@@ -37,8 +37,8 @@ target_link_libraries(example10 PUBLIC GAlib)
 add_executable(example11 ex11.C)
 target_link_libraries(example11 PUBLIC GAlib)
 
-#add_executable(example12 ex12.C)
-#target_link_libraries(example12 PUBLIC GAlib)
+add_executable(example12 ex12.C)
+target_link_libraries(example12 PUBLIC GAlib)
 
 add_executable(example13 ex13.C)
 target_link_libraries(example13 PUBLIC GAlib)
