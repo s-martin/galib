@@ -174,19 +174,6 @@ incorporate it into the code base.
 #define GALIB_USE_BORLAND_INST
 // let visual studio do its own instantations, so by default do not force them.
 #define GALIB_USE_AUTO_INST
-// we default to using std things in the std namespace, but depending on the
-// version of vcpp you are using and depending on the libraries with which you
-// will use GAlib, you might have to turn this one off.
-// use the pid only on winnt and derivatives.  win95/98/ME do not have it.
-// this requires unistd.h, which you may or may not have (depending on the
-// way that you installed the compiler).
-//#define GALIB_USE_PID
-
-// there are many warnings from vcpp, many of which we can safely ignore.
-//#pragma warning (disable : 4244)    // int-to-float warnings
-//#pragma warning(disable : 4305) // double-to-float warnings
-//#pragma warning(disable : 4355) // allow us to use this in constructors
-//#pragma warning (disable : 4250)    // dominated multiple inherits
 
 // ----------------------------------------------------------------------------
 // GNU compiler
@@ -239,15 +226,6 @@ using GALIB_BITBASE = long int;
 #define STA_CAST(type, x) (static_cast<type>(x))
 #define REI_CAST(type, x) (reinterpret_cast<type>(x))
 
-// Windows is brain-dead about how to export things, so we do this to keep the
-// code (somewhat) cleaner but still accomodate windows' stupidity.
-#if defined(COMPILE_GALIB_AS_DLL)
-#define GA_DLLDECL __declspec(dllexport)
-#elif defined(USE_GALIB_AS_DLL)
-#define GA_DLLDECL __declspec(dllimport)
-#else
-#define GA_DLLDECL
-#endif
 
 /* ----------------------------------------------------------------------------
 DEFAULT OPERATORS
