@@ -4,8 +4,6 @@ This is a running list of things to be done to galib.
 
 - make the library thread-safe
 - include rules for building both shared and static libraries
-- remove ancient pseudo rtti cruft
-- remove accommodations for ancient compilers
 - xml input and output for saving the state of genomes and evolutions
 - use double rather than float
 - allow run-time modification of the random number generator
