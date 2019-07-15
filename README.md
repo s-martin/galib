@@ -1,6 +1,4 @@
-# Modern GAlib: A (modernized) C++ Genetic Algorithm Library #
-
-https://travis-ci.com/s-martin/galib.svg?token=ryQD2yK6KA1p3pds4ruj&branch=master
+# Modern GAlib: A (modernized) C++ Genetic Algorithm Library [![Build Status](https://travis-ci.com/s-martin/galib.svg?token=ryQD2yK6KA1p3pds4ruj&branch=master)](https://travis-ci.com/s-martin/galib) 
 
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
