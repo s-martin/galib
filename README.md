@@ -1,4 +1,7 @@
 # Modern GAlib: A (modernized) C++ Genetic Algorithm Library #
+
+https://travis-ci.com/s-martin/galib.svg?token=ryQD2yK6KA1p3pds4ruj&branch=master
+
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
 GAlib is a C++ library of genetic algorithm objects.  With GAlib you can add 
