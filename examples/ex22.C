@@ -31,11 +31,6 @@ child crossover" you could use your own crossover algorithm instead.
 GALIB_INSTANTIATION_PREFIX GA1DArrayGenome<float>;
 #endif
 
-
-#ifndef M_PI
-#define M_PI            3.14159265358979323846
-#endif
-
 #define OBJECTIVE Objective1
 #define MIN_VALUE -100
 #define MAX_VALUE 100

@@ -29,9 +29,6 @@ example).
 
 #define THRESHOLD 0.5
 
-#ifndef M_PI
-#define M_PI            3.14159265358979323846
-#endif
 
 float Objective(GAGenome &);
 float Comparator(const GAGenome&, const GAGenome&);

@@ -25,8 +25,6 @@ algorithm, but you'll get bogus results unless you modify the algorithm.
  
 #define USE_RAW_SINE
 
-const auto M_PI = 3.14159265358979323846;
-
 #define NBITS     8
 
 #ifdef USE_RAW_SINE

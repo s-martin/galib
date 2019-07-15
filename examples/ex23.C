@@ -19,10 +19,6 @@ minimize your objective functions.
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
 
-#ifndef M_PI
-#define M_PI            3.14159265358979323846
-#endif
-
 #define MIN_VALUE -2
 #define MAX_VALUE 2
 #define INC       0.005
