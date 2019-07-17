@@ -8,7 +8,8 @@ representation and standard or custom selection, crossover, mutation,
 scaling, and termination methods.
 
 GAlib was originally developed by Matthew Wall. 
-Modernized GAlib from version 3.0 on is a fork of the original GAlib and modernized the
+Modernized GAlib from version 3.0 on is a fork of the [original GAlib](http://lancet.mit.edu/ga 
+) and modernized the
 original code using latest C++17 technology.  
 
 The library requires a C++ compiler conforming to C++17. It has been tested with
