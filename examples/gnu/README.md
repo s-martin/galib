@@ -1,4 +1,4 @@
-GNU BitString object and GAlib
+# GNU BitString object and GAlib
 mbwall 19sep95
 
 This directory contains some objects from the GNU library (libg++) that can be
@@ -20,7 +20,7 @@ well it work on DOS and/or Mac platforms.  At this point I do not have time to
 try to compile GNU code on those machines (especially when the code does such
 lowlevel bit operations).
 
-COPYRIGHT and LICENSING ISSUES
+## COPYRIGHT and LICENSING ISSUES
 
 The code in this directory is protected under the terms of the GNU public 
 license (see the file COPYING for details).  Under the terms of that agreement,
