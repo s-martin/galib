@@ -12,7 +12,7 @@
 #define _ga_tree_h_
 
 #include <GAGenome.h>
-#include <GATree.h>
+#include <GATree.hpp>
 #include <garandom.h>
 
 extern int _GATreeCompare(GANodeBASE *anode, GANodeBASE *bnode);

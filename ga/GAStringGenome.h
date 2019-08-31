@@ -10,7 +10,7 @@
 #ifndef _ga_string_h_
 #define _ga_string_h_
 
-#include <GA1DArrayGenome.h>
+#include <GA1DArrayGenome.hpp>
 #include <GAAllele.h>
 
 using GAStringAlleleSet = GAAlleleSet<char>;

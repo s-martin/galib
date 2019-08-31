@@ -994,7 +994,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	}
 
 	// We don't define this one apriori.  Do it in a specialization.
-	int read(std::istream &is) override
+	int read(std::istream &) override
 	{
 		GAErr(GA_LOC, className(), "read", GAError::OpUndef);
 		return 1;

@@ -11,7 +11,7 @@ alternate 0 and 1 then put -1 in the corners.
 #include <cstdio>
 #include <cstdlib>
 #include <ga.h>
-#include <GA2DArrayGenome.h>
+#include <GA2DArrayGenome.hpp>
 
 #include <iostream>
 
