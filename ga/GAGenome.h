@@ -234,7 +234,7 @@ class GAGenome : public GAID
 	// The GNU compiler sucks.  It won't recognize No*** as a member of the
 	// genome class.  So we have to use 0 as the defaults then check in the
 	// constructor.
-	explicit GAGenome(Initializer i = nullptr, Mutator m = nullptr,
+	GAGenome(Initializer i = nullptr, Mutator m = nullptr,
 					  Comparator c = nullptr);
 	GAGenome(const GAGenome &orig);
 	GAGenome &operator=(const GAGenome &arg)

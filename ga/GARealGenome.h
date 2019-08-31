@@ -13,7 +13,7 @@ for the real number genome.
 #define _ga_real_h_
 
 #include <GAAllele.h>
-#include <GA1DArrayGenome.h>
+#include <GA1DArrayGenome.hpp>
 
 typedef GAAlleleSet<float> GARealAlleleSet;
 typedef GAAlleleSetArray<float> GARealAlleleSetArray;

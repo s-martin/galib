@@ -20,7 +20,7 @@ it does get the job done.
 ---------------------------------------------------------------------------- */
 #include <cmath>
 #include <GASStateGA.h>
-#include <GAListGenome.h>
+#include <GAListGenome.hpp>
 #include <garandom.h>
  
 
