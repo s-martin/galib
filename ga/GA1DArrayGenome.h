@@ -609,8 +609,8 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	// crossover section and maintain the ordering of the non-hole elements.
 	// Finally, put the 'holes' in the proper order within the crossover
 	// section. After we have done the sister, we do the brother.
-	static int OrderCrossover(const GAGenome &p1, const GAGenome &p2, GAGenome *c1,
-					   GAGenome *c2)
+	static int OrderCrossover(const GAGenome &p1, const GAGenome &p2,
+							  GAGenome *c1, GAGenome *c2)
 	{
 		const GA1DArrayGenome<T> &mom =
 			DYN_CAST(const GA1DArrayGenome<T> &, p1);
@@ -1132,7 +1132,8 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	// that
 	// we can substitute into.  It does a linear search to find the holes (yuk).
 	static int GA1DArrayIsHole(const GA1DArrayGenome<T> &c,
-						const GA1DArrayGenome<T> &dad, int index, int a, int b)
+							   const GA1DArrayGenome<T> &dad, int index, int a,
+							   int b)
 	{
 		for (int i = a; i < b; i++)
 			if (c.gene(index) == dad.gene(i))
