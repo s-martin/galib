@@ -23,13 +23,6 @@ child crossover" you could use your own crossover algorithm instead.
  
  
 
-// force instantiations for compilers that do not do auto instantiation
-// for some compilers (e.g. metrowerks) this must come after any
-// specializations or you will get 'multiply-defined errors when you compile.
-#if !defined(GALIB_USE_AUTO_INST)
-#include <GA1DArrayGenome.C>
-GALIB_INSTANTIATION_PREFIX GA1DArrayGenome<float>;
-#endif
 
 #define OBJECTIVE Objective1
 #define MIN_VALUE -100
