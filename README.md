@@ -61,6 +61,12 @@ Open in Visual Studio as CMake project.
 
 > make
 
+### Building shared libraries
+
+To build shared libraries append `-DBUILD_SHARED_LIBS:BOOL=ON` to the above `cmake`command.
+
+See also https://cmake.org/cmake/help/v3.15/variable/BUILD_SHARED_LIBS.html in the CMake docs.
+
 ### Common Errors
 
 If that does not work, then here are the files you might have to modify:
