@@ -1,5 +1,3 @@
-mbw 5dec95
-
 To build the programs in this directory, use aimk (part of the PVM package).
 You should be able to simply type `aimk` to build the programs or
 `aimk install` to build the programs then put them into your PVM bin 
@@ -25,11 +23,6 @@ configured as described in the PVM documentation (see the makefile for details)
 For more details about PVM, see 
  http://www.netlib.org/pvm3/index.html
  http://www.epm.ornl.gov/pvm/pvm_home.html
-
-
-
-
-
 
 
 OK, so you don't want to chug through the PVM documentation?  Here's the 
@@ -84,9 +77,6 @@ The MANPATH variable must be defined already for this to work.
 
 6) to shut down pvm, type 'halt' at the pvm prompt (if you just type 'quit'
    then you'll leave the pvm prompt but pvmd will still be running)
-
-
-
 
 
 ## IMPORTANT NOTES

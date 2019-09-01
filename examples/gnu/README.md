@@ -1,5 +1,4 @@
 # GNU BitString object and GAlib
-mbwall 19sep95
 
 This directory contains some objects from the GNU library (libg++) that can be
 used with GAlib.  In particular, I have implemented a set of GAlib operators

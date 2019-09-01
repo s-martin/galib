@@ -14,7 +14,7 @@ original code using latest C++17 technology.
 
 The library requires a C++ compiler conforming to C++17. It has been tested with
 - Visual Studio 2019
-- GCC 8.3
+- GCC 8.3 (Ubuntu)
 
 Graphic examples (XWindows/Motif and MS Windows) are available, as are 
 parallel, distributed implementations using PVM.  There are about 30 examples

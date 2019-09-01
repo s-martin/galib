@@ -18,6 +18,6 @@ completed:
 
 - fix stream references in examples (includes and cout/cerr)
 - properly and automatically accommodate both <iostream.h> and
-    <iostream> inclusions
+    \<iostream\> inclusions
 - rewrite gaconfig.h to use consistent naming for options and make clear which
     are defaults, e.g. USE_ANSI_HEADERS/USE_NO_ANSI_HEADERS.
