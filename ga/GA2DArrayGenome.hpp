@@ -820,11 +820,11 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 		for (int i = 0; i < naset; i++)
 			aset[i] = sa.set(i);
 
-		initializer(
+		this->initializer(
 			GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_INITIALIZER);
-		mutator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_MUTATOR);
-		comparator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_COMPARATOR);
-		crossover(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_CROSSOVER);
+		this->mutator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_MUTATOR);
+		this->comparator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_COMPARATOR);
+		this->crossover(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_CROSSOVER);
 	}
 
 	GA2DArrayAlleleGenome(const GA2DArrayAlleleGenome<T> &orig)
