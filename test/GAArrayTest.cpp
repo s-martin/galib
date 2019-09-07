@@ -49,6 +49,12 @@ BOOST_AUTO_TEST_CASE(GAArray_001)
 
 	//BOOST_CHECK(gaarray != gaarray4);
 
+	GAArray<int> gaarray5(0);
+	gaarray5 = gaarray;
+	gaarray5.swap(0, 1);
+	BOOST_CHECK_EQUAL(gaarray5[0u], 2);
+	BOOST_CHECK_EQUAL(gaarray5[1u], 1);
+
 	// TODO add failures to improve implementation
 }
 
