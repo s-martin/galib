@@ -55,11 +55,23 @@ Open in Visual Studio as CMake project.
 
 > sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev 
 
+If you want to use code coverage:
+
+> sudo apt install lcov 
+> sudo apt install gcovr 
+
 > mkdir build && cd build
 
 > cmake ../
 
 > make
+
+Run unit tests:
+> make test
+
+Run unit tests and create coverage:
+> make GAlib_lcov
+> make GAlib_gcov
 
 ### Building shared libraries
 
