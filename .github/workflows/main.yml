@@ -9,9 +9,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: mkdir build && cd build
-    - name: Run a one-line script
+    - name: make build dir
+      run: mkdir build
+    - name: change to build dir
+      run: cd build    
+    - name: cmake
       run: cmake ../
-    - name: Run a one-line script
+    - name: make
       run: make
