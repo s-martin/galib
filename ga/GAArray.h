@@ -27,6 +27,9 @@ TODO:
 #ifndef _ga_arraytmpl_h_
 #define _ga_arraytmpl_h_
 
+#include <exception>
+
+
 template <class T> class GAArray
 {
   public:
@@ -86,6 +89,15 @@ template <class T> class GAArray
 
 	void swap(unsigned int i, unsigned int j)
 	{
+		if (i >= sz || i < 0)
+		{
+			throw std::out_of_range("swap: input i invalid");
+		}
+		if (j >= sz || j < 0)
+		{
+			throw std::out_of_range("swap: input j invalid");
+		}
+
 		T tmp = a[j];
 		a[j] = a[i];
 		a[i] = tmp;
@@ -123,13 +135,13 @@ template <class T> int operator==(const GAArray<T> &a, const GAArray<T> &b)
 {
 	if (a.size() != b.size())
 		return 0;
-	return a.equal(b, 0, 0, a.sz);
+	return a.equal(b, 0, 0, a.size());
 }
 template <class T> int operator!=(const GAArray<T> &a, const GAArray<T> &b)
 {
 	if (a.size() != b.size())
 		return 1;
-	return a.equal(b, 0, 0, a.sz) ? 0 : 1;
+	return a.equal(b, 0, 0, a.size()) ? 0 : 1;
 }
 
 #endif
