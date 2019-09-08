@@ -12,10 +12,10 @@ jobs:
     - name: change to galib
       run: ls -l
     - name: make build dir
-      run: mkdir build
+      run: mkdir build && ls -l
     - name: change to build dir
-      run: cd build    
+      run: cd build && ls -l
     - name: cmake
-      run: cmake ../
+      run: ls -l && cmake ../
     - name: make
       run: make
