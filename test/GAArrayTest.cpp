@@ -1,7 +1,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <GAArray.h>
-#include <iostream>
 
 
 BOOST_AUTO_TEST_SUITE( UnitTest )
@@ -10,7 +9,7 @@ BOOST_AUTO_TEST_CASE(GAArray_001)
 {
 	GAArray<int> gaarray(2);
 	BOOST_CHECK_EQUAL(gaarray.size(), 2);
-	
+
 	// TODO remove unsigned from operator
 	BOOST_CHECK_EQUAL(gaarray[0u], 0);
 	BOOST_CHECK_EQUAL(gaarray[1u], 0);
@@ -19,7 +18,7 @@ BOOST_AUTO_TEST_CASE(GAArray_001)
 	int i2 = 2;
 	gaarray[0u] = i1;
 	gaarray[1u] = i2;
-	
+
 	BOOST_CHECK_EQUAL(gaarray[0u], 1);
 	BOOST_CHECK_EQUAL(gaarray[1u], 2);
 
@@ -49,11 +48,61 @@ BOOST_AUTO_TEST_CASE(GAArray_001)
 
 	//BOOST_CHECK(gaarray != gaarray4);
 
-	GAArray<int> gaarray5(0);
-	gaarray5 = gaarray;
+	// TODO add failures to improve implementation
+}
+
+BOOST_AUTO_TEST_CASE(swap_001)
+{
+	GAArray<int> gaarray5(2);
+	gaarray5[0u] = 1;
+	gaarray5[1u] = 2;
+	BOOST_CHECK_EQUAL(gaarray5[0u], 1);
+	BOOST_CHECK_EQUAL(gaarray5[1u], 2);
+
 	gaarray5.swap(0, 1);
 	BOOST_CHECK_EQUAL(gaarray5[0u], 2);
 	BOOST_CHECK_EQUAL(gaarray5[1u], 1);
+	
+	// TODO add failures to improve implementation
+}
+
+BOOST_AUTO_TEST_CASE(copy_001)
+{
+	GAArray<int> gaarray6(2);
+	gaarray6[0u] = 5;
+	gaarray6[1u] = 6;
+	BOOST_CHECK_EQUAL(gaarray6[0u], 5);
+	BOOST_CHECK_EQUAL(gaarray6[1u], 6);
+
+	GAArray<int> gaarray7(2);
+	gaarray7[0u] = 1;
+	gaarray7[1u] = 2;
+
+	gaarray7.copy(gaarray6, 1, 0, 1);
+	BOOST_CHECK_EQUAL(gaarray7[0u], 1);
+	BOOST_CHECK_EQUAL(gaarray7[1u], 5);
+
+	// TODO add failures to improve implementation
+}
+
+BOOST_AUTO_TEST_CASE(size_001)
+{
+	GAArray<int> gaarray8(2);
+	gaarray8[0u] = 1;
+	gaarray8[1u] = 2;
+	BOOST_CHECK_EQUAL(gaarray8.size(), 2);
+	BOOST_CHECK_EQUAL(gaarray8[0u], 1);
+	BOOST_CHECK_EQUAL(gaarray8[1u], 2);
+
+	gaarray8.size(5);
+	BOOST_CHECK_EQUAL(gaarray8.size(), 5);
+	BOOST_CHECK_EQUAL(gaarray8[0u], 1);
+	BOOST_CHECK_EQUAL(gaarray8[1u], 2);
+
+	// TODO fix implementation
+	//BOOST_CHECK_EQUAL(gaarray8[2u], 0);
+	//BOOST_CHECK_EQUAL(gaarray8[3u], 0);
+	//BOOST_CHECK_EQUAL(gaarray8[4u], 0);
 
 	// TODO add failures to improve implementation
 }

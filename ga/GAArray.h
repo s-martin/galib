@@ -59,18 +59,21 @@ template <class T> class GAArray
 	operator T *() { return a; }
 	const T &operator[](unsigned int i) const { return a[i]; }
 	T &operator[](unsigned int i) { return a[i]; }
+	
 	void copy(const GAArray<T> &orig)
 	{
 		size(orig.sz);
 		for (unsigned int i = 0; i < sz; i++)
 			a[i] = orig.a[i];
 	}
+
 	void copy(const GAArray<T> &orig, unsigned int dest, unsigned int src,
 			  unsigned int length)
 	{
 		for (unsigned int i = 0; i < length; i++)
 			a[dest + i] = orig.a[src + i];
 	}
+
 	void move(unsigned int dest, unsigned int src, unsigned int length)
 	{
 		if (src > dest)
@@ -80,13 +83,16 @@ template <class T> class GAArray
 			for (unsigned int i = length - 1; i != 0; i--)
 				a[dest + i] = a[src + i];
 	}
+
 	void swap(unsigned int i, unsigned int j)
 	{
 		T tmp = a[j];
 		a[j] = a[i];
 		a[i] = tmp;
 	}
+
 	int size() const { return sz; }
+	
 	int size(unsigned int n)
 	{
 		if (n == sz)
@@ -98,6 +104,7 @@ template <class T> class GAArray
 		a = tmp;
 		return sz = n;
 	}
+	
 	bool equal(const GAArray<T> &b, unsigned int dest, unsigned int src,
 			   unsigned int length) const
 	{
