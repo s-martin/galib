@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: change to galib
-      run: cd galib
+      run: ls -l
     - name: make build dir
       run: mkdir build
     - name: change to build dir
