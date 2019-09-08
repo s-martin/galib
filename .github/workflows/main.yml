@@ -9,13 +9,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: change to galib
-      run: ls -l
     - name: make build dir
       run: mkdir build && ls -l
     - name: change to build dir
-      run: cd build && ls -l
+      run: cd build
     - name: cmake
-      run: ls -l && cmake ../
+      run: ls -l && cmake ..
     - name: make
       run: make
