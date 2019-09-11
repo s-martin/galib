@@ -1068,7 +1068,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 
 		nx = GAArray<T>::size(len);
 		_evaluated = false;
-		return this->sz;
+		return this->size();
 	}
 
 	//   Set the resize behaviour of the genome.  A genome can be fixed
@@ -1284,7 +1284,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	// The copy constructor creates a new genome whose allele set refers to the
 	// original's allele set.
 	GA1DArrayAlleleGenome(const GA1DArrayAlleleGenome<T> &orig)
-		: GA1DArrayGenome<T>(orig.sz)
+		: GA1DArrayGenome<T>(orig.size())
 	{
 		naset = 0;
 		aset = (GAAlleleSet<T> *)0;
