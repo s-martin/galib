@@ -9,14 +9,13 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: install boost
+      run: sudo apt install libboost-test-dev libboost-program-options-dev
     - name: make build dir
-      run: mkdir build && ls -l
-    - name: change to build dir
-      run: cd build
-    - name: cmake
+      run: mkdir build
+    - name: cmake config
       run: |
         cd build
         cmake ../
-   #   run: cmake --build ./build
     - name: make
       run: make
