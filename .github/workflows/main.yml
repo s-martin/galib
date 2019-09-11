@@ -14,6 +14,6 @@ jobs:
     - name: change to build dir
       run: cd build
     - name: cmake
-      run: cmake --build ./build .
+      run: cmake --build ./build
     - name: make
       run: make
