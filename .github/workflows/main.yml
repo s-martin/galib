@@ -18,8 +18,8 @@ jobs:
         cd build
         cmake ../
     - name: make
-      run: make
+      run: cmake --build ./build
     - name: run unit tests
-      run: make test
+      run: cmake --build ./build --target test
     - name: run coverage
-      run: make GAlib_lcov
+      run: cmake --build ./build --target GAlib_lcov
