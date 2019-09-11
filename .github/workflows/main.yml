@@ -9,8 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: install boost
-      run: sudo apt install libboost-test-dev libboost-program-options-dev
+    - name: install boost, lcov, gcov
+      run: sudo apt install libboost-test-dev libboost-program-options-dev lcov gcov
     - name: make build dir
       run: mkdir build
     - name: cmake config
@@ -19,3 +19,7 @@ jobs:
         cmake ../
     - name: make
       run: make
+    - name: run unit tests
+      run: make test
+    - name: run coverage
+      run: make GAlib_lcov
