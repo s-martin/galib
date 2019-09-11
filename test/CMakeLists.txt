@@ -5,6 +5,7 @@ set_property(DIRECTORY PROPERTY CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable("${PROJECT_NAME}Test" 
         "main.cpp"
 		"GAArrayTest.cpp"
+		"GAListTest.cpp"
         "GASimpleGATest.cpp"
         "GASStateGATest.cpp"
         "GAExamplesTest.cpp")
