@@ -7,113 +7,167 @@ BOOST_AUTO_TEST_SUITE( UnitTest )
 
 BOOST_AUTO_TEST_CASE(GAList_001)
 {
-	GAList<int> galist(2);
-	BOOST_CHECK_EQUAL(galist.size(), 1);
+	GAList<int> galist0;
+	BOOST_CHECK_EQUAL(galist0.size(), 0);
+	
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
 
-	BOOST_CHECK_EQUAL(*galist.head(), 2);
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
 
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+	
 	// TODO add failures to improve implementation
 }
 
 BOOST_AUTO_TEST_CASE(insert_001)
 {
-	GAList<int> galist(1);
-	BOOST_CHECK_EQUAL(galist.size(), 1);
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
 
-	galist.insert(2);
-	BOOST_CHECK_EQUAL(galist.size(), 2);
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
 
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
 }
-//	GAArray<int> gaarray5(2);
-//	gaarray5[0u] = 1;
-//	gaarray5[1u] = 2;
-//	BOOST_CHECK_EQUAL(gaarray5[0u], 1);
-//	BOOST_CHECK_EQUAL(gaarray5[1u], 2);
-//
-//	auto gaarray5a = gaarray5;
-//	auto gaarray5b = gaarray5;
-//
-//	gaarray5.swap(0, 1);
-//	BOOST_CHECK_EQUAL(gaarray5[0u], 2);
-//	BOOST_CHECK_EQUAL(gaarray5[1u], 1);
-//	
-//	// failures
-//	BOOST_CHECK_THROW(gaarray5a.swap(0, 3), std::out_of_range);
-//	BOOST_CHECK_THROW(gaarray5b.swap(3, 1), std::out_of_range);
-//}
-//
-//BOOST_AUTO_TEST_CASE(copy_001)
-//{
-//	GAArray<int> gaarray6(2);
-//	gaarray6[0u] = 5;
-//	gaarray6[1u] = 6;
-//	BOOST_CHECK_EQUAL(gaarray6[0u], 5);
-//	BOOST_CHECK_EQUAL(gaarray6[1u], 6);
-//
-//	GAArray<int> gaarray7(2);
-//	gaarray7[0u] = 1;
-//	gaarray7[1u] = 2;
-//
-//	gaarray7.copy(gaarray6, 1, 0, 1);
-//	BOOST_CHECK_EQUAL(gaarray7[0u], 1);
-//	BOOST_CHECK_EQUAL(gaarray7[1u], 5);
-//
-//	// TODO add failures to improve implementation
-//}
-//
-//BOOST_AUTO_TEST_CASE(size_001)
-//{
-//	GAArray<int> gaarray8(2);
-//	gaarray8[0u] = 1;
-//	gaarray8[1u] = 2;
-//	BOOST_CHECK_EQUAL(gaarray8.size(), 2);
-//	BOOST_CHECK_EQUAL(gaarray8[0u], 1);
-//	BOOST_CHECK_EQUAL(gaarray8[1u], 2);
-//
-//	auto gaarray8a = gaarray8;
-//
-//	gaarray8.size(5);
-//	BOOST_CHECK_EQUAL(gaarray8.size(), 5);
-//	BOOST_CHECK_EQUAL(gaarray8[0u], 1);
-//	BOOST_CHECK_EQUAL(gaarray8[1u], 2);
-//
-//	// TODO fix implementation
-//	//BOOST_CHECK_EQUAL(gaarray8[2u], 0);
-//	//BOOST_CHECK_EQUAL(gaarray8[3u], 0);
-//	//BOOST_CHECK_EQUAL(gaarray8[4u], 0);
-//
-//	gaarray8a.size(2);
-//	BOOST_CHECK_EQUAL(gaarray8a.size(), 2);
-//	BOOST_CHECK_EQUAL(gaarray8a[0u], 1);
-//	BOOST_CHECK_EQUAL(gaarray8a[1u], 2);
-//
-//
-//	// TODO add failures to improve implementation
-//}
-//
-//BOOST_AUTO_TEST_CASE(move_001)
-//{
-//	GAArray<int> gaarray9(4);
-//	gaarray9[0u] = 5;
-//	gaarray9[1u] = 6;
-//	gaarray9[2u] = 7;
-//	gaarray9[3u] = 8;
-//
-//	auto gaarray9a = gaarray9;
-//
-//	gaarray9.move(0, 2, 2);
-//	BOOST_CHECK_EQUAL(gaarray9[0u], 7);
-//	BOOST_CHECK_EQUAL(gaarray9[1u], 8);
-//	BOOST_CHECK_EQUAL(gaarray9[2u], 7);
-//	BOOST_CHECK_EQUAL(gaarray9[3u], 8);
-//
-//	gaarray9a.move(2, 0, 2);
-//	BOOST_CHECK_EQUAL(gaarray9a[0u], 5);
-//	BOOST_CHECK_EQUAL(gaarray9a[1u], 6);
-//	// TODO fix implementation BOOST_CHECK_EQUAL(gaarray9a[2u], 5);
-//	BOOST_CHECK_EQUAL(gaarray9a[3u], 6);
-//
-//	// TODO add failures to improve implementation
-//}
+
+BOOST_AUTO_TEST_CASE(insertList_001)
+{
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+	
+	GAList<int> galist2;
+	galist2.insert(10, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 4; i++)
+		galist2.insert(10 + i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(galist2.size(), 4);
+
+	for (int i = 0; i < 4; i++)
+		BOOST_CHECK_EQUAL(*galist2.next(), 10 + i);
+
+	galist1.warp(3);
+	galist1.insert(&galist2);
+	
+	BOOST_REQUIRE_EQUAL(galist1.size(), 9);
+	BOOST_CHECK_EQUAL(*galist1.head(), 0);
+	BOOST_CHECK_EQUAL(*galist1.next(), 1);
+	BOOST_CHECK_EQUAL(*galist1.next(), 2);
+	BOOST_CHECK_EQUAL(*galist1.next(), 3);
+	BOOST_CHECK_EQUAL(*galist1.next(), 10);
+	BOOST_CHECK_EQUAL(*galist1.next(), 11);
+	BOOST_CHECK_EQUAL(*galist1.next(), 12);
+	BOOST_CHECK_EQUAL(*galist1.next(), 13);
+	BOOST_CHECK_EQUAL(*galist1.next(), 4);
+}
+
+
+BOOST_AUTO_TEST_CASE(GAList_swap_001)
+{
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+
+	galist1.swap(1, 2);
+	BOOST_CHECK_EQUAL(*galist1.head(), 0);
+	BOOST_CHECK_EQUAL(*galist1.next(), 2);
+	BOOST_CHECK_EQUAL(*galist1.next(), 1);
+	BOOST_CHECK_EQUAL(*galist1.next(), 3);
+	BOOST_CHECK_EQUAL(*galist1.next(), 4);
+}
+
+BOOST_AUTO_TEST_CASE(destroy_001)
+{
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+
+	galist1.head();
+	galist1.next();
+	galist1.next();
+	galist1.prev();
+	galist1.destroy(); 
+
+	BOOST_CHECK_EQUAL(*galist1.current(), 0);
+	BOOST_REQUIRE_EQUAL(galist1.size(), 4);
+	BOOST_CHECK_EQUAL(*galist1.head(), 0);
+	BOOST_CHECK_EQUAL(*galist1.next(), 2);
+	BOOST_CHECK_EQUAL(*galist1.next(), 3);
+	BOOST_CHECK_EQUAL(*galist1.next(), 4);
+}
+
+BOOST_AUTO_TEST_CASE(destroy_002)
+{
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+
+	galist1.head();
+	galist1.destroy();
+
+	BOOST_CHECK_EQUAL(*galist1.current(), 1);
+	BOOST_REQUIRE_EQUAL(galist1.size(), 4);
+	BOOST_CHECK_EQUAL(*galist1.head(), 1);
+	BOOST_CHECK_EQUAL(*galist1.next(), 2);
+	BOOST_CHECK_EQUAL(*galist1.next(), 3);
+	BOOST_CHECK_EQUAL(*galist1.next(), 4);
+}
+
+BOOST_AUTO_TEST_CASE(remove_001)
+{
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+
+	galist1.head();
+	galist1.next();
+	galist1.next();
+	galist1.prev();
+	auto removedNode = galist1.remove();
+
+	BOOST_CHECK_EQUAL(*removedNode, 1);
+	BOOST_CHECK_EQUAL(*galist1.current(), 0);
+	BOOST_REQUIRE_EQUAL(galist1.size(), 4);
+	BOOST_CHECK_EQUAL(*galist1.head(), 0);
+	BOOST_CHECK_EQUAL(*galist1.next(), 2);
+	BOOST_CHECK_EQUAL(*galist1.next(), 3);
+	BOOST_CHECK_EQUAL(*galist1.next(), 4);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
