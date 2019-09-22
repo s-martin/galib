@@ -43,9 +43,9 @@ short version of how to build and test everything:
 
 Using vcpkg to install dependencies is recommended:
 > vcpkg install boost-test boost-program-options boost-predef
-
+>
 > md build && cd build
-
+>
 > cmake ../ -DCMAKE_TOOLCHAIN_FILE=\<path to vcpkg\>/scripts/buildsystems/vcpkg.cmake
 
 Open in Visual Studio as CMake project.
@@ -58,12 +58,15 @@ Open in Visual Studio as CMake project.
 If you want to use code coverage:
 
 > sudo apt install lcov 
+> 
 > sudo apt install gcovr 
 
+Configure and build:
+
 > mkdir build && cd build
-
+>
 > cmake ../
-
+>
 > make
 
 Run unit tests:
@@ -71,6 +74,7 @@ Run unit tests:
 
 Run unit tests and create coverage:
 > make GAlib_lcov
+>
 > make GAlib_gcov
 
 ### Building shared libraries
