@@ -11,10 +11,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: install boost, X11, lcov, gcov
       run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr
-    - name: make build dir
-      run: mkdir build
     - name: cmake config
       run: |
+        mkdir build
         cd build
         cmake ../
     - name: make
