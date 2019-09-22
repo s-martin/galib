@@ -25,7 +25,7 @@ it should operate on the data.  See comments below for further details.
 class GAGeneticAlgorithm;
 class GAGenome;
 
-template <typename T1, typename T2> constexpr void SWAP(T1& a, T2& b)
+template <typename T1, typename T2> constexpr void SWAP(T1 &a, T2 &b)
 {
 	auto tmp = a;
 	a = b;
@@ -54,7 +54,7 @@ selected to cross with itself, and self-copying is not out of the question)
 	   virtual int read(istream&)
 	   virtual int write(ostream&) const
 	   virtual int equal(const GAGenome&) const
-  
+  
 
 
 
@@ -87,7 +87,7 @@ initialize
   should first clean up as needed, then do its thing.  The initializer may be
   called any number of times (unlike a class constructor which is called only
   once for a given instance).
- 
+ 
 
 
 
@@ -234,8 +234,8 @@ class GAGenome : public GAID
 	// The GNU compiler sucks.  It won't recognize No*** as a member of the
 	// genome class.  So we have to use 0 as the defaults then check in the
 	// constructor.
-	explicit GAGenome(Initializer i = nullptr, Mutator m = nullptr,
-					  Comparator c = nullptr);
+	GAGenome(Initializer i = nullptr, Mutator m = nullptr,
+			 Comparator c = nullptr);
 	GAGenome(const GAGenome &orig);
 	GAGenome &operator=(const GAGenome &arg)
 	{

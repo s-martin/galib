@@ -27,6 +27,9 @@ TODO:
 #ifndef _ga_arraytmpl_h_
 #define _ga_arraytmpl_h_
 
+#include <exception>
+
+
 template <class T> class GAArray
 {
   public:
@@ -59,18 +62,21 @@ template <class T> class GAArray
 	operator T *() { return a; }
 	const T &operator[](unsigned int i) const { return a[i]; }
 	T &operator[](unsigned int i) { return a[i]; }
+	
 	void copy(const GAArray<T> &orig)
 	{
 		size(orig.sz);
 		for (unsigned int i = 0; i < sz; i++)
 			a[i] = orig.a[i];
 	}
+
 	void copy(const GAArray<T> &orig, unsigned int dest, unsigned int src,
 			  unsigned int length)
 	{
 		for (unsigned int i = 0; i < length; i++)
 			a[dest + i] = orig.a[src + i];
 	}
+
 	void move(unsigned int dest, unsigned int src, unsigned int length)
 	{
 		if (src > dest)
@@ -80,13 +86,25 @@ template <class T> class GAArray
 			for (unsigned int i = length - 1; i != 0; i--)
 				a[dest + i] = a[src + i];
 	}
+
 	void swap(unsigned int i, unsigned int j)
 	{
+		if (i >= sz || i < 0)
+		{
+			throw std::out_of_range("swap: input i invalid");
+		}
+		if (j >= sz || j < 0)
+		{
+			throw std::out_of_range("swap: input j invalid");
+		}
+
 		T tmp = a[j];
 		a[j] = a[i];
 		a[i] = tmp;
 	}
+
 	int size() const { return sz; }
+	
 	int size(unsigned int n)
 	{
 		if (n == sz)
@@ -98,6 +116,7 @@ template <class T> class GAArray
 		a = tmp;
 		return sz = n;
 	}
+	
 	bool equal(const GAArray<T> &b, unsigned int dest, unsigned int src,
 			   unsigned int length) const
 	{
@@ -116,13 +135,13 @@ template <class T> int operator==(const GAArray<T> &a, const GAArray<T> &b)
 {
 	if (a.size() != b.size())
 		return 0;
-	return a.equal(b, 0, 0, a.sz);
+	return a.equal(b, 0, 0, a.size());
 }
 template <class T> int operator!=(const GAArray<T> &a, const GAArray<T> &b)
 {
 	if (a.size() != b.size())
 		return 1;
-	return a.equal(b, 0, 0, a.sz) ? 0 : 1;
+	return a.equal(b, 0, 0, a.size()) ? 0 : 1;
 }
 
 #endif

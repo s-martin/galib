@@ -12,7 +12,7 @@
 #define _ga_list_h_
 
 #include <GAGenome.h>
-#include <GAList.h>
+#include <GAList.hpp>
 #include <GAMask.h>
 #include <garandom.h>
 

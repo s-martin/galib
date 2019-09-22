@@ -1,10 +1,6 @@
-GAlib examples
-mbw 5jan96
-
 # How to compile the examples
 
 The examples are automatically built with the library itself.
-
 
 # What the examples do
 
@@ -35,7 +31,7 @@ This example shows how to build a composite genome (a cell?) using
     The objective is to match a pattern and sequence of numbers.
 
 ##  ex6
-Grow a GATreeGenome<int> using a SteadyStateGA.  This example
+Grow a GATreeGenome\<int\> using a SteadyStateGA.  This example
 	illustrates the use of specialized methods to override the default
 	initialization method and to specialize the output from a tree.  It 
   	also shows how to use templatized genome classes.  Finally, it shows
@@ -53,7 +49,7 @@ Identical in function to example 3, this example shows how to use the
 	data from an input stream.
 
 ## ex8
-Grow a GAListGenome<int> using a GA with overlapping populations.
+Grow a GAListGenome\<int\> using a GA with overlapping populations.
 	This shows how to randomly initialize a list of integers, how to use
 	the sigma truncation scaling object to handle objective scores that 
 	may be positive or negative, and the 'set' member of the genetic 

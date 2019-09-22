@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: install boost, X11, lcov, gcov
+      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr
+    - name: cmake config
+      run: |
+        mkdir build
+        cd build
+        cmake ../
+    - name: make
+      run: cmake --build ./build
+    - name: run unit tests
+      run: cmake --build ./build --target test
+    - name: run coverage
+      run: cmake --build ./build --target GAlib_lcov

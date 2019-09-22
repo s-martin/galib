@@ -3,7 +3,6 @@ This is a running list of things to be done to galib.
 # Todo #
 
 - make the library thread-safe
-- include rules for building both shared and static libraries
 - xml input and output for saving the state of genomes and evolutions
 - use double rather than float
 - allow run-time modification of the random number generator
@@ -18,6 +17,6 @@ completed:
 
 - fix stream references in examples (includes and cout/cerr)
 - properly and automatically accommodate both <iostream.h> and
-    <iostream> inclusions
+    \<iostream\> inclusions
 - rewrite gaconfig.h to use consistent naming for options and make clear which
     are defaults, e.g. USE_ANSI_HEADERS/USE_NO_ANSI_HEADERS.
