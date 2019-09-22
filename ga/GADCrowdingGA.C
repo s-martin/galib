@@ -5,7 +5,7 @@
   Copyright (c) 1999 Matthew Wall, all rights reserved
 ---------------------------------------------------------------------------- */
 #include "GADCrowdingGA.h"
-#include "GAList.h"
+#include "GAList.hpp"
 #include "garandom.h"
 
 // this assumes that all of the genomes in the population are the same class

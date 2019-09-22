@@ -49,7 +49,7 @@ GA2DBinaryStringGenome::~GA2DBinaryStringGenome() = default;
 GAGenome *GA2DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 {
 	auto *cpy = new GA2DBinaryStringGenome(nx, ny);
-	if (flag == CONTENTS)
+	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
 	}

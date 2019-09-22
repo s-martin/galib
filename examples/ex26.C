@@ -20,12 +20,12 @@ it does get the job done.
 ---------------------------------------------------------------------------- */
 #include <cmath>
 #include <GASStateGA.h>
-#include <GAListGenome.h>
+#include <GAListGenome.hpp>
 #include <garandom.h>
  
 
 #include <iostream>
-
+#include <fstream>
  
  
  
@@ -425,12 +425,12 @@ GAListGenome<int>::write( std::ostream & os) const
 
 
 
-// force instantiations for compilers that do not do auto instantiation
-// for some compilers (e.g. metrowerks) this must come after any
-// specializations or you will get 'multiply-defined errors when you compile.
-#if !defined(GALIB_USE_AUTO_INST)
-#include <GAList.C>
-#include <GAListGenome.C>
-GALIB_INSTANTIATION_PREFIX GAList<int>;
-GALIB_INSTANTIATION_PREFIX GAListGenome<int>;
-#endif
+//// force instantiations for compilers that do not do auto instantiation
+//// for some compilers (e.g. metrowerks) this must come after any
+//// specializations or you will get 'multiply-defined errors when you compile.
+//#if !defined(GALIB_USE_AUTO_INST)
+//#include <GAList.C>
+//#include <GAListGenome.C>
+//GALIB_INSTANTIATION_PREFIX GAList<int>;
+//GALIB_INSTANTIATION_PREFIX GAListGenome<int>;
+//#endif

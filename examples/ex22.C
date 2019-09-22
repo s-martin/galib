@@ -19,25 +19,10 @@ child crossover" you could use your own crossover algorithm instead.
  
 
 #include <iostream>
-
+#include <fstream>
  
  
- 
-#define ofstream std::ofstream
 
-
-// force instantiations for compilers that do not do auto instantiation
-// for some compilers (e.g. metrowerks) this must come after any
-// specializations or you will get 'multiply-defined errors when you compile.
-#if !defined(GALIB_USE_AUTO_INST)
-#include <GA1DArrayGenome.C>
-GALIB_INSTANTIATION_PREFIX GA1DArrayGenome<float>;
-#endif
-
-
-#ifndef M_PI
-#define M_PI            3.14159265358979323846
-#endif
 
 #define OBJECTIVE Objective1
 #define MIN_VALUE -100
@@ -140,7 +125,7 @@ main(int argc, char** argv)
     }
   }
 
-  ofstream outfile;
+  std::ofstream outfile;
   char file[] = "sinusoid.dat";
   char ifile[] = "pop.initial.dat";
   char ffile[] = "pop.final.dat";

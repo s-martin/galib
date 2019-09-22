@@ -147,7 +147,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 		return *this;
 	}
 	~GABin2DecGenome() override { delete ptype; }
-	GAGenome *clone(GAGenome::CloneMethod flag = CONTENTS) const override;
+	GAGenome *clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override;
 	void copy(const GAGenome &) override;
 
 	int read(std::istream &) override;

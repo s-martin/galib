@@ -60,7 +60,7 @@ GA1DBinaryStringGenome::~GA1DBinaryStringGenome() = default;
 GAGenome *GA1DBinaryStringGenome::clone(GAGenome::CloneMethod flag) const
 {
 	auto *cpy = new GA1DBinaryStringGenome(nx);
-	if (flag == CONTENTS)
+	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
 	}

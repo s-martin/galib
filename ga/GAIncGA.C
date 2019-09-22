@@ -15,8 +15,8 @@
 GAIncrementalGA::GAIncrementalGA(const GAGenome &c, const std::shared_ptr<GAParameterList>& _params) : 
 	GAGeneticAlgorithm(c, _params)
 {
-	child1 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
-	child2 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
+	child1 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
+	child2 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
 	child1->geneticAlgorithm(*this);
 	child2->geneticAlgorithm(*this);
 
@@ -31,8 +31,8 @@ GAIncrementalGA::GAIncrementalGA(const GAGenome &c, const std::shared_ptr<GAPara
 GAIncrementalGA::GAIncrementalGA(const GAPopulation &p, const std::shared_ptr<GAParameterList>& _params) : 
 	GAGeneticAlgorithm(p, _params)
 {
-	child1 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
-	child2 = pop->individual(0).clone(GAGenome::ATTRIBUTES);
+	child1 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
+	child2 = pop->individual(0).clone(GAGenome::CloneMethod::ATTRIBUTES);
 	child1->geneticAlgorithm(*this);
 	child2->geneticAlgorithm(*this);
 

@@ -19,40 +19,97 @@ target_link_libraries(example4 PUBLIC GAlib Boost::program_options)
 add_executable(example5 ex5.C)
 target_link_libraries(example5 PUBLIC GAlib Boost::program_options)
 
-# add_executable(example6 ex6.C)
-# target_link_libraries(example6 PUBLIC GAlib)
+add_executable(example6 ex6.C)
+target_link_libraries(example6 PUBLIC GAlib)
 
 add_executable(example7 ex7.C)
 target_link_libraries(example7 PUBLIC GAlib Boost::program_options)
 
-# add_executable(example8 ex8.C)
-# target_link_libraries(example8 PUBLIC GAlib)
+add_executable(example8 ex8.C)
+target_link_libraries(example8 PUBLIC GAlib)
 
 add_executable(example9 ex9.C)
 target_link_libraries(example9 PUBLIC GAlib Boost::program_options)
 
-if(NOT MSVC) 
-	add_executable(gnuex 
-					./gnu/gnuex.C 
-					./gnu/bitstr.C
-					./gnu/AllocRing.cc 
-					./gnu/Obstack.cc 
-					./gnu/BitString.cc 
-					./gnu/builtin.cc 
-					./gnu/bitand.c 
-					./gnu/bitany.c 
-					./gnu/bitblt.c 
-					./gnu/bitclear.c 
-					./gnu/bitcopy.c 
-					./gnu/bitcount.c 
-					./gnu/bitinvert.c 
-					./gnu/bitlcomp.c 
-					./gnu/bitset1.c 
-					./gnu/bitxor.c 
-					./gnu/error.cc )
-	target_link_libraries(gnuex GAlib)
-	target_include_directories(gnuex PUBLIC ${CMAKE_SOURCE_DIR}/examples/gnu)
-endif()
+add_executable(example10 ex10.C)
+target_link_libraries(example10 PUBLIC GAlib)
+
+add_executable(example11 ex11.C)
+target_link_libraries(example11 PUBLIC GAlib)
+
+add_executable(example12 ex12.C)
+target_link_libraries(example12 PUBLIC GAlib)
+
+add_executable(example13 ex13.C)
+target_link_libraries(example13 PUBLIC GAlib)
+
+add_executable(example14 ex14.C)
+target_link_libraries(example14 PUBLIC GAlib)
+
+add_executable(example15 ex15.C)
+target_link_libraries(example15 PUBLIC GAlib)
+
+add_executable(example16 ex16.C)
+target_link_libraries(example16 PUBLIC GAlib)
+
+add_executable(example17 ex17.C)
+target_link_libraries(example17 PUBLIC GAlib)
+
+add_executable(example18 ex18.C)
+target_link_libraries(example18 PUBLIC GAlib)
+
+add_executable(example19 ex19.C)
+target_link_libraries(example19 PUBLIC GAlib)
+
+add_executable(example20 ex20.C)
+target_link_libraries(example20 PUBLIC GAlib)
+
+add_executable(example21 ex21.C)
+target_link_libraries(example21 PUBLIC GAlib)
+
+add_executable(example22 ex22.C)
+target_link_libraries(example22 PUBLIC GAlib)
+
+add_executable(example23 ex23.C)
+target_link_libraries(example23 PUBLIC GAlib)
+
+add_executable(example24 ex24.C)
+target_link_libraries(example24 PUBLIC GAlib)
+
+add_executable(example25 ex25.C)
+target_link_libraries(example25 PUBLIC GAlib)
+
+add_executable(example26 ex26.C)
+target_link_libraries(example26 PUBLIC GAlib)
+
+add_executable(example27 ex27.C)
+target_link_libraries(example27 PUBLIC GAlib)
+
+add_executable(randtest randtest.C)
+target_link_libraries(randtest PUBLIC GAlib)
+
+#if(NOT MSVC) 
+#	add_executable(gnuex 
+#					./gnu/gnuex.C 
+#					./gnu/bitstr.C
+#					./gnu/AllocRing.cc 
+#					./gnu/Obstack.cc 
+#					./gnu/BitString.cc 
+#					./gnu/builtin.cc 
+#					./gnu/bitand.c 
+#					./gnu/bitany.c 
+#					./gnu/bitblt.c 
+#					./gnu/bitclear.c 
+#					./gnu/bitcopy.c 
+#					./gnu/bitcount.c 
+#					./gnu/bitinvert.c 
+#					./gnu/bitlcomp.c 
+#					./gnu/bitset1.c 
+#					./gnu/bitxor.c 
+#					./gnu/error.cc )
+#	target_link_libraries(gnuex GAlib)
+#	target_include_directories(gnuex PUBLIC ${CMAKE_SOURCE_DIR}/examples/gnu)
+#endif()
 
 if(X11_FOUND) 
 	add_executable(gaview 
@@ -60,10 +117,10 @@ if(X11_FOUND)
 	target_link_libraries(gaview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
 	target_include_directories(gaview PUBLIC ${X11_INCLUDE_DIR})
 	
-	#add_executable(tspview  
-	#				./graphic/tspview.C)
-	#target_link_libraries(tspview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
-	#target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
+	add_executable(tspview  
+					./graphic/tspview.C)
+	target_link_libraries(tspview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
+	target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
 endif()
 
 # add_executable(pvmpop 

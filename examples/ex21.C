@@ -76,7 +76,7 @@ main(int argc, char** argv)
 
   GARealAlleleSetArray alleles2a;
   for(int i=0; i<length; i++)
-    alleles2a.add(0, 1, GAAllele::EXCLUSIVE, GAAllele::EXCLUSIVE);
+    alleles2a.add(0, 1, GAAllele::BoundType::EXCLUSIVE, GAAllele::BoundType::EXCLUSIVE);
   GARealGenome genome2a(alleles2a, Objective2);
 
 // Here we create a genome whose elements may assume any value in the interval
@@ -86,7 +86,7 @@ main(int argc, char** argv)
 // gaussian mutator, and uniform crossover.  Since gaussian is not the behavior
 // we want for mutation, we assign the flip mutator instead.
 
-  GARealAlleleSet alleles3(0,10,0.5,GAAllele::INCLUSIVE,GAAllele::EXCLUSIVE);
+  GARealAlleleSet alleles3(0,10,0.5,GAAllele::BoundType::INCLUSIVE,GAAllele::BoundType::EXCLUSIVE);
   GARealGenome genome3(length, alleles3, Objective3);
   genome3.crossover(GARealUniformCrossover);
   genome3.mutator(GARealSwapMutator);

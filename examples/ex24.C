@@ -17,10 +17,8 @@ example).
  
 
 #include <iostream>
-
+#include <fstream>
  
- 
-#define ofstream std::ofstream
 
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
@@ -31,9 +29,6 @@ example).
 
 #define THRESHOLD 0.5
 
-#ifndef M_PI
-#define M_PI            3.14159265358979323846
-#endif
 
 float Objective(GAGenome &);
 float Comparator(const GAGenome&, const GAGenome&);
@@ -194,7 +189,7 @@ main(int argc, char** argv)
   ga.parameters(argc, argv, true); // parse commands, complain if bogus args
   ga.evolve(seed);
 
-  ofstream outfile;
+  std::ofstream outfile;
 
 // dump the final population to file
 

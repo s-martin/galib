@@ -201,18 +201,3 @@ GATreeGenome<int>::write( std::ostream & os) const
   WriteNode(os, (GANode<int> *)rt);
   return os.fail() ? 1 : 0;
 }
-
-
-
-
-
-
-// force instantiations for compilers that do not do auto instantiation
-// for some compilers (e.g. metrowerks) this must come after any
-// specializations or you will get 'multiply-defined errors when you compile.
-#if !defined(GALIB_USE_AUTO_INST)
-#include <GATree.C>
-#include <GATreeGenome.C>
-GALIB_INSTANTIATION_PREFIX GATreeGenome<int>;
-GALIB_INSTANTIATION_PREFIX GATree<int>;
-#endif

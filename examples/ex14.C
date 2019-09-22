@@ -54,7 +54,7 @@ public:
   virtual ~RobotPathGenome();
   virtual GAGenome *clone(GAGenome::CloneMethod) const ;
   virtual void copy(const GAGenome & c);
-  virtual int equal(const GAGenome& g) const;
+  virtual bool equal(const GAGenome& g) const;
   virtual int read( std::istream & is);
   virtual int write( std::ostream & os) const ;
 
@@ -114,10 +114,10 @@ RobotPathGenome::clone(GAGenome::CloneMethod) const {
   return new RobotPathGenome(*this); 
 }
 
-int 
+bool 
 RobotPathGenome::equal(const GAGenome& g) const {
   RobotPathGenome& genome = (RobotPathGenome&)g;
-  int flag=0;
+  bool flag=false;
   for(int i=0; i<n && flag==0; i++)
     flag = list[i]->equal(*genome.list[i]);
   return flag;
@@ -361,15 +361,3 @@ main(int argc, char *argv[])
 
   return 0;
 }
-
-
-
-// force instantiations for compilers that do not do auto instantiation.
-// for some compilers (e.g. metrowerks) this must come after any
-// specializations or you will get 'multiply-defined errors when you compile.
-#if !defined(GALIB_USE_AUTO_INST)
-#include <GAList.C>
-#include <GAListGenome.C>
-GALIB_INSTANTIATION_PREFIX GAList<int>;
-GALIB_INSTANTIATION_PREFIX GAListGenome<int>;
-#endif

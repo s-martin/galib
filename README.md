@@ -1,4 +1,5 @@
-# Modern GAlib: A (modernized) C++ Genetic Algorithm Library #
+# Modern GAlib: A (modernized) C++ Genetic Algorithm Library [![Build Status](https://travis-ci.com/s-martin/galib.svg?token=ryQD2yK6KA1p3pds4ruj&branch=master)](https://travis-ci.com/s-martin/galib) 
+
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
 GAlib is a C++ library of genetic algorithm objects.  With GAlib you can add 
@@ -6,12 +7,14 @@ evolutionary algorithm optimization to almost any program using any data
 representation and standard or custom selection, crossover, mutation, 
 scaling, and termination methods.
 
-GAlib was originally developed by Matthew Wall. From version 3.0 onwards
-it was modernized using latest C++17 technology.  
+GAlib was originally developed by Matthew Wall. 
+Modernized GAlib from version 3.0 on is a fork of the [original GAlib](http://lancet.mit.edu/ga 
+) and modernized the
+original code using latest C++17 technology.  
 
 The library requires a C++ compiler conforming to C++17. It has been tested with
 - Visual Studio 2019
-- GCC 8.3
+- GCC 8.3 (Ubuntu)
 
 Graphic examples (XWindows/Motif and MS Windows) are available, as are 
 parallel, distributed implementations using PVM.  There are about 30 examples
@@ -39,11 +42,11 @@ short version of how to build and test everything:
 ### Windows ###
 
 Using vcpkg to install dependencies is recommended:
-> vcpkg install boost-test boost-program-options
-
-> mkdir build && cd build
-
-> cmake ../ -DCMAKE_TOOLCHAIN_FILE=<path to vcpkg>/scripts/buildsystems/vcpkg.cmake
+> vcpkg install boost-test boost-program-options boost-predef
+>
+> md build && cd build
+>
+> cmake ../ -DCMAKE_TOOLCHAIN_FILE=\<path to vcpkg\>/scripts/buildsystems/vcpkg.cmake
 
 Open in Visual Studio as CMake project.
 
@@ -52,11 +55,33 @@ Open in Visual Studio as CMake project.
 
 > sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev 
 
+If you want to use code coverage:
+
+> sudo apt install lcov 
+> 
+> sudo apt install gcovr 
+
+Configure and build:
+
 > mkdir build && cd build
-
+>
 > cmake ../
-
+>
 > make
+
+Run unit tests:
+> make test
+
+Run unit tests and create coverage:
+> make GAlib_lcov
+>
+> make GAlib_gcov
+
+### Building shared libraries
+
+To build shared libraries append `-DBUILD_SHARED_LIBS:BOOL=ON` to the above `cmake`command.
+
+See also https://cmake.org/cmake/help/v3.15/variable/BUILD_SHARED_LIBS.html in the CMake docs.
 
 ### Common Errors
 

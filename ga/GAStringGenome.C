@@ -98,8 +98,6 @@ template <> int GA1DArrayAlleleGenome<char>::write(std::ostream &os) const
 // some compilers require a syntax different than others when forcing the
 // instantiation (i.e. GNU wants the 'template class', borland does not).
 #ifndef GALIB_USE_AUTO_INST
-#include <GA1DArrayGenome.C>
-#include <GAAllele.C>
 
 #if defined(__BORLANDC__)
 #define GALIB_STRINGGENOME_TEMPLATE_PREFACE
