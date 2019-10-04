@@ -933,7 +933,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	// then copy the original.  The Array creator takes care of zeroing the
 	// data.
 	GA1DArrayGenome(const GA1DArrayGenome<T> &orig)
-		: GAArray<T>(orig.sz), GAGenome()
+		: GAArray<T>(orig.size()), GAGenome()
 	{
 		GA1DArrayGenome<T>::copy(orig);
 	}
@@ -945,7 +945,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	}
 	GA1DArrayGenome<T> &operator=(const T array[]) // no err checks!
 	{
-		for (unsigned int i = 0; i < this->sz; i++)
+		for (unsigned int i = 0; i < this->size(); i++)
 			gene(i, *(array + i));
 		return *this;
 	}
