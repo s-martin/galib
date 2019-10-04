@@ -555,7 +555,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
 	virtual int resize(int w, int h)
 	{
 		if (w == STA_CAST(int, nx) && h == STA_CAST(int, ny))
-			return this->sz;
+			return this->size();
 
 		if (w == GAGenome::ANY_SIZE)
 			w = GARandomInt(minX, maxX);
@@ -602,7 +602,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
 		nx = w;
 		ny = h;
 		_evaluated = false;
-		return this->sz;
+		return this->size();
 	}
 
 	int read(std::istream &) override
@@ -908,7 +908,7 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 				this->a[i] = aset[i % naset].allele();
 		}
 
-		return this->sz;
+		return this->size();
 	}
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
