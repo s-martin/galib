@@ -800,9 +800,8 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
 		: GA2DArrayGenome<T>(width, height, f, u)
 	{
-		naset = 1;
-		aset = new GAAlleleSet<T>[1];
-		aset[0] = s;
+		aset = std::vector<GAAlleleSet<T>>(1);
+		aset.at(0) = s;
 
 		this->initializer(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_INITIALIZER);
 		this->mutator(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_MUTATOR);
@@ -815,10 +814,9 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
 		: GA2DArrayGenome<T>(width, height, f, u)
 	{
-		naset = sa.size();
-		aset = new GAAlleleSet<T>[naset];
-		for (int i = 0; i < naset; i++)
-			aset[i] = sa.set(i);
+		aset = std::vector<GAAlleleSet<T>>(sa.size());
+		for (int i = 0; i < aset.size(); i++)
+			aset.at(i) = sa.set(i);
 
 		this->initializer(
 			GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_INITIALIZER);
@@ -830,12 +828,10 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 	GA2DArrayAlleleGenome(const GA2DArrayAlleleGenome<T> &orig)
 		: GA2DArrayGenome<T>(orig.nx, orig.ny)
 	{
-		naset = 0;
-		aset = (GAAlleleSet<T> *)0;
 		GA2DArrayAlleleGenome<T>::copy(orig);
 	}
 
-	~GA2DArrayAlleleGenome() { delete[] aset; }
+	~GA2DArrayAlleleGenome() { }
 
 	GA2DArrayAlleleGenome<T> &operator=(const GAGenome &orig)
 	{
@@ -863,14 +859,12 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 		if (c)
 		{
 			GA2DArrayGenome<T>::copy(*c);
-			if (naset != c->naset)
+			if (aset.size() != c->aset.size())
 			{
-				delete[] aset;
-				naset = c->naset;
-				aset = new GAAlleleSet<T>[c->naset];
+				aset = std::vector<GAAlleleSet<T>>(c->aset.size());
 			}
-			for (int i = 0; i < naset; i++)
-				aset[i].link(c->aset[i]);
+			for (int i = 0; i < aset.size(); i++)
+				aset.at(i).link(c->aset.at(i));
 		}
 	}
 
@@ -899,13 +893,13 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 			{
 				for (unsigned int i = oldx; i < this->nx; i++)
 					this->a[j * this->nx + i] =
-						aset[(j * this->nx + i) % naset].allele();
+						aset.at((j * this->nx + i) % aset.size()).allele();
 			}
 		}
 		if (this->ny > oldy)
 		{ // change in height is always new bits
 			for (unsigned int i = this->nx * oldy; i < this->nx * this->ny; i++)
-				this->a[i] = aset[i % naset].allele();
+				this->a.at(i) = aset.at(i % aset.size()).allele();
 		}
 
 		return this->size();
@@ -913,12 +907,11 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
 	{
-		return aset[i % naset];
+		return aset.at(i % aset.size());
 	}
 
   protected:
-	int naset;
-	GAAlleleSet<T> *aset;
+	std::vector<GAAlleleSet<T>> aset;
 };
 
 #endif

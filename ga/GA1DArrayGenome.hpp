@@ -33,6 +33,7 @@ that for common instantiations (float, char).
 #include <cstdlib>
 #include <cstring>
 #include <garandom.h>
+#include <vector>
 
 /* ----------------------------------------------------------------------------
 1DArrayGenome
@@ -1254,9 +1255,8 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
 		: GA1DArrayGenome<T>(length, f, u)
 	{
-		naset = 1;
-		aset = new GAAlleleSet<T>[1];
-		aset[0] = s;
+		aset = std::vector<GAAlleleSet<T>>(1);
+		aset.at(0) = s;
 
 		this->initializer(
 			GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
@@ -1269,10 +1269,9 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
 		: GA1DArrayGenome<T>(sa.size(), f, u)
 	{
-		naset = sa.size();
-		aset = new GAAlleleSet<T>[naset];
-		for (int i = 0; i < naset; i++)
-			aset[i] = sa.set(i);
+		aset = std::vector<GAAlleleSet<T>>(sa.size());
+		for (int i = 0; i < size(); i++)
+			aset.at(i) = sa.set(i);
 
 		this->initializer(
 			GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
@@ -1286,8 +1285,6 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	GA1DArrayAlleleGenome(const GA1DArrayAlleleGenome<T> &orig)
 		: GA1DArrayGenome<T>(orig.size())
 	{
-		naset = 0;
-		aset = (GAAlleleSet<T> *)0;
 		GA1DArrayAlleleGenome<T>::copy(orig);
 	}
 
@@ -1324,14 +1321,14 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		if (c)
 		{
 			GA1DArrayGenome<T>::copy(*c);
-			if (naset != c->naset)
+			if (size() != c->size())
 			{
-				delete[] aset;
-				naset = c->naset;
-				aset = new GAAlleleSet<T>[naset];
+				aset = std::vector<GAAlleleSet<T>>(c->size());
 			}
-			for (int i = 0; i < naset; i++)
-				aset[i].link(c->aset[i]);
+			for (int i = 0; i < aset.size(); i++)
+			{
+				aset.at(i).link(c->aset.at(i));
+			}
 		}
 	}
 
@@ -1357,19 +1354,21 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		if (this->nx > oldx)
 		{
 			for (unsigned int i = oldx; i < this->nx; i++)
-				this->a[i] = aset[i % naset].allele();
+				this->a.at(i) = aset.at(i % size()).allele();
 		}
 		return len;
 	}
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
 	{
-		return aset[i % naset];
+		return aset.at(i % size());
 	}
 
+	int size() const { return aset.size(); }
+
   protected:
-	int naset;
-	GAAlleleSet<T> *aset; // the allele set(s) for this genome
+	// the allele set(s) for this genome
+	std::vector<GAAlleleSet<T>> aset; 
 };
 
 #endif
