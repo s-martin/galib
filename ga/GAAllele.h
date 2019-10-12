@@ -21,6 +21,7 @@ imply the specific implementation of the container class).
 #include <gaerror.h>
 #include <istream>
 #include <ostream>
+#include <vector>
 
 constexpr auto GA_ALLELE_CHUNK = 10;
 
@@ -82,7 +83,7 @@ template <class T> class GAAlleleSetCore
   public:
 	GAAlleleSetCore()
 		: type(GAAllele::Type::ENUMERATED), csz(GA_ALLELE_CHUNK), sz(0), SZ(0),
-		  a(0)
+		  a(std::vector<T>())
 	{
 		lowerb = GAAllele::BoundType::NONE;
 		upperb = GAAllele::BoundType::NONE;
@@ -96,10 +97,9 @@ template <class T> class GAAlleleSetCore
 	{
 		while (SZ < sz)
 			SZ += csz;
-		a = new T[SZ];
-		//  memcpy(a, array, n*sizeof(T));
+		a = std::vector<T>(SZ);
 		for (unsigned int i = 0; i < sz; i++)
-			a[i] = *(array + i);
+			a.at(i) = *(array + i);
 		lowerb = GAAllele::BoundType::NONE;
 		upperb = GAAllele::BoundType::NONE;
 
@@ -110,10 +110,10 @@ template <class T> class GAAlleleSetCore
 					GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
 					GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE)
 		: type(GAAllele::Type::BOUNDED), csz(GA_ALLELE_CHUNK), sz(2), SZ(2),
-		  a(new T[2])
+		  a(std::vector<T>(2))
 	{
-		a[0] = lower;
-		a[1] = upper;
+		a.at(0) = lower;
+		a.at(1) = upper;
 		lowerb = lb;
 		upperb = ub;
 
@@ -124,11 +124,11 @@ template <class T> class GAAlleleSetCore
 					GAAllele::BoundType lb = GAAllele::BoundType::INCLUSIVE,
 					GAAllele::BoundType ub = GAAllele::BoundType::INCLUSIVE)
 		: type(GAAllele::Type::DISCRETIZED), csz(GA_ALLELE_CHUNK), sz(3), SZ(3),
-		  a(new T[3])
+		  a(std::vector<T>(3))
 	{
-		a[0] = lower;
-		a[1] = upper;
-		a[2] = increment;
+		a.at(0) = lower;
+		a.at(1) = upper;
+		a.at(2) = increment;
 		lowerb = lb;
 		upperb = ub;
 
@@ -137,11 +137,10 @@ template <class T> class GAAlleleSetCore
 
 	// We do not copy the original's reference count!
 	GAAlleleSetCore(const GAAlleleSetCore<T> &orig)
-		: csz(orig.csz), sz(orig.sz), SZ(orig.SZ), a(new T[orig.SZ])
+		: csz(orig.csz), sz(orig.sz), SZ(orig.SZ), a(std::vector<T>(orig.SZ))
 	{
-		//  memcpy(a, orig.a, sz*sizeof(T));
 		for (unsigned int i = 0; i < sz; i++)
-			a[i] = orig.a[i];
+			a.at(i) = orig.a.at(i);
 		lowerb = orig.lowerb;
 		upperb = orig.upperb;
 		type = orig.type;
@@ -155,7 +154,6 @@ template <class T> class GAAlleleSetCore
 	{
 		if (cnt > 0)
 			GAErr(GA_LOC, "GAAlleleSetCore", "destructor", GAError::RefsRemain);
-		delete[] a;
 	}
 
 	// Copying the contents of another allele set core does NOT change the
@@ -169,13 +167,11 @@ template <class T> class GAAlleleSetCore
 		{
 			while (SZ < orig.sz)
 				SZ += csz;
-			delete[] a;
-			a = new T[SZ];
+			a = std::vector<T>(SZ);
 		}
 
-		//  memcpy(a, orig.a, orig.sz*sizeof(T));
 		for (unsigned int i = 0; i < orig.sz; i++)
-			a[i] = orig.a[i];
+			a.at(i) = orig.a.at(i);
 
 		sz = orig.sz;
 		lowerb = orig.lowerb;
@@ -191,7 +187,7 @@ template <class T> class GAAlleleSetCore
 	unsigned int csz; // how big are the chunks to allocate?
 	unsigned int sz; // number we have
 	unsigned int SZ; // how many have we allocated?
-	T *a;
+	std::vector<T> a;
 };
 
 template <class T> class GAAlleleSet
@@ -249,7 +245,8 @@ template <class T> class GAAlleleSet
 
 	// When we link to another allele set, we point our core to that one.  Be
 	// sure that we have a core.  If not, just point.  If so, trash as needed.
-	void link(GAAlleleSet<T> &set)
+	// TODO check, if this wokrs now as it is now a std::vector
+	void link(GAAlleleSet<T> set)
 	{
 		if (&set != this)
 		{
@@ -288,14 +285,12 @@ template <class T> class GAAlleleSet
 		if (core->sz >= core->SZ)
 		{
 			core->SZ += core->csz;
-			T *tmp = core->a;
-			core->a = new T[core->SZ];
+			auto tmp = core->a;
+			core->a = std::vector<T>(core->SZ);
 			for (unsigned int i = 0; i < core->sz; i++)
-				core->a[i] = tmp[i];
-			//      memcpy(core->a, tmp, core->sz*sizeof(T));
-			delete[] tmp;
+				core->a.at(i) = tmp.at(i);
 		}
-		core->a[core->sz] = alle;
+		core->a.at(core->sz) = alle;
 		core->sz += 1;
 		return 0;
 	}
