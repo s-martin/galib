@@ -433,7 +433,7 @@ template <class T> class GATree : public GATreeBASE
 	T *warp(unsigned int i) { return iter.warp(i); }
 	T *warp(const GATreeIter<T> &i)
 	{
-		return ((i.tree == this) ? iter.warp(i) : (T *)0);
+		return ((i.tree == this) ? iter.warp(i) : nullptr);
 	}
 	int nchildren() { return iter.nchildren(); }
 	int nsiblings() { return iter.nsiblings(); }
@@ -479,64 +479,51 @@ template <class T> class GATreeIter : public GATreeIterBASE
 		node = t.iter.node;
 	}
 	GATreeIter(const GATreeIter<T> &i) : GATreeIterBASE(i) {}
-	T *current() { return (node ? &((GANode<T> *)node)->contents : (T *)0); }
+	T *current() { return (node ? &((GANode<T> *)node)->contents : nullptr); }
 	T *root()
 	{
-		return (((node = GATreeIterBASE::root()) != nullptr)
-					? &((GANode<T> *)GATreeIterBASE::root(node))->contents
-					: (T *)0);
+		return (((node = GATreeIterBASE::root()) != nullptr) ? &((GANode<T> *)GATreeIterBASE::root(node))->contents	: nullptr);
 	}
 	T *next()
 	{
-		return ((node && node->next)
-					? &((GANode<T> *)(node = node->next))->contents
-					: (T *)0);
+		return ((node && node->next) ? &((GANode<T> *)(node = node->next))->contents : nullptr);
 	}
 	T *prev()
 	{
-		return ((node && node->prev)
-					? &((GANode<T> *)(node = node->prev))->contents
-					: (T *)0);
+		return ((node && node->prev) ? &((GANode<T> *)(node = node->prev))->contents : nullptr);
 	}
 	T *parent()
 	{
-		return ((node && node->parent)
-					? &((GANode<T> *)(node = node->parent))->contents
-					: (T *)0);
+		return ((node && node->parent) ? &((GANode<T> *)(node = node->parent))->contents : nullptr);
 	}
 	T *child()
 	{
-		return ((node && node->child)
-					? &((GANode<T> *)(node = node->child))->contents
-					: (T *)0);
+		return ((node && node->child) ? &((GANode<T> *)(node = node->child))->contents : nullptr);
 	}
 	T *eldest()
 	{
-		return (node ? &((GANode<T> *)GATreeIterBASE::eldest(node))->contents
-					 : (T *)0);
+		return (node ? &((GANode<T> *)GATreeIterBASE::eldest(node))->contents : nullptr);
 	}
 	T *youngest()
 	{
-		return (node ? &((GANode<T> *)GATreeIterBASE::youngest(node))->contents
-					 : (T *)0);
+		return (node ? &((GANode<T> *)GATreeIterBASE::youngest(node))->contents : nullptr);
 	}
 	T *warp(const GATree<T> &t)
 	{
 		tree = &t;
 		node = t.iter.node;
-		return (t.iter.node ? &((GANode<T> *)(node = t.iter.node))->contents
-							: (T *)0);
+		return (t.iter.node ? &((GANode<T> *)(node = t.iter.node))->contents : nullptr);
 	}
 	T *warp(const GATreeIter<T> &i)
 	{
 		tree = i.tree;
 		node = i.node;
-		return (i.node ? &((GANode<T> *)(node = i.node))->contents : (T *)0);
+		return (i.node ? &((GANode<T> *)(node = i.node))->contents : nullptr);
 	}
 	T *warp(unsigned int i)
 	{
 		GANodeBASE *n = GATreeIterBASE::warp(i);
-		return (n ? &((GANode<T> *)(node = n))->contents : (T *)0);
+		return (n ? &((GANode<T> *)(node = n))->contents : nullptr);
 	}
 
   private:
