@@ -5,11 +5,8 @@
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
 ---------------------------------------------------------------------------- */
-#ifndef _ga_types_h_
-#define _ga_types_h_
 
-using GAProbability = float;
-using GAProb = float;
+#pragma once
 
 // This defines what type to use for the bitstream data storage.  Use the
 // smallest type available on your platform.
@@ -27,5 +24,3 @@ template <typename T1, typename T2> constexpr auto GAMin(T1 a, T2 b)
 {
 	return (((a) < (b)) ? (a) : (b));
 }
-
-#endif

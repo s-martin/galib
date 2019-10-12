@@ -118,9 +118,8 @@ GA1DArrayAlleleGenome<float>::GA1DArrayAlleleGenome(unsigned int length,
 													void *u)
 	: GA1DArrayGenome<float>(length, f, u)
 {
-	naset = 1;
-	aset = new GAAlleleSet<float>[1];
-	aset[0] = s;
+	aset = std::vector<GAAlleleSet<float>>(1);
+	aset.at(0) = s;
 
 	initializer(DEFAULT_REAL_INITIALIZER);
 	mutator(DEFAULT_REAL_MUTATOR);
@@ -133,11 +132,10 @@ GA1DArrayAlleleGenome<float>::GA1DArrayAlleleGenome(
 	const GAAlleleSetArray<float> &sa, GAGenome::Evaluator f, void *u)
 	: GA1DArrayGenome<float>(sa.size(), f, u)
 {
-	naset = sa.size();
-	aset = new GAAlleleSet<float>[naset];
-	for (int i = 0; i < naset; i++)
+	aset = std::vector<GAAlleleSet<float>>(sa.size());
+	for (int i = 0; i < aset.size(); i++)
 	{
-		aset[i] = sa.set(i);
+		aset.at(i) = sa.set(i);
 	}
 
 	initializer(DEFAULT_REAL_INITIALIZER);
@@ -148,7 +146,6 @@ GA1DArrayAlleleGenome<float>::GA1DArrayAlleleGenome(
 
 template <> GA1DArrayAlleleGenome<float>::~GA1DArrayAlleleGenome()
 {
-	delete[] aset;
 }
 
 // The read specialization takes in each number and stuffs it into the array.

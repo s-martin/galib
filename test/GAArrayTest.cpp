@@ -34,14 +34,9 @@ BOOST_AUTO_TEST_CASE(GAArray_001)
 	BOOST_CHECK_EQUAL(gaarray3[0u], 1);
 	BOOST_CHECK_EQUAL(gaarray3[1u], 2);
 
-	int simplearray[2];
-	simplearray[0] = 3;
-	simplearray[1] = 4;
-	BOOST_CHECK_EQUAL(simplearray[0u], 3);
-	BOOST_CHECK_EQUAL(simplearray[1u], 4);
-
 	GAArray<int> gaarray4(2);
-	gaarray4 = simplearray;
+	gaarray4[0u] = 3;
+	gaarray4[1u] = 4;
 	BOOST_CHECK_EQUAL(gaarray4.size(), 2);
 	BOOST_CHECK_EQUAL(gaarray4[0u], 3);
 	BOOST_CHECK_EQUAL(gaarray4[1u], 4);
@@ -107,9 +102,9 @@ BOOST_AUTO_TEST_CASE(size_001)
 	BOOST_CHECK_EQUAL(gaarray8[1u], 2);
 
 	// TODO fix implementation
-	//BOOST_CHECK_EQUAL(gaarray8[2u], 0);
-	//BOOST_CHECK_EQUAL(gaarray8[3u], 0);
-	//BOOST_CHECK_EQUAL(gaarray8[4u], 0);
+	BOOST_CHECK_EQUAL(gaarray8[2u], 0);
+	BOOST_CHECK_EQUAL(gaarray8[3u], 0);
+	BOOST_CHECK_EQUAL(gaarray8[4u], 0);
 
 	gaarray8a.size(2);
 	BOOST_CHECK_EQUAL(gaarray8a.size(), 2);
@@ -139,7 +134,7 @@ BOOST_AUTO_TEST_CASE(move_001)
 	gaarray9a.move(2, 0, 2);
 	BOOST_CHECK_EQUAL(gaarray9a[0u], 5);
 	BOOST_CHECK_EQUAL(gaarray9a[1u], 6);
-	// TODO fix implementation BOOST_CHECK_EQUAL(gaarray9a[2u], 5);
+	BOOST_CHECK_EQUAL(gaarray9a[2u], 5);
 	BOOST_CHECK_EQUAL(gaarray9a[3u], 6);
 
 	// TODO add failures to improve implementation
