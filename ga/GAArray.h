@@ -24,8 +24,8 @@ No error checking on the copy, so don't walk over end of array!
 TODO:
   should do specialization for simple types that does memcpy rather than loop
 ---------------------------------------------------------------------------- */
-#ifndef _ga_arraytmpl_h_
-#define _ga_arraytmpl_h_
+
+#pragma once
 
 #include <vector>
 
@@ -64,17 +64,17 @@ template <class T> class GAArray
 			  unsigned int length)
 	{
 		for (unsigned int i = 0; i < length; i++)
-			a[dest + i] = orig.a[src + i];
+		{
+			a.at(dest + i) = orig.a.at(src + i);
+		}
 	}
 
 	void move(unsigned int dest, unsigned int src, unsigned int length)
 	{
-		if (src > dest)
-			for (unsigned int i = 0; i < length; i++)
-				a[dest + i] = a[src + i];
-		else if (src < dest)
-			for (unsigned int i = length - 1; i != 0; i--)
-				a[dest + i] = a[src + i];
+		for (unsigned int i = 0; i < length; i++)
+		{
+			a.at(dest + i) = a.at(src + i);
+		}
 	}
 
 	void swap(unsigned int i, unsigned int j)
@@ -121,5 +121,3 @@ template <class T> int operator!=(const GAArray<T> &a, const GAArray<T> &b)
 		return 1;
 	return a.equal(b, 0, 0, a.size()) ? 0 : 1;
 }
-
-#endif
