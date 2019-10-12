@@ -50,14 +50,10 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	static void UnsetInitializer(GAGenome &);
 	static void SetInitializer(GAGenome &);
 	static int FlipMutator(GAGenome &, float);
-	static int UniformCrossover(const GAGenome &, const GAGenome &, GAGenome *,
-								GAGenome *);
-	static int EvenOddCrossover(const GAGenome &, const GAGenome &, GAGenome *,
-								GAGenome *);
-	static int OnePointCrossover(const GAGenome &, const GAGenome &, GAGenome *,
-								 GAGenome *);
-	static int TwoPointCrossover(const GAGenome &, const GAGenome &, GAGenome *,
-								 GAGenome *);
+	static int UniformCrossover(const GAGenome &, const GAGenome &, GAGenome *,	GAGenome *);
+	static int EvenOddCrossover(const GAGenome &, const GAGenome &, GAGenome *,	GAGenome *);
+	static int OnePointCrossover(const GAGenome &, const GAGenome &, GAGenome *, GAGenome *);
+	static int TwoPointCrossover(const GAGenome &, const GAGenome &, GAGenome *, GAGenome *);
 	static float BitComparator(const GAGenome &, const GAGenome &);
 
   public:

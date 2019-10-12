@@ -230,7 +230,7 @@ template <class T> class GAList : public GAListBASE
 	{
 		GANode<T> *node = DYN_CAST(GANode<T> *, iter.node);
 		if (!node)
-			return (T *)0;
+			return nullptr;
 
 		if (node->prev != node)
 			iter.node = node->prev;
@@ -281,7 +281,7 @@ template <class T> class GAList : public GAListBASE
 	T *warp(unsigned int i) { return iter.warp(i); }
 	T *warp(const GAListIter<T> &i)
 	{
-		return ((i.list == this) ? iter.warp(i) : (T *)0);
+		return ((i.list == this) ? iter.warp(i) : nullptr);
 	}
 	T *operator[](unsigned int i) { return iter.warp(i); }
 
@@ -327,49 +327,39 @@ template <class T> class GAListIter : public GAListIterBASE
 		node = t.iter.node;
 	}
 	GAListIter(const GAListIter<T> &i) : GAListIterBASE(i) {}
-	T *current() { return (node ? &((GANode<T> *)node)->contents : (T *)0); }
+	T *current() { return (node ? &((GANode<T> *)node)->contents : nullptr); }
 	T *head()
 	{
-		return (((node = GAListIterBASE::head()) != nullptr)
-					? &((GANode<T> *)GAListIterBASE::head())->contents
-					: (T *)0);
+		return (((node = GAListIterBASE::head()) != nullptr) ? &((GANode<T> *)GAListIterBASE::head())->contents : nullptr);
 	}
 	T *tail()
 	{
-		return (((node = GAListIterBASE::tail()) != nullptr)
-					? &((GANode<T> *)GAListIterBASE::tail())->contents
-					: (T *)0);
+		return (((node = GAListIterBASE::tail()) != nullptr) ? &((GANode<T> *)GAListIterBASE::tail())->contents	: nullptr);
 	}
 	T *next()
 	{
-		return ((node && node->next)
-					? &((GANode<T> *)(node = node->next))->contents
-					: (T *)0);
+		return ((node && node->next) ? &((GANode<T> *)(node = node->next))->contents : nullptr);
 	}
 	T *prev()
 	{
-		return ((node && node->prev)
-					? &((GANode<T> *)(node = node->prev))->contents
-					: (T *)0);
+		return ((node && node->prev) ? &((GANode<T> *)(node = node->prev))->contents : nullptr);
 	}
 	T *warp(const GAList<T> &t)
 	{
 		list = &t;
 		node = t.iter.node;
-		return (t.iter.node ? &((GANode<T> *)(node = t.iter.node))->contents
-							: (T *)0);
+		return (t.iter.node ? &((GANode<T> *)(node = t.iter.node))->contents : nullptr);
 	}
 	T *warp(const GAListIter<T> &i)
 	{
 		list = i.list;
 		node = i.node;
-		return (i.node ? &((GANode<T> *)(node = i.node))->contents : (T *)0);
+		return (i.node ? &((GANode<T> *)(node = i.node))->contents : nullptr);
 	}
 	T *warp(unsigned int i)
 	{
 		GANodeBASE *n = GAListIterBASE::warp(i);
-		return (n != nullptr ? &((GANode<T> *)(node = n))->contents
-							 : (T *)nullptr);
+		return (n != nullptr ? &((GANode<T> *)(node = n))->contents : nullptr);
 	}
 
   private:
