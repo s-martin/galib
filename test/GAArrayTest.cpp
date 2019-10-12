@@ -134,7 +134,6 @@ BOOST_AUTO_TEST_CASE(move_001)
 	gaarray9a.move(2, 0, 2);
 	BOOST_CHECK_EQUAL(gaarray9a[0u], 5);
 	BOOST_CHECK_EQUAL(gaarray9a[1u], 6);
-	// TODO fix implementation 
 	BOOST_CHECK_EQUAL(gaarray9a[2u], 5);
 	BOOST_CHECK_EQUAL(gaarray9a[3u], 6);
 
