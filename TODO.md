@@ -1,6 +1,6 @@
 This is a running list of things to be done to galib.
 
-# Todo #
+# TODO #
 
 - make the library thread-safe
 - xml input and output for saving the state of genomes and evolutions
