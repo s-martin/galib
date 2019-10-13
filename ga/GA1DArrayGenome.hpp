@@ -1325,7 +1325,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 			{
 				aset = std::vector<GAAlleleSet<T>>(c->size());
 			}
-			for (int i = 0; i < aset.size(); i++)
+			for (std::size_t i = 0; i < aset.size(); i++)
 			{
 				aset.at(i).link(c->aset.at(i));
 			}
