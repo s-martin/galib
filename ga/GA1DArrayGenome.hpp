@@ -34,6 +34,7 @@ that for common instantiations (float, char).
 #include <cstring>
 #include <garandom.h>
 #include <vector>
+#include <array>
 
 /* ----------------------------------------------------------------------------
 1DArrayGenome
@@ -289,8 +290,10 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			DYN_CAST(const GA1DArrayGenome<T> &, p2);
 
 		int nc = 0;
-		unsigned int momsite[2], momlen[2];
-		unsigned int dadsite[2], dadlen[2];
+		std::array<unsigned int, 2> momsite;
+		std::array<unsigned int, 2> momlen; 
+		std::array<unsigned int, 2> dadsite; 
+		std::array<unsigned int, 2> dadlen;
 
 		if (c1 && c2)
 		{
@@ -308,17 +311,17 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 						  GAError::SameLengthReqd);
 					return nc;
 				}
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = momsite[0];
-				dadsite[1] = momsite[1];
-				dadlen[0] = momlen[0];
-				dadlen[1] = momlen[1];
+				dadsite.at(0) = momsite.at(0);
+				dadsite.at(1) = momsite.at(1);
+				dadlen.at(0) = momlen.at(0);
+				dadlen.at(1) = momlen.at(1);
 			}
 			else if (sis.resizeBehaviour() == GAGenome::FIXED_SIZE ||
 					 bro.resizeBehaviour() == GAGenome::FIXED_SIZE)
@@ -327,30 +330,30 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			}
 			else
 			{
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = GARandomInt(0, dad.length());
-				dadsite[1] = GARandomInt(0, dad.length());
-				if (dadsite[0] > dadsite[1])
-					SWAP(dadsite[0], dadsite[1]);
-				dadlen[0] = dadsite[1] - dadsite[0];
-				dadlen[1] = dad.length() - dadsite[1];
+				dadsite.at(0) = GARandomInt(0, dad.length());
+				dadsite.at(1) = GARandomInt(0, dad.length());
+				if (dadsite.at(0) > dadsite.at(1))
+					SWAP(dadsite.at(0), dadsite.at(1));
+				dadlen.at(0) = dadsite.at(1) - dadsite.at(0);
+				dadlen.at(1) = dad.length() - dadsite.at(1);
 
-				sis.resize(momsite[0] + dadlen[0] + momlen[1]);
-				bro.resize(dadsite[0] + momlen[0] + dadlen[1]);
+				sis.resize(momsite.at(0) + dadlen.at(0) + momlen.at(1));
+				bro.resize(dadsite.at(0) + momlen.at(0) + dadlen.at(1));
 			}
 
-			sis.copy(mom, 0, 0, momsite[0]);
-			sis.copy(dad, momsite[0], dadsite[0], dadlen[0]);
-			sis.copy(mom, momsite[0] + dadlen[0], momsite[1], momlen[1]);
-			bro.copy(dad, 0, 0, dadsite[0]);
-			bro.copy(mom, dadsite[0], momsite[0], momlen[0]);
-			bro.copy(dad, dadsite[0] + momlen[0], dadsite[1], dadlen[1]);
+			sis.copy(mom, 0, 0, momsite.at(0));
+			sis.copy(dad, momsite.at(0), dadsite.at(0), dadlen.at(0));
+			sis.copy(mom, momsite.at(0) + dadlen.at(0), momsite.at(1), momlen.at(1));
+			bro.copy(dad, 0, 0, dadsite.at(0));
+			bro.copy(mom, dadsite.at(0), momsite.at(0), momlen.at(0));
+			bro.copy(dad, dadsite.at(0) + momlen.at(0), dadsite.at(1), dadlen.at(1));
 
 			nc = 2;
 		}
@@ -369,48 +372,48 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 						  GAError::SameLengthReqd);
 					return nc;
 				}
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = momsite[0];
-				dadsite[1] = momsite[1];
-				dadlen[0] = momlen[0];
-				dadlen[1] = momlen[1];
+				dadsite.at(0) = momsite.at(0);
+				dadsite.at(1) = momsite.at(1);
+				dadlen.at(0) = momlen.at(0);
+				dadlen.at(1) = momlen.at(1);
 			}
 			else
 			{
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = GARandomInt(0, dad.length());
-				dadsite[1] = GARandomInt(0, dad.length());
-				if (dadsite[0] > dadsite[1])
-					SWAP(dadsite[0], dadsite[1]);
-				dadlen[0] = dadsite[1] - dadsite[0];
-				dadlen[1] = dad.length() - dadsite[1];
+				dadsite.at(0) = GARandomInt(0, dad.length());
+				dadsite.at(1) = GARandomInt(0, dad.length());
+				if (dadsite.at(0) > dadsite.at(1))
+					SWAP(dadsite.at(0), dadsite.at(1));
+				dadlen.at(0) = dadsite.at(1) - dadsite.at(0);
+				dadlen.at(1) = dad.length() - dadsite.at(1);
 
-				sis.resize(momsite[0] + dadlen[0] + momlen[1]);
+				sis.resize(momsite.at(0) + dadlen.at(0) + momlen.at(1));
 			}
 
 			if (GARandomBit())
 			{
-				sis.copy(mom, 0, 0, momsite[0]);
-				sis.copy(dad, momsite[0], dadsite[0], dadlen[0]);
-				sis.copy(mom, momsite[0] + dadlen[0], momsite[1], momlen[1]);
+				sis.copy(mom, 0, 0, momsite.at(0));
+				sis.copy(dad, momsite.at(0), dadsite.at(0), dadlen.at(0));
+				sis.copy(mom, momsite.at(0) + dadlen.at(0), momsite.at(1), momlen.at(1));
 			}
 			else
 			{
-				sis.copy(dad, 0, 0, dadsite[0]);
-				sis.copy(mom, dadsite[0], momsite[0], momlen[0]);
-				sis.copy(dad, dadsite[0] + momlen[0], dadsite[1], dadlen[1]);
+				sis.copy(dad, 0, 0, dadsite.at(0));
+				sis.copy(mom, dadsite.at(0), momsite.at(0), momlen.at(0));
+				sis.copy(dad, dadsite.at(0) + momlen.at(0), dadsite.at(1), dadlen.at(1));
 			}
 
 			nc = 1;
