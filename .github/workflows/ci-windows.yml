@@ -13,7 +13,7 @@ jobs:
       run: vcpkg install boost-test boost-program-options boost-predef 
     - name: cmake config
       run: |
-        mkdir build
+        md build
         cd build
         cmake ../
     - name: make
