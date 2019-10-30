@@ -1,0 +1,22 @@
+name: CI-Windows
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: install dependencies
+      run: vcpkg install boost-test boost-program-options boost-predef 
+    - name: cmake config
+      run: |
+        mkdir build
+        cd build
+        cmake ../
+    - name: make
+      run: cmake --build ./build
+    - name: run unit tests
+      run: cmake --build ./build --target test
