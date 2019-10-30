@@ -930,7 +930,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	}
 	GA1DArrayGenome<T> &operator=(const T array[]) // no err checks!
 	{
-		for (unsigned int i = 0; i < this->size(); i++)
+		for (int i = 0; i < this->size(); i++)
 			gene(i, *(array + i));
 		return *this;
 	}
