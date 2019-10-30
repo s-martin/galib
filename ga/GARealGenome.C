@@ -133,7 +133,7 @@ GA1DArrayAlleleGenome<float>::GA1DArrayAlleleGenome(
 	: GA1DArrayGenome<float>(sa.size(), f, u)
 {
 	aset = std::vector<GAAlleleSet<float>>(sa.size());
-	for (int i = 0; i < aset.size(); i++)
+	for (std::size_t i = 0; i < aset.size(); i++)
 	{
 		aset.at(i) = sa.set(i);
 	}
