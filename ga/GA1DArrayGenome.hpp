@@ -34,6 +34,7 @@ that for common instantiations (float, char).
 #include <cstring>
 #include <garandom.h>
 #include <vector>
+#include <array>
 
 /* ----------------------------------------------------------------------------
 1DArrayGenome
@@ -101,23 +102,21 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	static int UniformCrossover(const GAGenome &p1, const GAGenome &p2,
 								GAGenome *c1, GAGenome *c2)
 	{
-		const GA1DArrayGenome<T> &mom =
-			DYN_CAST(const GA1DArrayGenome<T> &, p1);
-		const GA1DArrayGenome<T> &dad =
-			DYN_CAST(const GA1DArrayGenome<T> &, p2);
+		const GA1DArrayGenome<T> &mom =	DYN_CAST(const GA1DArrayGenome<T> &, p1);
+		const GA1DArrayGenome<T> &dad =	DYN_CAST(const GA1DArrayGenome<T> &, p2);
 
 		int n = 0;
-		int i;
 
 		if (c1 && c2)
 		{
 			GA1DArrayGenome<T> &sis = DYN_CAST(GA1DArrayGenome<T> &, *c1);
 			GA1DArrayGenome<T> &bro = DYN_CAST(GA1DArrayGenome<T> &, *c2);
 
-			if (sis.length() == bro.length() && mom.length() == dad.length() &&
-				sis.length() == mom.length())
+			if (sis.length() == bro.length() 
+				&& mom.length() == dad.length() 
+				&& sis.length() == mom.length())
 			{
-				for (i = sis.length() - 1; i >= 0; i--)
+				for (int i = sis.length() - 1; i >= 0; i--)
 				{
 					if (GARandomBit())
 					{
@@ -134,40 +133,34 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			else
 			{
 				GAMask mask;
-				int start;
-				int max =
-					(sis.length() > bro.length()) ? sis.length() : bro.length();
-				int min =
-					(mom.length() < dad.length()) ? mom.length() : dad.length();
+				int max = (sis.length() > bro.length()) ? sis.length() : bro.length();
+				int min = (mom.length() < dad.length()) ? mom.length() : dad.length();
 				mask.size(max);
-				for (i = 0; i < max; i++)
+				for (int i = 0; i < max; i++)
 					mask[i] = GARandomBit();
-				start = (sis.length() < min) ? sis.length() - 1 : min - 1;
-				for (i = start; i >= 0; i--)
+				int start = (sis.length() < min) ? sis.length() - 1 : min - 1;
+				for (int i = start; i >= 0; i--)
 					sis.gene(i, (mask[i] ? mom.gene(i) : dad.gene(i)));
 				start = (bro.length() < min) ? bro.length() - 1 : min - 1;
-				for (i = start; i >= 0; i--)
+				for (int i = start; i >= 0; i--)
 					bro.gene(i, (mask[i] ? dad.gene(i) : mom.gene(i)));
 			}
 			n = 2;
 		}
 		else if (c1 || c2)
 		{
-			GA1DArrayGenome<T> &sis =
-				(c1 ? DYN_CAST(GA1DArrayGenome<T> &, *c1)
-					: DYN_CAST(GA1DArrayGenome<T> &, *c2));
+			GA1DArrayGenome<T> &sis = (c1 ? DYN_CAST(GA1DArrayGenome<T> &, *c1)	: DYN_CAST(GA1DArrayGenome<T> &, *c2));
 
 			if (mom.length() == dad.length() && sis.length() == mom.length())
 			{
-				for (i = sis.length() - 1; i >= 0; i--)
+				for (int i = sis.length() - 1; i >= 0; i--)
 					sis.gene(i, (GARandomBit() ? mom.gene(i) : dad.gene(i)));
 			}
 			else
 			{
-				int min =
-					(mom.length() < dad.length()) ? mom.length() : dad.length();
+				int min = (mom.length() < dad.length()) ? mom.length() : dad.length();
 				min = (sis.length() < min) ? sis.length() : min;
-				for (i = min - 1; i >= 0; i--)
+				for (int i = min - 1; i >= 0; i--)
 					sis.gene(i, (GARandomBit() ? mom.gene(i) : dad.gene(i)));
 			}
 			n = 1;
@@ -297,8 +290,10 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			DYN_CAST(const GA1DArrayGenome<T> &, p2);
 
 		int nc = 0;
-		unsigned int momsite[2], momlen[2];
-		unsigned int dadsite[2], dadlen[2];
+		std::array<unsigned int, 2> momsite;
+		std::array<unsigned int, 2> momlen; 
+		std::array<unsigned int, 2> dadsite; 
+		std::array<unsigned int, 2> dadlen;
 
 		if (c1 && c2)
 		{
@@ -316,17 +311,17 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 						  GAError::SameLengthReqd);
 					return nc;
 				}
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = momsite[0];
-				dadsite[1] = momsite[1];
-				dadlen[0] = momlen[0];
-				dadlen[1] = momlen[1];
+				dadsite.at(0) = momsite.at(0);
+				dadsite.at(1) = momsite.at(1);
+				dadlen.at(0) = momlen.at(0);
+				dadlen.at(1) = momlen.at(1);
 			}
 			else if (sis.resizeBehaviour() == GAGenome::FIXED_SIZE ||
 					 bro.resizeBehaviour() == GAGenome::FIXED_SIZE)
@@ -335,30 +330,30 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			}
 			else
 			{
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = GARandomInt(0, dad.length());
-				dadsite[1] = GARandomInt(0, dad.length());
-				if (dadsite[0] > dadsite[1])
-					SWAP(dadsite[0], dadsite[1]);
-				dadlen[0] = dadsite[1] - dadsite[0];
-				dadlen[1] = dad.length() - dadsite[1];
+				dadsite.at(0) = GARandomInt(0, dad.length());
+				dadsite.at(1) = GARandomInt(0, dad.length());
+				if (dadsite.at(0) > dadsite.at(1))
+					SWAP(dadsite.at(0), dadsite.at(1));
+				dadlen.at(0) = dadsite.at(1) - dadsite.at(0);
+				dadlen.at(1) = dad.length() - dadsite.at(1);
 
-				sis.resize(momsite[0] + dadlen[0] + momlen[1]);
-				bro.resize(dadsite[0] + momlen[0] + dadlen[1]);
+				sis.resize(momsite.at(0) + dadlen.at(0) + momlen.at(1));
+				bro.resize(dadsite.at(0) + momlen.at(0) + dadlen.at(1));
 			}
 
-			sis.copy(mom, 0, 0, momsite[0]);
-			sis.copy(dad, momsite[0], dadsite[0], dadlen[0]);
-			sis.copy(mom, momsite[0] + dadlen[0], momsite[1], momlen[1]);
-			bro.copy(dad, 0, 0, dadsite[0]);
-			bro.copy(mom, dadsite[0], momsite[0], momlen[0]);
-			bro.copy(dad, dadsite[0] + momlen[0], dadsite[1], dadlen[1]);
+			sis.copy(mom, 0, 0, momsite.at(0));
+			sis.copy(dad, momsite.at(0), dadsite.at(0), dadlen.at(0));
+			sis.copy(mom, momsite.at(0) + dadlen.at(0), momsite.at(1), momlen.at(1));
+			bro.copy(dad, 0, 0, dadsite.at(0));
+			bro.copy(mom, dadsite.at(0), momsite.at(0), momlen.at(0));
+			bro.copy(dad, dadsite.at(0) + momlen.at(0), dadsite.at(1), dadlen.at(1));
 
 			nc = 2;
 		}
@@ -377,48 +372,48 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 						  GAError::SameLengthReqd);
 					return nc;
 				}
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = momsite[0];
-				dadsite[1] = momsite[1];
-				dadlen[0] = momlen[0];
-				dadlen[1] = momlen[1];
+				dadsite.at(0) = momsite.at(0);
+				dadsite.at(1) = momsite.at(1);
+				dadlen.at(0) = momlen.at(0);
+				dadlen.at(1) = momlen.at(1);
 			}
 			else
 			{
-				momsite[0] = GARandomInt(0, mom.length());
-				momsite[1] = GARandomInt(0, mom.length());
-				if (momsite[0] > momsite[1])
-					SWAP(momsite[0], momsite[1]);
-				momlen[0] = momsite[1] - momsite[0];
-				momlen[1] = mom.length() - momsite[1];
+				momsite.at(0) = GARandomInt(0, mom.length());
+				momsite.at(1) = GARandomInt(0, mom.length());
+				if (momsite.at(0) > momsite.at(1))
+					SWAP(momsite.at(0), momsite.at(1));
+				momlen.at(0) = momsite.at(1) - momsite.at(0);
+				momlen.at(1) = mom.length() - momsite.at(1);
 
-				dadsite[0] = GARandomInt(0, dad.length());
-				dadsite[1] = GARandomInt(0, dad.length());
-				if (dadsite[0] > dadsite[1])
-					SWAP(dadsite[0], dadsite[1]);
-				dadlen[0] = dadsite[1] - dadsite[0];
-				dadlen[1] = dad.length() - dadsite[1];
+				dadsite.at(0) = GARandomInt(0, dad.length());
+				dadsite.at(1) = GARandomInt(0, dad.length());
+				if (dadsite.at(0) > dadsite.at(1))
+					SWAP(dadsite.at(0), dadsite.at(1));
+				dadlen.at(0) = dadsite.at(1) - dadsite.at(0);
+				dadlen.at(1) = dad.length() - dadsite.at(1);
 
-				sis.resize(momsite[0] + dadlen[0] + momlen[1]);
+				sis.resize(momsite.at(0) + dadlen.at(0) + momlen.at(1));
 			}
 
 			if (GARandomBit())
 			{
-				sis.copy(mom, 0, 0, momsite[0]);
-				sis.copy(dad, momsite[0], dadsite[0], dadlen[0]);
-				sis.copy(mom, momsite[0] + dadlen[0], momsite[1], momlen[1]);
+				sis.copy(mom, 0, 0, momsite.at(0));
+				sis.copy(dad, momsite.at(0), dadsite.at(0), dadlen.at(0));
+				sis.copy(mom, momsite.at(0) + dadlen.at(0), momsite.at(1), momlen.at(1));
 			}
 			else
 			{
-				sis.copy(dad, 0, 0, dadsite[0]);
-				sis.copy(mom, dadsite[0], momsite[0], momlen[0]);
-				sis.copy(dad, dadsite[0] + momlen[0], dadsite[1], dadlen[1]);
+				sis.copy(dad, 0, 0, dadsite.at(0));
+				sis.copy(mom, dadsite.at(0), momsite.at(0), momlen.at(0));
+				sis.copy(dad, dadsite.at(0) + momlen.at(0), dadsite.at(1), dadlen.at(1));
 			}
 
 			nc = 1;
@@ -610,13 +605,10 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	// crossover section and maintain the ordering of the non-hole elements.
 	// Finally, put the 'holes' in the proper order within the crossover
 	// section. After we have done the sister, we do the brother.
-	static int OrderCrossover(const GAGenome &p1, const GAGenome &p2,
-							  GAGenome *c1, GAGenome *c2)
+	static int OrderCrossover(const GAGenome &p1, const GAGenome &p2, GAGenome *c1, GAGenome *c2)
 	{
-		const GA1DArrayGenome<T> &mom =
-			DYN_CAST(const GA1DArrayGenome<T> &, p1);
-		const GA1DArrayGenome<T> &dad =
-			DYN_CAST(const GA1DArrayGenome<T> &, p2);
+		const GA1DArrayGenome<T> &mom =	DYN_CAST(const GA1DArrayGenome<T> &, p1);
+		const GA1DArrayGenome<T> &dad = DYN_CAST(const GA1DArrayGenome<T> &, p2);
 
 		int nc = 0;
 		int a = GARandomInt(0, mom.length());
@@ -627,8 +619,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 
 		if (mom.length() != dad.length())
 		{
-			GAErr(GA_LOC, mom.className(), "order cross",
-				  GAError::BadParentLength);
+			GAErr(GA_LOC, mom.className(), "order cross", GAError::BadParentLength);
 			return nc;
 		}
 
@@ -793,18 +784,15 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	static int CycleCrossover(const GAGenome &p1, const GAGenome &p2,
 							  GAGenome *c1, GAGenome *c2)
 	{
-		const GA1DArrayGenome<T> &mom =
-			DYN_CAST(const GA1DArrayGenome<T> &, p1);
-		const GA1DArrayGenome<T> &dad =
-			DYN_CAST(const GA1DArrayGenome<T> &, p2);
+		const GA1DArrayGenome<T> &mom =	DYN_CAST(const GA1DArrayGenome<T> &, p1);
+		const GA1DArrayGenome<T> &dad =	DYN_CAST(const GA1DArrayGenome<T> &, p2);
 
 		int nc = 0;
-		int i, current = 0;
+		int current = 0;
 
 		if (mom.length() != dad.length())
 		{
-			GAErr(GA_LOC, mom.className(), "cycle cross",
-				  GAError::BadParentLength);
+			GAErr(GA_LOC, mom.className(), "cycle cross", GAError::BadParentLength);
 			return nc;
 		}
 
@@ -821,7 +809,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			mask[0] = 1;
 			while (dad.gene(current) != mom.gene(0))
 			{
-				for (i = 0; i < sis.size(); i++)
+				for (int i = 0; i < sis.size(); i++)
 				{
 					if (mom.gene(i) == dad.gene(current))
 					{
@@ -833,7 +821,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 				}
 			}
 
-			for (i = 0; i < sis.size(); i++)
+			for (int i = 0; i < sis.size(); i++)
 				if (mask[i] == 0)
 					sis.gene(i, dad.gene(i));
 
@@ -843,7 +831,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			mask[0] = 1;
 			while (mom.gene(current) != dad.gene(0))
 			{
-				for (i = 0; i < bro.size(); i++)
+				for (int i = 0; i < bro.size(); i++)
 				{
 					if (dad.gene(i) == mom.gene(current))
 					{
@@ -855,7 +843,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 				}
 			}
 
-			for (i = 0; i < bro.size(); i++)
+			for (int i = 0; i < bro.size(); i++)
 				if (mask[i] == 0)
 					bro.gene(i, mom.gene(i));
 
@@ -863,9 +851,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		}
 		else if (c1 || c2)
 		{
-			GA1DArrayGenome<T> &sis =
-				(c1 ? DYN_CAST(GA1DArrayGenome<T> &, *c1)
-					: DYN_CAST(GA1DArrayGenome<T> &, *c2));
+			GA1DArrayGenome<T> &sis = (c1 ? DYN_CAST(GA1DArrayGenome<T> &, *c1) : DYN_CAST(GA1DArrayGenome<T> &, *c2));
 
 			const GA1DArrayGenome<T> *parent1, *parent2;
 			if (GARandomBit())
@@ -887,7 +873,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			mask[0] = 1;
 			while (parent2->gene(current) != parent1->gene(0))
 			{
-				for (i = 0; i < sis.size(); i++)
+				for (int i = 0; i < sis.size(); i++)
 				{
 					if (parent1->gene(i) == parent2->gene(current))
 					{
@@ -898,7 +884,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 					}
 				}
 			}
-			for (i = 0; i < sis.size(); i++)
+			for (int i = 0; i < sis.size(); i++)
 				if (mask[i] == 0)
 					sis.gene(i, parent2->gene(i));
 
@@ -918,11 +904,9 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	// genome is created with a dummy initializer and the initializer is
 	// assigned later on). Besides, we default to the no-initialization
 	// initializer by calling the default genome constructor.
-	GA1DArrayGenome(unsigned int length, GAGenome::Evaluator f = nullptr,
-					void *u = nullptr)
+	GA1DArrayGenome(unsigned int length, GAGenome::Evaluator f = nullptr, void *u = nullptr)
 		: GAArray<T>(length),
-		  GAGenome(DEFAULT_1DARRAY_INITIALIZER, DEFAULT_1DARRAY_MUTATOR,
-				   DEFAULT_1DARRAY_COMPARATOR)
+		  GAGenome(DEFAULT_1DARRAY_INITIALIZER, DEFAULT_1DARRAY_MUTATOR, DEFAULT_1DARRAY_COMPARATOR)
 	{
 		evaluator(f);
 		userData(u);
@@ -952,8 +936,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	}
 	~GA1DArrayGenome(){};
 
-	GAGenome *
-	clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override
+	GAGenome * clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override
 	{
 		GA1DArrayGenome<T> *cpy = new GA1DArrayGenome<T>(nx);
 		if (flag == CloneMethod::CONTENTS)
@@ -982,8 +965,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	{
 		if (&orig == this)
 			return;
-		const GA1DArrayGenome<T> *c =
-			DYN_CAST(const GA1DArrayGenome<T> *, &orig);
+		const GA1DArrayGenome<T> *c = DYN_CAST(const GA1DArrayGenome<T> *, &orig);
 		if (c)
 		{
 			GAGenome::copy(*c);
@@ -1013,20 +995,18 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 	bool equal(const GAGenome &c) const override
 	{
 		const GA1DArrayGenome<T> &b = DYN_CAST(const GA1DArrayGenome<T> &, c);
-		return ((this == &c)
-					? true
-					: ((nx != b.nx) ? 0 : GAArray<T>::equal(b, 0, 0, nx)));
+		return ((this == &c) ? true	: ((nx != b.nx) ? 0 : GAArray<T>::equal(b, 0, 0, nx)));
 	}
 
 	const T &gene(unsigned int x = 0) const { return this->a[x]; }
 	T &gene(unsigned int x, const T &value)
 	{
-		if (this->a[x] != value)
+		if (this->a.at(x) != value)
 		{
-			this->a[x] = value;
+			this->a.at(x) = value;
 			_evaluated = false;
 		}
-		return this->a[x];
+		return this->a.at(x);
 	}
 	int length() const { return nx; }
 	int length(int x)
@@ -1103,8 +1083,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		return val;
 	}
 
-	void copy(const GA1DArrayGenome<T> &orig, unsigned int r, unsigned int x,
-			  unsigned int l)
+	void copy(const GA1DArrayGenome<T> &orig, unsigned int r, unsigned int x, unsigned int l)
 	{
 		if (l > 0 && x < orig.nx && r < nx)
 		{
@@ -1186,8 +1165,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	// alleles set.  We choose randomly the allele for each element.
 	static void UniformInitializer(GAGenome &c)
 	{
-		GA1DArrayAlleleGenome<T> &child =
-			DYN_CAST(GA1DArrayAlleleGenome<T> &, c);
+		GA1DArrayAlleleGenome<T> &child = DYN_CAST(GA1DArrayAlleleGenome<T> &, c);
 		child.resize(GAGenome::ANY_SIZE); // let chrom resize if it can
 		for (int i = child.length() - 1; i >= 0; i--)
 			child.gene(i, child.alleleset(i).allele());
@@ -1199,19 +1177,17 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	// This assumes that there is only one allele set for the array.
 	static void OrderedInitializer(GAGenome &c)
 	{
-		GA1DArrayAlleleGenome<T> &child =
-			DYN_CAST(GA1DArrayAlleleGenome<T> &, c);
+		GA1DArrayAlleleGenome<T> &child = DYN_CAST(GA1DArrayAlleleGenome<T> &, c);
 		child.resize(GAGenome::ANY_SIZE); // let chrom resize if it can
 		int length = child.length() - 1;
 		int n = 0;
-		int i;
-		for (i = length; i >= 0; i--)
+		for (int i = length; i >= 0; i--)
 		{
 			child.gene(i, child.alleleset().allele(n++));
 			if (n >= child.alleleset().size())
 				n = 0;
 		}
-		for (i = length; i >= 0; i--)
+		for (int i = length; i >= 0; i--)
 			child.swap(i, GARandomInt(0, length));
 	}
 
@@ -1220,8 +1196,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	// of allele sets for a given array.
 	static int FlipMutator(GAGenome &c, float pmut)
 	{
-		GA1DArrayAlleleGenome<T> &child =
-			DYN_CAST(GA1DArrayAlleleGenome<T> &, c);
+		GA1DArrayAlleleGenome<T> &child = DYN_CAST(GA1DArrayAlleleGenome<T> &, c);
 
 		if (pmut <= 0.0)
 			return (0);
@@ -1258,8 +1233,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		aset = std::vector<GAAlleleSet<T>>(1);
 		aset.at(0) = s;
 
-		this->initializer(
-			GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
+		this->initializer(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
 		this->mutator(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_MUTATOR);
 		this->comparator(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_COMPARATOR);
 		this->crossover(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_CROSSOVER);
@@ -1306,8 +1280,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	// capability because this whole interface isn't quite right yet...  Just
 	// clone the entire thing, contents and all.
 
-	GAGenome *clone(
-		GAGenome::CloneMethod = GAGenome::CloneMethod::CONTENTS) const override
+	GAGenome *clone(GAGenome::CloneMethod = GAGenome::CloneMethod::CONTENTS) const override
 	{
 		return new GA1DArrayAlleleGenome<T>(*this);
 	}
@@ -1325,7 +1298,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 			{
 				aset = std::vector<GAAlleleSet<T>>(c->size());
 			}
-			for (int i = 0; i < aset.size(); i++)
+			for (std::size_t i = 0; i < aset.size(); i++)
 			{
 				aset.at(i).link(c->aset.at(i));
 			}

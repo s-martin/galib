@@ -360,9 +360,8 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 												GAGenome::Evaluator f, void *u)
 	: GA3DArrayGenome<T>(w, h, d, f, u)
 {
-	naset = 1;
-	aset = new GAAlleleSet<T>[1];
-	aset[0] = s;
+	aset = std::vector<GAAlleleSet<T>>(1);
+	aset.at(0) = s;
 
 	initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
 	mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
@@ -377,10 +376,9 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 												GAGenome::Evaluator f, void *u)
 	: GA3DArrayGenome<T>(w, h, d, f, u)
 {
-	naset = sa.size();
-	aset = new GAAlleleSet<T>[naset];
-	for (int i = 0; i < naset; i++)
-		aset[i] = sa.set(i);
+	aset = std::vector<GAAlleleSet<T>>(sa.size());
+	for (int i = 0; i < aset.size(); i++)
+		aset.at(i) = sa.set(i);
 
 	initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
 	mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
@@ -393,14 +391,11 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(
 	const GA3DArrayAlleleGenome<T> &orig)
 	: GA3DArrayGenome<T>(orig.nx, orig.ny, orig.nz)
 {
-	naset = 0;
-	aset = (GAAlleleSet<T> *)0;
 	GA3DArrayAlleleGenome<T>::copy(orig);
 }
 
 template <class T> GA3DArrayAlleleGenome<T>::~GA3DArrayAlleleGenome()
 {
-	delete[] aset;
 }
 
 template <class T>
@@ -418,14 +413,12 @@ template <class T> void GA3DArrayAlleleGenome<T>::copy(const GAGenome &orig)
 	if (c)
 	{
 		GA3DArrayGenome<T>::copy(*c);
-		if (naset != c->naset)
+		if (aset.size() != c->aset.size())
 		{
-			delete[] aset;
-			naset = c->naset;
-			aset = new GAAlleleSet<T>[c->naset];
+			aset = std::vector<GAAlleleSet<T>>(c->aset.size());
 		}
-		for (int i = 0; i < naset; i++)
-			aset[i].link(c->aset[i]);
+		for (int i = 0; i < aset.size(); i++)
+			aset.at(i).link(c->aset.at(i));
 	}
 }
 
@@ -446,16 +439,12 @@ template <class T> int GA3DArrayAlleleGenome<T>::resize(int w, int h, int d)
 			int j;
 			for (j = oldy - 1; j >= 0; j--)
 				for (unsigned int i = oldx; i < this->nx; i++)
-					this->a[k * this->ny * this->nx + j * this->nx + i] =
-						aset[(k * this->ny * this->nx + j * this->nx + i) %
-							 naset]
-							.allele();
+					this->a.at(k * this->ny * this->nx + j * this->nx + i) =
+						aset.at((k * this->ny * this->nx + j * this->nx + i) % aset.size()).allele();
 			for (j = oldy; j < STA_CAST(int, this->ny); j++)
 				for (unsigned int i = 0; i < this->nx; i++)
-					this->a[k * this->ny * this->nx + j * this->nx + i] =
-						aset[(k * this->ny * this->nx + j * this->nx + i) %
-							 naset]
-							.allele();
+					this->a.at(k * this->ny * this->nx + j * this->nx + i) =
+						aset.at((k * this->ny * this->nx + j * this->nx + i) % aset.size()).allele();
 		}
 	}
 	else if (this->nx > oldx)
@@ -464,10 +453,8 @@ template <class T> int GA3DArrayAlleleGenome<T>::resize(int w, int h, int d)
 		for (int k = z - 1; k >= 0; k--)
 			for (int j = this->ny - 1; j >= 0; j--)
 				for (unsigned int i = oldx; i < this->nx; i++)
-					this->a[k * this->ny * this->nx + j * this->nx + i] =
-						aset[(k * this->ny * this->nx + j * this->nx + i) %
-							 naset]
-							.allele();
+					this->a.at(k * this->ny * this->nx + j * this->nx + i) =
+						aset.at((k * this->ny * this->nx + j * this->nx + i) % aset.size()).allele();
 	}
 	else if (this->ny > oldy)
 	{
@@ -475,16 +462,14 @@ template <class T> int GA3DArrayAlleleGenome<T>::resize(int w, int h, int d)
 		for (int k = z - 1; k >= 0; k--)
 			for (unsigned int j = oldy; j < this->ny; j++)
 				for (unsigned int i = 0; i < this->nx; i++)
-					this->a[k * this->ny * this->nx + j * this->nx + i] =
-						aset[(k * this->ny * this->nx + j * this->nx + i) %
-							 naset]
-							.allele();
+					this->a.at(k * this->ny * this->nx + j * this->nx + i) =
+						aset.at((k * this->ny * this->nx + j * this->nx + i) % aset.size()).allele();
 	}
 	if (this->nz > oldz)
 	{ // change in depth is always new elements
 		for (unsigned int i = this->nx * this->ny * oldz;
 			 i < this->nx * this->ny * this->nz; i++)
-			this->a[i] = aset[i % naset].allele();
+			this->a.at(i) = aset.at(i % aset.size()).allele();
 	}
 
 	return this->sz;

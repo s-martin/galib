@@ -863,7 +863,7 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 			{
 				aset = std::vector<GAAlleleSet<T>>(c->aset.size());
 			}
-			for (int i = 0; i < aset.size(); i++)
+			for (std::size_t i = 0; i < aset.size(); i++)
 				aset.at(i).link(c->aset.at(i));
 		}
 	}
@@ -888,11 +888,11 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 
 		if (this->nx > oldx)
 		{ // adjust the existing chunks of bits
-			int y = GAMin(oldy, this->ny);
-			for (int j = y - 1; j >= 0; j--)
+			int ynew = GAMin(oldy, this->ny);
+			for (int j = ynew - 1; j >= 0; j--)
 			{
 				for (unsigned int i = oldx; i < this->nx; i++)
-					this->a[j * this->nx + i] =
+					this->a.at(j * this->nx + i) =
 						aset.at((j * this->nx + i) % aset.size()).allele();
 			}
 		}
