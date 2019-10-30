@@ -1,4 +1,4 @@
-# Modern GAlib: A (modernized) C++ Genetic Algorithm Library [![Build Status](https://travis-ci.com/s-martin/galib.svg?token=ryQD2yK6KA1p3pds4ruj&branch=master)](https://travis-ci.com/s-martin/galib) 
+# Modern GAlib: A (modernized) C++ Genetic Algorithm Library ![](https://github.com/s-martin/galib/workflows/CI-Linux/badge.svg) ![](https://github.com/s-martin/galib/workflows/CI-Windows/badge.svg) 
 
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
@@ -41,41 +41,40 @@ short version of how to build and test everything:
 
 ### Windows ###
 
-Using vcpkg to install dependencies is recommended:
-> vcpkg install boost-test boost-program-options boost-predef
->
-> md build && cd build
->
-> cmake ../ -DCMAKE_TOOLCHAIN_FILE=\<path to vcpkg\>/scripts/buildsystems/vcpkg.cmake
+Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is recommended.
 
-Open in Visual Studio as CMake project.
+1. Clone or download the repository
 
+2. Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
+
+3. Open path in Visual Studio 2019 as CMake project.
 
 ### Linux (Ubuntu) ###
 
-> sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev 
+1. `sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev`
 
 If you want to use code coverage:
 
-> sudo apt install lcov 
-> 
-> sudo apt install gcovr 
+2. `sudo apt install lcov`
+
+3. `sudo apt install gcovr`
 
 Configure and build:
 
-> mkdir build && cd build
->
-> cmake ../
->
-> make
+4. `mkdir build && cd build`
+
+5. `cmake ../`
+
+6. `make`
 
 Run unit tests:
-> make test
+
+7. `make test`
 
 Run unit tests and create coverage:
-> make GAlib_lcov
->
-> make GAlib_gcov
+8. `make GAlib_lcov`
+
+9. `make GAlib_gcov`
 
 ### Building shared libraries
 
@@ -92,6 +91,8 @@ If that does not work, then here are the files you might have to modify:
 If you still have problems, look at Installation.html in the doc directory.
 
 ## DOCUMENTATION and MAILING LIST  ##
+
+**!!! to be updated !!!**
 
 Complete documentation in html format is available in the doc directory.  The 
 distribution site contains PDF and PostScript(tm) versions.

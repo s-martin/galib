@@ -16,6 +16,8 @@
 #include <GAArray.h>
 #include <GAGenome.h>
 
+#include <vector>
+
 /* ----------------------------------------------------------------------------
 3DArrayGenome
 ---------------------------------------------------------------------------- */
@@ -131,11 +133,11 @@ template <class T> class GA3DArrayAlleleGenome : public GA3DArrayGenome<T>
   public:
 	GA3DArrayAlleleGenome(unsigned int x, unsigned int y, unsigned int z,
 						  const GAAlleleSet<T> &a,
-						  GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
+						  GAGenome::Evaluator f = nullptr,
 						  void *u = nullptr);
 	GA3DArrayAlleleGenome(unsigned int x, unsigned int y, unsigned int z,
 						  const GAAlleleSetArray<T> &a,
-						  GAGenome::Evaluator f = (GAGenome::Evaluator)nullptr,
+						  GAGenome::Evaluator f = nullptr,
 						  void *u = nullptr);
 	GA3DArrayAlleleGenome(const GA3DArrayAlleleGenome<T> &orig);
 	GA3DArrayAlleleGenome<T> &operator=(const GAGenome &orig)
@@ -161,12 +163,11 @@ template <class T> class GA3DArrayAlleleGenome : public GA3DArrayGenome<T>
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
 	{
-		return aset[i % naset];
+		return aset.at(i % aset.size());
 	}
 
   protected:
-	int naset;
-	GAAlleleSet<T> *aset;
+	std::vector<GAAlleleSet<T>> aset;
 };
 
 #endif
