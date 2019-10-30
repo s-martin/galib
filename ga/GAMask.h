@@ -16,11 +16,9 @@ class GAMask
 public:
 	GAMask()
 	{
-		_n = 0;
 	}
 	GAMask(const GAMask& m)
 	{
-		_n = 0;
 		copy(m);
 	}
 	GAMask& operator=(const GAMask& m)
@@ -37,17 +35,16 @@ public:
 
 	void clear()
 	{
-		_mask.assign(_n, 0);
+		_mask.assign(_mask.size(), 0);
 	}
-	int size() const { return _n; }
+	int size() const { return _mask.size(); }
 	int size(unsigned int s)
 	{
-		if (s > _n)
+		if (s > _mask.size())
 		{
-			_n = s;
-			_mask.assign(_n, 0);
+			_mask.assign(s, 0);
 		}
-		return _n;
+		return _mask.size();
 	}
 	char mask(unsigned int i) const { return _mask.at(i); }
 	char& mask(unsigned int i) { return _mask.at(i); }
@@ -56,7 +53,6 @@ public:
 
 protected:
 	std::vector<char> _mask;
-	unsigned int _n;
 };
 
 #endif
