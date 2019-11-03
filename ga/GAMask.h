@@ -5,34 +5,14 @@
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
 ---------------------------------------------------------------------------- */
-#ifndef _ga_mask_h_
-#define _ga_mask_h_
 
-#include <cstring>
+#pragma once
+
 #include <vector>
 
 class GAMask
 {
 public:
-	GAMask()
-	{
-	}
-	GAMask(const GAMask& m)
-	{
-		copy(m);
-	}
-	GAMask& operator=(const GAMask& m)
-	{
-		copy(m);
-		return *this;
-	}
-	~GAMask() = default;
-	void copy(const GAMask& m)
-	{
-		size(m.size());
-		_mask = m._mask;
-	}
-
 	void clear()
 	{
 		_mask.assign(_mask.size(), 0);
@@ -52,7 +32,6 @@ public:
 	char& operator[](unsigned int i) { return _mask.at(i); }
 
 protected:
+	// TODO check, if using vector<bool> is feasible
 	std::vector<char> _mask;
 };
-
-#endif
