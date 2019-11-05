@@ -32,10 +32,8 @@ float objectiveEx1(GAGenome& g)
 	return score;
 }
 
-GASimpleGA ex1(unsigned int seed)
+GASimpleGA ex1()
 {
-	GARandomSeed(seed);
-
 	int width = 10;
 	int height = 5;
 

@@ -26,20 +26,7 @@ int main(int argc, char **argv)
 	std::cout << "alternating 1s and 0s using a SimpleGA\n\n";
 	std::cout.flush();
 
-	// See if we've been given a seed to use (for testing purposes).  When you
-	// specify a random seed, the evolution will be exactly the same each time
-	// you use that seed number.
-	unsigned int seed = 0;
-	for (int ii = 1; ii < argc; ii++)
-	{
-		if (strcmp(argv[ii++], "seed") == 0)
-		{
-			seed = (unsigned int)atoi(argv[ii]);
-			break;
-		}
-	}
-	 
-	auto ga = ex1(seed);
+	auto ga = ex1();
 
 	// Now we print out the best genome that the GA found.
 	std::cout << "The GA found:\n" << ga.statistics().bestIndividual() << "\n";

@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_SUITE(UnitTest)
 
 BOOST_AUTO_TEST_CASE(GAex1)
 {
-	auto ga = ex1(100);
+	auto ga = ex1();
 
 	std::stringstream str;
 	str << ga.statistics().bestIndividual();
