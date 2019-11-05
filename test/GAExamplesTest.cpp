@@ -1,5 +1,7 @@
 #include <boost/test/unit_test.hpp>
 
+#include "ex1.hpp"
+
 #include <ga.h>
 
 #include <fstream>
@@ -34,6 +36,15 @@ float objectiveEx9(GAGenome &c)
 }
 
 BOOST_AUTO_TEST_SUITE(UnitTest)
+
+BOOST_AUTO_TEST_CASE(GAex1)
+{
+	auto ga = ex1(100);
+
+	std::stringstream str;
+	str << ga.statistics().bestIndividual();
+	BOOST_CHECK_EQUAL(str.str(), "0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n");
+}
 
 BOOST_AUTO_TEST_CASE(GAex7)
 {
