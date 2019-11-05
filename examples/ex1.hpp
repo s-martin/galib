@@ -1,8 +1,9 @@
-
 #pragma once
 
 #include <GA2DBinStrGenome.h>
 #include <GASimpleGA.h>
+
+#include <iostream>
 
 
 // This is the objective function.  All it does is check for alternating 0s and
@@ -51,6 +52,9 @@ GASimpleGA ex1()
 	ga.pMutation(0.001);
 	ga.pCrossover(0.9);
 	ga.evolve();
+	
+	// Now we print out the best genome that the GA found.
+	std::cout << "The GA found:\n" << ga.statistics().bestIndividual() << "\n";
 	
 	return ga;
 }
