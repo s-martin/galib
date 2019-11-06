@@ -1,11 +1,10 @@
 #include <boost/test/unit_test.hpp>
 
 #include "ex1.hpp"
+#include "ex2.hpp"
 #include "ex4.hpp"
 #include "ex7.hpp"
 #include "ex9.hpp"
-
-#include <ga.h>
 
 #include <fstream>
 #include <iostream>
@@ -20,6 +19,19 @@ BOOST_AUTO_TEST_CASE(GAex1)
 	std::stringstream str;
 	str << ga.statistics().bestIndividual();
 	BOOST_CHECK_EQUAL(str.str(), "0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n");
+}
+
+BOOST_AUTO_TEST_CASE(GAex2)
+{
+	auto genome = ex2(101, true); // use static seed
+
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), 0.0980392173, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), 21.9607849, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(2), 3, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(3), -3.52941179, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(4), 34575.293, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(5), 0.00152941176, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(6), 6.56078434, 0.0000001);
 }
 
 BOOST_AUTO_TEST_CASE(GAex4)
