@@ -2,6 +2,7 @@
 
 #include "ex1.hpp"
 #include "ex2.hpp"
+#include "ex3.hpp"
 #include "ex4.hpp"
 #include "ex7.hpp"
 #include "ex9.hpp"
@@ -32,6 +33,22 @@ BOOST_AUTO_TEST_CASE(GAex2)
 	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(4), 34575.293, 0.0000001);
 	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(5), 0.00152941176, 0.0000001);
 	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(6), 6.56078434, 0.0000001);
+}
+
+BOOST_AUTO_TEST_CASE(GAex3)
+{
+	GAParameterList params;
+	GASteadyStateGA::registerDefaultParameters(params);
+	BOOST_REQUIRE(params.set(gaNpCrossover, 0.8));
+	BOOST_REQUIRE(params.set(gaNpMutation, 0.001));
+	BOOST_REQUIRE(params.set(gaNflushFrequency, 50));
+	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
+
+	auto ga = ex3(params, "smiley.txt");
+
+	BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 198);
+	BOOST_CHECK_EQUAL(ga.statistics().minEver(), 98);
+	BOOST_CHECK_EQUAL(ga.statistics().generation(), 250);
 }
 
 BOOST_AUTO_TEST_CASE(GAex4)

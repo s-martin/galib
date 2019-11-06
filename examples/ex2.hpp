@@ -5,6 +5,8 @@
 
 #include <iostream>
 #include <array>
+#include <cmath>
+
 
 // For this objective function we try to match the values in the array of float
 // that is passed to us as userData.  If the values in the genome map to
