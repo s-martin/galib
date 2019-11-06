@@ -1,6 +1,7 @@
 #pragma once
 
-#include <ga.h>
+#include <GA2DBinStrGenome.h>
+#include <GASStateGA.h>
 
 #include <fstream>
 #include <iostream>

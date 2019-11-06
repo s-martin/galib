@@ -1,8 +1,10 @@
 #pragma once
 
-#include <ga.h>
+#include <GABin2DecGenome.h>
+#include <GASimpleGA.h>
 
 #include <iostream>
+
 
 // This objective function tries to maximize the value of the function
 //
