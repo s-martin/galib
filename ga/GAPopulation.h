@@ -123,100 +123,114 @@ class GAPopulation : public GAID
 
 	float sum() const
 	{
-		if (!statted) {
+		if (!statted)
+		{
 			statistics();
-}
+		}
 		return rawSum;
 	}
 	float ave() const
 	{
-		if (!statted) {
+		if (!statted)
+		{
 			statistics();
-}
+		}
 		return rawAve;
 	}
 	float var() const
 	{
-		if (!statted) {
+		if (!statted)
+		{
 			statistics();
-}
+		}
 		return rawVar;
 	}
 	float dev() const
 	{
-		if (!statted) {
+		if (!statted)
+		{
 			statistics();
-}
+		}
 		return rawDev;
 	}
 	float max() const
 	{
-		if (!statted) {
+		if (!statted)
+		{
 			statistics();
-}
+		}
 		return rawMax;
 	}
 	float min() const
 	{
-		if (!statted) {
+		if (!statted)
+		{
 			statistics();
-}
+		}
 		return rawMin;
 	}
 	float div() const
 	{
-		if (!divved) {
+		if (!divved)
+		{
 			diversity();
-}
+		}
 		return popDiv;
 	}
 	float div(unsigned int i, unsigned int j) const
 	{
-		if (!divved) {
+		if (!divved)
+		{
 			diversity();
-}
+		}
 		return indDiv[i * n + j];
 	}
 	float fitsum() const
 	{
-		if (!scaled) {
+		if (!scaled)
+		{
 			scale();
-}
+		}
 		return fitSum;
 	}
 	float fitave() const
 	{
-		if (!scaled) {
+		if (!scaled)
+		{
 			scale();
-}
+		}
 		return fitAve;
 	}
 	float fitmax() const
 	{
-		if (!scaled) {
+		if (!scaled)
+		{
 			scale();
-}
+		}
 		return fitMax;
 	}
 	float fitmin() const
 	{
-		if (!scaled) {
+		if (!scaled)
+		{
 			scale();
-}
+		}
 		return fitMin;
 	}
 	float fitvar() const
 	{
-		if (!scaled) {
+		if (!scaled)
+		{
 			scale();
-}
+		}
 		return fitVar;
 	}
 	float fitdev() const
 	{
-		if (!scaled) {
+		if (!scaled)
+		{
 			scale();
-}
+		}
 		return fitDev;
 	}
 
@@ -249,9 +263,10 @@ class GAPopulation : public GAID
 	SortOrder order(SortOrder flag);
 	GAGenome &select()
 	{
-		if (!selectready) {
+		if (!selectready)
+		{
 			prepselect();
-}
+		}
 		return slct->select();
 	}
 	GASelectionScheme &selector() const { return *slct; }
@@ -278,17 +293,19 @@ class GAPopulation : public GAID
 
 	GAGenome &best(unsigned int i = 0, SortBasis basis = RAW) const
 	{
-		if (basis == SCALED) {
+		if (basis == SCALED)
+		{
 			scale();
-}
+		}
 		sort(false, basis);
 		return ((basis == RAW) ? *(rind[i]) : *(sind[i]));
 	}
 	GAGenome &worst(unsigned int i = 0, SortBasis basis = RAW) const
 	{
-		if (basis == SCALED) {
+		if (basis == SCALED)
+		{
 			scale();
-}
+		}
 		sort(false, basis);
 		return ((basis == RAW) ? *(rind[n - 1 - i]) : *(sind[n - 1 - i]));
 	}

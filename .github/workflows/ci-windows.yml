@@ -10,12 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: install dependencies
-      run: vcpkg install boost-test boost-program-options boost-predef 
+      run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
     - name: cmake config
       run: |
         md build
         cd build
-        cmake ../
+        cmake ../ -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
     - name: make
       run: cmake --build ./build
     - name: run unit tests
