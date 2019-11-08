@@ -47,7 +47,17 @@ Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is rec
 
 2. Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
 
+#### Visual Studio 2019 ####
+
 3. Open path in Visual Studio 2019 as CMake project.
+
+#### Previous versions of Visual Studio ####
+
+3. `md build && cd build`
+
+4. `cmake ../ -DCMAKE_TOOLCHAIN_FILE=<path to vcpkg>/scripts/buildsystems/vcpkg.cmake`
+
+5. Open created Visual Studio solution file in `build` directory
 
 ### Linux (Ubuntu) ###
 
@@ -72,6 +82,7 @@ Run unit tests:
 7. `make test`
 
 Run unit tests and create coverage:
+
 8. `make GAlib_lcov`
 
 9. `make GAlib_gcov`

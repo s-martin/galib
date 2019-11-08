@@ -167,7 +167,7 @@ limits that were passed to us.
 int GABinaryDecode(float &result, const GABit *bits, unsigned int nbits,
 				   float minval, float maxval)
 {
-	if (bits == (GABit *)nullptr || nbits == 0)
+	if (bits == nullptr || nbits == 0)
 	{
 		result = 0.0;
 		return 1;
@@ -202,7 +202,7 @@ could not represent it perfectly.
 ---------------------------------------------------------------------------- */
 int GABinaryEncode(unsigned BITBASE d, GABit *binstr, unsigned int nbits)
 {
-	if (binstr == (GABit *)nullptr || nbits == 0)
+	if (binstr == nullptr || nbits == 0)
 	{
 		return 1;
 	}
@@ -261,7 +261,7 @@ int GABinaryEncode(float &val, GABit *binstr, unsigned int nbits, float minval,
 int GAGrayDecode(float &value, const GABit *bits, unsigned int nbits,
 				 float minval, float maxval)
 {
-	if (bits == (GABit *)nullptr || nbits == 0)
+	if (bits == nullptr || nbits == 0)
 	{
 		value = 0.0;
 		return 1;
