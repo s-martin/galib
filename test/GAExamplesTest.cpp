@@ -4,7 +4,9 @@
 #include "ex2.hpp"
 #include "ex3.hpp"
 #include "ex4.hpp"
+#include "ex6.hpp"
 #include "ex7.hpp"
+#include "ex8.hpp"
 #include "ex9.hpp"
 
 #include <fstream>
@@ -71,6 +73,31 @@ BOOST_AUTO_TEST_CASE(GAex4)
 	);
 }
 
+BOOST_AUTO_TEST_CASE(GAex6)
+{
+	// Set the default values of the parameters.
+	GAParameterList params;
+	GASteadyStateGA::registerDefaultParameters(params);
+	BOOST_REQUIRE(params.set(gaNpopulationSize, 30)); // number of individuals in population
+	BOOST_REQUIRE(params.set(gaNpCrossover, 0.7)); // likelihood of doing crossover
+	BOOST_REQUIRE(params.set(gaNpMutation, 0.001)); // probability of mutation
+	BOOST_REQUIRE(params.set(gaNnGenerations, 100)); // number of generations
+	BOOST_REQUIRE(params.set(gaNscoreFrequency, 10)); // how often to record scores
+	BOOST_REQUIRE(params.set(gaNflushFrequency, 10)); // how often to flush scores to file
+	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
+
+	auto genome = ex6(params, 0);
+
+
+	// TODO check, why msvc and gcc differ; maybe seed is different
+#ifdef _WIN32
+	BOOST_CHECK_EQUAL(genome.size(), 6613);
+	BOOST_CHECK_EQUAL(genome.depth(), 73); 
+#else
+	BOOST_CHECK_EQUAL(genome.size(), 10557);
+	BOOST_CHECK_EQUAL(genome.depth(), 310); 
+#endif
+}
 
 BOOST_AUTO_TEST_CASE(GAex7)
 {
@@ -94,17 +121,27 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	BOOST_CHECK_EQUAL(ga.statistics().generation(), 160);
 }
 
+BOOST_AUTO_TEST_CASE(GAex8)
+{
+//	GARandomSeed(103);
+
+	auto genome = ex8();
+
+	BOOST_CHECK_EQUAL(genome.size(), 413);
+}
+
+
 BOOST_AUTO_TEST_CASE(GAex9)
 {
 	auto genome = ex9(100); // use static seed
 
 	// TODO check, why msvc and gcc differ; maybe seed is different
 #ifdef _WIN32
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.000381469727, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -0.00221252441, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.000228881836, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), 7.62939453e-05, 0.0000001);
 #else
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.0025177002, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -0.000839233398, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -7.62939453e-05, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -7.62939453e-05, 0.0000001);
 #endif
 }
 
