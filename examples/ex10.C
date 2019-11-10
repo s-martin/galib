@@ -91,7 +91,7 @@ main(int argc, char **argv)
 // steady-state GA tends to converge faster (depending on the type of replace-
 // ment method you specify).  
 
-  GASimpleGA ga(genome);
+  GASimpleGA ga(genome, params);
   ga.set(gaNpopulationSize, 200);
   ga.set(gaNnGenerations, 50);
   ga.set(gaNpMutation, 0.001);

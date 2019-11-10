@@ -120,34 +120,32 @@ main(int argc, char** argv)
 
 // Now do a genetic algorithm for each one of the genomes that we created.
 
+  params->set(gaNscoreFilename, "bog1.dat");
   GASteadyStateGA ga1(genome1, params);
-
-  ga1.set(gaNscoreFilename, "bog1.dat");
   std::cout << "\nrunning ga number 1 (alternate allele(0) and allele(3))..."<< std::endl;
   ga1.evolve(seed);
   std::cout << "the ga generated:\n" << ga1.statistics().bestIndividual() <<  std::endl;
 
+  params->set(gaNscoreFilename, "bog2.dat");
   GASteadyStateGA ga2(genome2, params);
-
-  ga2.set(gaNscoreFilename, "bog2.dat");
   std::cout << "\nrunning ga number 2 (continuous descending order)..." <<  std::endl;
   ga2.evolve();
   std::cout << "the ga generated:\n" << ga2.statistics().bestIndividual() <<  std::endl;
 
+  params->set(gaNscoreFilename, "bog2a.dat");
   GASteadyStateGA ga2a(genome2a, params);
-  ga2a.set(gaNscoreFilename, "bog2a.dat");
   std::cout << "\nrunning ga number 2a (descending order, EXCLUSIVE)..." <<  std::endl;
   ga2a.evolve();
   std::cout << "the ga generated:\n" << ga2a.statistics().bestIndividual() <<  std::endl;
 
+  params->set(gaNscoreFilename, "bog3.dat");
   GASteadyStateGA ga3(genome3, params);
-  ga3.set(gaNscoreFilename, "bog3.dat");
   std::cout << "\nrunning ga number 3 (discretized ascending order)..." <<  std::endl;
   ga3.evolve();
   std::cout << "the ga generated:\n" << ga3.statistics().bestIndividual() <<  std::endl;
 
+  params->set(gaNscoreFilename, "bog4.dat");
   GASteadyStateGA ga4(genome4, params);
-  ga4.set(gaNscoreFilename, "bog4.dat");
   std::cout << "\nrunning ga number 4 (maximize each gene)..." <<  std::endl;
   ga4.evolve();
   std::cout << "the ga generated:\n" << ga4.statistics().bestIndividual() <<  std::endl;

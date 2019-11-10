@@ -38,16 +38,15 @@ int main(int argc, char *argv[])
 	}
 
 	// Set the default values of the parameters.
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	params.set(gaNpopulationSize, 50); // number of individuals in population
-	params.set(gaNpCrossover, 0.8); // likelihood of doing crossover
-	params.set(gaNpMutation, 0.001); // probability of mutation
-	params.set(gaNnGenerations, 200); // number of generations
-	params.set(gaNscoreFrequency, 20); // how often to record scores
-	params.set(gaNflushFrequency, 50); // how often to flush scores to file
-	params.set(gaNscoreFilename, "bog.dat");
-	params.parse(argc, argv, false);
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNpopulationSize, 50); // number of individuals in population
+	params->set(gaNpCrossover, 0.8); // likelihood of doing crossover
+	params->set(gaNpMutation, 0.001); // probability of mutation
+	params->set(gaNnGenerations, 200); // number of generations
+	params->set(gaNscoreFrequency, 20); // how often to record scores
+	params->set(gaNflushFrequency, 50); // how often to flush scores to file
+	params->set(gaNscoreFilename, "bog.dat");
+	params->parse(argc, argv, false);
 
 	std::string datafile = "smiley.txt";
 	std::string parmfile = "";
@@ -88,7 +87,7 @@ int main(int argc, char *argv[])
 				std::ostringstream str;
 				str << argv[i];
 				parmfile = str.str();
-				params.read(parmfile);
+				params->read(parmfile);
 				continue;
 			}
 		}

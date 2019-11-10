@@ -135,8 +135,7 @@ GATreeGenome<int> ex6(GAParameterList params, unsigned int seed)
 	genome.initializer(TreeInitializer);
 	genome.mutator(GATreeGenome<int>::SwapSubtreeMutator);
 
-	GASteadyStateGA ga(genome);
-	ga.parameters(params);
+	GASteadyStateGA ga(genome, params);
 	ga.evolve(seed);
 
 	genome = ga.statistics().bestIndividual();

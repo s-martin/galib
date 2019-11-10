@@ -31,53 +31,6 @@ constexpr int NAMESIZE = 128; // max length of name in name-value pair
 
 GAParameterList::GAParameterList()
 {
-	//m_optionsDesc = std::make_shared<po::options_description>("All options");
-
-	//po::options_description mandatoryDesc("Mandatory Options");
-	//mandatoryDesc.add_options()
-	//	("help", "produce help message")
-	//	(gaNnGenerations, po::value<unsigned int>(&numGenerations)->default_value(250),	"Number of generations")
-	//	(gaNpConvergence, po::value<float>(&convergencePercentage)->default_value(0.99), "Convergence Percentage")
-	//	(gaNnConvergence, po::value<unsigned int>(&generationsToConvergence)->default_value(20), "Generations to Convergence")
-	//	(gaNpCrossover, po::value<float>(&probCrossover)->default_value(0.01), "crossover_probability")
-	//	(gaNpMutation, po::value<float>(&probMutation)->default_value(0.90), "mutation_probability")
-	//	(gaNpopulationSize,	po::value<unsigned int>(&populationSize)->default_value(50), "population_size")
-	//	(gaNnBestGenomes, po::value<unsigned int>(&numberOfBest)->default_value(1), "number_of_best")
-	//	(gaNscoreFrequency, po::value<unsigned int>(&scoreFrequency)->default_value(1), "score_frequency")
-	//	(gaNflushFrequency, po::value<unsigned int>(&flushFrequency)->default_value(0), "flush_frequency")
-	//	(gaNscoreFilename, po::value<std::string>(&scoreFilename)->default_value("generations.dat"), "score_filename")
-	//	(gaNselectScores, po::value<int>(&selectScores)->default_value(2), "select_scores")
-	//	(gaNrecordDiversity, po::value<bool>(&recordDiversity)->default_value(false), "record_diversity")
-	//	(gaNpMigration, po::value<float>(&migrationPercentage)->default_value(0.1), "migration_percentage")
-	//	(gaNminimaxi, po::value<int>(&miniMaxi)->default_value(1), "minimaxi")
-	//	(gaNseed, po::value<int>(&seed)->default_value(0), "seed");
-
-	//// deme
-	//po::options_description demeDesc("Deme Options");
-	//demeDesc.add_options()
-	//	(gaNnPopulations, po::value<unsigned int>(&numPopulations)->default_value(10), "number_of_populations")
-	//	(gaNnMigration, po::value<unsigned int>(&migrationNumber)->default_value(5), "migration_number");
-
-	//// Inc
-	//po::options_description incDesc("Incremental Options");
-	//incDesc.add_options()
-	//	(gaNnOffspring, po::value<unsigned int>(&numOffspring)->default_value(2), "number_of_offspring");
-	////	int gaDefScoreFrequency2 = 100;
-
-	//// simple
-	//po::options_description simpleDesc("Simple Options");
-	//simpleDesc.add_options()
-	//	(gaNelitism, po::value<bool>(&elitism)->default_value(true), "elitism");
-
-	//// Steady State
-	//po::options_description steadystateDesc("Steady State Options");
-	//steadystateDesc.add_options()
-	//	(gaNpReplacement, po::value<float>(&replacementPercentage)->default_value(0.5), "replacement_percentage")
-	//	(gaNnReplacement, po::value<int>(&numPercentage)->default_value(10), "replacement_number");
-	////	int gaDefScoreFrequency2 = 100;
-
-	//m_optionsDesc->add(mandatoryDesc).add(demeDesc).add(incDesc).add(simpleDesc).add(steadystateDesc);
-
 	auto opt = options();
 
 	std::ifstream file("default.ini", std::ifstream::in);
@@ -91,7 +44,6 @@ GAParameterList::GAParameterList()
 		std::cerr << e.what()<< std::endl;
 	}
 	file.close();
-
 }
 
 po::options_description GAParameterList::options()
@@ -155,80 +107,26 @@ bool GAParameterList::parse(int &argc, char **argv, bool)
 	return true;
 }
 
-//// Dump the parameters to the specified stream.  Just name-value pairs with a
-//// tab delimiter and newline separating pairs.
-////   If there is an error, return 1, otherwise return 0.
-// bool GAParameterList::write(std::ostream &os) const
-//{
-//	for (auto it = this->begin(); it != this->end(); ++it)
-//	{
-//		auto p = *it;
-//		int ival;
-//		float fval;
-//		double dval;
-//		char cval;
-//		char *sval;
-//
-//		os << p.fullname() << "\t";
-//
-//		switch (p.type())
-//		{
-//		case ParType::BOOLEAN:
-//			ival = *((int *)(p.value()));
-//			if (ival != 0)
-//			{
-//				os << "1\n";
-//			}
-//			else
-//			{
-//				os << "0\n";
-//			}
-//			break;
-//		case ParType::INT:
-//			ival = *((int *)(p.value()));
-//			os << ival << "\n";
-//			break;
-//		case ParType::CHAR:
-//			cval = *((char *)(p.value()));
-//			os << cval << "\n";
-//			break;
-//		case ParType::STRING:
-//			sval = ((char *)(p.value()));
-//			os << sval << "\n";
-//			break;
-//		case ParType::FLOAT:
-//			fval = *((float *)(p.value()));
-//			os << fval << "\n";
-//			break;
-//		case ParType::DOUBLE:
-//			dval = *((double *)(p.value()));
-//			os << dval << "\n";
-//			break;
-//		case ParType::POINTER:
-//		default:
-//			os << "(pointer)\n";
-//			//      os << p[i]->value() << "\n";
-//			break;
-//		}
-//	}
-//	return true;
-//}
-//
-// bool GAParameterList::write(const char *filename) const
-//{
-//	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
-//	// should be done this way, but SGI systems (and others?) don't do it
-//	// right...
-//	//  if(! outfile.is_open()){
-//	if (outfile.fail())
-//	{
-//		GAErr(GA_LOC, "GAParameterList", "write", gaErrWriteError, filename);
-//		return false;
-//	}
-//	bool status = write(outfile);
-//	outfile.close();
-//	return status;
-//}
+// Dump the parameters to the specified stream.  Just name-value pairs with a
+// tab delimiter and newline separating pairs.
+//   If there is an error, return 1, otherwise return 0.
+bool GAParameterList::write(std::ostream &os) const
+{
+	for (const auto &param : m_vm)
+	{
+		if (auto v = boost::any_cast<bool>(param.second.value()))
+		{
+			os << param.first.c_str() << "\t" << (v ? "1" : "0") << "\n";
+		}
+		else
+		{
+			os << param.first.c_str() << "\t" << param.second.as<std::string>() << "\n";
+		}
+	}
+
+	return true;
+}
+
 bool GAParameterList::write(const char *filename) const
 {
 	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));

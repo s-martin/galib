@@ -61,22 +61,6 @@ class GAParameterList
   public:
 	GAParameterList();
 
-	//template <typename T> std::optional<T> get(const std::string &name) const
-	//{
-	//	try
-	//	{
-	//		if (m_vm.count(name))
-	//		{
-	//			return m_vm[name].as<T>();
-	//		}
-	//	}
-	//	catch (boost::bad_any_cast &e)
-	//	{
-	//		std::cerr << "Could not get value for " << name << ". Exception: " << e.what() << std::endl;
-	//	}
-	//	return {};
-	//};
-
 	template <typename T> bool set(const std::string &name, T value)
 	{
 		try
@@ -139,6 +123,8 @@ class GAParameterList
 	{
 		// do any option check here
 
+		// TODO check, if bool 1 / 0 is parsed here
+
 		boost::program_options::parsed_options result(&desc);
 
 		std::string line;
@@ -169,8 +155,7 @@ class GAParameterList
 			boost::program_options::basic_option<charT> opt;
 			opt.string_key = kvpair.at(0);
 			opt.value.push_back(kvpair.at(1));
-			opt.unregistered = (result.description->find_nothrow(
-									kvpair.at(0), false) == nullptr);
+			opt.unregistered = (result.description->find_nothrow(kvpair.at(0), false) == nullptr);
 			opt.position_key = -1;
 			result.options.push_back(opt);
 		}
