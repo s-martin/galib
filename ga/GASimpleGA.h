@@ -18,8 +18,8 @@ class GASimpleGA : public GAGeneticAlgorithm
 	GADefineIdentity("GASimpleGA", GAID::SimpleGA);
 
   public:
-	explicit GASimpleGA(const GAGenome &, const std::shared_ptr<GAParameterList>& _params);
-	explicit GASimpleGA(const GAPopulation &, const std::shared_ptr<GAParameterList>& _params);
+	GASimpleGA(const GAGenome &, const std::shared_ptr<GAParameterList>& _params);
+	GASimpleGA(const GAPopulation &, const std::shared_ptr<GAParameterList>& _params);
 	GASimpleGA(const GASimpleGA &);
 	GASimpleGA &operator=(const GASimpleGA &);
 	~GASimpleGA() override;

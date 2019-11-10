@@ -21,8 +21,8 @@ conditional makes it go from 7.5 seconds to 3.2 seconds (bm bl cs 1024 c 0.9)
 #include <garandom.h>
 #include <gatypes.h>
 
-constexpr auto GA_BINSTR_CHUNKSIZE =
-	32; // size of the chunks of bits we allocate;
+// size of the chunks of bits we allocate;
+constexpr auto GA_BINSTR_CHUNKSIZE = 32;
 
 class GABinaryString
 {

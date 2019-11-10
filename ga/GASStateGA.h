@@ -18,8 +18,8 @@ class GASteadyStateGA : public GAGeneticAlgorithm
 	GADefineIdentity("GASteadyStateGA", GAID::SteadyStateGA);
 
   public:
-	explicit GASteadyStateGA(const GAGenome &, const std::shared_ptr<GAParameterList>& _params);
-	explicit GASteadyStateGA(const GAPopulation &, const std::shared_ptr<GAParameterList>& _params);
+	GASteadyStateGA(const GAGenome &, const std::shared_ptr<GAParameterList>& _params);
+	GASteadyStateGA(const GAPopulation &, const std::shared_ptr<GAParameterList>& _params);
 	GASteadyStateGA(const GASteadyStateGA &);
 	GASteadyStateGA &operator=(const GASteadyStateGA &);
 	~GASteadyStateGA() override;

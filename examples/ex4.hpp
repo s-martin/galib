@@ -1,16 +1,16 @@
-#include <boost/test/unit_test.hpp>
+#pragma once
 
 #include <GA3DBinStrGenome.h>
 #include <GASStateGA.h>
-#include <stdio.h>
 
-// based on example 4
+#include <iostream>
+
 
 // This is the objective function.  All it does is give one point for every
 // odd bit that is set and one point for every even bit that is not set.
-float objective(GAGenome &g)
+float objectiveEx4(GAGenome& g)
 {
-	GA3DBinaryStringGenome &genome = (GA3DBinaryStringGenome &)g;
+	GA3DBinaryStringGenome& genome = (GA3DBinaryStringGenome&)g;
 	float value = 0.0;
 	int count = 0;
 	int I = genome.width(), J = genome.height(), K = genome.depth();
@@ -31,9 +31,7 @@ float objective(GAGenome &g)
 	return value;
 }
 
-BOOST_AUTO_TEST_SUITE(UnitTest)
-
-BOOST_AUTO_TEST_CASE(GASStateGA_001)
+GASteadyStateGA ex4()
 {
 	int depth = 3;
 	int width = 10;
@@ -42,7 +40,7 @@ BOOST_AUTO_TEST_CASE(GASStateGA_001)
 	// Now create the GA and run it.  First we create a genome of the type that
 	// we want to use in the GA.  The ga doesn't use this genome in the
 	// optimization - it just uses it to clone a population of genomes.
-	GA3DBinaryStringGenome genome(width, height, depth, objective);
+	GA3DBinaryStringGenome genome(width, height, depth, objectiveEx4);
 
 	// Now that we have the genome, we create the genetic algorithm and set
 	// its parameters - number of generations, mutation probability, and
@@ -65,14 +63,9 @@ BOOST_AUTO_TEST_CASE(GASStateGA_001)
 	ga.selectScores(GAStatistics::AllScores);
 	ga.evolve();
 
-	std::stringstream str;
-	str << ga.statistics().bestIndividual();
-	BOOST_CHECK_EQUAL(
-		str.str(),
-        "0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n\n"
-        "1010101010\n0101010101\n1010101010\n0101010101\n1010101010\n\n"
-        "0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n\n"        
-        );
-}
+	// Now we print out the best genome.
+	std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
+	std::cout << "best of generation data are in 'bog.dat'\n";
 
-BOOST_AUTO_TEST_SUITE_END()
+	return ga;
+}

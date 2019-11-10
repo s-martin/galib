@@ -15,27 +15,21 @@ default parameters on the genetic algorithm and for parsing the command line.
 #include <cstdio>
 #include <cstdlib>
 
-#include <GA2DBinStrGenome.h> // and the header for the genome we need
-#include <GASimpleGA.h> // the header for the GA we'll use
+#include "ex3.hpp"
 
-#include <fstream>
-#include <iostream>
+#include <sstream>
 
-float objective(GAGenome &);
 
 int main(int argc, char *argv[])
 {
 	std::cout << "Example 3\n\n";
-	std::cout
-		<< "This program reads in a data file then runs a simple GA whose\n";
-	std::cout
-		<< "objective function tries to match the pattern of bits that are\n";
+	std::cout << "This program reads in a data file then runs a simple GA whose\n";
+	std::cout << "objective function tries to match the pattern of bits that are\n";
 	std::cout << "in the data file.\n\n";
 
 	// See if we've been given a seed to use (for testing purposes).  When you
 	// specify a random seed, the evolution will be exactly the same each time
 	// you use that seed number.
-
 	for (int ii = 1; ii < argc; ii++)
 	{
 		if (strcmp(argv[ii++], "seed") == 0)
@@ -55,18 +49,16 @@ int main(int argc, char *argv[])
 	//   want
 	// that are different than the GAlib defaults.  Then we parse the command
 	// line.
+	GAParameterList params;
+	params.set(gaNscoreFilename, "bog.dat");
+	params.set(gaNflushFrequency, 50);
+	params.set(gaNpMutation, 0.001);
+	params.set(gaNpCrossover, 0.8);
+	params.parse(argc, argv, false);
 
-	auto params = std::make_shared<GAParameterList>();
-	params->set(gaNscoreFilename, "bog.dat");
-	params->set(gaNflushFrequency, 50);
-	params->set(gaNpMutation, 0.001);
-	params->set(gaNpCrossover, 0.8);
-	params->parse(argc, argv, false);
-
-	char filename[128] = "smiley.txt";
+	std::string filename = "smiley.txt";
 
 	// Parse the command line for arguments.
-
 	for (int i = 1; i < argc; i++)
 	{
 		if (strcmp("file", argv[i]) == 0 || strcmp("f", argv[i]) == 0)
@@ -78,7 +70,9 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				sprintf(filename, argv[i]);
+				std::stringstream str;
+				str << argv[i];
+				filename = str.str();
 				continue;
 			}
 		}
@@ -90,90 +84,16 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i]
-					  << "\n\n";
-			std::cerr
-				<< "valid arguments include standard GAlib arguments plus:\n";
-			std::cerr << "  f\tfilename from which to read (" << filename
-					  << ")\n";
+			std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
+			std::cerr << "valid arguments include standard GAlib arguments plus:\n";
+			std::cerr << "  f\tfilename from which to read (" << filename << ")\n";
 			std::cerr << "\n";
 			exit(1);
 		}
 	}
 
-	// Read in the pattern from the specified file.  File format is pretty
-	// simple: two integers that give the height then width of the matrix, then
-	// the matrix of 1's and 0's (with whitespace inbetween).
-
-	std::ifstream inStream(filename);
-	if (!inStream)
-	{
-		std::cerr << "Cannot open " << filename << " for input.\n";
-		exit(1);
-	}
-
-	int height, width;
-	inStream >> height >> width;
-
-	short **target = new short *[width];
-	for (int i = 0; i < width; i++)
-		target[i] = new short[height];
-
-	for (int j = 0; j < height; j++)
-		for (int i = 0; i < width; i++)
-			inStream >> target[i][j];
-
-	inStream.close();
-
-	// Print out the pattern to be sure we got the right one.
-
-	std::cout << "input pattern:\n";
-	for (int j = 0; j < height; j++)
-	{
-		for (int i = 0; i < width; i++)
-			std::cout << (target[i][j] == 1 ? '*' : ' ') << " ";
-		std::cout << "\n";
-	}
-	std::cout << "\n";
-	std::cout.flush();
-
-	// Now create the GA and run it.
-
-	GA2DBinaryStringGenome genome(width, height, objective, (void *)target);
-	GASimpleGA ga(genome, params);
-	ga.evolve();
-
-	std::cout << "best of generation data are in '" << ga.scoreFilename()
-			  << "'\n";
-	genome = ga.statistics().bestIndividual();
-	std::cout << "the ga generated:\n";
-	for (int j = 0; j < height; j++)
-	{
-		for (int i = 0; i < width; i++)
-			std::cout << (genome.gene(i, j) == 1 ? '*' : ' ') << " ";
-		std::cout << "\n";
-	}
-	std::cout << "\n";
-	std::cout.flush();
-
-	for (int i = 0; i < width; i++)
-		delete target[i];
-	delete[] target;
+	ex3(params, filename);
 
 	return 0;
 }
 
-// For the objective function we compare the contents of the genome with the
-// target.  If a bit is set in the genome and it is also set in the target,
-// then we add 1 to the score.  If the bits do not match, we don't do anything.
-float objective(GAGenome &c)
-{
-	GA2DBinaryStringGenome &genome = (GA2DBinaryStringGenome &)c;
-	short **pattern = (short **)c.userData();
-
-	float value = 0.0;
-	for (int i = 0; i < genome.width(); i++)
-		for (int j = 0; j < genome.height(); j++)
-			value += (float)(genome.gene(i, j) == pattern[i][j]);
-	return (value);
-}

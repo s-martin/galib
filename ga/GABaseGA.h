@@ -60,8 +60,8 @@ class GAGeneticAlgorithm : public GAID
 	static bool TerminateUponPopConvergence(GAGeneticAlgorithm &);
 
   public:
-	explicit GAGeneticAlgorithm(const GAGenome &, const std::shared_ptr<GAParameterList> &_params);
-	explicit GAGeneticAlgorithm(const GAPopulation &, const std::shared_ptr<GAParameterList> &_params);
+	GAGeneticAlgorithm(const GAGenome &, const std::shared_ptr<GAParameterList> &_params);
+	GAGeneticAlgorithm(const GAPopulation &, const std::shared_ptr<GAParameterList> &_params);
 	GAGeneticAlgorithm(const GAGeneticAlgorithm &);
 	~GAGeneticAlgorithm() override;
 	virtual void copy(const GAGeneticAlgorithm &);

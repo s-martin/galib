@@ -95,6 +95,7 @@ template <class T> class GAArray
 		return a.size();
 	}
 	
+	// TODO could be removed, but currently used in GA1DArrayGenome.hpp:995
 	bool equal(const GAArray<T> &b, unsigned int dest, unsigned int src,
 			   unsigned int length) const
 	{
@@ -104,20 +105,23 @@ template <class T> class GAArray
 		return true;
 	}
 
+	template <class U>
+	bool operator==(const GAArray<U>& rhs) const
+	{
+		if (std::equal(a.begin(), a.end(), rhs.a.begin()))
+		{
+			return 1;
+		}
+		return 0;
+	}
+
+	template <class U>
+	bool operator!=(const GAArray<U>& rhs) const
+	{
+		return !operator==(rhs);
+	}
+
   protected:
 	// the contents of the array
 	std::vector<T> a;
 };
-
-template <class T> int operator==(const GAArray<T> &a, const GAArray<T> &b)
-{
-	if (a.size() != b.size())
-		return 0;
-	return a.equal(b, 0, 0, a.size());
-}
-template <class T> int operator!=(const GAArray<T> &a, const GAArray<T> &b)
-{
-	if (a.size() != b.size())
-		return 1;
-	return a.equal(b, 0, 0, a.size()) ? 0 : 1;
-}

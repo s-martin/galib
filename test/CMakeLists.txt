@@ -5,13 +5,13 @@ set_property(DIRECTORY PROPERTY CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable("${PROJECT_NAME}Test" 
         "main.cpp"
 		"GAArrayTest.cpp"
-        "GASimpleGATest.cpp"
-        "GASStateGATest.cpp"
+		"GAMaskTest.cpp"
 		"GAExamplesTest.cpp"
 		"GARandTest.cpp"
 		"GAParameterTest.cpp")
 
 target_include_directories("${PROJECT_NAME}Test" PUBLIC "../ga")
+target_include_directories("${PROJECT_NAME}Test" PUBLIC "../examples")
 target_include_directories(${PROJECT_NAME}Test PUBLIC ${Boost_INCLUDE_DIRS})
 
 target_link_libraries("${PROJECT_NAME}Test" PUBLIC GAlib Boost::unit_test_framework Boost::program_options)

@@ -393,8 +393,10 @@ template <class T> class GAAlleleSet
 		return 1;
 	}
 
-	friend int operator==(const GAAlleleSet<T>&, const GAAlleleSet<T>&);
-	friend int operator!=(const GAAlleleSet<T>&, const GAAlleleSet<T>&);
+	template <class U>
+	friend int operator==(const GAAlleleSet<U>&, const GAAlleleSet<U>&);
+	template <class U>
+	friend int operator!=(const GAAlleleSet<U>&, const GAAlleleSet<U>&);
 
   protected:
 	GAAlleleSetCore<T> *core;
