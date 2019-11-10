@@ -161,13 +161,13 @@ main(int argc, char *argv[])
   }
 
   auto params = std::make_shared<GAParameterList>(argc, argv);
-  params->populationSize(512);
-  params->pCrossover(0.9);
-  params->pMutation(0.001);
-  params->nGenerations(10000);
-  params->scoreFilename("bog.dat");
-  params->flushFrequency(100);
-  params->scoreFrequency(20);
+  params->set(gaNpopulationSize, 512);
+  params->set(gaNpCrossover, 0.9);
+  params->set(gaNpMutation, 0.001);
+  params->set(gaNnGenerations, 10000);
+  params->set(gaNscoreFilename, "bog.dat");
+  params->set(gaNflushFrequency, 100);
+  params->set(gaNscoreFrequency, 20);
   GA1DBinaryStringGenome genome(nbits, RoyalRoad);
   GASteadyStateGA ga(genome, params);
 

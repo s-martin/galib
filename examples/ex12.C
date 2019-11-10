@@ -71,7 +71,6 @@ main(int argc, char *argv[])
   genome.mutator(GAStringSwapMutator);
 
   GASteadyStateGA ga(genome, params);
-  ga.parameters(params);
   ga.crossover(GAStringPartialMatchCrossover);
   ga.evolve();
 
