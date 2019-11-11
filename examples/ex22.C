@@ -53,7 +53,7 @@ typedef int (*SingleChildCrossover)(const GAGenome&,const GAGenome&,GAGenome*);
 class SharedOverlapGA : public GASteadyStateGA {
 public:
   GADefineIdentity("SharedOverlapGA", 200);
-  SharedOverlapGA(const GAGenome& g) : GASteadyStateGA(g) {}
+  SharedOverlapGA(const GAGenome& g, const std::shared_ptr<GAParameterList>& params) : GASteadyStateGA(g, params) {}
   virtual ~SharedOverlapGA() {}
   virtual void step();
   SharedOverlapGA & operator++() { step(); return *this; }
@@ -138,19 +138,21 @@ main(int argc, char** argv)
 
   GASharing share(Comparator);
 
-  SharedOverlapGA ga(genome);
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 100);
+  params->set(gaNpReplacement, 0.25);
+  params->set(gaNnGenerations, 500);
+  params->set(gaNpMutation, 0.01);
+  params->set(gaNpCrossover, 1.0);
+  params->set(gaNscoreFilename, "bog.dat");	// name of file for scores
+  params->set(gaNscoreFrequency, 10);	// keep the scores of every 10th generation
+  params->set(gaNflushFrequency, 100);	// specify how often to write the score to disk
+  params->parse(argc, argv); 
+
+  SharedOverlapGA ga(genome, params);
   ga.crossover(Crossover);
   ga.scaling(share);
-  ga.populationSize(100);
-  ga.pReplacement(0.25);
-  ga.nGenerations(500);
-  ga.pMutation(0.01);
-  ga.pCrossover(1.0);
-  ga.scoreFilename("bog.dat");	// name of file for scores
-  ga.scoreFrequency(10);	// keep the scores of every 10th generation
-  ga.flushFrequency(100);	// specify how often to write the score to disk
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, true); // parse commands, complain if bogus args
 
   std::cout << "initializing...\n"; std::cout.flush();
   ga.initialize(seed);
@@ -204,7 +206,7 @@ main(int argc, char** argv)
   std::cout << "initial population is in '" << ifile << "'\n";
   std::cout << "final population is in '" << ffile << "'\n";
   std::cout << "the function is in '" << file << "'\n";
-  std::cout << "parameters were:\n\n" << ga.parameters() << "\n";
+  std::cout << "parameters were:\n\n" << params << "\n";
 
   return 0;
 }
