@@ -97,7 +97,7 @@ po::options_description GAParameterList::options()
 	return optionsDesc;
 }
 
-bool GAParameterList::parse(int &argc, char **argv, bool)
+bool GAParameterList::parse(int &argc, char **argv)
 {
 	auto opt = options();
 

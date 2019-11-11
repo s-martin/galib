@@ -49,12 +49,12 @@ int main(int argc, char *argv[])
 	//   want
 	// that are different than the GAlib defaults.  Then we parse the command
 	// line.
-	GAParameterList params;
-	params.set(gaNscoreFilename, "bog.dat");
-	params.set(gaNflushFrequency, 50);
-	params.set(gaNpMutation, 0.001);
-	params.set(gaNpCrossover, 0.8);
-	params.parse(argc, argv, false);
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNscoreFilename, "bog.dat");
+	params->set(gaNflushFrequency, 50);
+	params->set(gaNpMutation, 0.001);
+	params->set(gaNpCrossover, 0.8);
+	params->parse(argc, argv);
 
 	std::string filename = "smiley.txt";
 

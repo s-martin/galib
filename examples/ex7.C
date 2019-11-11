@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	params->set(gaNscoreFrequency, 20); // how often to record scores
 	params->set(gaNflushFrequency, 50); // how often to flush scores to file
 	params->set(gaNscoreFilename, "bog.dat");
-	params->parse(argc, argv, false);
+	params->parse(argc, argv);
 
 	std::string datafile = "smiley.txt";
 	std::string parmfile = "";

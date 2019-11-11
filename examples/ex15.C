@@ -96,15 +96,17 @@ main(int argc, char **argv)
 
 // Now create the GA using the genome and run it.
 
-  GASteadyStateGA ga(genome);
-  ga.scoreFrequency(1);
-  ga.flushFrequency(50);
-  ga.scoreFilename("bog.dat");
-  ga.populationSize(popsize);
-  ga.pMutation(pmut);
-  ga.pCrossover(pcross);
-  ga.pConvergence(pconv);
-  ga.nConvergence(nconv);
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNscoreFrequency, 1);
+  params->set(gaNflushFrequency, 50);
+  params->set(gaNscoreFilename, "bog.dat");
+  params->set(gaNpopulationSize, popsize);
+  params->set(gaNpMutation, pmut);
+  params->set(gaNpCrossover, pcross);
+  params->set(gaNpConvergence, pconv);
+  params->set(gaNnConvergence, nconv);
+  GASteadyStateGA ga(genome, params);
+  
   ga.terminator(GAGeneticAlgorithm::TerminateUponConvergence);
   ga.evolve();
 

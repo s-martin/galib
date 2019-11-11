@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	params->set(gaNscoreFilename, "bog.dat");
 	params->set(gaNscoreFrequency, 10); // record score every 10th generation
 	params->set(gaNflushFrequency, 10); // dump scores every 10th recorded score
-	params->parse(argc, argv, false); // Parse the command line for GAlib args.
+	params->parse(argc, argv); // Parse the command line for GAlib args.
 
 	ex6(params, seed);
 

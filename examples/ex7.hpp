@@ -21,7 +21,7 @@ float objectiveEx7(GAGenome& c)
 	return (value);
 }
 
-GASteadyStateGA ex7(GAParameterList params, const std::string &datafile)
+GASteadyStateGA ex7(const std::shared_ptr<GAParameterList>& params, const std::string &datafile)
 {
 	// Read in the pattern from the specified file.  File format is pretty
 	// simple: two integers that give the height then width of the matrix, then

@@ -271,7 +271,7 @@ int main(int argc, char *argv[])
 	params->set(gaNscoreFilename, "bog.dat");
 	params->set(gaNflushFrequency, 10);
 	params->set(gaNnGenerations, 800);
-	params->parse(argc, argv, false);
+	params->parse(argc, argv);
 
 	char filename1[128] = "smiley.txt";
 	char filename2[128] = "values.txt";

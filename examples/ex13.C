@@ -68,16 +68,15 @@ main(int argc, char *argv[])
 // Set the default values of the parameters and declare the params variable.
 
   int i,j;
-  GAParameterList params;
-  GAIncrementalGA::registerDefaultParameters(params);
-  params.set(gaNpopulationSize, 150);
-  params.set(gaNpCrossover, 0.8);
-  params.set(gaNpMutation, 0.005);
-  params.set(gaNnGenerations, 500);
-  params.set(gaNscoreFilename, "bog.dat");
-  params.set(gaNscoreFrequency, 10);
-  params.set(gaNflushFrequency, 50);
-  params.parse(argc, argv, false);   // don't complain about unknown args
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 150);
+  params->set(gaNpCrossover, 0.8);
+  params->set(gaNpMutation, 0.005);
+  params->set(gaNnGenerations, 500);
+  params->set(gaNscoreFilename, "bog.dat");
+  params->set(gaNscoreFrequency, 10);
+  params->set(gaNflushFrequency, 50);
+  params->parse(argc, argv);
 
 // Create a user data object.  We'll keep all of the information for this 
 // program in this object.
@@ -150,8 +149,7 @@ main(int argc, char *argv[])
 
   GA2DBinaryStringGenome picture_genome(*(data.picture_genome));
   GABin2DecGenome numbers_genome(*(data.numbers_genome));
-  GAIncrementalGA ga(picture_genome);
-  ga.parameters(params);
+  GAIncrementalGA ga(picture_genome, params);
   ga.evolve();
 
 // Now that we have evolved the best solution, put the best into our genomes
@@ -213,11 +211,12 @@ PictureObjective(GAGenome & c)
 
   if(correct > 0.95) {
     GABin2DecGenome& num_genome = (GABin2DecGenome&)(*data->numbers_genome);
-    GAIncrementalGA ga(num_genome);
-    ga.populationSize(550);
-    ga.nGenerations(50);
-    ga.pMutation(0.01);
-    ga.pCrossover(0.9);
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNpopulationSize, 550);
+	params->set(gaNnGenerations, 50);
+	params->set(gaNpMutation, 0.01);
+	params->set(gaNpCrossover, 0.9);
+	GAIncrementalGA ga(num_genome, params);
     ga.evolve();
     *data->numbers_genome = ga.statistics().bestIndividual();
 

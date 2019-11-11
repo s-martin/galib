@@ -61,7 +61,8 @@ class GAParameterList
   public:
 	GAParameterList();
 
-	template <typename T> bool set(const std::string &name, T value)
+	template <typename T> 
+	bool set(const std::string &name, T value)
 	{
 		try
 		{
@@ -85,7 +86,7 @@ class GAParameterList
 	}
 	bool set(const std::string &name, double v) { return set<double>(name, v); }
 	bool set(const std::string &name, float v) { return set<float>(name, v); }
-	bool parse(int &argc, char **argv, bool /*unused*/);
+	bool parse(int &argc, char **argv);
 
 	bool write(const char *filename) const;
 	bool write(std::ostream &os) const;
@@ -118,8 +119,8 @@ class GAParameterList
 	  boost::program_options::options_description options();
 
 	template <class charT>
-	boost::program_options::basic_parsed_options<charT> parseGAlibSettingsFile(std::basic_istream<charT> &is, const boost::program_options::options_description &desc,
-		bool allow_unregistered = false)
+	boost::program_options::basic_parsed_options<charT> parseGAlibSettingsFile(std::basic_istream<charT> &is, 
+		const boost::program_options::options_description &desc, bool allow_unregistered = false)
 	{
 		// do any option check here
 

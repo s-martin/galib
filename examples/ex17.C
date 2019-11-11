@@ -49,16 +49,18 @@ int main(int argc, char *argv[])
 	genome.mutator(GA2DArrayAlleleGenome<int>::FlipMutator);
 	genome.crossover(GA2DArrayGenome<int>::OnePointCrossover);
 
-	GASteadyStateGA ga(genome);
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNpopulationSize, 40);
+	params->set(gaNpCrossover, 0.6);
+	params->set(gaNpMutation, 0.001);
+	params->set(gaNnGenerations, 10000);
+	params->set(gaNpReplacement, 0.25);
+	params->parse(argc, argv);
+
+	GASteadyStateGA ga(genome, params);
 
 	GASigmaTruncationScaling trunc;
 	ga.scaling(trunc);
-	ga.set(gaNpopulationSize, 40);
-	ga.set(gaNpCrossover, 0.6);
-	ga.set(gaNpMutation, 0.001);
-	ga.set(gaNnGenerations, 10000);
-	ga.set(gaNpReplacement, 0.25);
-	ga.parameters(argc, argv);
 	ga.initialize(seed);
 
 	std::cout << "evolving...";

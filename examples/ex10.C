@@ -92,11 +92,12 @@ main(int argc, char **argv)
 // steady-state GA tends to converge faster (depending on the type of replace-
 // ment method you specify).  
 
-  auto params = std::make_shared<GAParameterList>(argc, argv);
+  auto params = std::make_shared<GAParameterList>();
   params->set(gaNpopulationSize, 200);
   params->set(gaNnGenerations, 50);
   params->set(gaNpMutation, 0.001);
   params->set(gaNpCrossover, 0.9);
+  params->parse(argc, argv);
   GASimpleGA ga(genome, params);
 
 
