@@ -130,9 +130,7 @@ bool GAParameterList::write(std::ostream &os) const
 bool GAParameterList::write(const char *filename) const
 {
 	std::ofstream outfile(filename, (std::ios::out | std::ios::trunc));
-	// should be done this way, but SGI systems (and others?) don't do it
-	// right...
-	//  if(! outfile.is_open()){
+
 	if (outfile.fail())
 	{
 		GAErr(GA_LOC, "GAParameterList", "write", GAError::WriteError, filename);
@@ -162,7 +160,9 @@ bool GAParameterList::write(const char *filename) const
 // allow setting pointers using this method.
 bool GAParameterList::read(std::istream &is)
 {
-	store(parseGAlibSettingsFile(is, *m_optionsDesc), m_vm);
+	auto opt = options();
+
+	store(parseGAlibSettingsFile(is, opt), m_vm);
 	notify(m_vm);
 
 	return true;
