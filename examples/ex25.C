@@ -36,13 +36,15 @@ main(int argc, char** argv) {
   }
 
   GA1DBinaryStringGenome genome(32, Objective);
-  GADemeGA ga(genome);
-  ga.nPopulations(5);
-  ga.populationSize(30);
-  ga.nGenerations(100);
-  ga.pMutation(0.03);
-  ga.pCrossover(1.0);
-  ga.parameters(argc, argv);
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNnPopulations, 5);
+  params->set(gaNpopulationSize, 30);
+  params->set(gaNnGenerations, 100);
+  params->set(gaNpMutation, 0.03);
+  params->set(gaNpCrossover, 1.0);
+  params->parse(argc, argv);
+  
+  GADemeGA ga(genome, params);
   std::cout << "initializing..."; std::cout.flush();
   ga.initialize(seed);
   std::cout << "evolving..."; std::cout.flush();

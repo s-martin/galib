@@ -39,12 +39,11 @@ BOOST_AUTO_TEST_CASE(GAex2)
 
 BOOST_AUTO_TEST_CASE(GAex3)
 {
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	BOOST_REQUIRE(params.set(gaNpCrossover, 0.8));
-	BOOST_REQUIRE(params.set(gaNpMutation, 0.001));
-	BOOST_REQUIRE(params.set(gaNflushFrequency, 50));
-	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
+	auto params = std::make_shared<GAParameterList>();
+	BOOST_REQUIRE(params->set(gaNpCrossover, 0.8));
+	BOOST_REQUIRE(params->set(gaNpMutation, 0.001));
+	BOOST_REQUIRE(params->set(gaNflushFrequency, 50));
+	BOOST_REQUIRE(params->set(gaNscoreFilename, "bog.dat"));
 
 	auto ga = ex3(params, "smiley.txt");
 
@@ -76,15 +75,14 @@ BOOST_AUTO_TEST_CASE(GAex4)
 BOOST_AUTO_TEST_CASE(GAex6)
 {
 	// Set the default values of the parameters.
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	BOOST_REQUIRE(params.set(gaNpopulationSize, 30)); // number of individuals in population
-	BOOST_REQUIRE(params.set(gaNpCrossover, 0.7)); // likelihood of doing crossover
-	BOOST_REQUIRE(params.set(gaNpMutation, 0.001)); // probability of mutation
-	BOOST_REQUIRE(params.set(gaNnGenerations, 100)); // number of generations
-	BOOST_REQUIRE(params.set(gaNscoreFrequency, 10)); // how often to record scores
-	BOOST_REQUIRE(params.set(gaNflushFrequency, 10)); // how often to flush scores to file
-	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
+	auto params = std::make_shared<GAParameterList>();
+	BOOST_REQUIRE(params->set(gaNpopulationSize, 30)); // number of individuals in population
+	BOOST_REQUIRE(params->set(gaNpCrossover, 0.7)); // likelihood of doing crossover
+	BOOST_REQUIRE(params->set(gaNpMutation, 0.001)); // probability of mutation
+	BOOST_REQUIRE(params->set(gaNnGenerations, 100)); // number of generations
+	BOOST_REQUIRE(params->set(gaNscoreFrequency, 10)); // how often to record scores
+	BOOST_REQUIRE(params->set(gaNflushFrequency, 10)); // how often to flush scores to file
+	BOOST_REQUIRE(params->set(gaNscoreFilename, "bog.dat"));
 
 	auto genome = ex6(params, 0);
 
@@ -104,15 +102,14 @@ BOOST_AUTO_TEST_CASE(GAex7)
 	GARandomSeed(100); // so test is always the same
 
 	// Set the default values of the parameters.
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	BOOST_REQUIRE(params.set(gaNpopulationSize, 50)); // number of individuals in population
-	BOOST_REQUIRE(params.set(gaNpCrossover, 0.8)); // likelihood of doing crossover
-	BOOST_REQUIRE(params.set(gaNpMutation, 0.001)); // probability of mutation
-	BOOST_REQUIRE(params.set(gaNnGenerations, 200)); // number of generations
-	BOOST_REQUIRE(params.set(gaNscoreFrequency, 20)); // how often to record scores
-	BOOST_REQUIRE(params.set(gaNflushFrequency, 50)); // how often to flush scores to file
-	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
+	auto params = std::make_shared<GAParameterList>();
+	BOOST_REQUIRE(params->set(gaNpopulationSize, 50)); // number of individuals in population
+	BOOST_REQUIRE(params->set(gaNpCrossover, 0.8)); // likelihood of doing crossover
+	BOOST_REQUIRE(params->set(gaNpMutation, 0.001)); // probability of mutation
+	BOOST_REQUIRE(params->set(gaNnGenerations, 200)); // number of generations
+	BOOST_REQUIRE(params->set(gaNscoreFrequency, 20)); // how often to record scores
+	BOOST_REQUIRE(params->set(gaNflushFrequency, 50)); // how often to flush scores to file
+	BOOST_REQUIRE(params->set(gaNscoreFilename, "bog.dat"));
 	
 	auto ga = ex7(params, "smiley.txt");
 

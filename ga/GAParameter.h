@@ -90,8 +90,8 @@ class GAParameterList
 
 	bool write(const char *filename) const;
 	bool write(std::ostream &os) const;
-	bool read(const std::string &filename, bool flag = true);
-	bool read(std::istream &is, bool flag = true);
+	bool read(const std::string &filename);
+	bool read(std::istream &is);
 
 	unsigned int numGenerations;
 	float convergencePercentage;
@@ -156,6 +156,7 @@ class GAParameterList
 			boost::program_options::basic_option<charT> opt;
 			opt.string_key = kvpair.at(0);
 			opt.value.push_back(kvpair.at(1));
+			// TODO works not yet, because description is null
 			opt.unregistered = (result.description->find_nothrow(kvpair.at(0), false) == nullptr);
 			opt.position_key = -1;
 			result.options.push_back(opt);

@@ -68,7 +68,7 @@ FinickySelector::select() const {
 class RestrictedMatingGA : public GASteadyStateGA {
 public:
   GADefineIdentity("RestrictedMatingGA", 288);
-  RestrictedMatingGA(const GAGenome& g) : GASteadyStateGA(g) {}
+  RestrictedMatingGA(const GAGenome& g, const std::shared_ptr<GAParameterList>& params) : GASteadyStateGA(g, params) {}
   virtual ~RestrictedMatingGA() {}
   virtual void step();
   RestrictedMatingGA & operator++() { step(); return *this; }
@@ -174,19 +174,21 @@ main(int argc, char** argv)
   GASharing scale(Comparator);
   FinickySelector select;
 
-  RestrictedMatingGA ga(genome);
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 50);	// how many individuals in the population
+  params->set(gaNnGenerations, 200);		// number of generations to evolve
+  params->set(gaNpMutation, 0.001);		// likelihood of mutating new offspring
+  params->set(gaNpCrossover, 0.9);		// likelihood of crossing over parents
+  params->set(gaNscoreFilename, "bog.dat");	// name of file for scores
+  params->set(gaNscoreFrequency, 1);		// keep the scores of every generation
+  params->set(gaNflushFrequency, 50);	// specify how often to write the score to disk
+  params->read("settings.txt"); // read parameters from settings file
+  params->parse(argc, argv);
+
+  RestrictedMatingGA ga(genome, params);
   ga.selector(select);		// use our selector instead of default
   ga.scaling(scale);		// set the scaling method to our sharing
-  ga.populationSize(50);	// how many individuals in the population
-  ga.nGenerations(200);		// number of generations to evolve
-  ga.pMutation(0.001);		// likelihood of mutating new offspring
-  ga.pCrossover(0.9);		// likelihood of crossing over parents
-  ga.scoreFilename("bog.dat");	// name of file for scores
-  ga.scoreFrequency(1);		// keep the scores of every generation
-  ga.flushFrequency(50);	// specify how often to write the score to disk
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters("settings.txt"); // read parameters from settings file
-  ga.parameters(argc, argv, true); // parse commands, complain if bogus args
   ga.evolve(seed);
 
   std::ofstream outfile;

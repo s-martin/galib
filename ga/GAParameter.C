@@ -160,7 +160,7 @@ bool GAParameterList::write(const char *filename) const
 // know about, we ignore the pair and go on to the next. / There's no global
 // list to tell us what type things are, and we don't assume. /   We don't
 // allow setting pointers using this method.
-bool GAParameterList::read(std::istream &is, bool flag)
+bool GAParameterList::read(std::istream &is)
 {
 	store(parseGAlibSettingsFile(is, *m_optionsDesc), m_vm);
 	notify(m_vm);
@@ -168,7 +168,7 @@ bool GAParameterList::read(std::istream &is, bool flag)
 	return true;
 }
 
-bool GAParameterList::read(const std::string &filename, bool flag)
+bool GAParameterList::read(const std::string &filename)
 {
 	std::ifstream infile(filename, std::ios::in);
 	if (!infile)
@@ -176,7 +176,7 @@ bool GAParameterList::read(const std::string &filename, bool flag)
 		GAErr(GA_LOC, "GAParameterList", "read", GAError::ReadError, filename);
 		return false;
 	}
-	bool status = read(infile, flag);
+	bool status = read(infile);
 	infile.close();
 	return status;
 }

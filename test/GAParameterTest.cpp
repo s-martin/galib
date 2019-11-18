@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE(GAParameterList_001)
 BOOST_AUTO_TEST_CASE(read_001)
 {
 	GAParameterList params;
-	BOOST_REQUIRE(params.read("settings.txt", false));
+	BOOST_REQUIRE(params.read("settings.txt"));
 	
 	BOOST_CHECK_EQUAL(100, params.populationSize);
 	BOOST_CHECK_CLOSE_FRACTION(0.01, params.probMutation, 0.001);
