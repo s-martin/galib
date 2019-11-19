@@ -74,9 +74,9 @@ extern GANodeBASE *_GAListTraverse(unsigned int index, unsigned int &cur,
 template <class T> GANode<T> *_GAListCopy(GANode<T> *node, GANode<T> *head)
 {
 	if (!node)
-		return (GANode<T> *)0;
+		return nullptr;
 	GANode<T> *newnode = new GANode<T>(node->contents);
-	GANode<T> *lasttmp = newnode, *newtmp = (GANode<T> *)0;
+	GANode<T> *lasttmp = newnode, *newtmp = nullptr;
 	GANode<T> *tmp = DYN_CAST(GANode<T> *, node->next);
 	while (tmp && tmp != head)
 	{
@@ -145,7 +145,7 @@ template <class T> class GAList : public GAListBASE
 
 		GANode<T> *newnode = _GAListCopy(node, DYN_CAST(GANode<T> *, hd));
 
-		t->insert(newnode, (GANode<T> *)0, GAListBASE::HEAD);
+		t->insert(newnode, nullptr, GAListBASE::HEAD);
 
 		// need to set iterator to right spot in the clone!!  for now its at the
 		// head

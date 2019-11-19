@@ -116,7 +116,7 @@ RestrictedMatingGA::step()
     stats.numsel += 2;		// keep track of number of selections
     if(GAFlipCoin(pCrossover())){
       stats.numcro += (*scross)(*mom, *dad,
-				&tmpPop->individual(i), (GAGenome*)0);
+				&tmpPop->individual(i), nullptr);
     }
     else{
       if(GARandomBit()) tmpPop->individual( i ).copy(*mom);
