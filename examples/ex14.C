@@ -44,7 +44,7 @@ class RobotPathGenome : public GAGenome
   public:
 	RobotPathGenome(int noofrobots, int pathlength);
 	RobotPathGenome(const RobotPathGenome &orig)
-	{
+	 : GAGenome(orig) {
 		n = l = 0;
 		list = nullptr;
 		copy(orig);

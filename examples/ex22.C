@@ -25,7 +25,7 @@ child crossover" you could use your own crossover algorithm instead.
 
 
 #define OBJECTIVE Objective1
-#define MIN_VALUE -100
+#define MIN_VALUE (-100)
 #define MAX_VALUE 100
 
 //#define OBJECTIVE Objective2

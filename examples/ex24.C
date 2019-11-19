@@ -23,7 +23,7 @@ example).
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
 
-#define MIN_VALUE -2
+#define MIN_VALUE (-2)
 #define MAX_VALUE 2
 #define INC       0.005
 
@@ -45,7 +45,7 @@ class FinickySelector : public GASelectionScheme {
 public:
   GADefineIdentity("FinickySelector", 273);
   FinickySelector(int w=GASelectionScheme::SCALED) : GASelectionScheme(w) { }
-  FinickySelector(const FinickySelector& orig) { copy(orig); }
+  FinickySelector(const FinickySelector& orig)  : GASelectionScheme(orig) { copy(orig); }
   FinickySelector& operator=(const FinickySelector& orig) 
     { if(&orig != this) copy(orig); return *this; }
   ~FinickySelector() override = default;
