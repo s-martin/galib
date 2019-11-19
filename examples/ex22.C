@@ -48,14 +48,14 @@ int   Crossover(const GAGenome&, const GAGenome&, GAGenome*);
 // so we define our own crossover and use it rather than the standard one in
 // GAlib.
 
-typedef int (*SingleChildCrossover)(const GAGenome&,const GAGenome&,GAGenome*);
+using SingleChildCrossover = int (*)(const GAGenome &, const GAGenome &, GAGenome *);
 
 class SharedOverlapGA : public GASteadyStateGA {
 public:
   GADefineIdentity("SharedOverlapGA", 200);
   SharedOverlapGA(const GAGenome& g) : GASteadyStateGA(g) {}
-  virtual ~SharedOverlapGA() {}
-  virtual void step();
+  ~SharedOverlapGA() override = default;
+  void step() override;
   SharedOverlapGA & operator++() { step(); return *this; }
   void crossover(SingleChildCrossover func) {crossFunction = func;}
 protected:
@@ -221,7 +221,7 @@ main(int argc, char** argv)
 float
 Objective1(GAGenome& g)
 {
-  GA1DArrayGenome<float>& genome = (GA1DArrayGenome<float>&)g;
+  auto& genome = (GA1DArrayGenome<float>&)g;
   float v = genome.gene(0);
   float y = 100.0 * exp(-fabs(v) / 50.0) * (1.0 - cos(v * M_PI * 2.0 / 25.0));
   if(v < MIN_VALUE || v > MAX_VALUE) y = 0;
@@ -232,7 +232,7 @@ Objective1(GAGenome& g)
 float
 Objective2(GAGenome& g)
 {
-  GA1DArrayGenome<float>& genome = (GA1DArrayGenome<float>&)g;
+  auto& genome = (GA1DArrayGenome<float>&)g;
   float v = genome.gene(0) / 100.0;
   float y = 0.5 + 0.6 * sin(M_PI*v) + 0.2 * sin(3*M_PI*v) + 0.1 * sin(5*M_PI*v)
     + 0.02 * sin(7*M_PI*v) + 0.01 * sin(7*M_PI*v);
@@ -244,14 +244,14 @@ Objective2(GAGenome& g)
 void
 Initializer(GAGenome& g)
 {
-  GA1DArrayGenome<float>& genome = (GA1DArrayGenome<float>&)g;
+  auto& genome = (GA1DArrayGenome<float>&)g;
   genome.gene(0, GARandomFloat(-100.0, 100.0));
 }
 
 int
 Mutator(GAGenome& g, float pmut)
 {
-  GA1DArrayGenome<float>& genome = (GA1DArrayGenome<float>&)g;
+  auto& genome = (GA1DArrayGenome<float>&)g;
   int nmut = 0;
   if(GAFlipCoin(pmut)){
     genome.gene(0, genome.gene(0) + 
@@ -264,9 +264,9 @@ Mutator(GAGenome& g, float pmut)
 int
 Crossover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1)
 {
-  GA1DArrayGenome<float>& mom = (GA1DArrayGenome<float>&)g1;
-  GA1DArrayGenome<float>& dad = (GA1DArrayGenome<float>&)g2;
-  GA1DArrayGenome<float>& child = (GA1DArrayGenome<float>&)*c1;
+  auto& mom = (GA1DArrayGenome<float>&)g1;
+  auto& dad = (GA1DArrayGenome<float>&)g2;
+  auto& child = (GA1DArrayGenome<float>&)*c1;
 
   float distance = 0.0, midpoint = 0.0;
 
@@ -287,8 +287,8 @@ Crossover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1)
 float
 Comparator(const GAGenome& g1, const GAGenome& g2) 
 {
-  GA1DArrayGenome<float>& a = (GA1DArrayGenome<float>&)g1;
-  GA1DArrayGenome<float>& b = (GA1DArrayGenome<float>&)g2;
+  auto& a = (GA1DArrayGenome<float>&)g1;
+  auto& b = (GA1DArrayGenome<float>&)g2;
 
   float val= exp( - (a.gene(0)-b.gene(0)) * (a.gene(0)-b.gene(0)) / FACTOR);
   if(1-val < 0 || 1-val > 1)  std::cerr << "val: " << val << "\n";

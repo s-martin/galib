@@ -934,11 +934,11 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			gene(i, *(array + i));
 		return *this;
 	}
-	~GA1DArrayGenome(){};
+	~GA1DArrayGenome() override= default;;
 
 	GAGenome * clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override
 	{
-		GA1DArrayGenome<T> *cpy = new GA1DArrayGenome<T>(nx);
+		auto *cpy = new GA1DArrayGenome<T>(nx);
 		if (flag == CloneMethod::CONTENTS)
 		{
 			cpy->copy(*this);

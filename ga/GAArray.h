@@ -49,7 +49,7 @@ template <class T> class GAArray
 		return *this;
 	}
 
-	virtual ~GAArray() { }
+	virtual ~GAArray() = default;
 
 	GAArray<T> *clone() { return new GAArray<T>(*this); }
 	const T &operator[](unsigned int i) const { return a.at(i); }
@@ -110,9 +110,9 @@ template <class T> class GAArray
 	{
 		if (std::equal(a.begin(), a.end(), rhs.a.begin()))
 		{
-			return 1;
+			return true;
 		}
-		return 0;
+		return false;
 	}
 
 	template <class U>

@@ -101,7 +101,7 @@ order.
 float
 objective(GAGenome & c)
 {
-  GAListGenome<int> & genome = (GAListGenome<int> &)c;
+  auto & genome = (GAListGenome<int> &)c;
 
   float score = (*genome.head() == genome.size()-1); // move to head of list
   for(int i=genome.size()-2; i>0; i--)
@@ -120,7 +120,7 @@ in each one.  After we make the list, we scramble everything up.
 void
 ListInitializer(GAGenome & c)
 {
-  GAListGenome<int> &child=(GAListGenome<int> &)c;
+  auto &child=(GAListGenome<int> &)c;
   while(child.head()) child.destroy(); // destroy any pre-existing list
 
   int n=25;
@@ -148,7 +148,7 @@ GAListGenome<int>::write( std::ostream & os) const
 {
   int *cur, *head;
   GAListIter<int> tmpiter(*this);
-  if((head=tmpiter.head()) != 0) os << *head << " ";
+  if((head=tmpiter.head()) != nullptr) os << *head << " ";
   for(cur=tmpiter.next(); cur && cur != head; cur=tmpiter.next())
     os << *cur << " ";
   return os.fail() ? 1 : 0;

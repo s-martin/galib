@@ -46,7 +46,7 @@ class RobotPathGenome : public GAGenome
 	RobotPathGenome(const RobotPathGenome &orig)
 	{
 		n = l = 0;
-		list = 0;
+		list = nullptr;
 		copy(orig);
 	}
 	RobotPathGenome operator=(const GAGenome &arg)
@@ -54,12 +54,12 @@ class RobotPathGenome : public GAGenome
 		copy(arg);
 		return *this;
 	}
-	virtual ~RobotPathGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod) const;
-	virtual void copy(const GAGenome &c);
-	virtual bool equal(const GAGenome &g) const;
-	virtual int read(std::istream &is);
-	virtual int write(std::ostream &os) const;
+	~RobotPathGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod) const override;
+	void copy(const GAGenome &c) override;
+	bool equal(const GAGenome &g) const override;
+	int read(std::istream &is) override;
+	int write(std::ostream &os) const override;
 
 	GAListGenome<int> &path(const int i) { return *list[i]; }
 	int npaths() const { return n; }
@@ -77,7 +77,7 @@ RobotPathGenome::RobotPathGenome(int noofrobots, int pathlength)
 	crossover(Crossover);
 	n = noofrobots;
 	l = pathlength;
-	list = (n ? new GAListGenome<int> *[n] : (GAListGenome<int> **)0);
+	list = (n ? new GAListGenome<int> *[n] : (GAListGenome<int> **)nullptr);
 	for (int i = 0; i < n; i++)
 	{
 		list[i] = new GAListGenome<int>;
@@ -91,7 +91,7 @@ void RobotPathGenome::copy(const GAGenome &g)
 	if (&g != this && sameClass(g))
 	{
 		GAGenome::copy(g); // copy the base class part
-		RobotPathGenome &genome = (RobotPathGenome &)g;
+		auto &genome = (RobotPathGenome &)g;
 		if (n == genome.n)
 		{
 			for (int i = 0; i < n; i++)
@@ -125,7 +125,7 @@ GAGenome *RobotPathGenome::clone(GAGenome::CloneMethod) const
 
 bool RobotPathGenome::equal(const GAGenome &g) const
 {
-	RobotPathGenome &genome = (RobotPathGenome &)g;
+	auto &genome = (RobotPathGenome &)g;
 	bool flag = false;
 	for (int i = 0; i < n && flag == 0; i++)
 		flag = list[i]->equal(*genome.list[i]);
@@ -149,7 +149,7 @@ int RobotPathGenome::write(std::ostream &os) const
 // These are the definitions of the operators for the robot path genome.
 void RobotPathGenome::Initializer(GAGenome &g)
 {
-	RobotPathGenome &genome = (RobotPathGenome &)g;
+	auto &genome = (RobotPathGenome &)g;
 	for (int i = 0; i < genome.npaths(); i++)
 		genome.path(i).initialize();
 	genome._evaluated = false;
@@ -157,7 +157,7 @@ void RobotPathGenome::Initializer(GAGenome &g)
 
 int RobotPathGenome::Mutator(GAGenome &g, float pmut)
 {
-	RobotPathGenome &genome = (RobotPathGenome &)g;
+	auto &genome = (RobotPathGenome &)g;
 	int nMut = 0;
 	for (int i = 0; i < genome.npaths(); i++)
 		nMut += genome.path(i).mutate(pmut);
@@ -168,8 +168,8 @@ int RobotPathGenome::Mutator(GAGenome &g, float pmut)
 
 float RobotPathGenome::Comparator(const GAGenome &a, const GAGenome &b)
 {
-	RobotPathGenome &sis = (RobotPathGenome &)a;
-	RobotPathGenome &bro = (RobotPathGenome &)b;
+	auto &sis = (RobotPathGenome &)a;
+	auto &bro = (RobotPathGenome &)b;
 	float diff = 0;
 	for (int i = 0; i < sis.npaths(); i++)
 		diff += sis.path(i).compare(bro.path(i));
@@ -182,7 +182,7 @@ float RobotPathGenome::Comparator(const GAGenome &a, const GAGenome &b)
 // in the list than there are lists in the composite genome.
 float RobotPathGenome::Evaluator(GAGenome &c)
 {
-	RobotPathGenome &genome = (RobotPathGenome &)c;
+	auto &genome = (RobotPathGenome &)c;
 	float score = 0;
 	for (int i = 0; i < genome.npaths(); i++)
 		if (*genome.path(i).warp(i) == 0)
@@ -198,14 +198,14 @@ float RobotPathGenome::Evaluator(GAGenome &c)
 int RobotPathGenome::Crossover(const GAGenome &a, const GAGenome &b,
 							   GAGenome *c, GAGenome *d)
 {
-	RobotPathGenome &mom = (RobotPathGenome &)a;
-	RobotPathGenome &dad = (RobotPathGenome &)b;
+	auto &mom = (RobotPathGenome &)a;
+	auto &dad = (RobotPathGenome &)b;
 
 	int n = 0;
 	if (c && d)
 	{
-		RobotPathGenome &sis = (RobotPathGenome &)*c;
-		RobotPathGenome &bro = (RobotPathGenome &)*d;
+		auto &sis = (RobotPathGenome &)*c;
+		auto &bro = (RobotPathGenome &)*d;
 		for (int i = 0; i < mom.npaths(); i++)
 			GAListGenome<int>::PartialMatchCrossover(
 				mom.path(i), dad.path(i), &sis.path(i), &bro.path(i));
@@ -215,19 +215,19 @@ int RobotPathGenome::Crossover(const GAGenome &a, const GAGenome &b,
 	}
 	else if (c)
 	{
-		RobotPathGenome &sis = (RobotPathGenome &)*c;
+		auto &sis = (RobotPathGenome &)*c;
 		for (int i = 0; i < mom.npaths(); i++)
 			GAListGenome<int>::PartialMatchCrossover(mom.path(i), dad.path(i),
-													 &sis.path(i), 0);
+													 &sis.path(i), nullptr);
 		sis._evaluated = false;
 		n = 1;
 	}
 	else if (d)
 	{
-		RobotPathGenome &bro = (RobotPathGenome &)*d;
+		auto &bro = (RobotPathGenome &)*d;
 		for (int i = 0; i < mom.npaths(); i++)
 			GAListGenome<int>::PartialMatchCrossover(mom.path(i), dad.path(i),
-													 0, &bro.path(i));
+													 nullptr, &bro.path(i));
 		bro._evaluated = false;
 		n = 1;
 	}
@@ -245,7 +245,7 @@ int RobotPathGenome::Crossover(const GAGenome &a, const GAGenome &b,
 // ordered crossover operators.
 void RobotPathGenome::PathInitializer(GAGenome &c)
 {
-	GAListGenome<int> &list = (GAListGenome<int> &)c;
+	auto &list = (GAListGenome<int> &)c;
 
 	// We must first destroy any pre-existing list.
 	while (list.head())
@@ -278,7 +278,7 @@ template <> int GAListGenome<int>::write(std::ostream &os) const
 {
 	int *cur, *head;
 	GAListIter<int> itertmp(*this);
-	if ((head = itertmp.head()) != 0)
+	if ((head = itertmp.head()) != nullptr)
 		os << *head << " ";
 	for (cur = itertmp.next(); cur && cur != head; cur = itertmp.next())
 		os << *cur << " ";

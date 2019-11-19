@@ -10,7 +10,7 @@
 // odd bit that is set and one point for every even bit that is not set.
 float objectiveEx4(GAGenome& g)
 {
-	GA3DBinaryStringGenome& genome = (GA3DBinaryStringGenome&)g;
+	auto& genome = (GA3DBinaryStringGenome&)g;
 	float value = 0.0;
 	int count = 0;
 	int I = genome.width(), J = genome.height(), K = genome.depth();

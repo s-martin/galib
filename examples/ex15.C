@@ -59,7 +59,7 @@ main(int argc, char **argv)
   GARandomSeed(seed);
   int i;
   int n=7;
-  float *target = new float[n];
+  auto *target = new float[n];
   float min[] = {0, 0,   3, -5, 100,    0.001, 0};
   float max[] = {1, 100, 3, -2, 100000, 0.010, 7};
   for(i=0; i<n; i++)
@@ -140,8 +140,8 @@ main(int argc, char **argv)
 float
 objective(GAGenome & c)
 {
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
-  float *sequence = (float *)c.userData();
+  auto & genome = (GABin2DecGenome &)c;
+  auto *sequence = (float *)c.userData();
 
   float value=genome.nPhenotypes();
   for(int i=0; i<genome.nPhenotypes(); i++)

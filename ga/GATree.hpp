@@ -101,7 +101,7 @@ template <class T> GANode<T> *_GATreeCopy(GANode<T> *node, GANode<T> *parent)
 	if (!node)
 		return nullptr;
 
-	GANode<T> *newnode = new GANode<T>(node->contents);
+	auto *newnode = new GANode<T>(node->contents);
 	newnode->parent = parent;
 	newnode->child = _GATreeCopy(DYN_CAST(GANode<T> *, node->child), newnode);
 
@@ -196,7 +196,7 @@ template <class T> class GATree : public GATreeBASE
 	//   clone.
 	GATree<T> *clone(unsigned int i = 0) const
 	{
-		GATree<T> *t = new GATree<T>;
+		auto *t = new GATree<T>;
 		GANode<T> *node;
 		unsigned int w = 0;
 		if (i == 0)
@@ -206,7 +206,7 @@ template <class T> class GATree : public GATreeBASE
 		if (!node)
 			return t;
 
-		GANode<T> *newnode = new GANode<T>(node->contents);
+		auto *newnode = new GANode<T>(node->contents);
 		newnode->child =
 			_GATreeCopy(DYN_CAST(GANode<T> *, node->child), newnode);
 		if (newnode->child)
@@ -226,7 +226,7 @@ template <class T> class GATree : public GATreeBASE
 	void copy(const GATree<T> &orig)
 	{
 		_GATreeDestroy(DYN_CAST(GANode<T> *, rt));
-		rt = _GATreeCopy(DYN_CAST(GANode<T> *, orig.rt), (GANode<T> *)0);
+		rt = _GATreeCopy(DYN_CAST(GANode<T> *, orig.rt), (GANode<T> *)nullptr);
 		iter.node = rt;
 		sz = orig.sz;
 		csz = orig.csz;
@@ -369,7 +369,7 @@ template <class T> class GATree : public GATreeBASE
 	// I forgot to fix the pointers in the root node of the sub-tree.
 	GATree<T> *remove()
 	{
-		GATree<T> *t = new GATree<T>;
+		auto *t = new GATree<T>;
 		GANode<T> *node = DYN_CAST(GANode<T> *, iter.node);
 		if (!node)
 			return t;
@@ -409,7 +409,7 @@ template <class T> class GATree : public GATreeBASE
 	}
 	int insert(const T &t, GATreeBASE::Location where = GATreeBASE::BELOW)
 	{
-		GANode<T> *c = new GANode<T>(t);
+		auto *c = new GANode<T>(t);
 		if (GATreeBASE::insert(c, iter.node, where) == GATreeBASE::ERR)
 		{
 			delete c;

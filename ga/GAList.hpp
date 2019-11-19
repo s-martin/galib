@@ -75,7 +75,7 @@ template <class T> GANode<T> *_GAListCopy(GANode<T> *node, GANode<T> *head)
 {
 	if (!node)
 		return nullptr;
-	GANode<T> *newnode = new GANode<T>(node->contents);
+	auto *newnode = new GANode<T>(node->contents);
 	GANode<T> *lasttmp = newnode, *newtmp = nullptr;
 	GANode<T> *tmp = DYN_CAST(GANode<T> *, node->next);
 	while (tmp && tmp != head)
@@ -133,7 +133,7 @@ template <class T> class GAList : public GAListBASE
 	// original list.
 	GAList<T> *clone(unsigned int i = 0) const
 	{
-		GAList<T> *t = new GAList<T>;
+		auto *t = new GAList<T>;
 		GANode<T> *node;
 		unsigned int w = 0;
 		if (i == 0)

@@ -82,7 +82,7 @@ template <class T> class GAAlleleSetCore
 {
   public:
 	GAAlleleSetCore()
-		: type(GAAllele::Type::ENUMERATED), csz(GA_ALLELE_CHUNK), sz(0), SZ(0),
+		:  csz(GA_ALLELE_CHUNK), 
 		  a(std::vector<T>())
 	{
 		lowerb = GAAllele::BoundType::NONE;
@@ -181,12 +181,12 @@ template <class T> class GAAlleleSetCore
 		return *this;
 	}
 
-	GAAllele::Type type; // is this an ennumerated or bounded set?
+	GAAllele::Type type{GAAllele::Type::ENUMERATED}; // is this an ennumerated or bounded set?
 	GAAllele::BoundType lowerb, upperb; // what kind of limit is the bound?
 	unsigned int cnt; // how many objects are using us?
 	unsigned int csz; // how big are the chunks to allocate?
-	unsigned int sz; // number we have
-	unsigned int SZ; // how many have we allocated?
+	unsigned int sz{0}; // number we have
+	unsigned int SZ{0}; // how many have we allocated?
 	std::vector<T> a;
 };
 
@@ -250,7 +250,7 @@ template <class T> class GAAlleleSet
 	{
 		if (&set != this)
 		{
-			if (core != 0)
+			if (core != nullptr)
 			{
 				core->cnt -= 1;
 				if (core->cnt == 0)
@@ -263,7 +263,7 @@ template <class T> class GAAlleleSet
 
 	void unlink()
 	{
-		if (core == 0)
+		if (core == nullptr)
 			return; // nothing to unlink
 		if (core->cnt > 1)
 		{
@@ -278,7 +278,7 @@ template <class T> class GAAlleleSet
 	// really wish there were enough compilers doing exceptions to use them...
 	int add(const T &alle)
 	{
-		if (core == 0)
+		if (core == nullptr)
 			core = new GAAlleleSetCore<T>;
 		if (core->type != GAAllele::Type::ENUMERATED)
 			return 1;
@@ -297,7 +297,7 @@ template <class T> class GAAlleleSet
 
 	int remove(const T &allele)
 	{
-		if (core == 0)
+		if (core == nullptr)
 			core = new GAAlleleSetCore<T>;
 		if (core->type != GAAllele::Type::ENUMERATED)
 			return 1;
@@ -405,7 +405,7 @@ template <class T> class GAAlleleSet
 template <class T> class GAAlleleSetArray
 {
   public:
-	GAAlleleSetArray() : csz(GA_ALLELE_CHUNK), sz(0), SZ(0), aset(0) {}
+	GAAlleleSetArray() : csz(GA_ALLELE_CHUNK),  aset(nullptr) {}
 
 	GAAlleleSetArray(const GAAlleleSet<T> &s)
 		: csz(GA_ALLELE_CHUNK), sz(1), SZ(GA_ALLELE_CHUNK),
@@ -533,8 +533,8 @@ template <class T> class GAAlleleSetArray
 
   protected:
 	unsigned int csz;
-	unsigned int sz;
-	unsigned int SZ;
+	unsigned int sz{0};
+	unsigned int SZ{0};
 	GAAlleleSet<T> **aset;
 };
 

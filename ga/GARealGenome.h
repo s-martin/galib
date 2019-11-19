@@ -15,10 +15,10 @@ for the real number genome.
 #include <GAAllele.h>
 #include <GA1DArrayGenome.hpp>
 
-typedef GAAlleleSet<float> GARealAlleleSet;
-typedef GAAlleleSetArray<float> GARealAlleleSetArray;
+using GARealAlleleSet = GAAlleleSet<float>;
+using GARealAlleleSetArray = GAAlleleSetArray<float>;
 
-typedef GA1DArrayAlleleGenome<float> GARealGenome;
+using GARealGenome = GA1DArrayAlleleGenome<float>;
 
 int GARealGaussianMutator(GAGenome &, float);
 
