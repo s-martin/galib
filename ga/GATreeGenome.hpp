@@ -280,8 +280,7 @@ template <class T> class GATreeGenome : public GATree<T>, public GAGenome
 		copy(orig);
 		return *this;
 	}
-	//~GATreeGenome() override;
-	~GATreeGenome() override = default;;
+	~GATreeGenome() override = default;
 
 	GAGenome *
 	clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override
