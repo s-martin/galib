@@ -1,4 +1,4 @@
-# Modern GAlib: A (modernized) C++ Genetic Algorithm Library ![](https://github.com/s-martin/galib/workflows/CI-Linux/badge.svg) ![](https://github.com/s-martin/galib/workflows/CI-Windows/badge.svg) 
+# Modern GAlib: A (modernized) C++ Genetic Algorithm Library ![](https://github.com/s-martin/galib/workflows/CI-Linux/badge.svg) ![](https://github.com/s-martin/galib/workflows/CI-Windows/badge.svg) ![](https://github.com/s-martin/galib/workflows/CodeQL/badge.svg)
 
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
