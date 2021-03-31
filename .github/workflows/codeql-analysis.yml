@@ -36,6 +36,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: install boost, X11, lcov, gcov
+      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr
+ 
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
