@@ -12,9 +12,6 @@ a fullblown list.  The parameter list is a special purpose, stripped down list
 implementation.
 ---------------------------------------------------------------------------- */
 #include <GAParameter.h>
-#include <cctype>
-#include <cstdlib>
-#include <cstring>
 #include <gaconfig.h>
 #include <gaerror.h>
 
@@ -24,10 +21,6 @@ implementation.
 
 namespace po = boost::program_options;
 
-constexpr int PRM_CHUNKSIZE = 10;
-constexpr int BUFSIZE = 1024; // size of buffer for reading pairs
-constexpr int MAX_PAIRS = 5000; // max number of name-value pairs in stream
-constexpr int NAMESIZE = 128; // max length of name in name-value pair
 
 GAParameterList::GAParameterList()
 {

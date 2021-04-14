@@ -8,8 +8,7 @@
  DESCRIPTION:
   Header for the parameters object used by the GA objects.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_parameters_h_
-#define _ga_parameters_h_
+#pragma once
 
 #include <gaconfig.h>
 #include <gatypes.h>
@@ -197,5 +196,3 @@ inline std::istream &operator>>(std::istream &is, GAParameterList &plist)
 	plist.read(is);
 	return is;
 }
-
-#endif
