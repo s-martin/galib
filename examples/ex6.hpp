@@ -15,7 +15,7 @@ list sizes built-in to the GA library.
 ---------------------------------------------------------------------------- */
 float objectiveEx6(GAGenome &c)
 {
-	GATreeGenome<int> &genome = (GATreeGenome<int> &)c;
+	auto &genome = (GATreeGenome<int> &)c;
 	return genome.size();
 }
 
@@ -29,7 +29,7 @@ cleaned up before it tries to initialize it.
 ---------------------------------------------------------------------------- */
 void TreeInitializer(GAGenome &c)
 {
-	GATreeGenome<int> &child = (GATreeGenome<int> &)c;
+	auto &child = (GATreeGenome<int> &)c;
 
 	// destroy any pre-existing tree
 	child.root();
@@ -65,7 +65,7 @@ void WriteNode(std::ostream &os, GANode<int> *n)
 {
 	if (!n)
 		return;
-	GANodeBASE *node = (GANodeBASE *)n;
+	auto *node = (GANodeBASE *)n;
 
 	os.width(10);
 	os << ((GANode<int> *)node)->contents << " ";

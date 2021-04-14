@@ -155,7 +155,7 @@ main(int argc, char** argv) {
 // in the previous implementation of this function.
 float
 Objective(GAGenome& g) {
-  GAListGenome<int> & genome = (GAListGenome<int> &)g;
+  auto & genome = (GAListGenome<int> &)g;
   float dist = 0;
   if(genome.head()) {
     for(int i=0; i<ntowns; i++) {
@@ -169,7 +169,7 @@ Objective(GAGenome& g) {
 
 void
 Initializer(GAGenome& g) {
-  GAListGenome<int> &child=(GAListGenome<int> &)g;
+  auto &child=(GAListGenome<int> &)g;
   while(child.head()) child.destroy(); // destroy any pre-existing list
 
   int i,town;
@@ -191,7 +191,7 @@ Initializer(GAGenome& g) {
 
 int
 Mutator(GAGenome& g, float pmut) {
-  GAListGenome<int> &child=(GAListGenome<int> &)g;
+  auto &child=(GAListGenome<int> &)g;
   int n, i;
   if ((GARandomFloat() >= pmut) || (pmut <= 0)) return 0;
 
@@ -237,9 +237,9 @@ ERXover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1, GAGenome* c2) {
 
 void
 ERXOneChild(const GAGenome& g1, const GAGenome& g2, GAGenome* c1) {
-  GAListGenome<int> &mate1=(GAListGenome<int> &)g1;
-  GAListGenome<int> &mate2=(GAListGenome<int> &)g2;
-  GAListGenome<int> &sis=(GAListGenome<int> &)*c1;
+  auto &mate1=(GAListGenome<int> &)g1;
+  auto &mate2=(GAListGenome<int> &)g2;
+  auto &sis=(GAListGenome<int> &)*c1;
   
   int i,j,k,t1,t2,town;
 
@@ -316,8 +316,8 @@ ERXOneChild(const GAGenome& g1, const GAGenome& g2, GAGenome* c1) {
 
 int
 PMXover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1, GAGenome* c2) {
-  GAListGenome<int> &mom=(GAListGenome<int> &)g1;
-  GAListGenome<int> &dad=(GAListGenome<int> &)g2;
+  auto &mom=(GAListGenome<int> &)g1;
+  auto &dad=(GAListGenome<int> &)g2;
 
   int a = GARandomInt(0, mom.size());
   int b = GARandomInt(0, dad.size());
@@ -328,7 +328,7 @@ PMXover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1, GAGenome* c2) {
   int i,j,nc=0;
 
   if(c1) {
-    GAListGenome<int> &sis=(GAListGenome<int> &)*c1;
+    auto &sis=(GAListGenome<int> &)*c1;
     sis.GAList<int>::copy(mom);
     GAListIter<int> diter(dad);
     index = diter.warp(a);
@@ -345,7 +345,7 @@ PMXover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1, GAGenome* c2) {
     nc += 1;
   }
   if(c2) {
-    GAListGenome<int> &sis=(GAListGenome<int> &)*c2;
+    auto &sis=(GAListGenome<int> &)*c2;
     sis.GAList<int>::copy(mom);
     GAListIter<int> diter(dad);
     index = diter.warp(a);
@@ -367,8 +367,8 @@ PMXover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1, GAGenome* c2) {
 
 float
 Comparator(const GAGenome& g1, const GAGenome& g2) {
-  GAListGenome<int> &a = (GAListGenome<int> &)g1;
-  GAListGenome<int> &b = (GAListGenome<int> &)g2;
+  auto &a = (GAListGenome<int> &)g1;
+  auto &b = (GAListGenome<int> &)g2;
 
   int i,j,t1,t2;
   float dist=ntowns;
@@ -414,7 +414,7 @@ GAListGenome<int>::write( std::ostream & os) const
 {
   int *cur, *head;
   GAListIter<int> tmpiter(*this);
-  if((head=tmpiter.head()) != 0) {
+  if((head=tmpiter.head()) != nullptr) {
     os << *head << " ";
     for(cur=tmpiter.next(); cur && cur != head; cur=tmpiter.next())
       os << *cur << " ";

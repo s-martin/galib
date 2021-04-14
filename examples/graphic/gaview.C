@@ -139,7 +139,7 @@ static char *fallbacks[] = {
 	"*some.label:		some", "*evolve.label:	all", "*score.label:	score",
 	"*stats.label:	stats", "*params.label:	params",
 
-	(char *)NULL};
+	(char *)nullptr};
 
 static XtResource resources[] = {
 #define Offset(field) (XtOffset(AppDataPtr, field))
@@ -158,7 +158,7 @@ static XtResource resources[] = {
 	{"ga", "GA", XtRInt, sizeof(int), Offset(whichGA), XtRImmediate,
 	 (XtPointer)2},
 	{"genome", "Genome", XtRInt, sizeof(int), Offset(whichGenome), XtRImmediate,
-	 (XtPointer)0},
+	 (XtPointer)nullptr},
 	{"function", "Function", XtRInt, sizeof(int), Offset(whichFunction),
 	 XtRImmediate, (XtPointer)3},
 	{"generationsPerStep", "GenerationsPerStep", XtRInt, sizeof(int),
@@ -167,15 +167,15 @@ static XtResource resources[] = {
 };
 
 static XrmOptionDescRec options[] = {
-	{"ga", "ga", XrmoptionSepArg, 0},
-	{"genome", "genome", XrmoptionSepArg, 0},
-	{"function", "function", XrmoptionSepArg, 0},
-	{"geninc", "generationsPerStep", XrmoptionSepArg, 0}};
+	{"ga", "ga", XrmoptionSepArg, nullptr},
+	{"genome", "genome", XrmoptionSepArg, nullptr},
+	{"function", "function", XrmoptionSepArg, nullptr},
+	{"geninc", "generationsPerStep", XrmoptionSepArg, nullptr}};
 
 float RealObjective(GAGenome &);
 float Bin2DecObjective(GAGenome &);
 
-typedef float (*Function)(float, float);
+using Function = float (*)(float, float);
 float Function1(float x, float y);
 float Function2(float x, float y);
 float Function3(float x, float y);
@@ -210,9 +210,9 @@ int main(int argc, char **argv)
 
 	Widget toplevel =
 		XtAppInitialize(&theAppData.appc, APP_CLASS, options, XtNumber(options),
-						&argc, argv, fallbacks, (ArgList)NULL, 0);
+						&argc, argv, fallbacks, (ArgList)nullptr, 0);
 	XtGetApplicationResources(toplevel, (XtPointer)&theAppData, resources,
-							  XtNumber(resources), NULL, 0);
+							  XtNumber(resources), nullptr, 0);
 
 	// do some setup for one of the functions
 
@@ -349,8 +349,8 @@ int main(int argc, char **argv)
 	}
 
 	XFreeGC(XtDisplay(toplevel), theAppData.bestgc);
-	for (int qq = 0; qq < MAX_POPS; qq++)
-		XFreeGC(XtDisplay(toplevel), theAppData.dotgc[qq]);
+	for (auto & qq : theAppData.dotgc)
+		XFreeGC(XtDisplay(toplevel), qq);
 	delete theAppData.genome;
 	delete theAppData.ga;
 
@@ -379,7 +379,7 @@ Boolean Evolve(int n)
 		theAppData.ga->generation() < n)
 	{
 		theAppData.ga->step();
-		DrawCB(theAppData.canvas, (XtPointer)&theAppData, 0);
+		DrawCB(theAppData.canvas, (XtPointer)&theAppData, nullptr);
 		UpdateCounter(theAppData.ga);
 		return False;
 	}
@@ -388,20 +388,20 @@ Boolean Evolve(int n)
 
 void ResetCB(Widget, XtPointer cd, XtPointer)
 {
-	AppDataPtr data = (AppDataPtr)cd;
+	auto data = (AppDataPtr)cd;
 	if (data->procid)
 	{
 		XtRemoveWorkProc(data->procid);
 		data->procid = 0;
 	}
 	data->ga->initialize();
-	DrawCB(data->canvas, data, 0);
+	DrawCB(data->canvas, data, nullptr);
 	UpdateCounter(data->ga);
 }
 
 void StopCB(Widget, XtPointer cd, XtPointer)
 {
-	AppDataPtr data = (AppDataPtr)cd;
+	auto data = (AppDataPtr)cd;
 	if (data->procid)
 	{
 		XtRemoveWorkProc(data->procid);
@@ -411,13 +411,13 @@ void StopCB(Widget, XtPointer cd, XtPointer)
 
 void StepCB(Widget, XtPointer cd, XtPointer)
 {
-	AppDataPtr data = (AppDataPtr)cd;
+	auto data = (AppDataPtr)cd;
 	Evolve(data->ga->generation() + 1);
 }
 
 void EvolveSomeCB(Widget, XtPointer cd, XtPointer)
 {
-	AppDataPtr data = (AppDataPtr)cd;
+	auto data = (AppDataPtr)cd;
 	data->procid =
 		XtAppAddWorkProc(data->appc, (XtWorkProc)Evolve,
 						 (XtPointer)(data->ga->generation() + data->geninc));
@@ -425,7 +425,7 @@ void EvolveSomeCB(Widget, XtPointer cd, XtPointer)
 
 void EvolveCB(Widget, XtPointer cd, XtPointer)
 {
-	AppDataPtr data = (AppDataPtr)cd;
+	auto data = (AppDataPtr)cd;
 	data->procid =
 		XtAppAddWorkProc(data->appc, (XtWorkProc)Evolve, (XtPointer)(-1));
 }
@@ -465,11 +465,11 @@ void DumpScoreCB(Widget, XtPointer cd, XtPointer)
 
 void DrawCB(Widget w, XtPointer cd, XtPointer)
 {
-	AppDataPtr data = (AppDataPtr)cd;
+	auto data = (AppDataPtr)cd;
 	XClearWindow(XtDisplay(w), XtWindow(w));
 	if (data->whichGA == 3)
 	{
-		GADemeGA *ga = (GADemeGA *)data->ga;
+		auto *ga = (GADemeGA *)data->ga;
 		for (int i = 0; i < ga->nPopulations(); i++)
 			DrawPopulation(w, ga->population(i), data->dotgc[i],
 						   data->dotgc[i]);
@@ -483,7 +483,7 @@ void DrawCB(Widget w, XtPointer cd, XtPointer)
 void DrawPopulation(Widget widget, const GAPopulation &pop, GC dotgc, GC bestgc)
 {
 	static int npts = 0;
-	static XPoint *pts = 0;
+	static XPoint *pts = nullptr;
 
 	if (npts != pop.size())
 	{
@@ -501,7 +501,7 @@ void DrawPopulation(Widget widget, const GAPopulation &pop, GC dotgc, GC bestgc)
 	h -= d;
 	Dimension originx = BUF + w / 2;
 	Dimension originy = BUF + h / 2;
-	float factor = (float)d;
+	auto factor = (float)d;
 	factor /= (maxx[theAppData.whichFunction] - minx[theAppData.whichFunction]);
 	int xbest = 0, ybest = 0;
 	if (theAppData.whichGenome == 1)
@@ -559,14 +559,14 @@ void DrawPopulation(Widget widget, const GAPopulation &pop, GC dotgc, GC bestgc)
 // appropriate function.
 float Bin2DecObjective(GAGenome &g)
 {
-	GABin2DecGenome &genome = (GABin2DecGenome &)g;
+	auto &genome = (GABin2DecGenome &)g;
 	return (obj[theAppData.whichFunction])(genome.phenotype(0),
 										   genome.phenotype(1));
 }
 
 float RealObjective(GAGenome &g)
 {
-	GARealGenome &genome = (GARealGenome &)g;
+	auto &genome = (GARealGenome &)g;
 	return (obj[theAppData.whichFunction])(genome.gene(0), genome.gene(1));
 }
 
@@ -773,7 +773,7 @@ Widget ConstructWidgets(Widget toplevel)
 
 void ExposureEH(Widget w, XtPointer cd, XEvent *, Boolean *)
 {
-	DrawCB(w, cd, 0);
+	DrawCB(w, cd, nullptr);
 }
 
 Widget ConstructWidgets(Widget toplevel)
@@ -830,7 +830,7 @@ Widget ConstructWidgets(Widget toplevel)
 
 	Widget quit =
 		XtVaCreateManagedWidget("quit", commandWidgetClass, ctrlbox, NULL);
-	XtAddCallback(quit, XtNcallback, QuitCB, (XtPointer)0);
+	XtAddCallback(quit, XtNcallback, QuitCB, (XtPointer)nullptr);
 
 	XtGCMask gcvalmask = GCFunction | GCForeground;
 	XGCValues gcval;

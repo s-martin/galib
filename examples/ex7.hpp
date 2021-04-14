@@ -11,8 +11,8 @@
 // user data.
 float objectiveEx7(GAGenome& c)
 {
-	GA2DBinaryStringGenome& genome = (GA2DBinaryStringGenome&)c;
-	GA2DBinaryStringGenome* pattern = (GA2DBinaryStringGenome*)c.userData();
+	auto& genome = (GA2DBinaryStringGenome&)c;
+	auto* pattern = (GA2DBinaryStringGenome*)c.userData();
 
 	float value = 0.0;
 	for (int i = 0; i < genome.width(); i++)

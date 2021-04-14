@@ -64,7 +64,7 @@ main(int argc, char** argv) {
 // a bit string of arbitrary length.
 float
 Objective(GAGenome& g) {
-  GA1DBinaryStringGenome & genome = (GA1DBinaryStringGenome &)g;
+  auto & genome = (GA1DBinaryStringGenome &)g;
   float score=0.0;
   for(int i=0; i<genome.length(); i++)
     score += genome.gene(i);

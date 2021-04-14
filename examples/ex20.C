@@ -61,7 +61,7 @@ int highestLevel=0;
 
 float
 RoyalRoad(GAGenome & c){
-  GA1DBinaryStringGenome & genome = (GA1DBinaryStringGenome &)c;
+  auto & genome = (GA1DBinaryStringGenome &)c;
 
   float score = 0.0;
   int total, i, j, index, n;

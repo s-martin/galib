@@ -43,12 +43,12 @@ class CompositeGenome : public GAGenome
 					GAGenome::Evaluator f = nullptr, void *u = nullptr);
 	CompositeGenome(const CompositeGenome &orig);
 	CompositeGenome &operator=(const GAGenome &g);
-	virtual ~CompositeGenome();
-	virtual GAGenome *clone(GAGenome::CloneMethod) const;
-	virtual void copy(const GAGenome &c);
-	virtual bool equal(const GAGenome &g) const;
-	virtual int read(std::istream &is);
-	virtual int write(std::ostream &os) const;
+	~CompositeGenome() override;
+	GAGenome *clone(GAGenome::CloneMethod) const override;
+	void copy(const GAGenome &c) override;
+	bool equal(const GAGenome &g) const override;
+	int read(std::istream &is) override;
+	int write(std::ostream &os) const override;
 
 	GA2DBinaryStringGenome &binstr() const { return *str; }
 	GABin2DecGenome &bin2dec() const { return *b2d; }
@@ -99,7 +99,7 @@ void CompositeGenome::copy(const GAGenome &c)
 	if (&c != this && sameClass(c))
 	{
 		GAGenome::copy(c);
-		CompositeGenome &bc = (CompositeGenome &)c;
+		auto &bc = (CompositeGenome &)c;
 		str->copy(*(bc.str));
 		b2d->copy(*(bc.b2d));
 	}
@@ -107,7 +107,7 @@ void CompositeGenome::copy(const GAGenome &c)
 
 bool CompositeGenome::equal(const GAGenome &g) const
 {
-	CompositeGenome &genome = (CompositeGenome &)g;
+	auto &genome = (CompositeGenome &)g;
 	return ((*str == *genome.str) && (*b2d == *genome.b2d));
 }
 
@@ -142,7 +142,7 @@ int CompositeGenome::write(std::ostream &os) const
 // get the encapsulation properly.
 void CompositeGenome::CompositeInitializer(GAGenome &c)
 {
-	CompositeGenome &child = (CompositeGenome &)c;
+	auto &child = (CompositeGenome &)c;
 	child.binstr().initialize();
 	child.bin2dec().initialize();
 	child._evaluated = false;
@@ -151,7 +151,7 @@ void CompositeGenome::CompositeInitializer(GAGenome &c)
 // The mutator just calls the mutator for each of the component genomes.
 int CompositeGenome::CompositeMutator(GAGenome &c, float pmut)
 {
-	CompositeGenome &child = (CompositeGenome &)c;
+	auto &child = (CompositeGenome &)c;
 	int nmut = child.binstr().mutate(pmut) + child.bin2dec().mutate(pmut);
 	if (nmut)
 		child._evaluated = false;
@@ -162,8 +162,8 @@ int CompositeGenome::CompositeMutator(GAGenome &c, float pmut)
 // then averages the score.
 float CompositeGenome::CompositeComparator(const GAGenome &a, const GAGenome &b)
 {
-	CompositeGenome &sis = (CompositeGenome &)a;
-	CompositeGenome &bro = (CompositeGenome &)b;
+	auto &sis = (CompositeGenome &)a;
+	auto &bro = (CompositeGenome &)b;
 	return 0.5 * (sis.binstr().compare(bro) + sis.bin2dec().compare(bro));
 }
 
@@ -173,8 +173,8 @@ float CompositeGenome::CompositeComparator(const GAGenome &a, const GAGenome &b)
 int CompositeGenome::CompositeCrossover(const GAGenome &a, const GAGenome &b,
 										GAGenome *c, GAGenome *d)
 {
-	CompositeGenome &mom = (CompositeGenome &)a;
-	CompositeGenome &dad = (CompositeGenome &)b;
+	auto &mom = (CompositeGenome &)a;
+	auto &dad = (CompositeGenome &)b;
 	int n = 0;
 
 	GAGenome::SexualCrossover strcross = mom.str->sexual();
@@ -182,8 +182,8 @@ int CompositeGenome::CompositeCrossover(const GAGenome &a, const GAGenome &b,
 
 	if (c && d)
 	{
-		CompositeGenome &sis = (CompositeGenome &)*c;
-		CompositeGenome &bro = (CompositeGenome &)*d;
+		auto &sis = (CompositeGenome &)*c;
+		auto &bro = (CompositeGenome &)*d;
 		(*strcross)(mom.binstr(), dad.binstr(), &sis.binstr(), &bro.binstr());
 		(*b2dcross)(mom.bin2dec(), dad.bin2dec(), &sis.bin2dec(),
 					&bro.bin2dec());
@@ -193,17 +193,17 @@ int CompositeGenome::CompositeCrossover(const GAGenome &a, const GAGenome &b,
 	}
 	else if (c)
 	{
-		CompositeGenome &sis = (CompositeGenome &)*c;
-		(*strcross)(mom.binstr(), dad.binstr(), &sis.binstr(), 0);
-		(*b2dcross)(mom.bin2dec(), dad.bin2dec(), &sis.bin2dec(), 0);
+		auto &sis = (CompositeGenome &)*c;
+		(*strcross)(mom.binstr(), dad.binstr(), &sis.binstr(), nullptr);
+		(*b2dcross)(mom.bin2dec(), dad.bin2dec(), &sis.bin2dec(), nullptr);
 		sis._evaluated = false;
 		n = 1;
 	}
 	else if (d)
 	{
-		CompositeGenome &bro = (CompositeGenome &)*d;
-		(*strcross)(mom.binstr(), dad.binstr(), 0, &bro.binstr());
-		(*b2dcross)(mom.bin2dec(), dad.bin2dec(), 0, &bro.bin2dec());
+		auto &bro = (CompositeGenome &)*d;
+		(*strcross)(mom.binstr(), dad.binstr(), nullptr, &bro.binstr());
+		(*b2dcross)(mom.bin2dec(), dad.bin2dec(), nullptr, &bro.bin2dec());
 		bro._evaluated = false;
 		n = 1;
 	}
@@ -224,7 +224,7 @@ typedef struct _CompositeData
 // genome.  The overall score is the sum of both parts.
 float Objective(GAGenome &g)
 {
-	CompositeGenome &genome = (CompositeGenome &)g;
+	auto &genome = (CompositeGenome &)g;
 	GA2DBinaryStringGenome &str = genome.binstr();
 	GABin2DecGenome &b2d = genome.bin2dec();
 
@@ -343,7 +343,7 @@ int main(int argc, char *argv[])
 	infile >> height;
 	infile >> width;
 
-	short **target = new short *[width];
+	auto **target = new short *[width];
 	for (int i = 0; i < width; i++)
 		target[i] = new short[height];
 
@@ -367,7 +367,7 @@ int main(int argc, char *argv[])
 
 	int n;
 	infile >> n;
-	float *sequence = new float[n];
+	auto *sequence = new float[n];
 	for (int i = 0; i < n; i++)
 		infile >> sequence[i];
 	infile.close();

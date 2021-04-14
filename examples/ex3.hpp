@@ -12,8 +12,8 @@
 // then we add 1 to the score.  If the bits do not match, we don't do anything.
 float objectiveEx3(GAGenome& c)
 {
-	GA2DBinaryStringGenome& genome = (GA2DBinaryStringGenome&)c;
-	short** pattern = (short**)c.userData();
+	auto& genome = (GA2DBinaryStringGenome&)c;
+	auto** pattern = (short**)c.userData();
 
 	float value = 0.0;
 	for (int i = 0; i < genome.width(); i++)
@@ -37,7 +37,7 @@ GASimpleGA ex3(const std::shared_ptr<GAParameterList>& params, const std::string
 	int height, width;
 	inStream >> height >> width;
 
-	short** target = new short* [width];
+	auto** target = new short* [width];
 	for (int i = 0; i < width; i++)
 		target[i] = new short[height];
 

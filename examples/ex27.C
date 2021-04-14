@@ -41,8 +41,8 @@ class DCrowdingGA : public GASteadyStateGA {
 public:
   GADefineIdentity("DeterministicCrowdingGA", 241);
   DCrowdingGA(const GAGenome& g, const std::shared_ptr<GAParameterList>& params) : GASteadyStateGA(g, params) {}
-  virtual ~DCrowdingGA() {}
-  virtual void step();
+  ~DCrowdingGA() override = default;
+  void step() override;
   DCrowdingGA & operator++() { step(); return *this; }
 };
 
@@ -71,7 +71,7 @@ DCrowdingGA::step() {
     delete ip;
     //create child
     stats.numsel += 2;		
-    stats.numcro += (*(mom->sexual()))(*mom, *dad, &tmpPop->individual(0), 0);
+    stats.numcro += (*(mom->sexual()))(*mom, *dad, &tmpPop->individual(0), nullptr);
     stats.nummut += tmpPop->individual(0).mutate(pMutation());
     stats.numeval += 1;	
     //replace closest parent
@@ -117,7 +117,7 @@ DCrowdingGA::step() {
 
 
 // Set up the various 2-dimensional, real number functions that we will use.
-typedef float (*Function)(float, float);
+using Function = float (*)(float, float);
 
 float Function1(float, float);
 float Function2(float, float);
@@ -319,20 +319,20 @@ Function4(float x, float y) {
 // These are the operators that we'll use for the real number genome.
 float
 Objective(GAGenome& g) {
-  GA1DArrayGenome<float>& genome = (GA1DArrayGenome<float>&)g;
+  auto& genome = (GA1DArrayGenome<float>&)g;
   return (obj[which])(genome.gene(0), genome.gene(1));
 }
 
 void
 Initializer(GAGenome& g) {
-  GA1DArrayGenome<float>& genome = (GA1DArrayGenome<float>&)g;
+  auto& genome = (GA1DArrayGenome<float>&)g;
   genome.gene(0, GARandomFloat(minx[which], maxx[which]));
   genome.gene(1, GARandomFloat(miny[which], maxy[which]));
 }
 
 int
 Mutator(GAGenome& g, float pmut) {
-  GA1DArrayGenome<float>& genome = (GA1DArrayGenome<float>&)g;
+  auto& genome = (GA1DArrayGenome<float>&)g;
   int nmut = 0;
 
   if(GAFlipCoin(pmut)){
@@ -353,14 +353,14 @@ Mutator(GAGenome& g, float pmut) {
 
 int
 Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2){
-  GA1DArrayGenome<float>& mom = (GA1DArrayGenome<float>&)g1;
-  GA1DArrayGenome<float>& dad = (GA1DArrayGenome<float>&)g2;
+  auto& mom = (GA1DArrayGenome<float>&)g1;
+  auto& dad = (GA1DArrayGenome<float>&)g2;
 
   int n = 0;
   float distance = 0.0, midpoint = 0.0;
 
   if(c1) {
-    GA1DArrayGenome<float>& sis = (GA1DArrayGenome<float>&)*c1;
+    auto& sis = (GA1DArrayGenome<float>&)*c1;
     distance = midpoint = 0.0;
 
     midpoint = (mom.gene(0) + dad.gene(0)) / 2;
@@ -379,7 +379,7 @@ Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2){
     n += 1;
   }
   if(c2) {
-    GA1DArrayGenome<float>& bro = (GA1DArrayGenome<float>&)*c2;
+    auto& bro = (GA1DArrayGenome<float>&)*c2;
     distance = midpoint = 0.0;
 
     midpoint = (mom.gene(0) + dad.gene(0)) / 2;
@@ -403,8 +403,8 @@ Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2){
 
 float
 Comparator(const GAGenome& g1, const GAGenome& g2) {
-  GA1DArrayGenome<float>& a = (GA1DArrayGenome<float>&)g1;
-  GA1DArrayGenome<float>& b = (GA1DArrayGenome<float>&)g2;
+  auto& a = (GA1DArrayGenome<float>&)g1;
+  auto& b = (GA1DArrayGenome<float>&)g2;
 
   float valx=(a.gene(0)-b.gene(0)) * (a.gene(0)-b.gene(0));
   float valy=(a.gene(1)-b.gene(1)) * (a.gene(1)-b.gene(1));

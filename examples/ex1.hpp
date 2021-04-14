@@ -16,7 +16,7 @@
 // nothing else.
 float objectiveEx1(GAGenome& g)
 {
-	GA2DBinaryStringGenome& genome = (GA2DBinaryStringGenome&)g;
+	auto& genome = (GA2DBinaryStringGenome&)g;
 	float score = 0.0;
 	int count = 0;
 	for (int i = 0; i < genome.width(); i++)

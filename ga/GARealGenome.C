@@ -145,8 +145,7 @@ GA1DArrayAlleleGenome<float>::GA1DArrayAlleleGenome(
 }
 
 template <> GA1DArrayAlleleGenome<float>::~GA1DArrayAlleleGenome()
-{
-}
+= default;
 
 // The read specialization takes in each number and stuffs it into the array.
 template <> int GA1DArrayAlleleGenome<float>::read(std::istream &is)

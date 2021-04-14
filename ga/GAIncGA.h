@@ -38,7 +38,7 @@ class GAIncrementalGA : public GAGeneticAlgorithm {
 public:
   GADefineIdentity("GAIncrementalGA", GAID::IncrementalGA);
 
-  typedef GAGenome & (*ReplacementFunction)(GAGenome&, GAPopulation&);
+  using ReplacementFunction = GAGenome &(*)(GAGenome &, GAPopulation &);
 
   enum ReplacementScheme {
     RANDOM = GAPopulation::RANDOM,

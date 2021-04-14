@@ -17,8 +17,8 @@
 // the value in the sequence.
 float objectiveEx2(GAGenome &g)
 {
-	GABin2DecGenome &genome = (GABin2DecGenome &)g;
-	float *sequence = (float *)g.userData();
+	auto &genome = (GABin2DecGenome &)g;
+	auto *sequence = (float *)g.userData();
 
 	float value = genome.nPhenotypes();
 	for (int i = 0; i < genome.nPhenotypes(); i++)

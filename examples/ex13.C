@@ -197,8 +197,8 @@ main(int argc, char *argv[])
 float
 PictureObjective(GAGenome & c)
 {
-  GA2DBinaryStringGenome & genome = (GA2DBinaryStringGenome &)c;
-  UserData * data = (UserData *)c.userData();
+  auto & genome = (GA2DBinaryStringGenome &)c;
+  auto * data = (UserData *)c.userData();
 
   float value=0.0;
   for(int i=0; i<genome.width(); i++)
@@ -210,7 +210,7 @@ PictureObjective(GAGenome & c)
   // if we get at least 95% of the pixels right, then run the secondary ga.
 
   if(correct > 0.95) {
-    GABin2DecGenome& num_genome = (GABin2DecGenome&)(*data->numbers_genome);
+    auto& num_genome = (GABin2DecGenome&)(*data->numbers_genome);
 	auto params = std::make_shared<GAParameterList>();
 	params->set(gaNpopulationSize, 550);
 	params->set(gaNnGenerations, 50);
@@ -231,8 +231,8 @@ PictureObjective(GAGenome & c)
 float
 NumbersObjective(GAGenome & c)
 {
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
-  UserData * data = (UserData *)c.userData();
+  auto & genome = (GABin2DecGenome &)c;
+  auto * data = (UserData *)c.userData();
 
   float value=genome.nPhenotypes();
   for(int i=0; i<genome.nPhenotypes(); i++)

@@ -93,7 +93,7 @@ order.
 float
 objective(GAGenome & c)
 {
-  GAStringGenome & genome = (GAStringGenome &)c;
+  auto & genome = (GAStringGenome &)c;
 
   float score = 0;
   for(int i=0; i<genome.size(); i++)
@@ -111,7 +111,7 @@ elements.  Once we have assigned all the values, we randomize the string.
 void
 AlphabetInitializer(GAGenome & c)
 {
-  GAStringGenome &genome=(GAStringGenome &)c;
+  auto &genome=(GAStringGenome &)c;
   int i;
   for(i=0; i<genome.size(); i++)
     genome.gene(25-i, 'a'+i);

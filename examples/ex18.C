@@ -125,7 +125,7 @@ main(int argc, char *argv[])
   int height, width;
   inStream >> height >> width;
 
-  short **target = new short*[width];
+  auto **target = new short*[width];
   for(i=0; i<width; i++)
     target[i] = new short[height];
 
@@ -202,8 +202,8 @@ main(int argc, char *argv[])
 float
 objective(GAGenome & c)
 {
-  GA2DBinaryStringGenome & genome = (GA2DBinaryStringGenome &)c;
-  short **pattern = (short **)c.userData();
+  auto & genome = (GA2DBinaryStringGenome &)c;
+  auto **pattern = (short **)c.userData();
 
   float value=0.0;
   for(int i=0; i<genome.width(); i++)

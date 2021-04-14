@@ -12,7 +12,7 @@
 //
 float objectiveEx9(GAGenome& c)
 {
-	GABin2DecGenome& genome = (GABin2DecGenome&)c;
+	auto& genome = (GABin2DecGenome&)c;
 
 	float y;
 	y = -genome.phenotype(0) * genome.phenotype(0);

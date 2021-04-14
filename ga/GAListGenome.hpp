@@ -133,7 +133,7 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 		{
 			auto sptr = siter.next();
 			auto bptr = biter.next();
-			if (sptr != 0 && bptr != 0)
+			if (sptr != nullptr && bptr != nullptr)
 				count += ((*sptr == *bptr) ? 0 : 1);
 		}
 		return count;
@@ -556,12 +556,12 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 		return *this;
 	}
 
-	~GAListGenome() {}
+	~GAListGenome() override = default;
 
 	GAGenome *
 	clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override
 	{
-		GAListGenome<T> *cpy = new GAListGenome<T>();
+		auto *cpy = new GAListGenome<T>();
 		if (flag == CloneMethod::CONTENTS)
 		{
 			cpy->copy(*this);

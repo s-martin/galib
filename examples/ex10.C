@@ -199,7 +199,7 @@ main(int argc, char **argv)
 // peaks of equal amplitude.  The second is modulated.
 float
 Objective(GAGenome & c){
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
+  auto & genome = (GABin2DecGenome &)c;
   return FUNCTION (genome.phenotype(0));
 }
 
@@ -235,8 +235,8 @@ Function2(float v) {
 
 float
 BitDistance(const GAGenome & c1, const GAGenome & c2){
-  GABin2DecGenome & a = (GABin2DecGenome &)c1;
-  GABin2DecGenome & b = (GABin2DecGenome &)c2;
+  auto & a = (GABin2DecGenome &)c1;
+  auto & b = (GABin2DecGenome &)c2;
 
   float x=0;
   for(int i=a.length()-1; i>=0; i--)
@@ -252,8 +252,8 @@ BitDistance(const GAGenome & c1, const GAGenome & c2){
 
 float
 PhenotypeDistance(const GAGenome & c1, const GAGenome & c2){
-  GABin2DecGenome & a = (GABin2DecGenome &)c1;
-  GABin2DecGenome & b = (GABin2DecGenome &)c2;
+  auto & a = (GABin2DecGenome &)c1;
+  auto & b = (GABin2DecGenome &)c2;
 
   return fabs(a.phenotype(0) - b.phenotype(0)) / (MAX_VALUE-MIN_VALUE);
 }
