@@ -8,9 +8,6 @@
  DESCRIPTION:
   Binary-to-decimal converters.
 ---------------------------------------------------------------------------- */
-#include <climits>
-#include <cstdio>
-#include <cstring>
 #include <gabincvt.h>
 #include <gaconfig.h>
 #include <gaerror.h>
@@ -30,19 +27,6 @@ constexpr int _GA_MAX_BITS()
 	return GALIB_BITS_IN_WORD * sizeof(GALIB_BITBASE);
 }
 
-// These are publicly available, but we don't want to advertise them.  They are
-// mostly just for testing purposes.  These are unscaled versions of the
-// converter routines.
-int GABinaryEncode(unsigned BITBASE, GABit *bits, unsigned int);
-int GABinaryDecode(float &, const GABit *bits, unsigned int);
-
-// If you write your own encoder/decoder you may want to use these to verify
-// the parameters.
-int GACheckEncoding(float &, unsigned int &, float, float, unsigned BITBASE &);
-int GACheckDecoding(unsigned int &);
-
-// This stuff is private.
-static int _GAEncodeBase(unsigned int, unsigned BITBASE, GABit *, int, int);
 
 /* ----------------------------------------------------------------------------
   Utilities to check the values for proper sizes.
@@ -51,8 +35,7 @@ int GACheckDecoding(unsigned int &nbits)
 {
 	if (static_cast<int>(nbits) >= _GA_MAX_BITS())
 	{
-		std::string errstr = "string is " + std::to_string(nbits) +
-							 ", max is " + std::to_string(_GA_MAX_BITS() - 1);
+		std::string errstr = "string is " + std::to_string(nbits) + ", max is " + std::to_string(_GA_MAX_BITS() - 1);
 
 		GAErr(GA_LOC, "GACheckDecoding", GAError::BinStrTooLong, errstr);
 		nbits = _GA_MAX_BITS() - 1;
@@ -67,8 +50,7 @@ int GACheckEncoding(float &val, unsigned int &nbits, float minval, float maxval,
 	int status = 0;
 	if (static_cast<int>(nbits) >= _GA_MAX_BITS())
 	{
-		std::string errstr = "string is " + std::to_string(nbits) +
-							 ", max is " + std::to_string(_GA_MAX_BITS() - 1);
+		std::string errstr = "string is " + std::to_string(nbits) + ", max is " + std::to_string(_GA_MAX_BITS() - 1);
 
 		GAErr(GA_LOC, "GACheckEncoding", GAError::BinStrTooLong, errstr);
 		nbits = _GA_MAX_BITS() - 1;
@@ -138,7 +120,7 @@ conversion using those bits.
 ---------------------------------------------------------------------------- */
 int GABinaryDecode(float &result, const GABit *bits, unsigned int nbits)
 {
-	if (bits == (GABit *)nullptr || nbits == 0)
+	if (bits == nullptr || nbits == 0)
 	{
 		result = 0.0;
 		return 1;

@@ -11,8 +11,7 @@ routines include encoders and decoders.  We define a standard binary encoder/
 decoder set as well as one Gray encoder/decoder.  You can define your own if
 you want a different Gray coding.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_bincvt_h_
-#define _ga_bincvt_h_
+#pragma once
 
 #include <gatypes.h>
 
@@ -26,10 +25,11 @@ you want a different Gray coding.
 using GABinaryEncoder = int (*)(float &, GABit *, unsigned int, float, float);
 using GABinaryDecoder = int (*)(float &, const GABit *, unsigned int, float, float);
 
+// These are publicly available, but we don't want to advertise them.  They are
+// mostly just for testing purposes.  These are unscaled versions of the
+// converter routines.
 int GABinaryEncode(float &, GABit *bits, unsigned int, float, float);
 int GABinaryDecode(float &, const GABit *bits, unsigned int, float, float);
 
 int GAGrayEncode(float &, GABit *bits, unsigned int, float, float);
 int GAGrayDecode(float &, const GABit *bits, unsigned int, float, float);
-
-#endif
