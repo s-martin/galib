@@ -8,6 +8,7 @@
  DESCRIPTION:
   Binary-to-decimal converters.
 ---------------------------------------------------------------------------- */
+#include <cstring>
 #include <gabincvt.h>
 #include <gaconfig.h>
 #include <gaerror.h>
