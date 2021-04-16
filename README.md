@@ -1,6 +1,6 @@
 # Modern GAlib: A (modernized) C++ Genetic Algorithm Library
 
-![](https://github.com/s-martin/galib/workflows/CI-Linux/badge.svg) ![](https://github.com/s-martin/galib/workflows/CI-Windows/badge.svg) ![](https://github.com/s-martin/galib/workflows/CodeQL/badge.svg)
+![](https://github.com/s-martin/galib/workflows/CI-Linux/badge.svg) ![](https://github.com/s-martin/galib/workflows/CI-Windows/badge.svg) ![](https://github.com/s-martin/galib/workflows/CodeQL/badge.svg) [![Codacy Security Scan](https://github.com/s-martin/galib/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codacy-analysis.yml)
 
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
