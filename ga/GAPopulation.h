@@ -67,8 +67,8 @@ class GAPopulation : public GAID
   public:
 	GADefineIdentity("GAPopulation", GAID::Population);
 
-	typedef void (*Initializer)(GAPopulation &);
-	typedef void (*Evaluator)(GAPopulation &);
+	using Initializer = void (*)(GAPopulation &);
+	using Evaluator = void (*)(GAPopulation &);
 
 	static void DefaultInitializer(GAPopulation &);
 	static void DefaultEvaluator(GAPopulation &);

@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 
 float objective(GAGenome &c)
 {
-	GA2DArrayAlleleGenome<int> &genome = (GA2DArrayAlleleGenome<int> &)c;
+	auto &genome = (GA2DArrayAlleleGenome<int> &)c;
 
 	float value = 0.0;
 	int count = 0;

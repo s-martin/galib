@@ -50,11 +50,11 @@ class GABin2DecPhenotypeCore
 
 	unsigned int cnt; // how many references to us?
 	unsigned int csz; // how big are the chunks we allocate?
-	unsigned int n, N; // how many phenotypes do we have? (real,alloc)
+	unsigned int n{0}, N{0}; // how many phenotypes do we have? (real,alloc)
 	uint16_t *nbits; // number of bits that max/min get mapped into
 	uint16_t *oset; // offset of the nth gene
 	float *minval, *maxval; // min, max value of phenotype elem
-	unsigned int sz; // total number of bits required
+	unsigned int sz{0}; // total number of bits required
 };
 
 class GABin2DecPhenotype

@@ -110,7 +110,7 @@ static char *fallbacks[] = {
 
 	"*font:		-*-helvetica-bold-r-*-*-*-140-*-*-*-*-*-*",
 
-	(char *)NULL};
+	(char *)nullptr};
 
 static XtWorkProcId procid;
 static Boolean Evolve(int);
@@ -259,8 +259,8 @@ int main(int argc, char **argv)
 	ga->initialize();
 
 	Widget toplevel =
-		XtAppInitialize(&appc, "TSPView", (XrmOptionDescRec *)NULL, 0, &argc,
-						argv, fallbacks, (ArgList)NULL, 0);
+		XtAppInitialize(&appc, "TSPView", (XrmOptionDescRec *)nullptr, 0, &argc,
+						argv, fallbacks, (ArgList)nullptr, 0);
 	Widget shell = ConstructWidgets(toplevel);
 
 	XtRealizeWidget(shell);
@@ -317,7 +317,7 @@ Boolean Evolve(int n)
 
 void ResetCB(Widget, XtPointer cd, XtPointer)
 {
-	GAGeneticAlgorithm *ga = (GAGeneticAlgorithm *)cd;
+	auto *ga = (GAGeneticAlgorithm *)cd;
 	if (procid)
 	{
 		XtRemoveWorkProc(procid);
@@ -339,13 +339,13 @@ void StopCB(Widget, XtPointer, XtPointer)
 
 void StepCB(Widget, XtPointer cd, XtPointer)
 {
-	GAGeneticAlgorithm *ga = (GAGeneticAlgorithm *)cd;
+	auto *ga = (GAGeneticAlgorithm *)cd;
 	Evolve(ga->generation() + 1);
 }
 
 void EvolveSomeCB(Widget, XtPointer cd, XtPointer)
 {
-	GAGeneticAlgorithm *ga = (GAGeneticAlgorithm *)cd;
+	auto *ga = (GAGeneticAlgorithm *)cd;
 	procid = XtAppAddWorkProc(appc, (XtWorkProc)Evolve,
 							  (XtPointer)(ga->generation() + geninc));
 }
@@ -362,7 +362,7 @@ void QuitCB(Widget, XtPointer, XtPointer) { done = 1; }
 
 void DrawCB(Widget w, XtPointer cd, XtPointer)
 {
-	GAGeneticAlgorithm *ga = (GAGeneticAlgorithm *)cd;
+	auto *ga = (GAGeneticAlgorithm *)cd;
 	XClearWindow(XtDisplay(w), XtWindow(w));
 	int nrows = (int)sqrt(1.3333333333 * ga->population().size()) + 1;
 	int ncols = ga->population().size() / nrows + 1;
@@ -379,7 +379,7 @@ void DrawCB(Widget w, XtPointer cd, XtPointer)
 	}
 }
 
-void Refresh() { DrawCB(canvas, (XtPointer)ga, 0); }
+void Refresh() { DrawCB(canvas, (XtPointer)ga, nullptr); }
 
 // draw an individual genome at the specified coordinates (in Xwindows space)
 // Draw the paths that link the towns.  We draw a complete, closed loop
@@ -387,7 +387,7 @@ void Refresh() { DrawCB(canvas, (XtPointer)ga, 0); }
 void DrawIndividual(GAGenome &g, Display *display, Drawable drawable, GC gc,
 					int xx, int yy)
 {
-	GAListGenome<int> &genome = (GAListGenome<int> &)g;
+	auto &genome = (GAListGenome<int> &)g;
 	for (int i = 0; i < genome.size() + 1; i++)
 	{
 		int sidx = *genome.current();
@@ -406,7 +406,7 @@ void DrawIndividual(GAGenome &g, Display *display, Drawable drawable, GC gc,
 // Here are the genome operators that we want to use for this problem.
 float Objective(GAGenome &g)
 {
-	GAListGenome<int> &genome = (GAListGenome<int> &)g;
+	auto &genome = (GAListGenome<int> &)g;
 	float dist = 0;
 	if (genome.head())
 	{
@@ -418,7 +418,7 @@ float Objective(GAGenome &g)
 
 void Initializer(GAGenome &g)
 {
-	GAListGenome<int> &child = (GAListGenome<int> &)g;
+	auto &child = (GAListGenome<int> &)g;
 	while (child.head())
 		child.destroy(); // destroy any pre-existing list
 
@@ -443,7 +443,7 @@ void Initializer(GAGenome &g)
 
 int Mutator(GAGenome &g, float pmut)
 {
-	GAListGenome<int> &child = (GAListGenome<int> &)g;
+	auto &child = (GAListGenome<int> &)g;
 	int n, i;
 	if ((GARandomFloat() >= pmut) || (pmut <= 0))
 		return 0;
@@ -510,9 +510,9 @@ int Crossover(const GAGenome &g1, const GAGenome &g2, GAGenome *c1,
 
 void ERXOneChild(const GAGenome &g1, const GAGenome &g2, GAGenome *c1)
 {
-	GAListGenome<int> &mate1 = (GAListGenome<int> &)g1;
-	GAListGenome<int> &mate2 = (GAListGenome<int> &)g2;
-	GAListGenome<int> &sis = (GAListGenome<int> &)*c1;
+	auto &mate1 = (GAListGenome<int> &)g1;
+	auto &mate2 = (GAListGenome<int> &)g2;
+	auto &sis = (GAListGenome<int> &)*c1;
 
 	int i, j, k, t1, t2, town;
 
@@ -618,8 +618,8 @@ void ERXOneChild(const GAGenome &g1, const GAGenome &g2, GAGenome *c1)
 
 float Comparator(const GAGenome &g1, const GAGenome &g2)
 {
-	GAListGenome<int> &a = (GAListGenome<int> &)g1;
-	GAListGenome<int> &b = (GAListGenome<int> &)g2;
+	auto &a = (GAListGenome<int> &)g1;
+	auto &b = (GAListGenome<int> &)g2;
 
 	int i, j, t1, t2;
 	float dist = ntowns;
@@ -670,7 +670,7 @@ template <> int GAListGenome<int>::write(std::ostream &os) const
 {
 	int *cur, *head;
 	GAListIter<int> iter(*this);
-	if ((head = iter.head()) != 0)
+	if ((head = iter.head()) != nullptr)
 		os << *head << " ";
 	for (cur = iter.next(); cur && cur != head; cur = iter.next())
 		os << *cur << " ";
@@ -765,7 +765,7 @@ Widget ConstructWidgets(Widget toplevel)
 
 void ExposureEH(Widget w, XtPointer cd, XEvent *, Boolean *)
 {
-	DrawCB(w, cd, 0);
+	DrawCB(w, cd, nullptr);
 }
 
 Widget ConstructWidgets(Widget toplevel)
@@ -798,7 +798,7 @@ Widget ConstructWidgets(Widget toplevel)
 
 	Widget quit =
 		XtVaCreateManagedWidget("quit", commandWidgetClass, ctrlbox, NULL);
-	XtAddCallback(quit, XtNcallback, QuitCB, (XtPointer)0);
+	XtAddCallback(quit, XtNcallback, QuitCB, (XtPointer)nullptr);
 
 	return toplevel;
 }

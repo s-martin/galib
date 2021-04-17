@@ -24,8 +24,8 @@ class Point {
 public:
   Point(float x, float y, float z) { _x = x; _y = y; _z = z; }
   Point(const Point & p) { _x = p._x; _y = p._y; _z = p._z; }
-  Point & operator=(const Point & p) { _x=p._x;_y=p._y;_z=p._z; return *this; }
-  ~Point() {}
+  Point & operator=(const Point & p) = default;
+  ~Point() = default;
 
   float x() const { return _x; }
   float y() const { return _y; }
@@ -140,7 +140,7 @@ list sizes built-in to the GA library.
 ---------------------------------------------------------------------------- */
 float
 objective(GAGenome & c) {
-  GATreeGenome<Point> & chrom = (GATreeGenome<Point> &)c;
+  auto & chrom = (GATreeGenome<Point> &)c;
   return chrom.size();
 }
 
@@ -174,7 +174,7 @@ DoChild(GATreeGenome<Point> & tree, int depth) {
 
 void
 TreeInitializer(GAGenome & c) {
-  GATreeGenome<Point> &tree=(GATreeGenome<Point> &)c;
+  auto &tree=(GATreeGenome<Point> &)c;
 
 // destroy any pre-existing tree
   tree.root();
@@ -203,7 +203,7 @@ very big.
 void 
 WriteNode( std::ostream & os, GANode<Point> * n) {
   if(!n) return;
-  GANodeBASE * node = (GANodeBASE *)n;
+  auto * node = (GANodeBASE *)n;
 
   os.width(10);
   os << ((GANode<Point> *)node)->contents << " ";

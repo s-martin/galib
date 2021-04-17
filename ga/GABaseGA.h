@@ -111,7 +111,7 @@ class GAGeneticAlgorithm : public GAID
   public:
 	GADefineIdentity("GAIncrementalGA", GAID::BaseGA);
 
-	typedef bool (*Terminator)(GAGeneticAlgorithm &ga);
+	using Terminator = bool (*)(GAGeneticAlgorithm &);
 
 	enum
 	{

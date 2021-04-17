@@ -280,13 +280,12 @@ template <class T> class GATreeGenome : public GATree<T>, public GAGenome
 		copy(orig);
 		return *this;
 	}
-	//~GATreeGenome() override;
-	~GATreeGenome(){};
+	~GATreeGenome() override = default;
 
 	GAGenome *
 	clone(GAGenome::CloneMethod flag = CloneMethod::CONTENTS) const override
 	{
-		GATreeGenome<T> *cpy = new GATreeGenome<T>();
+		auto *cpy = new GATreeGenome<T>();
 		if (flag == CloneMethod::CONTENTS)
 		{
 			cpy->copy(*this);

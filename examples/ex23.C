@@ -19,7 +19,7 @@ minimize your objective functions.
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
 
-#define MIN_VALUE -2
+#define MIN_VALUE (-2)
 #define MAX_VALUE 2
 #define INC       0.005
 
@@ -107,7 +107,7 @@ main(int argc, char** argv)
 // This objective function returns the sin of the value in the genome.
 float
 Objective(GAGenome& g){
-  GARealGenome& genome = (GARealGenome &)g;
+  auto& genome = (GARealGenome &)g;
   return 1 + sin(genome.gene(0)*2*M_PI);
 }
 
@@ -116,7 +116,7 @@ Objective(GAGenome& g){
 // completely different (maximum diversity).
 float
 Comparator(const GAGenome& g1, const GAGenome& g2) {
-  GARealGenome& a = (GARealGenome &)g1;
-  GARealGenome& b = (GARealGenome &)g2;
+  auto& a = (GARealGenome &)g1;
+  auto& b = (GARealGenome &)g2;
   return exp( -(a.gene(0) - b.gene(0)) * (a.gene(0) - b.gene(0)) / 1000.0);
 }

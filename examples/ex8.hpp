@@ -22,7 +22,7 @@ functions return a pointer to the node's contents, not the actual contents.
 ---------------------------------------------------------------------------- */
 float objectiveEx8(GAGenome &c)
 {
-	GAListGenome<int> &genome = (GAListGenome<int> &)c;
+	auto &genome = (GAListGenome<int> &)c;
 	int count = 0;
 	if (!genome.head())
 		return 0;
@@ -43,7 +43,7 @@ cleaned up before it tries to initialize it.
 ---------------------------------------------------------------------------- */
 void ListInitializer(GAGenome &c)
 {
-	GAListGenome<int> &child = (GAListGenome<int> &)c;
+	auto &child = (GAListGenome<int> &)c;
 
 	while (child.head())
 		child.destroy(); // destroy any pre-existing list
@@ -69,7 +69,7 @@ template <> int GAListGenome<int>::write(std::ostream &os) const
 {
 	int *cur, *head;
 	GAListIter<int> tmpiter(*this);
-	if ((head = tmpiter.head()) != NULL)
+	if ((head = tmpiter.head()) != nullptr)
 		os << *head << " ";
 	for (cur = tmpiter.next(); cur && cur != head; cur = tmpiter.next())
 		os << *cur << " ";

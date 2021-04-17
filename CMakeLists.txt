@@ -41,6 +41,10 @@ if(NOT MSVC)
 	find_package(X11 REQUIRED)
 endif()
 
+if(NOT MSVC) 
+	set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+endif()
+
 enable_testing()
 include(CTest)
 
