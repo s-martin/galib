@@ -1228,9 +1228,9 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
   public:
 	GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<T> &s,
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
-		: GA1DArrayGenome<T>(length, f, u)
-	{
-		aset = std::vector<GAAlleleSet<T>>(1);
+		: GA1DArrayGenome<T>(length, f, u),
+		aset(std::vector<GAAlleleSet<T>>(1))
+	{		
 		aset.at(0) = s;
 
 		this->initializer(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
@@ -1239,11 +1239,10 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		this->crossover(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_CROSSOVER);
 	}
 
-	GA1DArrayAlleleGenome(const GAAlleleSetArray<T> &sa,
-						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
-		: GA1DArrayGenome<T>(sa.size(), f, u)
+	GA1DArrayAlleleGenome(const GAAlleleSetArray<T> &sa, GAGenome::Evaluator f = nullptr, void *u = nullptr)
+		: GA1DArrayGenome<T>(sa.size(), f, u),
+		aset(std::vector<GAAlleleSet<T>>(sa.size()))
 	{
-		aset = std::vector<GAAlleleSet<T>>(sa.size());
 		for (int i = 0; i < size(); i++)
 			aset.at(i) = sa.set(i);
 

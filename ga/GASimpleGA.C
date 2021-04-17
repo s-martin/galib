@@ -172,7 +172,7 @@ void GASimpleGA::initialize(unsigned int seed)
 // population.
 void GASimpleGA::step()
 {
-	int i, mut, c1, c2;
+	int i, mut, c1;
 	GAGenome *mom, *dad; // tmp holders for selected genomes
 
 	GAPopulation *tmppop; // Swap the old population with the new pop.
@@ -189,7 +189,8 @@ void GASimpleGA::step()
 		dad = &(oldPop->select());
 		stats.numsel += 2; // keep track of number of selections
 
-		c1 = c2 = 0;
+		c1 = 0;
+		int c2 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
 			stats.numcro += (*scross)(*mom, *dad, &pop->individual(i),

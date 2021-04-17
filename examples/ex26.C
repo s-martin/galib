@@ -272,9 +272,9 @@ ERXOneChild(const GAGenome& g1, const GAGenome& g2, GAGenome* c1) {
   }
   
   // select the following town with the minimal no of next folling towns
-  int nPoss,nFollow;
+  int nFollow;
   for(i=1; i<ntowns; i++) {           
-    nPoss = 0;
+    int nPoss = 0;
     for(j=0; j<ntowns; j++) {          // no of poss. following towns
       if (CM[j][town]) {
 	nPoss += 1;
@@ -319,8 +319,13 @@ PMXover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1, GAGenome* c2) {
 
   int a = GARandomInt(0, mom.size());
   int b = GARandomInt(0, dad.size());
-  int h;
-  if (b<a) { h=a; a=b; b=h; }
+
+  if (b < a) 
+  { 
+      int h=a; 
+      a=b; 
+      b=h; 
+  }
 
   int* index;
   int i,j,nc=0;

@@ -318,7 +318,7 @@ void GASteadyStateGA::initialize(unsigned int seed)
 // replaced regardless of its better score.
 void GASteadyStateGA::step()
 {
-	int i, mut, c1, c2;
+	int i, mut, c1;
 	GAGenome *mom, *dad; // tmp holders for selected genomes
 
 	// Generate the individuals in the temporary population from individuals in
@@ -330,7 +330,8 @@ void GASteadyStateGA::step()
 		dad = &(pop->select());
 		stats.numsel += 2; // keep track of number of selections
 
-		c1 = c2 = 0;
+		c1 = 0;
+		int c2 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
 			stats.numcro += (*scross)(*mom, *dad, &tmpPop->individual(i),
