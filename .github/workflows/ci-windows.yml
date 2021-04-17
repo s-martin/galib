@@ -19,4 +19,5 @@ jobs:
     - name: make
       run: cmake --build ./build
     - name: run unit tests
-      run: ./build/test/Debug/GAlibTest.exe
+      working-directory: ./build
+      run: ./test/Debug/GAlibTest.exe
