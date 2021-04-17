@@ -167,7 +167,7 @@ main(int argc, char *argv[])
 float
 DeJong1(GAGenome & c)
 {
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
+  auto & genome = (GABin2DecGenome &)c;
   float value=0;
   value += genome.phenotype(0) * genome.phenotype(0);
   value += genome.phenotype(1) * genome.phenotype(1);
@@ -185,7 +185,7 @@ DeJong1(GAGenome & c)
 float
 DeJong2(GAGenome & c)
 {
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
+  auto & genome = (GABin2DecGenome &)c;
   float value=100.0;
   value *= genome.phenotype(0) * genome.phenotype(0) - genome.phenotype(1);
   value *= genome.phenotype(0) * genome.phenotype(0) - genome.phenotype(1);
@@ -205,7 +205,7 @@ DeJong2(GAGenome & c)
 float
 DeJong3(GAGenome & c)
 {
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
+  auto & genome = (GABin2DecGenome &)c;
   float value=25.0;
   value -= floor(genome.phenotype(0));
   value -= floor(genome.phenotype(1));
@@ -231,7 +231,7 @@ DeJong3(GAGenome & c)
 float
 DeJong4(GAGenome & c)
 {
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
+  auto & genome = (GABin2DecGenome &)c;
   float value = 0;
   for(int i=0; i<30; i++){
     float v = genome.phenotype(i);
@@ -274,7 +274,7 @@ static int a[2][25] ={
 float
 DeJong5(GAGenome & c)
 {
-  GABin2DecGenome & genome = (GABin2DecGenome &)c;
+  auto & genome = (GABin2DecGenome &)c;
 
   float lowtot,prod,total=0.002;
 

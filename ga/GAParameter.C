@@ -214,10 +214,9 @@ bool GAParameterList::add(const std::string &fn, const std::string &sn,
 //   If there is an error, return 1, otherwise return 0.
 bool GAParameterList::write(std::ostream &os) const
 {
-	for (auto it = this->begin(); it != this->end(); ++it)
+	for (auto p : *this)
 	{
-		auto p = *it;
-		int ival;
+			int ival;
 		float fval;
 		double dval;
 		char cval;

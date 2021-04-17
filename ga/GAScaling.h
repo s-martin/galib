@@ -68,7 +68,7 @@ class GANoScaling : public GAScalingScheme
   public:
 	GADefineIdentity("GANoScaling", GAID::NoScaling);
 
-	GANoScaling() {}
+	GANoScaling() = default;
 	GANoScaling(const GANoScaling &) {}
 	GANoScaling &operator=(const GAScalingScheme &) { return *this; }
 	~GANoScaling() override = default;

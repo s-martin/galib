@@ -52,8 +52,7 @@ GA1DArrayAlleleGenome<char>::GA1DArrayAlleleGenome(
 }
 
 template <> GA1DArrayAlleleGenome<char>::~GA1DArrayAlleleGenome()
-{
-}
+= default;
 
 // The read specialization takes in each character whether it is whitespace or
 // not and stuffs it into the genome.  This is unlike the default array read.

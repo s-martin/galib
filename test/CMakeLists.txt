@@ -6,6 +6,8 @@ add_executable("${PROJECT_NAME}Test"
         "main.cpp"
 		"GAArrayTest.cpp"
 		"GAMaskTest.cpp"
+        "GAExamplesTest.cpp"
+		"GARandTest.cpp"
 		"GAListTest.cpp"
         "GAExamplesTest.cpp")
 

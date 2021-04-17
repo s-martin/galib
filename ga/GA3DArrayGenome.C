@@ -53,7 +53,7 @@ GA3DArrayGenome<T>::GA3DArrayGenome(const GA3DArrayGenome<T> &orig)
 	GA3DArrayGenome<T>::copy(orig);
 }
 
-template <class T> GA3DArrayGenome<T>::~GA3DArrayGenome() {}
+template <class T> GA3DArrayGenome<T>::~GA3DArrayGenome() = default;
 
 template <class T> void GA3DArrayGenome<T>::copy(const GAGenome &orig)
 {
@@ -79,7 +79,7 @@ template <class T> void GA3DArrayGenome<T>::copy(const GAGenome &orig)
 template <class T>
 GAGenome *GA3DArrayGenome<T>::clone(GAGenome::CloneMethod flag) const
 {
-	GA3DArrayGenome<T> *cpy = new GA3DArrayGenome<T>(nx, ny, nz);
+	auto *cpy = new GA3DArrayGenome<T>(nx, ny, nz);
 	if (flag == CloneMethod::CONTENTS)
 	{
 		cpy->copy(*this);
@@ -330,7 +330,7 @@ template <class T> bool GA3DArrayGenome<T>::equal(const GAGenome &c) const
 {
 	if (this == &c)
 		return true;
-	GA3DArrayGenome<T> &b = (GA3DArrayGenome<T> &)c;
+	auto &b = (GA3DArrayGenome<T> &)c;
 	if (nx != b.nx || ny != b.ny || nz != b.nz)
 		return false;
 	bool val = false;
@@ -395,8 +395,7 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(
 }
 
 template <class T> GA3DArrayAlleleGenome<T>::~GA3DArrayAlleleGenome()
-{
-}
+= default;
 
 template <class T>
 GAGenome *GA3DArrayAlleleGenome<T>::clone(GAGenome::CloneMethod) const

@@ -169,7 +169,7 @@ main(int argc, char** argv)
 float
 Objective1(GAGenome& g)
 {
-  GARealGenome& genome = (GARealGenome&)g;
+  auto& genome = (GARealGenome&)g;
   float value=0.0;
   for(int i=0; i<genome.length(); i++){
     if(i%2 == 0 && genome.gene(i) == genome.alleleset().allele(0))
@@ -189,7 +189,7 @@ Objective1(GAGenome& g)
 float
 Objective2(GAGenome& g)
 {
-  GARealGenome& genome = (GARealGenome&)g;
+  auto& genome = (GARealGenome&)g;
   float value=0.0;
   for(int i=1; i<genome.length(); i++)
     if(genome.gene(i) < genome.gene(i-1)) value += 1.0;
@@ -203,7 +203,7 @@ Objective2(GAGenome& g)
 float
 Objective3(GAGenome& g)
 {
-  GARealGenome& genome = (GARealGenome&)g;
+  auto& genome = (GARealGenome&)g;
   float value=0.0;
   for(int i=1; i<genome.length(); i++)
     if(genome.gene(i) > genome.gene(i-1)) value += 1.0;
@@ -216,7 +216,7 @@ Objective3(GAGenome& g)
 float
 Objective4(GAGenome& g)
 {
-  GARealGenome& genome = (GARealGenome&)g;
+  auto& genome = (GARealGenome&)g;
   float value=0.0;
   for(int i=0; i<genome.length(); i++)
     value += genome.gene(i);

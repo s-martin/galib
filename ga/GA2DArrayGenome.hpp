@@ -492,7 +492,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
 				gene(i, j, *(array + j * nx + i));
 		return *this;
 	}
-	~GA2DArrayGenome() override{};
+	~GA2DArrayGenome() override= default;;
 
 	void copy(const GAGenome &orig) override
 	{
@@ -536,7 +536,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
 
 	GAGenome *clone(GAGenome::CloneMethod flag) const override
 	{
-		GA2DArrayGenome<T> *cpy = new GA2DArrayGenome<T>(nx, ny);
+		auto *cpy = new GA2DArrayGenome<T>(nx, ny);
 		if (flag == CloneMethod::CONTENTS)
 		{
 			cpy->copy(*this);
@@ -628,7 +628,7 @@ template <class T> class GA2DArrayGenome : public GAArray<T>, public GAGenome
 	{
 		if (this == &c)
 			return true;
-		GA2DArrayGenome<T> &b = (GA2DArrayGenome<T> &)c;
+		auto &b = (GA2DArrayGenome<T> &)c;
 		if (nx != b.nx || ny != b.ny)
 			return false;
 		bool val = false;
@@ -831,7 +831,7 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 		GA2DArrayAlleleGenome<T>::copy(orig);
 	}
 
-	~GA2DArrayAlleleGenome() { }
+	~GA2DArrayAlleleGenome() override = default;
 
 	GA2DArrayAlleleGenome<T> &operator=(const GAGenome &orig)
 	{

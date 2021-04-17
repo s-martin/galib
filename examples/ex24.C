@@ -23,7 +23,7 @@ example).
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
 
-#define MIN_VALUE -2
+#define MIN_VALUE (-2)
 #define MAX_VALUE 2
 #define INC       0.005
 
@@ -45,12 +45,12 @@ class FinickySelector : public GASelectionScheme {
 public:
   GADefineIdentity("FinickySelector", 273);
   FinickySelector(int w=GASelectionScheme::SCALED) : GASelectionScheme(w) { }
-  FinickySelector(const FinickySelector& orig) { copy(orig); }
+  FinickySelector(const FinickySelector& orig)  : GASelectionScheme(orig) { copy(orig); }
   FinickySelector& operator=(const FinickySelector& orig) 
     { if(&orig != this) copy(orig); return *this; }
-  virtual ~FinickySelector() { }
-  virtual GASelectionScheme* clone() const { return new FinickySelector; }
-  virtual GAGenome& select() const;
+  ~FinickySelector() override = default;
+  GASelectionScheme* clone() const override { return new FinickySelector; }
+  GAGenome& select() const override;
 };
 
 GAGenome&
@@ -69,8 +69,8 @@ class RestrictedMatingGA : public GASteadyStateGA {
 public:
   GADefineIdentity("RestrictedMatingGA", 288);
   RestrictedMatingGA(const GAGenome& g) : GASteadyStateGA(g) {}
-  virtual ~RestrictedMatingGA() {}
-  virtual void step();
+  ~RestrictedMatingGA() override = default;
+  void step() override;
   RestrictedMatingGA & operator++() { step(); return *this; }
 };
 
@@ -116,7 +116,7 @@ RestrictedMatingGA::step()
     stats.numsel += 2;		// keep track of number of selections
     if(GAFlipCoin(pCrossover())){
       stats.numcro += (*scross)(*mom, *dad,
-				&tmpPop->individual(i), (GAGenome*)0);
+				&tmpPop->individual(i), nullptr);
     }
     else{
       if(GARandomBit()) tmpPop->individual( i ).copy(*mom);
@@ -219,7 +219,7 @@ main(int argc, char** argv)
 // This objective function returns the sin of the value in the genome.
 float
 Objective(GAGenome& g){
-  GARealGenome& genome = (GARealGenome &)g;
+  auto& genome = (GARealGenome &)g;
   return 1 + sin(genome.gene(0)*2*M_PI);
 }
 
@@ -228,7 +228,7 @@ Objective(GAGenome& g){
 // completely different (maximum diversity).
 float
 Comparator(const GAGenome& g1, const GAGenome& g2) {
-  GARealGenome& a = (GARealGenome &)g1;
-  GARealGenome& b = (GARealGenome &)g2;
+  auto& a = (GARealGenome &)g1;
+  auto& b = (GARealGenome &)g2;
   return exp( -(a.gene(0) - b.gene(0)) * (a.gene(0) - b.gene(0)) / 100.0);
 }

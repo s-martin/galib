@@ -198,13 +198,12 @@ class GAGenome : public GAID
 	GADefineIdentity("GAGenome", GAID::Genome);
 
   public:
-	typedef float (*Evaluator)(GAGenome &);
-	typedef void (*Initializer)(GAGenome &);
-	typedef int (*Mutator)(GAGenome &, float);
-	typedef float (*Comparator)(const GAGenome &, const GAGenome &);
-	typedef int (*SexualCrossover)(const GAGenome &, const GAGenome &,
-								   GAGenome *, GAGenome *);
-	typedef int (*AsexualCrossover)(const GAGenome &, GAGenome *);
+	using Evaluator = float (*)(GAGenome &);
+	using Initializer = void (*)(GAGenome &);
+	using Mutator = int (*)(GAGenome &, float);
+	using Comparator = float (*)(const GAGenome &, const GAGenome &);
+	using SexualCrossover = int (*)(const GAGenome &, const GAGenome &, GAGenome *, GAGenome *);
+	using AsexualCrossover = int (*)(const GAGenome &, GAGenome *);
 
   public:
 	static void NoInitializer(GAGenome &);
