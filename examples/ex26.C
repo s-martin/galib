@@ -187,42 +187,54 @@ Initializer(GAGenome& g) {
   }		// each subsequent node 
 }
 
-int
-Mutator(GAGenome& g, float pmut) {
-  auto &child=(GAListGenome<int> &)g;
-  int n, i;
-  if ((GARandomFloat() >= pmut) || (pmut <= 0)) return 0;
+int Mutator(GAGenome& g, float pmut) 
+{
+    auto &child=(GAListGenome<int> &)g;
 
-  n = child.size();
+    if ((GARandomFloat() >= pmut) || (pmut <= 0)) 
+        return 0;
+
+    int n = child.size();
   
-  if (GARandomFloat()<0.5) {
-    child.swap(GARandomInt(0,n-1),GARandomInt(0,n-1)); // swap only one time
-  }
-  else {
-    int nNodes = GARandomInt(1,((int)(n/2-1)));       // displace nNodes 
-    child.warp(GARandomInt(0,n-1));                   // with or without
-    GAList<int> TmpList;                              // inversion
-    for(i=0;i<nNodes;i++) {
-      int *iptr = child.remove();
-      TmpList.insert(*iptr,GAListBASE::AFTER);
-      delete iptr;
-      child.next();
+    if (GARandomFloat()<0.5) 
+    {
+        child.swap(GARandomInt(0,n-1),GARandomInt(0,n-1)); // swap only one time
     }
-    int invert;
-    child.warp(GARandomInt(0,n-nNodes));
-    invert = (GARandomFloat()<0.5) ? 0 : 1;
-    if (invert) TmpList.head(); else TmpList.tail();
+    else 
+    {
+        int nNodes = GARandomInt(1,((int)(n/2-1)));       // displace nNodes 
+        child.warp(GARandomInt(0,n-1));                   // with or without
+        GAList<int> TmpList;                              // inversion
+        for(int i=0; i < nNodes; i++) 
+        {
+            int *iptr = child.remove();
+            TmpList.insert(*iptr,GAListBASE::AFTER);
+            delete iptr;
+            child.next();
+        }
 
-    for(i=0;i<nNodes;i++) {
-      int *iptr = TmpList.remove();
-      child.insert(*iptr,GAListBASE::AFTER);
-      delete iptr;
-      if (invert) TmpList.prev(); else TmpList.next();
+        child.warp(GARandomInt(0,n-nNodes));
+        int invert = (GARandomFloat()<0.5) ? 0 : 1;
+        if (invert) 
+            TmpList.head(); 
+        else 
+            TmpList.tail();
+
+        for(int i = 0; i < nNodes; i++) 
+        {
+            int *iptr = TmpList.remove();
+            child.insert(*iptr,GAListBASE::AFTER);
+            delete iptr;
+      
+            if (invert) 
+                TmpList.prev(); 
+            else 
+                TmpList.next();
+        }
     }
-  }
-  child.head();		// set iterator to root node
+    child.head();		// set iterator to root node
 
-  return (1);
+    return (1);
 }
 
 int
@@ -412,16 +424,17 @@ Comparator(const GAGenome& g1, const GAGenome& g2) {
 //   Notice that you can override ANY function of a template class.  This is
 // called "specialization" in C++ and it lets you tailor the behaviour of a 
 // template class to better fit the type.
-template <> int
-GAListGenome<int>::write( std::ostream & os) const
+template <> 
+int GAListGenome<int>::write( std::ostream & os) const
 {
-  int *cur, *head;
-  GAListIter<int> tmpiter(*this);
-  if((head=tmpiter.head()) != nullptr) {
-    os << *head << " ";
-    for(cur=tmpiter.next(); cur && cur != head; cur=tmpiter.next())
-      os << *cur << " ";
-  }
+    int *head;
+    GAListIter<int> tmpiter(*this);
+    if((head=tmpiter.head()) != nullptr) 
+    {
+        os << *head << " ";
+        for(auto cur = tmpiter.next(); cur && cur != head; cur = tmpiter.next())
+            os << *cur << " ";
+    }
 
   return os.fail() ? 1 : 0;
 }
