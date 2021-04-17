@@ -39,11 +39,15 @@ any standard 3D cross-platform API, so you get this instead.)
 // by Goldberg (not in his book) and his students.
 class DCrowdingGA : public GASteadyStateGA {
 public:
-  GADefineIdentity("DeterministicCrowdingGA", 241);
-  DCrowdingGA(const GAGenome& g) : GASteadyStateGA(g) {}
-  ~DCrowdingGA() override = default;
-  void step() override;
-  DCrowdingGA & operator++() { step(); return *this; }
+    GADefineIdentity("DeterministicCrowdingGA", 241);
+    explicit DCrowdingGA(const GAGenome& g) : GASteadyStateGA(g) {}
+    ~DCrowdingGA() override = default;
+    void step() override;
+    DCrowdingGA & operator++() 
+    { 
+        step(); 
+        return *this;
+    }
 };
 
 void DCrowdingGA::step() 
@@ -360,15 +364,16 @@ Mutator(GAGenome& g, float pmut) {
   return nmut;
 }
 
-int
-Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2){
+int Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2)
+{
   auto& mom = (GA1DArrayGenome<float>&)g1;
   auto& dad = (GA1DArrayGenome<float>&)g2;
 
   int n = 0;
   float distance = 0.0, midpoint = 0.0;
 
-  if(c1) {
+  if(c1) 
+  {
     auto& sis = (GA1DArrayGenome<float>&)*c1;
     distance = midpoint = 0.0;
 
