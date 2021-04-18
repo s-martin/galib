@@ -776,13 +776,12 @@ int GA3DArrayGenome<T>::EvenOddCrossover(const GAGenome &p1, const GAGenome &p2,
 		else
 		{
 			int startx, starty, startz;
-			int maxx = (sis.width() > bro.width()) ? sis.width() : bro.width();
+			//int maxx = (sis.width() > bro.width()) ? sis.width() : bro.width();
 			int minx = (mom.width() < dad.width()) ? mom.width() : dad.width();
-			int maxy =
-				(sis.height() > bro.height()) ? sis.height() : bro.height();
+			//int maxy = (sis.height() > bro.height()) ? sis.height() : bro.height();
 			int miny =
 				(mom.height() < dad.height()) ? mom.height() : dad.height();
-			int maxz = (sis.depth() > bro.depth()) ? sis.depth() : bro.depth();
+			//int maxz = (sis.depth() > bro.depth()) ? sis.depth() : bro.depth();
 			int minz = (mom.depth() < dad.depth()) ? mom.depth() : dad.depth();
 			startx = (sis.width() < minx) ? sis.width() : minx;
 			starty = (sis.height() < miny) ? sis.height() : miny;

@@ -7,9 +7,9 @@
 
   Source file for the simple genetic algorithm object.
 ---------------------------------------------------------------------------- */
-#include <GASimpleGA.h>
+#include "GASimpleGA.h"
 #include <boost/algorithm/string.hpp>
-#include <garandom.h>
+#include "garandom.h"
 
 GAParameterList &GASimpleGA::registerDefaultParameters(GAParameterList &p)
 {
