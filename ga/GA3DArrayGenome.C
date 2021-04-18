@@ -363,8 +363,8 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 	aset = std::vector<GAAlleleSet<T>>(1);
 	aset.at(0) = s;
 
-	initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
-	mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
+	this->initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
+	this->mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
 	comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
 	crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
@@ -380,8 +380,8 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 	for (int i = 0; i < aset.size(); i++)
 		aset.at(i) = sa.set(i);
 
-	initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
-	mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
+	this->initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
+	this->mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
 	comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
 	crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
