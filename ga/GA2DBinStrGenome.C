@@ -896,10 +896,9 @@ int GA2DBinaryStringGenome::EvenOddCrossover(const GAGenome &p1,
 		}
 		else
 		{
-			int count;
 			int minx = GAMin(mom.width(), dad.width());
 			int miny = GAMin(mom.height(), dad.height());
-			count = 0;
+			int count = 0;
 			minx = GAMin(sis.width(), minx);
 			miny = GAMin(sis.height(), miny);
 			for (i = 0; i < minx; i++)

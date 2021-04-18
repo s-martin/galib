@@ -292,8 +292,7 @@ void GAStatistics::update(const GAPopulation &pop)
 	}
 	maxever = (pop.max() > maxever) ? pop.max() : maxever;
 	minever = (pop.min() < minever) ? pop.min() : minever;
-	float tmpval;
-	tmpval = (on * (curgen - 1) + pop.ave()) / curgen;
+	float tmpval = (on * (curgen - 1) + pop.ave()) / curgen;
 	on = tmpval;
 	tmpval = (offmax * (curgen - 1) + pop.max()) / curgen;
 	offmax = tmpval;
