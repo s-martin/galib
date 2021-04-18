@@ -798,9 +798,9 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 	GA2DArrayAlleleGenome(unsigned int width, unsigned int height,
 						  const GAAlleleSet<T> &s,
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
-		: GA2DArrayGenome<T>(width, height, f, u)
+		: GA2DArrayGenome<T>(width, height, f, u),
+		aset(std::vector<GAAlleleSet<T>>(1))
 	{
-		aset = std::vector<GAAlleleSet<T>>(1);
 		aset.at(0) = s;
 
 		this->initializer(GA2DArrayAlleleGenome<T>::DEFAULT_2DARRAY_ALLELE_INITIALIZER);
@@ -812,9 +812,9 @@ template <class T> class GA2DArrayAlleleGenome : public GA2DArrayGenome<T>
 	GA2DArrayAlleleGenome(unsigned int width, unsigned int height,
 						  const GAAlleleSetArray<T> &sa,
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
-		: GA2DArrayGenome<T>(width, height, f, u)
+		: GA2DArrayGenome<T>(width, height, f, u),
+		aset(std::vector<GAAlleleSet<T>>(sa.size()))
 	{
-		aset = std::vector<GAAlleleSet<T>>(sa.size());
 		for (int i = 0; i < aset.size(); i++)
 			aset.at(i) = sa.set(i);
 

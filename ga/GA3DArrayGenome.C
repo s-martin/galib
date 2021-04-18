@@ -374,9 +374,9 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 												unsigned int d,
 												const GAAlleleSetArray<T> &sa,
 												GAGenome::Evaluator f, void *u)
-	: GA3DArrayGenome<T>(w, h, d, f, u)
+	: GA3DArrayGenome<T>(w, h, d, f, u),
+	aset(std::vector<GAAlleleSet<T>>(sa.size()))
 {
-	aset = std::vector<GAAlleleSet<T>>(sa.size());
 	for (int i = 0; i < aset.size(); i++)
 		aset.at(i) = sa.set(i);
 
