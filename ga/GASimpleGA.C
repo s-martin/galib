@@ -27,6 +27,7 @@ GASimpleGA::GASimpleGA(const GAGenome &c) : GAGeneticAlgorithm(c)
 	el = true;
 	params.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &el);
 }
+
 GASimpleGA::GASimpleGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 {
 	oldPop = pop->clone();
@@ -34,12 +35,18 @@ GASimpleGA::GASimpleGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
 	el = true;
 	params.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &el);
 }
+
 GASimpleGA::GASimpleGA(const GASimpleGA &ga) : GAGeneticAlgorithm(ga)
 {
 	oldPop = nullptr;
 	copy(ga);
 }
-GASimpleGA::~GASimpleGA() { delete oldPop; }
+
+GASimpleGA::~GASimpleGA() 
+{ 
+	delete oldPop;
+}
+
 GASimpleGA &GASimpleGA::operator=(const GASimpleGA &ga)
 {
 	if (&ga != this)
@@ -48,6 +55,7 @@ GASimpleGA &GASimpleGA::operator=(const GASimpleGA &ga)
 	}
 	return *this;
 }
+
 void GASimpleGA::copy(const GAGeneticAlgorithm &g)
 {
 	GAGeneticAlgorithm::copy(g);
@@ -172,7 +180,7 @@ void GASimpleGA::initialize(unsigned int seed)
 // population.
 void GASimpleGA::step()
 {
-	int i, mut, c1, c2;
+	int mut, c1;
 	GAGenome *mom, *dad; // tmp holders for selected genomes
 
 	GAPopulation *tmppop; // Swap the old population with the new pop.
@@ -183,13 +191,15 @@ void GASimpleGA::step()
 	// Generate the individuals in the temporary population from individuals in
 	// the main population.
 
+	int i;
 	for (i = 0; i < pop->size() - 1; i += 2)
 	{ // takes care of odd population
 		mom = &(oldPop->select());
 		dad = &(oldPop->select());
 		stats.numsel += 2; // keep track of number of selections
 
-		c1 = c2 = 0;
+		c1 = 0;
+		int c2 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
 			stats.numcro += (*scross)(*mom, *dad, &pop->individual(i),
@@ -214,6 +224,7 @@ void GASimpleGA::step()
 
 		stats.numeval += c1 + c2;
 	}
+
 	if (pop->size() % 2 != 0)
 	{ // do the remaining population member
 		mom = &(oldPop->select());

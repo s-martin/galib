@@ -276,10 +276,10 @@ DeJong5(GAGenome & c)
 {
   auto & genome = (GABin2DecGenome &)c;
 
-  float lowtot,prod,total=0.002;
+  float prod,total=0.002;
 
   for(int j=0; j<25; j+=1) {
-    lowtot=1.0 + (double)j;
+    float lowtot=1.0 + (double)j;
     for(int i=0; i<2; i+=1) {
       prod=1.0;
       for(int power=0; power<6; power+=1)
