@@ -23,12 +23,13 @@ BinaryStringGenome
 // original is not the same class as this, then we post an error and return.
 void GABinaryString::copy(const GABinaryString &orig)
 {
-	if (&orig == this)
+	/*if (&orig == this)
 	{
 		return;
 	}
 	resize(orig.sz);
-	memcpy(data, orig.data, SZ * sizeof(GABit));
+	memcpy(data, orig.data, SZ * sizeof(GABit));*/
+	data = orig.data;
 }
 
 // Resize the bitstream to the specified number of bits.  We return the number
@@ -39,7 +40,7 @@ void GABinaryString::copy(const GABinaryString &orig)
 // If we're making more space, we set the contents of the new space to zeros.
 int GABinaryString::resize(unsigned int x)
 {
-	if (sz == x)
+	/*if (sz == x)
 	{
 		return sz;
 	}
@@ -63,5 +64,7 @@ int GABinaryString::resize(unsigned int x)
 			delete[] tmp;
 		}
 	}
-	return (sz = x);
+	return (sz = x);*/
+	data.resize(x);
+	return data.size();
 }

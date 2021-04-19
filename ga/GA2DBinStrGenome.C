@@ -90,7 +90,7 @@ int GA2DBinaryStringGenome::resize(int w, int h)
 	if (static_cast<unsigned int>(w) == nx &&
 		static_cast<unsigned int>(h) == ny)
 	{
-		return sz;
+		return data.size();
 	}
 
 	if (w == GAGenome::ANY_SIZE)
@@ -179,7 +179,7 @@ int GA2DBinaryStringGenome::resize(int w, int h)
 	nx = w;
 	ny = h;
 	_evaluated = false;
-	return sz;
+	return data.size();
 }
 
 int GA2DBinaryStringGenome::read(std::istream &is)

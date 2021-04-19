@@ -20,32 +20,33 @@ conditional makes it go from 7.5 seconds to 3.2 seconds (bm bl cs 1024 c 0.9)
 #include <cstring>
 #include <garandom.h>
 #include <gatypes.h>
+#include <vector>
 
 // size of the chunks of bits we allocate;
-constexpr auto GA_BINSTR_CHUNKSIZE = 32;
+//constexpr auto GA_BINSTR_CHUNKSIZE = 32;
 
 class GABinaryString
 {
   public:
 	explicit GABinaryString(unsigned int s)
 	{
-		csz = GA_BINSTR_CHUNKSIZE;
+		/*csz = GA_BINSTR_CHUNKSIZE;
 		sz = 0;
 		SZ = 0;
-		data = nullptr;
+		data = nullptr;*/
 		resize(s);
 	}
 	GABinaryString(const GABinaryString &orig)
 	{
-		sz = 0;
+		/*sz = 0;
 		SZ = 0;
-		data = nullptr;
+		data = nullptr;*/
 		copy(orig);
 	}
-	virtual ~GABinaryString() { delete[] data; }
+	//virtual ~GABinaryString() { delete[] data; }
 	void copy(const GABinaryString &);
 	int resize(unsigned int); // pass desired size, in bits
-	int size() const { return sz; }
+	int size() const { return data.size(); }
 
 	short bit(unsigned int a) const { return (data[a]); }
 	short bit(unsigned int a, short val)
@@ -84,17 +85,17 @@ class GABinaryString
 	}
 	void randomize()
 	{
-		for (unsigned int i = 0; i < sz; i++)
+		for (auto item : data)
 		{
-			data[i] = static_cast<GABit>(GARandomBit());
+			item = static_cast<GABit>(GARandomBit());
 		}
 	}
 
   protected:
-	unsigned int sz; // size of chrom
+	/*unsigned int sz; // size of chrom
 	unsigned int SZ; // size of the memory allocated
-	unsigned int csz; // size of chunks we allocate
-	GABit *data; // the data themselves
+	unsigned int csz; // size of chunks we allocate*/
+	std::vector<GABit> data; // the data themselves
 };
 
 #endif

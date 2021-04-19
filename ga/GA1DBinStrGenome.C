@@ -146,7 +146,7 @@ int GA1DBinaryStringGenome::resize(int l)
 	}
 	nx = l;
 	_evaluated = false;
-	return sz;
+	return data.size();
 }
 
 // We read data from a stream as a series of 1's and 0's.  We want a continuous
