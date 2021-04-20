@@ -42,18 +42,12 @@ GAStatistics::GAStatistics()
 
 	nscrs = 0;
 	Nscrs = gaDefFlushFrequency;
-	gen = new int[Nscrs];
-	memset(gen, 0, Nscrs * sizeof(int));
-	aveScore = new float[Nscrs];
-	memset(aveScore, 0, Nscrs * sizeof(float));
-	maxScore = new float[Nscrs];
-	memset(maxScore, 0, Nscrs * sizeof(float));
-	minScore = new float[Nscrs];
-	memset(minScore, 0, Nscrs * sizeof(float));
-	devScore = new float[Nscrs];
-	memset(devScore, 0, Nscrs * sizeof(float));
-	divScore = new float[Nscrs];
-	memset(divScore, 0, Nscrs * sizeof(float));
+	gen.resize(Nscrs, 0);
+	aveScore.resize(Nscrs, 0); 
+	maxScore.resize(Nscrs, 0); 
+	minScore.resize(Nscrs, 0);
+	devScore.resize(Nscrs, 0);
+	divScore.resize(Nscrs, 0);
 	scorefile = gaDefScoreFilename;
 	which = Maximum;
 
@@ -62,24 +56,12 @@ GAStatistics::GAStatistics()
 GAStatistics::GAStatistics(const GAStatistics &orig)
 {
 	cscore = nullptr;
-	gen = nullptr;
-	aveScore = nullptr;
-	maxScore = nullptr;
-	minScore = nullptr;
-	devScore = nullptr;
-	divScore = nullptr;
 	boa = nullptr;
 	copy(orig);
 }
 GAStatistics::~GAStatistics()
 {
 	delete[] cscore;
-	delete[] gen;
-	delete[] aveScore;
-	delete[] maxScore;
-	delete[] minScore;
-	delete[] devScore;
-	delete[] divScore;
 	delete boa;
 }
 void GAStatistics::copy(const GAStatistics &orig)
@@ -123,24 +105,12 @@ void GAStatistics::copy(const GAStatistics &orig)
 
 	nscrs = orig.nscrs;
 	Nscrs = orig.Nscrs;
-	delete[] gen;
-	gen = new int[Nscrs];
-	memcpy(gen, orig.gen, Nscrs * sizeof(int));
-	delete[] aveScore;
-	aveScore = new float[Nscrs];
-	memcpy(aveScore, orig.aveScore, Nscrs * sizeof(float));
-	delete[] maxScore;
-	maxScore = new float[Nscrs];
-	memcpy(maxScore, orig.maxScore, Nscrs * sizeof(float));
-	delete[] minScore;
-	minScore = new float[Nscrs];
-	memcpy(minScore, orig.minScore, Nscrs * sizeof(float));
-	delete[] devScore;
-	devScore = new float[Nscrs];
-	memcpy(devScore, orig.devScore, Nscrs * sizeof(float));
-	delete[] divScore;
-	divScore = new float[Nscrs];
-	memcpy(divScore, orig.divScore, Nscrs * sizeof(float));
+	gen = orig.gen;
+	aveScore = orig.aveScore;
+	maxScore = orig.maxScore;
+	minScore = orig.minScore;
+	devScore = orig.devScore;
+	divScore = orig.divScore;
 
 	scorefile = orig.scorefile;
 
@@ -312,12 +282,12 @@ void GAStatistics::reset(const GAPopulation &pop)
 	curgen = 0;
 	numsel = numcro = nummut = numrep = numeval = numpeval = 0;
 
-	memset(gen, 0, Nscrs * sizeof(int));
-	memset(aveScore, 0, Nscrs * sizeof(float));
-	memset(maxScore, 0, Nscrs * sizeof(float));
-	memset(minScore, 0, Nscrs * sizeof(float));
-	memset(devScore, 0, Nscrs * sizeof(float));
-	memset(divScore, 0, Nscrs * sizeof(float));
+	std::fill(gen.begin(), gen.end(), 0);
+	std::fill(aveScore.begin(), aveScore.end(), 0);
+	std::fill(maxScore.begin(), maxScore.end(), 0);
+	std::fill(minScore.begin(), minScore.end(), 0);
+	std::fill(devScore.begin(), devScore.end(), 0);
+	std::fill(divScore.begin(), divScore.end(), 0);
 	nscrs = 0;
 	setScore(pop);
 	if (Nscrs > 0)
@@ -356,12 +326,12 @@ void GAStatistics::flushScores()
 		return;
 	}
 	writeScores();
-	memset(gen, 0, Nscrs * sizeof(int));
-	memset(aveScore, 0, Nscrs * sizeof(float));
-	memset(maxScore, 0, Nscrs * sizeof(float));
-	memset(minScore, 0, Nscrs * sizeof(float));
-	memset(devScore, 0, Nscrs * sizeof(float));
-	memset(divScore, 0, Nscrs * sizeof(float));
+	std::fill(gen.begin(), gen.end(), 0);
+	std::fill(aveScore.begin(), aveScore.end(), 0);
+	std::fill(maxScore.begin(), maxScore.end(), 0);
+	std::fill(minScore.begin(), minScore.end(), 0);
+	std::fill(devScore.begin(), devScore.end(), 0);
+	std::fill(divScore.begin(), divScore.end(), 0);
 	nscrs = 0;
 }
 
@@ -378,12 +348,12 @@ void GAStatistics::setScore(const GAPopulation &pop)
 	{
 		return;
 	}
-	gen[nscrs] = curgen;
-	aveScore[nscrs] = aveCur;
-	maxScore[nscrs] = maxCur;
-	minScore[nscrs] = minCur;
-	devScore[nscrs] = devCur;
-	divScore[nscrs] = divCur;
+	gen.at(nscrs) = curgen;
+	aveScore.at(nscrs) = aveCur;
+	maxScore.at(nscrs) = maxCur;
+	minScore.at(nscrs) = minCur;
+	devScore.at(nscrs) = devCur;
+	divScore.at(nscrs) = divCur;
 	nscrs++;
 }
 
@@ -513,52 +483,16 @@ void GAStatistics::resizeScores(unsigned int n)
 {
 	if (n == 0)
 	{
-		delete[] gen;
-		gen = nullptr;
-		delete[] aveScore;
-		aveScore = nullptr;
-		delete[] maxScore;
-		maxScore = nullptr;
-		delete[] minScore;
-		minScore = nullptr;
-		delete[] devScore;
-		devScore = nullptr;
-		delete[] divScore;
-		divScore = nullptr;
-
 		nscrs = n;
 	}
 	else
 	{
-		int *tmpi = gen;
-		gen = new int[n];
-		memcpy(gen, tmpi, (n < Nscrs ? n : Nscrs) * sizeof(int));
-		delete[] tmpi;
-
-		float *tmpf = aveScore;
-		aveScore = new float[n];
-		memcpy(aveScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
-		delete[] tmpf;
-
-		tmpf = maxScore;
-		maxScore = new float[n];
-		memcpy(maxScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
-		delete[] tmpf;
-
-		tmpf = minScore;
-		minScore = new float[n];
-		memcpy(minScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
-		delete[] tmpf;
-
-		tmpf = devScore;
-		devScore = new float[n];
-		memcpy(devScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
-		delete[] tmpf;
-
-		tmpf = divScore;
-		divScore = new float[n];
-		memcpy(divScore, tmpf, (n < Nscrs ? n : Nscrs) * sizeof(float));
-		delete[] tmpf;
+		gen.resize(n);
+		aveScore.resize(n);
+		maxScore.resize(n);
+		minScore.resize(n);
+		devScore.resize(n);
+		divScore.resize(n);
 
 		if (nscrs > n)
 		{
