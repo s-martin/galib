@@ -19,6 +19,6 @@ jobs:
     - name: make
       run: cmake --build ./build
     - name: run unit tests
-      run: cmake --build ./build --target test
+      run: cmake --build ./build --target test --rerun-failed --output-on-failure
     - name: run coverage
       run: cmake --build ./build --target GAlib_lcov
