@@ -34,6 +34,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: install dependencies
+        run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
 
       - name: Configure CMake
         run: cmake -B ${{ env.build }}
