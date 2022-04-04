@@ -39,7 +39,10 @@ jobs:
         run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
 
       - name: Configure CMake
-        run: cmake -B ${{ env.build }}
+        run: |
+          md build
+          cd build
+          cmake ../ -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
 
       # Build is not required unless generated source files are used
       # - name: Build CMake
