@@ -32,14 +32,14 @@ RankSelector
 #if USE_RANK_SELECTOR == 1
 GAGenome &GARankSelector::select() const
 {
-	int i, count = 1;
+	int count = 1;
 
 	GAPopulation::SortBasis basis =
 		(which == SCALED ? GAPopulation::SCALED : GAPopulation::RAW);
 	pop->sort(false, basis);
 	if (which == SCALED)
 	{
-		for (i = 1; i < pop->size() && pop->best(i, basis).fitness() ==
+		for (int i = 1; i < pop->size() && pop->best(i, basis).fitness() ==
 										   pop->best(0, basis).fitness();
 			 i++)
 		{
@@ -48,7 +48,7 @@ GAGenome &GARankSelector::select() const
 	}
 	else
 	{
-		for (i = 1; i < pop->size() &&
+		for (int i = 1; i < pop->size() &&
 					pop->best(i, basis).score() == pop->best(0, basis).score();
 			 i++)
 		{
@@ -84,12 +84,9 @@ RouletteWheelSelector
 #if USE_ROULETTE_SELECTOR == 1 || USE_TOURNAMENT_SELECTOR == 1
 GAGenome &GARouletteWheelSelector::select() const
 {
-	float cutoff;
-	int upper, lower;
-
-	cutoff = GARandomFloat();
-	lower = 0;
-	upper = pop->size() - 1;
+	float cutoff = GARandomFloat();
+	int lower = 0;
+	int upper = pop->size() - 1;
 	while (upper >= lower)
 	{
 		int i = lower + (upper - lower) / 2;
@@ -123,12 +120,11 @@ void GARouletteWheelSelector::update()
 		n = pop->size();
 	}
 
-	int i;
 	if (which == GASelectionScheme::RAW)
 	{
 		if (pop->max() == pop->min())
 		{
-			for (i = 0; i < n; i++)
+			for (int i = 0; i < n; i++)
 			{
 				psum.at(i) = static_cast<float>(i + 1) /
 							 static_cast<float>(n); // equal likelihoods
@@ -141,12 +137,12 @@ void GARouletteWheelSelector::update()
 			if (pop->order() == GAPopulation::HIGH_IS_BEST)
 			{
 				psum.at(0) = pop->individual(0, GAPopulation::RAW).score();
-				for (i = 1; i < n; i++)
+				for (int i = 1; i < n; i++)
 				{
 					psum.at(i) = pop->individual(i, GAPopulation::RAW).score() +
 								 psum.at(i - 1);
 				}
-				for (i = 0; i < n; i++)
+				for (int i = 0; i < n; i++)
 				{
 					psum.at(i) /= psum.at(n - 1);
 				}
@@ -155,13 +151,13 @@ void GARouletteWheelSelector::update()
 			{
 				psum.at(0) = -pop->individual(0, GAPopulation::RAW).score() +
 							 pop->max() + pop->min();
-				for (i = 1; i < n; i++)
+				for (int i = 1; i < n; i++)
 				{
 					psum.at(i) =
 						-pop->individual(i, GAPopulation::RAW).score() +
 						pop->max() + pop->min() + psum.at(i - 1);
 				}
-				for (i = 0; i < n; i++)
+				for (int i = 0; i < n; i++)
 				{
 					psum.at(i) /= psum.at(n - 1);
 				}
@@ -179,7 +175,7 @@ void GARouletteWheelSelector::update()
 	{
 		if (pop->fitmax() == pop->fitmin())
 		{
-			for (i = 0; i < n; i++)
+			for (int i = 0; i < n; i++)
 			{
 				psum.at(i) = static_cast<float>(i + 1) /
 							 static_cast<float>(n); // equal likelihoods
@@ -192,13 +188,13 @@ void GARouletteWheelSelector::update()
 			if (pop->order() == GAPopulation::HIGH_IS_BEST)
 			{
 				psum.at(0) = pop->individual(0, GAPopulation::SCALED).fitness();
-				for (i = 1; i < n; i++)
+				for (int i = 1; i < n; i++)
 				{
 					psum.at(i) =
 						pop->individual(i, GAPopulation::SCALED).fitness() +
 						psum[i - 1];
 				}
-				for (i = 0; i < n; i++)
+				for (int i = 0; i < n; i++)
 				{
 					psum.at(i) /= psum[n - 1];
 				}
@@ -208,13 +204,13 @@ void GARouletteWheelSelector::update()
 				psum.at(0) =
 					-pop->individual(0, GAPopulation::SCALED).fitness() +
 					pop->fitmax() + pop->fitmin();
-				for (i = 1; i < n; i++)
+				for (int i = 1; i < n; i++)
 				{
 					psum.at(i) =
 						-pop->individual(i, GAPopulation::SCALED).fitness() +
 						pop->fitmax() + pop->fitmin() + psum.at(i - 1);
 				}
-				for (i = 0; i < n; i++)
+				for (int i = 0; i < n; i++)
 				{
 					psum.at(i) /= psum.at(n - 1);
 				}
@@ -242,13 +238,11 @@ the roulette wheel selector so that we can use its update method.
 #if USE_TOURNAMENT_SELECTOR == 1
 GAGenome &GATournamentSelector::select() const
 {
-	int picked;
-	float cutoff;
-	int i, upper, lower;
+	int i;
 
-	cutoff = GARandomFloat();
-	lower = 0;
-	upper = pop->size() - 1;
+	float cutoff = GARandomFloat();
+	int lower = 0;
+	int upper = pop->size() - 1;
 	while (upper >= lower)
 	{
 		i = lower + (upper - lower) / 2;
@@ -264,7 +258,7 @@ GAGenome &GATournamentSelector::select() const
 	}
 	lower = GAMin(pop->size() - 1, lower);
 	lower = GAMax(0, lower);
-	picked = lower;
+	int picked = lower;
 
 	cutoff = GARandomFloat();
 	lower = 0;

@@ -22,7 +22,7 @@ implementation.
 
 #include <boost/algorithm/string.hpp>
 
-constexpr int PRM_CHUNKSIZE = 10;
+//constexpr int PRM_CHUNKSIZE = 10;
 constexpr int BUFSIZE = 1024; // size of buffer for reading pairs
 constexpr int MAX_PAIRS = 5000; // max number of name-value pairs in stream
 constexpr int NAMESIZE = 128; // max length of name in name-value pair

@@ -39,76 +39,92 @@ any standard 3D cross-platform API, so you get this instead.)
 // by Goldberg (not in his book) and his students.
 class DCrowdingGA : public GASteadyStateGA {
 public:
-  GADefineIdentity("DeterministicCrowdingGA", 241);
-  DCrowdingGA(const GAGenome& g) : GASteadyStateGA(g) {}
-  ~DCrowdingGA() override = default;
-  void step() override;
-  DCrowdingGA & operator++() { step(); return *this; }
+    GADefineIdentity("DeterministicCrowdingGA", 241);
+    explicit DCrowdingGA(const GAGenome& g) : GASteadyStateGA(g) {}
+    ~DCrowdingGA() override = default;
+    void step() override;
+    DCrowdingGA & operator++() 
+    { 
+        step(); 
+        return *this;
+    }
 };
 
-void
-DCrowdingGA::step() { 
-  int i,*ip;
-  float d1,d2;
-  GAGenome *mom, *dad;
-  GAList<int> IndPool;
+void DCrowdingGA::step() 
+{ 
+    GAList<int> IndPool;
 
-  while (IndPool.head()) IndPool.destroy();
+    while (IndPool.head()) 
+        IndPool.destroy();
 
-  for (i=0; i<pop->size(); i++) 
-    IndPool.insert(i);
+    for (int i = 0; i < pop->size(); i++) 
+        IndPool.insert(i);
     
-  do {
-    //select mom
-    IndPool.warp(GARandomInt(0,IndPool.size()-1));
-    ip=IndPool.remove();
-    mom = &pop->individual(*ip);
-    delete ip;
-    //select dad
-    IndPool.warp(GARandomInt(0,IndPool.size()-1));
-    ip=IndPool.remove();
-    dad = &pop->individual(*ip);
-    delete ip;
-    //create child
-    stats.numsel += 2;		
-    stats.numcro += (*(mom->sexual()))(*mom, *dad, &tmpPop->individual(0), nullptr);
-    stats.nummut += tmpPop->individual(0).mutate(pMutation());
-    stats.numeval += 1;	
-    //replace closest parent
-    d1 = tmpPop->individual(0).compare(*mom);
-    d2 = tmpPop->individual(0).compare(*dad);
-    if (d1 < d2) {
-      if (minmax == MINIMIZE) {
-	if (tmpPop->individual(0).score() < mom->score()) {
-	  mom->copy(tmpPop->individual(0));
-	  stats.numrep += 1;	
-	}
-      }
-      else {
-	if (tmpPop->individual(0).score() > mom->score()) {
-	  mom->copy(tmpPop->individual(0));
-	  stats.numrep += 1;	
-	}
-      }
-    }
-    else {
-      if (minmax == MINIMIZE) {
-	if (tmpPop->individual(0).score() < dad->score()) {
-	  dad->copy(tmpPop->individual(0));
-	  stats.numrep += 1;	
-	}
-      }
-      else {
-	if (tmpPop->individual(0).score() > dad->score()) {
-	  dad->copy(tmpPop->individual(0));
-	  stats.numrep += 1;	
-	}
-      }
-    }
-  } while (IndPool.size()>1);
+    do 
+    {
+        //select mom
+        IndPool.warp(GARandomInt(0,IndPool.size()-1));
+        auto ip=IndPool.remove();
+        auto mom = &pop->individual(*ip);
+        delete ip;
+        
+        //select dad
+        IndPool.warp(GARandomInt(0,IndPool.size()-1));
+        ip=IndPool.remove();
+        auto dad = &pop->individual(*ip);
+        delete ip;
+    
+        //create child
+        stats.numsel += 2;		
+        stats.numcro += (*(mom->sexual()))(*mom, *dad, &tmpPop->individual(0), nullptr);
+        stats.nummut += tmpPop->individual(0).mutate(pMutation());
+        stats.numeval += 1;	
+        //replace closest parent
+        float d1 = tmpPop->individual(0).compare(*mom);
+        float d2 = tmpPop->individual(0).compare(*dad);
+    
+        if (d1 < d2) 
+        {
+            if (minmax == MINIMIZE) 
+            {
+	            if (tmpPop->individual(0).score() < mom->score()) 
+                {
+	                mom->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+            else 
+            {
+	            if (tmpPop->individual(0).score() > mom->score()) 
+                {
+	                mom->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+        }
+        else 
+        {
+            if (minmax == MINIMIZE) 
+            {
+	            if (tmpPop->individual(0).score() < dad->score()) 
+                {
+	                dad->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+            else 
+            {
+	            if (tmpPop->individual(0).score() > dad->score()) 
+                {
+	                dad->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+        }
+    } while (IndPool.size()>1);
 
-  pop->evaluate(true);
-  stats.update(*pop);	
+    pop->evaluate(true);
+    stats.update(*pop);	
 }
 
 
@@ -348,15 +364,16 @@ Mutator(GAGenome& g, float pmut) {
   return nmut;
 }
 
-int
-Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2){
+int Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2)
+{
   auto& mom = (GA1DArrayGenome<float>&)g1;
   auto& dad = (GA1DArrayGenome<float>&)g2;
 
   int n = 0;
   float distance = 0.0, midpoint = 0.0;
 
-  if(c1) {
+  if(c1) 
+  {
     auto& sis = (GA1DArrayGenome<float>&)*c1;
     distance = midpoint = 0.0;
 

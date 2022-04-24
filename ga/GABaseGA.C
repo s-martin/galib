@@ -272,7 +272,10 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGeneticAlgorithm &ga)
 	d_seed = ga.d_seed;
 }
 
-GAGeneticAlgorithm::~GAGeneticAlgorithm() { delete pop; }
+GAGeneticAlgorithm::~GAGeneticAlgorithm() 
+{ 
+	delete pop; 
+}
 
 void GAGeneticAlgorithm::copy(const GAGeneticAlgorithm &ga)
 {
@@ -312,8 +315,7 @@ GAGeneticAlgorithm::parameters(const GAParameterList &list)
 	return params;
 }
 
-const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv,
-													  bool flag)
+const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv, bool flag)
 {
 	params.parse(argc, argv, flag); // get the args we understand
 	for (const auto &p : params)
@@ -323,8 +325,7 @@ const GAParameterList &GAGeneticAlgorithm::parameters(int &argc, char **argv,
 	return params;
 }
 
-const GAParameterList &GAGeneticAlgorithm::parameters(const std::string &filename,
-													  bool flag)
+const GAParameterList &GAGeneticAlgorithm::parameters(const std::string &filename, bool flag)
 {
 	params.read(filename, flag);
 	for (const auto &p : params)
@@ -334,8 +335,7 @@ const GAParameterList &GAGeneticAlgorithm::parameters(const std::string &filenam
 	return params;
 }
 
-const GAParameterList &GAGeneticAlgorithm::parameters(std::istream &is,
-													  bool flag)
+const GAParameterList &GAGeneticAlgorithm::parameters(std::istream &is, bool flag)
 {
 	params.read(is, flag);
 	for (const auto &p : params)

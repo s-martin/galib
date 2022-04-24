@@ -34,16 +34,16 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 	static int DestructiveMutator(GAGenome &c, float pmut)
 	{
 		GAListGenome<T> &child = DYN_CAST(GAListGenome<T> &, c);
-		int n, i;
+
 		if (pmut <= 0.0)
 			return 0;
 
-		n = child.size();
+		int n = child.size();
 		float nMut = pmut * STA_CAST(float, n);
 		if (nMut < 1.0)
 		{ // we have to do a flip test for each node
 			nMut = 0;
-			for (i = 0; i < n; i++)
+			for (int i = 0; i < n; i++)
 			{
 				if (GAFlipCoin(pmut) && child.warp(i))
 				{
@@ -54,7 +54,7 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 		}
 		else
 		{ // only nuke the number of nodes we need to
-			for (i = 0; i < nMut; i++)
+			for (int i = 0; i < nMut; i++)
 			{
 				if (child.warp(GARandomInt(0, n - 1)))
 					child.destroy();

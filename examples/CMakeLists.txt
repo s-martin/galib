@@ -1,4 +1,4 @@
-include_directories(${CMAKE_SOURCE_DIR}/ga)
+include_directories(${PROJECT_SOURCE_DIR}/ga)
 include_directories(${Boost_INCLUDE_DIRS})
 set_property(DIRECTORY PROPERTY CXX_EXTENSIONS OFF)
 set_property(DIRECTORY PROPERTY CMAKE_CXX_STANDARD 17)
@@ -108,7 +108,7 @@ target_link_libraries(randtest PUBLIC GAlib)
 #					./gnu/bitxor.c 
 #					./gnu/error.cc )
 #	target_link_libraries(gnuex GAlib)
-#	target_include_directories(gnuex PUBLIC ${CMAKE_SOURCE_DIR}/examples/gnu)
+#	target_include_directories(gnuex PUBLIC ${PROJECT_SOURCE_DIR}/examples/gnu)
 #endif()
 
 if(X11_FOUND) 

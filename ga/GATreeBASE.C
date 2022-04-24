@@ -119,9 +119,10 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 		n->prev = idx->prev;
 		idx->prev->next = n;
 		idx->prev = n;
-		if ((idx->parent != nullptr) && idx->parent->child == idx) {
+		if (idx->parent->child == idx)
+		{
 			n->parent->child = n;
-}
+		}
 		break;
 
 	case AFTER:
@@ -175,9 +176,10 @@ int GATreeBASE::insert(GANodeBASE *n, GANodeBASE *idx, Location where)
 //   If the removal is on the root node, set the root node to NULL.
 GANodeBASE *GATreeBASE::remove(GANodeBASE *n)
 {
-	if (n == nullptr) {
+	if (n == nullptr) 
+	{
 		return nullptr;
-}
+	}
 
 	if ((n->next == nullptr) || (n->prev == nullptr) || n->prev->next != n || n->next->prev != n)
 	{
@@ -185,24 +187,27 @@ GANodeBASE *GATreeBASE::remove(GANodeBASE *n)
 		return nullptr;
 	}
 
-	if (n->next == n || (n->next == nullptr))
+	if (n->next == n)
 	{
-		if ((n->parent != nullptr) && n->parent->child == n) {
+		if ((n->parent != nullptr) && n->parent->child == n) 
+		{
 			n->parent->child = nullptr;
-}
+		}
 	}
 	else
 	{
-		if ((n->parent != nullptr) && n->parent->child == n) {
+		if ((n->parent != nullptr) && n->parent->child == n) 
+		{
 			n->parent->child = n->next;
-}
+		}
 		n->prev->next = n->next;
 		n->next->prev = n->prev;
 	}
 
-	if (n == rt) {
+	if (n == rt) 
+	{
 		rt = nullptr;
-}
+	}
 
 	// uncomment these to modify the node that is getting removed
 	n->prev = n;
@@ -241,9 +246,10 @@ GANodeBASE *GATreeBASE::remove(GANodeBASE *n)
 // traverse the tree multiple times, for example.
 int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 {
-	if ((a == nullptr) || (b == nullptr) || a == b) {
+	if ((a == nullptr) || (b == nullptr) || a == b) 
+	{
 		return NO_ERR;
-}
+	}
 
 	GANodeBASE *aprev = a->prev;
 	GANodeBASE *anext = a->next;
@@ -254,11 +260,14 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 
 	if (anext == b || bnext == a)
 	{ // a & b are adjacent
-		if ((aparent != nullptr) && aparent->child == a) {
+		if ((aparent != nullptr) && aparent->child == a) 
+		{
 			aparent->child = b;
-		} else if ((bparent != nullptr) && bparent->child == b) {
+		} 
+		else if ((bparent != nullptr) && bparent->child == b) 
+		{
 			bparent->child = a;
-}
+		}
 
 		if (anext == b && bnext != a)
 		{ // same as b->prev = a
@@ -278,11 +287,14 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 			anext->prev = b;
 			bprev->next = a;
 		}
-		if (rt == a) {
+		if (rt == a) 
+		{
 			rt = b;
-		} else if (rt == b) {
+		} 
+		else if (rt == b) 
+		{
 			rt = a;
-}
+		}
 	}
 	else
 	{ // check for same tree then ancestry
@@ -290,22 +302,22 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 		GANodeBASE *broot = _GARootOfNode(b);
 		if (aroot == broot)
 		{ // check ancestry
-			while ((aparent != nullptr) && aparent != b) {
+			while ((aparent != nullptr) && aparent != b) 
+			{
 				aparent = aparent->parent;
-}
+			}
 			if (aparent == b)
 			{
-				GAErr(GA_LOC, "GATreeBASE", "swaptree",
-					  GAError::CannotSwapAncestors);
+				GAErr(GA_LOC, "GATreeBASE", "swaptree", GAError::CannotSwapAncestors);
 				return ERR;
 			}
-			while ((bparent != nullptr) && bparent != a) {
+			while ((bparent != nullptr) && bparent != a) 
+			{
 				bparent = bparent->parent;
-}
+			}
 			if (bparent == a)
 			{
-				GAErr(GA_LOC, "GATreeBASE", "swaptree",
-					  GAError::CannotSwapAncestors);
+				GAErr(GA_LOC, "GATreeBASE", "swaptree", GAError::CannotSwapAncestors);
 				return ERR;
 			}
 			aparent = a->parent; // reset the values
@@ -313,20 +325,25 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 		} // if not in same tree, we don't bother to check the ancestry
 		if (aparent == bparent)
 		{
-			if ((aparent != nullptr) && aparent->child == a) {
+			if ((aparent != nullptr) && aparent->child == a) 
+			{
 				aparent->child = b;
-			} else if ((bparent != nullptr) && bparent->child == b) {
+			} 
+			else if ((bparent != nullptr) && bparent->child == b) 
+			{
 				bparent->child = a;
-}
+			}
 		}
 		else
 		{
-			if ((aparent != nullptr) && aparent->child == a) {
+			if ((aparent != nullptr) && aparent->child == a) 
+			{
 				aparent->child = b;
-}
-			if ((bparent != nullptr) && bparent->child == b) {
+			}
+			if ((bparent != nullptr) && bparent->child == b) 
+			{
 				bparent->child = a;
-}
+			}
 		}
 		a->parent = bparent;
 		b->parent = aparent;
@@ -357,11 +374,14 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 
 		if (aroot != broot)
 		{
-			if (rt == a) {
+			if (rt == a) 
+			{
 				rt = b;
-			} else if (rt == b) {
+			} 
+			else if (rt == b) 
+			{
 				rt = a;
-}
+			}
 			// We could lose the other node here, but we have no way of knowing
 			// what the root node in the other tree is, so its up to the caller
 			// of this routine to take care of this!
@@ -390,9 +410,10 @@ int GATreeBASE::swaptree(GANodeBASE *a, GANodeBASE *b)
 // tree, so I won't worry about the different trees case.
 int GATreeBASE::swapnode(GANodeBASE *a, GANodeBASE *b)
 {
-	if ((a == nullptr) || (b == nullptr) || a == b) {
+	if ((a == nullptr) || (b == nullptr) || a == b) 
+	{
 		return NO_ERR;
-}
+	}
 
 	GANodeBASE *aprev = a->prev;
 	GANodeBASE *anext = a->next;
