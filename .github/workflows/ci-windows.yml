@@ -11,6 +11,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: run-vcpkg
       uses: lukka/run-vcpkg@v10.2
+      with:
+        vcpkgGitCommitId: '314018fef43c7e3a52a3e46599313b70ace3977a'
 
     #- name: install dependencies
     #  run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
