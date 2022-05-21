@@ -13,14 +13,22 @@ jobs:
       uses: lukka/run-vcpkg@v10.2
       with:
         vcpkgGitCommitId: '314018fef43c7e3a52a3e46599313b70ace3977a'
+        
+    - name: Run CMake consuming CMakePreset.json and vcpkg.json by mean of vcpkg.
+      uses: lukka/run-cmake@v10
+      with:
+        # cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+        configurePreset: 'ninja-multi-vcpkg'
+        buildPreset: 'ninja-multi-vcpkg'
+
 
     #- name: install dependencies
     #  run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
-    - name: cmake config
-      run: |
-        md build
-        cd build
-        cmake ../ -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+    #- name: cmake config
+    #  run: |
+    #    md build
+    #    cd build
+    #    cmake ../ -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
     - name: make
       run: cmake --build ./build
     - name: run unit tests
