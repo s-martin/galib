@@ -217,8 +217,7 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 		int z = GAMin(STA_CAST(int, nz), d);
 		for (int k = z - 1; k >= 0; k--)
 		{
-			int j;
-			for (j = ny - 1; j >= 0; j--)
+			for (int j = ny - 1; j >= 0; j--)
 			{
 				GABinaryString::move(k * h * w + j * w, k * ny * nx + j * nx,
 									 nx);
@@ -227,7 +226,7 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 					bit(k * h * w + j * w + i, GARandomBit());
 				}
 			}
-			for (j = ny; j < h; j++)
+			for (int j = ny; j < h; j++)
 			{
 				for (int i = 0; i < w; i++)
 				{
@@ -257,12 +256,11 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 		int z = GAMin(STA_CAST(int, nz), d);
 		for (int k = z - 1; k >= 0; k--)
 		{
-			int j;
-			for (j = ny - 1; j >= 0; j--)
+			for (int j = ny - 1; j >= 0; j--)
 			{
 				GABinaryString::move(k * h * w + j * w, k * ny * w + j * w, w);
 			}
-			for (j = ny; j < h; j++)
+			for (int j = ny; j < h; j++)
 			{
 				for (int i = 0; i < w; i++)
 				{

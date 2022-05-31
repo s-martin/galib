@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: install dependencies
       run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
     - name: cmake config
