@@ -282,10 +282,10 @@ class GASharing : public GAScalingScheme
 		_alpha = a;
 		_minmax = 0;
 	}
-	explicit GASharing(float cut = gaDefSharingCutoff, float a = 1.0)
+	explicit GASharing(float cut = gaDefSharingCutoff, float a = 1.0) :
+		df(nullptr)
 	{
 		N = 0;
-		df = nullptr;
 		_sigma = cut;
 		_alpha = a;
 		_minmax = 0;

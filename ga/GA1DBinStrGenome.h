@@ -12,8 +12,8 @@ crossover objects and all the default and built-in operators.
 #ifndef _ga_binstr1_h_
 #define _ga_binstr1_h_
 
-#include <GABinStr.h>
-#include <GAGenome.h>
+#include "GABinStr.h"
+#include "GAGenome.h"
 
 /* ----------------------------------------------------------------------------
 1DBinaryStringGenome
@@ -66,7 +66,7 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	}
 	GA1DBinaryStringGenome &operator=(const short array[]) // no err checks!
 	{
-		for (unsigned int i = 0; i < sz; i++)
+		for (unsigned int i = 0; i < data.size(); i++)
 		{
 			gene(i, *(array + i));
 		}
@@ -74,7 +74,7 @@ class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 	}
 	GA1DBinaryStringGenome &operator=(const int array[]) // no err checks!
 	{
-		for (unsigned int i = 0; i < sz; i++)
+		for (unsigned int i = 0; i < data.size(); i++)
 		{
 			gene(i, *(array + i));
 		}
