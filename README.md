@@ -68,27 +68,25 @@ Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is rec
 
 If you want to use code coverage:
 
-2. `sudo apt install lcov`
-
-3. `sudo apt install gcovr`
+2. `sudo apt install lcov gcovr`
 
 Configure and build:
 
-4. `mkdir build && cd build`
+3. `mkdir build && cd build`
 
-5. `cmake ../`
+4. `cmake ../`
 
-6. `make`
+5. `make`
 
 Run unit tests:
 
-7. `make test`
+6. `make test`
 
 Run unit tests and create coverage:
 
-8. `make GAlib_lcov`
+7. `make GAlib_lcov`
 
-9. `make GAlib_gcov`
+8. `make GAlib_gcov`
 
 ### Building shared libraries
 
