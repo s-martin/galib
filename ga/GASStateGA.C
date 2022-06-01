@@ -33,8 +33,7 @@ GASteadyStateGA::GASteadyStateGA(const GAPopulation &p, const std::shared_ptr<GA
 {
 	pRepl = params->replacementPercentage;
 
-	float n =
-		((pRepl * static_cast<float>(pop->size()) < 1) ? 1 : pRepl * static_cast<float>(pop->size()));
+	float n = ((pRepl * static_cast<float>(pop->size()) < 1) ? 1 : pRepl * static_cast<float>(pop->size()));
 	tmpPop = new GAPopulation(pop->individual(0), static_cast<unsigned int>(n));
 
 	nRepl = tmpPop->size();
@@ -43,13 +42,19 @@ GASteadyStateGA::GASteadyStateGA(const GAPopulation &p, const std::shared_ptr<GA
 
 	which = USE_PREPL;
 }
+
 GASteadyStateGA::GASteadyStateGA(const GASteadyStateGA &ga)
 	: GAGeneticAlgorithm(ga)
 {
 	tmpPop = nullptr;
 	copy(ga);
 }
-GASteadyStateGA::~GASteadyStateGA() { delete tmpPop; }
+
+GASteadyStateGA::~GASteadyStateGA() 
+{ 
+	delete tmpPop;
+}
+
 GASteadyStateGA &GASteadyStateGA::operator=(const GASteadyStateGA &ga)
 {
 	if (&ga != this)
@@ -58,6 +63,7 @@ GASteadyStateGA &GASteadyStateGA::operator=(const GASteadyStateGA &ga)
 	}
 	return *this;
 }
+
 void GASteadyStateGA::copy(const GAGeneticAlgorithm &g)
 {
 	GAGeneticAlgorithm::copy(g);
@@ -256,19 +262,20 @@ void GASteadyStateGA::initialize(unsigned int seed)
 // replaced regardless of its better score.
 void GASteadyStateGA::step()
 {
-	int i, mut, c1, c2;
+	int mut, c1;
 	GAGenome *mom, *dad; // tmp holders for selected genomes
 
 	// Generate the individuals in the temporary population from individuals in
 	// the main population.
-
+	int i;
 	for (i = 0; i < tmpPop->size() - 1; i += 2)
 	{ // takes care of odd population
 		mom = &(pop->select());
 		dad = &(pop->select());
 		stats.numsel += 2; // keep track of number of selections
 
-		c1 = c2 = 0;
+		c1 = 0;
+		int c2 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
 			stats.numcro += (*scross)(*mom, *dad, &tmpPop->individual(i),
@@ -293,6 +300,7 @@ void GASteadyStateGA::step()
 
 		stats.numeval += c1 + c2;
 	}
+
 	if (tmpPop->size() % 2 != 0)
 	{ // do the remaining population member
 		mom = &(pop->select());
@@ -332,7 +340,7 @@ void GASteadyStateGA::step()
 	// force a clone of the genome - we just let the population take over.  Then
 	// we take it back by doing a remove then a replace in the tmp population.
 
-	for (i = 0; i < tmpPop->size(); i++)
+	for (int i = 0; i < tmpPop->size(); i++)
 	{
 		pop->add(&tmpPop->individual(i));
 	}

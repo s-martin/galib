@@ -1,11 +1,9 @@
-# Release Notes for GAlib #
+# Release Notes for GAlib
 
 ## 3.0.0
 
 First release of modernized GAlib utilizing C++17 features.
 
-*TODO*
-
 ## 2.4.7
 
-Last version of original GAlib (http://lancet.mit.edu/ga)
+Last version of original GAlib (<http://lancet.mit.edu/ga>)

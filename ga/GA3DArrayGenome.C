@@ -363,8 +363,8 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 	aset = std::vector<GAAlleleSet<T>>(1);
 	aset.at(0) = s;
 
-	initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
-	mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
+	this->initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
+	this->mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
 	comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
 	crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
@@ -374,14 +374,14 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 												unsigned int d,
 												const GAAlleleSetArray<T> &sa,
 												GAGenome::Evaluator f, void *u)
-	: GA3DArrayGenome<T>(w, h, d, f, u)
+	: GA3DArrayGenome<T>(w, h, d, f, u),
+	aset(std::vector<GAAlleleSet<T>>(sa.size()))
 {
-	aset = std::vector<GAAlleleSet<T>>(sa.size());
 	for (int i = 0; i < aset.size(); i++)
 		aset.at(i) = sa.set(i);
 
-	initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
-	mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
+	this->initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
+	this->mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
 	comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
 	crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
@@ -776,13 +776,12 @@ int GA3DArrayGenome<T>::EvenOddCrossover(const GAGenome &p1, const GAGenome &p2,
 		else
 		{
 			int startx, starty, startz;
-			int maxx = (sis.width() > bro.width()) ? sis.width() : bro.width();
+			//int maxx = (sis.width() > bro.width()) ? sis.width() : bro.width();
 			int minx = (mom.width() < dad.width()) ? mom.width() : dad.width();
-			int maxy =
-				(sis.height() > bro.height()) ? sis.height() : bro.height();
+			//int maxy = (sis.height() > bro.height()) ? sis.height() : bro.height();
 			int miny =
 				(mom.height() < dad.height()) ? mom.height() : dad.height();
-			int maxz = (sis.depth() > bro.depth()) ? sis.depth() : bro.depth();
+			//int maxz = (sis.depth() > bro.depth()) ? sis.depth() : bro.depth();
 			int minz = (mom.depth() < dad.depth()) ? mom.depth() : dad.depth();
 			startx = (sis.width() < minx) ? sis.width() : minx;
 			starty = (sis.height() < miny) ? sis.height() : miny;

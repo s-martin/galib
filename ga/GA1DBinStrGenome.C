@@ -146,7 +146,7 @@ int GA1DBinaryStringGenome::resize(int l)
 	}
 	nx = l;
 	_evaluated = false;
-	return sz;
+	return data.size();
 }
 
 // We read data from a stream as a series of 1's and 0's.  We want a continuous
@@ -374,7 +374,6 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 		DYN_CAST(const GA1DBinaryStringGenome &, p2);
 
 	int n = 0;
-	int i;
 
 	if ((c1 != nullptr) && (c2 != nullptr))
 	{
@@ -384,7 +383,7 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 		if (sis.length() == bro.length() && mom.length() == dad.length() &&
 			sis.length() == mom.length())
 		{
-			for (i = sis.length() - 1; i >= 0; i--)
+			for (int i = sis.length() - 1; i >= 0; i--)
 			{
 				if (GARandomBit() != 0)
 				{
@@ -401,23 +400,22 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 		else
 		{
 			GAMask mask;
-			int start;
 			int max =
 				(sis.length() > bro.length()) ? sis.length() : bro.length();
 			int min =
 				(mom.length() < dad.length()) ? mom.length() : dad.length();
 			mask.size(max);
-			for (i = 0; i < max; i++)
+			for (int i = 0; i < max; i++)
 			{
 				mask[i] = GARandomBit();
 			}
-			start = (sis.length() < min) ? sis.length() - 1 : min - 1;
-			for (i = start; i >= 0; i--)
+			int start = (sis.length() < min) ? sis.length() - 1 : min - 1;
+			for (int i = start; i >= 0; i--)
 			{
 				sis.gene(i, (mask[i] != 0 ? mom.gene(i) : dad.gene(i)));
 			}
 			start = (bro.length() < min) ? bro.length() - 1 : min - 1;
-			for (i = start; i >= 0; i--)
+			for (int i = start; i >= 0; i--)
 			{
 				bro.gene(i, (mask[i] != 0 ? dad.gene(i) : mom.gene(i)));
 			}
@@ -432,7 +430,7 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 
 		if (mom.length() == dad.length() && sis.length() == mom.length())
 		{
-			for (i = sis.length() - 1; i >= 0; i--)
+			for (int i = sis.length() - 1; i >= 0; i--)
 			{
 				sis.gene(i, (GARandomBit() != 0 ? mom.gene(i) : dad.gene(i)));
 			}
@@ -442,7 +440,7 @@ int GA1DBinaryStringGenome::UniformCrossover(const GAGenome &p1,
 			int min =
 				(mom.length() < dad.length()) ? mom.length() : dad.length();
 			min = (sis.length() < min) ? sis.length() : min;
-			for (i = min - 1; i >= 0; i--)
+			for (int i = min - 1; i >= 0; i--)
 			{
 				sis.gene(i, (GARandomBit() != 0 ? mom.gene(i) : dad.gene(i)));
 			}
@@ -753,10 +751,9 @@ int GA1DBinaryStringGenome::EvenOddCrossover(const GAGenome &p1,
 		}
 		else
 		{
-			int start;
 			int min =
 				(mom.length() < dad.length()) ? mom.length() : dad.length();
-			start = (sis.length() < min) ? sis.length() - 1 : min - 1;
+			int start = (sis.length() < min) ? sis.length() - 1 : min - 1;
 			for (i = start; i >= 0; i--)
 			{
 				sis.gene(i, ((i % 2 == 0) ? mom.gene(i) : dad.gene(i)));

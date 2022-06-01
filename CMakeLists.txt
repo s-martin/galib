@@ -35,7 +35,7 @@ message(STATUS "Boost version: ${Boost_VERSION}")
 
 #find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
 
-#doxygen_add_docs(doc ${CMAKE_SOURCE_DIR}/ga)
+#doxygen_add_docs(doc ${PROJECT_SOURCE_DIR}/ga)
 
 if(NOT MSVC) 
 	find_package(X11 REQUIRED)

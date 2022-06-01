@@ -25,14 +25,14 @@ that for common instantiations (float, char).
 #ifndef _ga_array1_h_
 #define _ga_array1_h_
 
-#include <GAAllele.h>
-#include <GAArray.h>
-#include <GAGenome.h>
-#include <GAMask.h>
+#include "GAAllele.h"
+#include "GAArray.h"
+#include "GAGenome.h"
+#include "GAMask.h"
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
-#include <garandom.h>
+#include <cstring> 
+#include "garandom.h"
 #include <vector>
 #include <array>
 
@@ -459,10 +459,8 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 			}
 			else
 			{
-				int start;
-				int min =
-					(mom.length() < dad.length()) ? mom.length() : dad.length();
-				start = (sis.length() < min) ? sis.length() - 1 : min - 1;
+				int min = (mom.length() < dad.length()) ? mom.length() : dad.length();
+				int start = (sis.length() < min) ? sis.length() - 1 : min - 1;
 				for (i = start; i >= 0; i--)
 					sis.gene(i, ((i % 2 == 0) ? mom.gene(i) : dad.gene(i)));
 				start = (bro.length() < min) ? bro.length() - 1 : min - 1;
@@ -1228,9 +1226,9 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
   public:
 	GA1DArrayAlleleGenome(unsigned int length, const GAAlleleSet<T> &s,
 						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
-		: GA1DArrayGenome<T>(length, f, u)
-	{
-		aset = std::vector<GAAlleleSet<T>>(1);
+		: GA1DArrayGenome<T>(length, f, u),
+		aset(std::vector<GAAlleleSet<T>>(1))
+	{		
 		aset.at(0) = s;
 
 		this->initializer(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_INITIALIZER);
@@ -1239,11 +1237,10 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		this->crossover(GA1DArrayAlleleGenome<T>::DEFAULT_1DARRAY_ALLELE_CROSSOVER);
 	}
 
-	GA1DArrayAlleleGenome(const GAAlleleSetArray<T> &sa,
-						  GAGenome::Evaluator f = nullptr, void *u = nullptr)
-		: GA1DArrayGenome<T>(sa.size(), f, u)
+	GA1DArrayAlleleGenome(const GAAlleleSetArray<T> &sa, GAGenome::Evaluator f = nullptr, void *u = nullptr)
+		: GA1DArrayGenome<T>(sa.size(), f, u),
+		aset(std::vector<GAAlleleSet<T>>(sa.size()))
 	{
-		aset = std::vector<GAAlleleSet<T>>(sa.size());
 		for (int i = 0; i < size(); i++)
 			aset.at(i) = sa.set(i);
 

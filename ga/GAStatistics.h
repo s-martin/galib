@@ -127,16 +127,26 @@ class GAStatistics
 	unsigned int nconv, Nconv; // how many scores we're recording (flushFreq)
 	float *cscore; // best score of last n generations
 
-	unsigned int nscrs, Nscrs; // how many scores do we have?
-	int *gen; // generation number corresponding to scores
-	float *aveScore; // average scores of each generation
-	float *maxScore; // best scores of each generation
-	float *minScore; // worst scores of each generation
-	float *devScore; // stddev of each generation
-	float *divScore; // diversity of each generation
-	std::string scorefile; // name of file to which scores get written
-	int which; // which data to write to file
-	GAPopulation *boa; // keep a copy of the best genomes
+	// how many scores do we have?
+	unsigned int nscrs, Nscrs; 
+	// generation number corresponding to scores
+	std::vector<int> gen; 
+	// average scores of each generation
+	std::vector<float> aveScore; 
+	// best scores of each generation
+	std::vector<float> maxScore; 
+	// worst scores of each generation
+	std::vector<float> minScore; 
+	// stddev of each generation
+	std::vector<float> devScore; 
+	// diversity of each generation
+	std::vector<float> divScore;
+	// name of file to which scores get written
+	std::string scorefile; 
+	// which data to write to file
+	int which; 
+	// keep a copy of the best genomes
+	GAPopulation *boa; 
 
 	void setConvergence(float);
 	void setScore(const GAPopulation &);

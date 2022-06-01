@@ -90,7 +90,7 @@ int GA2DBinaryStringGenome::resize(int w, int h)
 	if (static_cast<unsigned int>(w) == nx &&
 		static_cast<unsigned int>(h) == ny)
 	{
-		return sz;
+		return data.size();
 	}
 
 	if (w == GAGenome::ANY_SIZE)
@@ -179,7 +179,7 @@ int GA2DBinaryStringGenome::resize(int w, int h)
 	nx = w;
 	ny = h;
 	_evaluated = false;
-	return sz;
+	return data.size();
 }
 
 int GA2DBinaryStringGenome::read(std::istream &is)
@@ -896,10 +896,9 @@ int GA2DBinaryStringGenome::EvenOddCrossover(const GAGenome &p1,
 		}
 		else
 		{
-			int count;
 			int minx = GAMin(mom.width(), dad.width());
 			int miny = GAMin(mom.height(), dad.height());
-			count = 0;
+			int count = 0;
 			minx = GAMin(sis.width(), minx);
 			miny = GAMin(sis.height(), miny);
 			for (i = 0; i < minx; i++)

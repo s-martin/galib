@@ -136,7 +136,7 @@ class GABin2DecGenome : public GA1DBinaryStringGenome
 		decoder(DEFAULT_BIN2DEC_DECODER);
 	}
 	GABin2DecGenome(const GABin2DecGenome &orig)
-		: GA1DBinaryStringGenome(orig.sz)
+		: GA1DBinaryStringGenome(orig.data.size())
 	{
 		ptype = nullptr;
 		copy(orig);

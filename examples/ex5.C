@@ -13,9 +13,9 @@ used with it.  All of the operators (initialization, mutation, crossover,
 comparison, and objective) are defined as member functions but are also
 override-able on any instance of the new genome.
 ---------------------------------------------------------------------------- */
-#include <GA2DBinStrGenome.h>
-#include <GABin2DecGenome.h>
-#include <GASStateGA.h>
+#include "GA2DBinStrGenome.h"
+#include "GABin2DecGenome.h"
+#include "GASStateGA.h"
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
@@ -287,7 +287,7 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				sprintf(filename1, argv[i]);
+				sprintf(filename1, "%s", argv[i]);
 				continue;
 			}
 		}
@@ -300,7 +300,7 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				sprintf(filename2, argv[i]);
+				sprintf(filename2, "%s", argv[i]);
 				continue;
 			}
 		}
