@@ -98,7 +98,7 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 	if (w == STA_CAST(int, nx) && h == STA_CAST(int, ny) &&
 		d == STA_CAST(int, nz))
 	{
-		return sz;
+		return data.size();
 	}
 
 	if (w == GAGenome::ANY_SIZE)
@@ -281,7 +281,7 @@ int GA3DBinaryStringGenome::resize(int w, int h, int d)
 	ny = h;
 	nz = d;
 	_evaluated = false;
-	return sz;
+	return data.size();
 }
 
 int GA3DBinaryStringGenome::read(std::istream &is)
