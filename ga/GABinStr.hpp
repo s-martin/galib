@@ -31,11 +31,6 @@ class GABinaryString
 		resize(s);
 	}
 
-	GABinaryString(const GABinaryString &orig)
-	{
-		copy(orig);
-	}
-
 	/**
 	 * @brief 
 	 * 
@@ -70,9 +65,11 @@ class GABinaryString
 		data.resize(x);
 		return data.size();
 	}
+
 	int size() const { return data.size(); }
 
 	short bit(unsigned int a) const { return (data[a]); }
+
 	short bit(unsigned int a, short val)
 	{ // set/unset the bit
 		return (data[a] = (val != 0 ? 1 : 0));
@@ -151,5 +148,6 @@ class GABinaryString
 	}
 
   protected:
-	std::vector<GABit> data; // the data themselves
+	/// the data themselves
+	std::vector<GABit> data; 
 };
