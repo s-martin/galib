@@ -12,7 +12,7 @@ crossover objects and all the default and built-in operators.
 #ifndef _ga_binstr2_h_
 #define _ga_binstr2_h_
 
-#include <GABinStr.h>
+#include <GABinStr.hpp>
 #include <GAGenome.h>
 
 /* ----------------------------------------------------------------------------
