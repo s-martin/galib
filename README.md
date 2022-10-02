@@ -1,7 +1,7 @@
 # Modern GAlib: A (modernized) C++ Genetic Algorithm Library
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/330617ca280b4c2287a8fd9d2f9bcc90)](https://app.codacy.com/gh/s-martin/galib?utm_source=github.com&utm_medium=referral&utm_content=s-martin/galib&utm_campaign=Badge_Grade_Settings)
-![](https://github.com/s-martin/galib/workflows/CI-Linux/badge.svg) ![](https://github.com/s-martin/galib/workflows/CI-Windows/badge.svg) ![](https://github.com/s-martin/galib/workflows/CodeQL/badge.svg) [![Codacy Security Scan](https://github.com/s-martin/galib/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codacy-analysis.yml)
+[![CI-Linux](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml) [![CI-Windows](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml) ![](https://github.com/s-martin/galib/workflows/CodeQL/badge.svg) [![CodeQL](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml) [![Microsoft C++ Code Analysis](https://github.com/s-martin/galib/actions/workflows/msvc.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/msvc.yml)
 
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
