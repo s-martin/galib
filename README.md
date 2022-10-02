@@ -12,7 +12,7 @@ scaling, and termination methods.
 
 GAlib was originally developed by Matthew Wall.
 
-Modernized GAlib from version 3.0 on is a fork of the [original GAlib](http://lancet.mit.edu/ga) and modernized the original code using latest C++17 technology.  
+Modernized GAlib from version 3.0 on is a fork of the [original GAlib](http://lancet.mit.edu/ga) and modernized the original code using C++17 technology.  
 
 The library requires a C++ compiler conforming to C++17. It has been tested with
 
@@ -50,9 +50,9 @@ Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is rec
 
 2. Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
 
-#### Visual Studio 2019
+#### Visual Studio 2019 or later
 
-3. Open path in Visual Studio 2019 as CMake project.
+3. Open path in Visual Studio as CMake project.
 
 #### Previous versions of Visual Studio
 
