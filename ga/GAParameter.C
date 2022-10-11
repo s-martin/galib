@@ -301,7 +301,7 @@ bool GAParameterList::write(const char *filename) const
 // whose name we do not know about, we ignore the pair and go on to the next.
 // There's no global list to tell us what type things are, and we don't assume.
 //   We don't allow setting pointers using this method.
-bool GAParameterList::read(std::istream &is, bool flag)
+bool GAParameterList::read(std::istream &is, bool)
 {
 	if (this->empty())
 	{

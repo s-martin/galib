@@ -141,7 +141,7 @@ class GABinaryString
 
 	void randomize()
 	{
-		for (auto item : data)
+		for (auto &item : data)
 		{
 			item = static_cast<GABit>(GARandomBit());
 		}
