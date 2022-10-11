@@ -91,7 +91,8 @@ GABin2DecGenome ex2(unsigned int seed, bool useStatic)
 	GABin2DecGenome genome(map, objectiveEx2, (void*)target.data());
 
 	// Now create the GA using the genome, set the parameters, and run it.
-	GASimpleGA ga(genome);
+	auto params = std::make_shared<GAParameterList>();
+	GASimpleGA ga(genome, params);
 	ga.populationSize(25);
 	ga.nGenerations(100);
 	ga.pMutation(0.01);

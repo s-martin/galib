@@ -47,19 +47,20 @@ main(int argc, char *argv[])
 
 // Set the default values of the parameters and declare the params variable.
 
-  GAParameterList params;
-  GASimpleGA::registerDefaultParameters(params);
-  GASteadyStateGA::registerDefaultParameters(params);
-  GAIncrementalGA::registerDefaultParameters(params);
-  params.set(gaNpopulationSize, 30);	// population size
-  params.set(gaNpCrossover, 0.9);	// probability of crossover
-  params.set(gaNpMutation, 0.001);	// probability of mutation
-  params.set(gaNnGenerations, 400);	// number of generations
-  params.set(gaNpReplacement, 0.25);	// how much of pop to replace each gen
-  params.set(gaNscoreFrequency, 10);	// how often to record scores
-  params.set(gaNflushFrequency, 50);	// how often to dump scores to file
-  params.set(gaNscoreFilename, "bog.dat");
-  params.parse(argc, argv, false);    // parse command line for GAlib args
+  auto params = std::make_shared<GAParameterList>();
+  // TODO check, how this registering works
+  //GASimpleGA::registerDefaultParameters(params);
+  //GASteadyStateGA::registerDefaultParameters(params);
+  //GAIncrementalGA::registerDefaultParameters(params);
+  params->set(gaNpopulationSize, 30);	// population size
+  params->set(gaNpCrossover, 0.9);	// probability of crossover
+  params->set(gaNpMutation, 0.001);	// probability of mutation
+  params->set(gaNnGenerations, 400);	// number of generations
+  params->set(gaNpReplacement, 0.25);	// how much of pop to replace each gen
+  params->set(gaNscoreFrequency, 10);	// how often to record scores
+  params->set(gaNflushFrequency, 50);	// how often to dump scores to file
+  params->set(gaNscoreFilename, "bog.dat");
+  params->parse(argc, argv);    // parse command line for GAlib args
 
   const int SIMPLE=0, STEADY_STATE=1, INCREMENTAL=2;
   int whichGA = SIMPLE;
@@ -152,8 +153,7 @@ main(int argc, char *argv[])
   switch(whichGA){
   case STEADY_STATE:
     {
-      GASteadyStateGA ga(genome);
-      ga.parameters(params);
+      GASteadyStateGA ga(genome, params);
       ga.evolve(seed);
       genome = ga.statistics().bestIndividual();
       stats = ga.statistics();
@@ -161,8 +161,7 @@ main(int argc, char *argv[])
     break;
   case INCREMENTAL:
     {
-      GAIncrementalGA ga(genome);
-      ga.parameters(params);
+      GAIncrementalGA ga(genome, params);
       ga.evolve(seed);
       genome = ga.statistics().bestIndividual();
       stats = ga.statistics();
@@ -171,8 +170,7 @@ main(int argc, char *argv[])
   case SIMPLE:
   default:
     {
-      GASimpleGA ga(genome);
-      ga.parameters(params);
+      GASimpleGA ga(genome, params);
       ga.evolve(seed);
       genome = ga.statistics().bestIndividual();
       stats = ga.statistics();

@@ -88,7 +88,8 @@ main(int argc, char **argv)
   genome.mutator(GATreeGenome<Point>::DestructiveMutator);
   GAPopulation destpop(genome, 50);
 
-  GASteadyStateGA ga(genome);
+  auto params = std::make_shared<GAParameterList>();
+  GASteadyStateGA ga(genome, params);
   ga.nGenerations(10);
 
 // first do evolution with subtree swap mutator.

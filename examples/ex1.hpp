@@ -46,7 +46,8 @@ GASimpleGA ex1()
 	// Now that we have the genome, we create the genetic algorithm and set
 	// its parameters - number of generations, mutation probability, and crossover
 	// probability.  And finally we tell it to evolve itself.
-	GASimpleGA ga(genome);
+	auto params = std::make_shared<GAParameterList>();
+	GASimpleGA ga(genome, params);
 	ga.populationSize(30);
 	ga.nGenerations(400);
 	ga.pMutation(0.001);

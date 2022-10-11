@@ -126,7 +126,7 @@ template <> int GATreeGenome<int>::write(std::ostream &os) const
 	return os.fail() ? 1 : 0;
 }
 
-GATreeGenome<int> ex6(GAParameterList params, unsigned int seed)
+GATreeGenome<int> ex6(const std::shared_ptr<GAParameterList>& params, unsigned int seed)
 {
 	// Now create the GA and run it.  We first create a chromsome with the
 	// operators we want.  Once we have the genome set up, create the genetic
@@ -135,8 +135,7 @@ GATreeGenome<int> ex6(GAParameterList params, unsigned int seed)
 	genome.initializer(TreeInitializer);
 	genome.mutator(GATreeGenome<int>::SwapSubtreeMutator);
 
-	GASteadyStateGA ga(genome);
-	ga.parameters(params);
+	GASteadyStateGA ga(genome, params);
 	ga.evolve(seed);
 
 	genome = ga.statistics().bestIndividual();

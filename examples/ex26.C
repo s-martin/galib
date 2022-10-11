@@ -115,15 +115,17 @@ main(int argc, char** argv) {
   genome.comparator(::Comparator);
   genome.crossover(XOVER);
 
-  GASteadyStateGA ga(genome);
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpReplacement, 1.0);
+  params->set(gaNpopulationSize, 100);
+  params->set(gaNnGenerations, 1000);
+  params->set(gaNpMutation, 0.1);
+  params->set(gaNpCrossover, 1.0);
+  params->parse(argc, argv);
+
+  GASteadyStateGA ga(genome, params);
   ga.minimize();
-  ga.pReplacement(1.0);
-  ga.populationSize(100);
-  ga.nGenerations(1000);
-  ga.pMutation(0.1);
-  ga.pCrossover(1.0);
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv);
   std::cout << "initializing..."; std::cout.flush();
   ga.initialize(seed);
   std::cout << "evolving..."; std::cout.flush();

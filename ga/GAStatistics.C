@@ -14,12 +14,6 @@
 
 #include <fstream>
 
-// Default settings and their names.
-int gaDefNumBestGenomes = 1;
-int gaDefScoreFrequency1 = 1;
-int gaDefScoreFrequency2 = 100;
-int gaDefFlushFrequency = 0;
-std::string gaDefScoreFilename = "generations.dat";
 
 GAStatistics::GAStatistics()
 {
@@ -32,7 +26,7 @@ GAStatistics::GAStatistics()
 	aveCur = maxCur = minCur = devCur = 0.0;
 	divCur = -1.0;
 
-	scoreFreq = gaDefScoreFrequency1;
+	scoreFreq = 1;
 	dodiv = false; // default is do not calculate diversity
 
 	nconv = 0;

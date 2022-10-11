@@ -362,8 +362,9 @@ int main(int argc, char *argv[])
 	}
 
 	RobotPathGenome genome(nrobots, listsize);
-	GASteadyStateGA ga(genome);
-	ga.parameters(argc, argv);
+	auto params = std::make_shared<GAParameterList>();
+	params->parse(argc, argv);
+	GASteadyStateGA ga(genome, params);
 	ga.evolve();
 
 	genome.initialize();

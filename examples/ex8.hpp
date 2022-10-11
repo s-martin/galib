@@ -85,29 +85,29 @@ GAListGenome<int> ex8()
 	//  genome.mutator(GAListGenome<int>::SwapMutator);
 	genome.mutator(GAListGenome<int>::DestructiveMutator);
 
+	// Set the default parameters we want to use, then check the command line
+	// for other arguments that might modify these.
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNpopulationSize, 40); // population size
+	params->set(gaNpCrossover, 0.6); // probability of crossover
+	params->set(gaNpMutation, 0.05); // probability of mutation
+	params->set(gaNnGenerations, 50); // number of generations
+	params->set(gaNscoreFrequency, 1); // how often to record scores
+	params->set(gaNflushFrequency, 10); // how often to dump scores to file
+	params->set(gaNselectScores, // which scores should we track?
+		GAStatistics::Maximum | GAStatistics::Minimum | GAStatistics::Mean);
+	params->set(gaNscoreFilename, "bog.dat");
+
 	// Now that we have a genome, we use it to create our GA.  After creating
 	// the GA we set the parameters and tell the GA to use sigma truncation
 	// scaling rather than the default (linear scaling).  Set the crossover to
 	// single point crossover.  The genetic algorithm handles crossover since
 	// genomes don't know about other genomes.  We could set the crossover on
 	// the genome if we wanted - either way will work.
-	GASteadyStateGA ga(genome);
+	GASteadyStateGA ga(genome, params);
 	GASigmaTruncationScaling scale;
 	ga.scaling(scale);
 	ga.crossover(GAListGenome<int>::OnePointCrossover);
-
-	// Set the default parameters we want to use, then check the command line
-	// for other arguments that might modify these.
-	ga.set(gaNpopulationSize, 40); // population size
-	ga.set(gaNpCrossover, 0.6); // probability of crossover
-	ga.set(gaNpMutation, 0.05); // probability of mutation
-	ga.set(gaNnGenerations, 50); // number of generations
-	ga.set(gaNscoreFrequency, 1); // how often to record scores
-	ga.set(gaNflushFrequency, 10); // how often to dump scores to file
-	ga.set(gaNselectScores, // which scores should we track?
-		GAStatistics::Maximum | GAStatistics::Minimum | GAStatistics::Mean);
-	ga.set(gaNscoreFilename, "bog.dat");
-// TODO	ga.parameters(argc, argv);
 
 	// Evolve the genetic algorithm then dump out the results of the run.
 	ga.evolve();
@@ -115,7 +115,7 @@ GAListGenome<int> ex8()
 	genome = ga.statistics().bestIndividual();
 	//  std::cout << "the ga generated the list:\n" << genome << "\n";
 	std::cout << "the list contains " << genome.size() << " nodes\n";
-	std::cout << "the ga used the parameters:\n" << ga.parameters() << "\n";
+	std::cout << "the ga used the parameters:\n" << params << "\n";
 
 	return genome;
 }

@@ -160,16 +160,18 @@ main(int argc, char *argv[])
     }
   }
 
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 512);
+  params->set(gaNpCrossover, 0.9);
+  params->set(gaNpMutation, 0.001);
+  params->set(gaNnGenerations, 10000);
+  params->set(gaNscoreFilename, "bog.dat");
+  params->set(gaNflushFrequency, 100);
+  params->set(gaNscoreFrequency, 20);
+  params->parse(argc, argv);
   GA1DBinaryStringGenome genome(nbits, RoyalRoad);
-  GASteadyStateGA ga(genome);
-  ga.populationSize(512);
-  ga.pCrossover(0.9);
-  ga.pMutation(0.001);
-  ga.nGenerations(10000);
-  ga.scoreFilename("bog.dat");
-  ga.flushFrequency(100);
-  ga.scoreFrequency(20);
-  ga.parameters(argc, argv);
+  GASteadyStateGA ga(genome, params);
+
   GASigmaTruncationScaling trunc;
   ga.scaling(trunc);
   ga.evolve(seed);
@@ -177,7 +179,7 @@ main(int argc, char *argv[])
   std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
   std::cout << "the highest level achieved was " << highestLevel << "\n";
   std::cout << "\nthe statistics for the run are:\n" << ga.statistics();
-  std::cout << "\nthe parameters for the run are:\n" << ga.parameters();
+  std::cout << "\nthe parameters for the run are:\n" << params;
   std::cout.flush();
 
   return 0;

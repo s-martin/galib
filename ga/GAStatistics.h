@@ -16,12 +16,6 @@
 #include <gaconfig.h>
 #include <gatypes.h>
 
-// Default settings and their names.
-extern int gaDefNumBestGenomes;
-extern int gaDefScoreFrequency1;
-extern int gaDefScoreFrequency2;
-extern int gaDefFlushFrequency;
-extern std::string gaDefScoreFilename;
 
 /* ----------------------------------------------------------------------------
 Statistics class

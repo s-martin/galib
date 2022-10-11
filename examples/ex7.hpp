@@ -21,7 +21,7 @@ float objectiveEx7(GAGenome& c)
 	return (value);
 }
 
-GASteadyStateGA ex7(GAParameterList params, const std::string &datafile)
+GASteadyStateGA ex7(const std::shared_ptr<GAParameterList>& params, const std::string &datafile)
 {
 	// Read in the pattern from the specified file.  File format is pretty
 	// simple: two integers that give the height then width of the matrix, then
@@ -63,16 +63,7 @@ GASteadyStateGA ex7(GAParameterList params, const std::string &datafile)
 	// the user-data.
 
 	GA2DBinaryStringGenome genome(width, height, objectiveEx7, (void*)&target);
-	GASteadyStateGA ga(genome);
-
-	// When you use a GA with overlapping populations, the default score
-	// frequency (how often the best of generation score is recorded) defaults
-	// to 100.  We use the parameters member function to change this value
-	// (along with all of the other parameters we set above).  You can also
-	// change the score frequency using the scoreFrequency member function of
-	// the GA.  Each of the parameters can be set individually if you like.
-	//   Here we just use the values that were set in the parameter list.
-	ga.parameters(params);
+	GASteadyStateGA ga(genome, params);
 
 	// The default selection method is RouletteWheel.  Here we set the selection
 	// method to TournamentSelection.

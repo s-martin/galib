@@ -52,19 +52,20 @@ main(int argc, char** argv)
   GARealGenome genome(1, alleles, Objective);
   GASharing scale(Comparator);
 
-  GASimpleGA ga(genome);
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 50);	// how many individuals in the population
+  params->set(gaNnGenerations, 25);		// number of generations to evolve
+  params->set(gaNpMutation, 0.001);		// likelihood of mutating new offspring
+  params->set(gaNpCrossover, 0.9);		// likelihood of crossing over parents
+  params->set(gaNscoreFilename, "bog.dat");	// name of file for scores
+  params->set(gaNscoreFrequency, 1);		// keep the scores of every generation
+  params->set(gaNflushFrequency, 10);	// specify how often to write the score to disk
+  params->parse(argc, argv);
+
+  GASimpleGA ga(genome, params);
   ga.minimize();		// by default we want to minimize the objective
   ga.scaling(scale);		// set the scaling method to our sharing
-  ga.populationSize(50);	// how many individuals in the population
-  ga.nGenerations(25);		// number of generations to evolve
-  ga.pMutation(0.001);		// likelihood of mutating new offspring
-  ga.pCrossover(0.9);		// likelihood of crossing over parents
-  ga.scoreFilename("bog.dat");	// name of file for scores
-  ga.scoreFrequency(1);		// keep the scores of every generation
-  ga.flushFrequency(10);	// specify how often to write the score to disk
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, true); // parse commands, complain if bogus args
-
   ga.initialize();
 
 // dump the initial population to file

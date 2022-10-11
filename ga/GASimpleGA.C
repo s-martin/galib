@@ -11,29 +11,18 @@
 #include <boost/algorithm/string.hpp>
 #include "garandom.h"
 
-GAParameterList &GASimpleGA::registerDefaultParameters(GAParameterList &p)
-{
-	GAGeneticAlgorithm::registerDefaultParameters(p);
 
-	p.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &gaDefElitism);
-
-	return p;
-}
-
-GASimpleGA::GASimpleGA(const GAGenome &c) : GAGeneticAlgorithm(c)
+GASimpleGA::GASimpleGA(const GAGenome &c, const std::shared_ptr<GAParameterList>& _params) : GAGeneticAlgorithm(c, _params)
 {
 	oldPop = pop->clone();
 
 	el = true;
-	params.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &el);
 }
-
-GASimpleGA::GASimpleGA(const GAPopulation &p) : GAGeneticAlgorithm(p)
+GASimpleGA::GASimpleGA(const GAPopulation &p, const std::shared_ptr<GAParameterList>& _params) : GAGeneticAlgorithm(p, _params)
 {
 	oldPop = pop->clone();
 
 	el = true;
-	params.add(gaNelitism, gaSNelitism, ParType::BOOLEAN, &el);
 }
 
 GASimpleGA::GASimpleGA(const GASimpleGA &ga) : GAGeneticAlgorithm(ga)
@@ -70,30 +59,6 @@ void GASimpleGA::copy(const GAGeneticAlgorithm &g)
 		oldPop = ga.oldPop->clone();
 	}
 	oldPop->geneticAlgorithm(*this);
-}
-
-int GASimpleGA::setptr(const std::string &name, const void *value)
-{
-	int status = GAGeneticAlgorithm::setptr(name, value);
-
-	if (boost::equals(name, gaNelitism) || boost::equals(name, gaSNelitism))
-	{
-		el = (*((int *)value) != 0 ? true : false);
-		status = 0;
-	}
-	return status;
-}
-
-int GASimpleGA::get(const char *name, void *value) const
-{
-	int status = GAGeneticAlgorithm::get(name, value);
-
-	if (strcmp(name, gaNelitism) == 0 || strcmp(name, gaSNelitism) == 0)
-	{
-		*(static_cast<int *>(value)) = (el == true ? 1 : 0);
-		status = 0;
-	}
-	return status;
 }
 
 void GASimpleGA::objectiveFunction(GAGenome::Evaluator f)

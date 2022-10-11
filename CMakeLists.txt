@@ -22,7 +22,7 @@ endif()
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost 1.65 REQUIRED COMPONENTS unit_test_framework) # filesystem)
+find_package(Boost 1.65 REQUIRED COMPONENTS unit_test_framework program_options)
 message(STATUS "Boost version: ${Boost_VERSION}")
              
 # This is needed if your Boost version is newer than your CMake version
@@ -67,5 +67,7 @@ add_subdirectory(test)
 
 # copy test data
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
+file(COPY examples/settings.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)
-file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}) # for lcov coverage target TODO harmonize
+file(COPY examples/settings.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)
+file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}) # for lcov coverage target TODO harmonizefile(COPY examples/settings.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)

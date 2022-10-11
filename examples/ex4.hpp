@@ -48,7 +48,8 @@ GASteadyStateGA ex4()
 	// generation scores and also keeps one genome as the 'best of all' - the
 	// best genome that it encounters from all of the generations.  Here we tell
 	// the GA to keep track of all scores, not just the best-of-generation.
-	GASteadyStateGA ga(genome);
+	auto params = std::make_shared<GAParameterList>();
+	GASteadyStateGA ga(genome, params);
 	ga.populationSize(100);
 	ga.pReplacement(0.50); // replace 50% of population each generation
 	//  ga.nReplacement(4);	          // number of individuals to replace each

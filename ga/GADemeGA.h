@@ -30,11 +30,10 @@ class GADemeGA : public GAGeneticAlgorithm
 	{
 		ALL = (-1)
 	};
-	static GAParameterList &registerDefaultParameters(GAParameterList &);
 
   public:
-	explicit GADemeGA(const GAGenome &);
-	explicit GADemeGA(const GAPopulation &);
+	explicit GADemeGA(const GAGenome &, const std::shared_ptr<GAParameterList>& _params);
+	explicit GADemeGA(const GAPopulation &, const std::shared_ptr<GAParameterList>& _params);
 	GADemeGA(const GADemeGA &);
 	GADemeGA &operator=(const GADemeGA &);
 	~GADemeGA() override;
@@ -48,9 +47,6 @@ class GADemeGA : public GAGeneticAlgorithm
 		step();
 		return *this;
 	}
-
-	int setptr(const std::string &name, const void *value) override;
-	int get(const char *name, void *value) const override;
 
 	int minimaxi() const override { return minmax; }
 	int minimaxi(int m) override;

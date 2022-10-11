@@ -43,19 +43,18 @@ main(int argc, char *argv[])
 
 // Set the default values of the parameters.
 
-  GAParameterList params;
-  GASteadyStateGA::registerDefaultParameters(params);
-  params.set(gaNpopulationSize, 30);	// population size
-  params.set(gaNpCrossover, 0.6);	// probability of crossover
-  params.set(gaNpMutation, 0.01);	// probability of mutation
-  params.set(gaNnGenerations, 1000);	// number of generations
-  params.set(gaNpReplacement, 0.5);	// how much of pop to replace each gen
-  params.set(gaNscoreFrequency, 10);	// how often to record scores
-  params.set(gaNnReplacement, 4);	// how much of pop to replace each gen
-  params.set(gaNflushFrequency, 10);	// how often to dump scores to file
-  params.set(gaNscoreFilename, "bog.dat");
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 30);	// population size
+  params->set(gaNpCrossover, 0.6);	// probability of crossover
+  params->set(gaNpMutation, 0.01);	// probability of mutation
+  params->set(gaNnGenerations, 1000);	// number of generations
+  params->set(gaNpReplacement, 0.5);	// how much of pop to replace each gen
+  params->set(gaNscoreFrequency, 10);	// how often to record scores
+  params->set(gaNnReplacement, 4);	// how much of pop to replace each gen
+  params->set(gaNflushFrequency, 10);	// how often to dump scores to file
+  params->set(gaNscoreFilename, "bog.dat");
 //  params.read("settings.txt");	        // grab values from file first
-  params.parse(argc, argv, false); // parse command line for GAlib args
+  params->parse(argc, argv); // parse command line for GAlib args
 
 // Now create the GA and run it.  We first create a genome with the
 // operators we want.  Since we're using a template genome, we must assign
@@ -70,9 +69,8 @@ main(int argc, char *argv[])
 // make all of the individuals for its populations).  Set the parameters on 
 // the GA then let it evolve.
 
-  GASteadyStateGA ga(genome);
+  GASteadyStateGA ga(genome, params);
   ga.crossover(GAListGenome<int>::PartialMatchCrossover);
-  ga.parameters(params);
   ga.evolve();
 
 // Assign the best that the GA found to our genome then print out the results.
@@ -81,7 +79,7 @@ main(int argc, char *argv[])
   std::cout << "the ga generated the following list (objective score is ";
   std::cout << genome.score() << "):\n" << genome << "\n";
   std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
-  std::cout << ga.parameters() << "\n";
+  std::cout << params << "\n";
 
 //  char *fn;
 //  ga.get(gaNscoreFilename, &fn);

@@ -38,16 +38,15 @@ int main(int argc, char *argv[])
 	}
 
 	// Set the default values of the parameters.
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	params.set(gaNpopulationSize, 30);
-	params.set(gaNpCrossover, 0.7);
-	params.set(gaNpMutation, 0.01);
-	params.set(gaNnGenerations, 100);
-	params.set(gaNscoreFilename, "bog.dat");
-	params.set(gaNscoreFrequency, 10); // record score every 10th generation
-	params.set(gaNflushFrequency, 10); // dump scores every 10th recorded score
-	params.parse(argc, argv, false); // Parse the command line for GAlib args.
+	auto params = std::make_shared<GAParameterList>();
+	params->set(gaNpopulationSize, 30);
+	params->set(gaNpCrossover, 0.7);
+	params->set(gaNpMutation, 0.01);
+	params->set(gaNnGenerations, 100);
+	params->set(gaNscoreFilename, "bog.dat");
+	params->set(gaNscoreFrequency, 10); // record score every 10th generation
+	params->set(gaNflushFrequency, 10); // dump scores every 10th recorded score
+	params->parse(argc, argv); // Parse the command line for GAlib args.
 
 	ex6(params, seed);
 

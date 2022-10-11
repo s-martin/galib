@@ -36,7 +36,8 @@ GABin2DecGenome ex9(unsigned int seed)
 
 	// Now create the GA using the genome and run it.  We'll use sigma
 	// truncation scaling so that we can handle negative objective scores.
-	GASimpleGA ga(genome);
+	auto params = std::make_shared<GAParameterList>();
+	GASimpleGA ga(genome, params);
 	GASigmaTruncationScaling scaling;
 	ga.populationSize(30);
 	ga.nGenerations(100);

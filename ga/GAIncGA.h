@@ -52,8 +52,8 @@ public:
   static GAParameterList& registerDefaultParameters(GAParameterList&);
 
 public:
-  explicit GAIncrementalGA(const GAGenome&);
-  explicit GAIncrementalGA(const GAPopulation&);
+  explicit GAIncrementalGA(const GAGenome&, const std::shared_ptr<GAParameterList>& _params);
+  explicit GAIncrementalGA(const GAPopulation&, const std::shared_ptr<GAParameterList>& _params);
   GAIncrementalGA(const GAIncrementalGA&);
   GAIncrementalGA& operator=(const GAIncrementalGA&);
   ~GAIncrementalGA() override;
@@ -62,9 +62,6 @@ public:
   void initialize(unsigned int seed=0) override;
   void step() override;
   GAIncrementalGA & operator++() { step(); return *this; }
-
-  int setptr(const std::string &name, const void* value) override;
-  int get(const char* name, void* value) const override;
 
   void objectiveFunction(GAGenome::Evaluator f) override;
   void objectiveData(const GAEvalData& v) override;

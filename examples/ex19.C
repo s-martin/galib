@@ -50,17 +50,16 @@ main(int argc, char *argv[])
     }
   }
 
-  GAParameterList params;
-  GASteadyStateGA::registerDefaultParameters(params);
-  params.set(gaNpopulationSize, 30);	// population size
-  params.set(gaNpCrossover, 0.9);	// probability of crossover
-  params.set(gaNpMutation, 0.001);	// probability of mutation
-  params.set(gaNnGenerations, 400);	// number of generations
-  params.set(gaNpReplacement, 0.25);	// how much of pop to replace each gen
-  params.set(gaNscoreFrequency, 10);	// how often to record scores
-  params.set(gaNflushFrequency, 50);	// how often to dump scores to file
-  params.set(gaNscoreFilename, "bog.dat");
-  params.parse(argc, argv, false);    // parse command line for GAlib args
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 30);	// population size
+  params->set(gaNpCrossover, 0.9);	// probability of crossover
+  params->set(gaNpMutation, 0.001);	// probability of mutation
+  params->set(gaNnGenerations, 400);	// number of generations
+  params->set(gaNpReplacement, 0.25);	// how much of pop to replace each gen
+  params->set(gaNscoreFrequency, 10);	// how often to record scores
+  params->set(gaNflushFrequency, 50);	// how often to dump scores to file
+  params->set(gaNscoreFilename, "bog.dat");
+  params->parse(argc, argv);    // parse command line for GAlib args
 
   int whichFunction = 0;
 
@@ -138,8 +137,7 @@ main(int argc, char *argv[])
   GABin2DecGenome genome(map, objective[whichFunction]);
   //  GAStatistics stats;
 
-  GASteadyStateGA ga(genome);
-  ga.parameters(params);
+  GASteadyStateGA ga(genome, params);
   GASigmaTruncationScaling scaling;
   ga.scaling(scaling);
 

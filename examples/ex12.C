@@ -50,13 +50,12 @@ main(int argc, char *argv[])
 // Set the default values of the parameters then parse for command line changes
 
   int i;
-  GAParameterList params;
-  GASteadyStateGA::registerDefaultParameters(params);
-  params.set(gaNpopulationSize, 25);	// population size
-  params.set(gaNpCrossover, 0.9);	// probability of crossover 
-  params.set(gaNpMutation, 0.01);	// probability of mutation
-  params.set(gaNnGenerations, 4000);	// number of generations
-  params.parse(argc, argv, false);
+  auto params = std::make_shared<GAParameterList>();
+  params->set(gaNpopulationSize, 25);	// population size
+  params->set(gaNpCrossover, 0.9);	// probability of crossover 
+  params->set(gaNpMutation, 0.01);	// probability of mutation
+  params->set(gaNnGenerations, 4000);	// number of generations
+  params->parse(argc, argv);
 
 // Now create the GA and run it.  We first create a genome with the
 // operators we want.  Since we're using a template genome, we must assign
@@ -71,8 +70,7 @@ main(int argc, char *argv[])
   genome.initializer(AlphabetInitializer);
   genome.mutator(GAStringSwapMutator);
 
-  GASteadyStateGA ga(genome);
-  ga.parameters(params);
+  GASteadyStateGA ga(genome, params);
   ga.crossover(GAStringPartialMatchCrossover);
   ga.evolve();
 

@@ -22,7 +22,7 @@ float objectiveEx3(GAGenome& c)
 	return (value);
 }
 
-GASimpleGA ex3(GAParameterList params, const std::string& filename)
+GASimpleGA ex3(const std::shared_ptr<GAParameterList>& params, const std::string& filename)
 {
 	// Read in the pattern from the specified file.  File format is pretty
 	// simple: two integers that give the height then width of the matrix, then
@@ -62,8 +62,7 @@ GASimpleGA ex3(GAParameterList params, const std::string& filename)
 	// Now create the GA and run it.
 
 	GA2DBinaryStringGenome genome(width, height, objectiveEx3, (void*)target);
-	GASimpleGA ga(genome);
-	ga.parameters(params);
+	GASimpleGA ga(genome, params);
 	ga.evolve();
 
 	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";

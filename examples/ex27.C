@@ -39,15 +39,11 @@ any standard 3D cross-platform API, so you get this instead.)
 // by Goldberg (not in his book) and his students.
 class DCrowdingGA : public GASteadyStateGA {
 public:
-    GADefineIdentity("DeterministicCrowdingGA", 241);
-    explicit DCrowdingGA(const GAGenome& g) : GASteadyStateGA(g) {}
-    ~DCrowdingGA() override = default;
-    void step() override;
-    DCrowdingGA & operator++() 
-    { 
-        step(); 
-        return *this;
-    }
+  GADefineIdentity("DeterministicCrowdingGA", 241);
+  DCrowdingGA(const GAGenome& g, const std::shared_ptr<GAParameterList>& params) : GASteadyStateGA(g, params) {}
+  ~DCrowdingGA() override = default;
+  void step() override;
+  DCrowdingGA & operator++() { step(); return *this; }
 };
 
 void DCrowdingGA::step() 
@@ -193,14 +189,17 @@ main(int argc, char** argv) {
   genome.comparator(::Comparator);
   genome.crossover(::Crossover);
 
-  DCrowdingGA ga(genome);
-  ga.maximize();
-  ga.populationSize(100);
-  ga.nGenerations(100);
-  ga.pMutation(0.05);
-  ga.pCrossover(1.0);
+  auto params = std::make_shared<GAParameterList>();
+  
+  params->set(gaNpopulationSize, 100);
+  params->set(gaNnGenerations, 100);
+  params->set(gaNpMutation, 0.05);
+  params->set(gaNpCrossover, 1.0);
+  params->parse(argc, argv);
+
+  DCrowdingGA ga(genome, params);
   ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, false);
+  ga.maximize();
 
   for (i=1; i<argc; i++){
     if(strcmp("func", argv[i]) == 0 || strcmp("f", argv[i]) == 0){
