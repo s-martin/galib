@@ -74,6 +74,8 @@ void GAParameter::setvalue(const void *v)
 	switch (t)
 	{
 	case ParType::BOOLEAN:
+		val.ival = *((bool *)v) ? 1 : 0;
+		break;
 	case ParType::INT:
 		val.ival = *((int *)v);
 		break;

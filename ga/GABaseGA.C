@@ -187,7 +187,7 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGenome &g)
 	params.add(gaNflushFrequency, gaSNflushFrequency, ParType::INT,
 			   &gaDefFlushFrequency);
 	stats.recordDiversity(gaDefDivFlag);
-	params.add(gaNrecordDiversity, gaSNrecordDiversity, ParType::INT,
+	params.add(gaNrecordDiversity, gaSNrecordDiversity, ParType::BOOLEAN,
 			   &gaDefDivFlag);
 	stats.scoreFilename(gaDefScoreFilename);
 	params.add(gaNscoreFilename, gaSNscoreFilename, ParType::STRING,
