@@ -21,7 +21,7 @@ jobs:
           # Whether the boost libraries are linked statically or dynamically
           # link: # optional, default is 
           # The architecture the binaries were built for
-          arch: x64
+          arch: aarch64
           # The dirctory to install boost into
           # boost_install_dir: # optional, default is 
           # Wheter to use actions/cache to improve build times
