@@ -15,7 +15,7 @@ jobs:
       uses: MarkusJx/install-boost@v2.4.3
       with:
           # The boost version to install, e.g. "1.73.0"
-          boost_version: 1.81.0
+          boost_version: "1.81.0"
           toolset: msvc 
           platform_version: 2022 
           # Whether the boost libraries are linked statically or dynamically
