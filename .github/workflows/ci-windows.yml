@@ -27,11 +27,12 @@ jobs:
           # Wheter to use actions/cache to improve build times
           cache: true
     - name: Configure CMake
-      run: cmake -B ${{ env.build }}
-        -DBoost_INCLUDE_DIR=${{steps.install-boost.outputs.BOOST_ROOT}}/include 
-        -DBoost_LIBRARY_DIRS=${{steps.install-boost.outputs.BOOST_ROOT}}/lib
+      run: |
+          cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE -B build\
+          -DBoost_INCLUDE_DIR=${{steps.install-boost.outputs.BOOST_ROOT}}/include\
+          -DBoost_LIBRARY_DIRS=${{steps.install-boost.outputs.BOOST_ROOT}}/lib
       env:
-        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+          BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
     #- name: install dependencies
     #  run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
     #- name: cmake config
