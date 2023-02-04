@@ -15,13 +15,13 @@ jobs:
       uses: MarkusJx/install-boost@v2.4.3
       with:
           # The boost version to install, e.g. "1.73.0"
-          boost_version: 1.80.0
+          boost_version: 1.81.0
           toolset: msvc 
           platform_version: 2022 
           # Whether the boost libraries are linked statically or dynamically
           # link: # optional, default is 
           # The architecture the binaries were built for
-          arch: aarch64
+          arch: x86 # is also for AMD64
           # The dirctory to install boost into
           # boost_install_dir: # optional, default is 
           # Wheter to use actions/cache to improve build times
