@@ -13,6 +13,7 @@ jobs:
       # You may pin to the exact commit or the version.
      # uses: MarkusJx/install-boost@d175e516e6d321b68ff67afecf7da5e7c53c16f7
       uses: MarkusJx/install-boost@v2.4.3
+      id: install-boost
       with:
           # The boost version to install, e.g. "1.73.0"
           boost_version: 1.81.0
@@ -25,11 +26,12 @@ jobs:
           # The dirctory to install boost into
           # boost_install_dir: # optional, default is 
           # Wheter to use actions/cache to improve build times
-          cache: true
+          cache: false # doesnt work under windows
     - name: Configure CMake
       run: |
-          cmake . -DBOOST_ROOT=${{ steps.install-boost.outputs.BOOST_ROOT }} -B ./build
-          
+          cmake . -B ./build
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
     #- name: install dependencies
     #  run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
     #- name: cmake config
