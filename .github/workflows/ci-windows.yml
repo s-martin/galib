@@ -15,13 +15,11 @@ jobs:
       uses: MarkusJx/install-boost@v2.4.3
       id: install-boost
       with:
-          # The boost version to install, e.g. "1.73.0"
           boost_version: 1.81.0
           toolset: msvc 
           platform_version: 2022 
           # Whether the boost libraries are linked statically or dynamically
-          # link: # optional, default is 
-          # The architecture the binaries were built for
+          link: shared
           arch: x86 # is also for AMD64
           # The dirctory to install boost into
           # boost_install_dir: # optional, default is 
@@ -29,7 +27,7 @@ jobs:
           cache: false # doesnt work under windows
     - name: Configure CMake
       run: |
-          cmake . -B ./build
+          cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE -B ./build
       env:
         BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
     #- name: install dependencies
