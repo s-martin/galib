@@ -2,6 +2,11 @@ name: CI-Windows
 
 on: [push]
 
+env:
+  # Path to the CMake build directory.
+  build: '${{ github.workspace }}/build'
+  config: 'Debug'
+
 jobs:
   build:
 
@@ -9,6 +14,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
+    
     - name: Download and install Boost
       uses: MarkusJx/install-boost@v2.4.4
       id: install-boost
@@ -18,26 +24,24 @@ jobs:
           platform_version: 2022
           link: shared # or static
           arch: x86 # is also for AMD64
-          # The dirctory to install boost into
-          # boost_install_dir: # optional, default is 
-          cache: false # doesnt work under windows
+  
     - name: Configure CMake
-      run: |
-          cmake . -B ./build
+      run: cmake . -DCMAKE_BUILD_TYPE=${{ env.config }} -B ${{ env.build }}
       env:
         BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-    #- name: install dependencies
-    #  run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
-    #- name: cmake config
-    #  run: |
-    #    md build
-    #    cd build
-    #    cmake ../ -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
-    - name: make
-      run: cmake --build ./build
+        
+    - name: Build CMake
+      run: cmake --build ${{ env.build }}
+    
     - name: run unit tests
-      #working-directory: ./build
-      #run: ./test/Debug/GAlibTest.exe
-      run: |
-        cd build
-        ./test/Debug/GAlibTest.exe
+      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTes
+        
+
+
+
+
+
+
+
+
+
