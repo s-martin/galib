@@ -34,7 +34,7 @@ jobs:
       run: cmake --build ${{ env.build }}
     
     - name: run unit tests
-      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTes
+      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTest
         
 
 
