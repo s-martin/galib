@@ -7,9 +7,9 @@
 
   Source file for the simple genetic algorithm object.
 ---------------------------------------------------------------------------- */
-#include <GASimpleGA.h>
+#include "GASimpleGA.h"
 #include <boost/algorithm/string.hpp>
-#include <garandom.h>
+#include "garandom.h"
 
 
 GASimpleGA::GASimpleGA(const GAGenome &c, const std::shared_ptr<GAParameterList>& _params) : GAGeneticAlgorithm(c, _params)
@@ -24,12 +24,18 @@ GASimpleGA::GASimpleGA(const GAPopulation &p, const std::shared_ptr<GAParameterL
 
 	el = true;
 }
+
 GASimpleGA::GASimpleGA(const GASimpleGA &ga) : GAGeneticAlgorithm(ga)
 {
 	oldPop = nullptr;
 	copy(ga);
 }
-GASimpleGA::~GASimpleGA() { delete oldPop; }
+
+GASimpleGA::~GASimpleGA() 
+{ 
+	delete oldPop;
+}
+
 GASimpleGA &GASimpleGA::operator=(const GASimpleGA &ga)
 {
 	if (&ga != this)
@@ -38,6 +44,7 @@ GASimpleGA &GASimpleGA::operator=(const GASimpleGA &ga)
 	}
 	return *this;
 }
+
 void GASimpleGA::copy(const GAGeneticAlgorithm &g)
 {
 	GAGeneticAlgorithm::copy(g);
@@ -138,7 +145,7 @@ void GASimpleGA::initialize(unsigned int seed)
 // population.
 void GASimpleGA::step()
 {
-	int i, mut, c1, c2;
+	int mut, c1;
 	GAGenome *mom, *dad; // tmp holders for selected genomes
 
 	GAPopulation *tmppop; // Swap the old population with the new pop.
@@ -149,13 +156,15 @@ void GASimpleGA::step()
 	// Generate the individuals in the temporary population from individuals in
 	// the main population.
 
+	int i;
 	for (i = 0; i < pop->size() - 1; i += 2)
 	{ // takes care of odd population
 		mom = &(oldPop->select());
 		dad = &(oldPop->select());
 		stats.numsel += 2; // keep track of number of selections
 
-		c1 = c2 = 0;
+		c1 = 0;
+		int c2 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
 			stats.numcro += (*scross)(*mom, *dad, &pop->individual(i),
@@ -180,6 +189,7 @@ void GASimpleGA::step()
 
 		stats.numeval += c1 + c2;
 	}
+
 	if (pop->size() % 2 != 0)
 	{ // do the remaining population member
 		mom = &(oldPop->select());

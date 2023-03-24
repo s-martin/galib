@@ -191,7 +191,10 @@ GAGeneticAlgorithm::GAGeneticAlgorithm(const GAGeneticAlgorithm &ga)
 	d_seed = ga.d_seed;
 }
 
-GAGeneticAlgorithm::~GAGeneticAlgorithm() { delete pop; }
+GAGeneticAlgorithm::~GAGeneticAlgorithm() 
+{ 
+	delete pop; 
+}
 
 void GAGeneticAlgorithm::copy(const GAGeneticAlgorithm &ga)
 {

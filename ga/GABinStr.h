@@ -37,6 +37,7 @@ class GABinaryString
 	}
 	GABinaryString(const GABinaryString &orig)
 	{
+		csz = GA_BINSTR_CHUNKSIZE;
 		sz = 0;
 		SZ = 0;
 		data = nullptr;

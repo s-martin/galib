@@ -176,7 +176,7 @@ void GAIncrementalGA::initialize(unsigned int seed)
 // each 'generation'.  The replacement strategy is set by the GA.
 void GAIncrementalGA::step()
 {
-	int mut, c1, c2;
+	int mut, c1;
 	GAGenome *mom, *dad; // tmp holders for selected genomes
 
 	mom = &(pop->select());
@@ -227,7 +227,8 @@ void GAIncrementalGA::step()
 	}
 	else
 	{
-		c1 = c2 = 0;
+		c1 = 0;
+		int c2 = 0;
 		if (GAFlipCoin(pCrossover()))
 		{
 			stats.numcro += (*scross)(*mom, *dad, child1, child2);
