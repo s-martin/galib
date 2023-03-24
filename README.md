@@ -73,6 +73,10 @@ If you want to use code coverage:
 
 2. `sudo apt install lcov gcovr`
 
+If you want to use doxygen:
+
+2. `sudo apt install doxygen mscgen dia graphviz`
+
 Configure and build:
 
 3. `mkdir build && cd build`
