@@ -35,14 +35,14 @@ GAStatistics::GAStatistics()
 	memset(cscore, 0, Nconv * sizeof(float));
 
 	nscrs = 0;
-	Nscrs = 0;
+	Nscrs = gaDefFlushFrequency;
 	gen.resize(Nscrs, 0);
 	aveScore.resize(Nscrs, 0); 
 	maxScore.resize(Nscrs, 0); 
 	minScore.resize(Nscrs, 0);
 	devScore.resize(Nscrs, 0);
 	divScore.resize(Nscrs, 0);
-	scorefile = "generations.dat";
+	scorefile = gaDefScoreFilename;
 	which = Maximum;
 
 	boa = nullptr;
