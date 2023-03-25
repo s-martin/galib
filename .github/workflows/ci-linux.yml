@@ -31,11 +31,17 @@ jobs:
     - name: Run coverage
       run: cmake --build ${{ env.build }} --target GAlib_lcov
       
-    - uses: DenverCoder1/doxygen-github-pages-action@v1.2.0
+    - name: Create nojekyll to ensure doxygen pages with underscores work on gh pages
+      run: touch ${{ env.build }}/doc/html/.nojekyll
+      shell: bash
+
+    - name: Deploy Doxygen to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: "gh-pages"
         folder: ${{ env.build }}/doc/html
-        config_file: ${{ env.build }}/Doxyfile
+
       
       
       
