@@ -36,9 +36,12 @@ that for common instantiations (float, char).
 #include <vector>
 #include <array>
 
-/* ----------------------------------------------------------------------------
-1DArrayGenome
----------------------------------------------------------------------------- */
+
+/**
+ * @brief GA1DArrayGenome
+ * 
+ * @tparam T 
+ */
 template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 {
   public:
@@ -74,13 +77,15 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		return (STA_CAST(int, nMut));
 	}
 
-	// The comparator is supposed to return a number that indicates how similar
-	// two genomes are, so here we just compare elements and return a number
-	// that indicates how many elements match.  If they are different lengths
-	// then we return -1 to indicate that we could not calculate the
-	// differences.
-	//   This assumes that there is an operator == defined for the object in the
-	// elements of the array.
+	/**
+	 * @brief How similar are two genomes
+	 * 
+	 * operator== must be defined
+	 * 
+	 * @param a Genome a
+	 * @param b Genome b
+	 * @return Number indicates how many elements match; -1, if genomes a and b are not the same length 
+	 */
 	static float ElementComparator(const GAGenome &a, const GAGenome &b)
 	{
 		const GA1DArrayGenome<T> &sis = DYN_CAST(const GA1DArrayGenome<T> &, a);
