@@ -32,7 +32,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         folder: ./build/doc/html
-        config_file: ./doc/Doxyfile
+        config_file: ./build/doc/Doxyfile
       
       
       
