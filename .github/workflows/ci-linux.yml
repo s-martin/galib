@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: install boost, X11, lcov, gcov
-      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr
+    - name: install boost, X11, lcov, gcov, doxygen
+      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen
       
     - name: cmake config
       run: |
