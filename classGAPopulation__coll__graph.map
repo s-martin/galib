@@ -1,12 +1,17 @@
 <map id="GAPopulation" name="GAPopulation">
-<area shape="rect" id="node1" title=" " alt="" coords="483,172,594,199"/>
-<area shape="rect" id="node4" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="317,367,472,393"/>
-<area shape="rect" id="node5" href="$classGAStatistics.html" title=" " alt="" coords="344,263,445,289"/>
-<area shape="rect" id="node10" href="$classGASelectionScheme.html" title=" " alt="" coords="590,263,743,289"/>
-<area shape="rect" id="node2" href="$classGAID.html" title=" " alt="" coords="511,5,566,32"/>
-<area shape="rect" id="node3" href="$classGAScalingScheme.html" title=" " alt="" coords="469,81,609,108"/>
-<area shape="rect" id="node8" href="$classGAGenome.html" title=" " alt="" coords="504,501,600,528"/>
-<area shape="rect" id="node6" href="$classGAParameterList.html" title=" " alt="" coords="48,263,179,289"/>
-<area shape="rect" id="node7" title=" " alt="" coords="5,172,192,199"/>
-<area shape="rect" id="node9" href="$classGAEvalData.html" title=" " alt="" coords="633,81,733,108"/>
+<area shape="rect" id="node1" title=" " alt="" coords="273,187,383,213"/>
+<area shape="rect" id="node4" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="385,440,540,467"/>
+<area shape="rect" id="node5" href="$classGAStatistics.html" title=" " alt="" coords="516,336,617,363"/>
+<area shape="rect" id="node15" href="$classGASelectionScheme.html" title=" " alt="" coords="191,336,345,363"/>
+<area shape="rect" id="node2" href="$classGAID.html" title=" " alt="" coords="215,5,270,32"/>
+<area shape="rect" id="node3" href="$classGAScalingScheme.html" title=" " alt="" coords="281,89,421,115"/>
+<area shape="rect" id="node13" href="$classGAGenome.html" title=" " alt="" coords="105,575,201,601"/>
+<area shape="rect" id="node6" title=" " alt="" coords="466,187,553,213"/>
+<area shape="rect" id="node7" title=" " alt="" coords="445,81,584,123"/>
+<area shape="rect" id="node8" title=" " alt="" coords="577,187,727,213"/>
+<area shape="rect" id="node9" title=" " alt="" coords="752,187,891,213"/>
+<area shape="rect" id="node10" href="$classGAParameterList.html" title=" " alt="" coords="847,336,977,363"/>
+<area shape="rect" id="node11" title=" " alt="" coords="915,187,1023,213"/>
+<area shape="rect" id="node12" title=" " alt="" coords="950,89,989,115"/>
+<area shape="rect" id="node14" href="$classGAEvalData.html" title=" " alt="" coords="49,89,149,115"/>
 </map>

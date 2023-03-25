@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GAlib: GABinaryString Class Reference</title>
+<title>Modernized GAlib: GABinaryString Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">GAlib
+   <div id="projectname">Modernized GAlib
    &#160;<span id="projectnumber">3.0.0 current</span>
    </div>
   </td>
@@ -82,6 +82,15 @@ Inheritance diagram for GABinaryString:</div>
 <area shape="rect" href="classGABin2DecGenome.html" title=" " alt="" coords="27,155,178,181"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for GABinaryString:</div>
+<div class="dyncontent">
+<div class="center"><img src="classGABinaryString__coll__graph.png" border="0" usemap="#aGABinaryString_coll__map" alt="Collaboration graph"/></div>
+<map name="aGABinaryString_coll__map" id="aGABinaryString_coll__map">
+<area shape="rect" title=" " alt="" coords="24,95,145,121"/>
+<area shape="rect" title=" " alt="" coords="5,5,164,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -89,10 +98,10 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>GABinaryString</b> (unsigned int s)</td></tr>
 <tr class="separator:a1c5087c24578add8c96fdc8ce99bb1c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acba888e7a0ff2049d14ff18248e1617f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGABinaryString.html#acba888e7a0ff2049d14ff18248e1617f">copy</a> (const <a class="el" href="classGABinaryString.html">GABinaryString</a> &amp;orig)</td></tr>
-<tr class="memdesc:acba888e7a0ff2049d14ff18248e1617f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the contents of the bitstream. We don't care what format it is in - we resize to make sure we have adequate space then we just copy all of the data. If the original is actually this, then we don't do anything. If the original is not the same class as this, then we post an error and return.  <a href="classGABinaryString.html#acba888e7a0ff2049d14ff18248e1617f">More...</a><br /></td></tr>
+<tr class="memdesc:acba888e7a0ff2049d14ff18248e1617f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the contents of the bitstream.  <a href="classGABinaryString.html#acba888e7a0ff2049d14ff18248e1617f">More...</a><br /></td></tr>
 <tr class="separator:acba888e7a0ff2049d14ff18248e1617f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43108de7848031b8ab830c2180fdc992"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGABinaryString.html#a43108de7848031b8ab830c2180fdc992">resize</a> (unsigned int x)</td></tr>
-<tr class="memdesc:a43108de7848031b8ab830c2180fdc992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the bitstream to the specified number of bits. We return the number of bits actually allocated. For now there is no error checking or memory management - we assume that we'll always get all of the memory we ask for. If we resize, we copy the previous bits into the new space. The memory will never overlap (new should see to that) so we use memcpy not memmove. If we're making more space, we set the contents of the new space to zeros.  <a href="classGABinaryString.html#a43108de7848031b8ab830c2180fdc992">More...</a><br /></td></tr>
+<tr class="memdesc:a43108de7848031b8ab830c2180fdc992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the bitstream to the specified number of bits.  <a href="classGABinaryString.html#a43108de7848031b8ab830c2180fdc992">More...</a><br /></td></tr>
 <tr class="separator:a43108de7848031b8ab830c2180fdc992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a736787e897d4f112707c26a33c062acd"><td class="memItemLeft" align="right" valign="top"><a id="a736787e897d4f112707c26a33c062acd"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
@@ -154,7 +163,8 @@ std::vector&lt; GABit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
 </table>
 </div><div class="memdoc">
 
-<p>Copy the contents of the bitstream. We don't care what format it is in - we resize to make sure we have adequate space then we just copy all of the data. If the original is actually this, then we don't do anything. If the original is not the same class as this, then we post an error and return. </p>
+<p>Copy the contents of the bitstream. </p>
+<p>We don't care what format it is in - we resize to make sure we have adequate space then we just copy all of the data. If the original is actually this, then we don't do anything. If the original is not the same class as this, then we post an error and return.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">orig</td><td></td></tr>
@@ -353,7 +363,8 @@ std::vector&lt; GABit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
 </table>
 </div><div class="memdoc">
 
-<p>Resize the bitstream to the specified number of bits. We return the number of bits actually allocated. For now there is no error checking or memory management - we assume that we'll always get all of the memory we ask for. If we resize, we copy the previous bits into the new space. The memory will never overlap (new should see to that) so we use memcpy not memmove. If we're making more space, we set the contents of the new space to zeros. </p>
+<p>Resize the bitstream to the specified number of bits. </p>
+<p>We return the number of bits actually allocated. For now there is no error checking or memory management - we assume that we'll always get all of the memory we ask for. If we resize, we copy the previous bits into the new space. The memory will never overlap (new should see to that) so we use memcpy not memmove. If we're making more space, we set the contents of the new space to zeros.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>desired size [bits] </td></tr>
@@ -370,7 +381,7 @@ std::vector&lt; GABit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 16:16:30 for GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Mar 25 2023 21:01:00 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
