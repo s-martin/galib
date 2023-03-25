@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resize_58',['resize',['../classGABinaryString.html#a43108de7848031b8ab830c2180fdc992',1,'GABinaryString']]]
+  ['move_60',['move',['../classGABinaryString.html#a931beaf206271cbb28ce8bd3e0c450eb',1,'GABinaryString']]]
 ];

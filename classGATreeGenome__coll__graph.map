@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title=" " alt="" coords="732,303,892,329"/>
 <area shape="rect" id="node2" href="$classGATree.html" title=" " alt="" coords="426,88,531,115"/>
 <area shape="rect" id="node3" href="$classGATreeBASE.html" title=" " alt="" coords="231,88,333,115"/>
-<area shape="rect" id="node4" href="$structGANodeBASE.html" title=" " alt="" coords="5,88,115,115"/>
+<area shape="rect" id="node4" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="5,88,115,115"/>
 <area shape="rect" id="node5" href="$classGAGenome.html" title=" " alt="" coords="431,415,527,441"/>
 <area shape="rect" id="node7" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="735,469,889,496"/>
 <area shape="rect" id="node8" href="$classGAPopulation.html" title=" " alt="" coords="989,368,1100,395"/>

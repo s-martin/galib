@@ -80,7 +80,7 @@ $(function() {
 <li>Define the objective function</li>
 </ul>
 <p>GAlib helps you with the first two items by providing many examples and pieces from which you can build your representation and operators. In many cases you can use the built-in representations and operators with little or no modification. The objective function is completely up to you. Once you have a representation, operators, and objective measure, you can apply any genetic algorithm to find better solutions to your problem.</p>
-<p>When you use a genetic algorithm to solve an optimization problem, you must be able to represent a single solution to your problem in a single data structure. The genetic algorithm will create a population of solutions based on a sample data structure that you provide. The genetic algorithm then operates on the population to evolve the best solution. In GAlib, the sample data structure is called a <a class="el" href="classGAGenome.html">GAGenome</a> (some people refer to it as a chromosome). The library contains four types of genomes: <a class="el" href="classGAListGenome.html">GAListGenome</a>, <a class="el" href="classGATreeGenome.html">GATreeGenome</a>, GAArrayGenome, and GABinaryStringGenome. These classes are derived from the base <a class="el" href="classGAGenome.html">GAGenome</a> class and a data structure class as indicated by their names. For example, the <a class="el" href="classGAListGenome.html">GAListGenome</a> is derived from the <a class="el" href="classGAList.html">GAList</a> class as well as the <a class="el" href="classGAGenome.html">GAGenome</a> class. Use a data structure that works with your problem definition. For example, if you are trying to optimize a function that depends on 5 real numbers, then use as your genome a 1-dimensional array of floats with 5 elements.</p>
+<p>When you use a genetic algorithm to solve an optimization problem, you must be able to represent a single solution to your problem in a single data structure. The genetic algorithm will create a population of solutions based on a sample data structure that you provide. The genetic algorithm then operates on the population to evolve the best solution. In GAlib, the sample data structure is called a <a class="el" href="classGAGenome.html">GAGenome</a> (some people refer to it as a chromosome). The library contains four types of genomes: <a class="el" href="classGAListGenome.html">GAListGenome</a>, <a class="el" href="classGATreeGenome.html">GATreeGenome</a>, GAArrayGenome, and GABinaryStringGenome. These classes are derived from the base <a class="el" href="classGAGenome.html">GAGenome</a> class and a data structure class as indicated by their names. For example, the <a class="el" href="classGAListGenome.html">GAListGenome</a> is derived from the <a class="el" href="classGAList.html" title="This object is a container for nodes that have a list structure.">GAList</a> class as well as the <a class="el" href="classGAGenome.html">GAGenome</a> class. Use a data structure that works with your problem definition. For example, if you are trying to optimize a function that depends on 5 real numbers, then use as your genome a 1-dimensional array of floats with 5 elements.</p>
 <p>There are many different types of genetic algorithms. GAlib includes three basic types: 'simple', 'steady-state', and 'incremental'. These algorithms differ in the way that they create new individuals and replace old individuals during the course of an evolution.</p>
 <p>GAlib provides two primary mechanisms for extending the capabilities of built-in objects. First of all (and most preferred, from a C++ point of view), you can derive your own classes and define new member functions. If you need to make only minor adjustments to the behavior of a GAlib class, in most cases you can define a single function and tell the existing GAlib class to use it instead of the default.</p>
 <p>Genetic algorithms, when properly implemented, are capable of both exploration (broad search) and exploitation (local search) of the search space. The type of behavior you'll get depends on how the operators work and on the 'shape' of the search space.</p>
@@ -306,7 +306,7 @@ How do I define my own operators?</h1>
 <div class="line">  <span class="keywordflow">return</span> nc;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassGAListGenome_html"><div class="ttname"><a href="classGAListGenome.html">GAListGenome</a></div><div class="ttdef"><b>Definition:</b> GAListGenome.hpp:24</div></div>
-<div class="ttc" id="aclassGAList_html"><div class="ttname"><a href="classGAList.html">GAList</a></div><div class="ttdef"><b>Definition:</b> GAList.hpp:104</div></div>
+<div class="ttc" id="aclassGAList_html"><div class="ttname"><a href="classGAList.html">GAList</a></div><div class="ttdoc">This object is a container for nodes that have a list structure.</div><div class="ttdef"><b>Definition:</b> GAList.hpp:88</div></div>
 </div><!-- fragment --><p>The definition for FlipMutator for 1DArrayAlleles looks like this:</p>
 <p><em>This mutator flips the value of a single element of the array to any of the possible allele values.</em></p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span></div>
@@ -334,7 +334,7 @@ How do I define my own operators?</h1>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span>((<span class="keywordtype">int</span>)nMut);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassGA1DArrayAlleleGenome_html"><div class="ttname"><a href="classGA1DArrayAlleleGenome.html">GA1DArrayAlleleGenome</a></div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:1160</div></div>
+<div class="ttc" id="aclassGA1DArrayAlleleGenome_html"><div class="ttname"><a href="classGA1DArrayAlleleGenome.html">GA1DArrayAlleleGenome</a></div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:1169</div></div>
 </div><!-- fragment --><p>And the definition for a typical initializer looks like this:</p>
 <p><em>This initializer creates a tree of bounded random size and forkiness.</em></p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span></div>
@@ -402,7 +402,7 @@ What about deriving my own genome class?</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 21:01:00 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Mar 25 2023 23:10:26 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

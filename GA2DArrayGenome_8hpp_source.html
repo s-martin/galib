@@ -131,9 +131,9 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> (STA_CAST(<span class="keywordtype">int</span>, nMut));</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">float</span> ElementComparator(<span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;a, <span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;b)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">float</span> ElementComparator(<span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;<a class="code" href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">a</a>, <span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;b)</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">const</span> <a class="code" href="classGA2DArrayGenome.html">GA2DArrayGenome&lt;T&gt;</a> &amp;sis = DYN_CAST(<span class="keyword">const</span> <a class="code" href="classGA2DArrayGenome.html">GA2DArrayGenome&lt;T&gt;</a> &amp;, a);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">const</span> <a class="code" href="classGA2DArrayGenome.html">GA2DArrayGenome&lt;T&gt;</a> &amp;sis = DYN_CAST(<span class="keyword">const</span> <a class="code" href="classGA2DArrayGenome.html">GA2DArrayGenome&lt;T&gt;</a> &amp;, <a class="code" href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">a</a>);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">const</span> <a class="code" href="classGA2DArrayGenome.html">GA2DArrayGenome&lt;T&gt;</a> &amp;bro = DYN_CAST(<span class="keyword">const</span> <a class="code" href="classGA2DArrayGenome.html">GA2DArrayGenome&lt;T&gt;</a> &amp;, b);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">if</span> (sis.size() != bro.size())</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">return</span> -1;</div>
@@ -799,9 +799,9 @@ $(function() {
 <div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;                resizeBehaviour(Dimension::HEIGHT, lowerY, upperY));</div>
 <div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    }</div>
 <div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;    <span class="keywordtype">void</span> swap(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> d)</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;    <span class="keywordtype">void</span> swap(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">a</a>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> d)</div>
 <div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;    {</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;        <a class="code" href="classGAArray.html">GAArray&lt;T&gt;::swap</a>(b * nx + a, d * nx + c);</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;        <a class="code" href="classGAArray.html">GAArray&lt;T&gt;::swap</a>(b * nx + <a class="code" href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">a</a>, d * nx + c);</div>
 <div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;        _evaluated = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    }</div>
 <div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
@@ -964,14 +964,14 @@ $(function() {
 <div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = ynew - 1; j &gt;= 0; j--)</div>
 <div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;            {</div>
 <div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = oldx; i &lt; this-&gt;nx; i++)</div>
-<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;                    this-&gt;a.at(j * this-&gt;nx + i) =</div>
+<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;                    this-&gt;<a class="code" href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">a</a>.at(j * this-&gt;nx + i) =</div>
 <div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;                        aset.at((j * this-&gt;nx + i) % aset.size()).allele();</div>
 <div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;            }</div>
 <div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;        }</div>
 <div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;        <span class="keywordflow">if</span> (this-&gt;ny &gt; oldy)</div>
 <div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;        { <span class="comment">// change in height is always new bits</span></div>
 <div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = this-&gt;nx * oldy; i &lt; this-&gt;nx * this-&gt;ny; i++)</div>
-<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;                this-&gt;a.at(i) = aset.at(i % aset.size()).allele();</div>
+<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;                this-&gt;<a class="code" href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">a</a>.at(i) = aset.at(i % aset.size()).allele();</div>
 <div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;        }</div>
 <div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160; </div>
 <div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;        <span class="keywordflow">return</span> this-&gt;size();</div>
@@ -989,15 +989,16 @@ $(function() {
 <div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassGA2DArrayAlleleGenome_html"><div class="ttname"><a href="classGA2DArrayAlleleGenome.html">GA2DArrayAlleleGenome</a></div><div class="ttdef"><b>Definition:</b> GA2DArrayGenome.hpp:745</div></div>
 <div class="ttc" id="aclassGA2DArrayGenome_html"><div class="ttname"><a href="classGA2DArrayGenome.html">GA2DArrayGenome</a></div><div class="ttdef"><b>Definition:</b> GA2DArrayGenome.hpp:28</div></div>
-<div class="ttc" id="aclassGAAlleleSetArray_html"><div class="ttname"><a href="classGAAlleleSetArray.html">GAAlleleSetArray</a></div><div class="ttdef"><b>Definition:</b> GAAllele.h:406</div></div>
-<div class="ttc" id="aclassGAAlleleSet_html"><div class="ttname"><a href="classGAAlleleSet.html">GAAlleleSet</a></div><div class="ttdef"><b>Definition:</b> GAAllele.h:194</div></div>
-<div class="ttc" id="aclassGAArray_html"><div class="ttname"><a href="classGAArray.html">GAArray</a></div><div class="ttdef"><b>Definition:</b> GAArray.h:34</div></div>
+<div class="ttc" id="aclassGAAlleleSetArray_html"><div class="ttname"><a href="classGAAlleleSetArray.html">GAAlleleSetArray</a></div><div class="ttdef"><b>Definition:</b> GAAllele.h:404</div></div>
+<div class="ttc" id="aclassGAAlleleSet_html"><div class="ttname"><a href="classGAAlleleSet.html">GAAlleleSet</a></div><div class="ttdef"><b>Definition:</b> GAAllele.h:192</div></div>
+<div class="ttc" id="aclassGAArray_html"><div class="ttname"><a href="classGAArray.html">GAArray</a></div><div class="ttdoc">Array Base Class.</div><div class="ttdef"><b>Definition:</b> GAArray.h:30</div></div>
+<div class="ttc" id="aclassGAArray_html_a875e5d1c2c066ed23402ab4aa63be5df"><div class="ttname"><a href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">GAArray::a</a></div><div class="ttdeci">std::vector&lt; T &gt; a</div><div class="ttdoc">the contents of the array</div><div class="ttdef"><b>Definition:</b> GAArray.h:122</div></div>
 <div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdef"><b>Definition:</b> GAGenome.h:198</div></div>
 <div class="ttc" id="aclassGAMask_html"><div class="ttname"><a href="classGAMask.html">GAMask</a></div><div class="ttdef"><b>Definition:</b> GAMask.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 21:00:59 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Mar 25 2023 23:10:26 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

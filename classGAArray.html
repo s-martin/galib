@@ -70,19 +70,16 @@ $(function() {
 <div class="title">GAArray&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Array Base Class.  
+ <a href="classGAArray.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GAArray_8h_source.html">GAArray.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GAArray&lt; T &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classGAArray__inherit__graph.png" border="0" usemap="#aGAArray_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="aGAArray_3_01T_01_4_inherit__map" id="aGAArray_3_01T_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="308,5,423,32"/>
-<area shape="rect" href="classGA1DArrayGenome.html" title="GA1DArrayGenome." alt="" coords="43,80,229,107"/>
-<area shape="rect" href="classGA2DArrayGenome.html" title=" " alt="" coords="272,80,459,107"/>
-<area shape="rect" href="classGA3DArrayGenome.html" title=" " alt="" coords="501,80,688,107"/>
-<area shape="rect" href="classGA1DArrayAlleleGenome.html" title=" " alt="" coords="5,155,229,181"/>
-<area shape="rect" href="classGA2DArrayAlleleGenome.html" title=" " alt="" coords="253,155,477,181"/>
-<area shape="rect" href="classGA3DArrayAlleleGenome.html" title=" " alt="" coords="501,155,725,181"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classGAArray__inherit__graph.svg" width="100%" height="440"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -138,16 +135,36 @@ template&lt;class U &gt; </td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a875e5d1c2c066ed23402ab4aa63be5df"><td class="memItemLeft" align="right" valign="top"><a id="a875e5d1c2c066ed23402ab4aa63be5df"></a>
-std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>a</b></td></tr>
+std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df">a</a></td></tr>
+<tr class="memdesc:a875e5d1c2c066ed23402ab4aa63be5df"><td class="mdescLeft">&#160;</td><td class="mdescRight">the contents of the array <br /></td></tr>
 <tr class="separator:a875e5d1c2c066ed23402ab4aa63be5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class T&gt;<br />
+class GAArray&lt; T &gt;</h3>
+
+<p>Array Base Class. </p>
+<p>This class can be used only on objects that have:</p><ul>
+<li>a default constructor (takes no arguments)</li>
+<li>operator=</li>
+<li>operator==</li>
+<li>operator!=</li>
+</ul>
+<p>In other words, use only primitive objects in this array (e.g. int, float, pointers, etc) The constructor will try to initialize to zero, but only if the type is right. We don't do any over-allocation, so resizing can be expensive. No error checking on the copy, so don't walk over end of array!</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>should do specialization for simple types that does memcpy rather than loop</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/galib/galib/ga/<a class="el" href="GAArray_8h_source.html">GAArray.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 21:01:00 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Mar 25 2023 23:10:26 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

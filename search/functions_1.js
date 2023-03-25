@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['elementcomparator_110',['ElementComparator',['../classGA1DArrayGenome.html#abdf80b813238f9e412636be4e9d9b60c',1,'GA1DArrayGenome']]],
-  ['equal_111',['equal',['../classGABinaryString.html#acdf850ee2fef926599708ea6b3dddcf7',1,'GABinaryString']]]
+  ['destroy_119',['destroy',['../classGAList.html#a193a2a02abe64fab6fc4d4c8943ff579',1,'GAList']]]
 ];
