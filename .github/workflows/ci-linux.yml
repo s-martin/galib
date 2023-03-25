@@ -19,18 +19,17 @@ jobs:
       
     - name: Configure CMake
       run: cmake . -B ${{ env.build }}
+      
+    - uses: ammaraskar/gcc-problem-matcher@master
         
     - name: Build CMake
-      run: cmake --build ${{ env.build }} --verbose
+      run: cmake --build ${{ env.build }}
       
     - name: Run unit tests
       run: cmake --build ${{ env.build }} --target test
       
     - name: Run coverage
       run: cmake --build ${{ env.build }} --target GAlib_lcov
-      
-    - name: file check
-      run: test -f ${{ env.build }}/doc/Doxyfile && echo "$FILE exists."
       
     - uses: DenverCoder1/doxygen-github-pages-action@v1.2.0
       with:
