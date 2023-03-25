@@ -25,8 +25,8 @@ jobs:
           link: shared # or static
           arch: x86 # is also for AMD64
           
-    - name: Install Doxygen and Graphwiz     
-      run: choco install doxygen graphviz
+    - name: Install Doxygen and Graphviz     
+      run: choco install doxygen.install graphviz
   
     - name: Configure CMake
       run: cmake . -DCMAKE_BUILD_TYPE=${{ env.config }} -B ${{ env.build }}
