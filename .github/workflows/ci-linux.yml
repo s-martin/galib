@@ -29,11 +29,14 @@ jobs:
     - name: Run coverage
       run: cmake --build ${{ env.build }} --target GAlib_lcov
       
+    - name: file check
+      run: test -f ${{ env.build }}/doc/Doxyfile && echo "$FILE exists."
+      
     - uses: DenverCoder1/doxygen-github-pages-action@v1.2.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         folder: ${{ env.build }}/doc/html
-        config_file: ${{ env.build }}/doc/Doxyfile
+        config_file: ${{ env.build }}/Doxyfile
       
       
       
