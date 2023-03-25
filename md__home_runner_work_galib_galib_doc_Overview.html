@@ -66,7 +66,12 @@ $(function() {
 <div class="title">Overview of GAlib </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This document outlines the contents of the library and presents some of the design philosophy behind the implementation. Some source code samples are provided at the end of the page to illustrate basic <a href="#structure">program structure</a>, operator <a href="#operators">capabilities</a>, operator <a href="#customization">customization</a>, and derivation of <a href="#derivation">new genome classes</a>.</p>
+<div class="textblock"><blockquote class="doxtable">
+<p>Original author Matthew Wall. All rights reserved.<br  />
+ Copyright (c) 1995-1996 Massachusetts Institute of Technology<br  />
+ Copyright (c) 1996-1999 Matthew Wall </p>
+</blockquote>
+<p>This document outlines the contents of the library and presents some of the design philosophy behind the implementation. Some source code samples are provided at the end of the page to illustrate basic <a href="#structure">program structure</a>, operator <a href="#operators">capabilities</a>, operator <a href="#customization">customization</a>, and derivation of <a href="#derivation">new genome classes</a>.</p>
 <p>When you use the library you will work primarily with two classes: a genome and a genetic algorithm. Each genome instance represents a single solution to your problem. The genetic algorithm object defines how the evolution should take place. The genetic algorithm uses an objective function (defined by you) to determine how 'fit' each genome is for survival. It uses the genome operators (built into the genome) and selection/replacement strategies (built into the genetic algorithm) to generate new individuals.</p>
 <p>There are three things you must do to solve a problem using a genetic algorithm:</p>
 <ul>
@@ -397,7 +402,7 @@ What about deriving my own genome class?</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 16:11:34 for GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Mar 25 2023 16:16:30 for GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
