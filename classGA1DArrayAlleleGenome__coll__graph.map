@@ -1,6 +1,6 @@
 <map id="GA1DArrayAlleleGenome&lt; T &gt;" name="GA1DArrayAlleleGenome&lt; T &gt;">
 <area shape="rect" id="node1" title=" " alt="" coords="5,353,229,380"/>
-<area shape="rect" id="node2" href="$classGA1DArrayGenome.html" title=" " alt="" coords="24,261,211,288"/>
+<area shape="rect" id="node2" href="$classGA1DArrayGenome.html" title="GA1DArrayGenome." alt="" coords="24,261,211,288"/>
 <area shape="rect" id="node3" href="$classGAArray.html" title=" " alt="" coords="60,125,175,152"/>
 <area shape="rect" id="node4" href="$classGAGenome.html" title=" " alt="" coords="353,125,449,152"/>
 <area shape="rect" id="node6" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="367,261,521,288"/>

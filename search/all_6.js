@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resize_56',['resize',['../classGABinaryString.html#a43108de7848031b8ab830c2180fdc992',1,'GABinaryString']]]
+  ['overview_20of_20galib_57',['Overview of GAlib',['../md__home_runner_work_galib_galib_doc_Overview.html',1,'']]]
 ];
