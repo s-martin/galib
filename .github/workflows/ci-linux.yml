@@ -17,7 +17,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake --verbose ../ 
+        cmake ../ 
         
     - name: make
       run: cmake --build ./build --verbose
