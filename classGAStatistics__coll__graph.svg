@@ -215,7 +215,7 @@ var sectionId = 'dynsection-0';
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="classGAParameterList.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="classGAParameterList.html" target="_top" xlink:title="Parameter List.">
 <polygon fill="white" stroke="black" points="387,-258.5 387,-277.5 485,-277.5 485,-258.5 387,-258.5"/>
 <text text-anchor="middle" x="436" y="-265.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAParameterList</text>
 </a>
