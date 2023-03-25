@@ -22,8 +22,8 @@ that for common instantiations (float, char).
 	then specialize to do member copy rather than bit copy (that way simple
 	users won't sacrifice speed, and complex users will get more complexity)
 ---------------------------------------------------------------------------- */
-#ifndef _ga_array1_h_
-#define _ga_array1_h_
+
+#pragma once
 
 #include "GAAllele.h"
 #include "GAArray.h"
@@ -37,8 +37,12 @@ that for common instantiations (float, char).
 #include <array>
 
 
-/**
- * @brief GA1DArrayGenome
+/** 1D Arrray Genome
+ * 
+ * You can use ANY kind of object in this genome.  But notice that it is
+ * really easy to optimize this for some of the simpler types.
+ * The objects in the array must have the following operators defined: =  ==  !=
+ * >> must be defined if you use the default read methods
  * 
  * @tparam T 
  */
@@ -47,7 +51,12 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
   public:
 	GADefineIdentity("GA1DArrayGenome", GAID::ArrayGenome);
 
-	// Randomly swap elements in the array.
+	/** Randomly swap elements in the array.
+	 * 
+	 * @param c 
+	 * @param pmut 
+	 * @return int 
+	 */
 	static int SwapMutator(GAGenome &c, float pmut)
 	{
 		GA1DArrayGenome<T> &child = DYN_CAST(GA1DArrayGenome<T> &, c);
@@ -77,14 +86,14 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		return (STA_CAST(int, nMut));
 	}
 
-	/**
-	 * @brief How similar are two genomes
+	/** How similar are two genomes
 	 * 
 	 * operator== must be defined
 	 * 
 	 * @param a Genome a
 	 * @param b Genome b
-	 * @return Number indicates how many elements match; -1, if genomes a and b are not the same length 
+	 * @return Number indicates how many elements match
+	 * @retval -1 if genomes a and b are not the same length 
 	 */
 	static float ElementComparator(const GAGenome &a, const GAGenome &b)
 	{
@@ -1345,5 +1354,3 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	// the allele set(s) for this genome
 	std::vector<GAAlleleSet<T>> aset; 
 };
-
-#endif

@@ -1,17 +1,10 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  allele.h
   mbwall 21mar95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-   Here we define a class of alleles.  An allele is a possible value for a gene
-and an allele set is a list of possible values (I use 'set' because it doesn't
-imply the specific implementation of the container class).
 ---------------------------------------------------------------------------- */
-#ifndef _ga_allele_h_
-#define _ga_allele_h_
+
+#pragma once
 
 #include <gaconfig.h>
 #include <garandom.h>
@@ -25,6 +18,11 @@ imply the specific implementation of the container class).
 
 constexpr auto GA_ALLELE_CHUNK = 10;
 
+/** Allele class
+ * 
+ * An allele is a possible value for a gene and an allele set is a list of possible values (I use 'set' because it doesn't
+ * imply the specific implementation of the container class).
+ */
 class GAAllele
 {
   public:
@@ -585,5 +583,3 @@ std::istream &operator>>(std::istream &is, GAAlleleSet<T> &arg)
 	arg.read(is);
 	return is;
 }
-
-#endif

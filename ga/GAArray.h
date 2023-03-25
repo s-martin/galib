@@ -1,28 +1,7 @@
-// $Header$
 /* ----------------------------------------------------------------------------
   arraytmpl.h
   mbwall 22apr95
   Copyright 1995 Massachusetts Institute of Technology
-
- DESCRIPTION:
-  This defines the array base class.  Be careful what you put into one of these
-arrays!  This class can be used only on objects that have:
-
-  a default constructor (takes no arguments)
-  operator=
-  operator==
-  operator!=
-
-In other words, use only primitive objects in this array (e.g. int, float,
-pointers, etc)
-
-The constructor will try to initialize to zero, but only if the type is right.
-
-We don't do any over-allocation, so resizing can be expensive.
-No error checking on the copy, so don't walk over end of array!
-
-TODO:
-  should do specialization for simple types that does memcpy rather than loop
 ---------------------------------------------------------------------------- */
 
 #pragma once
@@ -30,6 +9,23 @@ TODO:
 #include <vector>
 
 
+/** Array Base Class
+ * 
+ * This class can be used only on objects that have:
+ * - a default constructor (takes no arguments)
+ * - operator=
+ * - operator==
+ * - operator!=
+ * 
+ * In other words, use only primitive objects in this array (e.g. int, float, pointers, etc)
+ * The constructor will try to initialize to zero, but only if the type is right.
+ * We don't do any over-allocation, so resizing can be expensive.
+ * No error checking on the copy, so don't walk over end of array!
+ * 
+ * @todo should do specialization for simple types that does memcpy rather than loop
+ *
+ * @tparam T 
+ */
 template <class T> class GAArray
 {
   public:
@@ -122,6 +118,6 @@ template <class T> class GAArray
 	}
 
   protected:
-	// the contents of the array
+	/// the contents of the array
 	std::vector<T> a;
 };
