@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  parameters.C
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
@@ -193,11 +191,16 @@ bool GAParameterList::get(const std::string &name, void *value) const
 	return false;
 }
 
-// Add the item to the list if it does not already exist.  Return 0 if the add
-// was OK, -1 if there was a problem.
-bool GAParameterList::add(const std::string &fn, const std::string &sn,
-						  ParType t,
-						  const void *v)
+/** Add the item to the list if it does not already exist
+ * 
+ * @param fn 
+ * @param sn 
+ * @param t 
+ * @param v 
+ * @return true, if OK
+ * @return false, if there was a problem
+ */
+bool GAParameterList::add(const std::string &fn, const std::string &sn, ParType t, const void *v)
 {
 	auto param = std::find_if(this->begin(), this->end(),
 							  [=](const GAParameter &p) -> bool {
