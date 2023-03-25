@@ -1,5 +1,9 @@
 # Customizing GAlib
 
+> Original author Matthew Wall. All rights reserved.<br>
+> Copyright (c) 1995-1996 Massachusetts Institute of Technology<br>
+> Copyright (c) 1996-1999 Matthew Wall
+
 This document describes how to extend GAlib's capabilities by defining your own genomes and genetic operators.  The best way to customize the behavior of an object is to derive a new class.  If you do not want to do that much work, GAlib is designed to let you replace behaviors of existing objects by defining new functions.
 
 see also: *<a href="Overview.html">library overview</a>, <a href="ClassHierarchy.html">class hierarchy</a>, <a href="API.html">programming interface</a>*

@@ -1,5 +1,9 @@
 # Overview of GAlib
 
+> Original author Matthew Wall. All rights reserved.<br>
+> Copyright (c) 1995-1996 Massachusetts Institute of Technology<br>
+> Copyright (c) 1996-1999 Matthew Wall
+
 This document outlines the contents of the library and presents some of the design philosophy behind the implementation.  Some source code samples are provided at the end of the page to illustrate basic <a href="#structure">program structure</a>, operator <a href="#operators">capabilities</a>, operator <a href="#customization">customization</a>, and derivation of <a href="#derivation">new genome classes</a>.
 
 When you use the library you will work primarily with two classes:  a genome and a genetic algorithm.  Each genome instance represents a single solution to your problem.  The genetic algorithm object defines how the evolution should take place.  The genetic algorithm uses an objective function (defined by you) to determine how 'fit' each genome is for survival.  It uses the genome operators (built into the genome) and selection/replacement strategies (built into the genetic algorithm) to generate new individuals.

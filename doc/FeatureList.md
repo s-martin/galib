@@ -1,5 +1,9 @@
 # Feature List for GAlib
 
+> Original author Matthew Wall. All rights reserved.<br>
+> Copyright (c) 1995-1996 Massachusetts Institute of Technology<br>
+> Copyright (c) 1996-1999 Matthew Wall
+
 ## General Features
 
 - Many examples are included illustrating the use of various GAlib
