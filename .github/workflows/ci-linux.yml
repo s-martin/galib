@@ -22,3 +22,20 @@ jobs:
       run: cmake --build ./build --target test
     - name: run coverage
       run: cmake --build ./build --target GAlib_lcov
+      
+  deploy:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: DenverCoder1/doxygen-github-pages-action@v1.2.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          folder: doc/html
+      
+      
+      
+      
+      
+      
+      
