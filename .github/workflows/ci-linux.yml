@@ -2,6 +2,11 @@ name: CI-Linux
 
 on: [push]
 
+env:
+  # Path to the CMake build directory.
+  build: '${{ github.workspace }}/build'
+  config: 'Debug'
+
 jobs:
   build:
 
@@ -9,16 +14,27 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: install boost, X11, lcov, gcov
+    - name: install boost, X11, lcov, gcovr
       run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr
     - name: cmake config
-      run: |
-        mkdir build
-        cd build
-        cmake ../
+      run: cmake . -B ${{ env.build }}
     - name: make
-      run: cmake --build ./build
+      run: cmake --build ${{ env.build }}
     - name: run unit tests
-      run: cmake --build ./build --target test --rerun-failed --output-on-failure
+      run: cmake --build ${{ env.build }} --target test --rerun-failed --output-on-failure
     - name: run coverage
-      run: cmake --build ./build --target GAlib_lcov
+      run: cmake --build ${{ env.build }} --target GAlib_lcov  
+    - name: Report code coverage
+      uses: zgosalvez/github-actions-report-lcov@v3
+      with:
+        coverage-files: ${{ env.build }}/GAlib_lcov.info
+        minimum-coverage: 45
+        artifact-name: code-coverage-report
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ${{ env.build }}
+        update-comment: true
+      
+      
+      
+      
+      

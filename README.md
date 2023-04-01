@@ -1,7 +1,9 @@
 # Modern GAlib: A (modernized) C++ Genetic Algorithm Library
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/330617ca280b4c2287a8fd9d2f9bcc90)](https://app.codacy.com/gh/s-martin/galib?utm_source=github.com&utm_medium=referral&utm_content=s-martin/galib&utm_campaign=Badge_Grade_Settings)
-![](https://github.com/s-martin/galib/workflows/CI-Linux/badge.svg) ![](https://github.com/s-martin/galib/workflows/CI-Windows/badge.svg) ![](https://github.com/s-martin/galib/workflows/CodeQL/badge.svg) [![Codacy Security Scan](https://github.com/s-martin/galib/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codacy-analysis.yml)
+
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/s-martin/galib/master)
+
+[![CI-Linux](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml) [![CI-Windows](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml) [![CodeQL](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml) [![Microsoft C++ Code Analysis](https://github.com/s-martin/galib/actions/workflows/msvc.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/msvc.yml)
 
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
@@ -12,7 +14,7 @@ scaling, and termination methods.
 
 GAlib was originally developed by Matthew Wall.
 
-Modernized GAlib from version 3.0 on is a fork of the [original GAlib](http://lancet.mit.edu/ga) and modernized the original code using latest C++17 technology.  
+Modernized GAlib from version 3.0 on is a fork of the [original GAlib](http://lancet.mit.edu/ga) and modernized the original code using C++17 technology.  
 
 The library requires a C++ compiler conforming to C++17. It has been tested with
 
@@ -50,9 +52,9 @@ Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is rec
 
 2. Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
 
-#### Visual Studio 2019
+#### Visual Studio 2019 or later
 
-3. Open path in Visual Studio 2019 as CMake project.
+3. Open path in Visual Studio as CMake project.
 
 #### Previous versions of Visual Studio
 

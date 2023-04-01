@@ -2,40 +2,40 @@
 
 ## Original GAlib (until version 2.4.7)
 
-### 2005-01-27  Matthew Wall  <mwall@gouda.local>
+### 2005-01-27  Matthew Wall
 
 * gaconfig.h: added instantiation prefix for compilers that need forced instantiations but vary in their syntax.
 
-### 2005-01-12  Matthew Wall  <mwall@gouda.local>
+### 2005-01-12  Matthew Wall
 
 * gaconfig.h: fixed comment about use of streams.
 keep MSC_VER detection after other compilers so that the windows-based compilers that are trying to be like vcpp will not be detected as vcpp.
 
-### 2005-01-11  Matthew Wall  <mwall@localhost.localdomain>
+### 2005-01-11  Matthew Wall
 
 * gaconfig.h: fixed macro definitions for streams, templates
 
-### 2005-01-06  Matthew Wall  <mwall@gouda.local>
+### 2005-01-06  Matthew Wall
 
 * gaconfig.h: update ms compiler notes
 fixed borland compiler version detection.
 
-### 2004-12-29  Matthew Wall  <mwall@gouda.local>
+### 2004-12-29  Matthew Wall
 
 * GA2DArrayGenome.C: fixed oversight
 * GASimpleGA.C: use our own seed if one was specified
 * GAPopulation.C: keep compilers happy about redefining NOMINMAX
 * gaversion.h: added function for programmatic access to the library identifier string.
-* GABaseGA.[hC]: added seed as a recognized option
+* GABaseGA.h/.C: added seed as a recognized option
 * ga.h: no need to remove the deterministic crowding algorithm - it has no templates.
 
-### 2004-12-28  Matthew Wall  <mwall@gouda.local>
+### 2004-12-28  Matthew Wall
 
 * GAPopulation.C: be sure that we use the same score (just in case theinvocation of the score member is not deterministic).
 * gaconfig.h: deal with assertions
 * GASelector.C: fix end-of-array bug and added assertions to trigger other bad index problems.
 
-### 2004-12-28  Matthew Wall  <mwall@localhost.localdomain>
+### 2004-12-28  Matthew Wall
 
 * GARealGenome.C: adhere to c++ standard
 * GAStringGenome.C: adhere to c++ standard
@@ -56,7 +56,7 @@ fixed borland compiler version detection.
 * GAStringGenome.C: fix specializations
 * makefile: added ranlib for macosx, aix emit compile flags to BUILD file for diagnosis.
 
-### 2004-12-27  Matthew Wall  <mwall@gouda.local>
+### 2004-12-27  Matthew Wall
 
 * GAGenome.h: macro name change for streams management.  include a separate file for streams.
 * GATreeGenome.C: ditto
