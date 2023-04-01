@@ -21,7 +21,7 @@ jobs:
     - name: make
       run: cmake --build ${{ env.build }}
     - name: run unit tests
-      run: cmake --build ${{ env.build }} --target test --rerun-failed --output-on-failure
+      run: cmake --build ${{ env.build }} --target test -- --rerun-failed --output-on-failure
     - name: run coverage
       run: cmake --build ${{ env.build }} --target GAlib_lcov  
     - name: Report code coverage
