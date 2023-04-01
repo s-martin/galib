@@ -14,8 +14,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: install boost, X11, lcov
-      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov
+    - name: install boost, X11, lcov, gcovr
+      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr
     - name: cmake config
       run: cmake . -B ${{ env.build }}
     - name: make
