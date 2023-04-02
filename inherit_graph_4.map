@@ -13,15 +13,15 @@
 <area shape="rect" id="node10" href="$classGABin2DecGenome.html" title=" " alt="" coords="637,259,787,285"/>
 <area shape="rect" id="node13" href="$classGAID.html" title=" " alt="" coords="29,309,83,336"/>
 <area shape="rect" id="node14" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="155,537,309,564"/>
-<area shape="rect" id="node20" href="$classGAGenome.html" title=" " alt="" coords="184,208,280,235"/>
+<area shape="rect" id="node20" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="184,208,280,235"/>
 <area shape="rect" id="node23" href="$classGAPopulation.html" title=" " alt="" coords="177,259,287,285"/>
 <area shape="rect" id="node24" href="$classGAScalingScheme.html" title=" " alt="" coords="162,411,302,437"/>
 <area shape="rect" id="node26" href="$classGASelectionScheme.html" title=" " alt="" coords="155,309,309,336"/>
 <area shape="rect" id="node15" href="$classGADCrowdingGA.html" title=" " alt="" coords="389,461,520,488"/>
 <area shape="rect" id="node16" href="$classGADemeGA.html" title=" " alt="" coords="405,563,504,589"/>
 <area shape="rect" id="node17" href="$classGAIncrementalGA.html" title=" " alt="" coords="385,613,524,640"/>
-<area shape="rect" id="node18" href="$classGASimpleGA.html" title=" " alt="" coords="402,512,507,539"/>
-<area shape="rect" id="node19" href="$classGASteadyStateGA.html" title=" " alt="" coords="385,664,524,691"/>
+<area shape="rect" id="node18" href="$classGASimpleGA.html" title="Header file for the simple genetic algorithm class." alt="" coords="402,512,507,539"/>
+<area shape="rect" id="node19" href="$classGASteadyStateGA.html" title="Header file for the steady&#45;state genetic algorithm class." alt="" coords="385,664,524,691"/>
 <area shape="rect" id="node21" href="$classGAListGenome.html" title=" " alt="" coords="376,157,533,184"/>
 <area shape="rect" id="node22" href="$classGATreeGenome.html" title=" " alt="" coords="375,208,535,235"/>
 <area shape="rect" id="node25" href="$classGANoScaling.html" title=" " alt="" coords="401,411,508,437"/>

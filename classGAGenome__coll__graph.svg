@@ -58,7 +58,7 @@ var sectionId = 'dynsection-1';
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="The base genome class just defines the genome interface &#45; how to mutate, crossover,...">
 <polygon fill="#bfbfbf" stroke="black" points="266,-129.5 266,-148.5 338,-148.5 338,-129.5 266,-129.5"/>
 <text text-anchor="middle" x="302" y="-136.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAGenome</text>
 </a>
@@ -213,7 +213,7 @@ var sectionId = 'dynsection-1';
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node8"><a xlink:href="classGAStatistics.html" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="classGAStatistics.html" target="_top" xlink:title="Statistics class.">
 <polygon fill="white" stroke="black" points="883.5,-104.5 883.5,-123.5 959.5,-123.5 959.5,-104.5 883.5,-104.5"/>
 <text text-anchor="middle" x="921.5" y="-111.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAStatistics</text>
 </a>

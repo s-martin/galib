@@ -70,20 +70,16 @@ $(function() {
 <div class="title">GASimpleGA.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// $Header$</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">/* ----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  gasimple.h</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  mbwall 28jul94</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright (c) 1995 Massachusetts Institute of Technology</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">                     all rights reserved</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  Header file for the simple genetic algorithm class.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">---------------------------------------------------------------------------- */</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef _ga_gasimple_h_</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define _ga_gasimple_h_</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;GABaseGA.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* ----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  mbwall 28jul94</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  Copyright (c) 1995 Massachusetts Institute of Technology</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">                     all rights reserved</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">---------------------------------------------------------------------------- */</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;GABaseGA.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classGASimpleGA.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classGASimpleGA.html">GASimpleGA</a> : <span class="keyword">public</span> <a class="code" href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">public</span>:</div>
@@ -149,25 +145,24 @@ $(function() {
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    arg.write(os);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> (os);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">inline</span> std::istream &amp;operator&gt;&gt;(std::istream &amp;is, <a class="code" href="classGASimpleGA.html">GASimpleGA</a> &amp;arg)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    arg.read(is);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> (is);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">inline</span> std::istream &amp;operator&gt;&gt;(std::istream &amp;is, <a class="code" href="classGASimpleGA.html">GASimpleGA</a> &amp;arg)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    arg.read(is);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> (is);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
 <div class="ttc" id="aclassGAEvalData_html"><div class="ttname"><a href="classGAEvalData.html">GAEvalData</a></div><div class="ttdef"><b>Definition:</b> GAEvalData.h:17</div></div>
 <div class="ttc" id="aclassGAGeneticAlgorithm_html"><div class="ttname"><a href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a></div><div class="ttdef"><b>Definition:</b> GABaseGA.h:110</div></div>
-<div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdef"><b>Definition:</b> GAGenome.h:198</div></div>
+<div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdoc">The base genome class just defines the genome interface - how to mutate, crossover,...</div><div class="ttdef"><b>Definition:</b> GAGenome.h:200</div></div>
 <div class="ttc" id="aclassGAParameterList_html"><div class="ttname"><a href="classGAParameterList.html">GAParameterList</a></div><div class="ttdoc">Parameter List.</div><div class="ttdef"><b>Definition:</b> GAParameter.h:83</div></div>
 <div class="ttc" id="aclassGAPopulation_html"><div class="ttname"><a href="classGAPopulation.html">GAPopulation</a></div><div class="ttdef"><b>Definition:</b> GAPopulation.h:66</div></div>
 <div class="ttc" id="aclassGAScalingScheme_html"><div class="ttname"><a href="classGAScalingScheme.html">GAScalingScheme</a></div><div class="ttdef"><b>Definition:</b> GAScaling.h:46</div></div>
 <div class="ttc" id="aclassGASelectionScheme_html"><div class="ttname"><a href="classGASelectionScheme.html">GASelectionScheme</a></div><div class="ttdef"><b>Definition:</b> GASelector.h:55</div></div>
-<div class="ttc" id="aclassGASimpleGA_html"><div class="ttname"><a href="classGASimpleGA.html">GASimpleGA</a></div><div class="ttdef"><b>Definition:</b> GASimpleGA.h:16</div></div>
+<div class="ttc" id="aclassGASimpleGA_html"><div class="ttname"><a href="classGASimpleGA.html">GASimpleGA</a></div><div class="ttdoc">Header file for the simple genetic algorithm class.</div><div class="ttdef"><b>Definition:</b> GASimpleGA.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 23:24:47 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 2 2023 19:11:49 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

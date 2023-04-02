@@ -2,11 +2,11 @@
 <area shape="rect" id="node1" title=" " alt="" coords="1624,507,1723,533"/>
 <area shape="rect" id="node2" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="547,401,701,428"/>
 <area shape="rect" id="node4" href="$classGAPopulation.html" title=" " alt="" coords="1133,220,1244,247"/>
-<area shape="rect" id="node8" href="$classGAGenome.html" title=" " alt="" coords="911,393,1007,420"/>
+<area shape="rect" id="node8" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="911,393,1007,420"/>
 <area shape="rect" id="node3" href="$classGAID.html" title=" " alt="" coords="353,105,407,132"/>
 <area shape="rect" id="node5" href="$classGAScalingScheme.html" title=" " alt="" coords="725,49,865,76"/>
 <area shape="rect" id="node6" href="$classGASelectionScheme.html" title=" " alt="" coords="1377,247,1531,273"/>
-<area shape="rect" id="node9" href="$classGAStatistics.html" title=" " alt="" coords="1403,604,1505,631"/>
+<area shape="rect" id="node9" href="$classGAStatistics.html" title="Statistics class." alt="" coords="1403,604,1505,631"/>
 <area shape="rect" id="node7" href="$classGAEvalData.html" title=" " alt="" coords="574,175,674,201"/>
 <area shape="rect" id="node10" title=" " alt="" coords="1145,749,1232,776"/>
 <area shape="rect" id="node11" title=" " alt="" coords="889,742,1028,783"/>

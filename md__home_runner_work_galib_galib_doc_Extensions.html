@@ -135,7 +135,7 @@ Deriving your own genome class</h1>
 <div class="line">                <a class="code" href="classGAGenome.html">GAGenome</a>* sis, <a class="code" href="classGAGenome.html">GAGenome</a>* bro){</div>
 <div class="line">  <span class="comment">// your crossover here</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdef"><b>Definition:</b> GAGenome.h:198</div></div>
+<div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdoc">The base genome class just defines the genome interface - how to mutate, crossover,...</div><div class="ttdef"><b>Definition:</b> GAGenome.h:200</div></div>
 </div><!-- fragment --><p>By convention, one of the arguments to a derived genome constructor is the objective function. Alternatively (as illustrated in this example), you can hard code a default objective function into your genome - just call the <b>evaluator</b> member somewhere in your constructor and pass the function you want used as the default.</p>
 <p>Once you have defined your genome class, you should define the <a href="#genome_initialization">intialization</a>, <a href="#genome_mutation">mutation</a>, <a href="#genome_comparison">comparison</a>, and <a href="#genome_crossover">crossover</a> operators for it. The comparison operator is optional, but if you do not define it you will not be able to use the diversity measures in the genetic algorithms and/or populations.</p>
 <p>Note that the genetic comparator is not necessarily the same as the boolean operator== and operator!= comparators. The genetic comparator returns 0 if the two individuals are the same, -1 if the comparison fails for some reason, and a real number greater than 0 indicating the degree of difference if the individuals are not identical but can be compared. It may be based on genotype or phenotype. The boolean comparators, on the other hand, indicate only whether or not two individuals are identical. In most cases, the boolean comparator can simply call the genetic comparator, but in some cases it is more efficient to define different operators (the boolean comparators are called much more often than the genetic comparators, especially if no diversity is being measured).</p>
@@ -464,7 +464,7 @@ Genetic Algorithm</h1>
 <div class="line"> </div>
 <div class="line">  stats.update(*pop);  <span class="comment">// update the statistics by one generation</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassGASteadyStateGA_html"><div class="ttname"><a href="classGASteadyStateGA.html">GASteadyStateGA</a></div><div class="ttdef"><b>Definition:</b> GASStateGA.h:16</div></div>
+<div class="ttc" id="aclassGASteadyStateGA_html"><div class="ttname"><a href="classGASteadyStateGA.html">GASteadyStateGA</a></div><div class="ttdoc">Header file for the steady-state genetic algorithm class.</div><div class="ttdef"><b>Definition:</b> GASStateGA.h:16</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md23"></a>
 Termination Function</h1>
 <p>The termination function determines when the genetic algorithm should stop evolving. It takes a genetic algorithm as its argument and returns gaTrue if the genetic algorithm should stop or gaFalse if the algorithm should continue.</p>
@@ -509,7 +509,7 @@ Termination Function</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 23:24:47 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 2 2023 19:11:49 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

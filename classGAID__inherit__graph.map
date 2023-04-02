@@ -1,15 +1,15 @@
 <map id="GAID" name="GAID">
 <area shape="rect" id="node1" title=" " alt="" coords="5,487,60,513"/>
 <area shape="rect" id="node2" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="108,132,263,159"/>
-<area shape="rect" id="node8" href="$classGAGenome.html" title=" " alt="" coords="137,436,233,463"/>
+<area shape="rect" id="node8" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="137,436,233,463"/>
 <area shape="rect" id="node21" href="$classGAPopulation.html" title=" " alt="" coords="130,487,241,513"/>
 <area shape="rect" id="node22" href="$classGAScalingScheme.html" title=" " alt="" coords="115,537,255,564"/>
 <area shape="rect" id="node24" href="$classGASelectionScheme.html" title=" " alt="" coords="109,588,262,615"/>
 <area shape="rect" id="node3" href="$classGADCrowdingGA.html" title=" " alt="" coords="343,5,473,32"/>
 <area shape="rect" id="node4" href="$classGADemeGA.html" title=" " alt="" coords="359,56,457,83"/>
 <area shape="rect" id="node5" href="$classGAIncrementalGA.html" title=" " alt="" coords="339,107,477,133"/>
-<area shape="rect" id="node6" href="$classGASimpleGA.html" title=" " alt="" coords="355,157,461,184"/>
-<area shape="rect" id="node7" href="$classGASteadyStateGA.html" title=" " alt="" coords="339,208,477,235"/>
+<area shape="rect" id="node6" href="$classGASimpleGA.html" title="Header file for the simple genetic algorithm class." alt="" coords="355,157,461,184"/>
+<area shape="rect" id="node7" href="$classGASteadyStateGA.html" title="Header file for the steady&#45;state genetic algorithm class." alt="" coords="339,208,477,235"/>
 <area shape="rect" id="node9" href="$classGA1DArrayGenome.html" title="1D Arrray Genome" alt="" coords="315,259,501,285"/>
 <area shape="rect" id="node11" href="$classGA1DBinaryStringGenome.html" title=" " alt="" coords="311,309,505,336"/>
 <area shape="rect" id="node13" href="$classGA2DArrayGenome.html" title=" " alt="" coords="315,360,501,387"/>

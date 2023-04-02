@@ -67,7 +67,7 @@
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="classGAGenome.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="classGAGenome.html" target="_top" xlink:title="The base genome class just defines the genome interface &#45; how to mutate, crossover,...">
 <polygon fill="white" stroke="black" points="331,-180 331,-199 403,-199 403,-180 331,-180"/>
 <text text-anchor="middle" x="367" y="-187" font-family="Helvetica,sans-Serif" font-size="10.00">GAGenome</text>
 </a>
@@ -228,7 +228,7 @@
 <!-- Node12 -->
 <g id="node12" class="node">
 <title>Node12</title>
-<g id="a_node12"><a xlink:href="classGAStatistics.html" target="_top" xlink:title=" ">
+<g id="a_node12"><a xlink:href="classGAStatistics.html" target="_top" xlink:title="Statistics class.">
 <polygon fill="white" stroke="black" points="1011.5,-82 1011.5,-101 1087.5,-101 1087.5,-82 1011.5,-82"/>
 <text text-anchor="middle" x="1049.5" y="-89" font-family="Helvetica,sans-Serif" font-size="10.00">GAStatistics</text>
 </a>

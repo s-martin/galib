@@ -36,7 +36,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="classGAGenome.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="classGAGenome.html" target="_top" xlink:title="The base genome class just defines the genome interface &#45; how to mutate, crossover,...">
 <polygon fill="white" stroke="black" points="109.5,-56.5 109.5,-75.5 181.5,-75.5 181.5,-56.5 109.5,-56.5"/>
 <text text-anchor="middle" x="145.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAGenome</text>
 </a>

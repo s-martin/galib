@@ -2,6 +2,6 @@
 <area shape="rect" id="node1" title=" " alt="" coords="41,155,201,181"/>
 <area shape="rect" id="node2" href="$classGATree.html" title=" " alt="" coords="5,80,111,107"/>
 <area shape="rect" id="node3" href="$classGATreeBASE.html" title=" " alt="" coords="7,5,109,32"/>
-<area shape="rect" id="node4" href="$classGAGenome.html" title=" " alt="" coords="135,80,231,107"/>
+<area shape="rect" id="node4" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="135,80,231,107"/>
 <area shape="rect" id="node5" href="$classGAID.html" title=" " alt="" coords="156,5,211,32"/>
 </map>

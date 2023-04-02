@@ -72,6 +72,11 @@ $(function() {
 <div class="title">GAGenome Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The base genome class just defines the genome interface - how to mutate, crossover, evaluate, etc.  
+ <a href="classGAGenome.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GAGenome_8h_source.html">GAGenome.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GAGenome:</div>
 <div class="dyncontent">
@@ -347,13 +352,16 @@ SexualCrossover&#160;</td><td class="memItemRight" valign="bottom"><b>sexcross</
 AsexualCrossover&#160;</td><td class="memItemRight" valign="bottom"><b>asexcross</b></td></tr>
 <tr class="separator:a6695594b0d95c8d9f81f280302fd9b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The base genome class just defines the genome interface - how to mutate, crossover, evaluate, etc. </p>
+<p>When you create your own genome, multiply inherit from the base genome class and the data type that you want to use. Use the data type to store the information and use the genome part to tell the GA how it should operate on the data. See comments below for further details. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/galib/galib/ga/<a class="el" href="GAGenome_8h_source.html">GAGenome.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 25 2023 23:24:47 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 2 2023 19:11:49 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
