@@ -1,17 +1,12 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  statistics.h
   mbwall 14jul95
   Copyright (c) 1995 Massachusetts Institute of Technology
 				   - all rights reserved
-
- DESCRIPTION:
-  Header for the statistics object used by the GA objects.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_statistics_h_
-#define _ga_statistics_h_
 
-#include <GAGenome.h>
+#pragma once
+
+#include "GAGenome.h"
 #include <GAPopulation.h>
 #include <gaconfig.h>
 #include <gatypes.h>
@@ -23,13 +18,14 @@ extern int gaDefScoreFrequency2;
 extern int gaDefFlushFrequency;
 extern std::string gaDefScoreFilename;
 
-/* ----------------------------------------------------------------------------
-Statistics class
-  We define this class as a storage object for the current state of the GA.
-Whereas the parameters object keeps track of the user-definable settings for
-the GA, the statistics object keeps track of the data that the GA generates
-along the way.
----------------------------------------------------------------------------- */
+/** Statistics class
+ * 
+ * We define this class as a storage object for the current state of the GA.
+ * Whereas the parameters object keeps track of the user-definable settings for
+ * the GA, the statistics object keeps track of the data that the GA generates
+ * along the way. 
+ * 
+ */
 class GAStatistics
 {
   public:
@@ -236,5 +232,3 @@ inline std::ostream &operator<<(std::ostream &os, const GAStatistics &s)
 	s.write(os);
 	return os;
 }
-
-#endif

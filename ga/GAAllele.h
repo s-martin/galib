@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gaconfig.h>
+#include "gaconfig.h"
 #include <garandom.h>
 
 #include <GAAllele.h>

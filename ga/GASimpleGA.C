@@ -1,12 +1,9 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  gasimple.C
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
-  Source file for the simple genetic algorithm object.
 ---------------------------------------------------------------------------- */
+
 #include "GASimpleGA.h"
 #include <boost/algorithm/string.hpp>
 #include "garandom.h"
@@ -150,11 +147,15 @@ int GASimpleGA::minimaxi(int m)
 	return minmax;
 }
 
-// Initialize the population, set the random seed as needed, do a few stupidity
-// checks, reset the stats.  We must initialize the old pop because there is no
-// guarantee that each individual will get initialized during the course of our
-// operator++ operations.  We do not evaluate the old pop because that will
-// happen as-needed later on.
+/** Initialize the population, set the random seed as needed, do a few stupidity checks, reset the stats.
+ *
+ * We must initialize the old pop because there is no
+ * guarantee that each individual will get initialized during the course of our
+ * operator++ operations.  We do not evaluate the old pop because that will
+ * happen as-needed later on. 
+ * 
+ * @param seed 
+ */
 void GASimpleGA::initialize(unsigned int seed)
 {
 	GARandomSeed(seed);
@@ -171,13 +172,15 @@ void GASimpleGA::initialize(unsigned int seed)
 	}
 }
 
-//   Evolve a new generation of genomes.  When we start this routine, pop
-// contains the current generation.  When we finish, pop contains the new
-// generation and oldPop contains the (no longer) current generation.  The
-// previous old generation is lost.  We don't deallocate any memory, we just
-// reset the contents of the genomes.
-//   The selection routine must return a pointer to a genome from the old
-// population.
+/** Evolve a new generation of genomes
+ * 
+ * When we start this routine, pop contains the current generation.  
+ * When we finish, pop contains the new generation and oldPop contains 
+ * the (no longer) current generation.  The previous old generation is lost.
+ * We don't deallocate any memory, we just reset the contents of the genomes.
+ * The selection routine must return a pointer to a genome from the old population. 
+ * 
+ */
 void GASimpleGA::step()
 {
 	int mut, c1;
