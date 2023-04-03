@@ -26,8 +26,8 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-      files: |
-        ${{ env.build }}/**/*result.xml
+        files: |
+          ${{ env.build }}/**/*result.xml
     - name: run coverage
       run: cmake --build ${{ env.build }} --target GAlib_lcov  
     - name: Report code coverage
