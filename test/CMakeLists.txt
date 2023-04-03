@@ -15,4 +15,7 @@ target_include_directories(${PROJECT_NAME}Test PUBLIC ${Boost_INCLUDE_DIRS})
 
 target_link_libraries("${PROJECT_NAME}Test" PUBLIC GAlib Boost::unit_test_framework)
 
+set(CMAKE_CTEST_ARGUMENTS "--rerun-failed;--output-on-failure;--output-junit ${PROJECT_NAME}Test_results.xml")
+
 add_test(NAME "${PROJECT_NAME}Test" COMMAND "${PROJECT_NAME}Test")
+
