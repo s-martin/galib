@@ -36,7 +36,7 @@ jobs:
         coverage-files: ${{ env.build }}/GAlib_lcov.info
         minimum-coverage: 45
         artifact-name: code-coverage-report
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.TOKEN_PR_RW }}
         working-directory: ${{ env.build }}
         update-comment: true
         
