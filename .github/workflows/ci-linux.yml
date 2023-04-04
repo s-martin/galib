@@ -27,7 +27,7 @@ jobs:
       if: always()
       with:
         files: |
-          ${{ env.build }}/**/*results.xml
+          ${{ env.build }}/*results.xml
     - name: run coverage
       run: cmake --build ${{ env.build }} --target GAlib_lcov  
     - name: Report code coverage
