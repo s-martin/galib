@@ -29,8 +29,6 @@ jobs:
     - name: Run unit tests
       run: cmake --build ${{ env.build }} --target test
       
-     env.build }} --target GAlib_lcov
-      
     - name: Create nojekyll to ensure doxygen pages with underscores work on gh pages
       run: touch ${{ env.build }}/doc/html/.nojekyll
       shell: bash
