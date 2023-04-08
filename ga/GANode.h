@@ -1,26 +1,23 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  node.h
   mbwall 25nov94
   Copyright 1995 Massachusetts Institute of Technology
 
  DESCRIPTION:
   This defines the node objects.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_node_h_
-#define _ga_node_h_
+
+#pragma once
 
 #include <gaconfig.h>
 
 #include <ostream>
 
-/* ----------------------------------------------------------------------------
- GANodeBASE
--------------------------------------------------------------------------------
-  This is the basic node object.  In its basic form it should be useful for
-trees, lists, and some graphs.  I debated whether to make two different objects
-for tree and list nodes, but decided for now to make them the same.
----------------------------------------------------------------------------- */
+
+/** This is the basic node object
+ * 
+ * In its basic form it should be useful for trees, lists, and some graphs.
+ * 
+ */
 struct GANodeBASE
 {
 	GANodeBASE *next, *prev, *parent, *child;
@@ -99,5 +96,3 @@ template <class T> std::ostream &operator<<(std::ostream &os, GANode<T> &arg)
 	os << "  parent: " << arg.parent << "\n";
 	return (os);
 }
-
-#endif

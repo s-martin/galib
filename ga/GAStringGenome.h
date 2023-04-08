@@ -1,17 +1,15 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  string.h
   mbwall 25feb95
   Copyright (c) 1995 Massachusetts Institute of Technology
-
- DESCRIPTION:
-  This header defines the interface for the string genome.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_string_h_
-#define _ga_string_h_
+#pragma once
 
 #include <GA1DArrayGenome.hpp>
 #include <GAAllele.h>
+
+/** This header defines the interface for the string genome.
+ * 
+ */
 
 using GAStringAlleleSet = GAAlleleSet<char>;
 using GACharacterAlleleSet = GAAlleleSet<char>;
@@ -79,5 +77,3 @@ inline int GAStringCycleCrossover(const GAGenome &a, const GAGenome &b,
 {
 	return GA1DArrayGenome<char>::CycleCrossover(a, b, c, d);
 }
-
-#endif
