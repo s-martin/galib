@@ -14,22 +14,42 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: install boost, X11, lcov, gcovr
-      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr
-    - name: cmake config
+    
+    - name: install boost, X11, lcov, gcov, doxygen
+      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen graphviz mscgen dia 
+      
+    - name: Configure CMake
       run: cmake . -B ${{ env.build }}
-    - name: make
+      
+    - uses: ammaraskar/gcc-problem-matcher@master
+        
+    - name: Build CMake
       run: cmake --build ${{ env.build }}
-    - name: run unit tests
+      
+    - name: Run unit tests
       run: cmake --build ${{ env.build }} --target test
+
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
         files: |
           ${{ env.build }}/*results.xml
-    - name: run coverage
-      run: cmake --build ${{ env.build }} --target GAlib_lcov  
+      
+    - name: Create nojekyll to ensure doxygen pages with underscores work on gh pages
+      run: touch ${{ env.build }}/doc/html/.nojekyll
+      shell: bash
+
+    - name: Deploy Doxygen to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: "gh-pages"
+        folder: ${{ env.build }}/doc/html
+        
+    - name: Run coverage
+      run: cmake --build ${{ env.build }} --target GAlib_lcov
+
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v3
       with:
@@ -39,8 +59,6 @@ jobs:
         github-token: ${{ secrets.TOKEN_PR_RW }}
         working-directory: ${{ env.build }}
         update-comment: true
-        
-        
         
         
         
