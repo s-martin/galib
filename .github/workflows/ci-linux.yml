@@ -51,7 +51,8 @@ jobs:
       run: cmake --build ${{ env.build }} --target GAlib_lcov
 
     - name: Report code coverage
-      uses: romeovs/lcov-reporter-action@v0.3.1
+      # Commit sha is used to workaround the fact that v0.3.1 does not exist.
+      uses: romeovs/lcov-reporter-action@2a28ec3e25fb7eae9cb537e9141603486f810d1a
       with:
         lcov-file: ${{ env.build }}/GAlib_lcov.info
         github-token: ${{ secrets.GITHUB_TOKEN }}
