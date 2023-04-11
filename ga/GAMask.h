@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  binstr1.h
   mbwall 19apr95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
@@ -10,6 +8,9 @@
 
 #include <vector>
 
+/** GAMAsk
+ * 
+ */
 class GAMask
 {
 public:

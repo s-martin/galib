@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  parameters.C
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
@@ -74,6 +72,8 @@ void GAParameter::setvalue(const void *v)
 	switch (t)
 	{
 	case ParType::BOOLEAN:
+		val.ival = *((bool *)v) ? 1 : 0;
+		break;
 	case ParType::INT:
 		val.ival = *((int *)v);
 		break;
@@ -191,11 +191,16 @@ bool GAParameterList::get(const std::string &name, void *value) const
 	return false;
 }
 
-// Add the item to the list if it does not already exist.  Return 0 if the add
-// was OK, -1 if there was a problem.
-bool GAParameterList::add(const std::string &fn, const std::string &sn,
-						  ParType t,
-						  const void *v)
+/** Add the item to the list if it does not already exist
+ * 
+ * @param fn 
+ * @param sn 
+ * @param t 
+ * @param v 
+ * @return true, if OK
+ * @return false, if there was a problem
+ */
+bool GAParameterList::add(const std::string &fn, const std::string &sn, ParType t, const void *v)
 {
 	auto param = std::find_if(this->begin(), this->end(),
 							  [=](const GAParameter &p) -> bool {
@@ -301,7 +306,7 @@ bool GAParameterList::write(const char *filename) const
 // whose name we do not know about, we ignore the pair and go on to the next.
 // There's no global list to tell us what type things are, and we don't assume.
 //   We don't allow setting pointers using this method.
-bool GAParameterList::read(std::istream &is, bool flag)
+bool GAParameterList::read(std::istream &is, bool)
 {
 	if (this->empty())
 	{

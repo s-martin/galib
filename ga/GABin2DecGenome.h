@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  bin2dec.h
   mbwall 19apr95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved

@@ -11,7 +11,7 @@
 #ifndef _ga_binstr3_h_
 #define _ga_binstr3_h_
 
-#include <GABinStr.h>
+#include <GABinStr.hpp>
 #include <GAGenome.h>
 
 /* ----------------------------------------------------------------------------

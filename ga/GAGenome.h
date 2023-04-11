@@ -1,18 +1,9 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  genome.h
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
-
- DESCRIPTION:
-  The base genome class just defines the genome interface - how to mutate,
-crossover, evaluate, etc.  When you create your own genome, multiply inherit
-from the base genome class and the data type that you want to use.  Use the
-data type to store the information and use the genome part to tell the GA how
-it should operate on the data.  See comments below for further details.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_genome_h_
-#define _ga_genome_h_
+
+#pragma once 
 
 #include <GAEvalData.h>
 #include <gaconfig.h>
@@ -54,7 +45,8 @@ selected to cross with itself, and self-copying is not out of the question)
 	   virtual int read(istream&)
 	   virtual int write(ostream&) const
 	   virtual int equal(const GAGenome&) const
-  
+  
+
 
 
 
@@ -87,7 +79,8 @@ initialize
   should first clean up as needed, then do its thing.  The initializer may be
   called any number of times (unlike a class constructor which is called only
   once for a given instance).
- 
+ 
+
 
 
 
@@ -192,6 +185,17 @@ clone(attr)
   contents of the genome.  It does NOT call the initialization method.  For
   some data types this is the same thing as cloning the contents.
 ---------------------------------------------------------------------------- */
+
+
+
+/** The base genome class just defines the genome interface - how to mutate, crossover, evaluate, etc.
+ * 
+ * When you create your own genome, multiply inherit
+ * from the base genome class and the data type that you want to use.  Use the
+ * data type to store the information and use the genome part to tell the GA how
+ * it should operate on the data.  See comments below for further details.
+ * 
+ */
 class GAGenome : public GAID
 {
   public:
@@ -364,5 +368,3 @@ inline bool operator!=(const GAGenome &a, const GAGenome &b)
 {
 	return a.notequal(b);
 }
-
-#endif

@@ -1,17 +1,17 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  gasimple.h
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
-  Header file for the simple genetic algorithm class.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_gasimple_h_
-#define _ga_gasimple_h_
 
-#include <GABaseGA.h>
+#pragma once
 
+#include "GABaseGA.h"
+
+/** Header file for the simple genetic algorithm class.
+ * 
+ * 
+ */
 class GASimpleGA : public GAGeneticAlgorithm
 {
   public:
@@ -77,10 +77,9 @@ inline std::ostream &operator<<(std::ostream &os, GASimpleGA &arg)
 	arg.write(os);
 	return (os);
 }
+
 inline std::istream &operator>>(std::istream &is, GASimpleGA &arg)
 {
 	arg.read(is);
 	return (is);
 }
-
-#endif

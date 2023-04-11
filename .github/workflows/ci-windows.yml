@@ -2,6 +2,11 @@ name: CI-Windows
 
 on: [push]
 
+env:
+  # Path to the CMake build directory.
+  build: '${{ github.workspace }}/build'
+  config: 'Debug'
+
 jobs:
   build:
 
@@ -9,15 +14,40 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: install dependencies
-      run: vcpkg install boost-test boost-program-options boost-predef --triplet x64-windows
-    - name: cmake config
-      run: |
-        md build
-        cd build
-        cmake ../ -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
-    - name: make
-      run: cmake --build ./build
-    - name: run unit tests
-      working-directory: ./build
-      run: ./test/Debug/GAlibTest.exe
+    
+    - name: Download and install Boost
+      uses: MarkusJx/install-boost@v2.4.4
+      id: install-boost
+      with:
+          boost_version: 1.81.0
+          toolset: msvc 
+          platform_version: 2022
+          link: shared # or static
+          arch: x86 # is also for AMD64
+     
+    # Usually dont build doc on Windows, is done on Linux job
+    #- name: Install Doxygen and Graphviz     
+    #  run: choco install doxygen.install graphviz
+  
+    - name: Configure CMake
+      run: cmake . -DCMAKE_BUILD_TYPE=${{ env.config }} -B ${{ env.build }} -DBUILD_DOC=OFF
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+        
+    - uses: ammaraskar/msvc-problem-matcher@master
+        
+    - name: Build CMake
+      run: cmake --build ${{ env.build }}
+    
+    - name: Run unit tests
+      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTest
+        
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 
-#include <GABinStr.h>
+#include <GABinStr.hpp>
 
 
 BOOST_AUTO_TEST_SUITE(UnitTest)
