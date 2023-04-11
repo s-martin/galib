@@ -34,7 +34,7 @@ jobs:
       if: always()
       with:
         files: |
-          ${{ env.build }}/*results.xml
+          ${{ env.build }}/**/*results.xml
       
     - name: Create nojekyll to ensure doxygen pages with underscores work on gh pages
       run: touch ${{ env.build }}/doc/html/.nojekyll

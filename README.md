@@ -1,6 +1,5 @@
 # Modern GAlib: A (modernized) C++ Genetic Algorithm Library
 
-
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/s-martin/galib/master)
 
 [![CI-Linux](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml) [![CI-Windows](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml) [![CodeQL](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml) [![Microsoft C++ Code Analysis](https://github.com/s-martin/galib/actions/workflows/msvc.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/msvc.yml)
