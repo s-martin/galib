@@ -55,6 +55,7 @@ jobs:
       with:
         lcov-file: ${{ env.build }}/GAlib_lcov.info
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        title: Coverage Report
       #uses: zgosalvez/github-actions-report-lcov@v3.1.5
       #with:
       #  coverage-files: ${{ env.build }}/GAlib_lcov.info
