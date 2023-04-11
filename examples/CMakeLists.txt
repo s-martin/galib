@@ -111,23 +111,23 @@ target_link_libraries(randtest PUBLIC GAlib)
 #	target_include_directories(gnuex PUBLIC ${PROJECT_SOURCE_DIR}/examples/gnu)
 #endif()
 
-if(X11_FOUND) 
-	add_executable(gaview 
-					./graphic/gaview.C )
-	target_link_libraries(gaview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
-	target_include_directories(gaview PUBLIC ${X11_INCLUDE_DIR})
-	
-	add_executable(tspview  
-					./graphic/tspview.C)
-	target_link_libraries(tspview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
-	target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
+if(X11_FOUND)
+    add_executable(gaview
+                        ./graphic/gaview.C )
+    target_link_libraries(gaview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
+    target_include_directories(gaview PUBLIC ${X11_INCLUDE_DIR})
+
+    add_executable(tspview
+                        ./graphic/tspview.C)
+    target_link_libraries(tspview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
+    target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
 endif()
 
-# add_executable(pvmpop 
-#                 ./pvmpop/genome.C 
-#                 ./pvmpop/genome.h 
+# add_executable(pvmpop
+#                 ./pvmpop/genome.C
+#                 ./pvmpop/genome.h
 #                 ./pvmpop/master.C
-#                 ./pvmpop/PVMDemeGA.C 
+#                 ./pvmpop/PVMDemeGA.C
 #                 ./pvmpop/PVMDemeGA.h
 #                 ./pvmpop/slave.C)
 # target_link_libraries(pvmpop PUBLIC GAlib)
