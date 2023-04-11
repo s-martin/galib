@@ -1,15 +1,9 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  parameters.h
   mbwall 14jul95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-  Header for the parameters object used by the GA objects.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_parameters_h_
-#define _ga_parameters_h_
+#pragma once
 
 #include <gaconfig.h>
 #include <gatypes.h>
@@ -29,10 +23,11 @@ enum class ParType
 	POINTER
 };
 
-/* ----------------------------------------------------------------------------
-   This object is used for naming the parameters.  We associate a fullname, a
-short name, and a value with each parameter.
----------------------------------------------------------------------------- */
+/** This object is used for naming the parameters
+ * 
+ * We associate a fullname, a short name, and a value with each parameter.
+ * 
+ */
 class GAParameter
 {
   public:
@@ -77,12 +72,13 @@ class GAParameter
 	void setvalue(const void *);
 };
 
-/* ----------------------------------------------------------------------------
-   The parameter list is implemented as an array, but has the interface of a
-list.  Don't ask.  You can traverse through the list to get the parameters that
-you need.  Be sure to check the type before you try to extract the value for
-any specific parameter in the list.
----------------------------------------------------------------------------- */
+/** Parameter List
+ * 
+ * The parameter list is implemented as an array, but has the interface of a
+ * list.  You can traverse through the list to get the parameters that you need.
+ * Be sure to check the type before you try to extract the value for any specific parameter in the list.
+ * 
+ */
 class GAParameterList : public std::list<GAParameter>
 {
   public:
@@ -112,5 +108,3 @@ inline std::istream &operator>>(std::istream &is, GAParameterList &plist)
 	plist.read(is);
 	return is;
 }
-
-#endif

@@ -1,17 +1,17 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  gasteadystate.h
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
-  Header file for the steady-state genetic algorithm class.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_gasteadystate_h_
-#define _ga_gasteadystate_h_
 
-#include <GABaseGA.h>
+#pragma once
 
+#include "GABaseGA.h"
+
+/** Header file for the steady-state genetic algorithm class.
+ *
+ * 
+ */
 class GASteadyStateGA : public GAGeneticAlgorithm
 {
   public:
@@ -80,5 +80,3 @@ inline std::istream &operator>>(std::istream &is, GASteadyStateGA &arg)
 	arg.read(is);
 	return (is);
 }
-
-#endif
