@@ -51,12 +51,12 @@ jobs:
       run: cmake --build ${{ env.build }} --target GAlib_lcov
 
     - name: Report code coverage
-      uses: zgosalvez/github-actions-report-lcov@v3
+      uses: zgosalvez/github-actions-report-lcov@latest
       with:
         coverage-files: ${{ env.build }}/GAlib_lcov.info
         minimum-coverage: 30
         artifact-name: code-coverage-report
-        github-token: ${{ secrets.TOKEN_PR_RW }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ${{ env.build }}
         update-comment: true
         
