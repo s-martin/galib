@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: install boost, X11, lcov, gcov, doxygen
+    - name: Install Boost, X11, lcov, gcovr, Doxygen
       run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen graphviz mscgen dia 
       
     - name: Configure CMake
@@ -29,7 +29,7 @@ jobs:
     - name: Run unit tests
       run: cmake --build ${{ env.build }} --target test
 
-    - name: Publish Test Results
+    - name: Publish test results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
@@ -56,7 +56,7 @@ jobs:
         coverage-files: ${{ env.build }}/GAlib_lcov.info
         minimum-coverage: 30
         artifact-name: code-coverage-report
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ github.token }} #${{ secrets.GITHUB_TOKEN }}
         working-directory: ${{ env.build }}
         update-comment: true
         
