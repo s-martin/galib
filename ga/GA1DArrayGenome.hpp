@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  array1.h
   mbwall 25feb95
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
 						  all rights reserved
@@ -110,9 +108,17 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		return count / sis.length();
 	}
 
-	// Randomly take bits from each parent.  For each bit we flip a coin to see
-	// if that bit should come from the mother or the father.  If strings are
-	// different lengths then we need to use the mask to get things right.
+	/** Randomly take bits from each parent
+	 *
+	 * For each bit we flip a coin to see if that bit should come from the mother or the father.
+	 * If strings are different lengths then we need to use the mask to get things right. 
+	 * 
+	 * @param p1 Parent 1
+	 * @param p2 Parent 2
+	 * @param c1 
+	 * @param c2 
+	 * @return int 
+	 */
 	static int UniformCrossover(const GAGenome &p1, const GAGenome &p2,
 								GAGenome *c1, GAGenome *c2)
 	{
@@ -1331,6 +1337,12 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 
 	// If we resize to a larger length then we need to set the contents to a
 	// valid value (ie one of our alleles).
+	/**
+	 * @brief 
+	 * 
+	 * @param len 
+	 * @return int 
+	 */
 	int resize(int len) override
 	{
 		unsigned int oldx = this->nx;
