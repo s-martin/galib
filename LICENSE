@@ -17,12 +17,3 @@ Providing credit where credit is due
     This research was performed using GAlib, a library of genetic algorithm
     components (http://lancet.mit.edu/ga/).
 
-The GNU portions of the GAlib distribution 
--------------------------------------------------------------------------------
-  The portions of GAlib that contain code from the GNU g++ library are 
-  covered under the terms of the GNU Public License. As such they are 
-  freely available and do not fall under the terms of the GAlib licensing. 
-
-  The portions of GAlib that are based upon GNU code are all in the
-  'gnu' directory in the examples directory (in GAlib release 2.3.2
-  and later). 
