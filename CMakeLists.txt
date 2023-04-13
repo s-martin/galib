@@ -33,8 +33,9 @@ message(STATUS "Boost version: ${Boost_VERSION}")
 #    set_property(TARGET Boost::filesystem PROPERTY INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
 #endif()
 
-# first we can indicate the documentation build as an option and set it to ON by default
 option(BUILD_DOC "Build documentation" ON)
+
+option(BUILD_EXAMPLES "Build examples" ON)
 
 if(BUILD_DOC)
     find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
@@ -60,7 +61,9 @@ if(BUILD_DOC)
 endif()
 
 if(NOT MSVC)
-    find_package(X11 REQUIRED)
+    if(BUILD_EXAMPLES)
+        find_package(X11 REQUIRED)
+    endif()
 endif()
 
 if(NOT MSVC)
@@ -83,10 +86,16 @@ endif()
 
 
 add_subdirectory(ga)
-add_subdirectory(examples)
+
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
+
 add_subdirectory(test)
 
 # copy test data
-file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
+if(BUILD_EXAMPLES)
+    file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
+endif()
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}) # for lcov coverage target TODO harmonize

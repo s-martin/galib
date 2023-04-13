@@ -40,8 +40,7 @@ Original GAlib 2.4.7:
 ## COMPILATION
 
 CMake is used for compilation. There are three things to build: the library, the examples
-and the unit tests. Here is the
-short version of how to build and test everything:
+and the unit tests. Here is the short version of how to build and test everything:
 
 ### Windows
 
@@ -79,7 +78,7 @@ Configure and build:
 
 3. `mkdir build && cd build`
 
-4. `cmake ../`
+4. `cmake ../` (if you don't want to build examples append ˋ-DBUILD_EXAMPLES=OFFˋ)
 
 5. `make`
 
@@ -95,7 +94,7 @@ Run unit tests and create coverage:
 
 ### Building shared libraries
 
-To build shared libraries append `-DBUILD_SHARED_LIBS:BOOL=ON` to the above `cmake`command.
+To build shared libraries append `-DBUILD_SHARED_LIBS:BOOL=ON` to the above `cmake` command.
 
 See also <https://cmake.org/cmake/help/v3.15/variable/BUILD_SHARED_LIBS.html> in the CMake docs.
 
