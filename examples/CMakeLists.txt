@@ -101,8 +101,7 @@ if(X11_FOUND)
 endif()
 
 find_library (PVM_LIB pvm3)
-# works not, so just using find_library
-#find_package(PVM)
+
 if(BUILD_PVM)
     if(PVM_LIB)
         add_executable(pvmpop_master
