@@ -37,6 +37,9 @@ option(BUILD_DOC "Build documentation" ON)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 
+# TODO set default value to OFF
+option(BUILD_PVM "Build PVM" ON)
+
 if(BUILD_DOC)
     find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
 

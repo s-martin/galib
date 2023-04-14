@@ -11,6 +11,9 @@ data as well as routines for modifying the genetic algorithm's population.
 ---------------------------------------------------------------------------- */
 #include <pvm3.h>
 #include <unistd.h>
+#include <GA1DBinStrGenome.h>
+#include <GABaseGA.h>
+
 #include "genome.h"
 
 // When this flag is defined, the initialize and evaluate function dump a 

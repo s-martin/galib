@@ -16,6 +16,7 @@ the master then invoke the genome's evaluator on the new data, then send only
 the score to the master process.  We can also receive a 'finished' message
 that tells us to shut down and exit.
 ---------------------------------------------------------------------------- */
+#include <iostream>
 #include <pvm3.h>
 #include "genome.h"
 

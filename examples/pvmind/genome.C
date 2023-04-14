@@ -7,6 +7,7 @@
    This file contains the information needed to evaluate an operate on a 
 genome in these examples.
 ---------------------------------------------------------------------------- */
+#include <iostream>
 #include <pvm3.h>
 #include <unistd.h>
 #include "genome.h"

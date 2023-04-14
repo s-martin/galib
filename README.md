@@ -46,51 +46,55 @@ and the unit tests. Here is the short version of how to build and test everythin
 
 Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is recommended.
 
-1. Clone or download the repository
+- Clone or download the repository
 
-2. Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
+- Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
 
 #### Visual Studio 2019 or later
 
-3. Open path in Visual Studio as CMake project.
+- Open path in Visual Studio as CMake project.
 
 #### Previous versions of Visual Studio
 
-3. `md build && cd build`
+- `md build && cd build`
 
-4. `cmake ../ -DCMAKE_TOOLCHAIN_FILE=<path to vcpkg>/scripts/buildsystems/vcpkg.cmake`
+- `cmake ../ -DCMAKE_TOOLCHAIN_FILE=<path to vcpkg>/scripts/buildsystems/vcpkg.cmake`
 
-5. Open created Visual Studio solution file in `build` directory
+- Open created Visual Studio solution file in `build` directory
 
 ### Linux (Ubuntu)
 
-1. `sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev`
+- `sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev`
 
 If you want to use code coverage:
 
-2. `sudo apt install lcov gcovr`
+- `sudo apt install lcov gcovr`
 
 If you want to use doxygen:
 
-2. `sudo apt install doxygen mscgen dia graphviz`
+- `sudo apt install doxygen mscgen dia graphviz`
+
+If you want to use PVM:
+
+- sudo apt install pvm-dev
 
 Configure and build:
 
-3. `mkdir build && cd build`
+- `mkdir build && cd build`
 
-4. `cmake ../` (if you don't want to build examples append ˋ-DBUILD_EXAMPLES=OFFˋ)
+- `cmake ../` (if you don't want to build examples append ˋ-DBUILD_EXAMPLES=OFFˋ); if you want to build PVM append -DBUILD_PVM=ON
 
-5. `make`
+- `make`
 
 Run unit tests:
 
-6. `make test`
+- `make test`
 
 Run unit tests and create coverage:
 
-7. `make GAlib_lcov`
+- `make GAlib_lcov`
 
-8. `make GAlib_gcov`
+- `make GAlib_gcov`
 
 ### Building shared libraries
 
