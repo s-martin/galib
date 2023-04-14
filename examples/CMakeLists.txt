@@ -100,11 +100,26 @@ if(X11_FOUND)
     target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
 endif()
 
-# add_executable(pvmpop
-#                 ./pvmpop/genome.C
-#                 ./pvmpop/genome.h
-#                 ./pvmpop/master.C
-#                 ./pvmpop/PVMDemeGA.C
-#                 ./pvmpop/PVMDemeGA.h
-#                 ./pvmpop/slave.C)
-# target_link_libraries(pvmpop PUBLIC GAlib)
+find_library (PVM_LIB pvm3)
+# works not, so just using find_library
+#find_package(PVM)
+if(PVM_LIB)
+    add_executable(master
+                ./pvmpop/genome.C
+                ./pvmpop/genome.h
+                ./pvmpop/master.C
+                ./pvmpop/PVMDemeGA.C
+                ./pvmpop/PVMDemeGA.h)
+               # ./pvmpop/slave.C)
+    target_link_libraries(master PUBLIC GAlib ${PVM_LIB})
+    target_include_directories(master PUBLIC "../../ga")
+
+    add_executable(slave
+                ./pvmpop/genome.C
+                ./pvmpop/genome.h
+                ./pvmpop/slave.C
+                ./pvmpop/PVMDemeGA.C
+                ./pvmpop/PVMDemeGA.h)
+    target_link_libraries(slave PUBLIC GAlib ${PVM_LIB})
+    target_include_directories(slave PUBLIC "../../ga")
+endif()

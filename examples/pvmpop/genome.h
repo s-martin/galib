@@ -1,5 +1,4 @@
 /* ----------------------------------------------------------------------------
-  genome.h
   mbwall 5dec95
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
 
@@ -7,11 +6,13 @@
    This file contains the information needed to evaluate an operate on a 
 genome in these examples.
 ---------------------------------------------------------------------------- */
-#ifndef _genome_h_
-#define _genome_h_
 
-#include <gabase.h>
-#include <binstr1.h>
+#pragma once
+
+#include <GAGenome.h>
+#include <GABinStr.hpp>
+#include <GAPopulation.h>
+#include <GAStatistics.h>
 
 #define GENOME_LENGTH 64
 
@@ -36,5 +37,3 @@ const int MSG_INCOMING_STATISTICS =10;
 const int MSG_STEP_COMPLETE       =11;
 const int MSG_SET_POPULATION_SIZE =12;
 const int MSG_READY               =100;
-
-#endif

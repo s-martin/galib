@@ -14,8 +14,11 @@ migrations by telling the slaves when and where to migrate individuals.
 code that merges the received individuals into the population.  You can also
 determine which individuals will be selected to migrate to another population.
 ---------------------------------------------------------------------------- */
+#include <iostream>
 #include <pvm3.h>
 #include <GASimpleGA.h>
+#include <GA1DBinStrGenome.h>
+#include <GASStateGA.h>
 #include "genome.h"
 
 int
