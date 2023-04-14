@@ -74,13 +74,17 @@ If you want to use doxygen:
 
 2. `sudo apt install doxygen mscgen dia graphviz`
 
+If you want to use PVM:
+
+2. sudo apt install pvm3-dev
+
 Configure and build:
 
-3. `mkdir build && cd build`
+1. `mkdir build && cd build`
 
-4. `cmake ../` (if you don't want to build examples append ˋ-DBUILD_EXAMPLES=OFFˋ)
+2. `cmake ../` (if you don't want to build examples append ˋ-DBUILD_EXAMPLES=OFFˋ); if you want to build PVM append -DBUILD_PVM=ON
 
-5. `make`
+3. `make`
 
 Run unit tests:
 

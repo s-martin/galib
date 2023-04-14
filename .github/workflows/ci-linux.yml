@@ -19,7 +19,7 @@ jobs:
       run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen graphviz mscgen dia 
       
     - name: Configure CMake
-      run: cmake . -B ${{ env.build }}
+      run: cmake . -B ${{ env.build }} -DBUILD_PVM=ON
       
     - uses: ammaraskar/gcc-problem-matcher@master
         
