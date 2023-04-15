@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['uniformcrossover_67',['UniformCrossover',['../classGA1DArrayGenome.html#ae9ec93a518f095418ca0d8b236f2e355',1,'GA1DArrayGenome']]]
+  ['scorefile_72',['scorefile',['../classGAStatistics.html#a03c38af90502afa65b1c2d4cca8cd736',1,'GAStatistics']]],
+  ['swap_73',['swap',['../classGAList.html#ad416c888bdc1a24eefbd72fff7838dd1',1,'GAList']]],
+  ['swapmutator_74',['SwapMutator',['../classGA1DArrayGenome.html#ab7d685d38877d57867c3b1650f5fb038',1,'GA1DArrayGenome']]]
 ];

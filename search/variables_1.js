@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['data_131',['data',['../classGABinaryString.html#a5d5fd588a9589f74b49ad9d3de03064a',1,'GABinaryString']]]
+  ['boa_142',['boa',['../classGAStatistics.html#a114fa09909fada78e8dd602d1281bb01',1,'GAStatistics']]]
 ];
