@@ -3,20 +3,11 @@
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
 						  all rights reserved
 
- DESCRIPTION:
-  This header defines the interface for the 1D array genome.
-  You can use ANY kind of object in this genome.  But notice that it is
-really easy to optimize this for some of the simpler types.  I'll try to do
-that for common instantiations (float, char).
-  The objects in the array must have the following operators defined:
-  =  ==  !=
-  >> must be defined if you use the default read methods
-
  TO DO:
-*** If you want speed, specialize the comparison routines and copy routines
+* @todo If you want speed, specialize the comparison routines and copy routines
 	so that you can use memcpy, memmove, memcmp rather than looping through
 	each element.
-*** make the object defined for simple types, if you want to use complex types
+* @todo make the object defined for simple types, if you want to use complex types
 	then specialize to do member copy rather than bit copy (that way simple
 	users won't sacrifice speed, and complex users will get more complexity)
 ---------------------------------------------------------------------------- */
@@ -35,12 +26,17 @@ that for common instantiations (float, char).
 #include <array>
 
 
-/** 1D Arrray Genome
+/** 1D Array Genome
  * 
  * You can use ANY kind of object in this genome.  But notice that it is
  * really easy to optimize this for some of the simpler types.
- * The objects in the array must have the following operators defined: =  ==  !=
- * >> must be defined if you use the default read methods
+ * 
+ * The objects in the array must have the following operators defined: 
+ * - =  
+ * - ==  
+ * - !=
+ * 
+ * \>\> must be defined, if you use the default read methods
  * 
  * @tparam T 
  */
