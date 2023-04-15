@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  ga.h
   mbwall 28jul94
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
                           all rights reserved
@@ -143,8 +141,8 @@ not need to instantiate one to use that method.
 one copy of the genome type you want to use.
 
 ---------------------------------------------------------------------------- */
-#ifndef _ga_ga_h_
-#define _ga_ga_h_
+
+#pragma once
 
 // Make sure that we get the configuration into each of the galib components
 // that will be used.
@@ -168,5 +166,3 @@ one copy of the genome type you want to use.
 #include <GA3DArrayGenome.h>
 #include <GAListGenome.hpp>
 #include <GATreeGenome.hpp>
-
-#endif
