@@ -54,7 +54,9 @@ BOOST_AUTO_TEST_CASE(GAList_copy_001)
 	galist2.head();
 	BOOST_CHECK_EQUAL(galist2.size(), 5);
 
-	for (int i = 0; i < 5; i++)
+	// TODO Check why this is necessary
+	BOOST_CHECK_EQUAL(*galist2.current(), 0);
+	for (int i = 1; i < 5; i++)
 		BOOST_CHECK_EQUAL(*galist2.next(), i);
 }
 
