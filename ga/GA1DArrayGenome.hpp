@@ -26,7 +26,7 @@
 #include <array>
 
 
-/** 1D Array Genome
+/** 1 dimensional Array Genome
  * 
  * You can use ANY kind of object in this genome.  But notice that it is
  * really easy to optimize this for some of the simpler types.
@@ -81,7 +81,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 
 	/** How similar are two genomes
 	 * 
-	 * operator== must be defined
+	 * \c operator== must be defined
 	 * 
 	 * @param a Genome a
 	 * @param b Genome b

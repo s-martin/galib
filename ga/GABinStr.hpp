@@ -31,10 +31,9 @@ class GABinaryString
 		resize(s);
 	}
 
-	/**
-	 * @brief 
-	 * 
-	 * Copy the contents of the bitstream.  We don't care what format it is in -
+	/** Copy the contents of the bitstream.
+     * 
+     * We don't care what format it is in -
 	 * we resize to make sure we have adequate space then we just copy all of the
 	 * data.
 	 * If the original is actually this, then we don't do anything.  If the
@@ -47,15 +46,10 @@ class GABinaryString
 		data = orig.data;
 	}
 
-	/**
-	 * @brief 
-	 * 
-	 * Resize the bitstream to the specified number of bits.  We return the number
-	 * of bits actually allocated.  For now there is no error checking or memory
-	 * management - we assume that we'll always get all of the memory we ask for.
-	 * If we resize, we copy the previous bits into the new space.  The memory
-	 * will never overlap (new should see to that) so we use memcpy not memmove.
-	 * If we're making more space, we set the contents of the new space to zeros.
+	/** Resize the bitstream to the specified number of bits.
+     * 
+     * We return the number of bits actually allocated. The new allocated space not used
+     * is set to zeros.
 	 * 
 	 * @param x desired size [bits]
 	 * @return the new size
@@ -75,14 +69,13 @@ class GABinaryString
 		return (data[a] = (val != 0 ? 1 : 0));
 	}
 
-	/**
-	 * @brief 
+	/** Are two bitstreams equal?
 	 * 
 	 * @param rhs right hand side 
 	 * @param lhsIdx index of left hand side
 	 * @param rhsIdx  index of right hand side
 	 * @param l length
-	 * @return true, if equal 
+	 * @return True, if equal 
 	 */
 	bool equal(const GABinaryString &rhs, unsigned int lhsIdx, unsigned int rhsIdx, unsigned int l) const
 	{
@@ -92,7 +85,7 @@ class GABinaryString
 	/**
 	 * @brief 
 	 * 
-	 * @param orig 
+	 * @param orig
 	 * @param dest destination
 	 * @param src source
 	 * @param l length

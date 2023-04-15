@@ -77,9 +77,7 @@ incorporate it into the code base.
 
 ---------------------------------------------------------------------------- */
 
-// This is a bare-bones os-cpu-compiler detection with no dependencies on any
-// other header files or macros.  We try to detect everything based on what we
-// will get by default from the compilers.  The result of this is three macros
+// This is a os-cpu-compiler detection with.  The result of this is three macros
 //   GALIB_OS
 //   GALIB_CPU
 //   GALIB_COMPILER

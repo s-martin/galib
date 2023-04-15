@@ -16,8 +16,7 @@
 
 #include <ostream>
 
-/**
- * @brief Tells us where in the source code an error occurs.
+/** Tells us where in the source code an error occurs.
  * 
  */
 class GASourceLocator
@@ -30,8 +29,7 @@ class GASourceLocator
 
 #define GA_LOC GASourceLocator(__FILE__, __LINE__)
 
-/**
- * @brief Indices for all of the error messages used in the library.
+/** Indices for all of the error messages used in the library.
  * 
  */
 enum class GAError
