@@ -77,27 +77,28 @@ class GABinaryString
 	/**
 	 * @brief 
 	 * 
-	 * @param orig
-	 * @param dest destination
-	 * @param src source
-	 * @param l length
+	 * @param orig Copy from here
+	 * @param destIdx Start index of destination to copy
+	 * @param origIdx Start index of source from where we copy
+	 * @param l length Length of copied bitstream
 	 */
-	void copy(const GABinaryString &orig, unsigned int dest, unsigned int src, unsigned int l)
+	void copy(const GABinaryString &orig, unsigned int destIdx, unsigned int origIdx, unsigned int l)
 	{
 		data.resize(orig.data.size());
-		std::memcpy(&data[dest], &orig.data[src], l);
+		std::memcpy(&data[destIdx], &orig.data[origIdx], l);
 	}
 
-	/**
-	 * @brief 
+	/** Copy (sub) bitstream.
+     * 
+     * @todo Check, if it is a bug, that it's a copy not a move
 	 * 
-	 * @param dest destination
-	 * @param src source
+	 * @param destIdx Start index of destination
+	 * @param sourceIdx Start index of source
 	 * @param l length
 	 */
-	void move(unsigned int dest, unsigned int src, unsigned int l)
+	void move(unsigned int destIdx, unsigned int sourceIdx, unsigned int l)
 	{
-		std::memmove(&data[dest], &data[src], l);
+		std::memmove(&data[destIdx], &data[sourceIdx], l);
 	}
 
 	void set(unsigned int a, unsigned int l)
