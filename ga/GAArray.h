@@ -12,9 +12,9 @@
  * 
  * This class can be used only on objects that have:
  * - a default constructor (takes no arguments)
- * - operator=
- * - operator==
- * - operator!=
+ * - \c operator=
+ * - \c operator==
+ * - \c operator!=
  * 
  * In other words, use only primitive objects in this array (e.g. int, float, pointers, etc)
  * The constructor will try to initialize to zero, but only if the type is right.

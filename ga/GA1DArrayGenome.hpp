@@ -32,10 +32,10 @@
  * really easy to optimize this for some of the simpler types.
  * 
  * The objects in the array must have the following operators defined: 
- * - \c =  
- * - \c ==  
- * - \c !=
- * - \c \>\> must be defined, if you use the default read methods
+ * - \c operator=  
+ * - \c operator==  
+ * - \c operator!=
+ * - \c operator\>\> must be defined, if you use the default read methods
  * 
  * @tparam T 
  */
