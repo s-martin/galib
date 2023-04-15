@@ -146,12 +146,12 @@ class GAArray&lt; T &gt;</h3>
 <p>Array Base Class. </p>
 <p>This class can be used only on objects that have:</p><ul>
 <li>a default constructor (takes no arguments)</li>
-<li><code>operator=</code> </li>
-<li><code>operator==</code> </li>
-<li><code>operator!=</code> </li>
+<li>operator=</li>
+<li>operator==</li>
+<li>operator!=</li>
 </ul>
 <p>In other words, use only primitive objects in this array (e.g. int, float, pointers, etc) The constructor will try to initialize to zero, but only if the type is right. We don't do any over-allocation, so resizing can be expensive. No error checking on the copy, so don't walk over end of array!</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>should do specialization for simple types that does memcpy rather than loop</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>should do specialization for simple types that does memcpy rather than loop</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>
@@ -164,7 +164,7 @@ class GAArray&lt; T &gt;</h3>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 15 2023 22:28:50 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Apr 15 2023 22:29:00 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

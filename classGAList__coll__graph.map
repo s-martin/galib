@@ -1,5 +1,5 @@
 <map id="GAList&lt; T &gt;" name="GAList&lt; T &gt;">
-<area shape="rect" id="node1" title="Container for nodes that have a list structure." alt="" coords="9,203,111,229"/>
+<area shape="rect" id="node1" title="This object is a container for nodes that have a list structure." alt="" coords="9,203,111,229"/>
 <area shape="rect" id="node2" href="$classGAListBASE.html" title=" " alt="" coords="11,127,109,153"/>
 <area shape="rect" id="node3" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="5,21,115,48"/>
 </map>

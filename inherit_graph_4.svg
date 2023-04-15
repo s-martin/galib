@@ -21,7 +21,7 @@
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="classGA1DArrayGenome.html" target="_top" xlink:title="1 dimensional Array Genome">
+<g id="a_node2"><a xlink:href="classGA1DArrayGenome.html" target="_top" xlink:title="1D Arrray Genome">
 <polygon fill="white" stroke="black" points="267,-494.5 267,-513.5 407,-513.5 407,-494.5 267,-494.5"/>
 <text text-anchor="middle" x="337" y="-501.5" font-family="Helvetica,sans-Serif" font-size="10.00">GA1DArrayGenome&lt; T &gt;</text>
 </a>
@@ -120,7 +120,7 @@
 <!-- Node15 -->
 <g id="node9" class="node">
 <title>Node15</title>
-<g id="a_node9"><a xlink:href="classGA1DBinaryStringGenome.html" target="_top" xlink:title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;...">
+<g id="a_node9"><a xlink:href="classGA1DBinaryStringGenome.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="264,-304.5 264,-323.5 410,-323.5 410,-304.5 264,-304.5"/>
 <text text-anchor="middle" x="337" y="-311.5" font-family="Helvetica,sans-Serif" font-size="10.00">GA1DBinaryStringGenome</text>
 </a>
@@ -309,7 +309,7 @@
 <!-- Node25 -->
 <g id="node18" class="node">
 <title>Node25</title>
-<g id="a_node18"><a xlink:href="classGASimpleGA.html" target="_top" xlink:title="Simple genetic algorithm class.">
+<g id="a_node18"><a xlink:href="classGASimpleGA.html" target="_top" xlink:title="Header file for the simple genetic algorithm class.">
 <polygon fill="white" stroke="black" points="297.5,-114.5 297.5,-133.5 376.5,-133.5 376.5,-114.5 297.5,-114.5"/>
 <text text-anchor="middle" x="337" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">GASimpleGA</text>
 </a>
@@ -324,7 +324,7 @@
 <!-- Node26 -->
 <g id="node19" class="node">
 <title>Node26</title>
-<g id="a_node19"><a xlink:href="classGASteadyStateGA.html" target="_top" xlink:title="Steady&#45;state genetic algorithm class.">
+<g id="a_node19"><a xlink:href="classGASteadyStateGA.html" target="_top" xlink:title="Header file for the steady&#45;state genetic algorithm class.">
 <polygon fill="white" stroke="black" points="285,-0.5 285,-19.5 389,-19.5 389,-0.5 285,-0.5"/>
 <text text-anchor="middle" x="337" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">GASteadyStateGA</text>
 </a>
@@ -429,7 +429,7 @@
 <!-- Node35 -->
 <g id="node28" class="node">
 <title>Node35</title>
-<g id="a_node28"><a xlink:href="classGAList.html" target="_top" xlink:title="Container for nodes that have a list structure.">
+<g id="a_node28"><a xlink:href="classGAList.html" target="_top" xlink:title="This object is a container for nodes that have a list structure.">
 <polygon fill="white" stroke="black" points="131.5,-418.5 131.5,-437.5 208.5,-437.5 208.5,-418.5 131.5,-418.5"/>
 <text text-anchor="middle" x="170" y="-425.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAList&lt; T &gt;</text>
 </a>

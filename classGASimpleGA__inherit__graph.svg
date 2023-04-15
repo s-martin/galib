@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title="Simple genetic algorithm class.">
+<g id="a_node1"><a xlink:title="Header file for the simple genetic algorithm class.">
 <polygon fill="#bfbfbf" stroke="black" points="18.5,-0.5 18.5,-19.5 97.5,-19.5 97.5,-0.5 18.5,-0.5"/>
 <text text-anchor="middle" x="58" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">GASimpleGA</text>
 </a>

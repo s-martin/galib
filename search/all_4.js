@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['elementcomparator_12',['ElementComparator',['../classGA1DArrayGenome.html#abdf80b813238f9e412636be4e9d9b60c',1,'GA1DArrayGenome']]],
-  ['equal_13',['equal',['../classGABinaryString.html#acdf850ee2fef926599708ea6b3dddcf7',1,'GABinaryString']]]
+  ['feature_20list_20for_20galib_9',['Feature List for GAlib',['../md__home_runner_work_galib_galib_doc_FeatureList.html',1,'']]]
 ];
