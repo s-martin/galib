@@ -100,9 +100,9 @@ if(X11_FOUND)
     target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
 endif()
 
-find_library (PVM_LIB pvm3)
-
 if(BUILD_PVM)
+    find_library(PVM_LIB pvm3)
+
     if(PVM_LIB)
         add_executable(pvmpop_master
                 ./pvmpop/genome.C

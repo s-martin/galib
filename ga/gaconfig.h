@@ -1,14 +1,12 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  config.h
   mbwall 27jun95
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
 						  all rights reserved
   Copyright (c) 1998-2005 Matthew Wall
 						  all rights reserved
 ---------------------------------------------------------------------------- */
-#ifndef _ga_config_h_
-#define _ga_config_h_
+
+#pragma once
 
 #include <boost/predef.h>
 
@@ -301,5 +299,3 @@ of the objects in GAlib.
 #define DEFAULT_LIST_MUTATOR SwapMutator
 #define DEFAULT_LIST_COMPARATOR NodeComparator
 #define DEFAULT_LIST_CROSSOVER OnePointCrossover
-
-#endif

@@ -23,7 +23,7 @@ enum class ParType
 	POINTER
 };
 
-/** This object is used for naming the parameters
+/** Naming the parameters
  * 
  * We associate a fullname, a short name, and a value with each parameter.
  * 

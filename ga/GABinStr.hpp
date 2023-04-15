@@ -69,12 +69,12 @@ class GABinaryString
 		return (data[a] = (val != 0 ? 1 : 0));
 	}
 
-	/** Are two bitstreams equal?
+	/** Are two (subset) bitstreams equal?
 	 * 
-	 * @param rhs right hand side 
-	 * @param lhsIdx index of left hand side
-	 * @param rhsIdx  index of right hand side
-	 * @param l length
+	 * @param rhs Right hand side bitstream to compare
+	 * @param lhsIdx Start index of left hand side bitstream
+	 * @param rhsIdx Start index of right hand side bitstream
+	 * @param l length of bitstream to compare
 	 * @return True, if equal 
 	 */
 	bool equal(const GABinaryString &rhs, unsigned int lhsIdx, unsigned int rhsIdx, unsigned int l) const

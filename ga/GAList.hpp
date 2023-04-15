@@ -55,7 +55,7 @@ template <class T> GANode<T> *_GAListCopy(GANode<T> *node, GANode<T> *head)
 	return newnode;
 }
 
-/** This object is a container for nodes that have a list structure
+/** Container for nodes that have a list structure
  *
  * The base list object is responsible for maintaining the list heirarchy.
  * This object is responsible for doing the memory management (allocating and de-allocating the

@@ -8,8 +8,7 @@
 
 #pragma once
 
-// This defines what type to use for the bitstream data storage.  Use the
-// smallest type available on your platform.
+/// Type for the bitstream data storage.
 using GABit = unsigned char;
 
 #ifdef _WIN32 // for GCC already defined
@@ -20,6 +19,7 @@ template <typename T1, typename T2> constexpr auto GAMax(T1 a, T2 b)
 {
 	return (((a) > (b)) ? (a) : (b));
 }
+
 template <typename T1, typename T2> constexpr auto GAMin(T1 a, T2 b)
 {
 	return (((a) < (b)) ? (a) : (b));
