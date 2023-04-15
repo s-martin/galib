@@ -120,6 +120,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (std::ostrea
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>equal</b> (const <a class="el" href="classGAGenome.html">GAGenome</a> &amp;c) const override</td></tr>
 <tr class="separator:a8b9df19813397ecb378599d9cf217ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af536eb213104c2fdcef2d110d3e6fe51"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGA1DArrayAlleleGenome.html#af536eb213104c2fdcef2d110d3e6fe51">resize</a> (int len) override</td></tr>
+<tr class="memdesc:af536eb213104c2fdcef2d110d3e6fe51"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we resize to a larger length then we need to set the contents to a valid value (ie one of our alleles)  <a href="classGA1DArrayAlleleGenome.html#af536eb213104c2fdcef2d110d3e6fe51">More...</a><br /></td></tr>
 <tr class="separator:af536eb213104c2fdcef2d110d3e6fe51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a0a7b579543919f5c07d1e4ff25b7c"><td class="memItemLeft" align="right" valign="top"><a id="a35a0a7b579543919f5c07d1e4ff25b7c"></a>
 const <a class="el" href="classGAAlleleSet.html">GAAlleleSet</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>alleleset</b> (unsigned int i=0) const</td></tr>
@@ -376,7 +377,8 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><b>NoComparator<
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:af36a0ba9db2830d8b4e36611067e7e29"><td class="memItemLeft" align="right" valign="top"><a id="af36a0ba9db2830d8b4e36611067e7e29"></a>
-std::vector&lt; <a class="el" href="classGAAlleleSet.html">GAAlleleSet</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>aset</b></td></tr>
+std::vector&lt; <a class="el" href="classGAAlleleSet.html">GAAlleleSet</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGA1DArrayAlleleGenome.html#af36a0ba9db2830d8b4e36611067e7e29">aset</a></td></tr>
+<tr class="memdesc:af36a0ba9db2830d8b4e36611067e7e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">the allele set(s) for this genome <br /></td></tr>
 <tr class="separator:af36a0ba9db2830d8b4e36611067e7e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classGA1DArrayGenome"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classGA1DArrayGenome')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classGA1DArrayGenome.html">GA1DArrayGenome&lt; T &gt;</a></td></tr>
 <tr class="memitem:a126201b41d4deb513cbf3e72f5432432 inherit pro_attribs_classGA1DArrayGenome"><td class="memItemLeft" align="right" valign="top"><a id="a126201b41d4deb513cbf3e72f5432432"></a>
@@ -545,6 +547,8 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>If we resize to a larger length then we need to set the contents to a valid value (ie one of our alleles) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">len</td><td></td></tr>
@@ -563,7 +567,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 15 2023 18:59:06 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Apr 15 2023 20:46:11 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
