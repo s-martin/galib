@@ -70,19 +70,19 @@ If you want to use code coverage:
 
 - `sudo apt install lcov gcovr`
 
-If you want to use doxygen:
+If you want to use Doxygen:
 
 - `sudo apt install doxygen mscgen dia graphviz`
 
-If you want to use PVM:
+If you want to use PVM examples:
 
-- sudo apt install pvm-dev
+- `sudo apt install pvm-dev`
 
 Configure and build:
 
 - `mkdir build && cd build`
 
-- `cmake ../` (if you don't want to build examples append ˋ-DBUILD_EXAMPLES=OFFˋ); if you want to build PVM append -DBUILD_PVM=ON
+- `cmake ../` (if you don't want to build examples append `-DBUILD_EXAMPLES=OFF`, if you want to build PVM append `-DBUILD_PVM=ON`)
 
 - `make`
 

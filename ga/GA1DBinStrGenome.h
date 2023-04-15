@@ -1,16 +1,10 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  binstr1.h
   mbwall 19apr95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-  This header defines the interface for the 1D binary string genome, including
-crossover objects and all the default and built-in operators.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_binstr1_h_
-#define _ga_binstr1_h_
+
+#pragma once
 
 #include "GABinStr.hpp"
 #include "GAGenome.h"
@@ -41,6 +35,10 @@ copy
   bits allocated is not equal to a genome with 10 bits allocated unless
   both are the same size.
 ---------------------------------------------------------------------------- */
+
+/** Interface for the 1D binary string genome, including crossover objects and all the default and built-in operators.
+ * 
+*/
 class GA1DBinaryStringGenome : public GABinaryString, public GAGenome
 {
   public:
@@ -180,5 +178,3 @@ inline void GA1DBinaryStringGenome::move(unsigned int x, unsigned int srcx,
 	GABinaryString::move(x, srcx, l);
 	_evaluated = false;
 }
-
-#endif

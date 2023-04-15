@@ -2,15 +2,7 @@
   mbwall 25feb95
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
 						  all rights reserved
-
- TO DO:
-* @todo If you want speed, specialize the comparison routines and copy routines
-	so that you can use memcpy, memmove, memcmp rather than looping through
-	each element.
-* @todo make the object defined for simple types, if you want to use complex types
-	then specialize to do member copy rather than bit copy (that way simple
-	users won't sacrifice speed, and complex users will get more complexity)
----------------------------------------------------------------------------- */
+ ---------------------------------------------------------------------------- */
 
 #pragma once
 
@@ -36,6 +28,13 @@
  * - \c operator==  
  * - \c operator!=
  * - \c operator\>\> must be defined, if you use the default read methods
+ *
+ * @todo If you want speed, specialize the comparison routines and copy routines
+ * so that you can use memcpy, memmove, memcmp rather than looping through
+ * each element.
+ * @todo make the object defined for simple types, if you want to use complex types
+ * then specialize to do member copy rather than bit copy (that way simple
+ * users won't sacrifice speed, and complex users will get more complexity)
  * 
  * @tparam T 
  */
@@ -1330,10 +1329,10 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		return GA1DArrayGenome<T>::equal(c);
 	}
 
-	// If we resize to a larger length then we need to set the contents to a
-	// valid value (ie one of our alleles).
 	/**
-	 * @brief 
+	 * 
+     * If we resize to a larger length then we need to set the contents to a
+     * valid value (ie one of our alleles)
 	 * 
 	 * @param len 
 	 * @return int 
@@ -1358,6 +1357,6 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	int size() const { return aset.size(); }
 
   protected:
-	// the allele set(s) for this genome
+	/// the allele set(s) for this genome
 	std::vector<GAAlleleSet<T>> aset; 
 };
