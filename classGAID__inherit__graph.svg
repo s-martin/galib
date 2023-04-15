@@ -187,7 +187,7 @@ var sectionId = 'dynsection-0';
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="classGASimpleGA.html" target="_top" xlink:title="Header file for the simple genetic algorithm class.">
+<g id="a_node6"><a xlink:href="classGASimpleGA.html" target="_top" xlink:title="Simple genetic algorithm class.">
 <polygon fill="white" stroke="black" points="262.5,-380.5 262.5,-399.5 341.5,-399.5 341.5,-380.5 262.5,-380.5"/>
 <text text-anchor="middle" x="302" y="-387.5" font-family="Helvetica,sans-Serif" font-size="10.00">GASimpleGA</text>
 </a>
@@ -202,7 +202,7 @@ var sectionId = 'dynsection-0';
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
-<g id="a_node7"><a xlink:href="classGASteadyStateGA.html" target="_top" xlink:title="Header file for the steady&#45;state genetic algorithm class.">
+<g id="a_node7"><a xlink:href="classGASteadyStateGA.html" target="_top" xlink:title="Steady&#45;state genetic algorithm class.">
 <polygon fill="white" stroke="black" points="250,-342.5 250,-361.5 354,-361.5 354,-342.5 250,-342.5"/>
 <text text-anchor="middle" x="302" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">GASteadyStateGA</text>
 </a>

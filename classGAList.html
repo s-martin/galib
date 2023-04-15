@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This object is a container for nodes that have a list structure.  
+<p>Container for nodes that have a list structure.  
  <a href="classGAList.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="GAList_8hpp_source.html">GAList.hpp</a>&gt;</code></p>
@@ -209,7 +209,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
 class GAList&lt; T &gt;</h3>
 
-<p>This object is a container for nodes that have a list structure. </p>
+<p>Container for nodes that have a list structure. </p>
 <p>The base list object is responsible for maintaining the list heirarchy. This object is responsible for doing the memory management (allocating and de-allocating the nodes in the list). We insulate the user entirely from nodes - when you use a list, you don't get nodes back, you get the contents of nodes (ie the user doesn't have to think about the list parts of a node, they can simply assume that their data is organized into a list structure). We include an iterator in this object so that you can navigate through the list. You can create another iterator and assign it to your list so you can have multiple iterators. All of the actions take place relative to the current location of the embedded iterator. None of the iterators change the state of the list. Be careful so that you don't end up with an iterator dangling with a pointer to a part of a list that no longer exists (I would need some kind of reference counting and/or message passing to take care of this at a lower level, and I'm not ready to implement that at this point). For now we allocate nodes on the fly. Eventually I would like to do some better memory management (arrays perhaps?) so we don't have to do so much alloc and dealloc and recursion. We depend on the template-ized <a class="el" href="classGAListIter.html">GAListIter</a> routine, thus the declaration.</p>
 <p>current, head, tail, next, prev, warp These iterator methods are defined as access to the embedded iterator of the list. Use these methods to move the insertion point and to traverse the list. You can also create other iterators for this list, but they won't affect the contents.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -506,7 +506,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 15 2023 11:44:34 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Apr 15 2023 15:07:32 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
