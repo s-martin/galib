@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title="1D Array Genome">
+<g id="a_node1"><a xlink:title="1 dimensional Array Genome">
 <polygon fill="#bfbfbf" stroke="black" points="492,-282 492,-301 632,-301 632,-282 492,-282"/>
 <text text-anchor="middle" x="562" y="-289" font-family="Helvetica,sans-Serif" font-size="10.00">GA1DArrayGenome&lt; T &gt;</text>
 </a>

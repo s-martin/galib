@@ -1,6 +1,6 @@
 <map id="GAGenome" name="GAGenome">
 <area shape="rect" id="node1" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="108,183,204,209"/>
-<area shape="rect" id="node3" href="$classGA1DArrayGenome.html" title="1D Array Genome" alt="" coords="256,5,443,32"/>
+<area shape="rect" id="node3" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="256,5,443,32"/>
 <area shape="rect" id="node5" href="$classGA1DBinaryStringGenome.html" title=" " alt="" coords="252,56,447,83"/>
 <area shape="rect" id="node7" href="$classGA2DArrayGenome.html" title=" " alt="" coords="256,107,443,133"/>
 <area shape="rect" id="node9" href="$classGA2DBinaryStringGenome.html" title=" " alt="" coords="252,157,447,184"/>

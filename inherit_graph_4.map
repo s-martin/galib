@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classGAArray.html" title="Array Base Class." alt="" coords="175,56,289,83"/>
-<area shape="rect" id="node2" href="$classGA1DArrayGenome.html" title="1D Array Genome" alt="" coords="361,5,548,32"/>
+<area shape="rect" id="node2" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="361,5,548,32"/>
 <area shape="rect" id="node4" href="$classGA2DArrayGenome.html" title=" " alt="" coords="361,56,548,83"/>
 <area shape="rect" id="node6" href="$classGA3DArrayGenome.html" title=" " alt="" coords="361,107,548,133"/>
 <area shape="rect" id="node3" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="600,5,824,32"/>
