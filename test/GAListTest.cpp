@@ -51,6 +51,11 @@ BOOST_AUTO_TEST_CASE(GAList_copy_001)
 	GAList<int> galist2;
 	galist2.copy(galist1);
 
+	galist1.head();
+	BOOST_CHECK_EQUAL(*galist1.current(), 0);
+	for(int i = 1; i < 5; i++)
+	    BOOST_CHECK_EQUAL(*galist1.next(), i);
+
 	galist2.head();
 	BOOST_CHECK_EQUAL(galist2.size(), 5);
 
@@ -116,6 +121,11 @@ BOOST_AUTO_TEST_CASE(GAList_swap_001)
 	BOOST_CHECK_EQUAL(*galist1.next(), 1);
 	BOOST_CHECK_EQUAL(*galist1.next(), 3);
 	BOOST_CHECK_EQUAL(*galist1.next(), 4);
+
+    // failure cases
+	BOOST_CHECK_EQUAL(galist1.swap(2, 2), -1);
+	BOOST_CHECK_EQUAL(galist1.swap(5, 3), -1);
+	BOOST_CHECK_EQUAL(galist1.swap(3, 5), -1);
 }
 
 BOOST_AUTO_TEST_CASE(destroy_001)
@@ -192,6 +202,11 @@ BOOST_AUTO_TEST_CASE(remove_001)
 	BOOST_CHECK_EQUAL(*galist1.next(), 2);
 	BOOST_CHECK_EQUAL(*galist1.next(), 3);
 	BOOST_CHECK_EQUAL(*galist1.next(), 4);
+}
+
+BOOST_AUTO_TEST_CASE(GAList_clone_001)
+{
+
 }
 
 BOOST_AUTO_TEST_SUITE_END()
