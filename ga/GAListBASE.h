@@ -101,12 +101,14 @@ class GAListBASE
 		hd = n;
 		csz = 1;
 	}
+
+    int size() const;
+
+  protected:
 	GANodeBASE *remove(GANodeBASE *n);
 	int insert(GANodeBASE *n, GANodeBASE *idx, Location where = AFTER);
 	int swapnode(GANodeBASE *a, GANodeBASE *b);
-	int size() const;
 
-  protected:
 	int sz, csz; // number of nodes, have contents changed?
 	GANodeBASE *hd; // the head node of the list
 
