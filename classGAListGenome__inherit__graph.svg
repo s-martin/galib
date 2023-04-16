@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="classGAList.html" target="_top" xlink:title="This object is a container for nodes that have a list structure.">
+<g id="a_node2"><a xlink:href="classGAList.html" target="_top" xlink:title="Container for nodes that have a list structure.">
 <polygon fill="white" stroke="black" points="0,-56.5 0,-75.5 77,-75.5 77,-56.5 0,-56.5"/>
 <text text-anchor="middle" x="38.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAList&lt; T &gt;</text>
 </a>

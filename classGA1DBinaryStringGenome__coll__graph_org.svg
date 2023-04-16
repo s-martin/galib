@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;...">
 <polygon fill="#bfbfbf" stroke="black" points="533,-275 533,-294 679,-294 679,-275 533,-275"/>
 <text text-anchor="middle" x="606" y="-282" font-family="Helvetica,sans-Serif" font-size="10.00">GA1DBinaryStringGenome</text>
 </a>

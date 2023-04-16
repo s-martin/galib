@@ -8,10 +8,10 @@
 <area shape="rect" id="node3" href="$classGADCrowdingGA.html" title=" " alt="" coords="343,5,473,32"/>
 <area shape="rect" id="node4" href="$classGADemeGA.html" title=" " alt="" coords="359,56,457,83"/>
 <area shape="rect" id="node5" href="$classGAIncrementalGA.html" title=" " alt="" coords="339,107,477,133"/>
-<area shape="rect" id="node6" href="$classGASimpleGA.html" title="Header file for the simple genetic algorithm class." alt="" coords="355,157,461,184"/>
-<area shape="rect" id="node7" href="$classGASteadyStateGA.html" title="Header file for the steady&#45;state genetic algorithm class." alt="" coords="339,208,477,235"/>
-<area shape="rect" id="node9" href="$classGA1DArrayGenome.html" title="1D Arrray Genome" alt="" coords="315,259,501,285"/>
-<area shape="rect" id="node11" href="$classGA1DBinaryStringGenome.html" title=" " alt="" coords="311,309,505,336"/>
+<area shape="rect" id="node6" href="$classGASimpleGA.html" title="Simple genetic algorithm class." alt="" coords="355,157,461,184"/>
+<area shape="rect" id="node7" href="$classGASteadyStateGA.html" title="Steady&#45;state genetic algorithm class." alt="" coords="339,208,477,235"/>
+<area shape="rect" id="node9" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="315,259,501,285"/>
+<area shape="rect" id="node11" href="$classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="311,309,505,336"/>
 <area shape="rect" id="node13" href="$classGA2DArrayGenome.html" title=" " alt="" coords="315,360,501,387"/>
 <area shape="rect" id="node15" href="$classGA2DBinaryStringGenome.html" title=" " alt="" coords="311,411,505,437"/>
 <area shape="rect" id="node16" href="$classGA3DArrayGenome.html" title=" " alt="" coords="315,461,501,488"/>

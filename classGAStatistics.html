@@ -215,10 +215,10 @@ const <a class="el" href="classGAPopulation.html">GAPopulation</a> &amp;&#160;</
 const <a class="el" href="classGAGenome.html">GAGenome</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>bestIndividual</b> (unsigned int n=0) const</td></tr>
 <tr class="separator:a226ff993eb0377cc71e1f1520d8b1765"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cb64f61268f802a492725ae0ac34b7a"><td class="memItemLeft" align="right" valign="top"><a id="a6cb64f61268f802a492725ae0ac34b7a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>scores</b> (const std::string &amp;filename, int which=NoScores)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>scores</b> (const std::string &amp;filename, int <a class="el" href="classGAStatistics.html#af40d7931f2432a92ca4c1e7e588ddb8e">which</a>=NoScores)</td></tr>
 <tr class="separator:a6cb64f61268f802a492725ae0ac34b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b2b96b23942ec73ed407b3b76015a0"><td class="memItemLeft" align="right" valign="top"><a id="aa5b2b96b23942ec73ed407b3b76015a0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>scores</b> (std::ostream &amp;os, int which=NoScores)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>scores</b> (std::ostream &amp;os, int <a class="el" href="classGAStatistics.html#af40d7931f2432a92ca4c1e7e588ddb8e">which</a>=NoScores)</td></tr>
 <tr class="separator:aa5b2b96b23942ec73ed407b3b76015a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05566b42adf12564909482334bc175bb"><td class="memItemLeft" align="right" valign="top"><a id="a05566b42adf12564909482334bc175bb"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const std::string &amp;filename) const</td></tr>
@@ -332,37 +332,47 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>Nconv</b></td
 float *&#160;</td><td class="memItemRight" valign="bottom"><b>cscore</b></td></tr>
 <tr class="separator:afccf82296069bc03585a14859487db79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a569fd64610331815c0c8ee62caa9ae18"><td class="memItemLeft" align="right" valign="top"><a id="a569fd64610331815c0c8ee62caa9ae18"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>nscrs</b></td></tr>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#a569fd64610331815c0c8ee62caa9ae18">nscrs</a></td></tr>
+<tr class="memdesc:a569fd64610331815c0c8ee62caa9ae18"><td class="mdescLeft">&#160;</td><td class="mdescRight">how many scores do we have? <br /></td></tr>
 <tr class="separator:a569fd64610331815c0c8ee62caa9ae18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bef97f8deaa4816f83f51ddea383ab2"><td class="memItemLeft" align="right" valign="top"><a id="a4bef97f8deaa4816f83f51ddea383ab2"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>Nscrs</b></td></tr>
 <tr class="separator:a4bef97f8deaa4816f83f51ddea383ab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb256b4065de362eee6b664e96d51904"><td class="memItemLeft" align="right" valign="top"><a id="acb256b4065de362eee6b664e96d51904"></a>
-std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>gen</b></td></tr>
+std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#acb256b4065de362eee6b664e96d51904">gen</a></td></tr>
+<tr class="memdesc:acb256b4065de362eee6b664e96d51904"><td class="mdescLeft">&#160;</td><td class="mdescRight">generation number corresponding to scores <br /></td></tr>
 <tr class="separator:acb256b4065de362eee6b664e96d51904"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4445d76eb8790743f1ef9133c5e46d13"><td class="memItemLeft" align="right" valign="top"><a id="a4445d76eb8790743f1ef9133c5e46d13"></a>
-std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>aveScore</b></td></tr>
+std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#a4445d76eb8790743f1ef9133c5e46d13">aveScore</a></td></tr>
+<tr class="memdesc:a4445d76eb8790743f1ef9133c5e46d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">average scores of each generation <br /></td></tr>
 <tr class="separator:a4445d76eb8790743f1ef9133c5e46d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb280e2e2b7eaa22f9fe77a0a86d749f"><td class="memItemLeft" align="right" valign="top"><a id="acb280e2e2b7eaa22f9fe77a0a86d749f"></a>
-std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>maxScore</b></td></tr>
+std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#acb280e2e2b7eaa22f9fe77a0a86d749f">maxScore</a></td></tr>
+<tr class="memdesc:acb280e2e2b7eaa22f9fe77a0a86d749f"><td class="mdescLeft">&#160;</td><td class="mdescRight">best scores of each generation <br /></td></tr>
 <tr class="separator:acb280e2e2b7eaa22f9fe77a0a86d749f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8772b7113862630608f5d7cac12242b"><td class="memItemLeft" align="right" valign="top"><a id="ac8772b7113862630608f5d7cac12242b"></a>
-std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>minScore</b></td></tr>
+std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#ac8772b7113862630608f5d7cac12242b">minScore</a></td></tr>
+<tr class="memdesc:ac8772b7113862630608f5d7cac12242b"><td class="mdescLeft">&#160;</td><td class="mdescRight">worst scores of each generation <br /></td></tr>
 <tr class="separator:ac8772b7113862630608f5d7cac12242b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bbfd33b017430551e9efcb7f6e61e6f"><td class="memItemLeft" align="right" valign="top"><a id="a6bbfd33b017430551e9efcb7f6e61e6f"></a>
-std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>devScore</b></td></tr>
+std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#a6bbfd33b017430551e9efcb7f6e61e6f">devScore</a></td></tr>
+<tr class="memdesc:a6bbfd33b017430551e9efcb7f6e61e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">stddev of each generation <br /></td></tr>
 <tr class="separator:a6bbfd33b017430551e9efcb7f6e61e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a780d9823f21656d47f60043224b78afa"><td class="memItemLeft" align="right" valign="top"><a id="a780d9823f21656d47f60043224b78afa"></a>
-std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>divScore</b></td></tr>
+std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#a780d9823f21656d47f60043224b78afa">divScore</a></td></tr>
+<tr class="memdesc:a780d9823f21656d47f60043224b78afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">diversity of each generation <br /></td></tr>
 <tr class="separator:a780d9823f21656d47f60043224b78afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c38af90502afa65b1c2d4cca8cd736"><td class="memItemLeft" align="right" valign="top"><a id="a03c38af90502afa65b1c2d4cca8cd736"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>scorefile</b></td></tr>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#a03c38af90502afa65b1c2d4cca8cd736">scorefile</a></td></tr>
+<tr class="memdesc:a03c38af90502afa65b1c2d4cca8cd736"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of file to which scores get written <br /></td></tr>
 <tr class="separator:a03c38af90502afa65b1c2d4cca8cd736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af40d7931f2432a92ca4c1e7e588ddb8e"><td class="memItemLeft" align="right" valign="top"><a id="af40d7931f2432a92ca4c1e7e588ddb8e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>which</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#af40d7931f2432a92ca4c1e7e588ddb8e">which</a></td></tr>
+<tr class="memdesc:af40d7931f2432a92ca4c1e7e588ddb8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">which data to write to file <br /></td></tr>
 <tr class="separator:af40d7931f2432a92ca4c1e7e588ddb8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a114fa09909fada78e8dd602d1281bb01"><td class="memItemLeft" align="right" valign="top"><a id="a114fa09909fada78e8dd602d1281bb01"></a>
-<a class="el" href="classGAPopulation.html">GAPopulation</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>boa</b></td></tr>
+<a class="el" href="classGAPopulation.html">GAPopulation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAStatistics.html#a114fa09909fada78e8dd602d1281bb01">boa</a></td></tr>
+<tr class="memdesc:a114fa09909fada78e8dd602d1281bb01"><td class="mdescLeft">&#160;</td><td class="mdescRight">keep a copy of the best genomes <br /></td></tr>
 <tr class="separator:a114fa09909fada78e8dd602d1281bb01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -380,7 +390,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>GA</b></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 15 2023 22:29:00 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 16 2023 09:53:40 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

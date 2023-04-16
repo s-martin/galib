@@ -113,7 +113,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> GAStringUniformCrossover(<span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;a, <span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;b,</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                    <a class="code" href="classGAGenome.html">GAGenome</a> *c, <a class="code" href="classGAGenome.html">GAGenome</a> *d)</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classGA1DArrayGenome.html">GA1DArrayGenome&lt;char&gt;::UniformCrossover</a>(a, b, c, d);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classGA1DArrayGenome.html#ae9ec93a518f095418ca0d8b236f2e355">GA1DArrayGenome&lt;char&gt;::UniformCrossover</a>(a, b, c, d);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> GAStringEvenOddCrossover(<span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;a, <span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a> &amp;b,</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                    <a class="code" href="classGAGenome.html">GAGenome</a> *c, <a class="code" href="classGAGenome.html">GAGenome</a> *d)</div>
@@ -146,15 +146,16 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classGA1DArrayGenome.html">GA1DArrayGenome&lt;char&gt;::CycleCrossover</a>(a, b, c, d);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
 <div class="ttc" id="aclassGA1DArrayAlleleGenome_html"><div class="ttname"><a href="classGA1DArrayAlleleGenome.html">GA1DArrayAlleleGenome</a></div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:1169</div></div>
-<div class="ttc" id="aclassGA1DArrayGenome_html"><div class="ttname"><a href="classGA1DArrayGenome.html">GA1DArrayGenome</a></div><div class="ttdoc">1D Arrray Genome</div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:50</div></div>
-<div class="ttc" id="aclassGA1DArrayGenome_html_ab7d685d38877d57867c3b1650f5fb038"><div class="ttname"><a href="classGA1DArrayGenome.html#ab7d685d38877d57867c3b1650f5fb038">GA1DArrayGenome::SwapMutator</a></div><div class="ttdeci">static int SwapMutator(GAGenome &amp;c, float pmut)</div><div class="ttdoc">Randomly swap elements in the array.</div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:60</div></div>
+<div class="ttc" id="aclassGA1DArrayGenome_html"><div class="ttname"><a href="classGA1DArrayGenome.html">GA1DArrayGenome</a></div><div class="ttdoc">1 dimensional Array Genome</div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:42</div></div>
+<div class="ttc" id="aclassGA1DArrayGenome_html_ab7d685d38877d57867c3b1650f5fb038"><div class="ttname"><a href="classGA1DArrayGenome.html#ab7d685d38877d57867c3b1650f5fb038">GA1DArrayGenome::SwapMutator</a></div><div class="ttdeci">static int SwapMutator(GAGenome &amp;c, float pmut)</div><div class="ttdoc">Randomly swap elements in the array.</div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:52</div></div>
+<div class="ttc" id="aclassGA1DArrayGenome_html_ae9ec93a518f095418ca0d8b236f2e355"><div class="ttname"><a href="classGA1DArrayGenome.html#ae9ec93a518f095418ca0d8b236f2e355">GA1DArrayGenome::UniformCrossover</a></div><div class="ttdeci">static int UniformCrossover(const GAGenome &amp;p1, const GAGenome &amp;p2, GAGenome *c1, GAGenome *c2)</div><div class="ttdoc">Randomly take bits from each parent.</div><div class="ttdef"><b>Definition:</b> GA1DArrayGenome.hpp:116</div></div>
 <div class="ttc" id="aclassGAAlleleSetArray_html"><div class="ttname"><a href="classGAAlleleSetArray.html">GAAlleleSetArray</a></div><div class="ttdef"><b>Definition:</b> GAAllele.h:404</div></div>
 <div class="ttc" id="aclassGAAlleleSet_html"><div class="ttname"><a href="classGAAlleleSet.html">GAAlleleSet</a></div><div class="ttdef"><b>Definition:</b> GAAllele.h:192</div></div>
 <div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdoc">The base genome class just defines the genome interface - how to mutate, crossover,...</div><div class="ttdef"><b>Definition:</b> GAGenome.h:200</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 15 2023 22:29:00 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 16 2023 09:53:39 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
