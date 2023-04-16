@@ -18,7 +18,7 @@
 
 constexpr auto GA_ALLELE_CHUNK = 10;
 
-/** Allele class
+/** Allele
  * 
  * An allele is a possible value for a gene and an allele set is a list of possible values (I use 'set' because it doesn't
  * imply the specific implementation of the container class).

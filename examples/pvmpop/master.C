@@ -10,7 +10,8 @@ the master controls the evolution by specifying migrations between populations
 on various processes.
 ---------------------------------------------------------------------------- */
 #include <cstdio>
-#include <iostream.h>
+#include <iostream>
+#include <GA1DBinStrGenome.h>
 #include "PVMDemeGA.h"
 #include "genome.h"
 

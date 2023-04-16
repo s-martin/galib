@@ -8,7 +8,7 @@
 
 #include "GABaseGA.h"
 
-/** Header file for the simple genetic algorithm class.
+/** Simple genetic algorithm class.
  * 
  * 
  */

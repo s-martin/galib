@@ -8,7 +8,7 @@
 
 #include "GABaseGA.h"
 
-/** Header file for the steady-state genetic algorithm class.
+/** Steady-state genetic algorithm class.
  *
  * 
  */

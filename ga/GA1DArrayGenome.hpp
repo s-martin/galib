@@ -1,27 +1,8 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  array1.h
   mbwall 25feb95
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
 						  all rights reserved
-
- DESCRIPTION:
-  This header defines the interface for the 1D array genome.
-  You can use ANY kind of object in this genome.  But notice that it is
-really easy to optimize this for some of the simpler types.  I'll try to do
-that for common instantiations (float, char).
-  The objects in the array must have the following operators defined:
-  =  ==  !=
-  >> must be defined if you use the default read methods
-
- TO DO:
-*** If you want speed, specialize the comparison routines and copy routines
-	so that you can use memcpy, memmove, memcmp rather than looping through
-	each element.
-*** make the object defined for simple types, if you want to use complex types
-	then specialize to do member copy rather than bit copy (that way simple
-	users won't sacrifice speed, and complex users will get more complexity)
----------------------------------------------------------------------------- */
+ ---------------------------------------------------------------------------- */
 
 #pragma once
 
@@ -37,12 +18,23 @@ that for common instantiations (float, char).
 #include <array>
 
 
-/** 1D Arrray Genome
+/** 1 dimensional Array Genome
  * 
  * You can use ANY kind of object in this genome.  But notice that it is
  * really easy to optimize this for some of the simpler types.
- * The objects in the array must have the following operators defined: =  ==  !=
- * >> must be defined if you use the default read methods
+ * 
+ * The objects in the array must have the following operators defined: 
+ * - \c operator=  
+ * - \c operator==  
+ * - \c operator!=
+ * - \c operator\>\> must be defined, if you use the default read methods
+ *
+ * @todo If you want speed, specialize the comparison routines and copy routines
+ * so that you can use memcpy, memmove, memcmp rather than looping through
+ * each element.
+ * @todo make the object defined for simple types, if you want to use complex types
+ * then specialize to do member copy rather than bit copy (that way simple
+ * users won't sacrifice speed, and complex users will get more complexity)
  * 
  * @tparam T 
  */
@@ -88,7 +80,7 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 
 	/** How similar are two genomes
 	 * 
-	 * operator== must be defined
+	 * \c operator== must be defined
 	 * 
 	 * @param a Genome a
 	 * @param b Genome b
@@ -110,9 +102,17 @@ template <class T> class GA1DArrayGenome : public GAArray<T>, public GAGenome
 		return count / sis.length();
 	}
 
-	// Randomly take bits from each parent.  For each bit we flip a coin to see
-	// if that bit should come from the mother or the father.  If strings are
-	// different lengths then we need to use the mask to get things right.
+	/** Randomly take bits from each parent
+	 *
+	 * For each bit we flip a coin to see if that bit should come from the mother or the father.
+	 * If strings are different lengths then we need to use the mask to get things right. 
+	 * 
+	 * @param p1 Parent 1
+	 * @param p2 Parent 2
+	 * @param c1 
+	 * @param c2 
+	 * @return int 
+	 */
 	static int UniformCrossover(const GAGenome &p1, const GAGenome &p2,
 								GAGenome *c1, GAGenome *c2)
 	{
@@ -1329,8 +1329,14 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 		return GA1DArrayGenome<T>::equal(c);
 	}
 
-	// If we resize to a larger length then we need to set the contents to a
-	// valid value (ie one of our alleles).
+	/**
+	 * 
+     * If we resize to a larger length then we need to set the contents to a
+     * valid value (ie one of our alleles)
+	 * 
+	 * @param len 
+	 * @return int 
+	 */
 	int resize(int len) override
 	{
 		unsigned int oldx = this->nx;
@@ -1351,6 +1357,6 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	int size() const { return aset.size(); }
 
   protected:
-	// the allele set(s) for this genome
+	/// the allele set(s) for this genome
 	std::vector<GAAlleleSet<T>> aset; 
 };

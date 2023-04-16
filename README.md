@@ -2,7 +2,7 @@
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/s-martin/galib/master)
 
-[![CI-Linux](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml) [![CI-Windows](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml) [![CodeQL](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml) [![Microsoft C++ Code Analysis](https://github.com/s-martin/galib/actions/workflows/msvc.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/msvc.yml)
+[![CI-Linux](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml) [![CI-Windows](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml) [![CodeQL](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml)
 
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
@@ -40,62 +40,65 @@ Original GAlib 2.4.7:
 ## COMPILATION
 
 CMake is used for compilation. There are three things to build: the library, the examples
-and the unit tests. Here is the
-short version of how to build and test everything:
+and the unit tests. Here is the short version of how to build and test everything:
 
 ### Windows
 
 Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is recommended.
 
-1. Clone or download the repository
+- Clone or download the repository
 
-2. Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
+- Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
 
 #### Visual Studio 2019 or later
 
-3. Open path in Visual Studio as CMake project.
+- Open path in Visual Studio as CMake project.
 
 #### Previous versions of Visual Studio
 
-3. `md build && cd build`
+- `md build && cd build`
 
-4. `cmake ../ -DCMAKE_TOOLCHAIN_FILE=<path to vcpkg>/scripts/buildsystems/vcpkg.cmake`
+- `cmake ../ -DCMAKE_TOOLCHAIN_FILE=<path to vcpkg>/scripts/buildsystems/vcpkg.cmake`
 
-5. Open created Visual Studio solution file in `build` directory
+- Open created Visual Studio solution file in `build` directory
 
 ### Linux (Ubuntu)
 
-1. `sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev`
+- `sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev`
 
 If you want to use code coverage:
 
-2. `sudo apt install lcov gcovr`
+- `sudo apt install lcov gcovr`
 
-If you want to use doxygen:
+If you want to use Doxygen:
 
-2. `sudo apt install doxygen mscgen dia graphviz`
+- `sudo apt install doxygen mscgen dia graphviz`
+
+If you want to use PVM examples:
+
+- `sudo apt install pvm-dev`
 
 Configure and build:
 
-3. `mkdir build && cd build`
+- `mkdir build && cd build`
 
-4. `cmake ../`
+- `cmake ../` (if you don't want to build examples append `-DBUILD_EXAMPLES=OFF`, if you want to build PVM append `-DBUILD_PVM=ON`)
 
-5. `make`
+- `make`
 
 Run unit tests:
 
-6. `make test`
+- `make test`
 
 Run unit tests and create coverage:
 
-7. `make GAlib_lcov`
+- `make GAlib_lcov`
 
-8. `make GAlib_gcov`
+- `make GAlib_gcov`
 
 ### Building shared libraries
 
-To build shared libraries append `-DBUILD_SHARED_LIBS:BOOL=ON` to the above `cmake`command.
+To build shared libraries append `-DBUILD_SHARED_LIBS:BOOL=ON` to the above `cmake` command.
 
 See also <https://cmake.org/cmake/help/v3.15/variable/BUILD_SHARED_LIBS.html> in the CMake docs.
 

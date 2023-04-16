@@ -1,5 +1,4 @@
 /* ----------------------------------------------------------------------------
-  version.h
   mbwall 10oct98
 
    This is the header file to keep track of the versions and revisions of the

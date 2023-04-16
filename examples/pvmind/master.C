@@ -20,7 +20,7 @@ you parallelize one component without doing all the others, you might end up
 slowing everything down.
 ---------------------------------------------------------------------------- */
 #include <cstdio>
-#include <iostream.h>
+#include <iostream>
 #include <time.h>
 #include <pvm3.h>
 #include <ga.h>
@@ -143,7 +143,7 @@ StartupPVM(const char* prog, PVMData& d) {
   struct pvmhostinfo* hostp;
   int status = pvm_config(&nhost, &narch, &hostp);
   if(status == PvmSysErr) {
-    cerr<<"\n" << prog << ": PVM not responding. Have you started the PVM?\n";
+    std::cerr<<"\n" << prog << ": PVM not responding. Have you started the PVM?\n";
     return 1;
   }
   
@@ -153,7 +153,7 @@ StartupPVM(const char* prog, PVMData& d) {
      std::cerr << prog << ": Error spawning slaves.\n";
      std::cerr << "  Error codes of failed spawns are:\n";
     for(i=0; i<d.nreq; i++) {
-       std::cerr << "    slave "; cerr.width(3);
+       std::cerr << "    slave "; std::cerr.width(3);
        std::cerr << i << ": " << d.tid[i] << "\n";
     }
     pvm_exit();
@@ -163,7 +163,7 @@ StartupPVM(const char* prog, PVMData& d) {
      std::cerr << prog << ": Spawned only "<<d.ntasks<<" of "<<d.nreq<<"\n";
      std::cerr << "  Error codes of failed spawns are:\n";
     for(i=0; i<d.nreq; i++) {
-       std::cerr << "    slave "; cerr.width(3); 
+       std::cerr << "    slave "; std::cerr.width(3); 
        std::cerr << i << ": " << d.tid[i] << "\n";
     }
   }

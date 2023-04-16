@@ -1,9 +1,6 @@
 /* ----------------------------------------------------------------------------
   mbwall 25nov94
   Copyright 1995 Massachusetts Institute of Technology
-
- DESCRIPTION:
-  This defines the node objects.
 ---------------------------------------------------------------------------- */
 
 #pragma once
@@ -16,7 +13,6 @@
 /** This is the basic node object
  * 
  * In its basic form it should be useful for trees, lists, and some graphs.
- * 
  */
 struct GANodeBASE
 {
@@ -74,6 +70,11 @@ reassigned).  We do not allow the nodes to be created without any arguments.
   The node always owns its contents; when the node is destroyed, the contents
 of the node get destroyed as well.
 ---------------------------------------------------------------------------- */
+/**
+ * @brief 
+ * 
+ * @tparam T 
+ */
 template <class T> struct GANode : public GANodeBASE
 {
 	T contents;

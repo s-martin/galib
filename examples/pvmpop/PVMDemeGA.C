@@ -7,7 +7,9 @@
    Souce file for the deme-based genetic algorithm object.
 ---------------------------------------------------------------------------- */
 #include <cstring>
+#include <iostream>
 #include <garandom.h>
+#include <GA1DBinStrGenome.h>
 #include "PVMDemeGA.h"
 #include "genome.h"
 
@@ -308,7 +310,7 @@ PVMDemeGA::spawn(const char* slavename) {
      std::cerr << className() << ": spawn:\n  Error spawning slaves.\n";
      std::cerr << "  Error codes of failed spawns are:\n";
     for(int i=0; i<_Ntid; i++) {
-       std::cerr << "    slave "; cerr.width(3); cerr<<i<<": "<<_tid[i]<<"\n";
+       std::cerr << "    slave "; std::cerr.width(3); std::cerr<<i<<": "<<_tid[i]<<"\n";
     }
     pvm_exit();
     return _status = -1;
@@ -319,7 +321,7 @@ PVMDemeGA::spawn(const char* slavename) {
      std::cerr << "  Error codes of failed spawns are:\n";
     for(int i=0; i<_Ntid; i++) {
       if(_tid[i] < 0) {
-	 std::cerr << "    slave "; cerr.width(3); cerr<<i<<": "<<_tid[i]<<"\n";
+	 std::cerr << "    slave "; std::cerr.width(3); std::cerr<<i<<": "<<_tid[i]<<"\n";
       }
     }
   }

@@ -88,29 +88,6 @@ target_link_libraries(example27 PUBLIC GAlib)
 add_executable(randtest randtest.C)
 target_link_libraries(randtest PUBLIC GAlib)
 
-#if(NOT MSVC) 
-#	add_executable(gnuex 
-#					./gnu/gnuex.C 
-#					./gnu/bitstr.C
-#					./gnu/AllocRing.cc 
-#					./gnu/Obstack.cc 
-#					./gnu/BitString.cc 
-#					./gnu/builtin.cc 
-#					./gnu/bitand.c 
-#					./gnu/bitany.c 
-#					./gnu/bitblt.c 
-#					./gnu/bitclear.c 
-#					./gnu/bitcopy.c 
-#					./gnu/bitcount.c 
-#					./gnu/bitinvert.c 
-#					./gnu/bitlcomp.c 
-#					./gnu/bitset1.c 
-#					./gnu/bitxor.c 
-#					./gnu/error.cc )
-#	target_link_libraries(gnuex GAlib)
-#	target_include_directories(gnuex PUBLIC ${PROJECT_SOURCE_DIR}/examples/gnu)
-#endif()
-
 if(X11_FOUND)
     add_executable(gaview
                         ./graphic/gaview.C )
@@ -123,11 +100,40 @@ if(X11_FOUND)
     target_include_directories(tspview PUBLIC ${X11_INCLUDE_DIR})
 endif()
 
-# add_executable(pvmpop
-#                 ./pvmpop/genome.C
-#                 ./pvmpop/genome.h
-#                 ./pvmpop/master.C
-#                 ./pvmpop/PVMDemeGA.C
-#                 ./pvmpop/PVMDemeGA.h
-#                 ./pvmpop/slave.C)
-# target_link_libraries(pvmpop PUBLIC GAlib)
+if(BUILD_PVM)
+    find_library(PVM_LIB pvm3)
+
+    if(PVM_LIB)
+        add_executable(pvmpop_master
+                ./pvmpop/genome.C
+                ./pvmpop/genome.h
+                ./pvmpop/master.C
+                ./pvmpop/PVMDemeGA.C
+                ./pvmpop/PVMDemeGA.h)
+        target_link_libraries(pvmpop_master PUBLIC GAlib ${PVM_LIB})
+        target_include_directories(pvmpop_master PUBLIC "../../ga")
+
+        add_executable(pvmpop_slave
+                ./pvmpop/genome.C
+                ./pvmpop/genome.h
+                ./pvmpop/slave.C
+                ./pvmpop/PVMDemeGA.C
+                ./pvmpop/PVMDemeGA.h)
+        target_link_libraries(pvmpop_slave PUBLIC GAlib ${PVM_LIB})
+        target_include_directories(pvmpop_slave PUBLIC "../../ga")
+
+        add_executable(pvmind_master
+                ./pvmind/genome.C
+                ./pvmind/genome.h
+                ./pvmind/master.C)
+        target_link_libraries(pvmind_master PUBLIC GAlib ${PVM_LIB})
+        target_include_directories(pvmind_master PUBLIC "../../ga")
+
+        add_executable(pvmind_slave
+                ./pvmind/genome.C
+                ./pvmind/genome.h
+                ./pvmind/slave.C)
+        target_link_libraries(pvmind_slave PUBLIC GAlib ${PVM_LIB})
+        target_link_directories(pvmind_slave PUBLIC "../../ga")
+    endif()
+endif()

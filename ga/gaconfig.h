@@ -1,14 +1,12 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  config.h
   mbwall 27jun95
   Copyright (c) 1995-1996 Massachusetts Institute of Technology
 						  all rights reserved
   Copyright (c) 1998-2005 Matthew Wall
 						  all rights reserved
 ---------------------------------------------------------------------------- */
-#ifndef _ga_config_h_
-#define _ga_config_h_
+
+#pragma once
 
 #include <boost/predef.h>
 
@@ -77,9 +75,7 @@ incorporate it into the code base.
 
 ---------------------------------------------------------------------------- */
 
-// This is a bare-bones os-cpu-compiler detection with no dependencies on any
-// other header files or macros.  We try to detect everything based on what we
-// will get by default from the compilers.  The result of this is three macros
+// This is a os-cpu-compiler detection with.  The result of this is three macros
 //   GALIB_OS
 //   GALIB_CPU
 //   GALIB_COMPILER
@@ -303,5 +299,3 @@ of the objects in GAlib.
 #define DEFAULT_LIST_MUTATOR SwapMutator
 #define DEFAULT_LIST_COMPARATOR NodeComparator
 #define DEFAULT_LIST_CROSSOVER OnePointCrossover
-
-#endif

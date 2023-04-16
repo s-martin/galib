@@ -16,10 +16,10 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Install Boost, X11, lcov, gcovr, Doxygen
-      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen graphviz mscgen dia 
+      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen graphviz mscgen dia pvm-dev 
       
     - name: Configure CMake
-      run: cmake . -B ${{ env.build }}
+      run: cmake . -B ${{ env.build }} -DBUILD_PVM=ON
       
     - uses: ammaraskar/gcc-problem-matcher@master
         

@@ -236,16 +236,6 @@ You can learn a great deal by watching the genetic algorithm evolve.
         evolving in real time.  You can compare three different algorithms:
      simple, steady-state, and deterministic crowding.
 
-## gnu      (available only in the UNIX distribution)
-
-This directory contains the code for an example that uses the BitString
-        object from the GNU class library.  The example illustrates how to
-        incorporate an existing object (in this case the BitString) into a
-        GAlib Genome type.  The gnu directory contains the source code needed
-        for the BitString object (taken from the GNU library) plus the two
-        files (bitstr.h and bitstr.C) needed to define the new genome type and
-        the example file that runs the GA (gnuex.C).
-
 ## pvmind      (available only in the UNIX distribution)
 
 This directory contains code that illustrates how to use GAlib with
