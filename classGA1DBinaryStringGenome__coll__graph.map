@@ -1,5 +1,5 @@
 <map id="GA1DBinaryStringGenome" name="GA1DBinaryStringGenome">
-<area shape="rect" id="node1" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="716,221,911,248"/>
+<area shape="rect" id="node1" title=" " alt="" coords="716,221,911,248"/>
 <area shape="rect" id="node2" href="$classGABinaryString.html" title=" " alt="" coords="402,7,523,33"/>
 <area shape="rect" id="node3" title=" " alt="" coords="157,7,316,33"/>
 <area shape="rect" id="node4" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="415,333,511,360"/>

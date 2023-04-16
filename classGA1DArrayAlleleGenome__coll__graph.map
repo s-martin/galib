@@ -1,6 +1,6 @@
 <map id="GA1DArrayAlleleGenome&lt; T &gt;" name="GA1DArrayAlleleGenome&lt; T &gt;">
 <area shape="rect" id="node1" title=" " alt="" coords="929,41,1153,68"/>
-<area shape="rect" id="node2" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="661,5,848,32"/>
+<area shape="rect" id="node2" href="$classGA1DArrayGenome.html" title="1D Arrray Genome" alt="" coords="661,5,848,32"/>
 <area shape="rect" id="node3" href="$classGAArray.html" title="Array Base Class." alt="" coords="351,5,465,32"/>
 <area shape="rect" id="node4" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="360,285,456,312"/>
 <area shape="rect" id="node6" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="677,343,832,369"/>

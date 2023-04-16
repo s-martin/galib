@@ -1,5 +1,5 @@
 <map id="GASteadyStateGA" name="GASteadyStateGA">
-<area shape="rect" id="node1" title="Steady&#45;state genetic algorithm class." alt="" coords="1385,447,1523,473"/>
+<area shape="rect" id="node1" title="Header file for the steady&#45;state genetic algorithm class." alt="" coords="1385,447,1523,473"/>
 <area shape="rect" id="node2" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="547,397,701,424"/>
 <area shape="rect" id="node4" href="$classGAPopulation.html" title=" " alt="" coords="1133,331,1244,357"/>
 <area shape="rect" id="node8" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="911,280,1007,307"/>

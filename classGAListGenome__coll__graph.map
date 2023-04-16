@@ -1,6 +1,6 @@
 <map id="GAListGenome&lt; T &gt;" name="GAListGenome&lt; T &gt;">
 <area shape="rect" id="node1" title=" " alt="" coords="732,303,889,329"/>
-<area shape="rect" id="node2" href="$classGAList.html" title="Container for nodes that have a list structure." alt="" coords="427,88,530,115"/>
+<area shape="rect" id="node2" href="$classGAList.html" title="This object is a container for nodes that have a list structure." alt="" coords="427,88,530,115"/>
 <area shape="rect" id="node3" href="$classGAListBASE.html" title=" " alt="" coords="233,88,331,115"/>
 <area shape="rect" id="node4" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="5,88,115,115"/>
 <area shape="rect" id="node5" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="431,415,527,441"/>
