@@ -163,8 +163,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>insert</b> (<a class="
 <tr class="memitem:a2db82788af18a7c650bb72a9943b2075 inherit pro_methods_classGAListBASE"><td class="memItemLeft" align="right" valign="top"><a id="a2db82788af18a7c650bb72a9943b2075"></a>
 <a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *n)</td></tr>
 <tr class="separator:a2db82788af18a7c650bb72a9943b2075 inherit pro_methods_classGAListBASE"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd920a7e64acd49d9a7e038445f7f283 inherit pro_methods_classGAListBASE"><td class="memItemLeft" align="right" valign="top"><a id="acd920a7e64acd49d9a7e038445f7f283"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>insert</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *n, <a class="el" href="structGANodeBASE.html">GANodeBASE</a> *idx, Location where=AFTER)</td></tr>
+<tr class="memitem:acd920a7e64acd49d9a7e038445f7f283 inherit pro_methods_classGAListBASE"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAListBASE.html#acd920a7e64acd49d9a7e038445f7f283">insert</a> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *n, <a class="el" href="structGANodeBASE.html">GANodeBASE</a> *idx, Location where=AFTER)</td></tr>
 <tr class="separator:acd920a7e64acd49d9a7e038445f7f283 inherit pro_methods_classGAListBASE"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada6e97b5583184dbf625e3ce1af55f76 inherit pro_methods_classGAListBASE"><td class="memItemLeft" align="right" valign="top"><a id="ada6e97b5583184dbf625e3ce1af55f76"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>swapnode</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *a, <a class="el" href="structGANodeBASE.html">GANodeBASE</a> *b)</td></tr>
@@ -363,12 +362,19 @@ template&lt;class T &gt; </div>
 <p>Insert the object into the list at the specified place relative to the current location of the embedded iterator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td></td></tr>
-    <tr><td class="paramname">where</td><td></td></tr>
+    <tr><td class="paramname">t</td><td>Object to be inserted into list </td></tr>
+    <tr><td class="paramname">where</td><td>Insert location (default: AFTER) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No error </td></tr>
+    <tr><td class="paramname">-1</td><td>Error occurred </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -413,11 +419,18 @@ template&lt;class T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>List to be inserted </td></tr>
-    <tr><td class="paramname">where</td><td>Location where list is to be inserted </td></tr>
+    <tr><td class="paramname">where</td><td>Location where list is to be inserted (default: AFTER) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No Error </td></tr>
+    <tr><td class="paramname">-1</td><td>Error occurred </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -507,7 +520,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 16 2023 09:53:39 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 16 2023 10:01:48 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
