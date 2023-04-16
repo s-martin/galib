@@ -106,6 +106,15 @@ class GAListBASE
 
   protected:
 	GANodeBASE *remove(GANodeBASE *n);
+
+    /**
+     * @brief 
+     * 
+     * @param n 
+     * @param idx 
+     * @param where 
+     * @return int 
+     */
 	int insert(GANodeBASE *n, GANodeBASE *idx, Location where = AFTER);
 	int swapnode(GANodeBASE *a, GANodeBASE *b);
 
