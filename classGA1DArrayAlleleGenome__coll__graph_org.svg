@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="classGA1DArrayGenome.html" target="_top" xlink:title="1D Arrray Genome">
+<g id="a_node2"><a xlink:href="classGA1DArrayGenome.html" target="_top" xlink:title="1 dimensional Array Genome">
 <polygon fill="white" stroke="black" points="492,-536.5 492,-555.5 632,-555.5 632,-536.5 492,-536.5"/>
 <text text-anchor="middle" x="562" y="-543.5" font-family="Helvetica,sans-Serif" font-size="10.00">GA1DArrayGenome&lt; T &gt;</text>
 </a>

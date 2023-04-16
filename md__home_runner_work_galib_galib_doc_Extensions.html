@@ -240,13 +240,13 @@ Genome Mutation</h1>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> nMut;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassGA1DBinaryStringGenome_html"><div class="ttname"><a href="classGA1DBinaryStringGenome.html">GA1DBinaryStringGenome</a></div><div class="ttdef"><b>Definition:</b> GA1DBinStrGenome.h:45</div></div>
+<div class="ttc" id="aclassGA1DBinaryStringGenome_html"><div class="ttname"><a href="classGA1DBinaryStringGenome.html">GA1DBinaryStringGenome</a></div><div class="ttdoc">Interface for the 1D binary string genome, including crossover objects and all the default and built-...</div><div class="ttdef"><b>Definition:</b> GA1DBinStrGenome.h:43</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md15"></a>
 Genome Crossover</h1>
 <p>The crossover method is used by the genetic algorithm to mate individuals from the population to form new offspring. Each genome should define a default crossover method for the genetic algorithms to use. The <b>sexual</b> and <b>asexual</b> member functions return a pointer to the preferred sexual and asexual mating methods, respectively. The <b>crossover</b> member function is used to change the preferred mating method. The genome does not have a member function to invoke the crossover; only the genetic algorithm can actually perform the crossover.</p>
 <p>Some genetic algorithms use sexual mating, others use asexual mating. If possible, define both so that your genome will work with either kind of genetic algorithm. If your derived class does not define a cross method, an error message will be posted whenever crossover is attempted.</p>
 <p>Sexual crossover takes four arguments: two parents and two children. If one child is nil, the operator should be able to generate a single child. The genomes have already been allocated, so the crossover operator should simply modify the contents of the child genome as appropriate. The crossover function should return the number of crossovers that occurred. Your crossover function should be able to operate on one or two children, so be sure to test the child pointers to see if the genetic algorithm is asking you to create one or two children.</p>
-<p>Here is an implementation of the two-parent/one-or-two-child single point crossover operator for fixed-length genomes of the <a class="el" href="classGA1DBinaryStringGenome.html">GA1DBinaryStringGenome</a> class.</p>
+<p>Here is an implementation of the two-parent/one-or-two-child single point crossover operator for fixed-length genomes of the <a class="el" href="classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built-...">GA1DBinaryStringGenome</a> class.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span></div>
 <div class="line">SinglePointCrossover(<span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a>&amp;amp; p1, <span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a>&amp;amp; p2, <a class="code" href="classGAGenome.html">GAGenome</a>* c1, <a class="code" href="classGAGenome.html">GAGenome</a>* c2){</div>
 <div class="line">  <a class="code" href="classGA1DBinaryStringGenome.html">GA1DBinaryStringGenome</a> &amp;amp;mom=(<a class="code" href="classGA1DBinaryStringGenome.html">GA1DBinaryStringGenome</a> &amp;amp;)p1;</div>
@@ -464,7 +464,7 @@ Genetic Algorithm</h1>
 <div class="line"> </div>
 <div class="line">  stats.update(*pop);  <span class="comment">// update the statistics by one generation</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassGASteadyStateGA_html"><div class="ttname"><a href="classGASteadyStateGA.html">GASteadyStateGA</a></div><div class="ttdoc">Header file for the steady-state genetic algorithm class.</div><div class="ttdef"><b>Definition:</b> GASStateGA.h:16</div></div>
+<div class="ttc" id="aclassGASteadyStateGA_html"><div class="ttname"><a href="classGASteadyStateGA.html">GASteadyStateGA</a></div><div class="ttdoc">Steady-state genetic algorithm class.</div><div class="ttdef"><b>Definition:</b> GASStateGA.h:16</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md23"></a>
 Termination Function</h1>
 <p>The termination function determines when the genetic algorithm should stop evolving. It takes a genetic algorithm as its argument and returns gaTrue if the genetic algorithm should stop or gaFalse if the algorithm should continue.</p>
@@ -509,7 +509,7 @@ Termination Function</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 16 2023 19:18:58 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 16 2023 19:19:02 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

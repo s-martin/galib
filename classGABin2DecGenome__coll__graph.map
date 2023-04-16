@@ -1,6 +1,6 @@
 <map id="GABin2DecGenome" name="GABin2DecGenome">
 <area shape="rect" id="node1" title=" " alt="" coords="1064,437,1215,464"/>
-<area shape="rect" id="node2" href="$classGA1DBinaryStringGenome.html" title=" " alt="" coords="780,440,975,467"/>
+<area shape="rect" id="node2" href="$classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="780,440,975,467"/>
 <area shape="rect" id="node3" href="$classGABinaryString.html" title=" " alt="" coords="434,465,555,492"/>
 <area shape="rect" id="node4" title=" " alt="" coords="157,465,316,492"/>
 <area shape="rect" id="node5" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="447,357,543,384"/>
