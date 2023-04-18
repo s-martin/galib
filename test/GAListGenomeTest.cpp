@@ -1,0 +1,101 @@
+#include <boost/test/unit_test.hpp>
+
+#include <GAListGenome.hpp>
+
+
+BOOST_AUTO_TEST_SUITE( UnitTest )
+
+float objective(GAGenome &c)
+{
+    /*
+	auto &genome = (GAListGenome<int> &)c;
+	int count = 0;
+	if (!genome.head())
+		return 0;
+	count = (*genome.head() == 101) ? 1 : 0; // move to head of the list
+	for (int i = 1; i < genome.size(); i++)
+		count +=
+			(*genome.next() == 101) ? 1 : 0; // check each element of the list
+	return 5 * count - genome.size();
+    */
+   return 0;
+}
+
+BOOST_AUTO_TEST_CASE(GAListGenome_DestructiveMutator_001)
+{
+    GAListGenome<int> genome(objective);
+
+    genome.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		genome.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(genome.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*genome.next(), i);
+    
+    genome.mutator(GAListGenome<int>::DestructiveMutator);
+
+    BOOST_CHECK_EQUAL(genome.mutate(-1), 0); // failure case
+
+    BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
+
+    BOOST_CHECK_EQUAL(genome.size(), 3);
+
+    BOOST_CHECK_EQUAL(*genome.head(), 2);
+	BOOST_CHECK_EQUAL(*genome.next(), 3);
+    BOOST_CHECK_EQUAL(*genome.next(), 4);
+}
+
+BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
+{
+    GAListGenome<int> genome(objective);
+
+    genome.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		genome.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(genome.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*genome.next(), i);
+    
+    genome.mutator(GAListGenome<int>::SwapMutator);
+
+    BOOST_CHECK_EQUAL(genome.mutate(-1), 0); // failure case
+
+    BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
+
+    BOOST_CHECK_EQUAL(*genome.head(), 0);
+	BOOST_CHECK_EQUAL(*genome.next(), 4);
+    BOOST_CHECK_EQUAL(*genome.next(), 3);
+    BOOST_CHECK_EQUAL(*genome.next(), 2);
+    BOOST_CHECK_EQUAL(*genome.next(), 1);
+}
+
+BOOST_AUTO_TEST_CASE(GAListGenome_NodeComparator_001)
+{
+    GAListGenome<int> genome1(objective);
+    genome1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		genome1.insert(i);		// each subsequent node contains a number
+
+    BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome1, genome1), 0); // failure case
+
+    GAListGenome<int> genome_failure(objective);
+    genome_failure.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome1, genome_failure), 4); // failure case
+    BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome_failure, genome1), 4); // failure case
+
+    GAListGenome<int> genome_failure2(objective);
+    BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome_failure2, genome_failure2), 0); // failure case
+
+    GAListGenome<int> genome2(objective);
+    genome2.insert(3, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		genome2.insert(i+3);		// each subsequent node contains a number
+
+    BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome1, genome2), 5);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
