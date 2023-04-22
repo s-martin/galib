@@ -65,6 +65,15 @@ jobs:
       #  github-token: ${{ github.token }} #${{ secrets.GITHUB_TOKEN }}
       #  working-directory: ${{ env.build }}
       #  update-comment: true
+      
+    - name: Generate a code coverage report
+      uses: threeal/gcovr-action@latest
+      
+      
+      
+      
+      
+      
         
         
         
