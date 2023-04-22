@@ -46,11 +46,13 @@ and the unit tests. Here is the short version of how to build and test everythin
 
 ### Windows
 
-Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is recommended.
+Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies and [chocolatey](https://chocolatey.org) to install tools is recommended.
 
 - Clone or download the repository
 
 - Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
+
+- Install coverage tools: choco install opencppcoverage
 
 #### Visual Studio 2019 or later
 
