@@ -69,7 +69,7 @@ jobs:
     - name: Report code coverage with gcovr and coveralls
       uses: threeal/gcovr-action@latest
       with:
-        excludes: |
+        exclude: |
           examples/*
           test/*
         coveralls-send: true
