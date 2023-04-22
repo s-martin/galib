@@ -66,8 +66,14 @@ jobs:
       #  working-directory: ${{ env.build }}
       #  update-comment: true
       
-    - name: Generate a code coverage report
+    - name: Report code coverage with gcovr and coveralls
       uses: threeal/gcovr-action@latest
+      with:
+        excludes: |
+          examples/*
+          test/*
+        coveralls-send: true
+        github-token: ${{ secrets.GITHUB_TOKEN }}
       
       
       
