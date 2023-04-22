@@ -4,6 +4,8 @@
 
 [![CI-Linux](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-linux.yml) [![CI-Windows](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/ci-windows.yml) [![CodeQL](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/s-martin/galib/actions/workflows/codeql-analysis.yml)
 
+[![Coverage Status](https://coveralls.io/repos/github/s-martin/galib/badge.svg?branch=master)](https://coveralls.io/github/s-martin/galib?branch=master)
+
 Copyright (c) 1994-1996 MIT, 1996-2005 Matthew Wall
 
 GAlib is a C++ library of genetic algorithm objects.  With GAlib you can add
