@@ -70,6 +70,11 @@ $(function() {
 <div class="title">GAListIterBASE Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This is the base class for iterators for the list objects.  
+ <a href="classGAListIterBASE.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GAListBASE_8h_source.html">GAListBASE.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GAListIterBASE:</div>
 <div class="dyncontent">
@@ -118,11 +123,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (const
 <tr class="memitem:a4c12f47d95592de7d6a72a6730c82a14"><td class="memItemLeft" align="right" valign="top"><a id="a4c12f47d95592de7d6a72a6730c82a14"></a>
 <a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>tail</b> ()</td></tr>
 <tr class="separator:a4c12f47d95592de7d6a72a6730c82a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09261896e4fd2b9ef1d6779b681dc14e"><td class="memItemLeft" align="right" valign="top"><a id="a09261896e4fd2b9ef1d6779b681dc14e"></a>
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>warp</b> (unsigned int)</td></tr>
+<tr class="memitem:a09261896e4fd2b9ef1d6779b681dc14e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAListIterBASE.html#a09261896e4fd2b9ef1d6779b681dc14e">warp</a> (unsigned int)</td></tr>
+<tr class="memdesc:a09261896e4fd2b9ef1d6779b681dc14e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the iterator to the node referenced by index.  <a href="classGAListIterBASE.html#a09261896e4fd2b9ef1d6779b681dc14e">More...</a><br /></td></tr>
 <tr class="separator:a09261896e4fd2b9ef1d6779b681dc14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28cc08a89c0d1570702413c274448334"><td class="memItemLeft" align="right" valign="top"><a id="a28cc08a89c0d1570702413c274448334"></a>
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>warp</b> (const <a class="el" href="classGAListIterBASE.html">GAListIterBASE</a> &amp;i)</td></tr>
+<tr class="memitem:a28cc08a89c0d1570702413c274448334"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAListIterBASE.html#a28cc08a89c0d1570702413c274448334">warp</a> (const <a class="el" href="classGAListIterBASE.html">GAListIterBASE</a> &amp;i)</td></tr>
+<tr class="memdesc:a28cc08a89c0d1570702413c274448334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the iterator to the node referenced by index.  <a href="classGAListIterBASE.html#a28cc08a89c0d1570702413c274448334">More...</a><br /></td></tr>
 <tr class="separator:a28cc08a89c0d1570702413c274448334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e4cc4051e448a206febe24f1fc0b720"><td class="memItemLeft" align="right" valign="top"><a id="a7e4cc4051e448a206febe24f1fc0b720"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
@@ -137,13 +142,81 @@ Protected Attributes</h2></td></tr>
 const <a class="el" href="classGAListBASE.html">GAListBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>list</b></td></tr>
 <tr class="separator:a6131a061fe4df2e3560581c43db4f1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This is the base class for iterators for the list objects. </p>
+<p>We define this class separately from the List object so that you can have multiple interators for each list and so that you can more easily customize the traversal algorithms within the iterator. From the object point of view, the way you traverse a list is independent of how you represent the list. Like the ListBASE object, this object doesn't do any memory allocation or deallocation. All we do is provide list traversal. Notice that we keep a 'current location' in the list - whatever your last query was is stored as the node, so if you refer to the current member, you'll get your last query. If you pass a NULL node to these routines they will not break; passing a NULL will result in a no-op, and NULL will be returned. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a28cc08a89c0d1570702413c274448334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28cc08a89c0d1570702413c274448334">&#9670;&nbsp;</a></span>warp() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structGANodeBASE.html">GANodeBASE</a>* GAListIterBASE::warp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classGAListIterBASE.html">GAListIterBASE</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move the iterator to the node referenced by index. </p>
+<p>The head node is node '0' then the count increases from there.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>GANodeBASE* </dd></dl>
+
+</div>
+</div>
+<a id="a09261896e4fd2b9ef1d6779b681dc14e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09261896e4fd2b9ef1d6779b681dc14e">&#9670;&nbsp;</a></span>warp() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structGANodeBASE.html">GANodeBASE</a>* GAListIterBASE::warp </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Move the iterator to the node referenced by index. </p>
+<p>The head node is node '0' then the count increases from there.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>GANodeBASE* </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/galib/galib/ga/<a class="el" href="GAListBASE_8h_source.html">GAListBASE.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 22 2023 20:47:26 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Apr 22 2023 20:47:58 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

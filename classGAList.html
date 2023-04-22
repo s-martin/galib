@@ -319,7 +319,15 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>Remove the current node from the list and free the memory it was using. </p>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<p>Destroy the specified node. This uses the current node as the one to destroy, so be sure to use the iteration methods to move to the node you want to destroy. Once the node is gone, we set the current node to the prev node of the one that was destroyed. If the node that was nuked was the head node then we set the current node to the new head.</p>
+<dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No error </td></tr>
+    <tr><td class="paramname">-1</td><td>Error occurred </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -505,12 +513,19 @@ template&lt;class T &gt; </div>
 <p>This has no effect on the size or the iterator. If either index is out of bounds then we don't do anything.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td></td></tr>
-    <tr><td class="paramname">b</td><td></td></tr>
+    <tr><td class="paramname">a</td><td>Index of first node to swap </td></tr>
+    <tr><td class="paramname">b</td><td>Index of second node to swap </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No error </td></tr>
+    <tr><td class="paramname">-1</td><td>Error occurred </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -520,7 +535,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 22 2023 20:47:26 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Apr 22 2023 20:47:58 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
