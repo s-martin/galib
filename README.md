@@ -112,16 +112,19 @@ If that does not work, then here are the files you might have to modify:
 
 If you still have problems, look at Installation.html in the doc directory.
 
-## DOCUMENTATION and MAILING LIST
+## DOCUMENTATION
 
-**!!! to be updated !!!**
+Doxygen API documentation is available at <https://s-martin.github.io/galib/>.
 
-Complete documentation in html format is available in the doc directory.  The
-distribution site contains PDF and PostScript(tm) versions.
+More general documentation is available at `/doc`.
 
-A current list of bugs is at <http://lancet.mit.edu/ga/Bugs.html>
+### Documentation of original GAlib (until 2.4.7)
 
-There are two GAlib mailing lists:  galib@mit.edu and galib-announce@mit.edu
+List of bugs is at <http://lancet.mit.edu/ga/Bugs.html>
+
+#### Original Mailing Lists
+
+There are two GAlib mailing lists: galib@mit.edu and galib-announce@mit.edu
 The first list is an unmoderated list intended as a forum for galib users to
 help each other.  The second is only for announcements about GAlib updates.
 To subscribe, send email to galib-request@mit.edu (or galib-announce-request)
