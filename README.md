@@ -22,7 +22,7 @@ The library requires a C++ compiler conforming to C++17. It has been tested with
 - Visual Studio 2019
 - GCC 8.3 (Ubuntu)
 
-Graphic examples (XWindows/Motif and MS Windows) are available, as are
+Graphic examples (XWindows) are available, as are
 parallel, distributed implementations using PVM.  There are about 30 examples
 that illustrate various ways to use GAlib on a variety of problems.
 In addition many unit tests are available.

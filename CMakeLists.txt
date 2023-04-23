@@ -82,7 +82,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(COVERAGE_EXCLUDES "/usr/include/*" "examples/*" "test/*")
     SETUP_TARGET_FOR_COVERAGE_LCOV(NAME ${PROJECT_NAME}_lcov EXECUTABLE ${PROJECT_NAME}Test)
     SETUP_TARGET_FOR_COVERAGE_GCOVR_HTML(NAME ${PROJECT_NAME}_gcov EXECUTABLE ${PROJECT_NAME}Test)
-else()
+elseif(MSVC)
     add_custom_target(NAME ${PROJECT_NAME}Opencppcoverage COMMAND "opencppcoverage --working_dir ${CMAKE_CURRENT_BINARY_DIR}/test -- ${CMAKE_CURRENT_BINARY_DIR}/test/GAlibTest.exe")
 endif()
 
