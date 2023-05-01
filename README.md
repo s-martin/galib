@@ -22,7 +22,7 @@ The library requires a C++ compiler conforming to C++17. It has been tested with
 - Visual Studio 2019
 - GCC 8.3 (Ubuntu)
 
-Graphic examples (XWindows/Motif and MS Windows) are available, as are
+Graphic examples (XWindows) are available, as are
 parallel, distributed implementations using PVM.  There are about 30 examples
 that illustrate various ways to use GAlib on a variety of problems.
 In addition many unit tests are available.
@@ -46,11 +46,13 @@ and the unit tests. Here is the short version of how to build and test everythin
 
 ### Windows
 
-Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies is recommended.
+Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies and [chocolatey](https://chocolatey.org) to install tools is recommended.
 
 - Clone or download the repository
 
 - Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
+
+- Install coverage tools: choco install opencppcoverage
 
 #### Visual Studio 2019 or later
 
@@ -112,16 +114,19 @@ If that does not work, then here are the files you might have to modify:
 
 If you still have problems, look at Installation.html in the doc directory.
 
-## DOCUMENTATION and MAILING LIST
+## DOCUMENTATION
 
-**!!! to be updated !!!**
+Doxygen API documentation is available at <https://s-martin.github.io/galib/>.
 
-Complete documentation in html format is available in the doc directory.  The
-distribution site contains PDF and PostScript(tm) versions.
+More general documentation is available at `/doc`.
 
-A current list of bugs is at <http://lancet.mit.edu/ga/Bugs.html>
+### Documentation of original GAlib (until 2.4.7)
 
-There are two GAlib mailing lists:  galib@mit.edu and galib-announce@mit.edu
+List of bugs is at <http://lancet.mit.edu/ga/Bugs.html>
+
+#### Original Mailing Lists
+
+There are two GAlib mailing lists: galib@mit.edu and galib-announce@mit.edu
 The first list is an unmoderated list intended as a forum for galib users to
 help each other.  The second is only for announcements about GAlib updates.
 To subscribe, send email to galib-request@mit.edu (or galib-announce-request)
