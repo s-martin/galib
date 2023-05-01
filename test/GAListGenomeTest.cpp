@@ -98,4 +98,49 @@ BOOST_AUTO_TEST_CASE(GAListGenome_NodeComparator_001)
     BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome1, genome2), 5);
 }
 
+BOOST_AUTO_TEST_CASE(GAListGenome_OnePointCrossover_001)
+{
+    GAListGenome<int> genomep1(objective);
+    genomep1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		genomep1.insert(i);		// each subsequent node contains a number
+
+    GAListGenome<int> genomep2(objective);
+    genomep2.insert(5, GAListBASE::HEAD);
+	for (int i = 1; i < 5; i++)
+		genomep2.insert(i+5);
+
+    GAListGenome<int> genomec1(objective);
+    GAListGenome<int> genomec2(objective);
+    BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, &genomec1, &genomec2), 2);
+
+    BOOST_CHECK_EQUAL(*genomep1.head(), 0);
+	BOOST_CHECK_EQUAL(*genomep1.next(), 1);
+    BOOST_CHECK_EQUAL(*genomep1.next(), 2);
+    BOOST_CHECK_EQUAL(*genomep1.next(), 3);
+    BOOST_CHECK_EQUAL(*genomep1.next(), 4);
+
+    BOOST_CHECK_EQUAL(*genomep2.head(), 5);
+	BOOST_CHECK_EQUAL(*genomep2.next(), 6);
+    BOOST_CHECK_EQUAL(*genomep2.next(), 7);
+    BOOST_CHECK_EQUAL(*genomep2.next(), 8);
+    BOOST_CHECK_EQUAL(*genomep2.next(), 9);
+
+    BOOST_CHECK_EQUAL(*genomec1.head(), 0);
+	BOOST_CHECK_EQUAL(*genomec1.next(), 3);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 4);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 0);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 3);
+
+    BOOST_CHECK_EQUAL(*genomec2.head(), 0);
+	BOOST_CHECK_EQUAL(*genomec2.next(), 1);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 2);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 1);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 2);
+
+    BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, nullptr, nullptr), 0);
+    BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, &genomec1, nullptr), 1);
+    BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, nullptr, &genomec2), 1);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
