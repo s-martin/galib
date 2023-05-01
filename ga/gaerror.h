@@ -1,15 +1,10 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  error.h
   mbwall 7may95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-  This defines the error routines for handling errors.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_error_h_
-#define _ga_error_h_
+
+#pragma once
 
 #include <gaconfig.h>
 #include <gatypes.h>
@@ -128,5 +123,3 @@ void GASetErrorStream(std::ostream &);
 // GAlib function returns an error code, this string will contain the text of
 // the explanation for the error.
 static std::string gaErrMsg;
-
-#endif

@@ -7,18 +7,15 @@ BOOST_AUTO_TEST_SUITE( UnitTest )
 
 float objective(GAGenome &c)
 {
-    /*
 	auto &genome = (GAListGenome<int> &)c;
 	int count = 0;
 	if (!genome.head())
 		return 0;
-	count = (*genome.head() == 101) ? 1 : 0; // move to head of the list
+	count = (*genome.head() == 1) ? 1 : 0; // move to head of the list
 	for (int i = 1; i < genome.size(); i++)
 		count +=
-			(*genome.next() == 101) ? 1 : 0; // check each element of the list
+			(*genome.next() == 1) ? 1 : 0; // check each element of the list
 	return 5 * count - genome.size();
-    */
-   return 0;
 }
 
 BOOST_AUTO_TEST_CASE(GAListGenome_DestructiveMutator_001)
