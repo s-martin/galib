@@ -138,6 +138,12 @@ BOOST_AUTO_TEST_CASE(GAListGenome_OnePointCrossover_001)
     BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, nullptr, nullptr), 0);
     BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, &genomec1, nullptr), 1);
     BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, nullptr, &genomec2), 1);
+
+    std::cout << "OnePointCrossover" << std::endl;
+    std::cout << "Genome P1: " << genomep1 << std::endl;
+    std::cout << "Genome P2: " << genomep2 << std::endl;
+    std::cout << "Genome C1: " << genomec1 << std::endl;
+    std::cout << "Genome C2: " << genomec2 << std::endl;
 }
 
 BOOST_AUTO_TEST_CASE(GAListGenome_PartialMatchCrossover_001)
