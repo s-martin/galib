@@ -20,7 +20,8 @@ Modernized GAlib from version 3.0 on is a fork of the [original GAlib](http://la
 The library requires a C++ compiler conforming to C++17. It has been tested with
 
 - Visual Studio 2019
-- GCC 8.3 (Ubuntu)
+- GCC 8.3, 9.4 (Ubuntu)
+- LLVM/Clang 10.0.0 (Ubuntu)
 
 Graphic examples (XWindows) are available, as are
 parallel, distributed implementations using PVM.  There are about 30 examples
@@ -52,7 +53,7 @@ Using [vcpkg](https://github.com/microsoft/vcpkg) to install dependencies and [c
 
 - Install dependencies: `vcpkg install boost-test boost-program-options boost-predef`
 
-- Install coverage tools: choco install opencppcoverage
+- Install coverage tools: `choco install opencppcoverage`
 
 #### Visual Studio 2019 or later
 
@@ -126,9 +127,9 @@ List of bugs is at <http://lancet.mit.edu/ga/Bugs.html>
 
 #### Original Mailing Lists
 
-There are two GAlib mailing lists: galib@mit.edu and galib-announce@mit.edu
+There are two GAlib mailing lists: <galib@mit.edu> and <galib-announce@mit.edu>
 The first list is an unmoderated list intended as a forum for galib users to
 help each other.  The second is only for announcements about GAlib updates.
-To subscribe, send email to galib-request@mit.edu (or galib-announce-request)
+To subscribe, send email to <galib-request@mit.edu> (or galib-announce-request)
 with the word 'subscribe' as the subject and nothing in the body of the email.
 To unsubscribe, send email with the word 'unsubscribe' as the subject.
