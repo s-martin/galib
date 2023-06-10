@@ -105,8 +105,8 @@ Note that the genetic comparator is not necessarily the same as the boolean oper
 
 When you derive a genome, don't forget to use the _evaluated flag to indicate when the state of the genome has changed and an evaluation is needed.  If a member function changes the state of your genome, that member function should set the_evaluated flag to gaFalse.
 
-    Assign a default crossover, mutation, initialization, and comparison
-    method so that users don't have to assign one unless they want to. 
+Assign a default crossover, mutation, initialization, and comparison
+method so that users don't have to assign one unless they want to.
 
 It is a good idea to define an identity for your genome (especially if you will be using it in an environment with multiple genome types running around).  Use the DefineIdentity macro (defined in id.h) to do this in your class definition.  The DefineIdentity macro sets a class ID number and the name that will be used in error messages for the class.  You can use any number above 200 for the ID, but be sure to use a different number for each of your classes.
 
