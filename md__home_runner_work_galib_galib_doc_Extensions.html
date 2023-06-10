@@ -150,9 +150,9 @@ Deriving your own genome class</h1>
 </div><!-- fragment --><p>To enable streams-based reading and writing of your genome, you should define these:</p>
 <div class="fragment"><div class="line"><span class="keyword">virtual</span> <span class="keywordtype">int</span> read(istream&amp;amp;)</div>
 <div class="line"><span class="keyword">virtual</span> <span class="keywordtype">int</span> write(ostream&amp;amp;) const</div>
-</div><!-- fragment --><p>When you derive a genome, don't forget to use the _evaluated flag to indicate when the state of the genome has changed and an evaluation is needed. If a member function changes the state of your genome, that member function should set the_evaluated flag to gaFalse. </p><pre class="fragment">Assign a default crossover, mutation, initialization, and comparison
-method so that users don't have to assign one unless they want to. 
-</pre><p> It is a good idea to define an identity for your genome (especially if you will be using it in an environment with multiple genome types running around). Use the DefineIdentity macro (defined in id.h) to do this in your class definition. The DefineIdentity macro sets a class ID number and the name that will be used in error messages for the class. You can use any number above 200 for the ID, but be sure to use a different number for each of your classes.</p>
+</div><!-- fragment --><p>When you derive a genome, don't forget to use the _evaluated flag to indicate when the state of the genome has changed and an evaluation is needed. If a member function changes the state of your genome, that member function should set the_evaluated flag to gaFalse.</p>
+<p>Assign a default crossover, mutation, initialization, and comparison method so that users don't have to assign one unless they want to.</p>
+<p>It is a good idea to define an identity for your genome (especially if you will be using it in an environment with multiple genome types running around). Use the DefineIdentity macro (defined in id.h) to do this in your class definition. The DefineIdentity macro sets a class ID number and the name that will be used in error messages for the class. You can use any number above 200 for the ID, but be sure to use a different number for each of your classes.</p>
 <p>When run-time type information (RTTI) has stabilized across compilers, GAlib will probably use that instead of the Define/Declare identity macros.</p>
 <h1><a class="anchor" id="autotoc_md12"></a>
 Genome Testing</h1>
@@ -509,7 +509,7 @@ Termination Function</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 15 2023 21:09:30 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Jun 10 2023 21:54:34 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
