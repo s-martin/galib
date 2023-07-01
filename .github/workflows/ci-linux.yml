@@ -67,7 +67,7 @@ jobs:
       #  update-comment: true
       
     - name: Report code coverage with gcovr and coveralls
-      uses: threeal/gcovr-action@3ebdc7454cc05fa4c5f4417984c1ece14a2974ee
+      uses: threeal/gcovr-action@cde27147cfdf897a7abaf83aaf0a7893539e58fc
       with:
         excludes: |
           examples/*
