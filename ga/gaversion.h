@@ -1,10 +1,7 @@
 /* ----------------------------------------------------------------------------
   mbwall 10oct98
-
-   This is the header file to keep track of the versions and revisions of the
-GA library.  You can use the ident command to extract the version and other
-build information from the galib object file.
 ---------------------------------------------------------------------------- */
+
 #pragma once
 
 #include <gaconfig.h>

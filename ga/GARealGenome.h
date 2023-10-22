@@ -1,16 +1,10 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  real.h
   mbwall 25feb95
   Copyright (c) 1995 Massachusetts Institute of Technology
                      all rights reserved
-
- DESCRIPTION:
-  This header defines the specialization of the array genome of type float
-for the real number genome.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_real_h_
-#define _ga_real_h_
+
+#pragma once
 
 #include <GAAllele.h>
 #include <GA1DArrayGenome.hpp>
@@ -76,5 +70,3 @@ int GARealArithmeticCrossover(const GAGenome& a, const GAGenome& b,
 				  GAGenome* c, GAGenome* d);
 int GARealBlendCrossover(const GAGenome& a, const GAGenome& b,
 				  GAGenome* c, GAGenome* d);
-
-#endif

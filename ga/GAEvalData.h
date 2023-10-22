@@ -1,18 +1,16 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  eval.h
   mbwall 3dec95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-  This is the basic interface for the object that contains evaluation data.  It
-can be used with genomes and/or populations in combination with their
-respective evaluation methods.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_eval_h_
-#define _ga_eval_h_
 
+#pragma once
+
+/**
+ * This is the basic interface for the object that contains evaluation data. It
+ * can be used with genomes and/or populations in combination with their
+ * respective evaluation methods.
+ */
 class GAEvalData
 {
   public:
@@ -30,5 +28,3 @@ class GAEvalData
 	virtual GAEvalData *clone() const = 0;
 	virtual void copy(const GAEvalData &) = 0;
 };
-
-#endif

@@ -1,13 +1,9 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  error.C
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-  This file contains all of the error messages for the library.
 ---------------------------------------------------------------------------- */
+
 #include <cstdio>
 #include <cstring>
 #include <gaerror.h>
