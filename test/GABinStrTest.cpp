@@ -62,17 +62,21 @@ BOOST_AUTO_TEST_CASE(equal_001)
 	BOOST_CHECK_EQUAL(binstr2.bit(1u, 1), 1);
 	BOOST_CHECK_EQUAL(binstr2.bit(2u, 1), 1);
 	BOOST_CHECK(binstr1.equal(binstr2, 0, 0, 3));
+    BOOST_CHECK(binstr1.equal(binstr2, 1, 1, 2));
+    BOOST_CHECK(!binstr1.equal(binstr2, 0, 1, 2));
 
 	GABinaryString binstr3(3);
 	BOOST_CHECK_EQUAL(binstr3.bit(0u, 0), 0);
 	BOOST_CHECK_EQUAL(binstr3.bit(1u, 1), 1);
 	BOOST_CHECK_EQUAL(binstr3.bit(2u, 0), 0);
 	BOOST_CHECK(!binstr1.equal(binstr3, 0, 0, 3));
+    BOOST_CHECK(binstr1.equal(binstr3, 0, 0, 2));
 
 	GABinaryString binstr4(2);
 	BOOST_CHECK_EQUAL(binstr4.bit(0u, 0), 0);
 	BOOST_CHECK_EQUAL(binstr4.bit(1u, 1), 1);
 	BOOST_CHECK(!binstr1.equal(binstr4, 0, 0, 3));
+    BOOST_CHECK(binstr1.equal(binstr4, 1, 1, 1));
 }
 
 BOOST_AUTO_TEST_CASE(set_001)

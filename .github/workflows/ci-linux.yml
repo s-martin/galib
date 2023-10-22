@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Install Boost, X11, lcov, gcovr, Doxygen
-      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen graphviz mscgen dia 
+      run: sudo apt install libboost-test-dev libboost-program-options-dev libx11-dev libxt-dev libxaw7-dev lcov gcovr doxygen graphviz mscgen dia pvm-dev 
       
     - name: Configure CMake
       run: cmake . -B ${{ env.build }} -DBUILD_PVM=ON
@@ -56,7 +56,7 @@ jobs:
         lcov-file: ${{ env.build }}/GAlib_lcov.info
         lcov-base: ${{ env.build }}/GAlib_lcov.base
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        title: Coverage Report
+        title: lcov Coverage Report
       #uses: zgosalvez/github-actions-report-lcov@v3.1.5
       #with:
       #  coverage-files: ${{ env.build }}/GAlib_lcov.info
@@ -65,6 +65,21 @@ jobs:
       #  github-token: ${{ github.token }} #${{ secrets.GITHUB_TOKEN }}
       #  working-directory: ${{ env.build }}
       #  update-comment: true
+      
+    - name: Report code coverage with gcovr and coveralls
+      uses: threeal/gcovr-action@d3ac27f1d942b2dd185a1fc64c252bfddf9401e6
+      with:
+        excludes: |
+          examples/*
+          test/*
+        coveralls-send: true
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      
+      
+      
+      
+      
         
         
         

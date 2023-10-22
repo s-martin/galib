@@ -1,3 +1,5 @@
+message(STATUS "Building examples")
+
 include_directories(${PROJECT_SOURCE_DIR}/ga)
 include_directories(${Boost_INCLUDE_DIRS})
 set_property(DIRECTORY PROPERTY CXX_EXTENSIONS OFF)
@@ -89,6 +91,7 @@ add_executable(randtest randtest.C)
 target_link_libraries(randtest PUBLIC GAlib)
 
 if(X11_FOUND)
+    message(STATUS "Building graphic examples")
     add_executable(gaview
                         ./graphic/gaview.C )
     target_link_libraries(gaview GAlib Xaw ${X11_Xt_LIB} ${X11_LIBRARIES})
@@ -104,6 +107,7 @@ if(BUILD_PVM)
     find_library(PVM_LIB pvm3)
 
     if(PVM_LIB)
+        message(STATUS "Building PVM examples")
         add_executable(pvmpop_master
                 ./pvmpop/genome.C
                 ./pvmpop/genome.h

@@ -251,8 +251,10 @@ template <class T> class GAList : public GAListBASE
 	 * for the memory used by the contents of the original list.
 	 * 
 	 * @param t List to be inserted
-	 * @param where Location where list is to be inserted
-	 * @return int 
+	 * @param where Location where list is to be inserted (default: AFTER)
+	 * @return Error code
+     * @retval 0 No Error
+     * @retval -1 Error occurred
 	 */
 	int insert(GAList<T> *t, GAListBASE::Location where = GAListBASE::AFTER)
 	{
@@ -272,11 +274,12 @@ template <class T> class GAList : public GAListBASE
 	}
 
 	/** Insert the object into the list at the specified place relative to the current location of the embedded iterator
-	 * 
 	 *  
-	 * @param t 
-	 * @param where 
-	 * @return int 
+	 * @param t Object to be inserted into list
+	 * @param where Insert location (default: AFTER)
+	 * @return Error code
+     * @retval 0 No error
+     * @retval -1 Error occurred
 	 */
 	int insert(const T &t, GAListBASE::Location where = GAListBASE::AFTER)
 	{
