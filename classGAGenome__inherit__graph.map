@@ -3,7 +3,7 @@
 <area shape="rect" id="node3" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="256,5,443,32"/>
 <area shape="rect" id="node5" href="$classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="252,56,447,83"/>
 <area shape="rect" id="node7" href="$classGA2DArrayGenome.html" title=" " alt="" coords="256,107,443,133"/>
-<area shape="rect" id="node9" href="$classGA2DBinaryStringGenome.html" title=" " alt="" coords="252,157,447,184"/>
+<area shape="rect" id="node9" href="$classGA2DBinaryStringGenome.html" title="This header defines the interface for the 2D binary string genome, including crossover objects and al..." alt="" coords="252,157,447,184"/>
 <area shape="rect" id="node10" href="$classGA3DArrayGenome.html" title=" " alt="" coords="256,208,443,235"/>
 <area shape="rect" id="node12" href="$classGA3DBinaryStringGenome.html" title=" " alt="" coords="252,259,447,285"/>
 <area shape="rect" id="node13" href="$classGAListGenome.html" title="GAListGenome." alt="" coords="271,309,428,336"/>

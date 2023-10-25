@@ -112,7 +112,7 @@ var sectionId = 'dynsection-0';
 <!-- Node9 -->
 <g id="node9" class="node">
 <title>Node9</title>
-<g id="a_node9"><a xlink:href="classGA2DBinaryStringGenome.html" target="_top" xlink:title=" ">
+<g id="a_node9"><a xlink:href="classGA2DBinaryStringGenome.html" target="_top" xlink:title="This header defines the interface for the 2D binary string genome, including crossover objects and al...">
 <polygon fill="white" stroke="black" points="185,-152.5 185,-171.5 331,-171.5 331,-152.5 185,-152.5"/>
 <text text-anchor="middle" x="258" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">GA2DBinaryStringGenome</text>
 </a>

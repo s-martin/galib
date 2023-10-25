@@ -1,5 +1,5 @@
 <map id="GA2DBinaryStringGenome" name="GA2DBinaryStringGenome">
-<area shape="rect" id="node1" title=" " alt="" coords="35,155,230,181"/>
+<area shape="rect" id="node1" title="This header defines the interface for the 2D binary string genome, including crossover objects and al..." alt="" coords="35,155,230,181"/>
 <area shape="rect" id="node2" href="$classGABinaryString.html" title=" " alt="" coords="5,80,127,107"/>
 <area shape="rect" id="node3" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="151,80,247,107"/>
 <area shape="rect" id="node4" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="172,5,227,32"/>
