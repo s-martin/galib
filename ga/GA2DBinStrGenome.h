@@ -1,24 +1,18 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  binstr2.h
   mbwall 19apr95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-  This header defines the interface for the 2D binary string genome, including
-crossover objects and all the default and built-in operators.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_binstr2_h_
-#define _ga_binstr2_h_
+
+#pragma once
 
 #include <GABinStr.hpp>
 #include <GAGenome.h>
 
-/* ----------------------------------------------------------------------------
-2DBinaryStringGenome
--------------------------------------------------------------------------------
----------------------------------------------------------------------------- */
+/**
+ * This header defines the interface for the 2D binary string genome, including
+ * crossover objects and all the default and built-in operators.
+ */
 class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
 {
   public:
@@ -120,5 +114,3 @@ class GA2DBinaryStringGenome : public GABinaryString, public GAGenome
   protected:
 	unsigned int nx, ny, minX, minY, maxX, maxY;
 };
-
-#endif
