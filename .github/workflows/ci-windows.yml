@@ -45,7 +45,7 @@ jobs:
       run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTest
 
     - name: Run coverage
-      run: cmake --buld ${{ env.build }} --config ${{ env.config }} --target GAlibOpencppcoverage
+      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibOpencppcoverage
         
 
 
