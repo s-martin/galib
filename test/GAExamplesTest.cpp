@@ -48,14 +48,14 @@ BOOST_AUTO_TEST_CASE(GAex3)
 
 	auto ga = ex3(params, "smiley.txt");
 
-	// TODO check, why msvc and gcc differ; maybe seed is different
-#ifdef _WIN32
-	BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 198);
-	BOOST_CHECK_EQUAL(ga.statistics().minEver(), 98);
-#else
+	// TODO older MSVC versions somehow differed; maybe seed is different
+//#ifdef _WIN32
+//	BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 198);
+//	BOOST_CHECK_EQUAL(ga.statistics().minEver(), 98);
+//#else
 	BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 192);
 	BOOST_CHECK_EQUAL(ga.statistics().minEver(), 100);
-#endif
+//#endif
 	BOOST_CHECK_EQUAL(ga.statistics().generation(), 250);
 }
 
@@ -89,14 +89,14 @@ BOOST_AUTO_TEST_CASE(GAex6)
 	auto genome = ex6(params, 0);
 
 
-	// TODO check, why msvc and gcc differ; maybe seed is different
-#ifdef _WIN32
-	BOOST_CHECK_EQUAL(genome.size(), 6613);
-	BOOST_CHECK_EQUAL(genome.depth(), 73); 
-#else
+	// older MSVC versions somehow differed; maybe seed is different
+//#ifdef _WIN32
+//	BOOST_CHECK_EQUAL(genome.size(), 6613);
+//	BOOST_CHECK_EQUAL(genome.depth(), 73); 
+//#else
 	BOOST_CHECK_EQUAL(genome.size(), 10557);
 	BOOST_CHECK_EQUAL(genome.depth(), 310); 
-#endif
+//#endif
 }
 
 BOOST_AUTO_TEST_CASE(GAex7)
@@ -135,14 +135,14 @@ BOOST_AUTO_TEST_CASE(GAex9)
 {
 	auto genome = ex9(100); // use static seed
 
-	// TODO check, why msvc and gcc differ; maybe seed is different
-#ifdef _WIN32
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.000228881836, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), 7.62939453e-05, 0.0000001);
-#else
+	// TODO older MSVC versions somehow differed; maybe seed is different
+//#ifdef _WIN32
+//	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.000228881836, 0.0000001);
+//	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), 7.62939453e-05, 0.0000001);
+//#else
 	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -7.62939453e-05, 0.0000001);
 	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -7.62939453e-05, 0.0000001);
-#endif
+//#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()
