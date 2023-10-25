@@ -1,5 +1,5 @@
 <map id="GAGeneticAlgorithm" name="GAGeneticAlgorithm">
-<area shape="rect" id="node1" title=" " alt="" coords="275,80,429,107"/>
+<area shape="rect" id="node1" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="275,80,429,107"/>
 <area shape="rect" id="node3" href="$classGADCrowdingGA.html" title=" " alt="" coords="5,155,136,181"/>
 <area shape="rect" id="node4" href="$classGADemeGA.html" title=" " alt="" coords="160,155,259,181"/>
 <area shape="rect" id="node5" href="$classGAIncrementalGA.html" title=" " alt="" coords="283,155,421,181"/>

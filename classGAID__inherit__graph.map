@@ -1,6 +1,6 @@
 <map id="GAID" name="GAID">
 <area shape="rect" id="node1" title="This defines the identifiers for polymorphic classes." alt="" coords="5,487,60,513"/>
-<area shape="rect" id="node2" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="108,132,263,159"/>
+<area shape="rect" id="node2" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="108,132,263,159"/>
 <area shape="rect" id="node8" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="137,436,233,463"/>
 <area shape="rect" id="node21" href="$classGAPopulation.html" title=" " alt="" coords="130,487,241,513"/>
 <area shape="rect" id="node22" href="$classGAScalingScheme.html" title=" " alt="" coords="115,537,255,564"/>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['which_153',['which',['../classGAStatistics.html#af40d7931f2432a92ca4c1e7e588ddb8e',1,'GAStatistics']]]
+  ['scorefile_166',['scorefile',['../classGAStatistics.html#a03c38af90502afa65b1c2d4cca8cd736',1,'GAStatistics']]],
+  ['scross_167',['scross',['../classGAGeneticAlgorithm.html#a8cc9fd223d7727821a76eecff52b584b',1,'GAGeneticAlgorithm']]]
 ];

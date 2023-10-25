@@ -79,7 +79,7 @@
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="classGAGeneticAlgorithm.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="classGAGeneticAlgorithm.html" target="_top" xlink:title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ...">
 <polygon fill="white" stroke="black" points="548,-150 548,-169 664,-169 664,-150 548,-150"/>
 <text text-anchor="middle" x="606" y="-157" font-family="Helvetica,sans-Serif" font-size="10.00">GAGeneticAlgorithm</text>
 </a>

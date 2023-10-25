@@ -4,7 +4,7 @@
 <area shape="rect" id="node3" href="$classGATreeBASE.html" title=" " alt="" coords="231,88,333,115"/>
 <area shape="rect" id="node4" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="5,88,115,115"/>
 <area shape="rect" id="node5" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="431,415,527,441"/>
-<area shape="rect" id="node7" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="735,469,889,496"/>
+<area shape="rect" id="node7" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="735,469,889,496"/>
 <area shape="rect" id="node8" href="$classGAPopulation.html" title=" " alt="" coords="989,368,1100,395"/>
 <area shape="rect" id="node6" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="255,252,309,279"/>
 <area shape="rect" id="node9" href="$classGAScalingScheme.html" title=" " alt="" coords="568,196,708,223"/>

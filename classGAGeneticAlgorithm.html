@@ -72,6 +72,11 @@ $(function() {
 <div class="title">GAGeneticAlgorithm Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The base GA class is virtual - it defines the core data elements and parts of the interface that are common to all genetic algorithms (as defined in GAlib, that is).  
+ <a href="classGAGeneticAlgorithm.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GABaseGA_8h_source.html">GABaseGA.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GAGeneticAlgorithm:</div>
 <div class="dyncontent">
@@ -162,16 +167,17 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> (const <a class="el" href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a> &amp;)</td></tr>
 <tr class="separator:ab94051ca911049e73de2a29d85d69f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8836d1ef7cda4e8b7194c78bc7bb635"><td class="memItemLeft" align="right" valign="top"><a id="ad8836d1ef7cda4e8b7194c78bc7bb635"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>done</b> ()</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#ad8836d1ef7cda4e8b7194c78bc7bb635">done</a> ()</td></tr>
+<tr class="memdesc:ad8836d1ef7cda4e8b7194c78bc7bb635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the completion measure routine to tell whether or not the GA is done. <br /></td></tr>
 <tr class="separator:ad8836d1ef7cda4e8b7194c78bc7bb635"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e6eb213ec22e0631fe995ebadc69441"><td class="memItemLeft" align="right" valign="top"><a id="a0e6eb213ec22e0631fe995ebadc69441"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> (unsigned int seed=0)=0</td></tr>
+<tr class="memitem:a0e6eb213ec22e0631fe995ebadc69441"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#a0e6eb213ec22e0631fe995ebadc69441">initialize</a> (unsigned int seed=0)=0</td></tr>
+<tr class="memdesc:a0e6eb213ec22e0631fe995ebadc69441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Undefined for the base class.  <a href="classGAGeneticAlgorithm.html#a0e6eb213ec22e0631fe995ebadc69441">More...</a><br /></td></tr>
 <tr class="separator:a0e6eb213ec22e0631fe995ebadc69441"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bdc7522a65a2e4e86f31e8cc8fd65ff"><td class="memItemLeft" align="right" valign="top"><a id="a9bdc7522a65a2e4e86f31e8cc8fd65ff"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>step</b> ()=0</td></tr>
+<tr class="memitem:a9bdc7522a65a2e4e86f31e8cc8fd65ff"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#a9bdc7522a65a2e4e86f31e8cc8fd65ff">step</a> ()=0</td></tr>
+<tr class="memdesc:a9bdc7522a65a2e4e86f31e8cc8fd65ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evolve by one generation.  <a href="classGAGeneticAlgorithm.html#a9bdc7522a65a2e4e86f31e8cc8fd65ff">More...</a><br /></td></tr>
 <tr class="separator:a9bdc7522a65a2e4e86f31e8cc8fd65ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf0b966a4dbf6306468af8d3b6117b18"><td class="memItemLeft" align="right" valign="top"><a id="adf0b966a4dbf6306468af8d3b6117b18"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>evolve</b> (unsigned int seed=0)</td></tr>
+<tr class="memitem:adf0b966a4dbf6306468af8d3b6117b18"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#adf0b966a4dbf6306468af8d3b6117b18">evolve</a> (unsigned int seed=0)</td></tr>
+<tr class="memdesc:adf0b966a4dbf6306468af8d3b6117b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is provided as a convenience so that you don't have to increment the GA generation-by-generation by hand.  <a href="classGAGeneticAlgorithm.html#adf0b966a4dbf6306468af8d3b6117b18">More...</a><br /></td></tr>
 <tr class="separator:adf0b966a4dbf6306468af8d3b6117b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f79d38bda55b7820f8d11db2172346c"><td class="memItemLeft" align="right" valign="top"><a id="a5f79d38bda55b7820f8d11db2172346c"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const char *) const</td></tr>
@@ -406,10 +412,12 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classGAPopulation.html">GAPopulation</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pop</b></td></tr>
 <tr class="separator:ade54dea59beb7ff7af27bbc12051ed31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7827609d092dda0fc68eff305697c59"><td class="memItemLeft" align="right" valign="top"><a id="ad7827609d092dda0fc68eff305697c59"></a>
-Terminator&#160;</td><td class="memItemRight" valign="bottom"><b>cf</b></td></tr>
+Terminator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#ad7827609d092dda0fc68eff305697c59">cf</a></td></tr>
+<tr class="memdesc:ad7827609d092dda0fc68eff305697c59"><td class="mdescLeft">&#160;</td><td class="mdescRight">function for determining done-ness <br /></td></tr>
 <tr class="separator:ad7827609d092dda0fc68eff305697c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab32ad9b232c9bfcc59c4ccb591fe7c26"><td class="memItemLeft" align="right" valign="top"><a id="ab32ad9b232c9bfcc59c4ccb591fe7c26"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>ud</b></td></tr>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#ab32ad9b232c9bfcc59c4ccb591fe7c26">ud</a></td></tr>
+<tr class="memdesc:ab32ad9b232c9bfcc59c4ccb591fe7c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to user data structure <br /></td></tr>
 <tr class="separator:ab32ad9b232c9bfcc59c4ccb591fe7c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af51241ce40295c8d54a21704247d00ac"><td class="memItemLeft" align="right" valign="top"><a id="af51241ce40295c8d54a21704247d00ac"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>d_seed</b></td></tr>
@@ -433,19 +441,114 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>pmut</b></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>minmax</b></td></tr>
 <tr class="separator:a9a920412a15def8154f0364ede468d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cc9fd223d7727821a76eecff52b584b"><td class="memItemLeft" align="right" valign="top"><a id="a8cc9fd223d7727821a76eecff52b584b"></a>
-GAGenome::SexualCrossover&#160;</td><td class="memItemRight" valign="bottom"><b>scross</b></td></tr>
+GAGenome::SexualCrossover&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#a8cc9fd223d7727821a76eecff52b584b">scross</a></td></tr>
+<tr class="memdesc:a8cc9fd223d7727821a76eecff52b584b"><td class="mdescLeft">&#160;</td><td class="mdescRight">sexual crossover to use <br /></td></tr>
 <tr class="separator:a8cc9fd223d7727821a76eecff52b584b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fde812ec07042c2286ad0f9420a07d7"><td class="memItemLeft" align="right" valign="top"><a id="a1fde812ec07042c2286ad0f9420a07d7"></a>
-GAGenome::AsexualCrossover&#160;</td><td class="memItemRight" valign="bottom"><b>across</b></td></tr>
+GAGenome::AsexualCrossover&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAGeneticAlgorithm.html#a1fde812ec07042c2286ad0f9420a07d7">across</a></td></tr>
+<tr class="memdesc:a1fde812ec07042c2286ad0f9420a07d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">asexual crossover to use <br /></td></tr>
 <tr class="separator:a1fde812ec07042c2286ad0f9420a07d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The base GA class is virtual - it defines the core data elements and parts of the interface that are common to all genetic algorithms (as defined in GAlib, that is). </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="adf0b966a4dbf6306468af8d3b6117b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf0b966a4dbf6306468af8d3b6117b18">&#9670;&nbsp;</a></span>evolve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GAGeneticAlgorithm::evolve </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>seed</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method is provided as a convenience so that you don't have to increment the GA generation-by-generation by hand. </p>
+<p>If you do decide to do it by hand, be sure that you initialize before you start evolving! </p>
+
+</div>
+</div>
+<a id="a0e6eb213ec22e0631fe995ebadc69441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e6eb213ec22e0631fe995ebadc69441">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GAGeneticAlgorithm::initialize </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>seed</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Undefined for the base class. </p>
+<p>The initialization routine typically calls the population initializer (which typically calls the genome initializers). It should also reset the statistics. </p>
+
+<p>Implemented in <a class="el" href="classGASteadyStateGA.html#a3cccb3a245587e18ead8b3dfcb1258d7">GASteadyStateGA</a>, <a class="el" href="classGASimpleGA.html#a3e4d9136801a0964bc46cc567094e1b9">GASimpleGA</a>, <a class="el" href="classGAIncrementalGA.html#a515291befa4ac768dae3d17a280f6b9b">GAIncrementalGA</a>, <a class="el" href="classGADemeGA.html#afb37f08200fe48445dfefee9f724f7ca">GADemeGA</a>, and <a class="el" href="classGADCrowdingGA.html#ad42112be78de7a61dd25120731f0b41c">GADCrowdingGA</a>.</p>
+
+</div>
+</div>
+<a id="a9bdc7522a65a2e4e86f31e8cc8fd65ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bdc7522a65a2e4e86f31e8cc8fd65ff">&#9670;&nbsp;</a></span>step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GAGeneticAlgorithm::step </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evolve by one generation. </p>
+<p>'generation' can be defined different ways for different genetic algorithms, but in the traditional formulation a generation mean creation of a new population (or portion thereof). </p>
+
+<p>Implemented in <a class="el" href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">GASteadyStateGA</a>, <a class="el" href="classGASimpleGA.html#a38fc6b501c1760c518a7884df5bae244">GASimpleGA</a>, <a class="el" href="classGAIncrementalGA.html#a0e7b048335dc5b29760327a17db6ba82">GAIncrementalGA</a>, <a class="el" href="classGADemeGA.html#a36c9daa710b38ef72c73057943c1f595">GADemeGA</a>, and <a class="el" href="classGADCrowdingGA.html#a14536b3165a6b8ea09f2346986dc3b2f">GADCrowdingGA</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/galib/galib/ga/<a class="el" href="GABaseGA_8h_source.html">GABaseGA.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 25 2023 20:01:51 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Wed Oct 25 2023 20:18:50 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

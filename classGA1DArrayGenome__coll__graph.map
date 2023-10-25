@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="1 dimensional Array Genome" alt="" coords="661,164,848,191"/>
 <area shape="rect" id="node2" href="$classGAArray.html" title="Array Base Class." alt="" coords="351,145,465,172"/>
 <area shape="rect" id="node3" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="360,411,456,437"/>
-<area shape="rect" id="node5" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="677,263,832,289"/>
+<area shape="rect" id="node5" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="677,263,832,289"/>
 <area shape="rect" id="node6" href="$classGAPopulation.html" title=" " alt="" coords="945,177,1056,204"/>
 <area shape="rect" id="node4" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="184,95,239,121"/>
 <area shape="rect" id="node7" href="$classGAScalingScheme.html" title=" " alt="" coords="497,44,637,71"/>

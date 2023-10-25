@@ -432,7 +432,7 @@ Genetic Algorithm</h1>
 <div class="line">  GADefineIdentity(<span class="stringliteral">&quot;RestrictedMatingGA&quot;</span>, 288);</div>
 <div class="line">  RestrictedMatingGA(<span class="keyword">const</span> <a class="code" href="classGAGenome.html">GAGenome</a>&amp;amp; g) : <a class="code" href="classGASteadyStateGA.html">GASteadyStateGA</a>(g) {}</div>
 <div class="line">  <span class="keyword">virtual</span> ~RestrictedMatingGA() {}</div>
-<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> step();</div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">step</a>();</div>
 <div class="line">  RestrictedMatingGA &amp;amp; operator++() { step(); <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -465,6 +465,7 @@ Genetic Algorithm</h1>
 <div class="line">  stats.update(*pop);  <span class="comment">// update the statistics by one generation</span></div>
 <div class="line">}</div>
 <div class="ttc" id="aclassGASteadyStateGA_html"><div class="ttname"><a href="classGASteadyStateGA.html">GASteadyStateGA</a></div><div class="ttdoc">Steady-state genetic algorithm class.</div><div class="ttdef"><b>Definition:</b> GASStateGA.h:16</div></div>
+<div class="ttc" id="aclassGASteadyStateGA_html_acc5cc68d86a4ba7b4478298f942b9882"><div class="ttname"><a href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">GASteadyStateGA::step</a></div><div class="ttdeci">void step() override</div><div class="ttdoc">Evolve by one generation.</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md23"></a>
 Termination Function</h1>
 <p>The termination function determines when the genetic algorithm should stop evolving. It takes a genetic algorithm as its argument and returns gaTrue if the genetic algorithm should stop or gaFalse if the algorithm should continue.</p>
@@ -473,7 +474,7 @@ Termination Function</h1>
 <div class="line">GATerminateUponGeneration(<a class="code" href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a> &amp;amp; ga){</div>
 <div class="line">  <span class="keywordflow">return</span>(ga.generation() &amp;lt; ga.nGenerations() ? gaFalse : gaTrue);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassGAGeneticAlgorithm_html"><div class="ttname"><a href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a></div><div class="ttdef"><b>Definition:</b> GABaseGA.h:110</div></div>
+<div class="ttc" id="aclassGAGeneticAlgorithm_html"><div class="ttname"><a href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a></div><div class="ttdoc">The base GA class is virtual - it defines the core data elements and parts of the interface that are ...</div><div class="ttdef"><b>Definition:</b> GABaseGA.h:89</div></div>
 </div><!-- fragment --><p>The second example compares the average score in the current population with the score of the best individual in the current population. If the ratio of these exceeds a specified threshhold, it returns gaTrue to signify that the GA should stop. Basically this means that the entire population has converged to a 'good' score.</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">float</span> desiredRatio = 0.95;    <span class="comment">// stop when pop average is 95% of best</span></div>
 <div class="line"> </div>
@@ -509,7 +510,7 @@ Termination Function</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 25 2023 20:01:51 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Wed Oct 25 2023 20:18:49 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -33,7 +33,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="classGAGeneticAlgorithm.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="classGAGeneticAlgorithm.html" target="_top" xlink:title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ...">
 <polygon fill="white" stroke="black" points="492,-134.5 492,-153.5 608,-153.5 608,-134.5 492,-134.5"/>
 <text text-anchor="middle" x="550" y="-141.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAGeneticAlgorithm</text>
 </a>

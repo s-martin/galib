@@ -95,11 +95,11 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    ~<a class="code" href="classGASteadyStateGA.html">GASteadyStateGA</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> copy(<span class="keyword">const</span> <a class="code" href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a> &amp;) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> initialize(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seed = 0) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> step() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classGASteadyStateGA.html#a3cccb3a245587e18ead8b3dfcb1258d7">   30</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGASteadyStateGA.html#a3cccb3a245587e18ead8b3dfcb1258d7">initialize</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seed = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">   31</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">step</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classGASteadyStateGA.html">GASteadyStateGA</a> &amp;operator++()</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        step();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">step</a>();</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
@@ -149,17 +149,19 @@ $(function() {
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> (is);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
 <div class="ttc" id="aclassGAEvalData_html"><div class="ttname"><a href="classGAEvalData.html">GAEvalData</a></div><div class="ttdoc">This is the basic interface for the object that contains evaluation data.</div><div class="ttdef"><b>Definition:</b> GAEvalData.h:15</div></div>
-<div class="ttc" id="aclassGAGeneticAlgorithm_html"><div class="ttname"><a href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a></div><div class="ttdef"><b>Definition:</b> GABaseGA.h:110</div></div>
+<div class="ttc" id="aclassGAGeneticAlgorithm_html"><div class="ttname"><a href="classGAGeneticAlgorithm.html">GAGeneticAlgorithm</a></div><div class="ttdoc">The base GA class is virtual - it defines the core data elements and parts of the interface that are ...</div><div class="ttdef"><b>Definition:</b> GABaseGA.h:89</div></div>
 <div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdoc">The base genome class just defines the genome interface - how to mutate, crossover,...</div><div class="ttdef"><b>Definition:</b> GAGenome.h:200</div></div>
 <div class="ttc" id="aclassGAParameterList_html"><div class="ttname"><a href="classGAParameterList.html">GAParameterList</a></div><div class="ttdoc">Parameter List.</div><div class="ttdef"><b>Definition:</b> GAParameter.h:83</div></div>
 <div class="ttc" id="aclassGAPopulation_html"><div class="ttname"><a href="classGAPopulation.html">GAPopulation</a></div><div class="ttdef"><b>Definition:</b> GAPopulation.h:66</div></div>
 <div class="ttc" id="aclassGAScalingScheme_html"><div class="ttname"><a href="classGAScalingScheme.html">GAScalingScheme</a></div><div class="ttdef"><b>Definition:</b> GAScaling.h:46</div></div>
 <div class="ttc" id="aclassGASelectionScheme_html"><div class="ttname"><a href="classGASelectionScheme.html">GASelectionScheme</a></div><div class="ttdef"><b>Definition:</b> GASelector.h:55</div></div>
 <div class="ttc" id="aclassGASteadyStateGA_html"><div class="ttname"><a href="classGASteadyStateGA.html">GASteadyStateGA</a></div><div class="ttdoc">Steady-state genetic algorithm class.</div><div class="ttdef"><b>Definition:</b> GASStateGA.h:16</div></div>
+<div class="ttc" id="aclassGASteadyStateGA_html_a3cccb3a245587e18ead8b3dfcb1258d7"><div class="ttname"><a href="classGASteadyStateGA.html#a3cccb3a245587e18ead8b3dfcb1258d7">GASteadyStateGA::initialize</a></div><div class="ttdeci">void initialize(unsigned int seed=0) override</div><div class="ttdoc">Undefined for the base class.</div></div>
+<div class="ttc" id="aclassGASteadyStateGA_html_acc5cc68d86a4ba7b4478298f942b9882"><div class="ttname"><a href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">GASteadyStateGA::step</a></div><div class="ttdeci">void step() override</div><div class="ttdoc">Evolve by one generation.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 25 2023 20:01:51 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Wed Oct 25 2023 20:18:49 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

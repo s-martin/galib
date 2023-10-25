@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scorefile_152',['scorefile',['../classGAStatistics.html#a03c38af90502afa65b1c2d4cca8cd736',1,'GAStatistics']]]
+  ['nscrs_165',['nscrs',['../classGAStatistics.html#a569fd64610331815c0c8ee62caa9ae18',1,'GAStatistics']]]
 ];

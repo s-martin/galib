@@ -67,7 +67,7 @@ var sectionId = 'dynsection-1';
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="classGAGeneticAlgorithm.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classGAGeneticAlgorithm.html" target="_top" xlink:title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ...">
 <polygon fill="white" stroke="black" points="406,-214.5 406,-233.5 522,-233.5 522,-214.5 406,-214.5"/>
 <text text-anchor="middle" x="464" y="-221.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAGeneticAlgorithm</text>
 </a>

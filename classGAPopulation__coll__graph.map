@@ -1,6 +1,6 @@
 <map id="GAPopulation" name="GAPopulation">
 <area shape="rect" id="node1" title=" " alt="" coords="273,187,383,213"/>
-<area shape="rect" id="node4" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="385,440,540,467"/>
+<area shape="rect" id="node4" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="385,440,540,467"/>
 <area shape="rect" id="node5" href="$classGAStatistics.html" title="Statistics class." alt="" coords="516,336,617,363"/>
 <area shape="rect" id="node15" href="$classGASelectionScheme.html" title=" " alt="" coords="191,336,345,363"/>
 <area shape="rect" id="node2" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="215,5,270,32"/>
