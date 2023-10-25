@@ -3,5 +3,5 @@
 <area shape="rect" id="node2" href="$classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="35,155,230,181"/>
 <area shape="rect" id="node3" href="$classGABinaryString.html" title=" " alt="" coords="5,80,127,107"/>
 <area shape="rect" id="node4" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="151,80,247,107"/>
-<area shape="rect" id="node5" href="$classGAID.html" title=" " alt="" coords="172,5,227,32"/>
+<area shape="rect" id="node5" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="172,5,227,32"/>
 </map>

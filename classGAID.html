@@ -70,6 +70,11 @@ $(function() {
 <div class="title">GAID Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This defines the identifiers for polymorphic classes.  
+ <a href="classGAID.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="gaid_8h_source.html">gaid.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GAID:</div>
 <div class="dyncontent">
@@ -140,13 +145,16 @@ virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>class
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>classID</b> () const</td></tr>
 <tr class="separator:a8274bc15b8d36824a34fa2352c8e99b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This defines the identifiers for polymorphic classes. </p>
+<p>The IDs are used primarily for checking to be see if the two objects are the same type before doing a copy, for example. The name is often used when printing out error messages so you'll know where things are happening. I hate to derive so many classes from the same base class, especially when the derived classes are completely unrelated. But this is a convenient way to enumerate the built-in classes, and they DO share the polymorphic behaviour (even if they do NOT share any other attributes). </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/galib/galib/ga/<a class="el" href="gaid_8h_source.html">gaid.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 1 2023 10:08:45 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Wed Oct 25 2023 20:01:51 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

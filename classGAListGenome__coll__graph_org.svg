@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="GAListGenome.">
 <polygon fill="#bfbfbf" stroke="black" points="545,-275 545,-294 663,-294 663,-275 545,-275"/>
 <text text-anchor="middle" x="604" y="-282" font-family="Helvetica,sans-Serif" font-size="10.00">GAListGenome&lt; T &gt;</text>
 </a>
@@ -138,7 +138,7 @@
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="classGAID.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="classGAID.html" target="_top" xlink:title="This defines the identifiers for polymorphic classes.">
 <polygon fill="white" stroke="black" points="187,-313 187,-332 228,-332 228,-313 187,-313"/>
 <text text-anchor="middle" x="207.5" y="-320" font-family="Helvetica,sans-Serif" font-size="10.00">GAID</text>
 </a>
@@ -268,7 +268,7 @@
 <!-- Node11 -->
 <g id="node11" class="node">
 <title>Node11</title>
-<g id="a_node11"><a xlink:href="classGAEvalData.html" target="_top" xlink:title=" ">
+<g id="a_node11"><a xlink:href="classGAEvalData.html" target="_top" xlink:title="This is the basic interface for the object that contains evaluation data.">
 <polygon fill="white" stroke="black" points="170,-50 170,-69 245,-69 245,-50 170,-50"/>
 <text text-anchor="middle" x="207.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">GAEvalData</text>
 </a>

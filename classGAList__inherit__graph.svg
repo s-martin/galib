@@ -21,7 +21,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="classGAListGenome.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="classGAListGenome.html" target="_top" xlink:title="GAListGenome.">
 <polygon fill="white" stroke="black" points="0,-0.5 0,-19.5 118,-19.5 118,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="59" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAListGenome&lt; T &gt;</text>
 </a>

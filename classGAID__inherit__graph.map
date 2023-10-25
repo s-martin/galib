@@ -1,5 +1,5 @@
 <map id="GAID" name="GAID">
-<area shape="rect" id="node1" title=" " alt="" coords="5,487,60,513"/>
+<area shape="rect" id="node1" title="This defines the identifiers for polymorphic classes." alt="" coords="5,487,60,513"/>
 <area shape="rect" id="node2" href="$classGAGeneticAlgorithm.html" title=" " alt="" coords="108,132,263,159"/>
 <area shape="rect" id="node8" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="137,436,233,463"/>
 <area shape="rect" id="node21" href="$classGAPopulation.html" title=" " alt="" coords="130,487,241,513"/>
@@ -16,7 +16,7 @@
 <area shape="rect" id="node15" href="$classGA2DBinaryStringGenome.html" title=" " alt="" coords="311,411,505,437"/>
 <area shape="rect" id="node16" href="$classGA3DArrayGenome.html" title=" " alt="" coords="315,461,501,488"/>
 <area shape="rect" id="node18" href="$classGA3DBinaryStringGenome.html" title=" " alt="" coords="311,512,505,539"/>
-<area shape="rect" id="node19" href="$classGAListGenome.html" title=" " alt="" coords="329,563,487,589"/>
+<area shape="rect" id="node19" href="$classGAListGenome.html" title="GAListGenome." alt="" coords="329,563,487,589"/>
 <area shape="rect" id="node20" href="$classGATreeGenome.html" title=" " alt="" coords="328,613,488,640"/>
 <area shape="rect" id="node10" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="553,259,777,285"/>
 <area shape="rect" id="node12" href="$classGABin2DecGenome.html" title=" " alt="" coords="590,309,741,336"/>

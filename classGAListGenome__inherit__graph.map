@@ -1,7 +1,7 @@
 <map id="GAListGenome&lt; T &gt;" name="GAListGenome&lt; T &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="39,155,197,181"/>
+<area shape="rect" id="node1" title="GAListGenome." alt="" coords="39,155,197,181"/>
 <area shape="rect" id="node2" href="$classGAList.html" title="Container for nodes that have a list structure." alt="" coords="5,80,108,107"/>
 <area shape="rect" id="node3" href="$classGAListBASE.html" title=" " alt="" coords="7,5,106,32"/>
 <area shape="rect" id="node4" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="133,80,229,107"/>
-<area shape="rect" id="node5" href="$classGAID.html" title=" " alt="" coords="153,5,208,32"/>
+<area shape="rect" id="node5" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="153,5,208,32"/>
 </map>

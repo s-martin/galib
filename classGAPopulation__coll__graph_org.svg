@@ -77,7 +77,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="classGAID.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classGAID.html" target="_top" xlink:title="This defines the identifiers for polymorphic classes.">
 <polygon fill="white" stroke="black" points="157.5,-450.5 157.5,-469.5 198.5,-469.5 198.5,-450.5 157.5,-450.5"/>
 <text text-anchor="middle" x="178" y="-457.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAID</text>
 </a>
@@ -312,7 +312,7 @@
 <!-- Node14 -->
 <g id="node14" class="node">
 <title>Node14</title>
-<g id="a_node14"><a xlink:href="classGAEvalData.html" target="_top" xlink:title=" ">
+<g id="a_node14"><a xlink:href="classGAEvalData.html" target="_top" xlink:title="This is the basic interface for the object that contains evaluation data.">
 <polygon fill="white" stroke="black" points="32.5,-388 32.5,-407 107.5,-407 107.5,-388 32.5,-388"/>
 <text text-anchor="middle" x="70" y="-395" font-family="Helvetica,sans-Serif" font-size="10.00">GAEvalData</text>
 </a>

@@ -96,7 +96,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="classGAID.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classGAID.html" target="_top" xlink:title="This defines the identifiers for polymorphic classes.">
 <polygon fill="white" stroke="black" points="239.5,-112.5 239.5,-131.5 280.5,-131.5 280.5,-112.5 239.5,-112.5"/>
 <text text-anchor="middle" x="260" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">GAID</text>
 </a>

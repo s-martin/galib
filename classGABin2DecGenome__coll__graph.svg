@@ -174,7 +174,7 @@ var sectionId = 'dynsection-1';
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="classGAID.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="classGAID.html" target="_top" xlink:title="This defines the identifiers for polymorphic classes.">
 <polygon fill="white" stroke="black" points="153,-340 153,-359 194,-359 194,-340 153,-340"/>
 <text text-anchor="middle" x="173.5" y="-347" font-family="Helvetica,sans-Serif" font-size="10.00">GAID</text>
 </a>
@@ -304,7 +304,7 @@ var sectionId = 'dynsection-1';
 <!-- Node11 -->
 <g id="node11" class="node">
 <title>Node11</title>
-<g id="a_node11"><a xlink:href="classGAEvalData.html" target="_top" xlink:title=" ">
+<g id="a_node11"><a xlink:href="classGAEvalData.html" target="_top" xlink:title="This is the basic interface for the object that contains evaluation data.">
 <polygon fill="white" stroke="black" points="136,-397 136,-416 211,-416 211,-397 136,-397"/>
 <text text-anchor="middle" x="173.5" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">GAEvalData</text>
 </a>
