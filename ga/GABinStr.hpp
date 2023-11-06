@@ -1,17 +1,8 @@
 /* ----------------------------------------------------------------------------
   mbwall 30jun95
   Copyright (c) 1995 Massachusetts Institute of Technology
-
- DESCRIPTION:
-  This header defines the interface for the binary string.  This is a crude
-version of a real bitstring object.  We don't do real bitstring in the
-interest of speed and ease of coding this mess up.
-
- TO DO:
-  we can get major improvements to speed by inlining functions and getting rid
-of the error checking...  for example, inlining genome and removing the
-conditional makes it go from 7.5 seconds to 3.2 seconds (bm bl cs 1024 c 0.9)
 ---------------------------------------------------------------------------- */
+
 #pragma once
 
 
@@ -20,7 +11,15 @@ conditional makes it go from 7.5 seconds to 3.2 seconds (bm bl cs 1024 c 0.9)
 #include <gatypes.h>
 #include <vector>
 
-
+/**
+ * This header defines the interface for the binary string.  This is a crude
+ * version of a real bitstring object.  We don't do real bitstring in the
+ * interest of speed and ease of coding this mess up.
+ * 
+ * @todo we can get major improvements to speed by inlining functions and getting rid
+ * of the error checking...  for example, inlining genome and removing the
+ * conditional makes it go from 7.5 seconds to 3.2 seconds (bm bl cs 1024 c 0.9)
+ */
 class GABinaryString
 {
   public:

@@ -1,10 +1,9 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  population.C
   mbwall 11aug94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
 ---------------------------------------------------------------------------- */
+
 #include <GABaseGA.h> // for the sake of flaky g++ compiler
 #include <GAPopulation.h>
 #include <GASelector.h>

@@ -7,8 +7,8 @@
  DESCRIPTION:
   This defines the templatized tree objects.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_treetmpl_h_
-#define _ga_treetmpl_h_
+
+#pragma once
 
 #include <GATreeBASE.h>
 #include <gaerror.h>
@@ -529,5 +529,3 @@ template <class T> class GATreeIter : public GATreeIterBASE
   private:
 	friend class GATree<T>;
 };
-
-#endif
