@@ -1,5 +1,5 @@
 <map id="GABinaryString" name="GABinaryString">
-<area shape="rect" id="node1" title=" " alt="" coords="261,5,382,32"/>
+<area shape="rect" id="node1" title="This header defines the interface for the binary string." alt="" coords="261,5,382,32"/>
 <area shape="rect" id="node2" href="$classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="5,80,200,107"/>
 <area shape="rect" id="node4" href="$classGA2DBinaryStringGenome.html" title="This header defines the interface for the 2D binary string genome, including crossover objects and al..." alt="" coords="224,80,419,107"/>
 <area shape="rect" id="node5" href="$classGA3DBinaryStringGenome.html" title=" " alt="" coords="443,80,637,107"/>

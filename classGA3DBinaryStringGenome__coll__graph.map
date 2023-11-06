@@ -1,6 +1,6 @@
 <map id="GA3DBinaryStringGenome" name="GA3DBinaryStringGenome">
 <area shape="rect" id="node1" title=" " alt="" coords="716,221,911,248"/>
-<area shape="rect" id="node2" href="$classGABinaryString.html" title=" " alt="" coords="402,7,523,33"/>
+<area shape="rect" id="node2" href="$classGABinaryString.html" title="This header defines the interface for the binary string." alt="" coords="402,7,523,33"/>
 <area shape="rect" id="node3" title=" " alt="" coords="157,7,316,33"/>
 <area shape="rect" id="node4" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="415,333,511,360"/>
 <area shape="rect" id="node6" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="736,388,891,415"/>

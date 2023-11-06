@@ -70,6 +70,11 @@ $(function() {
 <div class="title">GABinaryString Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This header defines the interface for the binary string.  
+ <a href="classGABinaryString.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GABinStr_8hpp_source.html">GABinStr.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GABinaryString:</div>
 <div class="dyncontent">
@@ -131,7 +136,11 @@ std::vector&lt; GABit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
 <tr class="memdesc:a5d5fd588a9589f74b49ad9d3de03064a"><td class="mdescLeft">&#160;</td><td class="mdescRight">the data themselves <br /></td></tr>
 <tr class="separator:a5d5fd588a9589f74b49ad9d3de03064a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This header defines the interface for the binary string. </p>
+<p>This is a crude version of a real bitstring object. We don't do real bitstring in the interest of speed and ease of coding this mess up.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>we can get major improvements to speed by inlining functions and getting rid of the error checking... for example, inlining genome and removing the conditional makes it go from 7.5 seconds to 3.2 seconds (bm bl cs 1024 c 0.9) </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="acba888e7a0ff2049d14ff18248e1617f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acba888e7a0ff2049d14ff18248e1617f">&#9670;&nbsp;</a></span>copy() <span class="overload">[1/2]</span></h2>
 
@@ -324,7 +333,7 @@ std::vector&lt; GABit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
 </div><div class="memdoc">
 
 <p>Copy (sub) bitstream. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Check, if it is a bug, that it's a copy not a move</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Check, if it is a bug, that it's a copy not a move</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">destIdx</td><td>Start index of destination </td></tr>
@@ -378,7 +387,7 @@ std::vector&lt; GABit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 5 2023 22:27:20 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Nov 6 2023 22:11:05 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
