@@ -2,6 +2,7 @@
   mbwall 25feb95
   Copyright (c) 1995 Massachusetts Institute of Technology
 ---------------------------------------------------------------------------- */
+
 #pragma once
 
 #include <GA1DArrayGenome.hpp>

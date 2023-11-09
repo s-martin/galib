@@ -1,25 +1,20 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  list.h
   mbwall 25feb95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
- DESCRIPTION:
-  This header defines the interface for the list genome.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_list_h_
-#define _ga_list_h_
+
+#pragma once
 
 #include <GAGenome.h>
 #include <GAList.hpp>
 #include <GAMask.h>
 #include <garandom.h>
 
-/* ----------------------------------------------------------------------------
-ListGenome
--------------------------------------------------------------------------------
----------------------------------------------------------------------------- */
+
+/**
+ * GAListGenome
+ */
 template <class T> class GAListGenome : public GAList<T>, public GAGenome
 {
   public:
@@ -697,5 +692,3 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 		return 0;
 	}
 };
-
-#endif

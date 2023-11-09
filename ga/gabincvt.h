@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  bincvt.h
   mbwall 29jun95
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved

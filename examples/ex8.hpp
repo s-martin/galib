@@ -65,16 +65,17 @@ void ListInitializer(GAGenome &c)
 // some compilers are more finicky about how you do it than others.  For the
 // metrowerks compiler this specialization must come before the forced
 // instantiation.
-template <> int GAListGenome<int>::write(std::ostream &os) const
-{
-	int *cur, *head;
-	GAListIter<int> tmpiter(*this);
-	if ((head = tmpiter.head()) != nullptr)
-		os << *head << " ";
-	for (cur = tmpiter.next(); cur && cur != head; cur = tmpiter.next())
-		os << *cur << " ";
-	return os.fail() ? 1 : 0;
-}
+// TODO fix double instantiation
+//template <> int GAListGenome<int>::write(std::ostream &os) const
+//{
+//	int *cur, *head;
+//	GAListIter<int> tmpiter(*this);
+//	if ((head = tmpiter.head()) != nullptr)
+//		os << *head << " ";
+//	for (cur = tmpiter.next(); cur && cur != head; cur = tmpiter.next())
+//		os << *cur << " ";
+//	return os.fail() ? 1 : 0;
+//}
 
 GAListGenome<int> ex8()
 {
@@ -107,7 +108,7 @@ GAListGenome<int> ex8()
 	ga.set(gaNselectScores, // which scores should we track?
 		GAStatistics::Maximum | GAStatistics::Minimum | GAStatistics::Mean);
 	ga.set(gaNscoreFilename, "bog.dat");
-// TODO	ga.parameters(argc, argv);
+    // TODO	ga.parameters(argc, argv);
 
 	// Evolve the genetic algorithm then dump out the results of the run.
 	ga.evolve();

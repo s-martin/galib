@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Download and install Boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -28,6 +28,8 @@ jobs:
     # Usually dont build doc on Windows, is done on Linux job
     #- name: Install Doxygen and Graphviz     
     #  run: choco install doxygen.install graphviz
+    - name: Install opencppcoverage
+      run: choco install opencppcoverage
   
     - name: Configure CMake
       run: cmake . -DCMAKE_BUILD_TYPE=${{ env.config }} -B ${{ env.build }} -DBUILD_DOC=OFF
@@ -41,6 +43,9 @@ jobs:
     
     - name: Run unit tests
       run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTest
+
+    - name: Run coverage
+      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibOpencppcoverage
         
 
 

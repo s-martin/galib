@@ -1,14 +1,10 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  gabase.h
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
-  Header for the base genetic algorithm class.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_gabase_h_
-#define _ga_gabase_h_
+
+#pragma once
 
 #include <GAGenome.h>
 #include <GAParameter.h>
@@ -83,29 +79,12 @@ extern bool gaDefDivFlag;
 extern bool gaDefElitism;
 extern int gaDefSeed;
 
-/* ----------------------------------------------------------------------------
-   The base GA class is virtual - it defines the core data elements and parts
-of the interface that are common to all genetic algorithms (as defined in
-GAlib, that is).
 
-initialize
-  Undefined for the base class.  The initialization routine typically calls
-the population initializer (which typically calls the genome initializers).
-It should also reset the statistics.
-
-step
-  Evolve by one generation.  'generation' can be defined different ways for
-different genetic algorithms, but in the traditional formulation a generation
-mean creation of a new population (or portion thereof).
-
-done
-  Calls the completion measure routine to tell whether or not the GA is done.
-
-evolve
-  This method is provided as a convenience so that you don't have to increment
-the GA generation-by-generation by hand.  If you do decide to do it by hand,
-be sure that you initialize before you start evolving!
----------------------------------------------------------------------------- */
+/**
+ * The base GA class is virtual - it defines the core data elements and parts
+ * of the interface that are common to all genetic algorithms (as defined in
+ * GAlib, that is).
+ */
 class GAGeneticAlgorithm : public GAID
 {
   public:
@@ -132,10 +111,33 @@ class GAGeneticAlgorithm : public GAID
 	~GAGeneticAlgorithm() override;
 	virtual void copy(const GAGeneticAlgorithm &);
 
+    /**
+     * Calls the completion measure routine to tell whether or not the GA is done.
+     */
 	bool done() { return (*cf)(*this); }
+
+    /**
+     * Undefined for the base class.  The initialization routine typically calls
+     * the population initializer (which typically calls the genome initializers).
+     * It should also reset the statistics.
+     */
 	virtual void initialize(unsigned int seed = 0) = 0;
-	virtual void step() = 0;
-	virtual void evolve(unsigned int seed = 0)
+	
+    /**
+     * Evolve by one generation. 
+     * 
+     * 'generation' can be defined different ways for
+     * different genetic algorithms, but in the traditional formulation a generation
+     * mean creation of a new population (or portion thereof).
+     */
+    virtual void step() = 0;
+	
+    /**
+     * This method is provided as a convenience so that you don't have to increment
+     * the GA generation-by-generation by hand.  If you do decide to do it by hand,
+     * be sure that you initialize before you start evolving!
+     */
+    virtual void evolve(unsigned int seed = 0)
 	{
 		initialize(seed);
 		while (!done())
@@ -287,8 +289,12 @@ class GAGeneticAlgorithm : public GAID
 	GAStatistics stats;
 	GAParameterList params;
 	GAPopulation *pop;
-	Terminator cf; // function for determining done-ness
-	void *ud; // pointer to user data structure
+	
+    /// function for determining done-ness
+    Terminator cf; 
+	
+    /// pointer to user data structure
+    void *ud; 
 
 	int d_seed;
 	unsigned int ngen;
@@ -297,8 +303,10 @@ class GAGeneticAlgorithm : public GAID
 	float pcross;
 	float pmut;
 	int minmax;
-	GAGenome::SexualCrossover scross; // sexual crossover to use
-	GAGenome::AsexualCrossover across; // asexual crossover to use
-};
 
-#endif
+    /// sexual crossover to use
+	GAGenome::SexualCrossover scross;
+
+    /// asexual crossover to use
+	GAGenome::AsexualCrossover across; 
+};

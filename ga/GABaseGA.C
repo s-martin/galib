@@ -1,12 +1,9 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  gabase.C
   mbwall 28jul94
   Copyright (c) 1995 Massachusetts Institute of Technology
 					 all rights reserved
-
-  Source file for the base genetic algorithm object.
 ---------------------------------------------------------------------------- */
+
 #include <GABaseGA.h>
 #include <cstdio>
 #include <cstring>

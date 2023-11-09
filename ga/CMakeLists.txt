@@ -1,7 +1,7 @@
 
 
-file(GLOB SRCS *.C) # TODO remove GLOB
-file(GLOB HDRS *.h) # TODO remove GLOB
+file(GLOB SRCS *.C *.cxx) # TODO remove GLOB
+file(GLOB HDRS *.h *.hpp) # TODO remove GLOB
 add_library(${PROJECT_NAME} ${SRCS} ${HDRS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/ga)
