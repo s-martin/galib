@@ -9,6 +9,8 @@ add_executable("${PROJECT_NAME}Test"
         "GAArrayTest.cpp"
         "GAMaskTest.cpp"
         "GAExamplesTest.cpp"
+        "GARandTest.cpp"
+        "GAListTest.cpp"
         "GABinStrTest.cpp"
         "GAListGenomeTest.cpp")
 

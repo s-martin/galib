@@ -161,15 +161,17 @@ template <class T> class GAList : public GAListBASE
 		csz = orig.csz;
 	}
 
-	// Destroy the specified node.  This uses the current node as the one to
-	// destroy, so be sure to use the iteration methods to move to the node you
-	// want to destroy.  Once the node is gone, we set the current node to the
-	// prev node of the one that was destroyed.  If the node that was nuked was
-	// the head node then we set the current node to the new head.
 	/** Remove the current node from the list and free the memory it was using.
 	 * 
+	 * Destroy the specified node.  This uses the current node as the one to
+	 * destroy, so be sure to use the iteration methods to move to the node you
+	 * want to destroy.  Once the node is gone, we set the current node to the
+	 * prev node of the one that was destroyed.  If the node that was nuked was
+	 * the head node then we set the current node to the new head. 
 	 * 
-	 * @return int 
+	 * @return Error code
+     * @retval 0 No error
+     * @retval -1 Error occurred
 	 */
 	int destroy()
 	{
@@ -192,14 +194,16 @@ template <class T> class GAList : public GAListBASE
 	 * This has no effect on the size or the iterator.
 	 * If either index is out of bounds then we don't do anything.
 	 * 
-	 * @param a 
-	 * @param b 
-	 * @return int 
+	 * @param a Index of first node to swap
+	 * @param b Index of second node to swap
+	 * @return Error code
+     * @retval 0 No error
+     * @retval -1 Error occurred
 	 */
 	int swap(unsigned int a, unsigned int b)
 	{
-		if (a == b || a > (unsigned int)size() || b > (unsigned int)size())
-			return GAListBASE::NO_ERR;
+		if (a == b || a >= (unsigned int)size() || b >= (unsigned int)size())
+			return GAListBASE::ERR;
 		GANodeBASE *tmp = hd, *anode = nullptr, *bnode = nullptr;
 		unsigned int cur = 0;
 		while (tmp && tmp->next != hd)
