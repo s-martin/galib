@@ -18,7 +18,6 @@
 
 #include <iostream>
 
-
 int main(int argc, char **argv)
 {
 	std::cout << "Example 1\n\n";
@@ -37,7 +36,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	ex1();
+	example1(argc, argv);
 
 	return 0;
 }
