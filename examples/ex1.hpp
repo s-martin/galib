@@ -14,7 +14,7 @@
 // the members that a GA2DBinaryStringGenome has.  And it's ok to cast it
 // because we know that we will only get GA2DBinaryStringGenomes and
 // nothing else.
-float objectiveEx1(GAGenome& g)
+float objective(GAGenome& g)
 {
 	auto& genome = (GA2DBinaryStringGenome&)g;
 	float score = 0.0;
@@ -33,7 +33,7 @@ float objectiveEx1(GAGenome& g)
 	return score;
 }
 
-GASimpleGA ex1()
+GAStatistics example1(unsigned int seed, bool useStatic)
 {
 	int width = 10;
 	int height = 5;
@@ -41,7 +41,7 @@ GASimpleGA ex1()
 	// Now create the GA and run it.  First we create a genome of the type that
 	// we want to use in the GA.  The ga doesn't operate on this genome in the
 	// optimization - it just uses it to clone a population of genomes.
-	GA2DBinaryStringGenome genome(width, height, objectiveEx1);
+	GA2DBinaryStringGenome genome(width, height, objective);
 
 	// Now that we have the genome, we create the genetic algorithm and set
 	// its parameters - number of generations, mutation probability, and crossover
@@ -56,5 +56,5 @@ GASimpleGA ex1()
 	// Now we print out the best genome that the GA found.
 	std::cout << "The GA found:\n" << ga.statistics().bestIndividual() << "\n";
 	
-	return ga;
+	return ga.statistics();
 }

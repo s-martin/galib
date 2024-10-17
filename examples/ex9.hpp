@@ -10,7 +10,7 @@
 //
 //                  y = -(x1*x1 + x2*x2)
 //
-float objectiveEx9(GAGenome& c)
+float objective(GAGenome& c)
 {
 	auto& genome = (GABin2DecGenome&)c;
 
@@ -20,7 +20,7 @@ float objectiveEx9(GAGenome& c)
 	return y;
 }
 
-GABin2DecGenome ex9(unsigned int seed)
+GAStatistics example9(unsigned int seed)
 {
 	// Create a phenotype for two variables.  The number of bits you can use to
 	// represent any number is limited by the type of computer you are using. In
@@ -32,7 +32,7 @@ GABin2DecGenome ex9(unsigned int seed)
 	map.add(16, -5, 5);
 
 	// Create the template genome using the phenotype map we just made.
-	GABin2DecGenome genome(map, objectiveEx9);
+	GABin2DecGenome genome(map, objective);
 
 	// Now create the GA using the genome and run it.  We'll use sigma
 	// truncation scaling so that we can handle negative objective scores.
@@ -54,5 +54,5 @@ GABin2DecGenome ex9(unsigned int seed)
 	std::cout << genome.phenotype(0) << ", " << genome.phenotype(1) << ")\n\n";
 	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
 
-	return genome;
+	return ga.statistics();
 }

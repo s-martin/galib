@@ -120,3 +120,29 @@ GAListGenome<int> ex8()
 
 	return genome;
 }
+
+float objective(GAGenome &c)
+{
+	return objectiveEx8(c);
+}
+
+GAStatistics example8(unsigned int seed)
+{
+	GAListGenome<int> genome(objective);
+	genome.initializer(ListInitializer);
+	genome.mutator(GAListGenome<int>::DestructiveMutator);
+
+	GASteadyStateGA ga(genome);
+	ga.set(gaNpopulationSize, 40); // population size
+	ga.set(gaNpCrossover, 0.6); // probability of crossover
+	ga.set(gaNpMutation, 0.05); // probability of mutation
+	ga.set(gaNnGenerations, 50); // number of generations
+	ga.set(gaNscoreFrequency, 1); // how often to record scores
+	ga.set(gaNflushFrequency, 10); // how often to dump scores to file
+	ga.set(gaNselectScores, // which scores should we track?
+		GAStatistics::Maximum | GAStatistics::Minimum | GAStatistics::Mean);
+	ga.set(gaNscoreFilename, "bog.dat");
+	ga.evolve(seed);
+
+	return ga.statistics();
+}

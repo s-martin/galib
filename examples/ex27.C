@@ -19,19 +19,8 @@ any standard 3D cross-platform API, so you get this instead.)
 #include <GASStateGA.h>
 #include <GAList.hpp>
 #include <GA1DArrayGenome.hpp>
- 
-
 #include <iostream>
-
- 
- 
- 
-
-
-
-
-
-
+#include "ex27.hpp"
 
 // This is the class definition for the deterministic crowding genetic 
 // algorithm.  It is based upon the steady-state genetic algorithm, but we
@@ -127,11 +116,6 @@ void DCrowdingGA::step()
     stats.update(*pop);	
 }
 
-
-
-
-
-
 // Set up the various 2-dimensional, real number functions that we will use.
 using Function = float (*)(float, float);
 
@@ -148,8 +132,6 @@ static float maxx[] = { 6,  60,  500, 10 };
 static float miny[] = {-6, -60, -500, -10 };
 static float maxy[] = { 6,  60,  500, 10 };
 
-
-
 // These are the declarations for our genome operators (we do not use the
 // defaults from GAlib for this example).
 float Objective(GAGenome&);
@@ -158,93 +140,34 @@ void  Initializer(GAGenome&);
 int   Crossover(const GAGenome&, const GAGenome&, GAGenome*, GAGenome*);
 float Comparator(const GAGenome&, const GAGenome&);
 
-
-int
-main(int argc, char** argv) {
-  std::cout << "Example 27\n\n";
-  std::cout << "Deterministic crowding demonstration program.\n\n";
-  std::cout << "In addition to the standard GAlib command-line arguments,\n";
-  std::cout << "you can specify one of the four following functions:\n";
-  std::cout << "   0 - modified Himmelblau's function\n";
-  std::cout << "   1 - Foxholes (25)\n";
-  std::cout << "   2 - Schwefel's nasty (1 glob. Max bei (420.96/420.96)\n";
-  std::cout << "   3 - Mexican Hat (optimum at 0,0)\n";
-  std::cout <<  std::endl;
-
-  int i;
-
-// See if we've been given a seed to use (for testing purposes).  When you
-// specify a random seed, the evolution will be exactly the same each time
-// you use that seed number.
-
-  for(i=1; i<argc; i++) {
-    if(strcmp(argv[i++],"seed") == 0)
-      GARandomSeed((unsigned int)atoi(argv[i]));
-  }
-
-  for (i=0; i<25; i++) {
-    ai[i] = 16 * ((i % 5) -2);
-    bi[i] = 16 * ((i / 5) -2);
-  }
-
-  GA1DArrayGenome<float> genome(2, Objective);
-  genome.initializer(::Initializer);
-  genome.mutator(::Mutator);
-  genome.comparator(::Comparator);
-  genome.crossover(::Crossover);
-
-  DCrowdingGA ga(genome);
-  ga.maximize();
-  ga.populationSize(100);
-  ga.nGenerations(100);
-  ga.pMutation(0.05);
-  ga.pCrossover(1.0);
-  ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, false);
-
-  for (i=1; i<argc; i++){
-    if(strcmp("func", argv[i]) == 0 || strcmp("f", argv[i]) == 0){
-      if(++i >= argc){
-         std::cerr << argv[0] << ": the function option needs a number.\n";
-        exit(1);
-      }
-      else{
-        which = atoi(argv[i]);
-        continue;
-      }
+GAStatistics example27(GAParameterList params, unsigned int seed)
+{
+    for (int i = 0; i < 25; i++) {
+        ai[i] = 16 * ((i % 5) - 2);
+        bi[i] = 16 * ((i / 5) - 2);
     }
-    else if(strcmp("seed", argv[i]) == 0){
-      if(++i < argc) continue;
-      continue;
-    }
-    else {
-       std::cerr << argv[0] << ":  unrecognized arguement: " << argv[i] << "\n\n";
-       std::cerr << "valid arguments include standard GAlib arguments plus:\n";
-       std::cerr << "  f\tfunction to use (" << which << ")\n";
-       std::cerr << "\n";
-      exit(1);
-    }
-  }
 
-  ga.evolve();
-  std::cout << "best individual is " << ga.statistics().bestIndividual() << "\n\n";
-  std::cout << ga.statistics() << "\n";
+    GA1DArrayGenome<float> genome(2, Objective);
+    genome.initializer(::Initializer);
+    genome.mutator(::Mutator);
+    genome.comparator(::Comparator);
+    genome.crossover(::Crossover);
 
-  return 0;
+    DCrowdingGA ga(genome);
+    ga.maximize();
+    ga.populationSize(100);
+    ga.nGenerations(100);
+    ga.pMutation(0.05);
+    ga.pCrossover(1.0);
+    ga.selectScores(GAStatistics::AllScores);
+    ga.parameters(params);
+
+    ga.evolve(seed);
+    std::cout << "best individual is " << ga.statistics().bestIndividual() << "\n\n";
+    std::cout << ga.statistics() << "\n";
+
+    return ga.statistics();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*****************************************************************************/
 /* Type:        2D FUNCTION                                                  */
@@ -261,7 +184,6 @@ Function1(float x, float y) {
   float z = -((x*x+y-11)*(x*x+y-11)+(x+y*y-7)*(x+y*y-7))/200 + 10;
   return z;
 }
-
 
 /*****************************************************************************/
 /* Type:        2D FUNCTION                                                  */
@@ -284,7 +206,6 @@ Function2(float x, float y) {
   return z;
 }
 
-
 /*****************************************************************************/
 /* Type:        2D FUNCTION                                                  */
 /* Name:        Objective2D_3                                                */
@@ -299,7 +220,6 @@ Function3(float x, float y) {
   //float z = 100  *  ( sin(sqrt(fabs(x))) * sin(sqrt(fabs(y))) );
   return (z);
 }
-
 
 /*****************************************************************************/
 /* Type:        2D FUNCTION                                                  */
@@ -316,18 +236,6 @@ Function4(float x, float y) {
   z = (0.5 - z);
   return (z);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 // These are the operators that we'll use for the real number genome.
 float

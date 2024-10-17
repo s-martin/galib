@@ -12,20 +12,15 @@ the command line.
 #include <cstdio>
 #include <cstdlib>
 #include <ga.h>
- 
+#include "ex18.hpp"
 
 #include <iostream>
 #include <fstream>
 
- 
- 
- 
-
 float objective(GAGenome &);
 int cntr=0;
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
   std::cout << "Example 18\n\n";
   std::cout << "This program is designed to compare the GA types.  You can\n";
@@ -34,10 +29,6 @@ main(int argc, char *argv[])
   std::cout << "function tries to match a pattern read in from a file.\n\n";
   std::cout.flush();
 
-// See if we've been given a seed to use (for testing purposes).  When you
-// specify a random seed, the evolution will be exactly the same each time
-// you use that seed number.
-
   unsigned int seed = 0;
   for(int ii=1; ii<argc; ii++) {
     if(strcmp(argv[ii++],"seed") == 0) {
@@ -45,28 +36,24 @@ main(int argc, char *argv[])
     }
   }
 
-// Set the default values of the parameters and declare the params variable.
-
   GAParameterList params;
   GASimpleGA::registerDefaultParameters(params);
   GASteadyStateGA::registerDefaultParameters(params);
   GAIncrementalGA::registerDefaultParameters(params);
-  params.set(gaNpopulationSize, 30);	// population size
-  params.set(gaNpCrossover, 0.9);	// probability of crossover
-  params.set(gaNpMutation, 0.001);	// probability of mutation
-  params.set(gaNnGenerations, 400);	// number of generations
-  params.set(gaNpReplacement, 0.25);	// how much of pop to replace each gen
-  params.set(gaNscoreFrequency, 10);	// how often to record scores
-  params.set(gaNflushFrequency, 50);	// how often to dump scores to file
+  params.set(gaNpopulationSize, 30);
+  params.set(gaNpCrossover, 0.9);
+  params.set(gaNpMutation, 0.001);
+  params.set(gaNnGenerations, 400);
+  params.set(gaNpReplacement, 0.25);
+  params.set(gaNscoreFrequency, 10);
+  params.set(gaNflushFrequency, 50);
   params.set(gaNscoreFilename, "bog.dat");
-  params.parse(argc, argv, false);    // parse command line for GAlib args
+  params.parse(argc, argv, false);
 
   const int SIMPLE=0, STEADY_STATE=1, INCREMENTAL=2;
   int whichGA = SIMPLE;
   int i,j;
   char filename[128] = "smiley.txt";
-
-// Parse the command line for more arguments.
 
   for(i=1; i<argc; i++){
     if(strcmp("ga", argv[i]) == 0){
@@ -111,10 +98,6 @@ main(int argc, char *argv[])
     }
   }
 
-// Read in the pattern from the specified file.  File format is pretty simple:
-// two integers that give the height then width of the matrix, then the matrix
-// of 1's and 0's (with whitespace inbetween).
-
    std::ifstream inStream(filename);
   if(!inStream){
      std::cerr << "Cannot open " << filename << " for input.\n";
@@ -134,8 +117,6 @@ main(int argc, char *argv[])
 
   inStream.close();
 
-// Print out the pattern to be sure we got the right one.
-
   std::cout << "input pattern:\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++)
@@ -144,41 +125,7 @@ main(int argc, char *argv[])
   }
   std::cout << "\n"; std::cout.flush();
 
-// Now create the GA and run it.
-
-  GA2DBinaryStringGenome genome(width, height, objective, (void *)target);
-  GAStatistics stats;
-
-  switch(whichGA){
-  case STEADY_STATE:
-    {
-      GASteadyStateGA ga(genome);
-      ga.parameters(params);
-      ga.evolve(seed);
-      genome = ga.statistics().bestIndividual();
-      stats = ga.statistics();
-    }
-    break;
-  case INCREMENTAL:
-    {
-      GAIncrementalGA ga(genome);
-      ga.parameters(params);
-      ga.evolve(seed);
-      genome = ga.statistics().bestIndividual();
-      stats = ga.statistics();
-    }
-    break;
-  case SIMPLE:
-  default:
-    {
-      GASimpleGA ga(genome);
-      ga.parameters(params);
-      ga.evolve(seed);
-      genome = ga.statistics().bestIndividual();
-      stats = ga.statistics();
-    }
-    break;
-  }
+  GAStatistics stats = example18(params, seed, target, whichGA);
 
   std::cout << "the ga generated:\n";
   for(j=0; j<height; j++){
@@ -198,11 +145,8 @@ main(int argc, char *argv[])
 
   return 0;
 }
- 
 
-
-float
-objective(GAGenome & c)
+float objective(GAGenome & c)
 {
   auto & genome = (GA2DBinaryStringGenome &)c;
   auto **pattern = (short **)c.userData();

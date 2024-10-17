@@ -1,23 +1,4 @@
-/* ----------------------------------------------------------------------------
-  ex8.C
-  mbwall 14jan95
-  Copyright 1995-1996  Massachusetts Institute of Technology
-
- DESCRIPTION:
-   Example program for the list genome.  This example contains
-the code to run a genetic algorithm with a list genome.
-  This program illustrates how to specialize member functions of the
-template classes.  Here we specialize the default write() method so that we get
-the contents of the nodes rather than the pointers to the node contents.  You
-can specialize most functions of a template class (as long as they are not
-inlined).
-  The objective function for this example returns both positive and negative
-values, depending on the genome it is evaluting.  So the example also shows how
-to use the sigma truncation scaling method to handle the mixed scores.
----------------------------------------------------------------------------- */
-
 #include "ex8.hpp"
-
 
 int main(int argc, char *argv[])
 {
@@ -37,7 +18,7 @@ int main(int argc, char *argv[])
 			GARandomSeed((unsigned int)atoi(argv[i]));
 	}
 
-	ex8();
+	example8(0);
 
 	return 0;
 }

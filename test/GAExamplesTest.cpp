@@ -17,24 +17,24 @@ BOOST_AUTO_TEST_SUITE(UnitTest)
 
 BOOST_AUTO_TEST_CASE(GAex1)
 {
-	auto ga = ex1();
+	auto ga = example1(0, true);
 
 	std::stringstream str;
-	str << ga.statistics().bestIndividual();
+	str << ga.bestIndividual();
 	BOOST_CHECK_EQUAL(str.str(), "0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n");
 }
 
 BOOST_AUTO_TEST_CASE(GAex2)
 {
-	auto genome = ex2(101, true); // use static seed
+	auto ga = example2(0, true);
 
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), 0.0980392173, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), 21.9607849, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(2), 3, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(3), -3.52941179, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(4), 34575.293, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(5), 0.00152941176, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(6), 6.56078434, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(0), 0.0980392173, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(1), 21.9607849, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(2), 3, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(3), -3.52941179, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(4), 34575.293, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(5), 0.00152941176, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(6), 6.56078434, 0.0000001);
 }
 
 BOOST_AUTO_TEST_CASE(GAex3)
@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(GAex3)
 	BOOST_REQUIRE(params.set(gaNflushFrequency, 50));
 	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
 
-	auto ga = ex3(params, "smiley.txt");
+	auto ga = example3(params, "smiley.txt");
 
 	// TODO older MSVC versions somehow differed; maybe seed is different
 //#ifdef _WIN32
@@ -61,10 +61,10 @@ BOOST_AUTO_TEST_CASE(GAex3)
 
 BOOST_AUTO_TEST_CASE(GAex4)
 {
-	auto ga = ex4();
+	auto ga = example4(0, true);
 
 	std::stringstream str;
-	str << ga.statistics().bestIndividual();
+	str << ga.bestIndividual();
 	BOOST_CHECK_EQUAL(
 		str.str(),
 		"0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n\n"
@@ -75,46 +75,15 @@ BOOST_AUTO_TEST_CASE(GAex4)
 
 BOOST_AUTO_TEST_CASE(GAex6)
 {
-	// Set the default values of the parameters.
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	BOOST_REQUIRE(params.set(gaNpopulationSize, 30)); // number of individuals in population
-	BOOST_REQUIRE(params.set(gaNpCrossover, 0.7)); // likelihood of doing crossover
-	BOOST_REQUIRE(params.set(gaNpMutation, 0.001)); // probability of mutation
-	BOOST_REQUIRE(params.set(gaNnGenerations, 100)); // number of generations
-	BOOST_REQUIRE(params.set(gaNscoreFrequency, 10)); // how often to record scores
-	BOOST_REQUIRE(params.set(gaNflushFrequency, 10)); // how often to flush scores to file
-	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
+	auto ga = example6(0, true);
 
-	auto genome = ex6(params, 0);
-
-
-	// older MSVC versions somehow differed; maybe seed is different
-//#ifdef _WIN32
-//	BOOST_CHECK_EQUAL(genome.size(), 6613);
-//	BOOST_CHECK_EQUAL(genome.depth(), 73); 
-//#else
-	BOOST_CHECK_EQUAL(genome.size(), 10557);
-	BOOST_CHECK_EQUAL(genome.depth(), 310); 
-//#endif
+	BOOST_CHECK_EQUAL(ga.bestIndividual().size(), 10557);
+	BOOST_CHECK_EQUAL(ga.bestIndividual().depth(), 310);
 }
 
 BOOST_AUTO_TEST_CASE(GAex7)
 {
-	GARandomSeed(100); // so test is always the same
-
-	// Set the default values of the parameters.
-	GAParameterList params;
-	GASteadyStateGA::registerDefaultParameters(params);
-	BOOST_REQUIRE(params.set(gaNpopulationSize, 50)); // number of individuals in population
-	BOOST_REQUIRE(params.set(gaNpCrossover, 0.8)); // likelihood of doing crossover
-	BOOST_REQUIRE(params.set(gaNpMutation, 0.001)); // probability of mutation
-	BOOST_REQUIRE(params.set(gaNnGenerations, 200)); // number of generations
-	BOOST_REQUIRE(params.set(gaNscoreFrequency, 20)); // how often to record scores
-	BOOST_REQUIRE(params.set(gaNflushFrequency, 50)); // how often to flush scores to file
-	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
-	
-	auto ga = ex7(params, "smiley.txt");
+	auto ga = example7(0, true);
 
 	BOOST_CHECK_EQUAL(ga.statistics().maxEver(), 217);
 	BOOST_CHECK_EQUAL(ga.statistics().minEver(), 97);
@@ -123,26 +92,17 @@ BOOST_AUTO_TEST_CASE(GAex7)
 
 BOOST_AUTO_TEST_CASE(GAex8)
 {
-//	GARandomSeed(103);
+	auto ga = example8(0, true);
 
-	auto genome = ex8();
-
-	BOOST_CHECK_EQUAL(genome.size(), 413);
+	BOOST_CHECK_EQUAL(ga.bestIndividual().size(), 413);
 }
-
 
 BOOST_AUTO_TEST_CASE(GAex9)
 {
-	auto genome = ex9(100); // use static seed
+	auto ga = example9(0, true);
 
-	// TODO older MSVC versions somehow differed; maybe seed is different
-//#ifdef _WIN32
-//	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -0.000228881836, 0.0000001);
-//	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), 7.62939453e-05, 0.0000001);
-//#else
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(0), -7.62939453e-05, 0.0000001);
-	BOOST_CHECK_CLOSE_FRACTION(genome.phenotype(1), -7.62939453e-05, 0.0000001);
-//#endif
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(0), -7.62939453e-05, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(1), -7.62939453e-05, 0.0000001);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

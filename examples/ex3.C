@@ -1,24 +1,4 @@
-/* ----------------------------------------------------------------------------
-  ex3.C
-  mbwall 28jul94
-  Copyright (c) 1995-1996  Massachusetts Institute of Technology
-
- DESCRIPTION:
-   Example program for the SimpleGA class and 2DBinaryStringGenome class.
-This program reads in a 2D pattern from a data file then tries to match the
-pattern in a 2D binary string genome.  We use a simple GA (with linear
-scaled fitness selection and non-steady-state population generation) and
-2D binary string genomes.
-   This example also illustrates the use of the GAParameterList for setting
-default parameters on the genetic algorithm and for parsing the command line.
----------------------------------------------------------------------------- */
-#include <cstdio>
-#include <cstdlib>
-
 #include "ex3.hpp"
-
-#include <sstream>
-
 
 int main(int argc, char *argv[])
 {
@@ -97,4 +77,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-

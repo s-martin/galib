@@ -13,7 +13,7 @@ example - not good programming style, but it gets the job done.
 #include <cstdio>
 #include <cstdlib>
 #include <ga.h>
- 
+#include "ex20.hpp"
 
 #include <iostream>
 

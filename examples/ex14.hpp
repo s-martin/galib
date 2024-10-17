@@ -1,7 +1,6 @@
-#include <cstdio>
-#include <cstdlib>
-#include <ga.h>
+#pragma once
 
+#include <ga.h>
 #include <iostream>
 
 // Here we specify how big the lists will be and how many lists will be in each
@@ -272,6 +271,11 @@ template <> int GAListGenome<int>::write(std::ostream &os) const
 	for (cur = itertmp.next(); cur && cur != head; cur = itertmp.next())
 		os << *cur << " ";
 	return os.fail() ? 1 : 0;
+}
+
+float objective(GAGenome &c)
+{
+	return RobotPathGenome::Evaluator(c);
 }
 
 GAStatistics example14(unsigned int seed, bool useStatic)
