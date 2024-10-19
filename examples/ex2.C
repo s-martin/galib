@@ -14,7 +14,6 @@ objective function.
 
 #include "ex2.hpp"
 
-
 int main(int argc, char **argv)
 {
 	std::cout << "Example 2\n\n";
@@ -36,7 +35,7 @@ int main(int argc, char **argv)
 
 	GARandomSeed(seed);
 
-	ex2(seed, false); // use dynamic values
+	example2(seed, false); // use dynamic values
 
 	return 0;
 }

@@ -1,10 +1,11 @@
+#pragma once
+
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
 #include <ga.h>
 #include <iostream>
 #include <fstream>
-#include "ex13.hpp"
 
 typedef struct _UserData {
   int width, height;
@@ -16,6 +17,11 @@ typedef struct _UserData {
 
 float PictureObjective(GAGenome &);
 float NumbersObjective(GAGenome &);
+
+float objective(GAGenome & g)
+{
+    return PictureObjective(g);
+}
 
 GAStatistics example13(unsigned int seed, const char* filename)
 {
@@ -34,11 +40,7 @@ GAStatistics example13(unsigned int seed, const char* filename)
 // specify a random seed, the evolution will be exactly the same each time
 // you use that seed number.
 
-  for(int ii=1; ii<argc; ii++) {
-    if(strcmp(argv[ii++],"seed") == 0) {
-      seed = atoi(argv[ii]);
-    }
-  }
+  GARandomSeed(seed);
 
 // Set the default values of the parameters and declare the params variable.
 
@@ -52,7 +54,6 @@ GAStatistics example13(unsigned int seed, const char* filename)
   params.set(gaNscoreFilename, "bog.dat");
   params.set(gaNscoreFrequency, 10);
   params.set(gaNflushFrequency, 50);
-  params.parse(argc, argv, false);   // don't complain about unknown args
 
 // Create a user data object.  We'll keep all of the information for this 
 // program in this object.
@@ -91,7 +92,6 @@ GAStatistics example13(unsigned int seed, const char* filename)
   int n=7;
   float min[] = {0, 0,   3, -5, 100,    0.001, 0};
   float max[] = {1, 100, 3, -2, 100000, 0.010, 7};
-  GARandomSeed(seed);
   data.numbers_target = new float[n];
   for(i=0; i<n; i++)
     data.numbers_target[i] = GARandomFloat(min[i], max[i]);

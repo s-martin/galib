@@ -22,15 +22,10 @@ it does get the job done.
 #include <GASStateGA.h>
 #include <GAListGenome.hpp>
 #include <garandom.h>
- 
+#include "ex26.hpp"
 
 #include <iostream>
 #include <fstream>
- 
- 
- 
- 
- 
 
 // Set this up for your favorite TSP.  The sample one is a contrived problem
 // with the towns laid out in a grid (so it is easy to figure out what the 
@@ -62,87 +57,6 @@ float Comparator(const GAGenome&, const GAGenome&);
 int   ERXover(const GAGenome&, const GAGenome&, GAGenome*, GAGenome*);
 int   PMXover(const GAGenome&, const GAGenome&, GAGenome*, GAGenome*);
 void  ERXOneChild(const GAGenome&, const GAGenome&, GAGenome*);
-
-
-int
-main(int argc, char** argv) {
-  std::cout << "Example 26\n\n";
-  std::cout << "The Travelling Salesman Problem (TSP) demo program.\n" <<  std::endl;
-
-// See if we've been given a seed to use (for testing purposes).  When you
-// specify a random seed, the evolution will be exactly the same each time
-// you use that seed number.
-
-  unsigned int seed = 0;
-  for(int ii=1; ii<argc; ii++) {
-    if(strcmp(argv[ii++],"seed") == 0) {
-      seed = atoi(argv[ii]);
-    }
-  }
-
-  double dump;
-   std::ifstream in(TSP_FILE); 
-  if(!in) {
-     std::cerr << "could not read data file " << TSP_FILE << "\n";
-    exit(1);
-  }
-  ntowns=0;
-  do {
-    in >> dump;
-    in >> x[ntowns];
-    in >> y[ntowns];
-    ntowns++;
-  } while(!in.eof() && ntowns < MAX_TOWNS);
-  in.close();
-  if(ntowns >= MAX_TOWNS) {
-     std::cerr << "data file contains more towns than allowed for in the fixed\n";
-     std::cerr << "arrays.  Recompile the program with larger arrays or try a\n";
-     std::cerr << "smaller problem.\n";
-    exit(1);
-  }
-
-  double dx,dy;
-  for(int i=0;i<ntowns;i++) {
-    for(int j=i; j<ntowns;j++) {
-      dx=x[i]-x[j]; dy=y[i]-y[j];
-      DISTANCE[j][i]=DISTANCE[i][j]=sqrt(dx*dx+dy*dy);
-    }
-  }
-
-  GAListGenome<int> genome(Objective);
-  genome.initializer(::Initializer);
-  genome.mutator(::Mutator);
-  genome.comparator(::Comparator);
-  genome.crossover(XOVER);
-
-  GASteadyStateGA ga(genome);
-  ga.minimize();
-  ga.pReplacement(1.0);
-  ga.populationSize(100);
-  ga.nGenerations(1000);
-  ga.pMutation(0.1);
-  ga.pCrossover(1.0);
-  ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv);
-  std::cout << "initializing..."; std::cout.flush();
-  ga.initialize(seed);
-  std::cout << "evolving..."; std::cout.flush();
-  while(!ga.done()) {
-    ga.step();
-    if(ga.generation() % 10 == 0) {
-      std::cout << ga.generation() << " "; std::cout.flush();
-    }
-  }
-
-  genome = ga.statistics().bestIndividual();
-  std::cout << "the shortest path found is " << genome.score() << "\n";
-  std::cout << "this is the distance from the sequence\n";
-  std::cout << genome << "\n\n";
-  std::cout << ga.statistics() << "\n";
-
-  return 0;
-}
-
 
 
 

@@ -15,7 +15,7 @@ License).
 #include <cstdlib>
 #include <cmath>
 #include <ga.h>
- 
+#include "ex19.hpp"
 
 #include <iostream>
 
@@ -320,5 +320,3 @@ Gauss(double mean, double variance){
     }
   }
 }
-
-

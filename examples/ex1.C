@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	ex1();
+	example1();
 
 	return 0;
 }

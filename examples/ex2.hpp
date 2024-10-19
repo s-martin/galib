@@ -26,7 +26,12 @@ float objectiveEx2(GAGenome &g)
 	return value;
 }
 
-GABin2DecGenome ex2(unsigned int seed, bool useStatic)
+float objective(GAGenome &g)
+{
+	return objectiveEx2(g);
+}
+
+GAStatistics example2(unsigned int seed, bool useStatic)
 {
 	// Generate a sequence of random numbers using the values in the min and max
 	// arrays.  We also set one of them to integer value to show how you can get
@@ -128,5 +133,5 @@ GABin2DecGenome ex2(unsigned int seed, bool useStatic)
 	// std::cout << genome << "\n";
 	std::cout << "best of generation data are in 'bog.dat'\n";
 
-	return genome;
+	return ga.statistics();
 }

@@ -146,3 +146,21 @@ GATreeGenome<int> ex6(GAParameterList params, unsigned int seed)
 
 	return genome;
 }
+
+float objective(GAGenome &c)
+{
+	return objectiveEx6(c);
+}
+
+GAStatistics example6(GAParameterList params, unsigned int seed)
+{
+	GATreeGenome<int> genome(objective);
+	genome.initializer(TreeInitializer);
+	genome.mutator(GATreeGenome<int>::SwapSubtreeMutator);
+
+	GASteadyStateGA ga(genome);
+	ga.parameters(params);
+	ga.evolve(seed);
+
+	return ga.statistics();
+}

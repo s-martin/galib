@@ -16,13 +16,9 @@ child crossover" you could use your own crossover algorithm instead.
 #include <cstdio>
 #include <cmath>
 #include <ga.h>
- 
-
 #include <iostream>
 #include <fstream>
- 
- 
-
+#include "ex22.hpp"
 
 #define OBJECTIVE Objective1
 #define MIN_VALUE (-100)
@@ -38,8 +34,6 @@ int   Mutator(GAGenome&, float);
 void  Initializer(GAGenome&);
 float Comparator(const GAGenome&, const GAGenome&);
 int   Crossover(const GAGenome&, const GAGenome&, GAGenome*);
-
-
 
 // Here we define our own genetic algorithm class.  This class is almost the
 // same as the steady-state genetic algorithm, but we modify the step method
@@ -99,120 +93,6 @@ SharedOverlapGA::step()
 
   stats.update(*pop);		// update the statistics by one generation
 }
-
-
-
-
-
-
-int
-main(int argc, char** argv)
-{
-  std::cout << "Example 22\n\n";
-  std::cout << "This example shows how to derive your own genetic algorithm\n";
-  std::cout << "class.  Here we use a custom, single-child crossover and a\n";
-  std::cout << "modified replacement strategy with overlapping populations.\n\n";
-  std::cout.flush();
-
-// See if we've been given a seed to use (for testing purposes).  When you
-// specify a random seed, the evolution will be exactly the same each time
-// you use that seed number.
-
-  unsigned int seed = 0;
-  for(int ii=1; ii<argc; ii++) {
-    if(strcmp(argv[ii++],"seed") == 0) {
-      seed = atoi(argv[ii]);
-    }
-  }
-
-  std::ofstream outfile;
-  char file[] = "sinusoid.dat";
-  char ifile[] = "pop.initial.dat";
-  char ffile[] = "pop.final.dat";
-  int i;
-
-  GA1DArrayGenome<float> genome(1, OBJECTIVE);
-  genome.initializer(::Initializer);
-  genome.mutator(::Mutator);
-  genome.comparator(::Comparator);
-
-  GASharing share(Comparator);
-
-  SharedOverlapGA ga(genome);
-  ga.crossover(Crossover);
-  ga.scaling(share);
-  ga.populationSize(100);
-  ga.pReplacement(0.25);
-  ga.nGenerations(500);
-  ga.pMutation(0.01);
-  ga.pCrossover(1.0);
-  ga.scoreFilename("bog.dat");	// name of file for scores
-  ga.scoreFrequency(10);	// keep the scores of every 10th generation
-  ga.flushFrequency(100);	// specify how often to write the score to disk
-  ga.selectScores(GAStatistics::AllScores);
-  ga.parameters(argc, argv, true); // parse commands, complain if bogus args
-
-  std::cout << "initializing...\n"; std::cout.flush();
-  ga.initialize(seed);
-
-// dump the initial population to file
-
-  outfile.open(ifile, (std::ios::out | std::ios::trunc));
-  for(i=0; i<ga.population().size(); i++){
-    genome = ga.population().individual(i);
-    outfile << genome.gene(0) << "\t" << genome.score() << "\n";
-  }
-  outfile.close();
-
-// Evolve until the termination function says we're finished.  Print out a
-// little status indicator periodically to let us know what's going on.  After
-// the evolution we flush any remaining scores to file.
-
-  std::cout << "evolving"; std::cout.flush();
-  while(!ga.done()){
-    ga.step();
-    if(ga.generation() % 50 == 0){
-      std::cout << ".";
-      std::cout.flush();
-    }
-  }
-  std::cout << "\n\n";
-  ga.flushScores();
-
-// dump the final population to file
-
-  outfile.open(ffile, (std::ios::out | std::ios::trunc));
-  for(i=0; i<ga.population().size(); i++){
-    genome = ga.population().individual(i);
-    outfile << genome.gene(0) << "\t" << genome.score() << "\n";
-  }
-  outfile.close();
-
-// dump the function to file
-
-  std::cout << "dumping the function to file..." <<  std::endl;
-  outfile.open(file, (std::ios::out | std::ios::trunc));
-  if(outfile.fail()){
-     std::cerr << "Cannot open " << file << " for output.\n";
-    exit(1);
-  }
-  for(float x=MIN_VALUE; x<=MAX_VALUE; x+=1.0)
-    outfile << genome.gene(0,x) << "\t" << genome.score() << "\n";
-  outfile << "\n";
-  outfile.close();
-
-  std::cout << "initial population is in '" << ifile << "'\n";
-  std::cout << "final population is in '" << ffile << "'\n";
-  std::cout << "the function is in '" << file << "'\n";
-  std::cout << "parameters were:\n\n" << ga.parameters() << "\n";
-
-  return 0;
-}
- 
-
-
-
-
 
 // Here are two different objective functions.  Function 1 has multiple peaks
 // with significant difference between peak heights - it is a modulated
@@ -276,7 +156,6 @@ Crossover(const GAGenome& g1, const GAGenome& g2, GAGenome* c1)
 
   return 1;
 }
-
 
 // You can change the factor to control how tightly the distance function 
 // considers the spacing of two genomes.  Higher numbers will give you a 

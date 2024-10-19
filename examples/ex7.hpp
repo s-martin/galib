@@ -21,8 +21,18 @@ float objectiveEx7(GAGenome& c)
 	return (value);
 }
 
-GASteadyStateGA ex7(GAParameterList params, const std::string &datafile)
+float objective(GAGenome& c)
 {
+	return objectiveEx7(c);
+}
+
+GAStatistics example7(GAParameterList params, const std::string &datafile)
+{
+	std::cout << "Example 7\n\n";
+	std::cout << "This program reads in a data file then runs a steady-state GA \n";
+	std::cout << "whose objective function tries to match the pattern of bits that\n";
+	std::cout << "are in the data file.\n\n";
+
 	// Read in the pattern from the specified file.  File format is pretty
 	// simple: two integers that give the height then width of the matrix, then
 	// the matrix of 1's and 0's (with whitespace inbetween).
@@ -133,5 +143,5 @@ GASteadyStateGA ex7(GAParameterList params, const std::string &datafile)
 
 	std::cout << "best of generation data are in '" << ga.scoreFilename() << "'\n";
 
-	return ga;
+	return ga.statistics();
 }

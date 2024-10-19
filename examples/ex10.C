@@ -1,28 +1,12 @@
-/* ----------------------------------------------------------------------------
-  ex10.C
-  mbwall 10apr95
-  Copyright (c) 1995-1996  Massachusetts Institute of Technology
-
- DESCRIPTION:
-   Sample program that illustrates how to use a distance function to do 
-speciation.  This example does both gene-based and phenotype-based distance
-calculations.  The differences are quite interesting.  Also, the length of the
-bit string (i.e. the size of the search space) is also a significant factor in
-the performance of the speciation methods.
-   Notice that Goldberg describes fitness scaling speciation in the context of
-a simple genetic algorithm.  You can try using it with a steady-state 
-algorithm, but you'll get bogus results unless you modify the algorithm.
----------------------------------------------------------------------------- */
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
 #include <ga.h>
- 
+#include "ex10.hpp"
 
 #include <iostream>
 #include <fstream>
 
- 
 #define USE_RAW_SINE
 
 #define NBITS     8
@@ -43,155 +27,11 @@ float Objective(GAGenome &);
 float BitDistance(const GAGenome & a, const GAGenome & b);
 float PhenotypeDistance(const GAGenome & a, const GAGenome & b);
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-  std::cout << "Example 10\n\n";
-  std::cout << "This program uses sharing to do speciation.  The objective\n";
-  std::cout << "function has more than one optimum, so different genomes\n";
-  std::cout << "may have equally high scores.  Speciation keeps the population\n";
-  std::cout << "from clustering at one optimum.\n";
-  std::cout << "  Both gene-wise and phenotype-wise distance functions are used.\n";
-  std::cout << "  Populations from all three runs are written to the files \n";
-  std::cout << "pop.nospec.dat, pop.genespec.dat and pop.phenespec.dat.  The\n";
-  std::cout << "function is written to the file sinusoid.dat\n\n";
-  std::cout.flush();
-
-// See if we've been given a seed to use (for testing purposes).  When you
-// specify a random seed, the evolution will be exactly the same each time
-// you use that seed number.
-
-  for(int ii=1; ii<argc; ii++) {
-    if(strcmp(argv[ii++],"seed") == 0) {
-      GARandomSeed((unsigned int)atoi(argv[ii]));
-    }
-  }
-
-  int i;
-  char filename[32] = "sinusoid.dat";
-  char popfilename1[32] = "pop.nospec.dat";
-  char popfilename2[32] = "pop.genespec.dat";
-  char popfilename3[32] = "pop.phenespec.dat";
-  std::ofstream outfile;
-
-// Create a phenotype for two variables.  The number of bits you can use to
-// represent any number is limited by the type of computer you are using.  In
-// this case, we use 16 bits to represent a floating point number whose value
-// can range from the minimum to maximum value as defined by the macros.
-
-  GABin2DecPhenotype map;
-  map.add(NBITS, MIN_VALUE, MAX_VALUE);
-
-// Create the template genome using the phenotype map we just made.
-
-  GABin2DecGenome genome(map, Objective);
-
-// Now create the GA using the genome and set all of the parameters.
-// You'll get different results depending on the type of GA that you use.  The
-// steady-state GA tends to converge faster (depending on the type of replace-
-// ment method you specify).  
-
-  GASimpleGA ga(genome);
-  ga.set(gaNpopulationSize, 200);
-  ga.set(gaNnGenerations, 50);
-  ga.set(gaNpMutation, 0.001);
-  ga.set(gaNpCrossover, 0.9);
-  ga.parameters(argc, argv);
-
-
-// Do the non-speciated and write to file the best-of-generation.
-
-  std::cout << "running with no speciation (fitness proportionate scaling)...\n";
-  std::cout.flush();
-  GALinearScaling lin;
-  ga.scaling(lin);
-  ga.evolve();
-  genome = ga.statistics().bestIndividual();
-  std::cout << "the ga found an optimum at the point "<<genome.phenotype(0)<< std::endl;
-
-  outfile.open(popfilename1, (std::ios::out | std::ios::trunc));
-  if(outfile.fail()){
-     std::cerr << "Cannot open " << popfilename1 << " for output.\n";
-    exit(1);
-  }
-  for(i=0; i<ga.population().size(); i++){
-    outfile<<((GABin2DecGenome&)(ga.population().individual(i))).phenotype(0);
-    outfile << "\t";
-    outfile << ga.population().individual(i).score() << "\n";
-  }
-  outfile.close();
-
-
-
-// Now do speciation using the gene-wise distance function
-
-  std::cout << "running the ga with speciation (sharing using bit-wise)...\n";
-  std::cout.flush();
-  GASharing bitSharing(BitDistance);
-  ga.scaling(bitSharing);
-  ga.evolve();
-  genome = ga.statistics().bestIndividual();
-  std::cout << "the ga found an optimum at the point "<<genome.phenotype(0)<< std::endl;
-
-  outfile.open(popfilename2, (std::ios::out | std::ios::trunc));
-  if(outfile.fail()){
-     std::cerr << "Cannot open " << popfilename2 << " for output.\n";
-    exit(1);
-  }
-  for(i=0; i<ga.population().size(); i++){
-    outfile<<((GABin2DecGenome&)(ga.population().individual(i))).phenotype(0);
-    outfile << "\t";
-    outfile << ga.population().individual(i).score() << "\n";
-  }
-  outfile.close();
-
-
-
-// Now do speciation using the phenotype-wise distance function
-
-  std::cout << "running the ga with speciation (sharing using phenotype-wise)...\n";
-  std::cout.flush();
-  GASharing pheneSharing(PhenotypeDistance);
-  ga.scaling(pheneSharing);
-  ga.evolve();
-  genome = ga.statistics().bestIndividual();
-  std::cout << "the ga found an optimum at the point "<<genome.phenotype(0)<< std::endl;
-
-  outfile.open(popfilename3, (std::ios::out | std::ios::trunc));
-  if(outfile.fail()){
-     std::cerr << "Cannot open " << popfilename3 << " for output.\n";
-    exit(1);
-  }
-  for(i=0; i<ga.population().size(); i++){
-    outfile<<((GABin2DecGenome&)(ga.population().individual(i))).phenotype(0);
-    outfile << "\t";
-    outfile << ga.population().individual(i).score() << "\n";
-  }
-  outfile.close();
-
-
-// Now dump the function to file for comparisons
-
-  std::cout << "dumping the function to file..." <<  std::endl;
-  outfile.open(filename, (std::ios::out | std::ios::trunc));
-  if(outfile.fail()){
-     std::cerr << "Cannot open " << filename << " for output.\n";
-    exit(1);
-  }
-  float inc = MAX_VALUE - MIN_VALUE;
-  inc /= pow(2.0,NBITS);
-  for(float x=MIN_VALUE; x<=MAX_VALUE; x+=inc){
-    outfile << x << "\t" << FUNCTION (x) << "\n";
-  }
-  outfile << "\n";
-  outfile.close();
-
-  return 0;
+    example10(0, argc, argv);
+    return 0;
 }
- 
-
-
-
 
 // You can choose between one of two sinusoidal functions.  The first one has
 // peaks of equal amplitude.  The second is modulated.
@@ -214,10 +54,6 @@ Function2(float v) {
   if(y < 0) y = 0;
   return y+0.00001;
 }
-
-
-
-
 
 // Here are a couple of possible distance functions for this problem.  One of
 // them uses the genes to determine the same-ness, the other uses the
@@ -243,8 +79,6 @@ BitDistance(const GAGenome & c1, const GAGenome & c2){
   return x/a.length();
 }
 
-
-
 // This distance function looks at the phenotypes rather than the genes of the
 // genome.  This distance function will try to drive them to extremes.
 
@@ -255,4 +89,3 @@ PhenotypeDistance(const GAGenome & c1, const GAGenome & c2){
 
   return fabs(a.phenotype(0) - b.phenotype(0)) / (MAX_VALUE-MIN_VALUE);
 }
-

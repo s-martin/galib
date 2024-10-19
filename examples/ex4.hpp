@@ -31,7 +31,12 @@ float objectiveEx4(GAGenome& g)
 	return value;
 }
 
-GASteadyStateGA ex4()
+float objective(GAGenome& g)
+{
+	return objectiveEx4(g);
+}
+
+GAStatistics example4(unsigned int seed)
 {
 	int depth = 3;
 	int width = 10;
@@ -60,11 +65,11 @@ GASteadyStateGA ex4()
 	ga.scoreFrequency(10); // keep the scores of every 10th generation
 	ga.flushFrequency(50); // specify how often to write the score to disk
 	ga.selectScores(GAStatistics::AllScores);
-	ga.evolve();
+	ga.evolve(seed);
 
 	// Now we print out the best genome.
 	std::cout << "the ga generated:\n" << ga.statistics().bestIndividual() << "\n";
 	std::cout << "best of generation data are in 'bog.dat'\n";
 
-	return ga;
+	return ga.statistics();
 }

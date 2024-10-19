@@ -1,21 +1,5 @@
-/* ----------------------------------------------------------------------------
-  ex9.C
-  mbwall 10apr95
-  Copyright 1995-1996 Massachusetts Institute of Technology
-
- DESCRIPTION:
-   Sample program that illustrates how to use a GA to find the maximum value
-of a continuous function in two variables.  This program uses a binary-to-
-decimal genome.
----------------------------------------------------------------------------- */
-#include <cstdio>
-#include <ga.h>
-
 #include "ex9.hpp"
 
-#include <iostream>
-
- 
 int main(int argc, char **argv)
 {
 	std::cout << "Example 9\n\n";
@@ -40,7 +24,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	ex9(seed);
+	example9(seed);
 
 	return 0;
 }

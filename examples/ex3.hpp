@@ -10,7 +10,7 @@
 // For the objective function we compare the contents of the genome with the
 // target.  If a bit is set in the genome and it is also set in the target,
 // then we add 1 to the score.  If the bits do not match, we don't do anything.
-float objectiveEx3(GAGenome& c)
+float objective(GAGenome& c)
 {
 	auto& genome = (GA2DBinaryStringGenome&)c;
 	auto** pattern = (short**)c.userData();
@@ -22,7 +22,7 @@ float objectiveEx3(GAGenome& c)
 	return (value);
 }
 
-GASimpleGA ex3(GAParameterList params, const std::string& filename)
+GAStatistics example3(GAParameterList params, const std::string& filename)
 {
 	// Read in the pattern from the specified file.  File format is pretty
 	// simple: two integers that give the height then width of the matrix, then
@@ -61,7 +61,7 @@ GASimpleGA ex3(GAParameterList params, const std::string& filename)
 
 	// Now create the GA and run it.
 
-	GA2DBinaryStringGenome genome(width, height, objectiveEx3, (void*)target);
+	GA2DBinaryStringGenome genome(width, height, objective, (void*)target);
 	GASimpleGA ga(genome);
 	ga.parameters(params);
 	ga.evolve();
@@ -82,5 +82,5 @@ GASimpleGA ex3(GAParameterList params, const std::string& filename)
 		delete target[i];
 	delete[] target;
 
-	return ga;
+	return ga.statistics();
 }

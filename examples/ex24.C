@@ -14,11 +14,9 @@ example).
 #include <cstdio>
 #include <cmath>
 #include <ga.h>
- 
-
 #include <iostream>
 #include <fstream>
- 
+#include "ex24.hpp"
 
 #define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
