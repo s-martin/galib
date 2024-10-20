@@ -1,4 +1,5 @@
 #include "ex3.hpp"
+#include <sstream>
 
 int main(int argc, char *argv[])
 {
@@ -73,7 +74,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	ex3(params, filename);
+	example3(params, filename);
 
 	return 0;
 }

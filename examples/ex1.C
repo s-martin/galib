@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	example1(argc, argv);
+	example1();
 
 	return 0;
 }
