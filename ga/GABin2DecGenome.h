@@ -29,6 +29,8 @@ out, please turn off the lights).
 
 #include <GA1DBinStrGenome.h>
 #include <gabincvt.h>
+#include <cstdint>
+
 
 #ifdef max
 #undef max
