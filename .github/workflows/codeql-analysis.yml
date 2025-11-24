@@ -20,6 +20,11 @@ on:
   schedule:
     - cron: '24 8 * * 1'
 
+env:
+  # Path to the CMake build directory.
+  build: '${{ github.workspace }}/build'
+  config: 'Debug'
+
 jobs:
   analyze:
     name: Analyze
@@ -66,6 +71,15 @@ jobs:
     #- run: |
     #   make bootstrap
     #   make release
+
+    - name: Configure CMake
+      run: cmake . -B ${{ env.build }} -DBUILD_PVM=ON
+
+    - name: Build CMake
+      run: cmake --build ${{ env.build }}
+
+    - name: Run unit tests
+      run: cmake --build ${{ env.build }} --target test
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v4
