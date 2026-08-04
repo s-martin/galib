@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  listbase.C
   mbwall 10dec94
   Copyright 1995 Massachusetts Institute of Technology
 
