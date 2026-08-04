@@ -17,6 +17,8 @@
 #include "ex1.hpp"
 
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 
 
 int main(int argc, char **argv)
@@ -26,18 +28,28 @@ int main(int argc, char **argv)
 	std::cout << "alternating 1s and 0s using a SimpleGA\n\n";
 	std::cout.flush();
 
+	unsigned int seed = 0;
+	bool haveSeed = false;
+
 	// See if we've been given a seed to use (for testing purposes).  When you
 	// specify a random seed, the evolution will be exactly the same each time
 	// you use that seed number.
-	for (int ii = 1; ii < argc; ii++)
+	for (int ii = 1; ii < argc; ++ii)
 	{
-		if (strcmp(argv[ii++], "seed") == 0)
+		if (std::strcmp(argv[ii], "seed") == 0 && ii + 1 < argc)
 		{
-			GARandomSeed((unsigned int)atoi(argv[ii]));
+			seed = static_cast<unsigned int>(std::atoi(argv[ii + 1]));
+			haveSeed = true;
+			++ii; // skip the seed value we just consumed
 		}
 	}
 
-	example1();
+	if (haveSeed)
+		GARandomSeed(seed);
+
+	// Call the example function with the parsed seed. Use 'true' for useStatic to
+	// preserve previous behavior in tests that call example1(0, true).
+	example1(seed, true);
 
 	return 0;
 }
