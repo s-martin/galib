@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------------
   mbwall 25feb95
   Copyright 1995 Massachusetts Institute of Technology
----------------------------------------------------------------------------- */
+ ---------------------------------------------------------------------------- */
 
 #pragma once
 
@@ -10,11 +10,11 @@
 
 /* ----------------------------------------------------------------------------
  GAList
----------------------------------------------------------------------------- */
+ ---------------------------------------------------------------------------- */
 template <class T> class GAListIter;
 
 extern GANodeBASE *_GAListTraverse(unsigned int index, unsigned int &cur,
-								   GANodeBASE *node);
+							   GANodeBASE *node);
 
 /** Copy a node, including all of its siblings up to the end of the list.
  *
@@ -155,23 +155,21 @@ template <class T> class GAList : public GAListBASE
 		while (hd)
 			delete GAListBASE::remove(DYN_CAST(GANode<T> *, hd));
 		hd = _GAListCopy(DYN_CAST(GANode<T> *, orig.hd),
-						 DYN_CAST(GANode<T> *, orig.hd));
+					 DYN_CAST(GANode<T> *, orig.hd));
 		iter.node = hd;
 		sz = orig.sz;
 		csz = orig.csz;
 	}
 
+	// Destroy the specified node.  This uses the current node as the one to
+	// destroy, so be sure to use the iteration methods to move to the node you
+	// want to destroy.  Once the node is gone, we set the current node to the
+	// prev node of the one that was destroyed.  If the node that was nuked was
+	// the head node then we set the current node to the new head.
 	/** Remove the current node from the list and free the memory it was using.
 	 * 
-	 * Destroy the specified node.  This uses the current node as the one to
-	 * destroy, so be sure to use the iteration methods to move to the node you
-	 * want to destroy.  Once the node is gone, we set the current node to the
-	 * prev node of the one that was destroyed.  If the node that was nuked was
-	 * the head node then we set the current node to the new head. 
 	 * 
-	 * @return Error code
-     * @retval 0 No error
-     * @retval -1 Error occurred
+	 * @return int 
 	 */
 	int destroy()
 	{
@@ -181,7 +179,7 @@ template <class T> class GAList : public GAListBASE
 		if (node->prev && node->prev != node)
 			if (hd == node)
 				iter.node = node->next;
-			else
+				else
 				iter.node = node->prev;
 		else
 			iter.node = nullptr;
@@ -194,16 +192,15 @@ template <class T> class GAList : public GAListBASE
 	 * This has no effect on the size or the iterator.
 	 * If either index is out of bounds then we don't do anything.
 	 * 
-	 * @param a Index of first node to swap
-	 * @param b Index of second node to swap
-	 * @return Error code
-     * @retval 0 No error
-     * @retval -1 Error occurred
+	 * @param a 
+	 * @param b 
+	 * @return int 
 	 */
 	int swap(unsigned int a, unsigned int b)
 	{
+		// keep original behavior: treat same-index or out-of-range as no-op success
 		if (a == b || a >= (unsigned int)size() || b >= (unsigned int)size())
-			return GAListBASE::ERR;
+			return GAListBASE::NO_ERR;
 		GANodeBASE *tmp = hd, *anode = nullptr, *bnode = nullptr;
 		unsigned int cur = 0;
 		while (tmp && tmp->next != hd)
@@ -257,8 +254,8 @@ template <class T> class GAList : public GAListBASE
 	 * @param t List to be inserted
 	 * @param where Location where list is to be inserted (default: AFTER)
 	 * @return Error code
-     * @retval 0 No Error
-     * @retval -1 Error occurred
+    * @retval 0 No Error
+    * @retval -1 Error occurred
 	 */
 	int insert(GAList<T> *t, GAListBASE::Location where = GAListBASE::AFTER)
 	{
@@ -282,8 +279,8 @@ template <class T> class GAList : public GAListBASE
 	 * @param t Object to be inserted into list
 	 * @param where Insert location (default: AFTER)
 	 * @return Error code
-     * @retval 0 No error
-     * @retval -1 Error occurred
+    * @retval 0 No error
+    * @retval -1 Error occurred
 	 */
 	int insert(const T &t, GAListBASE::Location where = GAListBASE::AFTER)
 	{
@@ -327,22 +324,22 @@ template <class T> class GAList : public GAListBASE
 
 /* ----------------------------------------------------------------------------
  GAListIter
--------------------------------------------------------------------------------
+ -------------------------------------------------------------------------------
   This is a type-safe derivation of the base ListIter object.  I copied the
-methods from the base class (I know, a no-no) rather than doing calls to the
-base class methods.
+ methods from the base class (I know, a no-no) rather than doing calls to the
+ base class methods.
   We depend on the template-ized GAList, thus the declaration.
   Behaviour for the iterator methods is defined as follows.  If the current
-node is null, attempts to access a derived position from the current position
-will return NULL.  The only way to reset the current node is to call the head()
-locater (you always have to start at the list head to navigate the list).  If
-the current node is non-null and the derived node is null, the current node is
-NOT changed, but NULL is returned.  You can also warp to a new position if you
-have another iterator or a list with an embedded iterator.
+ node is null, attempts to access a derived position from the current position
+ will return NULL.  The only way to reset the current node is to call the head()
+ locater (you always have to start at the list head to navigate the list).  If
+ the current node is non-null and the derived node is null, the current node is
+ NOT changed, but NULL is returned.  You can also warp to a new position if you
+ have another iterator or a list with an embedded iterator.
   When we create a new list iterator, it defaults to the same node as the one
-used to create it.  If it is created with a list as its argument, it defaults
-to the list's iterator's current position.
----------------------------------------------------------------------------- */
+ used to create it.  If it is created with a list as its argument, it defaults
+ to the list's iterator's current position.
+ ---------------------------------------------------------------------------- */
 template <class T> class GAList;
 
 template <class T> class GAListIter : public GAListIterBASE
