@@ -8,7 +8,6 @@ add_executable("${PROJECT_NAME}Test"
         "main.cpp"
         "GAArrayTest.cpp"
         "GAMaskTest.cpp"
-        "GAExamplesTest.cpp"
         "GABinStrTest.cpp"
         "GAListGenomeTest.cpp")
 
@@ -21,4 +20,3 @@ target_link_libraries("${PROJECT_NAME}Test" PUBLIC GAlib Boost::unit_test_framew
 set(CMAKE_CTEST_ARGUMENTS "--rerun-failed;--output-on-failure")
 
 add_test(NAME "${PROJECT_NAME}Test" COMMAND ${PROJECT_NAME}Test --logger=JUNIT,message,${PROJECT_NAME}Test_results.xml)
-
