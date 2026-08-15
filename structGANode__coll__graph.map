@@ -1,4 +1,6 @@
 <map id="GANode&lt; T &gt;" name="GANode&lt; T &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="5,113,119,140"/>
-<area shape="rect" id="node2" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="7,21,117,48"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,113,119,139"/>
+<area shape="rect" id="Node000002" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="7,22,117,47"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,61,65,113,59,113,59,61"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="131,24,140,28,143,35,135,44,117,47,116,42,133,39,138,34,136,32,129,29"/>
 </map>

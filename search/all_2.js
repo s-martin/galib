@@ -1,8 +1,14 @@
 var searchData=
 [
-  ['cf_5',['cf',['../classGAGeneticAlgorithm.html#ad7827609d092dda0fc68eff305697c59',1,'GAGeneticAlgorithm']]],
-  ['changelog_6',['Changelog',['../md__home_runner_work_galib_galib_ga_ChangeLog.html',1,'']]],
-  ['clone_7',['clone',['../classGAList.html#a7ca8ac5ef833d73f4bd43849c60783bc',1,'GAList']]],
-  ['copy_8',['copy',['../classGABinaryString.html#acba888e7a0ff2049d14ff18248e1617f',1,'GABinaryString::copy(const GABinaryString &amp;orig)'],['../classGABinaryString.html#a85d07ad8c83c77c13d08317fffd1d57b',1,'GABinaryString::copy(const GABinaryString &amp;orig, unsigned int destIdx, unsigned int origIdx, unsigned int l)'],['../classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f',1,'GAList::copy()']]],
-  ['customizing_20galib_9',['Customizing GAlib',['../md__home_runner_work_galib_galib_doc_Extensions.html',1,'']]]
+  ['2_204_207_0',['Original GAlib (until version 2.4.7)',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md1',1,'']]],
+  ['2004_2012_2027_20matthew_20wall_1',['2004-12-27  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md9',1,'']]],
+  ['2004_2012_2028_20matthew_20wall_2',['2004 12 28 matthew wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md7',1,'2004-12-28  Matthew Wall'],['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md8',1,'2004-12-28  Matthew Wall']]],
+  ['2004_2012_2029_20matthew_20wall_3',['2004-12-29  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md6',1,'']]],
+  ['2005_2001_2006_20matthew_20wall_4',['2005-01-06  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md5',1,'']]],
+  ['2005_2001_2011_20matthew_20wall_5',['2005-01-11  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md4',1,'']]],
+  ['2005_2001_2012_20matthew_20wall_6',['2005-01-12  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md3',1,'']]],
+  ['2005_2001_2027_20matthew_20wall_7',['2005-01-27  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md2',1,'']]],
+  ['27_20matthew_20wall_8',['27 matthew wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md9',1,'2004-12-27  Matthew Wall'],['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md2',1,'2005-01-27  Matthew Wall']]],
+  ['28_20matthew_20wall_9',['28 matthew wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md7',1,'2004-12-28  Matthew Wall'],['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md8',1,'2004-12-28  Matthew Wall']]],
+  ['29_20matthew_20wall_10',['2004-12-29  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md6',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['which_87',['which',['../classGAStatistics.html#af40d7931f2432a92ca4c1e7e588ddb8e',1,'GAStatistics']]]
+  ['nscrs_0',['nscrs',['../classGAStatistics.html#a569fd64610331815c0c8ee62caa9ae18',1,'GAStatistics']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['changelog_170',['Changelog',['../md__home_runner_work_galib_galib_ga_ChangeLog.html',1,'']]],
-  ['customizing_20galib_171',['Customizing GAlib',['../md__home_runner_work_galib_galib_doc_Extensions.html',1,'']]]
+  ['changelog_0',['Changelog',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html',1,'']]],
+  ['customizing_20galib_1',['Customizing GAlib',['../md__2home_2runner_2work_2galib_2galib_2doc_2Extensions.html',1,'']]]
 ];

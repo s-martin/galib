@@ -1,7 +1,11 @@
 <map id="GA1DArrayGenome&lt; T &gt;" name="GA1DArrayGenome&lt; T &gt;">
-<area shape="rect" id="node1" title="1 dimensional Array Genome" alt="" coords="33,155,220,181"/>
-<area shape="rect" id="node5" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="15,229,239,256"/>
-<area shape="rect" id="node2" href="$classGAArray.html" title="Array Base Class." alt="" coords="5,80,120,107"/>
-<area shape="rect" id="node3" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="144,80,240,107"/>
-<area shape="rect" id="node4" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="165,5,219,32"/>
+<area shape="rect" id="Node000001" title="1 dimensional Array Genome" alt="" coords="33,152,220,177"/>
+<area shape="rect" id="Node000005" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="15,225,239,251"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="129,191,129,225,124,225,124,191"/>
+<area shape="rect" id="Node000002" href="$classGAArray.html" title="Array Base Class." alt="" coords="5,79,120,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,113,118,150,114,154,80,116"/>
+<area shape="rect" id="Node000003" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="144,79,240,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,116,139,154,135,150,170,113"/>
+<area shape="rect" id="Node000004" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="165,5,219,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="195,44,195,79,189,79,189,44"/>
 </map>

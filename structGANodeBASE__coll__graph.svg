@@ -6,27 +6,54 @@
 <!-- Title: GANodeBASE Pages: 1 -->
 <svg width="140pt" height="52pt"
  viewBox="0.00 0.00 140.00 52.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<svg id="main" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" onload="init(evt)">
+<style type="text/css"><![CDATA[
+.node, .edge {opacity: 0.7;}
+.node.selected, .edge.selected {opacity: 1;}
+.edge:hover path { stroke: red; }
+.edge:hover polygon { stroke: red; fill: red; }
+]]></style>
+<script type="application/ecmascript" xlink:href="svg.min.js"/>
+<svg id="graph" class="graph">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 48)">
 <title>GANodeBASE</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-48 136,-48 136,4 -4,4"/>
 <!-- Node1 -->
-<g id="node1" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title="This is the basic node object.">
-<polygon fill="#bfbfbf" stroke="black" points="0,-12.5 0,-31.5 82,-31.5 82,-12.5 0,-12.5"/>
+<g id="a_Node000001"><a xlink:title="This is the basic node object.">
+<polygon fill="#999999" stroke="#666666" points="82,-31.5 0,-31.5 0,-12.5 82,-12.5 82,-31.5"/>
 <text text-anchor="middle" x="41" y="-19.5" font-family="Helvetica,sans-Serif" font-size="10.00">GANodeBASE</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge1_Node000001_Node000001" class="edge">
 <title>Node1&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M92.26,-25C97.01,-24.38 100,-23.38 100,-22 100,-19.79 92.34,-18.56 82.08,-18.3"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="91.82,-21.52 82.08,-25.7 92.3,-28.5 91.82,-21.52"/>
-<text text-anchor="middle" x="116" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00"> child</text>
-<text text-anchor="middle" x="116" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00">next</text>
-<text text-anchor="middle" x="116" y="-14" font-family="Helvetica,sans-Serif" font-size="10.00">parent</text>
-<text text-anchor="middle" x="116" y="-3" font-family="Helvetica,sans-Serif" font-size="10.00">prev</text>
+<g id="a_edge1_Node000001_Node000001"><a xlink:title=" ">
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M92.26,-24.7C97.01,-24.14 100,-23.24 100,-22 100,-20.01 92.34,-18.9 82.08,-18.67"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="91.85,-21.22 82.08,-25.33 92.28,-28.2 91.85,-21.22"/>
+</a>
+</g>
+<text text-anchor="middle" x="116" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey"> child</text>
+<text text-anchor="middle" x="116" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">next</text>
+<text text-anchor="middle" x="116" y="-14" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">parent</text>
+<text text-anchor="middle" x="116" y="-3" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">prev</text>
 </g>
 </g>
+</svg>
+</svg>
+
+<style type='text/css'>
+<![CDATA[
+[data-mouse-over-selected='false'] { opacity: 0.7; }
+[data-mouse-over-selected='true']  { opacity: 1.0; }
+]]>
+</style>
+<script type="application/ecmascript"><![CDATA[
+document.addEventListener('DOMContentLoaded', (event) => {
+  highlightEdges();
+  highlightAdjacentNodes();
+});
+]]></script>
 </svg>

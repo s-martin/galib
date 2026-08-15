@@ -1,5 +1,9 @@
 <map id="GATreeIterBASE" name="GATreeIterBASE">
-<area shape="rect" id="node1" title=" " alt="" coords="16,216,139,243"/>
-<area shape="rect" id="node2" href="$classGATreeBASE.html" title=" " alt="" coords="100,127,201,153"/>
-<area shape="rect" id="node3" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="5,21,115,48"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,215,128,240"/>
+<area shape="rect" id="Node000002" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="12,22,121,47"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,61,61,104,60,152,67,214,62,215,55,152,55,103,60,61"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="136,23,144,28,148,35,140,45,122,48,121,43,137,40,143,34,141,31,134,28"/>
+<area shape="rect" id="Node000003" href="$classGATreeBASE.html" title=" " alt="" coords="107,127,208,152"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="88,56,149,125,145,128,84,60"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="137,164,81,216,77,212,133,160"/>
 </map>

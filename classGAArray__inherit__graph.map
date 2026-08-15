@@ -1,9 +1,15 @@
 <map id="GAArray&lt; T &gt;" name="GAArray&lt; T &gt;">
-<area shape="rect" id="node1" title="Array Base Class." alt="" coords="308,5,423,32"/>
-<area shape="rect" id="node2" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="43,80,229,107"/>
-<area shape="rect" id="node4" href="$classGA2DArrayGenome.html" title=" " alt="" coords="272,80,459,107"/>
-<area shape="rect" id="node6" href="$classGA3DArrayGenome.html" title=" " alt="" coords="501,80,688,107"/>
-<area shape="rect" id="node3" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="5,155,229,181"/>
-<area shape="rect" id="node5" href="$classGA2DArrayAlleleGenome.html" title=" " alt="" coords="253,155,477,181"/>
-<area shape="rect" id="node7" href="$classGA3DArrayAlleleGenome.html" title=" " alt="" coords="501,155,725,181"/>
+<area shape="rect" id="Node000001" title="Array Base Class." alt="" coords="308,5,423,31"/>
+<area shape="rect" id="Node000002" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="43,79,229,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="316,37,174,81,172,76,314,32"/>
+<area shape="rect" id="Node000004" href="$classGA2DArrayGenome.html" title=" " alt="" coords="272,79,459,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="368,44,368,79,363,79,363,44"/>
+<area shape="rect" id="Node000006" href="$classGA3DArrayGenome.html" title=" " alt="" coords="501,79,688,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="416,32,558,76,557,81,415,37"/>
+<area shape="rect" id="Node000003" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="5,152,229,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="132,118,123,153,118,151,127,117"/>
+<area shape="rect" id="Node000005" href="$classGA2DArrayAlleleGenome.html" title=" " alt="" coords="253,152,477,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="368,118,368,152,363,152,363,118"/>
+<area shape="rect" id="Node000007" href="$classGA3DArrayAlleleGenome.html" title=" " alt="" coords="501,152,725,177"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="604,117,613,151,608,153,599,118"/>
 </map>

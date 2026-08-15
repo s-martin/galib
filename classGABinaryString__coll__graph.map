@@ -1,4 +1,5 @@
 <map id="GABinaryString" name="GABinaryString">
-<area shape="rect" id="node1" title="This header defines the interface for the binary string." alt="" coords="24,95,145,121"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" id="Node000001" title="This header defines the interface for the binary string." alt="" coords="24,93,145,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,164,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,45,87,93,82,93,82,45"/>
 </map>

@@ -1,3 +1,4 @@
 <map id="GANodeBASE" name="GANodeBASE">
-<area shape="rect" id="node1" title="This is the basic node object." alt="" coords="5,21,115,48"/>
+<area shape="rect" id="Node000001" title="This is the basic node object." alt="" coords="5,22,115,47"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="129,29,141,35,115,42,114,36,136,34,127,34"/>
 </map>

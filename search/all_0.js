@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['a_0',['a',['../classGAArray.html#a875e5d1c2c066ed23402ab4aa63be5df',1,'GAArray']]],
-  ['across_1',['across',['../classGAGeneticAlgorithm.html#a1fde812ec07042c2286ad0f9420a07d7',1,'GAGeneticAlgorithm']]],
-  ['aset_2',['aset',['../classGA1DArrayAlleleGenome.html#af36a0ba9db2830d8b4e36611067e7e29',1,'GA1DArrayAlleleGenome']]],
-  ['avescore_3',['aveScore',['../classGAStatistics.html#a4445d76eb8790743f1ef9133c5e46d13',1,'GAStatistics']]]
+  ['01_2006_20matthew_20wall_0',['2005-01-06  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md5',1,'']]],
+  ['01_2011_20matthew_20wall_1',['2005-01-11  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md4',1,'']]],
+  ['01_2012_20matthew_20wall_2',['2005-01-12  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md3',1,'']]],
+  ['01_2027_20matthew_20wall_3',['2005-01-27  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md2',1,'']]],
+  ['06_20matthew_20wall_4',['2005-01-06  Matthew Wall',['../md__2home_2runner_2work_2galib_2galib_2ga_2ChangeLog.html#autotoc_md5',1,'']]]
 ];
