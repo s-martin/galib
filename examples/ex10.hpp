@@ -34,8 +34,6 @@ GAStatistics example10(unsigned int seed, int argc, char **argv)
 
     GABin2DecGenome genome(map, objective);
     genome.crossover(GABin2DecGenome::UniformCrossover);
-    genome.crossoverProbability(0.6);
-    genome.mutationProbability(0.01);
     genome.comparator(BitDistance);
     genome.comparator(PhenotypeDistance);
 

@@ -17,9 +17,6 @@ the command line.
 #include <iostream>
 #include <fstream>
 
-float objective(GAGenome &);
-int cntr=0;
-
 int main(int argc, char *argv[])
 {
   std::cout << "Example 18\n\n";
@@ -50,7 +47,6 @@ int main(int argc, char *argv[])
   params.set(gaNscoreFilename, "bog.dat");
   params.parse(argc, argv, false);
 
-  const int SIMPLE=0, STEADY_STATE=1, INCREMENTAL=2;
   int whichGA = SIMPLE;
   int i,j;
   char filename[128] = "smiley.txt";
@@ -127,13 +123,6 @@ int main(int argc, char *argv[])
 
   GAStatistics stats = example18(params, seed, target, whichGA);
 
-  std::cout << "the ga generated:\n";
-  for(j=0; j<height; j++){
-    for(i=0; i<width; i++){
-      std::cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
-    }
-    std::cout << "\n";
-  }
   std::cout << "\nthe statistics for the run are:\n" << stats;
   std::cout << "\nthe objective function was called " << cntr << " times\n";
   std::cout << "\nbest of generation data are in 'bog.dat'\n";
@@ -144,19 +133,4 @@ int main(int argc, char *argv[])
   delete [] target;
 
   return 0;
-}
-
-float objective(GAGenome & c)
-{
-  auto & genome = (GA2DBinaryStringGenome &)c;
-  auto **pattern = (short **)c.userData();
-
-  float value=0.0;
-  for(int i=0; i<genome.width(); i++)
-    for(int j=0; j<genome.height(); j++)
-      value += (float)(genome.gene(i,j) == pattern[i][j]);
-
-  cntr++;
-
-  return(value);
 }
