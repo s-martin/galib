@@ -175,7 +175,6 @@ int main(int argc, char **argv)
 	unsigned int seed = 0;
 	GAParameterList params;
 	GASteadyStateGA::registerDefaultParameters(params);
-	params.parse(argc, argv, false);
 
 	for (int i = 1; i < argc; ++i)
 	{
@@ -196,6 +195,7 @@ int main(int argc, char **argv)
 		}
 	}
 
+	params.parse(argc, argv, false);
 	example27(params, seed);
 	return 0;
 }
