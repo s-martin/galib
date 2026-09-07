@@ -1,6 +1,9 @@
 #pragma once
 
+#include <GAStringGenome.h>
 #include <ga.h>
+#include <cstdlib>
+#include <cstring>
 #include <iostream>
 
 float objective(GAGenome &c)

@@ -16,9 +16,9 @@ the command line.
 
 #include <iostream>
 #include <fstream>
+#include <memory>
 
-float objective(GAGenome &);
-int cntr=0;
+int cntr = 0;
 
 int main(int argc, char *argv[])
 {
@@ -50,7 +50,6 @@ int main(int argc, char *argv[])
   params.set(gaNscoreFilename, "bog.dat");
   params.parse(argc, argv, false);
 
-  const int SIMPLE=0, STEADY_STATE=1, INCREMENTAL=2;
   int whichGA = SIMPLE;
   int i,j;
   char filename[128] = "smiley.txt";
@@ -127,13 +126,6 @@ int main(int argc, char *argv[])
 
   GAStatistics stats = example18(params, seed, target, whichGA);
 
-  std::cout << "the ga generated:\n";
-  for(j=0; j<height; j++){
-    for(i=0; i<width; i++){
-      std::cout << (genome.gene(i,j) == 1 ? '*' : ' ') << " ";
-    }
-    std::cout << "\n";
-  }
   std::cout << "\nthe statistics for the run are:\n" << stats;
   std::cout << "\nthe objective function was called " << cntr << " times\n";
   std::cout << "\nbest of generation data are in 'bog.dat'\n";
@@ -146,17 +138,47 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-float objective(GAGenome & c)
+float objective(GAGenome &c)
 {
-  auto & genome = (GA2DBinaryStringGenome &)c;
-  auto **pattern = (short **)c.userData();
+	auto &genome = (GA2DBinaryStringGenome &)c;
+	auto **pattern = (short **)c.userData();
 
-  float value=0.0;
-  for(int i=0; i<genome.width(); i++)
-    for(int j=0; j<genome.height(); j++)
-      value += (float)(genome.gene(i,j) == pattern[i][j]);
+	float value = 0.0;
+	for (int i = 0; i < genome.width(); i++)
+		for (int j = 0; j < genome.height(); j++)
+			value += (float)(genome.gene(i, j) == pattern[i][j]);
 
-  cntr++;
+	cntr++;
+	return value;
+}
 
-  return(value);
+GAStatistics example18(GAParameterList &params, unsigned int seed, short **target, int whichGA)
+{
+	const int height = 5;
+	const int width = 10;
+
+	GA2DBinaryStringGenome genome(width, height, objective);
+	genome.userData((void *)target);
+
+	std::unique_ptr<GAGeneticAlgorithm> ga;
+	switch (whichGA)
+	{
+		case STEADY_STATE:
+			ga = std::make_unique<GASteadyStateGA>(genome);
+			break;
+		case INCREMENTAL:
+			ga = std::make_unique<GAIncrementalGA>(genome);
+			break;
+		case SIMPLE:
+		default:
+			ga = std::make_unique<GASimpleGA>(genome);
+			break;
+	}
+
+	ga->parameters(params);
+	ga->initialize(seed);
+	while (!ga->done())
+		ga->step();
+
+	return ga->statistics();
 }

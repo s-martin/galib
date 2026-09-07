@@ -16,11 +16,12 @@ it looks much better running in real-time in 3D, but, alas, there is not yet
 any standard 3D cross-platform API, so you get this instead.)
 ---------------------------------------------------------------------------- */
 #include <cmath>
+#include <cstdlib>
+#include <cstring>
 #include <GASStateGA.h>
 #include <GAList.hpp>
 #include <GA1DArrayGenome.hpp>
 #include <iostream>
-#include "ex27.hpp"
 
 // This is the class definition for the deterministic crowding genetic 
 // algorithm.  It is based upon the steady-state genetic algorithm, but we
@@ -167,6 +168,36 @@ GAStatistics example27(GAParameterList params, unsigned int seed)
     std::cout << ga.statistics() << "\n";
 
     return ga.statistics();
+}
+
+int main(int argc, char **argv)
+{
+	unsigned int seed = 0;
+	GAParameterList params;
+	GASteadyStateGA::registerDefaultParameters(params);
+
+	for (int i = 1; i < argc; ++i)
+	{
+		if (std::strcmp(argv[i], "seed") == 0 && i + 1 < argc)
+		{
+			seed = static_cast<unsigned int>(std::atoi(argv[i + 1]));
+			++i;
+		}
+		else if ((std::strcmp(argv[i], "which") == 0 || std::strcmp(argv[i], "w") == 0) &&
+				 i + 1 < argc)
+		{
+			which = std::atoi(argv[i + 1]);
+			if (which < 0)
+				which = 0;
+			if (which > 3)
+				which = 3;
+			++i;
+		}
+	}
+
+	params.parse(argc, argv, false);
+	example27(params, seed);
+	return 0;
 }
 
 /*****************************************************************************/

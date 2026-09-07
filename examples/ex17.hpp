@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ga/GA2DArrayGenome.h>
-#include <ga/GASimpleGA.h>
+#include <GA2DArrayGenome.hpp>
+#include <GASimpleGA.h>
 #include <iostream>
 
 float objective(GAGenome &c)
