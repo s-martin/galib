@@ -11,8 +11,7 @@ function(add_galib_example target source)
     target_link_libraries(${target} PUBLIC GAlib)
 endfunction()
 
-# Build the validated/stable example subset in CI.
-# ex12 and ex15-ex27 remain excluded from CI until their modernized headers/sources are fully reconciled.
+# TODO ex12 and ex15-ex27 remain excluded from CI until their modernized headers/sources are fully reconciled.
 add_galib_example(example1 ex1.C)
 add_galib_example(example2 ex2.C)
 add_galib_example(example3 ex3.C)
