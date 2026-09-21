@@ -1,6 +1,4 @@
-// $Header$
 /* ----------------------------------------------------------------------------
-  listbase.h
   mbwall 25nov94
   Copyright 1995 Massachusetts Institute of Technology
 
@@ -12,8 +10,8 @@
 class since those take care of memory management.  BASE class has no concept of
 memory management, nor does it know the best way to count what its got.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_listbase_h_
-#define _ga_listbase_h_
+
+#pragma once
 
 #include <GANode.h>
 
@@ -130,19 +128,7 @@ class GAListBASE
 /* ----------------------------------------------------------------------------
  GAListIterBASE
 -------------------------------------------------------------------------------
-  This is the base class for iterators for the list objects.  We define this
-class separately from the List object so that you can have multiple interators
-for each list and so that you can more easily customize the traversal
-algorithms within the iterator.  From the object point of view, the way you
-traverse a list is independent of how you represent the list.
-  Like the ListBASE object, this object doesn't do any memory allocation or
-deallocation.  All we do is provide list traversal.
-  Notice that we keep a 'current location' in the list - whatever your last
-query was is stored as the node, so if you refer to the current member, you'll
-get your last query.
-  If you pass a NULL node to these routines they will not break; passing a NULL
-will result in a no-op, and NULL will be returned.
-
+  
 creation
   When you create an iterator, you should pass another iterator (the new one
   will copy the first) or a list (the iterator will default to the head node
@@ -153,10 +139,23 @@ current, head, tail, next, prev, warp
   the iterator now points to.  If current is NULL or a NULL is passed to one of
   these routines, a NULL is returned and the iterator does not move.
 
-warp
-  Move the iterator to the node referenced by index.  The head node is node '0'
-  then the count increases from there.
 ---------------------------------------------------------------------------- */
+
+/** This is the base class for iterators for the list objects.
+ *
+ * We define this class separately from the List object so that you can have multiple interators
+ * for each list and so that you can more easily customize the traversal
+ * algorithms within the iterator.  From the object point of view, the way you
+ * traverse a list is independent of how you represent the list.
+ * Like the ListBASE object, this object doesn't do any memory allocation or
+ * deallocation.  All we do is provide list traversal.
+ * Notice that we keep a 'current location' in the list - whatever your last
+ * query was is stored as the node, so if you refer to the current member, you'll
+ * get your last query.
+ * If you pass a NULL node to these routines they will not break; passing a NULL
+ * will result in a no-op, and NULL will be returned. 
+ * 
+ */
 class GAListIterBASE
 {
   public:
@@ -206,18 +205,33 @@ class GAListIterBASE
 	{
 		return (((list != nullptr) && (list->hd != nullptr)) ? (node = list->hd->prev) : nullptr);
 	}
-	GANodeBASE *warp(unsigned int);
+	
+    /** Move the iterator to the node referenced by index.
+     * 
+     * The head node is node '0' then the count increases from there.
+     * 
+     * @param index
+     * @return GANodeBASE* 
+     */
+    GANodeBASE *warp(unsigned int);
+
+    /** Move the iterator to the node referenced by index.
+     * 
+     * The head node is node '0' then the count increases from there.
+     * 
+     * @param i 
+     * @return GANodeBASE* 
+     */
 	GANodeBASE *warp(const GAListIterBASE &i)
 	{
 		list = i.list;
 		node = nullptr;
 		return (i.node != nullptr ? (node = i.node) : nullptr);
 	}
+    
 	int size() { return (list != nullptr ? list->size() : 0); }
 
   protected:
 	GANodeBASE *node;
 	const GAListBASE *list;
 };
-
-#endif
