@@ -401,8 +401,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    <span class="comment">// do a depth-first traversal of the tree and assign coords to the nodes in</span></div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="comment">// the order we get them in the traversal.  Each coord pair is measured</span></div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="comment">// relative to the parent of the node.</span></div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordtype">void</span> _tt(std::ostream &amp;os, <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *n)</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    {</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordtype">void</span> _tt(std::ostream &amp;os, <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *n)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="keyword">    </span>{</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keywordflow">if</span> (!n)</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <a class="code hl_struct" href="structGANodeBASE.html">GANodeBASE</a> *node = DYN_CAST(<a class="code hl_struct" href="structGANodeBASE.html">GANodeBASE</a> *, n);</div>
@@ -507,7 +507,7 @@ $(document).ready(function() { init_codefold(0); });
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 7 2026 16:32:46 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Oct 3 2026 15:36:08 for Modernized GAlib by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>
