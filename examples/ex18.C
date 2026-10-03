@@ -9,16 +9,10 @@ This program reads in a 2D pattern from a data file then tries to match the
 pattern in a 2D binary string genome.  The type of GA can be specified at
 the command line.
 ---------------------------------------------------------------------------- */
-#include <cstdio>
-#include <cstdlib>
-#include <ga.h>
 #include "ex18.hpp"
 
 #include <iostream>
 #include <fstream>
-
-float objective(GAGenome &);
-int cntr=0;
 
 int main(int argc, char *argv[])
 {
@@ -50,7 +44,6 @@ int main(int argc, char *argv[])
   params.set(gaNscoreFilename, "bog.dat");
   params.parse(argc, argv, false);
 
-  const int SIMPLE=0, STEADY_STATE=1, INCREMENTAL=2;
   int whichGA = SIMPLE;
   int i,j;
   char filename[128] = "smiley.txt";
@@ -125,8 +118,9 @@ int main(int argc, char *argv[])
   }
   std::cout << "\n"; std::cout.flush();
 
-  GAStatistics stats = example18(params, seed, target, whichGA);
+  GAStatistics stats = example18(params, seed, target, width, height, whichGA);
 
+  auto genome = static_cast<const GA2DBinaryStringGenome &>(stats.bestIndividual());
   std::cout << "the ga generated:\n";
   for(j=0; j<height; j++){
     for(i=0; i<width; i++){
@@ -140,23 +134,8 @@ int main(int argc, char *argv[])
   std::cout.flush();
 
   for(i=0; i<width; i++)
-    delete target[i];
+    delete [] target[i];
   delete [] target;
 
   return 0;
-}
-
-float objective(GAGenome & c)
-{
-  auto & genome = (GA2DBinaryStringGenome &)c;
-  auto **pattern = (short **)c.userData();
-
-  float value=0.0;
-  for(int i=0; i<genome.width(); i++)
-    for(int j=0; j<genome.height(); j++)
-      value += (float)(genome.gene(i,j) == pattern[i][j]);
-
-  cntr++;
-
-  return(value);
 }

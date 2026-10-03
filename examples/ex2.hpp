@@ -26,11 +26,6 @@ float objectiveEx2(GAGenome &g)
 	return value;
 }
 
-float objective(GAGenome &g)
-{
-	return objectiveEx2(g);
-}
-
 GAStatistics example2(unsigned int seed, bool useStatic)
 {
 	// Generate a sequence of random numbers using the values in the min and max

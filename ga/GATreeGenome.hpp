@@ -317,7 +317,7 @@ template <class T> class GATreeGenome : public GATree<T>, public GAGenome
 	// do a depth-first traversal of the tree and assign coords to the nodes in
 	// the order we get them in the traversal.  Each coord pair is measured
 	// relative to the parent of the node.
-	void _tt(std::ostream &os, GANode<T> *n)
+	void _tt(std::ostream &os, GANode<T> *n) const
 	{
 		if (!n)
 			return;

@@ -81,7 +81,7 @@ float RoyalRoad(GAGenome &c)
     return (score);
 }
 
-float objective(GAGenome &c)
+float objectiveEx20(GAGenome &c)
 {
     return RoyalRoad(c);
 }

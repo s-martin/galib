@@ -21,11 +21,6 @@ float objectiveEx7(GAGenome& c)
 	return (value);
 }
 
-float objective(GAGenome& c)
-{
-	return objectiveEx7(c);
-}
-
 GAStatistics example7(GAParameterList params, const std::string &datafile)
 {
 	std::cout << "Example 7\n\n";

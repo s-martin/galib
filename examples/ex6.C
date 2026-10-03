@@ -1,6 +1,6 @@
 #include "ex6.hpp"
 
-GAStatistics example6(GAParameterList params, unsigned int seed)
+int main(int argc, char **argv)
 {
 	std::cout << "Example 6\n\n";
 	std::cout << "This example uses a SteadyState GA and Tree<int> genome.  It\n";
@@ -11,8 +11,18 @@ GAStatistics example6(GAParameterList params, unsigned int seed)
 	// See if we've been given a seed to use (for testing purposes).  When you
 	// specify a random seed, the evolution will be exactly the same each time
 	// you use that seed number.
+	unsigned int seed = 0;
+	for (int ii = 1; ii < argc; ii++)
+	{
+		if (strcmp(argv[ii++], "seed") == 0)
+		{
+			seed = (unsigned int)atoi(argv[ii]);
+		}
+	}
 
 	// Set the default values of the parameters.
+	GAParameterList params;
+	GASteadyStateGA::registerDefaultParameters(params);
 	params.set(gaNpopulationSize, 30);
 	params.set(gaNpCrossover, 0.7);
 	params.set(gaNpMutation, 0.01);
@@ -20,6 +30,9 @@ GAStatistics example6(GAParameterList params, unsigned int seed)
 	params.set(gaNscoreFilename, "bog.dat");
 	params.set(gaNscoreFrequency, 10); // record score every 10th generation
 	params.set(gaNflushFrequency, 10); // dump scores every 10th recorded score
+	params.parse(argc, argv, false);   // don't complain about unknown args
 
-	return ex6(params, seed);
+	example6(params, seed);
+
+	return 0;
 }

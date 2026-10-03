@@ -1,9 +1,9 @@
 #pragma once
 
 #include <GABin2DecGenome.h>
-#include <GASteadyStateGA.h>
-#include <GASigmaTruncationScaling.h>
-#include <GAParameterList.h>
+#include <GASStateGA.h>
+#include <GAScaling.h>
+#include <GAParameter.h>
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
@@ -18,11 +18,6 @@ float DeJong4(GAGenome &);
 float DeJong5(GAGenome &);
 
 GAGenome::Evaluator objective[5] = {DeJong1,DeJong2,DeJong3,DeJong4,DeJong5};
-
-float objective(GAGenome &c)
-{
-  return objective[0](c);
-}
 
 GAStatistics example19(unsigned int seed, int whichFunction)
 {
@@ -132,6 +127,13 @@ float DeJong4(GAGenome & c)
   }
   return(value);
 }
+
+static int a[2][25] ={
+  {-32, -16, 0, 16, 32, -32, -16, 0, 16, 32, -32, -16, 0, 16, 32,
+   -32, -16, 0, 16, 32, -32, -16, 0, 16, 32        },
+  {-32, -32, -32, -32, -32, -16, -16, -16, -16, -16,
+   16, 16, 16, 16, 16, 32, 32, 32, 32, 32  }
+};
 
 float DeJong5(GAGenome & c)
 {

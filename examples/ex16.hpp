@@ -3,7 +3,20 @@
 #include <ga.h>
 #include <iostream>
 
-float objective(GAGenome &c)
+// A simple non-trivial object to store in the nodes of the tree.
+class Point
+{
+public:
+  Point(int xx = 0, int yy = 0) : x(xx), y(yy) {}
+  int x, y;
+};
+
+inline std::ostream &operator<<(std::ostream &os, const Point &p)
+{
+  return os << "(" << p.x << ", " << p.y << ")";
+}
+
+float objectiveEx16(GAGenome &c)
 {
   auto &genome = (GATreeGenome<Point> &)c;
   return genome.size();
@@ -29,7 +42,7 @@ void TreeInitializer(GAGenome &c)
 
 GAStatistics example16(unsigned int seed, int argc, char **argv)
 {
-  GATreeGenome<Point> genome(objective);
+  GATreeGenome<Point> genome(objectiveEx16);
   genome.initializer(TreeInitializer);
   genome.crossover(GATreeGenome<Point>::OnePointCrossover);
 

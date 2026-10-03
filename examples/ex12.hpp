@@ -3,7 +3,10 @@
 #include <ga.h>
 #include <iostream>
 
-float objective(GAGenome &c)
+#define INSTANTIATE_STRING_GENOME
+#include <GAStringGenome.h>
+
+float objectiveEx12(GAGenome &c)
 {
   auto &genome = (GAStringGenome &)c;
 
@@ -37,8 +40,15 @@ GAStatistics example12(unsigned int seed, int argc, char **argv)
     }
   }
 
-  GAStringGenome genome(26, objective);
-  genome.crossover(GAStringGenome::OnePointCrossover);
+  // The allele set contains the letters a to z.  The ordered initializer puts
+  // each of them in the string exactly once.
+  GAAlleleSet<char> letters;
+  for (int i = 0; i < 26; i++)
+    letters.add('a' + i);
+
+  GAStringGenome genome(26, letters, objectiveEx12);
+  genome.initializer(GAStringGenome::OrderedInitializer);
+  genome.crossover(GAStringGenome::PartialMatchCrossover);
   genome.mutator(GAStringGenome::SwapMutator);
 
   GASimpleGA ga(genome);

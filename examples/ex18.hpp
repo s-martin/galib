@@ -1,18 +1,29 @@
 #ifndef EX18_HPP
 #define EX18_HPP
 
-#include <ga/ga.h>
-#include <ga/std_stream.h>
-#include <ga/GA2DBinStrGenome.h>
+#include <ga.h>
+#include <GA2DBinStrGenome.h>
 
-float objective(GAGenome & c)
+#include <memory>
+
+enum Ex18GAType
+{
+  SIMPLE = 0,
+  STEADY_STATE = 1,
+  INCREMENTAL = 2
+};
+
+// counts how often the objective function was called
+int cntr = 0;
+
+float objectiveEx18(GAGenome & c)
 {
   auto & genome = (GA2DBinaryStringGenome &)c;
   auto **pattern = (short **)c.userData();
 
   float value=0.0;
   for(int i=0; i<genome.width(); i++)
-    for(int j=0; i<genome.height(); j++)
+    for(int j=0; j<genome.height(); j++)
       value += (float)(genome.gene(i,j) == pattern[i][j]);
 
   cntr++;
@@ -20,31 +31,32 @@ float objective(GAGenome & c)
   return(value);
 }
 
-GAStatistics example18(GAParameterList &params, unsigned int seed, short **target, int whichGA)
+GAStatistics example18(GAParameterList &params, unsigned int seed, short **target, int width, int height, int whichGA)
 {
-  GASimpleGA ga;
-  GA2DBinaryStringGenome genome(width, height, objective);
+  GA2DBinaryStringGenome genome(width, height, objectiveEx18);
   genome.userData((void *)target);
 
+  std::unique_ptr<GAGeneticAlgorithm> ga;
   switch(whichGA){
-    case SIMPLE:
-      ga = GASimpleGA(genome);
-      break;
     case STEADY_STATE:
-      ga = GASteadyStateGA(genome);
+      ga = std::make_unique<GASteadyStateGA>(genome);
       break;
     case INCREMENTAL:
-      ga = GAIncrementalGA(genome);
+      ga = std::make_unique<GAIncrementalGA>(genome);
+      break;
+    case SIMPLE:
+    default:
+      ga = std::make_unique<GASimpleGA>(genome);
       break;
   }
 
-  ga.parameters(params);
-  ga.initialize(seed);
-  while(!ga.done()){
-    ga.step();
+  ga->parameters(params);
+  ga->initialize(seed);
+  while(!ga->done()){
+    ga->step();
   }
 
-  return ga.statistics();
+  return ga->statistics();
 }
 
 #endif

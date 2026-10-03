@@ -80,10 +80,12 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     include(CodeCoverage)
     APPEND_COVERAGE_COMPILER_FLAGS()
     set(COVERAGE_EXCLUDES "/usr/include/*" "examples/*" "test/*")
-    SETUP_TARGET_FOR_COVERAGE_LCOV(NAME ${PROJECT_NAME}_lcov EXECUTABLE ${PROJECT_NAME}Test)
+    SETUP_TARGET_FOR_COVERAGE_LCOV(NAME ${PROJECT_NAME}_lcov EXECUTABLE ${PROJECT_NAME}Test LCOV_ARGS --ignore-errors mismatch,unused)
     SETUP_TARGET_FOR_COVERAGE_GCOVR_HTML(NAME ${PROJECT_NAME}_gcov EXECUTABLE ${PROJECT_NAME}Test)
 elseif(MSVC)
-    add_custom_target(NAME ${PROJECT_NAME}Opencppcoverage COMMAND "opencppcoverage --working_dir ${CMAKE_CURRENT_BINARY_DIR}/test -- ${CMAKE_CURRENT_BINARY_DIR}/test/GAlibTest.exe")
+    add_custom_target(${PROJECT_NAME}Opencppcoverage
+        COMMAND opencppcoverage --working_dir ${CMAKE_CURRENT_BINARY_DIR}/test -- ${CMAKE_CURRENT_BINARY_DIR}/test/$<CONFIG>/GAlibTest.exe
+        DEPENDS ${PROJECT_NAME}Test)
 endif()
 
 
@@ -98,6 +100,7 @@ add_subdirectory(test)
 # copy test data
 if(BUILD_EXAMPLES)
     file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
+    file(COPY examples/tsp_rect_20.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
 endif()
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}) # for lcov coverage target TODO harmonize

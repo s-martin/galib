@@ -121,14 +121,10 @@ GAListGenome<int> ex8()
 	return genome;
 }
 
-float objective(GAGenome &c)
-{
-	return objectiveEx8(c);
-}
 
 GAStatistics example8(unsigned int seed)
 {
-	GAListGenome<int> genome(objective);
+	GAListGenome<int> genome(objectiveEx8);
 	genome.initializer(ListInitializer);
 	genome.mutator(GAListGenome<int>::DestructiveMutator);
 

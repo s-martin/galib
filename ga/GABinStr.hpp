@@ -70,6 +70,9 @@ class GABinaryString
 	 */
 	bool equal(const GABinaryString &rhs, unsigned int lhsIdx, unsigned int rhsIdx, unsigned int l) const
 	{
+		// a range reaching past either bitstream can never be equal (and must not be read)
+		if (static_cast<size_t>(lhsIdx) + l > data.size() || static_cast<size_t>(rhsIdx) + l > rhs.data.size())
+			return false;
 		return (std::memcmp(&data[lhsIdx], &rhs.data[rhsIdx], l) != 0 ? false : true);
 	}
 

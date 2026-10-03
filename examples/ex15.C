@@ -7,12 +7,7 @@
    This example nearly identical to example 2, but it uses convergence as the
 stopping criterion for the GA rather than number-of-generations.
 ---------------------------------------------------------------------------- */
-#include <cstdio>
-#include <cmath>
-#include <ga.h>
 #include "ex15.hpp"
-
-#include <iostream>
 
  
 
@@ -39,7 +34,7 @@ int main(int argc, char **argv)
 
 // Dump the results of the GA to the screen.
 
-  GABin2DecGenome genome = stats.bestIndividual();
+  auto genome = static_cast<const GABin2DecGenome &>(stats.bestIndividual());
   std::cout << "the ga generated:\n";
   for(unsigned int jj=0; jj<genome.nPhenotypes(); jj++){
     std::cout.width(10); std::cout << genome.phenotype(jj) << " ";
