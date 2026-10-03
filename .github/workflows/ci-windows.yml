@@ -53,7 +53,9 @@ jobs:
         ctest --test-dir ${{ env.build }} -C ${{ env.config }} --output-on-failure
 
     - name: Publish test results
-      uses: EnricoMi/publish-unit-test-result-action@v2
+      # The default action is a Docker container action, which only runs on Linux
+      # runners. Use the composite variant so this step works on windows-latest.
+      uses: EnricoMi/publish-unit-test-result-action/composite@v2
       if: always()
       with:
         files: |
