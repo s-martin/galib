@@ -1285,7 +1285,7 @@ template <class T> class GA1DArrayAlleleGenome : public GA1DArrayGenome<T>
 	}
 
 	// Delete the allele set
-	~GA1DArrayAlleleGenome() override { delete[] aset; }
+	~GA1DArrayAlleleGenome() override {}
 
 	// This implementation of clone does not make use of the contents/attributes
 	// capability because this whole interface isn't quite right yet...  Just

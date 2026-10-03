@@ -6,30 +6,237 @@
 #include <GA1DArrayGenome.hpp>
 #include <iostream>
 
+// This is the class definition for the deterministic crowding genetic 
+// algorithm.  It is based upon the steady-state genetic algorithm, but we
+// modify the replacement so that it does deterministic crowding as described
+// by Goldberg (not in his book) and his students.
+class DCrowdingGA : public GASteadyStateGA {
+public:
+    GADefineIdentity("DeterministicCrowdingGA", 241);
+    explicit DCrowdingGA(const GAGenome& g) : GASteadyStateGA(g) {}
+    ~DCrowdingGA() override = default;
+    void step() override;
+    DCrowdingGA & operator++() 
+    { 
+        step(); 
+        return *this;
+    }
+};
+
+void DCrowdingGA::step() 
+{ 
+    GAList<int> IndPool;
+
+    while (IndPool.head()) 
+        IndPool.destroy();
+
+    for (int i = 0; i < pop->size(); i++) 
+        IndPool.insert(i);
+    
+    do 
+    {
+        //select mom
+        IndPool.warp(GARandomInt(0,IndPool.size()-1));
+        auto ip=IndPool.remove();
+        auto mom = &pop->individual(*ip);
+        delete ip;
+        
+        //select dad
+        IndPool.warp(GARandomInt(0,IndPool.size()-1));
+        ip=IndPool.remove();
+        auto dad = &pop->individual(*ip);
+        delete ip;
+    
+        //create child
+        stats.numsel += 2;		
+        stats.numcro += (*(mom->sexual()))(*mom, *dad, &tmpPop->individual(0), nullptr);
+        stats.nummut += tmpPop->individual(0).mutate(pMutation());
+        stats.numeval += 1;	
+        //replace closest parent
+        float d1 = tmpPop->individual(0).compare(*mom);
+        float d2 = tmpPop->individual(0).compare(*dad);
+    
+        if (d1 < d2) 
+        {
+            if (minmax == MINIMIZE) 
+            {
+	            if (tmpPop->individual(0).score() < mom->score()) 
+                {
+	                mom->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+            else 
+            {
+	            if (tmpPop->individual(0).score() > mom->score()) 
+                {
+	                mom->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+        }
+        else 
+        {
+            if (minmax == MINIMIZE) 
+            {
+	            if (tmpPop->individual(0).score() < dad->score()) 
+                {
+	                dad->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+            else 
+            {
+	            if (tmpPop->individual(0).score() > dad->score()) 
+                {
+	                dad->copy(tmpPop->individual(0));
+	                stats.numrep += 1;	
+	            }
+            }
+        }
+    } while (IndPool.size()>1);
+
+    pop->evaluate(true);
+    stats.update(*pop);	
+}
+
+// Set up the various 2-dimensional, real number functions that we will use.
+using Function = float (*)(float, float);
+
 float Function1(float, float);
 float Function2(float, float);
 float Function3(float, float);
 float Function4(float, float);
-float ai[25], bi[25];
+float ai[25],bi[25];
 
 static int which = 0;
+static Function obj[] = { Function1, Function2, Function3, Function4 };
 static float minx[] = {-6, -60, -500, -10 };
 static float maxx[] = { 6,  60,  500, 10 };
 static float miny[] = {-6, -60, -500, -10 };
 static float maxy[] = { 6,  60,  500, 10 };
 
-float objective(GAGenome& g) {
+// These are the declarations for our genome operators (we do not use the
+// defaults from GAlib for this example).
+float Objective(GAGenome&);
+int   Mutator(GAGenome&, float);
+void  Initializer(GAGenome&);
+int   Crossover(const GAGenome&, const GAGenome&, GAGenome*, GAGenome*);
+float Comparator(const GAGenome&, const GAGenome&);
+
+GAStatistics example27(unsigned int seed, int argc, char **argv)
+{
+    for (int i = 0; i < 25; i++) {
+        ai[i] = 16 * ((i % 5) - 2);
+        bi[i] = 16 * ((i / 5) - 2);
+    }
+
+    GA1DArrayGenome<float> genome(2, Objective);
+    genome.initializer(::Initializer);
+    genome.mutator(::Mutator);
+    genome.comparator(::Comparator);
+    genome.crossover(::Crossover);
+
+    DCrowdingGA ga(genome);
+    ga.maximize();
+    ga.populationSize(100);
+    ga.nGenerations(100);
+    ga.pMutation(0.05);
+    ga.pCrossover(1.0);
+    ga.selectScores(GAStatistics::AllScores);
+    ga.parameters(argc, argv, false); // don't complain about unknown args
+
+    ga.evolve(seed);
+    std::cout << "best individual is " << ga.statistics().bestIndividual() << "\n\n";
+    std::cout << ga.statistics() << "\n";
+
+    return ga.statistics();
+}
+
+/*****************************************************************************/
+/* Type:        2D FUNCTION                                                  */
+/* Name:        Objective2D_1                                                */
+/* Description: 2D tooth                                                     */
+/* Boundaries:  -6 < x < 6                                                   */
+/*              -6 < y < 6                                                   */
+/* Source:      modified Himmelblau's function from Deb, K.                  */
+/*              'GA in multimodal function optimazation' Masters thesis      */
+/*		TCGA Rep. 89002 / U. of Alabama                              */
+/*****************************************************************************/
+float
+Function1(float x, float y) {
+  float z = -((x*x+y-11)*(x*x+y-11)+(x+y*y-7)*(x+y*y-7))/200 + 10;
+  return z;
+}
+
+/*****************************************************************************/
+/* Type:        2D FUNCTION                                                  */
+/* Name:        Objective2D_2                                                */
+/* Description: Foxholes (25)                                                */
+/* Boundaries:  -60 < x < 60                                                 */
+/*              -60 < y < 60                                                 */
+/* Source:      Shekel's Foxholes problem from De Jong's Diss.(1975)         */
+/*              'GA in multimodal function optimazation' Masters thesis      */
+/*		TCGA Rep. 89002 / U. of Alabama                              */
+/*****************************************************************************/
+float
+Function2(float x, float y) {
+  int i;
+  float sum = 0;
+  for (i=0; i<25; i++) {
+    sum += (1 / (1 + i + pow((x-ai[i]),6) + pow((y-bi[i]),6)));
+  }
+  float z = 100.0 - (1 / (0.02 + sum));
+  return z;
+}
+
+/*****************************************************************************/
+/* Type:        2D FUNCTION                                                  */
+/* Name:        Objective2D_3                                                */
+/* Description: Schwefel's nasty (1 glob. Max bei (420.96/420.96)            */
+/* Boundaries:  -500 < x < 500                                               */
+/*              -500 < y < 500                                               */
+/* Source:      Schwefel's function in Schoeneburg                           */
+/*****************************************************************************/
+float
+Function3(float x, float y) {
+  float z = fabs(x) * sin(sqrt(fabs(x))) + fabs(y) * sin(sqrt(fabs(y)));
+  //float z = 100  *  ( sin(sqrt(fabs(x))) * sin(sqrt(fabs(y))) );
+  return (z);
+}
+
+/*****************************************************************************/
+/* Type:        2D FUNCTION                                                  */
+/* Name:        Objective2D_4                                                */
+/* Description: Mexican Hat                                                  */
+/* Boundaries:  -10 < x < 10                                                 */
+/*              -10 < y < 10                                                 */
+/* Source:                                                                   */
+/*****************************************************************************/
+float
+Function4(float x, float y) {
+  float z = sin(sqrt(x*x + y*y))*sin(sqrt(x*x + y*y)) - 0.5;
+  z /= ((1.0 + 0.001*(x*x + y*y))*(1.0 + 0.001*(x*x + y*y)));
+  z = (0.5 - z);
+  return (z);
+}
+
+// These are the operators that we'll use for the real number genome.
+float
+Objective(GAGenome& g) {
   auto& genome = (GA1DArrayGenome<float>&)g;
   return (obj[which])(genome.gene(0), genome.gene(1));
 }
 
-void initializer(GAGenome& g) {
+void
+Initializer(GAGenome& g) {
   auto& genome = (GA1DArrayGenome<float>&)g;
   genome.gene(0, GARandomFloat(minx[which], maxx[which]));
   genome.gene(1, GARandomFloat(miny[which], maxy[which]));
 }
 
-int mutator(GAGenome& g, float pmut) {
+int
+Mutator(GAGenome& g, float pmut) {
   auto& genome = (GA1DArrayGenome<float>&)g;
   int nmut = 0;
 
@@ -49,7 +256,7 @@ int mutator(GAGenome& g, float pmut) {
   return nmut;
 }
 
-int crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2)
+int Crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2)
 {
   auto& mom = (GA1DArrayGenome<float>&)g1;
   auto& dad = (GA1DArrayGenome<float>&)g2;
@@ -100,40 +307,12 @@ int crossover(const GAGenome& g1,const GAGenome& g2,GAGenome* c1,GAGenome* c2)
   return n;
 }
 
-float comparator(const GAGenome& g1, const GAGenome& g2) {
+float
+Comparator(const GAGenome& g1, const GAGenome& g2) {
   auto& a = (GA1DArrayGenome<float>&)g1;
   auto& b = (GA1DArrayGenome<float>&)g2;
 
   float valx=(a.gene(0)-b.gene(0)) * (a.gene(0)-b.gene(0));
   float valy=(a.gene(1)-b.gene(1)) * (a.gene(1)-b.gene(1));
   return sqrt(valx+valy);
-}
-
-GAStatistics example27(unsigned int seed, int argc, char **argv)
-{
-    for (int i = 0; i < 25; i++) {
-        ai[i] = 16 * ((i % 5) - 2);
-        bi[i] = 16 * ((i / 5) - 2);
-    }
-
-    GA1DArrayGenome<float> genome(2, objective);
-    genome.initializer(::initializer);
-    genome.mutator(::mutator);
-    genome.comparator(::comparator);
-    genome.crossover(::crossover);
-
-    DCrowdingGA ga(genome);
-    ga.maximize();
-    ga.populationSize(100);
-    ga.nGenerations(100);
-    ga.pMutation(0.05);
-    ga.pCrossover(1.0);
-    ga.selectScores(GAStatistics::AllScores);
-    ga.parameters(argc, argv, true);
-
-    ga.evolve(seed);
-    std::cout << "best individual is " << ga.statistics().bestIndividual() << "\n\n";
-    std::cout << ga.statistics() << "\n";
-
-    return ga.statistics();
 }

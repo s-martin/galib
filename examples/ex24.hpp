@@ -1,7 +1,9 @@
 #pragma once
 
+#define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
 #include <GASStateGA.h>
+#include <cmath>
 #include <iostream>
 #include <fstream>
 
@@ -10,7 +12,7 @@
 #define INC 0.005
 #define THRESHOLD 0.5
 
-float objective(GAGenome &g)
+float objectiveEx24(GAGenome &g)
 {
     auto &genome = (GARealGenome &)g;
     return 1 + sin(genome.gene(0) * 2 * M_PI);
@@ -23,10 +25,114 @@ float comparator(const GAGenome &g1, const GAGenome &g2)
     return exp(-(a.gene(0) - b.gene(0)) * (a.gene(0) - b.gene(0)) / 100.0);
 }
 
+// Use any ID above 200 for the object's ID number.  The selection scheme
+// takes care of keeping the population up-to-date - we only have to worry
+// about the selection method itself.  This selector picks randomly, but only
+// from the upper half of the population (based on the scaled fitness scores).
+class FinickySelector : public GASelectionScheme {
+public:
+  GADefineIdentity("FinickySelector", 273);
+  FinickySelector(int w=GASelectionScheme::SCALED) : GASelectionScheme(w) { }
+  FinickySelector(const FinickySelector& orig)  : GASelectionScheme(orig) { copy(orig); }
+  FinickySelector& operator=(const FinickySelector& orig) 
+    { if(&orig != this) copy(orig); return *this; }
+  ~FinickySelector() override = default;
+  GASelectionScheme* clone() const override { return new FinickySelector; }
+  GAGenome& select() const override;
+};
+
+GAGenome&
+FinickySelector::select() const {
+  return pop->best(GARandomInt(0, pop->size()/2), GAPopulation::SCALED); 
+}
+
+
+
+
+// This is the genetic algorithm that does the restricted mating.  It is 
+// similar to the steady state genetic algorithm, but we modify the selection
+// part of the step method to do the restricted mating.
+
+class RestrictedMatingGA : public GASteadyStateGA {
+public:
+  GADefineIdentity("RestrictedMatingGA", 288);
+  RestrictedMatingGA(const GAGenome& g) : GASteadyStateGA(g) {}
+  ~RestrictedMatingGA() override = default;
+  void step() override;
+  RestrictedMatingGA & operator++() { step(); return *this; }
+};
+
+// This step method is similar to that of the regular steady-state genetic
+// algorithm, but here we select only individuals that are similar to each
+// other (based on what their comparators tell us).
+
+void
+RestrictedMatingGA::step()
+{ 
+  int i;
+  GAGenome *mom, *dad;
+
+// Generate the individuals in the temporary population from individuals in 
+// the main population.  We do a restrictive selection in which we only let
+// individuals that are dissimilar mate.  We do a little count just to make
+// sure that we don't loop forever (just accept whatever we selected if we
+// can't find what we'd like).
+
+  for(i=0; i<tmpPop->size()-1; i+=2){	// takes care of odd population
+    mom = &(pop->select()); 
+    int k=0;
+    do { k++; dad = &(pop->select()); }
+    while(mom->compare(*dad) < THRESHOLD && k<pop->size());
+    stats.numsel += 2;		// keep track of number of selections
+    if(GAFlipCoin(pCrossover())){
+      stats.numcro += (*scross)(*mom, *dad, &tmpPop->individual(i), 
+				&tmpPop->individual(i+1));
+    }
+    else{
+      tmpPop->individual( i ).copy(*mom);
+      tmpPop->individual(i+1).copy(*dad);
+    }
+    stats.nummut += tmpPop->individual( i ).mutate(pMutation());
+    stats.nummut += tmpPop->individual(i+1).mutate(pMutation());
+  }
+  if(tmpPop->size() % 2 != 0){	// do the remaining population member
+    mom = &(pop->select());  
+    dad = &(pop->select());
+    int k=0;
+    do { k++; dad = &(pop->select()); }
+    while(mom->compare(*dad) < THRESHOLD && k<pop->size());
+    stats.numsel += 2;		// keep track of number of selections
+    if(GAFlipCoin(pCrossover())){
+      stats.numcro += (*scross)(*mom, *dad,
+				&tmpPop->individual(i), nullptr);
+    }
+    else{
+      if(GARandomBit()) tmpPop->individual( i ).copy(*mom);
+      else tmpPop->individual( i ).copy(*dad);
+    }
+    stats.nummut += tmpPop->individual( i ).mutate(pMutation());
+  }
+
+// Now stick the new individuals into the population, force an evaluation,
+// force a scaling, then remove the worst individuals so that we keep a 
+// constant population size.
+
+  for(i=0; i<tmpPop->size(); i++)
+    pop->add(tmpPop->individual(i));
+
+  pop->evaluate();		// get info about current pop for next time
+  pop->scale();			// remind the population to do its scaling
+
+  for(i=0; i<tmpPop->size(); i++)
+    pop->destroy(GAPopulation::WORST, GAPopulation::SCALED);
+
+  stats.update(*pop);		// update the statistics by one generation
+}
+
 GAStatistics example24(unsigned int seed, int argc, char **argv)
 {
     GARealAlleleSet alleles(MIN_VALUE, MAX_VALUE);
-    GARealGenome genome(1, alleles, objective);
+    GARealGenome genome(1, alleles, objectiveEx24);
     GASharing scale(comparator);
     FinickySelector select;
 

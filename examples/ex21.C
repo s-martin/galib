@@ -17,8 +17,6 @@ create the array determines which behaviour you'll get.
 
 #include <iostream>
 
-#define INSTANTIATE_REAL_GENOME
-#include <GARealGenome.h>
 
 int main(int argc, char** argv)
 {

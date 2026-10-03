@@ -1,10 +1,11 @@
 #pragma once
 
+#define INSTANTIATE_REAL_GENOME
 #include <GARealGenome.h>
 #include <GASimpleGA.h>
 #include <iostream>
 
-float objective(GAGenome &g)
+float objectiveEx21(GAGenome &g)
 {
     auto &genome = (GARealGenome &)g;
     float score = 0.0;
@@ -24,7 +25,7 @@ GAStatistics example21(unsigned int seed, int argc, char **argv)
     alleles.add(0, 1);
     alleles.add(0, 1);
 
-    GARealGenome genome(alleles, objective);
+    GARealGenome genome(alleles, objectiveEx21);
 
     GASimpleGA ga(genome);
     ga.populationSize(30);

@@ -98,6 +98,7 @@ add_subdirectory(test)
 # copy test data
 if(BUILD_EXAMPLES)
     file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
+    file(COPY examples/tsp_rect_20.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/examples)
 endif()
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)
 file(COPY examples/smiley.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}) # for lcov coverage target TODO harmonize
