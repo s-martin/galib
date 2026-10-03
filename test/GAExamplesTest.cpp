@@ -11,6 +11,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <garandom.h>
 
 
 namespace
@@ -56,24 +57,17 @@ BOOST_AUTO_TEST_CASE(GAex1)
 	BOOST_CHECK_EQUAL(str.str(), "0101010101\n1010101010\n0101010101\n1010101010\n0101010101\n");
 }
 
-// The seed is derived from the clock when 0 is passed, so the stochastic
-// examples below are checked for plausible results rather than golden values.
-// TODO (later PR): restore exact golden values for ex2, ex3, ex6, ex7, ex8, ex9
-// (and the GAListGenome mutator/crossover tests) by seeding the RNG with a fixed
-// non-zero seed, then regenerate the expected values; they may differ per platform.
 BOOST_AUTO_TEST_CASE(GAex2)
 {
-	auto ga = example2(0, true);
-	const auto& g = static_cast<const GABin2DecGenome&>(ga.bestIndividual());
+	auto ga = example2(102, true);
 
-	BOOST_CHECK_EQUAL(g.nPhenotypes(), 7u);
-	BOOST_CHECK_EQUAL(g.phenotype(2), 3);
-	for (unsigned int i = 0; i < g.nPhenotypes(); i++)
-	{
-		BOOST_CHECK_GE(g.phenotype(i), -10.0);
-		BOOST_CHECK_LE(g.phenotype(i), 100000.0);
-	}
-	BOOST_CHECK_GE(ga.maxEver(), ga.minEver());
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(0), 0.0980392173, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(1), 21.9607849, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(2), 3, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(3), -3.52941179, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(4), 34575.293, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(5), 0.00152941176, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(6), 6.56078434, 0.0000001);
 }
 
 BOOST_AUTO_TEST_CASE(GAex3)
@@ -85,10 +79,11 @@ BOOST_AUTO_TEST_CASE(GAex3)
 	BOOST_REQUIRE(params.set(gaNflushFrequency, 50));
 	BOOST_REQUIRE(params.set(gaNscoreFilename, "bog.dat"));
 
+	GAResetRNG(103);
 	auto ga = example3(params, "smiley.txt");
 
-	BOOST_CHECK_GT(ga.maxEver(), ga.minEver());
-	BOOST_CHECK_GT(ga.maxEver(), 100);
+	BOOST_CHECK_EQUAL(ga.maxEver(), 192);
+	BOOST_CHECK_EQUAL(ga.minEver(), 100);
 	BOOST_CHECK_EQUAL(ga.generation(), 250);
 }
 
@@ -108,38 +103,35 @@ BOOST_AUTO_TEST_CASE(GAex4)
 
 BOOST_AUTO_TEST_CASE(GAex6)
 {
-	auto ga = example6(params6(), 0);
-	const auto& g = static_cast<const GATreeGenome<int>&>(ga.bestIndividual());
+	auto ga = example6(params6(), 106);
 
-	BOOST_CHECK_GT(g.size(), 0);
-	BOOST_CHECK_GT(g.depth(), 0);
-	BOOST_CHECK_LE(g.depth(), g.size());
+	BOOST_CHECK_EQUAL(ga.bestIndividual().size(), 10557);
+	BOOST_CHECK_EQUAL(ga.bestIndividual().depth(), 310);
 }
 
 BOOST_AUTO_TEST_CASE(GAex7)
 {
+	GAResetRNG(107);
 	auto ga = example7(params7(), "smiley.txt");
 
-	BOOST_CHECK_GT(ga.maxEver(), ga.minEver());
-	BOOST_CHECK_GT(ga.generation(), 0);
-	BOOST_CHECK_LE(ga.generation(), 400);
+	BOOST_CHECK_EQUAL(ga.maxEver(), 217);
+	BOOST_CHECK_EQUAL(ga.minEver(), 97);
+	BOOST_CHECK_EQUAL(ga.generation(), 160);
 }
 
 BOOST_AUTO_TEST_CASE(GAex8)
 {
-	auto ga = example8(0);
+	auto ga = example8(108);
 
-	BOOST_CHECK_GE(static_cast<const GAListGenome<int>&>(ga.bestIndividual()).size(), 0);
+	BOOST_CHECK_EQUAL(ga.bestIndividual().size(), 413);
 }
 
 BOOST_AUTO_TEST_CASE(GAex9)
 {
-	auto ga = example9(0);
-	const auto& g = static_cast<const GABin2DecGenome&>(ga.bestIndividual());
+	auto ga = example9(109);
 
-	// the optimum is (0, 0); the GA must at least end up close to it
-	BOOST_CHECK_SMALL(g.phenotype(0), 1.0f);
-	BOOST_CHECK_SMALL(g.phenotype(1), 1.0f);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(0), -7.62939453e-05, 0.0000001);
+	BOOST_CHECK_CLOSE_FRACTION(ga.bestIndividual().phenotype(1), -7.62939453e-05, 0.0000001);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
