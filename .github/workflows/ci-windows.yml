@@ -47,7 +47,12 @@ jobs:
       run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTest
 
     - name: Run coverage
-      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibOpencppcoverage
+      env:
+        BOOST_LIBDIR: ${{ steps.install-boost.outputs.BOOST_ROOT }}/lib
+      run: |
+        # the shared Boost DLLs must be found when the test exe is started
+        $env:PATH = "$env:BOOST_LIBDIR;$env:PATH"
+        cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibOpencppcoverage
         
 
 
