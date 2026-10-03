@@ -51,7 +51,7 @@ GAStatistics example1(unsigned int seed, bool useStatic)
 	ga.nGenerations(400);
 	ga.pMutation(0.001);
 	ga.pCrossover(0.9);
-	ga.evolve();
+	ga.evolve(seed);
 	
 	// Now we print out the best genome that the GA found.
 	std::cout << "The GA found:\n" << ga.statistics().bestIndividual() << "\n";
