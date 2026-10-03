@@ -29,7 +29,9 @@ jobs:
     #- name: Install Doxygen and Graphviz     
     #  run: choco install doxygen.install graphviz
     - name: Install opencppcoverage
-      run: choco install opencppcoverage
+      run: |
+        choco install opencppcoverage
+        echo "C:\Program Files\OpenCppCoverage" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
   
     - name: Configure CMake
       run: cmake . -DCMAKE_BUILD_TYPE=${{ env.config }} -B ${{ env.build }} -DBUILD_DOC=OFF
