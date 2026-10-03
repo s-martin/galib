@@ -58,6 +58,9 @@ BOOST_AUTO_TEST_CASE(GAex1)
 
 // The seed is derived from the clock when 0 is passed, so the stochastic
 // examples below are checked for plausible results rather than golden values.
+// TODO (later PR): restore exact golden values for ex2, ex3, ex6, ex7, ex8, ex9
+// (and the GAListGenome mutator/crossover tests) by seeding the RNG with a fixed
+// non-zero seed, then regenerate the expected values; they may differ per platform.
 BOOST_AUTO_TEST_CASE(GAex2)
 {
 	auto ga = example2(0, true);
