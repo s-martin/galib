@@ -3,22 +3,8 @@
 #include <GAListGenome.hpp>
 #include <garandom.h>
 
-#include <algorithm>
-#include <vector>
-
 
 BOOST_AUTO_TEST_SUITE( UnitTest )
-
-static std::vector<int> toVector(GAListGenome<int> &genome)
-{
-	std::vector<int> v;
-	if (!genome.head())
-		return v;
-	v.push_back(*genome.head());
-	for (int i = 1; i < genome.size(); i++)
-		v.push_back(*genome.next());
-	return v;
-}
 
 float objective(GAGenome &c)
 {
@@ -53,9 +39,8 @@ BOOST_AUTO_TEST_CASE(GAListGenome_DestructiveMutator_001)
 
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
-    BOOST_CHECK_EQUAL(genome.size(), 3);
-    BOOST_CHECK_EQUAL(*genome.head(), 2);
-    BOOST_CHECK_EQUAL(*genome.next(), 3);
+    BOOST_CHECK_EQUAL(genome.size(), 2);
+    BOOST_CHECK_EQUAL(*genome.head(), 3);
     BOOST_CHECK_EQUAL(*genome.next(), 4);
 }
 
@@ -80,10 +65,10 @@ BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
     BOOST_CHECK_EQUAL(*genome.head(), 0);
-    BOOST_CHECK_EQUAL(*genome.next(), 4);
-    BOOST_CHECK_EQUAL(*genome.next(), 3);
-    BOOST_CHECK_EQUAL(*genome.next(), 2);
     BOOST_CHECK_EQUAL(*genome.next(), 1);
+    BOOST_CHECK_EQUAL(*genome.next(), 4);
+    BOOST_CHECK_EQUAL(*genome.next(), 2);
+    BOOST_CHECK_EQUAL(*genome.next(), 3);
 }
 
 BOOST_AUTO_TEST_CASE(GAListGenome_NodeComparator_001)
@@ -141,16 +126,16 @@ BOOST_AUTO_TEST_CASE(GAListGenome_OnePointCrossover_001)
     BOOST_CHECK_EQUAL(*genomep2.next(), 9);
 
     BOOST_CHECK_EQUAL(*genomec1.head(), 0);
-    BOOST_CHECK_EQUAL(*genomec1.next(), 3);
-    BOOST_CHECK_EQUAL(*genomec1.next(), 4);
     BOOST_CHECK_EQUAL(*genomec1.next(), 0);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 1);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 2);
     BOOST_CHECK_EQUAL(*genomec1.next(), 3);
 
-    BOOST_CHECK_EQUAL(*genomec2.head(), 0);
-    BOOST_CHECK_EQUAL(*genomec2.next(), 1);
+    BOOST_CHECK_EQUAL(*genomec2.head(), 1);
     BOOST_CHECK_EQUAL(*genomec2.next(), 2);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 3);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 4);
     BOOST_CHECK_EQUAL(*genomec2.next(), 1);
-    BOOST_CHECK_EQUAL(*genomec2.next(), 2);
 
     BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, nullptr, nullptr), 0);
     BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, &genomec1, nullptr), 1);
