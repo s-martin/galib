@@ -7,12 +7,7 @@
    Illustration of how to use a non-trivial object in the nodes of a tree
 genome.  This example uses points in the nodes.
 ---------------------------------------------------------------------------- */
-#include <cstdio>
-#include <cstdlib>
-#include <ga.h>
 #include "ex16.hpp"
-
-#include <iostream>
 
 int main(int argc, char **argv)
 {
@@ -37,56 +32,7 @@ int main(int argc, char **argv)
     }
   }
 
-  GATreeGenome<Point> genome(objective);
-  genome.initializer(TreeInitializer);
-  genome.crossover(GATreeGenome<Point>::OnePointCrossover);
-
-  genome.mutator(GATreeGenome<Point>::SwapSubtreeMutator);
-  GAPopulation swappop(genome, 50);
-
-  genome.mutator(GATreeGenome<Point>::DestructiveMutator);
-  GAPopulation destpop(genome, 50);
-
-  GASteadyStateGA ga(genome);
-  ga.nGenerations(10);
-
-  // first do evolution with subtree swap mutator.
-
-  ga.population(swappop);
-
-  std::cout << "initializing...";
-  ga.initialize(seed);
-  std::cout << "evolving for " << ga.nGenerations() << " generations...";
-  while (!ga.done())
-  {
-    ga.step();
-    std::cout << ".";
-    std::cout.flush();
-  }
-  std::cout << "\n";
-
-  genome = ga.statistics().bestIndividual();
-  std::cout << "the ga generated a tree with " << genome.size();
-  std::cout << " nodes, " << genome.depth() << " levels deep.\n";
-
-  // now do evolution with destructive swap mutator
-
-  ga.population(destpop);
-
-  std::cout << "\ninitializing...";
-  ga.initialize();
-  std::cout << "evolving for " << ga.nGenerations() << " generations...";
-  while (!ga.done())
-  {
-    ga.step();
-    std::cout << ".";
-    std::cout.flush();
-  }
-  std::cout << "\n";
-
-  genome = ga.statistics().bestIndividual();
-  std::cout << "the ga generated a tree with " << genome.size();
-  std::cout << " nodes, " << genome.depth() << " levels deep.\n";
+  example16(seed, argc, argv);
 
   return 0;
 }

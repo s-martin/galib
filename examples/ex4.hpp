@@ -31,11 +31,6 @@ float objectiveEx4(GAGenome& g)
 	return value;
 }
 
-float objective(GAGenome& g)
-{
-	return objectiveEx4(g);
-}
-
 GAStatistics example4(unsigned int seed)
 {
 	int depth = 3;

@@ -22,7 +22,7 @@ float Objective(GAGenome &);
 float BitDistance(const GAGenome & a, const GAGenome & b);
 float PhenotypeDistance(const GAGenome & a, const GAGenome & b);
 
-float objective(GAGenome & g)
+float objectiveEx10(GAGenome & g)
 {
     return Objective(g);
 }
@@ -32,10 +32,8 @@ GAStatistics example10(unsigned int seed, int argc, char **argv)
     GABin2DecPhenotype map;
     map.add(NBITS, MIN_VALUE, MAX_VALUE);
 
-    GABin2DecGenome genome(map, objective);
+    GABin2DecGenome genome(map, objectiveEx10);
     genome.crossover(GABin2DecGenome::UniformCrossover);
-    genome.crossoverProbability(0.6);
-    genome.mutationProbability(0.01);
     genome.comparator(BitDistance);
     genome.comparator(PhenotypeDistance);
 

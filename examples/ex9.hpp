@@ -10,7 +10,7 @@
 //
 //                  y = -(x1*x1 + x2*x2)
 //
-float objective(GAGenome& c)
+float objectiveEx9(GAGenome& c)
 {
 	auto& genome = (GABin2DecGenome&)c;
 
@@ -32,7 +32,7 @@ GAStatistics example9(unsigned int seed)
 	map.add(16, -5, 5);
 
 	// Create the template genome using the phenotype map we just made.
-	GABin2DecGenome genome(map, objective);
+	GABin2DecGenome genome(map, objectiveEx9);
 
 	// Now create the GA using the genome and run it.  We'll use sigma
 	// truncation scaling so that we can handle negative objective scores.

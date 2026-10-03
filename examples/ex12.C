@@ -6,15 +6,7 @@
  DESCRIPTION:
    This example shows how to use an order-based string genome.
 ---------------------------------------------------------------------------- */
-#include <cstdio>
-#include <cstdlib>
-#include <ga.h>
 #include "ex12.hpp"
-
-#include <iostream>
-
-#define INSTANTIATE_STRING_GENOME
-#include <GAStringGenome.h>
 
 int main(int argc, char *argv[])
 {
@@ -31,9 +23,9 @@ int main(int argc, char *argv[])
     }
   }
 
-  auto ga = example12(seed, argc, argv);
+  auto stats = example12(seed, argc, argv);
 
-  auto genome = ga.statistics().bestIndividual();
+  auto genome = static_cast<const GAStringGenome &>(stats.bestIndividual());
   std::cout << "the ga generated the following string (objective score is ";
   std::cout << genome.score() << "):\n" << genome << "\n";
   std::cout << genome.className() << "\n";

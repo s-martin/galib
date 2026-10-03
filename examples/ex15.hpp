@@ -4,31 +4,64 @@
 #include <cmath>
 #include <iostream>
 
-float objective(GAGenome &c)
+// For this objective function we try to match the values in the array of float
+// that is passed to us as userData.  The closer the values in the genome are
+// to the values in the sequence, the better the score.
+float objectiveEx15(GAGenome &c)
 {
-  // Define the objective function for example 15
-  // This function should calculate the objective value for the genome
-  // For simplicity, we will use a placeholder implementation
-  return 0.0;
+  auto &genome = (GABin2DecGenome &)c;
+  auto *sequence = (float *)c.userData();
+
+  float value = genome.nPhenotypes();
+  for (unsigned int i = 0; i < genome.nPhenotypes(); i++)
+    value += 1.0 / (1.0 + fabs(genome.phenotype(i) - sequence[i]));
+  return value;
 }
 
 GAStatistics example15(unsigned int seed, int argc, char **argv)
 {
-  // Create the initial genome for the genetic algorithm to use
-  GABin2DecPhenotype map;
-  map.add(16, -10.0, 10.0); // 16 bits, range -10.0 to 10.0
-  GABin2DecGenome genome(map, objective);
+  (void)argc;
+  (void)argv;
 
-  // Create the genetic algorithm
+  // Generate a sequence of random numbers using the values in the min and max
+  // arrays.
+  const int n = 5;
+  float min[n] = { 0, 0, 3, -5, 100 };
+  float max[n] = { 1, 100, 3, -2, 100000 };
+  float target[n];
+
+  GARandomSeed(seed);
+  for (int i = 0; i < n; i++)
+    target[i] = GARandomFloat(min[i], max[i]);
+
+  std::cout << "input sequence:\n";
+  for (int i = 0; i < n; i++)
+  {
+    std::cout.width(10);
+    std::cout << target[i] << " ";
+  }
+  std::cout << "\n\n";
+  std::cout.flush();
+
+  // Create the phenotype map and the genome that the GA will use.
+  GABin2DecPhenotype map;
+  for (int i = 0; i < n; i++)
+    map.add(8, min[i], max[i]);
+  GABin2DecGenome genome(map, objectiveEx15, (void *)target);
+
+  // Use convergence as the stopping criterion rather than the number of
+  // generations.
   GASimpleGA ga(genome);
-  ga.minimize(); // We want to minimize the objective function
-  ga.populationSize(30);
-  ga.nGenerations(100);
+  ga.populationSize(50);
+  ga.nGenerations(500);
   ga.pMutation(0.01);
-  ga.pCrossover(0.9);
+  ga.pCrossover(0.6);
   ga.scoreFilename("bog.dat");
+  ga.scoreFrequency(10);
   ga.flushFrequency(50);
-  ga.selectScores(GAStatistics::AllScores);
+  ga.terminator(GAGeneticAlgorithm::TerminateUponConvergence);
+  ga.pConvergence(0.99);
+  ga.nConvergence(20);
   ga.evolve(seed);
 
   return ga.statistics();
