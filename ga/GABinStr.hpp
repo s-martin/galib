@@ -105,7 +105,7 @@ class GABinaryString
 
 	void set(unsigned int a, unsigned int l)
 	{
-		for (unsigned int i = a; i < l; i++)
+		for (unsigned int i = a; i < a + l; i++)
 		{
 			data.at(i) = 1;
 		}
@@ -113,7 +113,7 @@ class GABinaryString
 
 	void unset(unsigned int a, unsigned int l)
 	{
-				for (unsigned int i = a; i < l; i++)
+		for (unsigned int i = a; i < a + l; i++)
 		{
 			data.at(i) = 0;
 		}
