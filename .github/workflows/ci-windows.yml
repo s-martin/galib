@@ -1,6 +1,6 @@
 name: CI-Windows
 
-on: [push]
+on: [push, pull_request]
 
 env:
   # Path to the CMake build directory.
@@ -44,7 +44,20 @@ jobs:
       run: cmake --build ${{ env.build }}
     
     - name: Run unit tests
-      run: cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTest
+      env:
+        BOOST_LIBDIR: ${{ steps.install-boost.outputs.BOOST_ROOT }}/lib
+      run: |
+        # the shared Boost DLLs must be found when the test exe is started
+        $env:PATH = "$env:BOOST_LIBDIR;$env:PATH"
+        cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibTest
+        ctest --test-dir ${{ env.build }} -C ${{ env.config }} --output-on-failure
+
+    - name: Publish test results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          ${{ env.build }}/**/*results.xml
 
     - name: Run coverage
       env:
@@ -54,10 +67,6 @@ jobs:
         $env:PATH = "$env:BOOST_LIBDIR;$env:PATH"
         cmake --build ${{ env.build }} --config ${{ env.config }} --target GAlibOpencppcoverage
         
-
-
-
-
 
 
 

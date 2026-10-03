@@ -43,7 +43,9 @@ BOOST_AUTO_TEST_CASE(GAArray_001)
 
 	BOOST_CHECK(gaarray != gaarray4);
 
-	// TODO add failures to improve implementation
+	// failures
+	BOOST_CHECK_THROW(gaarray[2u], std::out_of_range);
+	BOOST_CHECK_THROW(gaarray4[2u], std::out_of_range);
 }
 
 BOOST_AUTO_TEST_CASE(swap_001)
@@ -82,7 +84,9 @@ BOOST_AUTO_TEST_CASE(copy_001)
 	BOOST_CHECK_EQUAL(gaarray7[0u], 1);
 	BOOST_CHECK_EQUAL(gaarray7[1u], 5);
 
-	// TODO add failures to improve implementation
+	// failures
+	BOOST_CHECK_THROW(gaarray7.copy(gaarray6, 2, 0, 1), std::out_of_range); // dest out of range
+	BOOST_CHECK_THROW(gaarray7.copy(gaarray6, 0, 2, 1), std::out_of_range); // src out of range
 }
 
 BOOST_AUTO_TEST_CASE(size_001)
@@ -101,7 +105,7 @@ BOOST_AUTO_TEST_CASE(size_001)
 	BOOST_CHECK_EQUAL(gaarray8[0u], 1);
 	BOOST_CHECK_EQUAL(gaarray8[1u], 2);
 
-	// TODO fix implementation
+	// growing the array value-initializes (zeroes) the newly added elements
 	BOOST_CHECK_EQUAL(gaarray8[2u], 0);
 	BOOST_CHECK_EQUAL(gaarray8[3u], 0);
 	BOOST_CHECK_EQUAL(gaarray8[4u], 0);
@@ -111,8 +115,16 @@ BOOST_AUTO_TEST_CASE(size_001)
 	BOOST_CHECK_EQUAL(gaarray8a[0u], 1);
 	BOOST_CHECK_EQUAL(gaarray8a[1u], 2);
 
+	// failures
+	BOOST_CHECK_THROW(gaarray8a[2u], std::out_of_range); // out of range after resize
 
-	// TODO add failures to improve implementation
+	GAArray<int> gaarray8b(2);
+	gaarray8b[0u] = 1;
+	gaarray8b[1u] = 2;
+	gaarray8b.size(1); // shrinking drops the trailing elements
+	BOOST_CHECK_EQUAL(gaarray8b.size(), 1);
+	BOOST_CHECK_EQUAL(gaarray8b[0u], 1);
+	BOOST_CHECK_THROW(gaarray8b[1u], std::out_of_range);
 }
 
 BOOST_AUTO_TEST_CASE(move_001)
@@ -137,7 +149,9 @@ BOOST_AUTO_TEST_CASE(move_001)
 	BOOST_CHECK_EQUAL(gaarray9a[2u], 5);
 	BOOST_CHECK_EQUAL(gaarray9a[3u], 6);
 
-	// TODO add failures to improve implementation
+	// failures
+	BOOST_CHECK_THROW(gaarray9.move(3, 0, 2), std::out_of_range); // dest + length out of range
+	BOOST_CHECK_THROW(gaarray9.move(0, 3, 2), std::out_of_range); // src + length out of range
 }
 
 BOOST_AUTO_TEST_SUITE_END()
