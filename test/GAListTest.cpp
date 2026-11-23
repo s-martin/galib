@@ -75,8 +75,9 @@ BOOST_AUTO_TEST_CASE(GAList_insert_002)
     BOOST_CHECK_EQUAL(*galist1.next(), 6);
 
     // failure case
+    BOOST_CHECK_EQUAL(galist2.size(), 0); // the contents were moved into galist1
     BOOST_CHECK_EQUAL(galist2.insert(&galist2), GAListBASE::ERR);
-    BOOST_CHECK_EQUAL(galist2.size(), 7);
+    BOOST_CHECK_EQUAL(galist2.size(), 0);
 }
 
 

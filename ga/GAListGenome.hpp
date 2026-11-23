@@ -580,35 +580,19 @@ template <class T> class GAListGenome : public GAList<T>, public GAGenome
 		}
 	}
 
-	// Traverse the list (breadth-first) and dump the contents as best we can to
-	// the stream.  We don't try to write the contents of the nodes - we simply
-	// write a . for each node in the list.
+	// Dump the position and the address of the contents of each node in the
+	// list.  We don't try to write the contents of the nodes.
 	int write(std::ostream &os) const override
 	{
-		os << "node       next       prev       contents\n";
-		if (!this->hd)
-			return 0;
-		;
-		os.width(10);
-		os << this->hd << " ";
-		os.width(10);
-		os << this->hd->next << " ";
-		os.width(10);
-		os << this->hd->prev << " ";
-		os.width(10);
-		os << &(DYN_CAST(GANode<T> *, this->hd)->contents) << "\n";
-
-		for (GANodeBASE *tmp = this->hd->next; tmp && tmp != this->hd;
-			 tmp = tmp->next)
+		os << "index      contents\n";
+		GAListIter<T> it(*this);
+		T *p = it.head();
+		for (int i = 0; p != nullptr && i < this->size(); i++, p = it.next())
 		{
 			os.width(10);
-			os << tmp << " ";
+			os << i << " ";
 			os.width(10);
-			os << tmp->next << " ";
-			os.width(10);
-			os << tmp->prev << " ";
-			os.width(10);
-			os << &(DYN_CAST(GANode<T> *, tmp)->contents) << "\n";
+			os << p << "\n";
 		}
 		return 0;
 	}
