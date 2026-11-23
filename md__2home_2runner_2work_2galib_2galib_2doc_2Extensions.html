@@ -74,7 +74,7 @@ $(function() {
   <div class="headertitle"><div class="title">Customizing GAlib </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md10"></a></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md11"></a></p>
 <blockquote class="doxtable">
 <p>Original author Matthew Wall. All rights reserved.<br  />
  Copyright (c) 1995-1996 Massachusetts Institute of Technology<br  />
@@ -82,7 +82,7 @@ $(function() {
 </blockquote>
 <p>This document describes how to extend GAlib's capabilities by defining your own genomes and genetic operators. The best way to customize the behavior of an object is to derive a new class. If you do not want to do that much work, GAlib is designed to let you replace behaviors of existing objects by defining new functions.</p>
 <p>see also: *<a href="Overview.html">library overview</a>, <a href="ClassHierarchy.html">class hierarchy</a>, <a href="API.html">programming interface</a>*</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 Deriving your own genome class</h1>
 <p>You can create your own genome class by multiply-inheriting from the base genome class and your own data type. For example, if you have already have an object defined, say MyObject, then you would derive a new genome class called MyGenome, whose class definition looks like this:</p>
 <div class="fragment"><div class="line"><span class="comment">// Class definition for the new genome object, including statically defined</span></div>
@@ -163,7 +163,7 @@ Deriving your own genome class</h1>
 <p>Assign a default crossover, mutation, initialization, and comparison method so that users don't have to assign one unless they want to.</p>
 <p>It is a good idea to define an identity for your genome (especially if you will be using it in an environment with multiple genome types running around). Use the DefineIdentity macro (defined in id.h) to do this in your class definition. The DefineIdentity macro sets a class ID number and the name that will be used in error messages for the class. You can use any number above 200 for the ID, but be sure to use a different number for each of your classes.</p>
 <p>When run-time type information (RTTI) has stabilized across compilers, GAlib will probably use that instead of the Define/Declare identity macros.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
 Genome Testing</h1>
 <p>Use the following program to test your genome. The basic idea here is to test incrementally in order to isolate problems as they arise. If your genome works with a small test program such as this one, it will function properly with any genetic algorithm in GAlib. (This is no guarantee, however, that your genome will help you find the solution to your problem. That is another matter entirely.)</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span></div>
@@ -203,7 +203,7 @@ Genome Testing</h1>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
 Genome Initialization</h1>
 <p>The initializer takes a single argument: the genome to be initialized. The genome has already been allocated; the intializer only needs to populate it with appropriate contents.</p>
 <p>Here is the implementation of an initializer for the <a class="el" href="classGATreeGenome.html">GATreeGenome</a>&lt;int&gt; class.</p>
@@ -229,7 +229,7 @@ Genome Initialization</h1>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassGATreeGenome_html"><div class="ttname"><a href="classGATreeGenome.html">GATreeGenome</a></div><div class="ttdef"><b>Definition</b> GATreeGenome.hpp:28</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
 Genome Mutation</h1>
 <p>The genome mutator takes two arguments: the genome that will receive the mutation(s) and a mutation probability. The exact meaning of the mutation probability is up to the designer of the mutation operator. The mutator should return the number of mutations that occured.</p>
 <p>Most genetic algorithms invoke the mutation method on each newly generated offspring. So your mutation operator should base its actions on the value of the mutation probability. For example, an array of floats could flip a <em>pmut</em>-biased coin for each element in the array. If the coin toss returns true, the element gets a Gaussian mutation. If it returns false, the element is left unchanged. Alternatively, a single biased coin toss could be used to determine whether or not the <em>entire</em> genome should be mutated.</p>
@@ -250,7 +250,7 @@ Genome Mutation</h1>
 <div class="line">  <span class="keywordflow">return</span> nMut;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassGA1DBinaryStringGenome_html"><div class="ttname"><a href="classGA1DBinaryStringGenome.html">GA1DBinaryStringGenome</a></div><div class="ttdoc">Interface for the 1D binary string genome, including crossover objects and all the default and built-...</div><div class="ttdef"><b>Definition</b> GA1DBinStrGenome.h:43</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
 Genome Crossover</h1>
 <p>The crossover method is used by the genetic algorithm to mate individuals from the population to form new offspring. Each genome should define a default crossover method for the genetic algorithms to use. The <b>sexual</b> and <b>asexual</b> member functions return a pointer to the preferred sexual and asexual mating methods, respectively. The <b>crossover</b> member function is used to change the preferred mating method. The genome does not have a member function to invoke the crossover; only the genetic algorithm can actually perform the crossover.</p>
 <p>Some genetic algorithms use sexual mating, others use asexual mating. If possible, define both so that your genome will work with either kind of genetic algorithm. If your derived class does not define a cross method, an error message will be posted whenever crossover is attempted.</p>
@@ -280,7 +280,7 @@ Genome Crossover</h1>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> n;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
 Genome Comparison</h1>
 <p>The comparison method is used for diversity calculations. It compares two genomes and returns a number that is greater than or equal to zero. A value of 0 means that the two genomes are identical (no diversity). There is no maximum value for the return value from the comparator. A value of -1 indicates that the diversity could not be calculated.</p>
 <p>Here is the comparator for the binary string genomes. It simply counts up the number of bits that both genomes share. In this example, we return a -1 if the genomes are not the same length.</p>
@@ -294,7 +294,7 @@ Genome Comparison</h1>
 <div class="line">    count += ((sis.gene(i) == bro.gene(i)) ? 0 : 1);</div>
 <div class="line">  <span class="keywordflow">return</span> count/sis.length();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
 Genome Evaluation</h1>
 <p>The genome evaluator is the objective function for your problem. It takes a single genome as its argument. The evaluator returns a number that indicates how good or bad the genome is. You must cast the generic genome to the genome type that you are using. If your objective function works with different genome types, then use the genome object's <b>className</b> and/or <b>classID</b> member functions to determine the genome class before you do the casts.</p>
 <p>Here is a simple evaluation function for a real number genome with a single element. The function tries to maximize a sinusoidal.</p>
@@ -303,7 +303,7 @@ Genome Evaluation</h1>
 <div class="line">  GARealGenome&amp;amp; genome = (GARealGenome &amp;amp;)g;</div>
 <div class="line">  <span class="keywordflow">return</span> 1 + sin(genome.gene(0)*2*M_PI);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
 Population Initialization</h1>
 <p>This method is invoked when the population is initialized.</p>
 <p>Here is an implemenation that invokes the initializer for each genome in the population.</p>
@@ -313,7 +313,7 @@ Population Initialization</h1>
 <div class="line">    p.individual(i).initialize();</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassGAPopulation_html"><div class="ttname"><a href="classGAPopulation.html">GAPopulation</a></div><div class="ttdef"><b>Definition</b> GAPopulation.h:66</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Population Evaluation</h1>
 <p>This method is invoked when the population is evaluated. If your objective is population-based, you can use this method to set the score for each genome rather than invoking an evaluator for each genome.</p>
 <p>Here is an implementation that invokes the evaluation method for each genome in the population.</p>
@@ -322,7 +322,7 @@ Population Evaluation</h1>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&amp;lt;p.size(); i++)</div>
 <div class="line">    p.individual(i).evaluate();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
 Scaling Scheme</h1>
 <p>The scaling object does the transformation from raw (objective) scores to scaled (fitness) scores. The most important member function you will have to define for a new scaling object is the <b>evaluate</b> member function. This function calculates the fitness scores based on the objective scores in the population that is passed to it.</p>
 <p>The <a class="el" href="classGAScalingScheme.html">GAScalingScheme</a> class is a pure virtual (abstract) class and cannot be instantiated. To make your derived class non-virtual, you <em>must</em> define the <b>clone</b> and <b>evaluate</b> functions. You should also define the <b>copy</b> method if your derived class introduces any additional data members that require non-trivial copy.</p>
@@ -363,7 +363,7 @@ Scaling Scheme</h1>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassGAScalingScheme_html"><div class="ttname"><a href="classGAScalingScheme.html">GAScalingScheme</a></div><div class="ttdef"><b>Definition</b> GAScaling.h:46</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
 Selection Scheme</h1>
 <p>The selection object is used to pick individuals from the population. Before a selection occurs, the <b>update</b> method is called. You can use this method to do any pre-selection data transformations for your selection scheme. When a selection is requested, the <b>select</b> method is called. The <b>select</b> method should return a reference to a single individual from the population.</p>
 <p>A selector may make its selections based either on the scaled (fitness) scores or on the raw (objective) scores of the individuals in the population. Note also that a population may be sorted either low-to-high or high-to-low, depending on which sort order was chosen. Your selector should be able to handle either order (this way it will work with genetic algorithms that maximize or minimize).</p>
@@ -431,7 +431,7 @@ Selection Scheme</h1>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> pop-&amp;gt;individual(picked,basis);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
 Genetic Algorithm</h1>
 <p>Here is a sample derived class that does restricted mating. In this example, one of the parents is selected as usual. The second individual is select as the first, but it is used only if it is similar to the first individual. If not, we make another selection. If enough selections fail, we take what we can get.</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>RestrictedMatingGA : <span class="keyword">public</span> <a class="code hl_class" href="classGASteadyStateGA.html">GASteadyStateGA</a> {</div>
@@ -473,7 +473,7 @@ Genetic Algorithm</h1>
 <div class="line">}</div>
 <div class="ttc" id="aclassGASteadyStateGA_html"><div class="ttname"><a href="classGASteadyStateGA.html">GASteadyStateGA</a></div><div class="ttdoc">Steady-state genetic algorithm class.</div><div class="ttdef"><b>Definition</b> GASStateGA.h:16</div></div>
 <div class="ttc" id="aclassGASteadyStateGA_html_acc5cc68d86a4ba7b4478298f942b9882"><div class="ttname"><a href="classGASteadyStateGA.html#acc5cc68d86a4ba7b4478298f942b9882">GASteadyStateGA::step</a></div><div class="ttdeci">void step() override</div><div class="ttdoc">Evolve by one generation.</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
 Termination Function</h1>
 <p>The termination function determines when the genetic algorithm should stop evolving. It takes a genetic algorithm as its argument and returns gaTrue if the genetic algorithm should stop or gaFalse if the algorithm should continue.</p>
 <p>Here are three examples of termination functions. The first compares the current generation to the desired number of generations. If the current generation is less than the desired number of generations, it returns gaFalse to signify that the GA is not yet complete.</p>

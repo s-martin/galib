@@ -74,7 +74,7 @@ $(function() {
   <div class="headertitle"><div class="title">Overview of GAlib </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md30"></a></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md31"></a></p>
 <blockquote class="doxtable">
 <p>Original author Matthew Wall. All rights reserved.<br  />
  Copyright (c) 1995-1996 Massachusetts Institute of Technology<br  />
@@ -93,7 +93,7 @@ $(function() {
 <p>There are many different types of genetic algorithms. GAlib includes three basic types: 'simple', 'steady-state', and 'incremental'. These algorithms differ in the way that they create new individuals and replace old individuals during the course of an evolution.</p>
 <p>GAlib provides two primary mechanisms for extending the capabilities of built-in objects. First of all (and most preferred, from a C++ point of view), you can derive your own classes and define new member functions. If you need to make only minor adjustments to the behavior of a GAlib class, in most cases you can define a single function and tell the existing GAlib class to use it instead of the default.</p>
 <p>Genetic algorithms, when properly implemented, are capable of both exploration (broad search) and exploitation (local search) of the search space. The type of behavior you'll get depends on how the operators work and on the 'shape' of the search space.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
 The Genetic Algorithm</h1>
 <p>The genetic algorithm object determines which individuals should survive, which should reproduce, and which should die. It also records statistics and decides how long the evolution should continue. Typically a genetic algorithm has no obvious stopping criterion. You must tell the algorithm when to stop. Often the number-of-generations is used as a stopping measure, but you can use goodness-of-best-solution, convergence-of-population, or any problem-specific criterion if you prefer.</p>
 <p>The library contains four flavors of genetic algorithms. The first is the standard 'simple genetic algorithm' described by Goldberg in his <a href="References.html#goldberg">book</a>. This algorithm uses non-overlapping populations and optional elitism. Each generation the algorithm creates an entirely new population of individuals. The second is a 'steady-state genetic algorithm' that uses overlapping populations. In this variation, you can specify how much of the population should be replaced in each generation. The third variation is the 'incremental genetic algorithm', in which each generation consists of only one or two children. The incremental genetic algorithms allow custom replacement methods to define how the new generation should be integrated into the population. So, for example, a newly generated child could replace its parent, replace a random individual in the population, or replace an individual that is most like it. The fourth type is the 'deme' genetic algorithm. This algorithm evolves multiple populations in parallel using a steady-state algorithm. Each generation the algorithm migrates some of the individuals from each population to one of the other populations.</p>
@@ -101,14 +101,14 @@ The Genetic Algorithm</h1>
 <p>The base genetic algorithm class contains operators and data common to most flavors of genetic algorithms. When you derive your own genetic algorithm you can use these member data and functions to keep track of statistics and monitor performance.</p>
 <p>The genetic algorithm contains the statistics, replacement strategy, and parameters for running the algorithm. the population object, a container for genomes, also contains some statistics as well as selection and scaling operators. A typical genetic algorithm will run forever. The library has built in functions for specifying when the algorithm should terminate. These include terminate-upon-generation, in which you specify a certain number of generations for which the algorithm should run, and terminate-upon-convergence, in which you specify a value to which the best-of-generation score should converge. You can customize the termination function to use your own stopping criterion.</p>
 <p>The number of function evaluations is a good way to compare different genetic algorithms with various other search methods. The GAlib genetic algorithms keep track of both the number of genome evaluations and population evaluations.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
 Defining a Representation</h1>
 <p>Use a data structure that is appropriate for your problem. If you are optimizing a function of real numbers, use real numbers in your genome. If a solution to your problem can be represented with some imaginary numbers and some integer values, define a genome with these characteristics.</p>
 <p>Defining an appropriate representation is part of the art of using genetic algorithms (and at this point, it is still an art, not a science). Use a representation that is minimal but completely expressive. Your representation should be able to represent any solution to your problem, but if at all possible you should design it so that it cannot represent infeasible solutions to your problem. Remember that if the genome can represent infeasible solutions then the objective function must be designed to give partial credit to infeasibles.</p>
 <p>The representation should not contain information beyond that needed to represent a solution to the problem. Although there may be merit in using a representation that contains 'extra' genetic material, unless properly implemented (in concert with the objective function and in full consideration of the type and characteristics of the search space), this tends to increase the size of the search space and thus hinder the performance of the genetic algorithm.</p>
 <p>The number of possible representations is endless. You may choose a purely numeric representation such as an array of real numbers. These could be implemented as real numbers, or, in the Goldberg-style of a string of bits that map to real numbers (beware that using real numbers directly far out-performs the binary-to-decimal representation for most problems, especially when you use reasonable crossover operators). Your problem may depend on a sequence of items, in which case an order-based representation (either list or array) may be more appropriate. In many of these cases, you must choose operators that maintain the integrity of the sequence; crossover must generate reordered lists without duplicating any element in the list. Other problems lend themselves to a tree structure. Here you may want to represent solutions explicitly as trees and perform the genetic operations on the trees directly. Alternatively, many people encode trees into an array or parsable string, then operate on the string. Some problems include a mix of continuous and discrete elements, in which case you may need to create a new structure to hold the mix of information. In these cases you must define genetic operators that respect the structure of the solution. For example, a solution with both integer and floating parts might use a crossover that crosses integer parts with integer parts and floating parts with floating parts, but never mixes floating parts with integer parts.</p>
 <p>Whichever representation you choose, be sure to pick operators that are appropriate for your representation.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
 The Genome Operators</h1>
 <p>Each genome has three primary operators: initialization, mutation, and crossover. With these operators you can bias an initial population, define a mutation or crossover specific to your problem's representation, or evolve parts of the genetic algorithm as your population evolves. GAlib comes with these operators pre-defined for each genome type, but you can customize any of them. <br  />
 </p>
@@ -119,17 +119,17 @@ The Genome Operators</h1>
 <p>In addition to the three primary operators, each genome must also contain an objective function and may also contain a comparator. The objective function is used to evaluate the genome. The comparator (often referred to as a 'distance function') is used to determine how different one genome is from another. Every genetic algorithm requires that an objective function is defined - this is how the genetic algorithm determines which individuals are better than others. Some genetic algorithms require a comparator.</p>
 <p>The library has some basic data types built in, but if you already have an array or list object, for example, then you can quickly build a genome from it by multiply inheriting from your object and the genome object. You can then use this new object directly in the GAlib genetic algorithm objects.</p>
 <p>In general, a genetic algorithm does not need to know about the contents of the data structures on which it is operating. The library reflects this generality. You can mix and match genome types with genetic algorithms. The genetic algorithm knows how to clone genomes in order to create populations, initialize genomes to start a run, cross genomes to generate children, and mutate genomes. All of these operations are performed via the genome member functions.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
 The Population Object</h1>
 <p>The population object is a container for genomes. Each population object has its own initializer (the default simply calls the initializer for each individual in the population) and evaluator (the default simply calls the evaluator for each individual in the population). It also keeps track of the best, average, deviation, etc for the population. Diversity can be recorded as well, but since diversity calculations often require a great deal of additional compuation, the default is to not record diversity.</p>
 <p>The selection method is also defined in the population object. This method is used by the genetic algorithms to choose which individuals should mate.</p>
 <p>Each population object has a scaling scheme object associated with it. The scaling scheme object converts the objective score of each genome to a fitness score that the genetic algorithm uses for selection. It also caches fitness information for use later on by the selection schemes.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
 Objective Functions and Fitness Scaling</h1>
 <p>Genetic algorithms are often more attractive than gradient search methods because they do not require compilicated differential equations or a smooth search space. The genetic algorithm needs only a single measure of how good a single individual is compared to the other individuals. The objective function provides this measure; given a single solution to a problem, how good is it?</p>
 <p>It is important to note the distinction between fitness and objective scores. The objective score is the value returned by your objective function; it is the raw performance evaluation of a genome. The fitness score, on the other hand, is a possibly-transformed rating used by the genetic algorithm to determine the fitness of individuals for mating. The fitness score is typically obtained by a linear scaling of the raw objective scores (but you can define any mapping you want, or no transformation at all). For example, if you use linear scaling then the fitness scores are derived from the objective scores using the fitness proportional scaling technique described in Goldberg's book. The genetic algorithm uses the fitness scores, not the objective scores, to do selection.</p>
 <p>You can evaluate the individuals in a population using an individual-based evaluation function (which you define), or a population-based evaluator (also which you define). If you use an individual-based objective, then the function is assigned to each genome. A population-based objective function can make use of individual objective functions, or it can set the individual scores itself.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
 So what does it look like in C++?</h1>
 <p>A typical optimization program has the following form:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">float</span> Objective(<a class="code hl_class" href="classGAGenome.html">GAGenome</a>&amp;);</div>
@@ -177,7 +177,7 @@ So what does it look like in C++?</h1>
 </div><!-- fragment --><p>You can define the objective function as a static member of a derived class, or just define a function and use it with the existing GAlib genome classes.</p>
 <p>When you write an objective function, you must first cast the generic genome into the type of genome that your objective function is expecting. From that point on you can work with the specific genome type. Each objective function returns a single value that represents the objective score of the genome that was passed to the objective function.</p>
 <p>Please see the <a href="examples/">examples</a> for more samples of the library in action. And see the <a href="API.html">programming interface</a> page for a complete list of member functions and built-in operators.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
 What can the operators do?</h1>
 <p>Here are some examples of the types of mutation and crossover that can be done using GAlib. Traditional crossover generates two children from two parents, and mutation is typically applied to a single individual. However, many other types of crossover and mutation are possible, such as crossover using three or more parents, asexual crossover or population-based mutation. The following examples illustrate some of the standard, sexual crossover and individual mutation methods in GAlib.</p>
 <table border="2" cellspacing="3" cellpadding="20">
@@ -215,7 +215,7 @@ What can the operators do?</h1>
  Array Uniform Crossover<br  />
  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
 How do I define my own operators?</h1>
 <p>Defining the operators is only as difficult as figuring out the algorithm you want to implement. As far as the actual implementation goes, there's not much to it. To assign an operator to a genome, just use the appropriate member function. For example, the following code snippet assigns 'MyInitializer' as the initialization function and 'MyCrossover' as the crossover function for a binary string genome.</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classGA1DBinaryStringGenome.html">GA1DBinaryStringGenome</a> genome(20);</div>
@@ -364,7 +364,7 @@ How do I define my own operators?</h1>
 <div class="line">  tree.parent();  <span class="comment">// move the iterator up one level</span></div>
 <div class="line">}</div>
 <div class="ttc" id="aclassGATreeGenome_html"><div class="ttname"><a href="classGATreeGenome.html">GATreeGenome</a></div><div class="ttdef"><b>Definition</b> GATreeGenome.hpp:28</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
 What about deriving my own genome class?</h1>
 <p>Here is the definition of a genome that contains an arbitrary number of lists. It could easily be modified to become a diploid genome. It is used in exactly the same way that the built-in genomes are used. For a simpler example, see the <a href="examples/gnu/bitstr.h">GNU example</a> which integrates the GNU BitString object with GAlib to form a new genome class.</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>RobotPathGenome : <span class="keyword">public</span> <a class="code hl_class" href="classGAGenome.html">GAGenome</a> {</div>

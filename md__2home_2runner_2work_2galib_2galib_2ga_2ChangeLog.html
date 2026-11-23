@@ -76,28 +76,34 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Unreleased</h1>
+<ul>
+<li><a class="el" href="GAList_8hpp_source.html">GAList.hpp</a>: reimplemented GAList/GAListIter on top of std::list. GAListBASE.C is gone and <a class="el" href="GAListBASE_8h_source.html">GAListBASE.h</a> only holds the shared enums.</li>
+<li><a class="el" href="garandom_8h_source.html">garandom.h</a>/.C: replaced the ran1/ran2/ran3/rand/random/rand48 generators and the separate bit generator with std::mt19937. The GALIB_USE_RAN*/GALIB_USE_RAND* options in <a class="el" href="gaconfig_8h_source.html">gaconfig.h</a> are removed. Results for a given seed differ from earlier versions.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 Original GAlib (until version 2.4.7)</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 2005-01-27 Matthew Wall</h2>
 <ul>
 <li><a class="el" href="gaconfig_8h_source.html">gaconfig.h</a>: added instantiation prefix for compilers that need forced instantiations but vary in their syntax.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 2005-01-12 Matthew Wall</h2>
 <ul>
 <li><a class="el" href="gaconfig_8h_source.html">gaconfig.h</a>: fixed comment about use of streams. keep MSC_VER detection after other compilers so that the windows-based compilers that are trying to be like vcpp will not be detected as vcpp.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 2005-01-11 Matthew Wall</h2>
 <ul>
 <li><a class="el" href="gaconfig_8h_source.html">gaconfig.h</a>: fixed macro definitions for streams, templates</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 2005-01-06 Matthew Wall</h2>
 <ul>
 <li><a class="el" href="gaconfig_8h_source.html">gaconfig.h</a>: update ms compiler notes fixed borland compiler version detection.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 2004-12-29 Matthew Wall</h2>
 <ul>
 <li>GA2DArrayGenome.C: fixed oversight</li>
@@ -107,14 +113,14 @@ Original GAlib (until version 2.4.7)</h1>
 <li><a class="el" href="GABaseGA_8h_source.html">GABaseGA.h</a>/.C: added seed as a recognized option</li>
 <li><a class="el" href="ga_8h_source.html">ga.h</a>: no need to remove the deterministic crowding algorithm - it has no templates.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 2004-12-28 Matthew Wall</h2>
 <ul>
 <li>GAPopulation.C: be sure that we use the same score (just in case theinvocation of the score member is not deterministic).</li>
 <li><a class="el" href="gaconfig_8h_source.html">gaconfig.h</a>: deal with assertions</li>
 <li>GASelector.C: fix end-of-array bug and added assertions to trigger other bad index problems.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 2004-12-28 Matthew Wall</h2>
 <ul>
 <li>GARealGenome.C: adhere to c++ standard</li>
@@ -136,7 +142,7 @@ Original GAlib (until version 2.4.7)</h1>
 <li>GAStringGenome.C: fix specializations</li>
 <li>makefile: added ranlib for macosx, aix emit compile flags to BUILD file for diagnosis.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 2004-12-27 Matthew Wall</h2>
 <ul>
 <li><a class="el" href="GAGenome_8h_source.html">GAGenome.h</a>: macro name change for streams management. include a separate file for streams.</li>
