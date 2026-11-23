@@ -35,7 +35,7 @@ BOOST_AUTO_TEST_CASE(GAListGenome_DestructiveMutator_001)
     GARandomSeed(201);
     genome.mutator(GAListGenome<int>::DestructiveMutator);
 
-    BOOST_CHECK_EQUAL(genome.mutate(-1), 0); // failure case
+    BOOST_CHECK_EQUAL(genome.mutate(-1), GAListBASE::NO_ERR); // failure case
 
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
     GARandomSeed(202);
     genome.mutator(GAListGenome<int>::SwapMutator);
 
-    BOOST_CHECK_EQUAL(genome.mutate(-1), 0); // failure case
+    BOOST_CHECK_EQUAL(genome.mutate(-1), GAListBASE::NO_ERR); // failure case
 
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
@@ -307,7 +307,7 @@ BOOST_AUTO_TEST_CASE(GAListGenome_CycleCrossover_001)
     GAListGenome<int> genomep1(objective);
     genomep1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
 	for (int i = 1; i < 5; i++)
-		genomep1.insert(i);		// each subsequent node contains a number
+		genomep1.insert(i);
 
     GAListGenome<int> genomep2(objective);
     genomep2.insert(5, GAListBASE::HEAD);
