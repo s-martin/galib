@@ -206,7 +206,46 @@ BOOST_AUTO_TEST_CASE(remove_001)
 
 BOOST_AUTO_TEST_CASE(GAList_clone_001)
 {
+	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
 
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+
+    auto galist2 = galist1.clone();
+   	BOOST_CHECK_EQUAL(galist2->size(), 5);
+
+   	// TODO Check why this is necessary, see also copy
+	BOOST_CHECK_EQUAL(*galist2->head(), 0);
+	for (int i = 1; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist2->next(), i);
+}
+
+BOOST_AUTO_TEST_CASE(GAList_warp_001)
+{
+   	GAList<int> galist1;
+	galist1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+	for (int i = 1; i < 5; i++)
+		galist1.insert(i);		// each subsequent node contains a number
+
+	BOOST_CHECK_EQUAL(galist1.size(), 5);
+
+	for (int i = 0; i < 5; i++)
+		BOOST_CHECK_EQUAL(*galist1.next(), i);
+
+    BOOST_CHECK_EQUAL(*galist1.current(), 4);
+    galist1.warp(2);
+    BOOST_CHECK_EQUAL(*galist1.current(), 2);
+    galist1.warp(0);
+    BOOST_CHECK_EQUAL(*galist1.current(), 0);
+
+    // failure cases
+    BOOST_CHECK_EQUAL(galist1.warp(5), nullptr);
+    BOOST_CHECK_EQUAL(*galist1.current(), 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
