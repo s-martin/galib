@@ -1,7 +1,7 @@
 #pragma once
 
 #define INSTANTIATE_REAL_GENOME
-#include <GARealGenome.h>
+#include <GARealGenome.hpp>
 #include <GASimpleGA.h>
 #include <iostream>
 

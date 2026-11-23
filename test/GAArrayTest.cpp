@@ -1,6 +1,7 @@
 #include <boost/test/unit_test.hpp>
 
-#include <GAArray.h>
+#include <GAArray.hpp>
+#include <GA3DArrayGenome.hpp>
 
 
 BOOST_AUTO_TEST_SUITE( UnitTest )
@@ -46,6 +47,30 @@ BOOST_AUTO_TEST_CASE(GAArray_001)
 	// failures
 	BOOST_CHECK_THROW(gaarray[2u], std::out_of_range);
 	BOOST_CHECK_THROW(gaarray4[2u], std::out_of_range);
+}
+
+BOOST_AUTO_TEST_CASE(GA3DArrayGenome_001)
+{
+	GA3DArrayGenome<int> genome(2, 2, 2);
+	genome.gene(1, 1, 1, 42);
+
+	BOOST_CHECK_EQUAL(genome.width(), 2);
+	BOOST_CHECK_EQUAL(genome.height(), 2);
+	BOOST_CHECK_EQUAL(genome.depth(), 2);
+	BOOST_CHECK_EQUAL(genome.gene(1, 1, 1), 42);
+
+	genome.resize(3, 2, 2);
+	BOOST_CHECK_EQUAL(genome.width(), 3);
+	BOOST_CHECK_EQUAL(genome.gene(1, 1, 1), 42);
+
+	GAAlleleSet<int> alleles;
+	alleles.add(0);
+	alleles.add(1);
+	GA3DArrayAlleleGenome<int> alleleGenome(2, 2, 2, alleles);
+	GA3DArrayAlleleGenome<int>::UniformInitializer(alleleGenome);
+	auto *clone = alleleGenome.clone();
+	BOOST_CHECK(alleleGenome.equal(*clone));
+	delete clone;
 }
 
 BOOST_AUTO_TEST_CASE(swap_001)

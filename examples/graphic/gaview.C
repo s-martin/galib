@@ -20,7 +20,7 @@ depending on which you have on your system.
 #include <iostream>
 
 #define INSTANTIATE_REAL_GENOME
-#include <GARealGenome.h>
+#include <GARealGenome.hpp>
 
 // comment this line if you don't have MOTIF on your system
 //#define USE_MOTIF

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <GAAllele.h>
+#include <GAAllele.hpp>
 #include <GA1DArrayGenome.hpp>
 
 using GARealAlleleSet = GAAlleleSet<float>;
@@ -16,11 +16,11 @@ using GARealGenome = GA1DArrayAlleleGenome<float>;
 
 int GARealGaussianMutator(GAGenome &, float);
 
-// in one (and only one) place in the code that uses the string genome, you 
-// should define INSTANTIATE_STRING_GENOME in order to force the specialization
-// for this genome.
+// In one (and only one) translation unit that uses the real genome, define
+// INSTANTIATE_REAL_GENOME before including this header to enable its
+// specializations.
 #if defined(INSTANTIATE_REAL_GENOME)
-#include <GARealGenome.C>
+#include <GARealGenome_impl.hpp>
 #endif
 
 inline void GARealUniformInitializer(GAGenome& g){

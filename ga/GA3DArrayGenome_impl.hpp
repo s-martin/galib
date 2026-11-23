@@ -6,12 +6,12 @@
 					 all rights reserved
 
  DESCRIPTION:
-  Source file for the 3D array genome.
+  Template implementation for the 3D array genome.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_array3_C_
-#define _ga_array3_C_
+#ifndef _ga_array3_impl_hpp_
+#define _ga_array3_impl_hpp_
 
-#include <GA3DArrayGenome.h>
+#include <GA3DArrayGenome.hpp>
 #include <GAMask.h>
 #include <cstdio>
 #include <cstdlib>
@@ -48,7 +48,7 @@ GA3DArrayGenome<T>::GA3DArrayGenome(unsigned int w, unsigned int h,
 
 template <class T>
 GA3DArrayGenome<T>::GA3DArrayGenome(const GA3DArrayGenome<T> &orig)
-	: GAArray<T>(orig.sz), GAGenome()
+	: GAArray<T>(orig.size()), GAGenome()
 {
 	GA3DArrayGenome<T>::copy(orig);
 }
@@ -101,7 +101,7 @@ template <class T> int GA3DArrayGenome<T>::resize(int w, int h, int d)
 {
 	if (w == STA_CAST(int, nx) && h == STA_CAST(int, ny) &&
 		d == STA_CAST(int, nz))
-		return this->sz;
+		return this->size();
 
 	if (w == GAGenome::ANY_SIZE)
 		w = GARandomInt(minX, maxX);
@@ -195,7 +195,7 @@ template <class T> int GA3DArrayGenome<T>::resize(int w, int h, int d)
 	ny = h;
 	nz = d;
 	_evaluated = false;
-	return this->sz;
+	return this->size();
 }
 
 template <class T> int GA3DArrayGenome<T>::read(std::istream &)
@@ -365,8 +365,8 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 
 	this->initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
 	this->mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
-	comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
-	crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
+	this->comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
+	this->crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
 
 template <class T>
@@ -382,8 +382,8 @@ GA3DArrayAlleleGenome<T>::GA3DArrayAlleleGenome(unsigned int w, unsigned int h,
 
 	this->initializer(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_INITIALIZER);
 	this->mutator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_MUTATOR);
-	comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
-	crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
+	this->comparator(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_COMPARATOR);
+	this->crossover(GA3DArrayAlleleGenome<T>::DEFAULT_3DARRAY_ALLELE_CROSSOVER);
 }
 
 template <class T>
@@ -471,7 +471,7 @@ template <class T> int GA3DArrayAlleleGenome<T>::resize(int w, int h, int d)
 			this->a.at(i) = aset.at(i % aset.size()).allele();
 	}
 
-	return this->sz;
+	return this->size();
 }
 
 template <class T> int GA3DArrayAlleleGenome<T>::read(std::istream &is)
@@ -484,7 +484,7 @@ template <class T> int GA3DArrayAlleleGenome<T>::write(std::ostream &os) const
 	return GA3DArrayGenome<T>::write(os);
 }
 
-template <class T> int GA3DArrayAlleleGenome<T>::equal(const GAGenome &c) const
+template <class T> bool GA3DArrayAlleleGenome<T>::equal(const GAGenome &c) const
 {
 	return GA3DArrayGenome<T>::equal(c);
 }

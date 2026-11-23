@@ -4,7 +4,7 @@
 #include <iostream>
 
 #define INSTANTIATE_STRING_GENOME
-#include <GAStringGenome.h>
+#include <GAStringGenome.hpp>
 
 float objectiveEx12(GAGenome &c)
 {

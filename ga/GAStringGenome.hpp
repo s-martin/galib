@@ -6,7 +6,7 @@
 #pragma once
 
 #include <GA1DArrayGenome.hpp>
-#include <GAAllele.h>
+#include <GAAllele.hpp>
 
 /** This header defines the interface for the string genome.
  * 
@@ -22,7 +22,7 @@ using GAStringGenome = GA1DArrayAlleleGenome<char>;
 // should define INSTANTIATE_STRING_GENOME in order to force the specialization
 // for this genome.
 #if defined(INSTANTIATE_STRING_GENOME)
-#include <GAStringGenome.C>
+#include <GAStringGenome_impl.hpp>
 #endif
 
 inline void GAStringUniformInitializer(GAGenome &g)

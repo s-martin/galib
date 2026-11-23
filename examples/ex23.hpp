@@ -4,7 +4,7 @@
 #include <cmath>
 
 #define INSTANTIATE_REAL_GENOME
-#include <GARealGenome.h>
+#include <GARealGenome.hpp>
 
 #define MIN_VALUE (-2)
 #define MAX_VALUE 2
