@@ -38,7 +38,7 @@ option(BUILD_DOC "Build documentation" ON)
 option(BUILD_EXAMPLES "Build examples" ON)
 
 # TODO set default value to OFF
-option(BUILD_PVM "Build PVM" ON)
+option(BUILD_PVM "Build PVM" OFF)
 
 if(BUILD_DOC)
     find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
@@ -80,7 +80,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     include(CodeCoverage)
     APPEND_COVERAGE_COMPILER_FLAGS()
     set(COVERAGE_EXCLUDES "/usr/include/*" "examples/*" "test/*")
-    SETUP_TARGET_FOR_COVERAGE_LCOV(NAME ${PROJECT_NAME}_lcov EXECUTABLE ${PROJECT_NAME}Test LCOV_ARGS --ignore-errors mismatch,unused)
+    SETUP_TARGET_FOR_COVERAGE_LCOV(NAME ${PROJECT_NAME}_lcov EXECUTABLE ${PROJECT_NAME}Test LCOV_ARGS --ignore-errors mismatch,unused,inconsistent)
     SETUP_TARGET_FOR_COVERAGE_GCOVR_HTML(NAME ${PROJECT_NAME}_gcov EXECUTABLE ${PROJECT_NAME}Test)
 elseif(MSVC)
     add_custom_target(${PROJECT_NAME}Opencppcoverage

@@ -3,7 +3,6 @@
 #include <GAListGenome.hpp>
 #include <garandom.h>
 
-
 BOOST_AUTO_TEST_SUITE( UnitTest )
 
 float objective(GAGenome &c)
@@ -23,9 +22,9 @@ BOOST_AUTO_TEST_CASE(GAListGenome_DestructiveMutator_001)
 {
     GAListGenome<int> genome(objective);
 
-    genome.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    genome.insert(0, GAListBASE::HEAD);
 	for (int i = 1; i < 5; i++)
-		genome.insert(i);		// each subsequent node contains a number
+		genome.insert(i);
 
 	BOOST_CHECK_EQUAL(genome.size(), 5);
 
@@ -35,7 +34,7 @@ BOOST_AUTO_TEST_CASE(GAListGenome_DestructiveMutator_001)
     GARandomSeed(201);
     genome.mutator(GAListGenome<int>::DestructiveMutator);
 
-    BOOST_CHECK_EQUAL(genome.mutate(-1), 0); // failure case
+    BOOST_CHECK_EQUAL(genome.mutate(-1), GAListBASE::NO_ERR); // failure case
 
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
@@ -48,9 +47,9 @@ BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
 {
     GAListGenome<int> genome(objective);
 
-    genome.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    genome.insert(0, GAListBASE::HEAD);
 	for (int i = 1; i < 5; i++)
-		genome.insert(i);		// each subsequent node contains a number
+		genome.insert(i);
 
 	BOOST_CHECK_EQUAL(genome.size(), 5);
 
@@ -60,7 +59,7 @@ BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
     GARandomSeed(202);
     genome.mutator(GAListGenome<int>::SwapMutator);
 
-    BOOST_CHECK_EQUAL(genome.mutate(-1), 0); // failure case
+    BOOST_CHECK_EQUAL(genome.mutate(-1), GAListBASE::NO_ERR); // failure case
 
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
@@ -74,14 +73,14 @@ BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
 BOOST_AUTO_TEST_CASE(GAListGenome_NodeComparator_001)
 {
     GAListGenome<int> genome1(objective);
-    genome1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    genome1.insert(0, GAListBASE::HEAD);
 	for (int i = 1; i < 5; i++)
-		genome1.insert(i);		// each subsequent node contains a number
+		genome1.insert(i);
 
     BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome1, genome1), 0); // failure case
 
     GAListGenome<int> genome_failure(objective);
-    genome_failure.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    genome_failure.insert(0, GAListBASE::HEAD);
     BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome1, genome_failure), 4); // failure case
     BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome_failure, genome1), 4); // failure case
 
@@ -89,9 +88,9 @@ BOOST_AUTO_TEST_CASE(GAListGenome_NodeComparator_001)
     BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome_failure2, genome_failure2), 0); // failure case
 
     GAListGenome<int> genome2(objective);
-    genome2.insert(3, GAListBASE::HEAD); // the head node contains a '0'
+    genome2.insert(3, GAListBASE::HEAD);
 	for (int i = 1; i < 5; i++)
-		genome2.insert(i+3);		// each subsequent node contains a number
+		genome2.insert(i+3);
 
     BOOST_CHECK_EQUAL(GAListGenome<int>::NodeComparator(genome1, genome2), 5);
 }
@@ -99,9 +98,9 @@ BOOST_AUTO_TEST_CASE(GAListGenome_NodeComparator_001)
 BOOST_AUTO_TEST_CASE(GAListGenome_OnePointCrossover_001)
 {
     GAListGenome<int> genomep1(objective);
-    genomep1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    genomep1.insert(0, GAListBASE::HEAD);
 	for (int i = 1; i < 5; i++)
-		genomep1.insert(i);		// each subsequent node contains a number
+		genomep1.insert(i);
 
     GAListGenome<int> genomep2(objective);
     genomep2.insert(5, GAListBASE::HEAD);
@@ -145,9 +144,9 @@ BOOST_AUTO_TEST_CASE(GAListGenome_OnePointCrossover_001)
 BOOST_AUTO_TEST_CASE(GAListGenome_PartialMatchCrossover_001)
 {
     GAListGenome<int> genomep1(objective);
-    genomep1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    genomep1.insert(0, GAListBASE::HEAD);
 	for (int i = 1; i < 5; i++)
-		genomep1.insert(i);		// each subsequent node contains a number
+		genomep1.insert(i);
 
     GAListGenome<int> genomep2(objective);
     genomep2.insert(5, GAListBASE::HEAD);
@@ -195,9 +194,9 @@ BOOST_AUTO_TEST_CASE(GAListGenome_PartialMatchCrossover_001)
 BOOST_AUTO_TEST_CASE(GAListGenome_OrderCrossover_001)
 {
     GAListGenome<int> genomep1(objective);
-    genomep1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
+    genomep1.insert(0, GAListBASE::HEAD);
 	for (int i = 1; i < 5; i++)
-		genomep1.insert(i);		// each subsequent node contains a number
+		genomep1.insert(i);
 
     GAListGenome<int> genomep2(objective);
     genomep2.insert(5, GAListBASE::HEAD);
@@ -301,7 +300,7 @@ BOOST_AUTO_TEST_CASE(GAListGenome_CycleCrossover_001)
     GAListGenome<int> genomep1(objective);
     genomep1.insert(0, GAListBASE::HEAD); // the head node contains a '0'
 	for (int i = 1; i < 5; i++)
-		genomep1.insert(i);		// each subsequent node contains a number
+		genomep1.insert(i);
 
     GAListGenome<int> genomep2(objective);
     genomep2.insert(5, GAListBASE::HEAD);
