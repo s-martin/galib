@@ -88,323 +88,287 @@ $(function() {
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;GAListBASE.h&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;gaerror.h&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/* ----------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> GAList</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> ---------------------------------------------------------------------------- */</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code hl_class" href="classGAListIter.html">GAListIter</a>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">extern</span> <a class="code hl_struct" href="structGANodeBASE.html">GANodeBASE</a> *_GAListTraverse(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;cur,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>                               <a class="code hl_struct" href="structGANodeBASE.html">GANodeBASE</a> *node);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *_GAListCopy(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *node, <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *head)</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (!node)</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">auto</span> *newnode = <span class="keyword">new</span> <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a>(node-&gt;contents);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *lasttmp = newnode, *newtmp = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *tmp = DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, node-&gt;next);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">while</span> (tmp &amp;&amp; tmp != head)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        newtmp = <span class="keyword">new</span> <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a>(tmp-&gt;contents);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        newtmp-&gt;prev = lasttmp;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        lasttmp-&gt;next = newtmp;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        lasttmp = newtmp;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        tmp = DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, tmp-&gt;next);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (newtmp)</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        newtmp-&gt;next = newnode;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        newnode-&gt;prev = newtmp;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        newnode-&gt;next = newnode;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        newnode-&gt;prev = newnode;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> newnode;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
-<div class="foldopen" id="foldopen00087" data-start="{" data-end="};">
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classGAList.html">   87</a></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span>GAList : <span class="keyword">public</span> GAListBASE</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>{</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    GAList() : GAListBASE() { iter(*<span class="keyword">this</span>); }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">explicit</span> GAList(<span class="keyword">const</span> T &amp;t) : GAListBASE(<span class="keyword">new</span> <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a>(t)), iter(*<span class="keyword">this</span>) {}</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    GAList(<span class="keyword">const</span> GAList&lt;T&gt; &amp;orig)</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        iter(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_function" href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">copy</a>(orig);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    GAList&lt;T&gt; &amp;operator=(<span class="keyword">const</span> GAList&lt;T&gt; &amp;orig)</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">if</span> (&amp;orig != <span class="keyword">this</span>)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <a class="code hl_function" href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">copy</a>(orig);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="comment">// The destructor just goes through the list and deletes every node.</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">virtual</span> ~GAList()</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">while</span> (hd)</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keyword">delete</span> GAListBASE::remove(DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, hd));</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        iter.node = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span></div>
-<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classGAList.html#a3d5f5d5acc5147550a11ba9873d176be">  120</a></span>    GAList&lt;T&gt; *<a class="code hl_function" href="classGAList.html#a3d5f5d5acc5147550a11ba9873d176be">clone</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keyword">auto</span> *t = <span class="keyword">new</span> GAList&lt;T&gt;;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *node;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> w = 0;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">if</span> (i == 0)</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            node = DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, hd);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            node = DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, _GAListTraverse(i, w, hd));</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">if</span> (!node)</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keywordflow">return</span> t;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *newnode = _GAListCopy(node, DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, hd));</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        t-&gt;insert(newnode, <span class="keyword">nullptr</span>, GAListBASE::HEAD);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="comment">// need to set iterator to right spot in the clone!!  for now its at the</span></div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="comment">// head</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">return</span> t;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    }</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code hl_class" href="classGAListIter.html">GAListIter</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classGAList.html">   32</a></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span>GAList : <span class="keyword">public</span> GAListBASE</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    GAList() : iter(*<span class="keyword">this</span>) {}</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">explicit</span> GAList(<span class="keyword">const</span> T &amp;t) : items(1, t), iter(*<span class="keyword">this</span>) { iter.head(); }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    GAList(<span class="keyword">const</span> GAList&lt;T&gt; &amp;orig) : items(orig.items), iter(*<span class="keyword">this</span>) { iter.head(); }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    GAList&lt;T&gt; &amp;operator=(<span class="keyword">const</span> GAList&lt;T&gt; &amp;orig)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">if</span> (&amp;orig != <span class="keyword">this</span>)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <a class="code hl_function" href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">copy</a>(orig);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">virtual</span> ~GAList() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classGAList.html#ab3a4a054235256eab250b3cbfb58f816">   47</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#ab3a4a054235256eab250b3cbfb58f816">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(items.size()); }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classGAList.html#a3d5f5d5acc5147550a11ba9873d176be">   57</a></span>    GAList&lt;T&gt; *<a class="code hl_function" href="classGAList.html#a3d5f5d5acc5147550a11ba9873d176be">clone</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keyword">auto</span> *t = <span class="keyword">new</span> GAList&lt;T&gt;;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">if</span> (i &gt;= items.size())</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keywordflow">return</span> t; <span class="comment">// empty or out of range: empty list</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keyword">auto</span> first = items.begin();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        std::advance(first, i);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        t-&gt;items.assign(first, items.end());</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        t-&gt;iter.head();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">return</span> t;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
 </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="comment">// methods that modify the state of the list</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="comment">// Yes, this is really ugly.  We do a complete destruction of the existing</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="comment">// list</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="comment">// then we copy the new one.  No caching, no nothing.  Oh well.  We set the</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="comment">// iterator to the head node - it should be set to the corresponding node,</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="comment">// but I won&#39;t do that right now.  THIS IS A BUG!</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">   73</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">copy</a>(<span class="keyword">const</span> GAList&lt;T&gt; &amp;orig)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        items = orig.items;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        iter.head();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classGAList.html#a193a2a02abe64fab6fc4d4c8943ff579">   85</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#a193a2a02abe64fab6fc4d4c8943ff579">destroy</a>()</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">if</span> (!iter.valid)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">return</span> NO_ERR;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keyword">auto</span> doomed = iter.node;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">if</span> (items.size() == 1)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            iter.valid = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (doomed == items.begin())</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            iter.node = std::next(doomed);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            iter.node = std::prev(doomed);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        items.erase(doomed);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">return</span> NO_ERR;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classGAList.html#ad416c888bdc1a24eefbd72fff7838dd1">  108</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#ad416c888bdc1a24eefbd72fff7838dd1">swap</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b)</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">if</span> (a == b || a &gt;= items.size() || b &gt;= items.size())</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            <span class="keywordflow">return</span> NO_ERR;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (a &gt; b)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            std::swap(a, b);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keyword">auto</span> ia = items.begin();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        std::advance(ia, a);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keyword">auto</span> ib = ia;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        std::advance(ib, b - a);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keyword">auto</span> afterb = std::next(ib);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        items.splice(ia, items, ib);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        items.splice(afterb, items, ia);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">return</span> NO_ERR;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span></div>
+<div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classGAList.html#ae97f4f2aad72d4c4aef4383d8f0669e6">  130</a></span>    T *<a class="code hl_function" href="classGAList.html#ae97f4f2aad72d4c4aef4383d8f0669e6">remove</a>()</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">if</span> (!iter.valid)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keyword">auto</span> doomed = iter.node;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        T *contents = <span class="keyword">new</span> T(*doomed);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">if</span> (items.size() == 1)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            iter.valid = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            iter.node = (doomed == items.begin()) ? std::prev(items.end()) : std::prev(doomed);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        items.erase(doomed);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">return</span> contents;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span></div>
 <div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">  153</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">copy</a>(<span class="keyword">const</span> GAList&lt;T&gt; &amp;orig)</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classGAList.html#a8d81e80d2a36d518b4812423f85a2284">  153</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#a8d81e80d2a36d518b4812423f85a2284">insert</a>(GAList&lt;T&gt; *t, <a class="code hl_enumeration" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a> where = AFTER)</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    {</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">while</span> (hd)</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            <span class="keyword">delete</span> GAListBASE::remove(DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, hd));</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        hd = _GAListCopy(DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, orig.hd),</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                     DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, orig.hd));</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        iter.node = hd;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        sz = orig.sz;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        csz = orig.csz;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> == t)</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            GAErr(GA_LOC, <span class="stringliteral">&quot;GAList&quot;</span>, <span class="stringliteral">&quot;insert&quot;</span>, GAError::CannotInsertIntoSelf);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="keywordflow">return</span> ERR;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordflow">if</span> (t-&gt;items.empty())</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="keywordflow">return</span> NO_ERR;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keyword">auto</span> pos = insertPosition(where);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordflow">if</span> (pos.second == ERR)</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            <span class="keywordflow">return</span> ERR;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keyword">auto</span> first = t-&gt;items.begin();</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        items.splice(pos.first, t-&gt;items);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        iter.node = first;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        iter.valid = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        t-&gt;iter.valid = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordflow">return</span> NO_ERR;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
 </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="comment">// Destroy the specified node.  This uses the current node as the one to</span></div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="comment">// destroy, so be sure to use the iteration methods to move to the node you</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="comment">// want to destroy.  Once the node is gone, we set the current node to the</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="comment">// prev node of the one that was destroyed.  If the node that was nuked was</span></div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="comment">// the head node then we set the current node to the new head.</span></div>
-<div class="foldopen" id="foldopen00174" data-start="{" data-end="}">
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classGAList.html#a193a2a02abe64fab6fc4d4c8943ff579">  174</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#a193a2a02abe64fab6fc4d4c8943ff579">destroy</a>()</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    {</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <a class="code hl_struct" href="structGANodeBASE.html">GANodeBASE</a> *node = iter.node;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordflow">if</span> (!node)</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            <span class="keywordflow">return</span> GAListBASE::NO_ERR;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordflow">if</span> (node-&gt;prev &amp;&amp; node-&gt;prev != node)</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <span class="keywordflow">if</span> (hd == node)</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                iter.node = node-&gt;next;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                iter.node = node-&gt;prev;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            iter.node = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keyword">delete</span> GAListBASE::remove(node);</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">return</span> GAListBASE::NO_ERR;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span></div>
+<div class="foldopen" id="foldopen00181" data-start="{" data-end="}">
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="classGAList.html#a8180e193cc88cdb7ba270b99e1993d8c">  181</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#a8180e193cc88cdb7ba270b99e1993d8c">insert</a>(<span class="keyword">const</span> T &amp;t, <a class="code hl_enumeration" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a> where = AFTER)</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keyword">auto</span> pos = insertPosition(where);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (pos.second == ERR)</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordflow">return</span> ERR;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        iter.node = items.insert(pos.first, t);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        iter.valid = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">return</span> NO_ERR;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    }</div>
 </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
-<div class="foldopen" id="foldopen00199" data-start="{" data-end="}">
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="classGAList.html#ad416c888bdc1a24eefbd72fff7838dd1">  199</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#ad416c888bdc1a24eefbd72fff7838dd1">swap</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b)</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    {</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="comment">// keep original behavior: treat same-index or out-of-range as no-op success</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">if</span> (a == b || a &gt;= (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)size() || b &gt;= (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)size())</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <span class="keywordflow">return</span> GAListBASE::NO_ERR;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <a class="code hl_struct" href="structGANodeBASE.html">GANodeBASE</a> *tmp = hd, *anode = <span class="keyword">nullptr</span>, *bnode = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cur = 0;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">while</span> (tmp &amp;&amp; tmp-&gt;next != hd)</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        {</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <span class="keywordflow">if</span> (a == cur)</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                anode = tmp;</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            <span class="keywordflow">if</span> (b == cur)</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                bnode = tmp;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            tmp = tmp-&gt;next;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            cur++;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        }</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">if</span> (a == cur)</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            anode = tmp;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordflow">if</span> (b == cur)</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            bnode = tmp;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">return</span> GAListBASE::swapnode(anode, bnode);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="comment">// typesafes on iteration methods.  These call the built-in iterator then</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="comment">// return the contents of the now-current node.  They do not affect the</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="comment">// state of the list.</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    T *head() { <span class="keywordflow">return</span> iter.head(); }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    T *tail() { <span class="keywordflow">return</span> iter.tail(); }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    T *current() { <span class="keywordflow">return</span> iter.current(); }</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    T *next() { <span class="keywordflow">return</span> iter.next(); }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    T *prev() { <span class="keywordflow">return</span> iter.prev(); }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    T *warp(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i) { <span class="keywordflow">return</span> iter.warp(i); }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    T *warp(<span class="keyword">const</span> GAListIter&lt;T&gt; &amp;i)</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">return</span> ((i.list == <span class="keyword">this</span>) ? iter.warp(i) : <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    T *operator[](<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i) { <span class="keywordflow">return</span> iter.warp(i); }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="comment">// Translate the insert location into a position in the std::list.  An empty</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="comment">// list always inserts at the head.  BEFORE the head inserts at the end.</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    std::pair&lt;typename std::list&lt;T&gt;::iterator, <span class="keywordtype">int</span>&gt; insertPosition(<a class="code hl_enumeration" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a> where)</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">if</span> (items.empty())</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            where = HEAD;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!iter.valid &amp;&amp; where != HEAD &amp;&amp; where != TAIL)</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        {</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            GAErr(GA_LOC, <span class="stringliteral">&quot;GAList&quot;</span>, <span class="stringliteral">&quot;insert&quot;</span>, GAError::CannotInsertOnNilNode);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            <span class="keywordflow">return</span> {items.end(), ERR};</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        }</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">switch</span> (where)</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">case</span> HEAD:</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="keywordflow">return</span> {items.begin(), NO_ERR};</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <span class="keywordflow">case</span> TAIL:</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            <span class="keywordflow">return</span> {items.end(), NO_ERR};</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">case</span> BEFORE:</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordflow">return</span> {iter.node == items.begin() ? items.end() : iter.node, NO_ERR};</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordflow">case</span> AFTER:</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            <span class="keywordflow">return</span> {std::next(iter.node), NO_ERR};</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        }</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        GAErr(GA_LOC, <span class="stringliteral">&quot;GAList&quot;</span>, <span class="stringliteral">&quot;insert&quot;</span>, GAError::BadWhereIndicator);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keywordflow">return</span> {items.end(), ERR};</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    std::list&lt;T&gt; items;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    GAListIter&lt;T&gt; iter; <span class="comment">// the embedded iterator</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keyword">friend</span> <span class="keyword">class </span>GAListIter&lt;T&gt;;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>};</div>
 </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span></div>
-<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classGAList.html#ae97f4f2aad72d4c4aef4383d8f0669e6">  233</a></span>    T *<a class="code hl_function" href="classGAList.html#ae97f4f2aad72d4c4aef4383d8f0669e6">remove</a>()</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    {</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *node = DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, iter.node);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">if</span> (!node)</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordflow">if</span> (node-&gt;prev != node)</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            iter.node = node-&gt;prev;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            iter.node = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        node = DYN_CAST(<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *, GAListBASE::remove(node));</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        T *contents = <span class="keyword">new</span> T(node-&gt;contents);</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="keyword">delete</span> node;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">return</span> contents;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    }</div>
-</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span></div>
-<div class="foldopen" id="foldopen00260" data-start="{" data-end="}">
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno"><a class="line" href="classGAList.html#a3ea23bdd611edeb6e0db0ff94f71d56d">  260</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#a3ea23bdd611edeb6e0db0ff94f71d56d">insert</a>(GAList&lt;T&gt; *t, GAListBASE::Location where = GAListBASE::AFTER)</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    {</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> == t)</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        {</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            GAErr(GA_LOC, <span class="stringliteral">&quot;GAList&quot;</span>, <span class="stringliteral">&quot;insert&quot;</span>, GAError::CannotInsertIntoSelf);</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <span class="keywordflow">return</span> GAListBASE::ERR;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        }</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classGAListBASE.html#acd920a7e64acd49d9a7e038445f7f283">GAListBASE::insert</a>(t-&gt;hd, iter.node, where) == GAListBASE::ERR)</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        {</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="keywordflow">return</span> GAListBASE::ERR;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        }</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        iter.node = (t-&gt;hd ? t-&gt;hd : iter.node);</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        t-&gt;hd = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        t-&gt;iter.node = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="keywordflow">return</span> GAListBASE::NO_ERR;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    }</div>
-</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span></div>
-<div class="foldopen" id="foldopen00285" data-start="{" data-end="}">
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="classGAList.html#a5f32dfa544976716b91dca47171fad45">  285</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#a5f32dfa544976716b91dca47171fad45">insert</a>(<span class="keyword">const</span> T &amp;t, GAListBASE::Location where = GAListBASE::AFTER)</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    {</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        <span class="keyword">auto</span> *c = <span class="keyword">new</span> <a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a>(t);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classGAListBASE.html#acd920a7e64acd49d9a7e038445f7f283">GAListBASE::insert</a>(c, iter.node, where) == GAListBASE::ERR)</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        {</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            <span class="keyword">delete</span> c;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            <span class="keywordflow">return</span> GAListBASE::ERR;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        }</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        iter.node = c;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <span class="keywordflow">return</span> GAListBASE::NO_ERR;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    }</div>
-</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="comment">// typesafes on iteration methods.  These call the built-in iterator then</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="comment">// return the contents of the now-current node.  They do not affect the</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="comment">// state of the list.</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    T *head() { <span class="keywordflow">return</span> iter.head(); }</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    T *tail() { <span class="keywordflow">return</span> iter.tail(); }</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    T *current() { <span class="keywordflow">return</span> iter.current(); }</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    T *next() { <span class="keywordflow">return</span> iter.next(); }</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    T *prev() { <span class="keywordflow">return</span> iter.prev(); }</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    T *warp(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i) { <span class="keywordflow">return</span> iter.warp(i); }</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    T *warp(<span class="keyword">const</span> GAListIter&lt;T&gt; &amp;i)</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span></div>
+<div class="foldopen" id="foldopen00250" data-start="{" data-end="};">
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="classGAListIter.html">  250</a></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span>GAListIter</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>{</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    GAListIter() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keyword">explicit</span> GAListIter(<span class="keyword">const</span> <a class="code hl_class" href="classGAList.html">GAList&lt;T&gt;</a> &amp;t) { (*this)(t); }</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    GAListIter(<span class="keyword">const</span> GAListIter&lt;T&gt; &amp;i) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    GAListIter&lt;T&gt; &amp;operator=(<span class="keyword">const</span> GAListIter&lt;T&gt; &amp;i) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordtype">void</span> operator()(<span class="keyword">const</span> <a class="code hl_class" href="classGAList.html">GAList&lt;T&gt;</a> &amp;t)</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        list = <span class="keyword">const_cast&lt;</span><a class="code hl_class" href="classGAList.html">GAList&lt;T&gt;</a> *<span class="keyword">&gt;</span>(&amp;t);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        node = t.iter.node;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        valid = t.iter.valid;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    }</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    T *current() { <span class="keywordflow">return</span> valid ? &amp;*node : <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    T *head()</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    {</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">if</span> (list == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        valid = !list-&gt;items.empty();</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        node = list-&gt;items.begin();</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">return</span> current();</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    }</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    T *tail()</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keywordflow">if</span> (list == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        valid = !list-&gt;items.empty();</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        node = valid ? std::prev(list-&gt;items.end()) : list-&gt;items.end();</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">return</span> current();</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    }</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    T *next()</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    {</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">if</span> (!valid)</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">if</span> (++node == list-&gt;items.end())</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            node = list-&gt;items.begin();</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">return</span> &amp;*node;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    T *prev()</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    {</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordflow">if</span> (!valid)</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <span class="keywordflow">if</span> (node == list-&gt;items.begin())</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>            node = std::prev(list-&gt;items.end());</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>            --node;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="keywordflow">return</span> &amp;*node;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    }</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span></div>
+<div class="foldopen" id="foldopen00306" data-start="{" data-end="}">
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="classGAListIter.html#a6b1ff33fff2e24b40d1a50df58a2ea81">  306</a></span>    T *<a class="code hl_function" href="classGAListIter.html#a6b1ff33fff2e24b40d1a50df58a2ea81">warp</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i)</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    {</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        <span class="keywordflow">return</span> ((i.list == <span class="keyword">this</span>) ? iter.warp(i) : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    }</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    T *operator[](<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i) { <span class="keywordflow">return</span> iter.warp(i); }</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classGAList.html#a3ea23bdd611edeb6e0db0ff94f71d56d">insert</a>(GANode&lt;T&gt; *n, GANode&lt;T&gt; *idx,</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>               GAListBASE::Location where = GAListBASE::AFTER)</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        <span class="keywordflow">if</span> (head() == <span class="keyword">nullptr</span> || i &gt;= list-&gt;items.size())</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        std::advance(node, i);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keywordflow">return</span> &amp;*node;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
+</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span></div>
+<div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classGAListIter.html#a919135a7804e782374809296fc2d24e1">  314</a></span>    T *<a class="code hl_function" href="classGAListIter.html#a919135a7804e782374809296fc2d24e1">warp</a>(<span class="keyword">const</span> <a class="code hl_class" href="classGAList.html">GAList&lt;T&gt;</a> &amp;t)</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    {</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classGAListBASE.html#acd920a7e64acd49d9a7e038445f7f283">GAListBASE::insert</a>(n, idx, where) == GAListBASE::ERR)</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            <span class="keywordflow">return</span> GAListBASE::ERR;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        iter.node = n;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">return</span> GAListBASE::NO_ERR;</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    }</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    GAListIter&lt;T&gt; iter; <span class="comment">// the embedded iterator</span></div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keyword">friend</span> <span class="keyword">class </span>GAListIter&lt;T&gt;;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>};</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        (*this)(t);</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        <span class="keywordflow">return</span> current();</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    }</div>
 </div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment">/* ----------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="comment"> GAListIter</span></div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span><span class="comment"> -------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="comment">  This is a type-safe derivation of the base ListIter object.  I copied the</span></div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="comment"> methods from the base class (I know, a no-no) rather than doing calls to the</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="comment"> base class methods.</span></div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment">  We depend on the template-ized GAList, thus the declaration.</span></div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="comment">  Behaviour for the iterator methods is defined as follows.  If the current</span></div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="comment"> node is null, attempts to access a derived position from the current position</span></div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment"> will return NULL.  The only way to reset the current node is to call the head()</span></div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment"> locater (you always have to start at the list head to navigate the list).  If</span></div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="comment"> the current node is non-null and the derived node is null, the current node is</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="comment"> NOT changed, but NULL is returned.  You can also warp to a new position if you</span></div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="comment"> have another iterator or a list with an embedded iterator.</span></div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="comment">  When we create a new list iterator, it defaults to the same node as the one</span></div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="comment"> used to create it.  If it is created with a list as its argument, it defaults</span></div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="comment"> to the list&#39;s iterator&#39;s current position.</span></div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><span class="comment"> ---------------------------------------------------------------------------- */</span></div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code hl_class" href="classGAList.html">GAList</a>;</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
-<div class="foldopen" id="foldopen00345" data-start="{" data-end="};">
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno"><a class="line" href="classGAListIter.html">  345</a></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span>GAListIter : <span class="keyword">public</span> GAListIterBASE</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>{</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    GAListIter() : GAListIterBASE() {}</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="keyword">explicit</span> GAListIter(<span class="keyword">const</span> <a class="code hl_class" href="classGAList.html">GAList&lt;T&gt;</a> &amp;t) : GAListIterBASE(t)</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    {</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        node = t.iter.node;</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    }</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    GAListIter(<span class="keyword">const</span> GAListIter&lt;T&gt; &amp;i) : GAListIterBASE(i) {}</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    T *current() { <span class="keywordflow">return</span> (node ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)node)-&gt;contents : <span class="keyword">nullptr</span>); }</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    T *head()</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    {</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <span class="keywordflow">return</span> (((node = GAListIterBASE::head()) != <span class="keyword">nullptr</span>) ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)GAListIterBASE::head())-&gt;contents : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    }</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    T *tail()</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    {</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="keywordflow">return</span> (((node = GAListIterBASE::tail()) != <span class="keyword">nullptr</span>) ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)GAListIterBASE::tail())-&gt;contents : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    }</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    T *next()</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    {</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keywordflow">return</span> ((node &amp;&amp; node-&gt;next) ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)(node = node-&gt;next))-&gt;contents : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    }</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    T *prev()</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    {</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="keywordflow">return</span> ((node &amp;&amp; node-&gt;prev) ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)(node = node-&gt;prev))-&gt;contents : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    }</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    T *warp(<span class="keyword">const</span> <a class="code hl_class" href="classGAList.html">GAList&lt;T&gt;</a> &amp;t)</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    {</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        list = &amp;t;</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        node = t.iter.node;</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <span class="keywordflow">return</span> (t.iter.node ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)(node = t.iter.node))-&gt;contents : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    }</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    T *warp(<span class="keyword">const</span> GAListIter&lt;T&gt; &amp;i)</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    {</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        list = i.list;</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        node = i.node;</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="keywordflow">return</span> (i.node ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)(node = i.node))-&gt;contents : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    }</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    T *warp(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i)</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    {</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        <a class="code hl_struct" href="structGANodeBASE.html">GANodeBASE</a> *n = <a class="code hl_function" href="classGAListIterBASE.html#a6238552885a8e977de357abfdc553475">GAListIterBASE::warp</a>(i);</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        <span class="keywordflow">return</span> (n != <span class="keyword">nullptr</span> ? &amp;((<a class="code hl_struct" href="structGANode.html">GANode&lt;T&gt;</a> *)(node = n))-&gt;contents : <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    }</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classGAList.html">GAList</a>&lt;T&gt;; <span class="comment">// do I need to do this?</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>};</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span></div>
+<div class="foldopen" id="foldopen00320" data-start="{" data-end="}">
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno"><a class="line" href="classGAListIter.html#aa093d5cd111525641124bf8c1da20027">  320</a></span>    T *<a class="code hl_function" href="classGAListIter.html#aa093d5cd111525641124bf8c1da20027">warp</a>(<span class="keyword">const</span> GAListIter&lt;T&gt; &amp;i)</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    {</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        list = i.list;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        node = i.node;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        valid = i.valid;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="keywordflow">return</span> current();</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    }</div>
 </div>
-<div class="ttc" id="aclassGAListBASE_html_acd920a7e64acd49d9a7e038445f7f283"><div class="ttname"><a href="classGAListBASE.html#acd920a7e64acd49d9a7e038445f7f283">GAListBASE::insert</a></div><div class="ttdeci">int insert(GANodeBASE *n, GANodeBASE *idx, Location where=AFTER)</div></div>
-<div class="ttc" id="aclassGAListIterBASE_html_a6238552885a8e977de357abfdc553475"><div class="ttname"><a href="classGAListIterBASE.html#a6238552885a8e977de357abfdc553475">GAListIterBASE::warp</a></div><div class="ttdeci">GANodeBASE * warp(unsigned int)</div><div class="ttdoc">Move the iterator to the node referenced by index.</div></div>
-<div class="ttc" id="aclassGAListIter_html"><div class="ttname"><a href="classGAListIter.html">GAListIter</a></div><div class="ttdef"><b>Definition</b> GAList.hpp:346</div></div>
-<div class="ttc" id="aclassGAList_html"><div class="ttname"><a href="classGAList.html">GAList</a></div><div class="ttdoc">Container for nodes that have a list structure.</div><div class="ttdef"><b>Definition</b> GAList.hpp:88</div></div>
-<div class="ttc" id="aclassGAList_html_a193a2a02abe64fab6fc4d4c8943ff579"><div class="ttname"><a href="classGAList.html#a193a2a02abe64fab6fc4d4c8943ff579">GAList::destroy</a></div><div class="ttdeci">int destroy()</div><div class="ttdoc">Remove the current node from the list and free the memory it was using.</div><div class="ttdef"><b>Definition</b> GAList.hpp:174</div></div>
-<div class="ttc" id="aclassGAList_html_a3d5f5d5acc5147550a11ba9873d176be"><div class="ttname"><a href="classGAList.html#a3d5f5d5acc5147550a11ba9873d176be">GAList::clone</a></div><div class="ttdeci">GAList&lt; T &gt; * clone(unsigned int i=0) const</div><div class="ttdoc">Make a copy of a list and return the pointer to the new list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:120</div></div>
-<div class="ttc" id="aclassGAList_html_a3ea23bdd611edeb6e0db0ff94f71d56d"><div class="ttname"><a href="classGAList.html#a3ea23bdd611edeb6e0db0ff94f71d56d">GAList::insert</a></div><div class="ttdeci">int insert(GAList&lt; T &gt; *t, GAListBASE::Location where=GAListBASE::AFTER)</div><div class="ttdoc">Inserts the contents of list in to the current list and removes it from the original list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:260</div></div>
-<div class="ttc" id="aclassGAList_html_a5f32dfa544976716b91dca47171fad45"><div class="ttname"><a href="classGAList.html#a5f32dfa544976716b91dca47171fad45">GAList::insert</a></div><div class="ttdeci">int insert(const T &amp;t, GAListBASE::Location where=GAListBASE::AFTER)</div><div class="ttdoc">Insert the object into the list at the specified place relative to the current location of the embedd...</div><div class="ttdef"><b>Definition</b> GAList.hpp:285</div></div>
-<div class="ttc" id="aclassGAList_html_ad416c888bdc1a24eefbd72fff7838dd1"><div class="ttname"><a href="classGAList.html#ad416c888bdc1a24eefbd72fff7838dd1">GAList::swap</a></div><div class="ttdeci">int swap(unsigned int a, unsigned int b)</div><div class="ttdoc">Swap two nodes in the list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:199</div></div>
-<div class="ttc" id="aclassGAList_html_ae97f4f2aad72d4c4aef4383d8f0669e6"><div class="ttname"><a href="classGAList.html#ae97f4f2aad72d4c4aef4383d8f0669e6">GAList::remove</a></div><div class="ttdeci">T * remove()</div><div class="ttdoc">Remove the current node from the list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:233</div></div>
-<div class="ttc" id="aclassGAList_html_af5551ec3442f549d235d8e43e5e0dd2f"><div class="ttname"><a href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">GAList::copy</a></div><div class="ttdeci">void copy(const GAList&lt; T &gt; &amp;orig)</div><div class="ttdoc">Make a complete copy of the list and return a pointer to the new list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:153</div></div>
-<div class="ttc" id="astructGANodeBASE_html"><div class="ttname"><a href="structGANodeBASE.html">GANodeBASE</a></div><div class="ttdoc">This is the basic node object.</div><div class="ttdef"><b>Definition</b> GANode.h:18</div></div>
-<div class="ttc" id="astructGANode_html"><div class="ttname"><a href="structGANode.html">GANode</a></div><div class="ttdef"><b>Definition</b> GANode.h:79</div></div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordtype">int</span> size()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> list != <span class="keyword">nullptr</span> ? list-&gt;size() : 0; }</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    GAList&lt;T&gt; *list = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keyword">typename</span> std::list&lt;T&gt;::iterator node{};</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordtype">bool</span> valid = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    <span class="keyword">friend</span> <span class="keyword">class </span>GAList&lt;T&gt;;</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>};</div>
+</div>
+<div class="ttc" id="aclassGAListBASE_html_a6dd05bae582308d522af18a65e6913fe"><div class="ttname"><a href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">GAListBASE::Location</a></div><div class="ttdeci">Location</div><div class="ttdoc">Values for &#39;where&#39; to insert.</div><div class="ttdef"><b>Definition</b> GAListBASE.h:22</div></div>
+<div class="ttc" id="aclassGAListIter_html"><div class="ttname"><a href="classGAListIter.html">GAListIter</a></div><div class="ttdoc">Iterator for GAList.</div><div class="ttdef"><b>Definition</b> GAList.hpp:251</div></div>
+<div class="ttc" id="aclassGAListIter_html_a6b1ff33fff2e24b40d1a50df58a2ea81"><div class="ttname"><a href="classGAListIter.html#a6b1ff33fff2e24b40d1a50df58a2ea81">GAListIter::warp</a></div><div class="ttdeci">T * warp(unsigned int i)</div><div class="ttdoc">Move the iterator to the element referenced by index.</div><div class="ttdef"><b>Definition</b> GAList.hpp:306</div></div>
+<div class="ttc" id="aclassGAListIter_html_a919135a7804e782374809296fc2d24e1"><div class="ttname"><a href="classGAListIter.html#a919135a7804e782374809296fc2d24e1">GAListIter::warp</a></div><div class="ttdeci">T * warp(const GAList&lt; T &gt; &amp;t)</div><div class="ttdoc">Move the iterator to the current position of the list&#39;s embedded iterator.</div><div class="ttdef"><b>Definition</b> GAList.hpp:314</div></div>
+<div class="ttc" id="aclassGAListIter_html_aa093d5cd111525641124bf8c1da20027"><div class="ttname"><a href="classGAListIter.html#aa093d5cd111525641124bf8c1da20027">GAListIter::warp</a></div><div class="ttdeci">T * warp(const GAListIter&lt; T &gt; &amp;i)</div><div class="ttdoc">Move the iterator to the position of another iterator.</div><div class="ttdef"><b>Definition</b> GAList.hpp:320</div></div>
+<div class="ttc" id="aclassGAList_html"><div class="ttname"><a href="classGAList.html">GAList</a></div><div class="ttdoc">List of objects, implemented on top of std::list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:33</div></div>
+<div class="ttc" id="aclassGAList_html_a193a2a02abe64fab6fc4d4c8943ff579"><div class="ttname"><a href="classGAList.html#a193a2a02abe64fab6fc4d4c8943ff579">GAList::destroy</a></div><div class="ttdeci">int destroy()</div><div class="ttdoc">Remove the current node from the list and free the memory it was using.</div><div class="ttdef"><b>Definition</b> GAList.hpp:85</div></div>
+<div class="ttc" id="aclassGAList_html_a3d5f5d5acc5147550a11ba9873d176be"><div class="ttname"><a href="classGAList.html#a3d5f5d5acc5147550a11ba9873d176be">GAList::clone</a></div><div class="ttdeci">GAList&lt; T &gt; * clone(unsigned int i=0) const</div><div class="ttdoc">Make a copy of a list and return the pointer to the new list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:57</div></div>
+<div class="ttc" id="aclassGAList_html_a8180e193cc88cdb7ba270b99e1993d8c"><div class="ttname"><a href="classGAList.html#a8180e193cc88cdb7ba270b99e1993d8c">GAList::insert</a></div><div class="ttdeci">int insert(const T &amp;t, Location where=AFTER)</div><div class="ttdoc">Insert the object into the list at the specified place relative to the current location of the embedd...</div><div class="ttdef"><b>Definition</b> GAList.hpp:181</div></div>
+<div class="ttc" id="aclassGAList_html_a8d81e80d2a36d518b4812423f85a2284"><div class="ttname"><a href="classGAList.html#a8d81e80d2a36d518b4812423f85a2284">GAList::insert</a></div><div class="ttdeci">int insert(GAList&lt; T &gt; *t, Location where=AFTER)</div><div class="ttdoc">Inserts the contents of list in to the current list and removes it from the original list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:153</div></div>
+<div class="ttc" id="aclassGAList_html_ab3a4a054235256eab250b3cbfb58f816"><div class="ttname"><a href="classGAList.html#ab3a4a054235256eab250b3cbfb58f816">GAList::size</a></div><div class="ttdeci">int size() const</div><div class="ttdoc">Number of elements in the list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:47</div></div>
+<div class="ttc" id="aclassGAList_html_ad416c888bdc1a24eefbd72fff7838dd1"><div class="ttname"><a href="classGAList.html#ad416c888bdc1a24eefbd72fff7838dd1">GAList::swap</a></div><div class="ttdeci">int swap(unsigned int a, unsigned int b)</div><div class="ttdoc">Swap two nodes in the list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:108</div></div>
+<div class="ttc" id="aclassGAList_html_ae97f4f2aad72d4c4aef4383d8f0669e6"><div class="ttname"><a href="classGAList.html#ae97f4f2aad72d4c4aef4383d8f0669e6">GAList::remove</a></div><div class="ttdeci">T * remove()</div><div class="ttdoc">Remove the current node from the list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:130</div></div>
+<div class="ttc" id="aclassGAList_html_af5551ec3442f549d235d8e43e5e0dd2f"><div class="ttname"><a href="classGAList.html#af5551ec3442f549d235d8e43e5e0dd2f">GAList::copy</a></div><div class="ttdeci">void copy(const GAList&lt; T &gt; &amp;orig)</div><div class="ttdoc">Make a complete copy of the list.</div><div class="ttdef"><b>Definition</b> GAList.hpp:73</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

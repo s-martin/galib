@@ -66,8 +66,8 @@
 <area shape="poly" id="edge33_Node000029_Node000033" title=" " alt="" coords="298,903,310,909,325,923,334,936,343,948,357,960,383,972,411,982,406,982,381,977,355,965,339,952,330,939,321,926,306,914,298,908"/>
 <area shape="rect" id="Node000034" href="$classGASigmaTruncationScaling.html" title=" " alt="" coords="356,1027,551,1055"/>
 <area shape="poly" id="edge34_Node000029_Node000034" title=" " alt="" coords="302,904,310,910,321,923,328,936,334,963,340,988,347,1000,358,1012,378,1027,373,1026,354,1016,342,1004,335,990,329,964,323,938,317,926,306,914,302,910"/>
-<area shape="rect" id="Node000017" href="$classGAListBASE.html" title=" " alt="" coords="7,455,104,483"/>
-<area shape="rect" id="Node000016" href="$classGAList.html" title="Container for nodes that have a list structure." alt="" coords="180,455,282,483"/>
+<area shape="rect" id="Node000017" href="$classGAListBASE.html" title="Constants shared by GAList and the genomes derived from it." alt="" coords="7,455,104,483"/>
+<area shape="rect" id="Node000016" href="$classGAList.html" title="List of objects, implemented on top of std::list." alt="" coords="180,455,282,483"/>
 <area shape="poly" id="edge36_Node000017_Node000016" title=" " alt="" coords="118,467,182,467,178,471,121,471"/>
 <area shape="poly" id="edge37_Node000016_Node000015" title=" " alt="" coords="296,467,377,467,373,471,298,471"/>
 <area shape="rect" id="Node000020" href="$classGATreeBASE.html" title=" " alt="" coords="5,507,106,535"/>

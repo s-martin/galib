@@ -73,15 +73,13 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classGAList-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">GAList&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Container for nodes that have a list structure.  
+<p>List of objects, implemented on top of std::list.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="GAList_8hpp_source.html">GAList.hpp</a>&gt;</code></p>
@@ -93,7 +91,7 @@ Inheritance diagram for GAList&lt; T &gt;:</div>
 <div class="dynheader">
 Collaboration diagram for GAList&lt; T &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classGAList__coll__graph.svg" width="194" height="280"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classGAList__coll__graph.svg" width="112" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -104,20 +102,23 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>GAList</b> (const <a class="el" href="classGAList.html">GAList</a>&lt; T &gt; &amp;orig)</td></tr>
 <tr class="memitem:a743b1a4289892e0adf271f831378b254" id="r_a743b1a4289892e0adf271f831378b254"><td class="memItemLeft" align="right" valign="top"><a id="a743b1a4289892e0adf271f831378b254" name="a743b1a4289892e0adf271f831378b254"></a>
 <a class="el" href="classGAList.html">GAList</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classGAList.html">GAList</a>&lt; T &gt; &amp;orig)</td></tr>
+<tr class="memitem:ab3a4a054235256eab250b3cbfb58f816" id="r_ab3a4a054235256eab250b3cbfb58f816"><td class="memItemLeft" align="right" valign="top"><a id="ab3a4a054235256eab250b3cbfb58f816" name="ab3a4a054235256eab250b3cbfb58f816"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
+<tr class="memdesc:ab3a4a054235256eab250b3cbfb58f816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in the list. <br /></td></tr>
 <tr class="memitem:a3d5f5d5acc5147550a11ba9873d176be" id="r_a3d5f5d5acc5147550a11ba9873d176be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classGAList.html">GAList</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d5f5d5acc5147550a11ba9873d176be">clone</a> (unsigned int i=0) const</td></tr>
 <tr class="memdesc:a3d5f5d5acc5147550a11ba9873d176be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a copy of a list and return the pointer to the new list.  <br /></td></tr>
 <tr class="memitem:af5551ec3442f549d235d8e43e5e0dd2f" id="r_af5551ec3442f549d235d8e43e5e0dd2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5551ec3442f549d235d8e43e5e0dd2f">copy</a> (const <a class="el" href="classGAList.html">GAList</a>&lt; T &gt; &amp;orig)</td></tr>
-<tr class="memdesc:af5551ec3442f549d235d8e43e5e0dd2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a complete copy of the list and return a pointer to the new list.  <br /></td></tr>
+<tr class="memdesc:af5551ec3442f549d235d8e43e5e0dd2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a complete copy of the list.  <br /></td></tr>
 <tr class="memitem:a193a2a02abe64fab6fc4d4c8943ff579" id="r_a193a2a02abe64fab6fc4d4c8943ff579"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a193a2a02abe64fab6fc4d4c8943ff579">destroy</a> ()</td></tr>
 <tr class="memdesc:a193a2a02abe64fab6fc4d4c8943ff579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the current node from the list and free the memory it was using.  <br /></td></tr>
 <tr class="memitem:ad416c888bdc1a24eefbd72fff7838dd1" id="r_ad416c888bdc1a24eefbd72fff7838dd1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad416c888bdc1a24eefbd72fff7838dd1">swap</a> (unsigned int a, unsigned int b)</td></tr>
 <tr class="memdesc:ad416c888bdc1a24eefbd72fff7838dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap two nodes in the list.  <br /></td></tr>
 <tr class="memitem:ae97f4f2aad72d4c4aef4383d8f0669e6" id="r_ae97f4f2aad72d4c4aef4383d8f0669e6"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae97f4f2aad72d4c4aef4383d8f0669e6">remove</a> ()</td></tr>
 <tr class="memdesc:ae97f4f2aad72d4c4aef4383d8f0669e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the current node from the list.  <br /></td></tr>
-<tr class="memitem:a3ea23bdd611edeb6e0db0ff94f71d56d" id="r_a3ea23bdd611edeb6e0db0ff94f71d56d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ea23bdd611edeb6e0db0ff94f71d56d">insert</a> (<a class="el" href="classGAList.html">GAList</a>&lt; T &gt; *t, GAListBASE::Location where=GAListBASE::AFTER)</td></tr>
-<tr class="memdesc:a3ea23bdd611edeb6e0db0ff94f71d56d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts the contents of list in to the current list and removes it from the original list.  <br /></td></tr>
-<tr class="memitem:a5f32dfa544976716b91dca47171fad45" id="r_a5f32dfa544976716b91dca47171fad45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f32dfa544976716b91dca47171fad45">insert</a> (const T &amp;t, GAListBASE::Location where=GAListBASE::AFTER)</td></tr>
-<tr class="memdesc:a5f32dfa544976716b91dca47171fad45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the object into the list at the specified place relative to the current location of the embedded iterator.  <br /></td></tr>
+<tr class="memitem:a8d81e80d2a36d518b4812423f85a2284" id="r_a8d81e80d2a36d518b4812423f85a2284"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8d81e80d2a36d518b4812423f85a2284">insert</a> (<a class="el" href="classGAList.html">GAList</a>&lt; T &gt; *t, <a class="el" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a> where=AFTER)</td></tr>
+<tr class="memdesc:a8d81e80d2a36d518b4812423f85a2284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts the contents of list in to the current list and removes it from the original list.  <br /></td></tr>
+<tr class="memitem:a8180e193cc88cdb7ba270b99e1993d8c" id="r_a8180e193cc88cdb7ba270b99e1993d8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8180e193cc88cdb7ba270b99e1993d8c">insert</a> (const T &amp;t, <a class="el" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a> where=AFTER)</td></tr>
+<tr class="memdesc:a8180e193cc88cdb7ba270b99e1993d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the object into the list at the specified place relative to the current location of the embedded iterator.  <br /></td></tr>
 <tr class="memitem:a1b86d2ae98817c46b5959dde0a43620a" id="r_a1b86d2ae98817c46b5959dde0a43620a"><td class="memItemLeft" align="right" valign="top"><a id="a1b86d2ae98817c46b5959dde0a43620a" name="a1b86d2ae98817c46b5959dde0a43620a"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>head</b> ()</td></tr>
 <tr class="memitem:addfb123db16093488014072301133d7c" id="r_addfb123db16093488014072301133d7c"><td class="memItemLeft" align="right" valign="top"><a id="addfb123db16093488014072301133d7c" name="addfb123db16093488014072301133d7c"></a>
@@ -134,34 +135,6 @@ T *&#160;</td><td class="memItemRight" valign="bottom"><b>warp</b> (unsigned int
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>warp</b> (const <a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt; &amp;i)</td></tr>
 <tr class="memitem:a391983ecf1bda88b030ae88ed8ca7a3d" id="r_a391983ecf1bda88b030ae88ed8ca7a3d"><td class="memItemLeft" align="right" valign="top"><a id="a391983ecf1bda88b030ae88ed8ca7a3d" name="a391983ecf1bda88b030ae88ed8ca7a3d"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (unsigned int i)</td></tr>
-<tr class="inherit_header pub_methods_classGAListBASE"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classGAListBASE')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classGAListBASE.html">GAListBASE</a></td></tr>
-<tr class="memitem:a4d10b0a8d9fcfcddf29bcf4ecfe8e4f1 inherit pub_methods_classGAListBASE" id="r_a4d10b0a8d9fcfcddf29bcf4ecfe8e4f1"><td class="memItemLeft" align="right" valign="top">
-&#160;</td><td class="memItemRight" valign="bottom"><b>GAListBASE</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *n)</td></tr>
-<tr class="memitem:a11d937bb82c151b02922c6c8e0f61b66 inherit pub_methods_classGAListBASE" id="r_a11d937bb82c151b02922c6c8e0f61b66"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:af1c6d909a3248328c46acef6f820b255" id="r_af1c6d909a3248328c46acef6f820b255"><td class="memItemLeft" align="right" valign="top"><a id="af1c6d909a3248328c46acef6f820b255" name="af1c6d909a3248328c46acef6f820b255"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>insert</b> (<a class="el" href="structGANode.html">GANode</a>&lt; T &gt; *n, <a class="el" href="structGANode.html">GANode</a>&lt; T &gt; *idx, GAListBASE::Location where=GAListBASE::AFTER)</td></tr>
-<tr class="inherit_header pro_methods_classGAListBASE"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classGAListBASE')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected Member Functions inherited from <a class="el" href="classGAListBASE.html">GAListBASE</a></td></tr>
-<tr class="memitem:aff2589bb89b0b1684c4817089d2a3f03 inherit pro_methods_classGAListBASE" id="r_aff2589bb89b0b1684c4817089d2a3f03"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *n)</td></tr>
-<tr class="memitem:acd920a7e64acd49d9a7e038445f7f283 inherit pro_methods_classGAListBASE" id="r_acd920a7e64acd49d9a7e038445f7f283"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAListBASE.html#acd920a7e64acd49d9a7e038445f7f283">insert</a> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *n, <a class="el" href="structGANodeBASE.html">GANodeBASE</a> *idx, Location where=AFTER)</td></tr>
-<tr class="memitem:ada6e97b5583184dbf625e3ce1af55f76 inherit pro_methods_classGAListBASE" id="r_ada6e97b5583184dbf625e3ce1af55f76"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>swapnode</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *a, <a class="el" href="structGANodeBASE.html">GANodeBASE</a> *b)</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:ae65e1c60b8d2b809004f72e8861be2c5" id="r_ae65e1c60b8d2b809004f72e8861be2c5"><td class="memItemLeft" align="right" valign="top"><a id="ae65e1c60b8d2b809004f72e8861be2c5" name="ae65e1c60b8d2b809004f72e8861be2c5"></a>
-<a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>iter</b></td></tr>
-<tr class="inherit_header pro_attribs_classGAListBASE"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classGAListBASE')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected Attributes inherited from <a class="el" href="classGAListBASE.html">GAListBASE</a></td></tr>
-<tr class="memitem:a52b6f9867df4db1c19b2390f66b55597 inherit pro_attribs_classGAListBASE" id="r_a52b6f9867df4db1c19b2390f66b55597"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sz</b></td></tr>
-<tr class="memitem:acbbe4c50acac176d804d5c440120db3f inherit pro_attribs_classGAListBASE" id="r_acbbe4c50acac176d804d5c440120db3f"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>csz</b></td></tr>
-<tr class="memitem:a22c259718f7f063182136adc6495fcf5 inherit pro_attribs_classGAListBASE" id="r_a22c259718f7f063182136adc6495fcf5"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>hd</b></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -171,26 +144,23 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>GAListIter&lt; T &gt
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_classGAListBASE"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classGAListBASE')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Types inherited from <a class="el" href="classGAListBASE.html">GAListBASE</a></td></tr>
-<tr class="memitem:a6dd05bae582308d522af18a65e6913fe inherit pub_types_classGAListBASE" id="r_a6dd05bae582308d522af18a65e6913fe"><td class="memItemLeft" align="right" valign="top"><a id="a6dd05bae582308d522af18a65e6913fe" name="a6dd05bae582308d522af18a65e6913fe"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Location</b> { <b>HEAD</b> = 0
+<tr class="memitem:a6dd05bae582308d522af18a65e6913fe inherit pub_types_classGAListBASE" id="r_a6dd05bae582308d522af18a65e6913fe"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a> { <b>HEAD</b> = 0
 , <b>TAIL</b>
 , <b>BEFORE</b>
 , <b>AFTER</b>
  }</td></tr>
+<tr class="memdesc:a6dd05bae582308d522af18a65e6913fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values for 'where' to insert.  <a href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">More...</a><br /></td></tr>
 <tr class="memitem:adceac88f8ce41e897266c5487e24fa7d inherit pub_types_classGAListBASE" id="r_adceac88f8ce41e897266c5487e24fa7d"><td class="memItemLeft" align="right" valign="top"><a id="adceac88f8ce41e897266c5487e24fa7d" name="adceac88f8ce41e897266c5487e24fa7d"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>NO_ERR</b> = 0
 , <b>ERR</b> = -1
  }</td></tr>
+<tr class="memdesc:adceac88f8ce41e897266c5487e24fa7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return codes. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
-class GAList&lt; T &gt;</div><p>Container for nodes that have a list structure. </p>
-<p>The base list object is responsible for maintaining the list heirarchy. This object is responsible for doing the memory management (allocating and de-allocating the nodes in the list). We insulate the user entirely from nodes - when you use a list, you don't get nodes back, you get the contents of nodes (ie the user doesn't have to think about the list parts of a node, they can simply assume that their data is organized into a list structure). We include an iterator in this object so that you can navigate through the list. You can create another iterator and assign it to your list so you can have multiple iterators. All of the actions take place relative to the current location of the embedded iterator. None of the iterators change the state of the list. Be careful so that you don't end up with an iterator dangling with a pointer to a part of a list that no longer exists (I would need some kind of reference counting and/or message passing to take care of this at a lower level, and I'm not ready to implement that at this point). For now we allocate nodes on the fly. Eventually I would like to do some better memory management (arrays perhaps?) so we don't have to do so much alloc and dealloc and recursion. We depend on the template-ized <a class="el" href="classGAListIter.html">GAListIter</a> routine, thus the declaration.</p>
-<p>current, head, tail, next, prev, warp These iterator methods are defined as access to the embedded iterator of the list. Use these methods to move the insertion point and to traverse the list. You can also create other iterators for this list, but they won't affect the contents.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+class GAList&lt; T &gt;</div><p>List of objects, implemented on top of std::list. </p>
+<p>You never get nodes back, you get pointers to the contents of the nodes. We include an iterator in this object so that you can navigate through the list. You can create another iterator (<a class="el" href="classGAListIter.html" title="Iterator for GAList.">GAListIter</a>) and assign it to your list so you can have multiple iterators. All of the actions take place relative to the current location of the embedded iterator. Be careful so that you don't end up with an iterator dangling at an element that no longer exists.</p>
+<p>The list behaves as a circular list: next() at the tail wraps to the head and prev() at the head wraps to the tail.</p>
+<p>The contents must be copy constructible. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a3d5f5d5acc5147550a11ba9873d176be" name="a3d5f5d5acc5147550a11ba9873d176be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3d5f5d5acc5147550a11ba9873d176be">&#9670;&#160;</a></span>clone()</h2>
@@ -218,14 +188,14 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>Make a copy of a list and return the pointer to the new list. </p>
-<p>The cloning is based on the value passed to this routine. This routine has no effect on the iterator in the original list.</p>
+<p>This routine has no effect on the iterator in the original list. The iterator of the new list is at its head.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">i</td><td>0: will clone entire list; other values will clone the list from the index to the end of the list. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classGAList.html" title="Container for nodes that have a list structure.">GAList&lt;T&gt;</a>* </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classGAList.html" title="List of objects, implemented on top of std::list.">GAList&lt;T&gt;</a>* the caller owns the returned list </dd></dl>
 
 </div>
 </div>
@@ -254,13 +224,8 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Make a complete copy of the list and return a pointer to the new list. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">orig</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Make a complete copy of the list. </p>
+<p>The iterator is set to the head of the list, not to the node corresponding to the iterator of orig. </p>
 
 </div>
 </div>
@@ -290,12 +255,12 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>Remove the current node from the list and free the memory it was using. </p>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<p>Once the node is gone, the current node is the previous node. If the node that was destroyed was the head then the current node is the new head. </p><dl class="section return"><dt>Returns</dt><dd>error code (always NO_ERR) </dd></dl>
 
 </div>
 </div>
-<a id="a5f32dfa544976716b91dca47171fad45" name="a5f32dfa544976716b91dca47171fad45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f32dfa544976716b91dca47171fad45">&#9670;&#160;</a></span>insert() <span class="overload">[1/2]</span></h2>
+<a id="a8180e193cc88cdb7ba270b99e1993d8c" name="a8180e193cc88cdb7ba270b99e1993d8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8180e193cc88cdb7ba270b99e1993d8c">&#9670;&#160;</a></span>insert() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -313,7 +278,7 @@ template&lt;class T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">GAListBASE::Location</td>          <td class="paramname"><span class="paramname"><em>where</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GAListBASE::AFTER</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a></td>          <td class="paramname"><span class="paramname"><em>where</em></span><span class="paramdefsep"> = </span><span class="paramdefval">AFTER</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -324,6 +289,7 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>Insert the object into the list at the specified place relative to the current location of the embedded iterator. </p>
+<p>The iterator is set to the new element.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>Object to be inserted into list </td></tr>
@@ -331,19 +297,12 @@ template&lt;class T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>No error </td></tr>
-    <tr><td class="paramname">-1</td><td>Error occurred </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>NO_ERR or ERR </dd></dl>
 
 </div>
 </div>
-<a id="a3ea23bdd611edeb6e0db0ff94f71d56d" name="a3ea23bdd611edeb6e0db0ff94f71d56d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea23bdd611edeb6e0db0ff94f71d56d">&#9670;&#160;</a></span>insert() <span class="overload">[2/2]</span></h2>
+<a id="a8d81e80d2a36d518b4812423f85a2284" name="a8d81e80d2a36d518b4812423f85a2284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d81e80d2a36d518b4812423f85a2284">&#9670;&#160;</a></span>insert() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -361,7 +320,7 @@ template&lt;class T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">GAListBASE::Location</td>          <td class="paramname"><span class="paramname"><em>where</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GAListBASE::AFTER</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe">Location</a></td>          <td class="paramname"><span class="paramname"><em>where</em></span><span class="paramdefsep"> = </span><span class="paramdefval">AFTER</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -372,22 +331,15 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>Inserts the contents of list in to the current list and removes it from the original list. </p>
-<p>Does NOT delete the original list, but DOES assume responsibility for the memory used by the contents of the original list.</p>
+<p>The original list is not deleted but is empty afterwards. The iterator is set to the first inserted element.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>List to be inserted </td></tr>
-    <tr><td class="paramname">where</td><td>Location where list is to be inserted (default: AFTER) </td></tr>
+    <tr><td class="paramname">where</td><td><a class="el" href="classGAListBASE.html#a6dd05bae582308d522af18a65e6913fe" title="Values for &#39;where&#39; to insert.">Location</a> where list is to be inserted (default: AFTER) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>No Error </td></tr>
-    <tr><td class="paramname">-1</td><td>Error occurred </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>NO_ERR or ERR </dd></dl>
 
 </div>
 </div>
@@ -417,8 +369,8 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>Remove the current node from the list. </p>
-<p>The iterator gets set to the next node toward the head of the list. This routine makes a copy of the node contents using the copy initializer of the T object, so the copy initializer MUST be defined and accessible. We return a pointer to the contents rather than the contenst for the same reason we return a pointer from all the iter routines - we don't want to pass big objects around.</p>
-<dl class="section return"><dt>Returns</dt><dd>T* pointer to the contents of the node that was removed. The node itself is destroyed </dd></dl>
+<p>The iterator gets set to the previous node (the tail if the head was removed).</p>
+<dl class="section return"><dt>Returns</dt><dd>copy of the contents of the removed node, or nullptr if there is no current node. The caller owns the returned object. </dd></dl>
 
 </div>
 </div>
@@ -452,15 +404,8 @@ template&lt;class T&gt; </div>
 </div><div class="memdoc">
 
 <p>Swap two nodes in the list. </p>
-<p>This has no effect on the size or the iterator. If either index is out of bounds then we don't do anything.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td></td></tr>
-    <tr><td class="paramname">b</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<p>This has no effect on the size or the iterator (the iterator stays on the same node). If either index is out of bounds, or both are the same, then we don't do anything.</p>
+<dl class="section return"><dt>Returns</dt><dd>error code (always NO_ERR) </dd></dl>
 
 </div>
 </div>

@@ -616,7 +616,7 @@
 <!-- Node17 -->
 <g id="Node000017" class="node">
 <title>Node17</title>
-<g id="a_Node000017"><a xlink:href="classGAListBASE.html" target="_top" xlink:title=" ">
+<g id="a_Node000017"><a xlink:href="classGAListBASE.html" target="_top" xlink:title="Constants shared by GAList and the genomes derived from it.">
 <polygon fill="white" stroke="#666666" points="74.12,-449.75 1.12,-449.75 1.12,-429 74.12,-429 74.12,-449.75"/>
 <text xml:space="preserve" text-anchor="middle" x="37.62" y="-436.25" font-family="Helvetica,sans-Serif" font-size="10.00">GAListBASE</text>
 </a>
@@ -625,7 +625,7 @@
 <!-- Node16 -->
 <g id="Node000016" class="node">
 <title>Node16</title>
-<g id="a_Node000016"><a xlink:href="classGAList.html" target="_top" xlink:title="Container for nodes that have a list structure.">
+<g id="a_Node000016"><a xlink:href="classGAList.html" target="_top" xlink:title="List of objects, implemented on top of std::list.">
 <polygon fill="white" stroke="#666666" points="207.12,-449.75 131.12,-449.75 131.12,-429 207.12,-429 207.12,-449.75"/>
 <text xml:space="preserve" text-anchor="middle" x="169.12" y="-436.25" font-family="Helvetica,sans-Serif" font-size="10.00">GAList&lt; T &gt;</text>
 </a>

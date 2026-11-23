@@ -78,23 +78,22 @@ $(function() {
   <div class="headertitle"><div class="title">GAListIter&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for GAListIter&lt; T &gt;:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classGAListIter__inherit__graph.svg" width="135" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for GAListIter&lt; T &gt;:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classGAListIter__coll__graph.svg" width="214" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>Iterator for <a class="el" href="classGAList.html" title="List of objects, implemented on top of std::list.">GAList</a>.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GAList_8hpp_source.html">GAList.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a629f4c6f9b1073356672a8fc2abf2ed3" id="r_a629f4c6f9b1073356672a8fc2abf2ed3"><td class="memItemLeft" align="right" valign="top"><a id="a629f4c6f9b1073356672a8fc2abf2ed3" name="a629f4c6f9b1073356672a8fc2abf2ed3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>GAListIter</b> (const <a class="el" href="classGAList.html">GAList</a>&lt; T &gt; &amp;t)</td></tr>
-<tr class="memitem:aa6b08e5ebfc7effcc55e455375666b3d" id="r_aa6b08e5ebfc7effcc55e455375666b3d"><td class="memItemLeft" align="right" valign="top"><a id="aa6b08e5ebfc7effcc55e455375666b3d" name="aa6b08e5ebfc7effcc55e455375666b3d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GAListIter</b> (const <a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt; &amp;i)</td></tr>
+<tr class="memitem:a9fb681c7174e11e08c281701732d42fa" id="r_a9fb681c7174e11e08c281701732d42fa"><td class="memItemLeft" align="right" valign="top"><a id="a9fb681c7174e11e08c281701732d42fa" name="a9fb681c7174e11e08c281701732d42fa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>GAListIter</b> (const <a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt; &amp;i)=default</td></tr>
+<tr class="memitem:ae9bf7438ded601173063f072dbe8ab58" id="r_ae9bf7438ded601173063f072dbe8ab58"><td class="memItemLeft" align="right" valign="top"><a id="ae9bf7438ded601173063f072dbe8ab58" name="ae9bf7438ded601173063f072dbe8ab58"></a>
+<a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt; &amp;i)=default</td></tr>
+<tr class="memitem:abd12ca2c83a48b296cd9f87727d4226c" id="r_abd12ca2c83a48b296cd9f87727d4226c"><td class="memItemLeft" align="right" valign="top"><a id="abd12ca2c83a48b296cd9f87727d4226c" name="abd12ca2c83a48b296cd9f87727d4226c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (const <a class="el" href="classGAList.html">GAList</a>&lt; T &gt; &amp;t)</td></tr>
 <tr class="memitem:af0fb332f879f97d4c08707a6428758fc" id="r_af0fb332f879f97d4c08707a6428758fc"><td class="memItemLeft" align="right" valign="top"><a id="af0fb332f879f97d4c08707a6428758fc" name="af0fb332f879f97d4c08707a6428758fc"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>current</b> ()</td></tr>
 <tr class="memitem:acd852f5fea97385093ec99de170d05f6" id="r_acd852f5fea97385093ec99de170d05f6"><td class="memItemLeft" align="right" valign="top"><a id="acd852f5fea97385093ec99de170d05f6" name="acd852f5fea97385093ec99de170d05f6"></a>
@@ -105,55 +104,58 @@ T *&#160;</td><td class="memItemRight" valign="bottom"><b>tail</b> ()</td></tr>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> ()</td></tr>
 <tr class="memitem:a6961fdfa4d35bf3f86bb5f12e678976e" id="r_a6961fdfa4d35bf3f86bb5f12e678976e"><td class="memItemLeft" align="right" valign="top"><a id="a6961fdfa4d35bf3f86bb5f12e678976e" name="a6961fdfa4d35bf3f86bb5f12e678976e"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>prev</b> ()</td></tr>
+<tr class="memitem:a6b1ff33fff2e24b40d1a50df58a2ea81" id="r_a6b1ff33fff2e24b40d1a50df58a2ea81"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b1ff33fff2e24b40d1a50df58a2ea81">warp</a> (unsigned int i)</td></tr>
+<tr class="memdesc:a6b1ff33fff2e24b40d1a50df58a2ea81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the iterator to the element referenced by index.  <br /></td></tr>
 <tr class="memitem:a919135a7804e782374809296fc2d24e1" id="r_a919135a7804e782374809296fc2d24e1"><td class="memItemLeft" align="right" valign="top"><a id="a919135a7804e782374809296fc2d24e1" name="a919135a7804e782374809296fc2d24e1"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>warp</b> (const <a class="el" href="classGAList.html">GAList</a>&lt; T &gt; &amp;t)</td></tr>
+<tr class="memdesc:a919135a7804e782374809296fc2d24e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the iterator to the current position of the list's embedded iterator. <br /></td></tr>
 <tr class="memitem:aa093d5cd111525641124bf8c1da20027" id="r_aa093d5cd111525641124bf8c1da20027"><td class="memItemLeft" align="right" valign="top"><a id="aa093d5cd111525641124bf8c1da20027" name="aa093d5cd111525641124bf8c1da20027"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>warp</b> (const <a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt; &amp;i)</td></tr>
-<tr class="memitem:a6b1ff33fff2e24b40d1a50df58a2ea81" id="r_a6b1ff33fff2e24b40d1a50df58a2ea81"><td class="memItemLeft" align="right" valign="top"><a id="a6b1ff33fff2e24b40d1a50df58a2ea81" name="a6b1ff33fff2e24b40d1a50df58a2ea81"></a>
-T *&#160;</td><td class="memItemRight" valign="bottom"><b>warp</b> (unsigned int i)</td></tr>
-<tr class="inherit_header pub_methods_classGAListIterBASE"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classGAListIterBASE')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classGAListIterBASE.html">GAListIterBASE</a></td></tr>
-<tr class="memitem:a55446cfe8183917f3cc66940232aed1d inherit pub_methods_classGAListIterBASE" id="r_a55446cfe8183917f3cc66940232aed1d"><td class="memItemLeft" align="right" valign="top">
-&#160;</td><td class="memItemRight" valign="bottom"><b>GAListIterBASE</b> (const <a class="el" href="classGAListBASE.html">GAListBASE</a> &amp;t)</td></tr>
-<tr class="memitem:a12676e57acae35fe84fcc05b416f11ee inherit pub_methods_classGAListIterBASE" id="r_a12676e57acae35fe84fcc05b416f11ee"><td class="memItemLeft" align="right" valign="top">
-&#160;</td><td class="memItemRight" valign="bottom"><b>GAListIterBASE</b> (const <a class="el" href="classGAListIterBASE.html">GAListIterBASE</a> &amp;i)</td></tr>
-<tr class="memitem:a415fd621f36d986941b3d842e2567826 inherit pub_methods_classGAListIterBASE" id="r_a415fd621f36d986941b3d842e2567826"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (const <a class="el" href="classGAListBASE.html">GAListBASE</a> &amp;t)</td></tr>
-<tr class="memitem:a41a32a267900611932d150027d20ba61 inherit pub_methods_classGAListIterBASE" id="r_a41a32a267900611932d150027d20ba61"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>current</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *c)</td></tr>
-<tr class="memitem:a455c37c8303d486556f2e535dfc252b5 inherit pub_methods_classGAListIterBASE" id="r_a455c37c8303d486556f2e535dfc252b5"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>current</b> ()</td></tr>
-<tr class="memitem:a36664976ede9b6c0c0f5d9146023bcb3 inherit pub_methods_classGAListIterBASE" id="r_a36664976ede9b6c0c0f5d9146023bcb3"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> ()</td></tr>
-<tr class="memitem:a775804e86e8260190692302403656959 inherit pub_methods_classGAListIterBASE" id="r_a775804e86e8260190692302403656959"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *c)</td></tr>
-<tr class="memitem:a6f64dee3fcc37f6eed4b55a999641554 inherit pub_methods_classGAListIterBASE" id="r_a6f64dee3fcc37f6eed4b55a999641554"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>prev</b> ()</td></tr>
-<tr class="memitem:ad56093efbd4355268297083225958e32 inherit pub_methods_classGAListIterBASE" id="r_ad56093efbd4355268297083225958e32"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>prev</b> (<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *c)</td></tr>
-<tr class="memitem:a0e1a9aee7bbc10a02d51fedd293b5cdc inherit pub_methods_classGAListIterBASE" id="r_a0e1a9aee7bbc10a02d51fedd293b5cdc"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>head</b> ()</td></tr>
-<tr class="memitem:a12963f0f033f5f7a0645b20eb0ec1e24 inherit pub_methods_classGAListIterBASE" id="r_a12963f0f033f5f7a0645b20eb0ec1e24"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>tail</b> ()</td></tr>
-<tr class="memitem:a6238552885a8e977de357abfdc553475 inherit pub_methods_classGAListIterBASE" id="r_a6238552885a8e977de357abfdc553475"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAListIterBASE.html#a6238552885a8e977de357abfdc553475">warp</a> (unsigned int)</td></tr>
-<tr class="memdesc:a6238552885a8e977de357abfdc553475 inherit pub_methods_classGAListIterBASE"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the iterator to the node referenced by index.  <br /></td></tr>
-<tr class="memitem:ac21b6462cfb7c413e0d5a8d607bf9bb4 inherit pub_methods_classGAListIterBASE" id="r_ac21b6462cfb7c413e0d5a8d607bf9bb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGAListIterBASE.html#ac21b6462cfb7c413e0d5a8d607bf9bb4">warp</a> (const <a class="el" href="classGAListIterBASE.html">GAListIterBASE</a> &amp;i)</td></tr>
-<tr class="memdesc:ac21b6462cfb7c413e0d5a8d607bf9bb4 inherit pub_methods_classGAListIterBASE"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the iterator to the node referenced by index.  <br /></td></tr>
-<tr class="memitem:a7e4cc4051e448a206febe24f1fc0b720 inherit pub_methods_classGAListIterBASE" id="r_a7e4cc4051e448a206febe24f1fc0b720"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
+<tr class="memdesc:aa093d5cd111525641124bf8c1da20027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the iterator to the position of another iterator. <br /></td></tr>
+<tr class="memitem:afee3398ab95d523fb0d43344fe844278" id="r_afee3398ab95d523fb0d43344fe844278"><td class="memItemLeft" align="right" valign="top"><a id="afee3398ab95d523fb0d43344fe844278" name="afee3398ab95d523fb0d43344fe844278"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a801ba18da9a4612a0f1db9fc7acf99a2" id="r_a801ba18da9a4612a0f1db9fc7acf99a2"><td class="memItemLeft" align="right" valign="top"><a id="a801ba18da9a4612a0f1db9fc7acf99a2" name="a801ba18da9a4612a0f1db9fc7acf99a2"></a>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>GAList&lt; T &gt;</b></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_attribs_classGAListIterBASE"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classGAListIterBASE')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected Attributes inherited from <a class="el" href="classGAListIterBASE.html">GAListIterBASE</a></td></tr>
-<tr class="memitem:a231b4b7c333b2e1f24ddae9c446ee295 inherit pro_attribs_classGAListIterBASE" id="r_a231b4b7c333b2e1f24ddae9c446ee295"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structGANodeBASE.html">GANodeBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>node</b></td></tr>
-<tr class="memitem:a6131a061fe4df2e3560581c43db4f1d3 inherit pro_attribs_classGAListIterBASE" id="r_a6131a061fe4df2e3560581c43db4f1d3"><td class="memItemLeft" align="right" valign="top">
-const <a class="el" href="classGAListBASE.html">GAListBASE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>list</b></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
+class GAListIter&lt; T &gt;</div><p>Iterator for <a class="el" href="classGAList.html" title="List of objects, implemented on top of std::list.">GAList</a>. </p>
+<p>An iterator is independent of the iterator embedded in the list and of other iterators. Navigation is circular: next() at the tail wraps to the head and prev() at the head wraps to the tail. The iterator is invalid (current() returns nullptr) until it is moved onto an element, and when the list is empty.</p>
+<p>When we create a new list iterator from another iterator, it defaults to the same node. If it is created with a list as its argument, it defaults to the list's iterator's current position. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a6b1ff33fff2e24b40d1a50df58a2ea81" name="a6b1ff33fff2e24b40d1a50df58a2ea81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b1ff33fff2e24b40d1a50df58a2ea81">&#9670;&#160;</a></span>warp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="classGAListIter.html">GAListIter</a>&lt; T &gt;::warp </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move the iterator to the element referenced by index. </p>
+<p>The head is element 0. If the index is out of bounds nullptr is returned and the iterator is left at the head. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/galib/galib/ga/<a class="el" href="GAList_8hpp_source.html">GAList.hpp</a></li>
 </ul>

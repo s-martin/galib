@@ -1,9 +1,0 @@
-<map id="GAListIterBASE" name="GAListIterBASE">
-<area shape="rect" id="Node000001" title="This is the base class for iterators for the list objects." alt="" coords="5,271,125,299"/>
-<area shape="rect" id="Node000002" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="11,38,119,65"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,78,60,135,60,198,66,271,61,271,54,198,55,135,61,83"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="115,33,136,38,143,43,146,51,142,61,131,67,102,68,99,63,129,62,138,58,141,51,139,46,134,42,117,38"/>
-<area shape="rect" id="Node000003" href="$classGAListBASE.html" title=" " alt="" coords="108,170,206,198"/>
-<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="84,76,150,169,145,171,82,81"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="137,210,79,272,76,268,132,209"/>
-</map>
