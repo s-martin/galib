@@ -195,7 +195,7 @@ Be sure to set the includes path so that the directory in which the GAlib header
 Adding the string genome or real number genome source files to a project may cause the compilation to fail (depending on your compiler).  They are designed to be included by other source files rather than being compiled themselves.  They contain specializations of template classes.
 </p>
 <p>
-By default, the library is configured to use the system's 'rand' random number generator when compiled with the Borland compiler.  This is because I've had problems with the better RNGs (ran2) in 16-bit mode.  If you are compiling a 32-bit application and you're using a Borland compiler, you should edit gaconfig.h so that USE_RAND is not defined.  In any event, be sure to check the integrity of the random number generator by building and running the randtest example as soon as you build the library.
+The library uses the C++ standard library's std::mt19937 random number generator.  Be sure to check the integrity of the random number generator by building and running the randtest example as soon as you build the library.
 </p>
 
 
@@ -267,7 +267,7 @@ You can compile the library by defining the GALIB_USE_NO_TEMPLATES preprocessor 
 </p>
 <blockquote>
 GAAllele.C GA1DArrayGenome.C GA2DArrayGenome.C GA3DArrayGenome.C <br>
-GAListGenome.C GAListBASE.C GAList.C <br>
+GAListGenome.C GAList.C <br>
 GATreeGenome.C GATreeBASE.C GATree.C 
 </blockquote>
 If you need one of the template genome types but do not have a compiler that understands templates, you can modify the template files by hand.  You will have to create a file for each type that you want to instantiate.  If you will be instantiating only one type, remove &lt;T&gt; and replace T with the type you are going to instantiate.  If you will be instantiating more than one type then you will have to replace &lt;T&gt; with an appropriate name and replace T with the type.  For example, to create an instance of an 'int' version of the tree object, GATree&lt;int&gt; would become GATreeInt and any occurances of 'T * var' would be replaced with 'int * var'.

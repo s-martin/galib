@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+* GAList.hpp: reimplemented GAList/GAListIter on top of std::list.  GAListBASE.C is gone and GAListBASE.h only holds the shared enums.
+* garandom.h/.C: replaced the ran1/ran2/ran3/rand/random/rand48 generators and the separate bit generator with std::mt19937.  The GALIB_USE_RAN*/GALIB_USE_RAND* options in gaconfig.h are removed.  Results for a given seed differ from earlier versions.
+
 ## Original GAlib (until version 2.4.7)
 
 ### 2005-01-27  Matthew Wall

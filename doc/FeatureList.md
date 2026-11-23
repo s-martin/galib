@@ -9,7 +9,7 @@
 - Many examples are included illustrating the use of various GAlib features, class derivations, parallelization, deterministic crowding, travelling salesman, DeJong, and Royal Road problems.
 - The library has been used on various Windows and Linux configurations. GAlib compiles without warnings on most major compilers.
 - Templates are used in some genome classes, but GAlib can be used without templates if your compiler does not understand them.
-- Four random number generators are included with the library.  You can select the one most appropriate for your system, or use your own.
+- Random numbers come from the C++ standard library (std::mt19937); seed it for reproducible runs.
 
 ## Algorithms, Parameters, and Statistics
 

@@ -275,7 +275,7 @@ The GARandomBit function is the most efficient way to do unbiased coin tosses.  
 The Gaussian functions return a random number from a Gaussian distribution with deviation that you specify.  The GAUnitGaussian function returns a number from a unit Gaussian distribution with mean 0 and deviation of 1.
 </p>
 <p>
-GAlib uses a single random number generator for the entire library.  You may not change the random number generator on the fly - it can be changed only when GAlib is compiled.  See the config.h and random.h header files for details.  By default, GAlib uses the <i>ran2</i> generator described in <a href="http://nr.harvard.edu/nr/bookc.html">Numerical Recipes in C</a>.
+GAlib uses a single random number generator for the entire library: the standard library's <i>std::mt19937</i> engine.  Seed it with GARandomSeed or GAResetRNG to get reproducible results.  See the garandom.h header file for details.
 </p>
 </blockquote>
 
@@ -3971,7 +3971,7 @@ The GAList&lt;T&gt; object is defined for your convenience so that you do not ha
 <br clear=all>
 </p>
 <p>
-The template-ized GAList&lt;T&gt; is derived from a generic list base class called GAListBASE.  The template list is defined in listtmpl.h, the list base class is defined in listbase.h
+The template-ized GAList&lt;T&gt; is implemented on top of std::list.  It is defined in GAList.hpp.  The GAListBASE class (GAListBASE.h) only holds the constants shared by the lists, such as the insert locations and the return codes.
 </p>
 <p>
 Any object used in the nodes must have the following methods defined and publicly available:
