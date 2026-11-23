@@ -12,7 +12,7 @@ BOOST_AUTO_TEST_CASE(GAList_001)
 
 	BOOST_CHECK_EQUAL(*galist.head(), 2);
 
-	//// TODO add failures to improve implementation
+	// TODO add failures to improve implementation
 }
 
 BOOST_AUTO_TEST_CASE(insert_001)
