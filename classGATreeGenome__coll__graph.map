@@ -1,53 +1,53 @@
 <map id="GATreeGenome&lt; T &gt;" name="GATreeGenome&lt; T &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="721,387,881,413"/>
-<area shape="rect" id="Node000002" href="$classGATree.html" title=" " alt="" coords="739,246,845,271"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="796,285,803,387,798,387,791,285"/>
-<area shape="rect" id="Node000003" href="$classGATreeBASE.html" title=" " alt="" coords="741,127,843,152"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="795,166,795,246,789,246,789,166"/>
-<area shape="rect" id="Node000004" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="737,22,847,47"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="795,61,795,126,789,126,789,61"/>
-<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="861,23,870,28,873,35,865,45,847,48,846,43,863,40,868,34,866,31,859,28"/>
-<area shape="rect" id="Node000005" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="525,246,621,271"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="606,276,688,324,785,385,782,390,685,329,603,280"/>
-<area shape="poly" id="edge31_Node000005_Node000005" title=" " alt="" coords="618,242,638,246,645,251,648,259,644,268,633,274,604,274,604,269,632,268,640,264,643,259,641,254,636,250,617,247"/>
-<area shape="rect" id="Node000007" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="424,387,579,413"/>
-<area shape="poly" id="edge30_Node000007_Node000005" title=" " alt="" coords="571,286,561,321,545,357,517,389,513,386,540,355,556,319,566,284"/>
-<area shape="rect" id="Node000013" href="$classGAPopulation.html" title=" " alt="" coords="593,485,703,510"/>
-<area shape="poly" id="edge16_Node000013_Node000005" title=" " alt="" coords="588,283,609,325,623,352,635,379,646,438,650,484,645,485,641,439,629,381,618,354,604,328,583,285"/>
-<area shape="rect" id="Node000006" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="906,127,961,152"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="894,156,609,249,608,243,892,151"/>
-<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="931,166,923,198,908,235,888,273,859,305,837,318,808,331,732,355,570,390,569,385,731,350,806,326,835,314,856,301,883,270,904,233,917,196,926,165"/>
-<area shape="poly" id="edge15_Node000013_Node000006" title=" " alt="" coords="950,163,978,217,1002,287,1008,324,1007,360,997,393,975,422,955,435,927,447,855,467,775,482,704,492,703,487,774,477,854,462,926,442,953,431,971,418,992,391,1002,359,1003,324,997,288,973,219,946,165"/>
-<area shape="rect" id="Node000014" href="$classGAScalingScheme.html" title=" " alt="" coords="859,329,999,354"/>
-<area shape="poly" id="edge18_Node000014_Node000006" title=" " alt="" coords="935,166,932,328,927,328,930,166"/>
-<area shape="rect" id="Node000015" href="$classGASelectionScheme.html" title=" " alt="" coords="631,633,785,659"/>
-<area shape="poly" id="edge20_Node000015_Node000006" title=" " alt="" coords="975,153,1007,169,1039,192,1063,221,1071,238,1073,257,1073,499,1071,511,1064,524,1039,546,1003,566,959,585,860,615,769,636,768,631,858,610,957,580,1001,562,1036,542,1060,520,1066,510,1068,498,1068,258,1066,240,1059,224,1036,195,1005,173,972,157"/>
-<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="503,373,519,326,539,294,560,270,564,274,543,298,524,328,508,375"/>
-<area shape="poly" id="edge29_Node000007_Node000007" title=" " alt="" coords="594,391,605,400,597,408,580,412,579,406,595,403,600,400,591,395"/>
-<area shape="poly" id="edge23_Node000013_Node000007" title=" " alt="" coords="523,420,567,456,618,482,616,487,564,461,520,425"/>
-<area shape="rect" id="Node000008" href="$classGAStatistics.html" title="Statistics class." alt="" coords="336,633,437,659"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="407,622,419,608,450,554,472,498,496,412,501,414,477,500,454,557,424,611,412,625"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="317,485,456,510"/>
-<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="389,524,389,633,384,633,384,524"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="142,485,293,510"/>
-<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="236,520,271,563,318,607,359,631,356,636,314,611,267,567,232,523"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="31,485,118,510"/>
-<area shape="poly" id="edge12_Node000008_Node000011" title=" " alt="" coords="91,520,129,565,153,588,181,607,220,623,260,633,336,642,335,647,259,639,218,628,179,612,150,592,125,569,87,523"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="5,380,144,420"/>
-<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="77,434,77,484,72,484,72,434"/>
-<area shape="poly" id="edge28_Node000007_Node000013" title=" " alt="" coords="624,477,585,446,527,415,530,410,588,442,628,473"/>
-<area shape="poly" id="edge14_Node000008_Node000013" title=" " alt="" coords="622,520,600,538,579,559,565,577,549,594,524,612,481,630,438,640,437,635,479,625,521,607,545,590,561,574,576,555,597,534,619,516"/>
-<area shape="poly" id="edge22_Node000013_Node000013" title=" " alt="" coords="719,488,730,497,722,506,704,508,703,503,719,501,725,498,716,493"/>
-<area shape="poly" id="edge21_Node000015_Node000013" title=" " alt="" coords="643,524,637,565,639,588,646,608,658,621,674,631,671,636,655,625,642,611,633,589,631,565,637,523"/>
-<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="926,369,915,396,895,422,850,452,800,473,749,487,704,494,703,489,748,482,798,468,847,448,892,418,910,394,921,367"/>
-<area shape="poly" id="edge19_Node000013_Node000015" title=" " alt="" coords="702,620,693,580,676,537,657,512,662,509,681,535,698,579,707,619"/>
-<area shape="rect" id="Node000016" href="$classGAEvalData.html" title="This is the basic interface for the object that contains evaluation data." alt="" coords="283,127,383,152"/>
-<area shape="poly" id="edge32_Node000005_Node000016" title=" " alt="" coords="381,154,446,179,515,212,561,244,558,248,512,217,444,184,380,159"/>
-<area shape="poly" id="edge24_Node000013_Node000016" title=" " alt="" coords="334,166,333,222,342,292,352,329,366,363,387,393,414,418,457,443,505,462,593,485,592,490,503,467,455,448,410,422,383,397,362,365,347,330,337,294,328,222,328,166"/>
-<area shape="rect" id="Node000017" href="$classGAParameterList.html" title="Parameter List." alt="" coords="371,246,501,271"/>
-<area shape="poly" id="edge25_Node000007_Node000017" title=" " alt="" coords="433,285,431,320,433,338,440,355,455,372,474,385,471,389,451,376,435,357,428,339,425,320,428,284"/>
-<area shape="rect" id="Node000018" title=" " alt="" coords="407,127,515,152"/>
-<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="459,166,441,246,436,245,453,165"/>
-<area shape="rect" id="Node000019" title=" " alt="" coords="442,22,481,47"/>
-<area shape="poly" id="edge27_Node000018_Node000019" title=" " alt="" coords="464,61,464,126,459,126,459,61"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="727,513,886,540"/>
+<area shape="rect" id="Node000002" href="$classGATree.html" title=" " alt="" coords="746,326,851,353"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="801,366,808,514,804,511,798,371"/>
+<area shape="rect" id="Node000003" href="$classGATreeBASE.html" title=" " alt="" coords="748,170,849,198"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="800,211,801,326,796,324,797,216"/>
+<area shape="rect" id="Node000004" href="$structGANodeBASE.html" title="This is the basic node object." alt="" coords="744,38,853,65"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="800,78,801,171,796,169,797,83"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="848,33,870,38,877,43,879,51,875,61,864,67,835,68,833,63,863,62,871,58,874,51,872,46,868,42,850,38"/>
+<area shape="rect" id="Node000005" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="530,326,625,353"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="606,361,793,512,788,513,604,366"/>
+<area shape="poly" id="edge31_Node000005_Node000005" title=" " alt="" coords="612,318,639,320,648,328,651,339,646,353,633,360,615,361,598,356,597,351,616,356,631,355,642,350,646,339,644,331,637,325,613,323"/>
+<area shape="rect" id="Node000007" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="421,513,576,540"/>
+<area shape="poly" id="edge30_Node000007_Node000005" title=" " alt="" coords="578,367,573,423,565,452,553,480,538,499,520,514,517,510,534,496,548,478,560,450,568,422,576,371"/>
+<area shape="rect" id="Node000013" href="$classGAPopulation.html" title=" " alt="" coords="594,633,704,661"/>
+<area shape="poly" id="edge16_Node000013_Node000005" title=" " alt="" coords="594,364,612,396,626,431,641,489,648,547,652,634,647,632,643,547,635,490,621,432,607,398,593,369"/>
+<area shape="rect" id="Node000006" href="$classGAID.html" title="This defines the identifiers for polymorphic classes." alt="" coords="911,170,966,198"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="894,204,736,273,609,327,607,323,733,269,899,202"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="934,211,906,321,886,374,864,409,842,426,811,441,731,471,642,496,562,515,560,510,640,491,729,466,809,437,840,421,861,406,881,372,901,319,931,215"/>
+<area shape="poly" id="edge15_Node000013_Node000006" title=" " alt="" coords="955,209,989,278,1005,322,1018,369,1025,418,1024,466,1012,512,1001,533,986,552,956,579,921,601,884,617,846,630,770,644,705,649,704,644,769,639,844,625,882,612,919,596,953,575,982,549,996,530,1007,510,1019,466,1020,419,1013,370,1000,323,984,280,953,214"/>
+<area shape="rect" id="Node000014" href="$classGAScalingScheme.html" title=" " alt="" coords="866,442,1006,469"/>
+<area shape="poly" id="edge18_Node000014_Node000006" title=" " alt="" coords="940,211,938,442,934,440,937,216"/>
+<area shape="rect" id="Node000015" href="$classGASelectionScheme.html" title=" " alt="" coords="636,833,788,861"/>
+<area shape="poly" id="edge20_Node000015_Node000006" title=" " alt="" coords="977,204,1011,227,1044,258,1068,295,1076,316,1078,338,1078,648,1076,672,1070,694,1048,732,1015,763,973,788,927,808,879,823,789,841,788,835,878,818,925,803,971,784,1011,759,1044,729,1065,692,1071,671,1073,648,1073,338,1071,317,1064,297,1039,261,1008,231,977,209"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="503,496,524,431,546,387,567,356,570,352,550,390,529,433,507,499"/>
+<area shape="poly" id="edge29_Node000007_Node000007" title=" " alt="" coords="591,516,602,527,594,536,577,540,575,535,592,531,597,527,591,522"/>
+<area shape="poly" id="edge23_Node000013_Node000007" title=" " alt="" coords="517,551,538,575,561,597,589,616,619,633,614,632,587,620,558,601,534,579,516,556"/>
+<area shape="rect" id="Node000008" href="$classGAStatistics.html" title="Statistics class." alt="" coords="334,833,434,861"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="410,820,419,808,438,772,454,733,477,655,489,587,496,543,499,539,495,588,482,657,459,735,443,774,423,810,413,824"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="315,633,452,661"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="386,675,386,834,381,832,382,678"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="141,633,290,661"/>
+<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="226,673,257,740,280,775,307,807,325,820,346,833,341,832,322,825,304,811,275,779,252,742,224,678"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="31,633,118,661"/>
+<area shape="poly" id="edge12_Node000008_Node000011" title=" " alt="" coords="82,673,95,706,112,743,136,778,166,807,195,819,238,828,336,842,331,842,238,833,194,824,163,811,132,781,108,745,91,708,81,678"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="5,504,144,549"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="75,562,77,633,72,632,74,567"/>
+<area shape="poly" id="edge28_Node000007_Node000013" title=" " alt="" coords="628,621,607,599,582,576,555,558,528,544,528,538,557,553,585,572,611,595,633,622"/>
+<area shape="poly" id="edge14_Node000008_Node000013" title=" " alt="" coords="622,669,595,696,574,728,562,757,548,784,521,811,479,833,435,844,434,838,477,828,518,807,544,781,557,754,569,725,591,693,617,672"/>
+<area shape="poly" id="edge22_Node000013_Node000013" title=" " alt="" coords="719,636,727,640,730,647,722,657,705,661,704,656,720,652,725,647,724,644,719,641"/>
+<area shape="poly" id="edge21_Node000015_Node000013" title=" " alt="" coords="642,674,636,705,633,740,635,775,647,808,659,821,675,833,669,832,655,825,643,810,630,776,627,739,631,705,638,677"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="933,483,922,520,900,552,855,587,803,612,751,630,705,640,704,635,750,624,801,607,852,582,897,549,917,517,929,486"/>
+<area shape="poly" id="edge19_Node000013_Node000015" title=" " alt="" coords="708,816,699,760,680,696,660,664,662,659,685,694,704,759,712,819"/>
+<area shape="rect" id="Node000016" href="$classGAEvalData.html" title="This is the basic interface for the object that contains evaluation data." alt="" coords="288,170,387,198"/>
+<area shape="poly" id="edge32_Node000005_Node000016" title=" " alt="" coords="389,201,454,230,519,269,548,297,571,325,566,325,545,300,516,273,452,234,390,207"/>
+<area shape="poly" id="edge24_Node000013_Node000016" title=" " alt="" coords="335,211,334,265,334,331,342,406,360,478,377,512,401,540,430,565,463,585,532,615,597,636,592,636,530,620,460,590,427,569,397,544,373,515,355,480,336,406,329,332,328,264,333,216"/>
+<area shape="rect" id="Node000017" href="$classGAParameterList.html" title="Parameter List." alt="" coords="375,326,505,353"/>
+<area shape="poly" id="edge25_Node000007_Node000017" title=" " alt="" coords="434,366,430,421,432,450,441,478,455,496,475,512,470,512,452,500,436,480,427,452,424,421,432,371"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="412,170,519,198"/>
+<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="462,211,444,326,439,324,459,216"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="446,38,484,65"/>
+<area shape="poly" id="edge27_Node000018_Node000019" title=" " alt="" coords="466,78,468,171,463,169,464,83"/>
 </map>

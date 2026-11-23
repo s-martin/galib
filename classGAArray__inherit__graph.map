@@ -1,15 +1,19 @@
 <map id="GAArray&lt; T &gt;" name="GAArray&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Array Base Class." alt="" coords="308,5,423,31"/>
-<area shape="rect" id="Node000002" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="43,79,229,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="316,37,174,81,172,76,314,32"/>
-<area shape="rect" id="Node000004" href="$classGA2DArrayGenome.html" title=" " alt="" coords="272,79,459,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="368,44,368,79,363,79,363,44"/>
-<area shape="rect" id="Node000006" href="$classGA3DArrayGenome.html" title=" " alt="" coords="501,79,688,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="416,32,558,76,557,81,415,37"/>
-<area shape="rect" id="Node000003" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="5,152,229,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="132,118,123,153,118,151,127,117"/>
-<area shape="rect" id="Node000005" href="$classGA2DArrayAlleleGenome.html" title=" " alt="" coords="253,152,477,177"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="368,118,368,152,363,152,363,118"/>
-<area shape="rect" id="Node000007" href="$classGA3DArrayAlleleGenome.html" title=" " alt="" coords="501,152,725,177"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="604,117,613,151,608,153,599,118"/>
+<area shape="rect" id="Node000001" title="Array Base Class." alt="" coords="5,195,119,223"/>
+<area shape="rect" id="Node000002" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="167,114,353,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,186,225,140,222,144,113,191"/>
+<area shape="rect" id="Node000006" href="$classGA2DArrayGenome.html" title=" " alt="" coords="167,195,353,223"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="134,206,169,208,164,210,135,212"/>
+<area shape="rect" id="Node000008" href="$classGA3DArrayGenome.html" title=" " alt="" coords="167,247,353,275"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="133,225,207,246,202,247,132,230"/>
+<area shape="rect" id="Node000003" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="420,5,605,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="301,104,400,60,436,50,431,52,402,65,304,109"/>
+<area shape="rect" id="Node000004" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="420,75,605,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="368,112,422,107,417,109,369,117"/>
+<area shape="rect" id="Node000005" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="401,143,624,171"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="368,138,403,144,398,144,369,143"/>
+<area shape="rect" id="Node000007" href="$classGA2DArrayAlleleGenome.html" title=" " alt="" coords="401,195,624,223"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="369,206,403,209,398,209,369,212"/>
+<area shape="rect" id="Node000009" href="$classGA3DArrayAlleleGenome.html" title=" " alt="" coords="401,247,624,275"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="369,258,403,261,398,261,369,264"/>
 </map>

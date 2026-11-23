@@ -1,49 +1,61 @@
 <map id="GAID" name="GAID">
-<area shape="rect" id="Node000001" title="This defines the identifiers for polymorphic classes." alt="" coords="5,473,60,499"/>
-<area shape="rect" id="Node000002" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="108,129,263,155"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="43,459,176,154,181,156,48,462"/>
-<area shape="rect" id="Node000008" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="137,424,233,449"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="72,470,107,458,142,447,144,452,109,463,74,475"/>
-<area shape="rect" id="Node000021" href="$classGAPopulation.html" title=" " alt="" coords="130,473,241,499"/>
-<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="74,483,130,483,130,489,74,489"/>
-<area shape="rect" id="Node000022" href="$classGAScalingScheme.html" title=" " alt="" coords="115,523,255,548"/>
-<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="74,497,109,509,144,520,142,525,107,514,72,502"/>
-<area shape="rect" id="Node000024" href="$classGASelectionScheme.html" title=" " alt="" coords="109,572,262,597"/>
-<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="54,508,79,534,109,558,133,569,131,574,107,563,75,538,50,511"/>
-<area shape="rect" id="Node000003" href="$classGADCrowdingGA.html" title=" " alt="" coords="343,5,473,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="206,118,251,78,309,40,341,27,343,32,312,44,255,82,210,122"/>
-<area shape="rect" id="Node000004" href="$classGADemeGA.html" title=" " alt="" coords="359,55,457,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="226,121,310,89,358,75,359,81,312,94,228,126"/>
-<area shape="rect" id="Node000005" href="$classGAIncrementalGA.html" title=" " alt="" coords="339,104,477,129"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="276,129,338,122,339,127,277,134"/>
-<area shape="rect" id="Node000006" href="$classGASimpleGA.html" title="Simple genetic algorithm class." alt="" coords="355,153,461,179"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="277,149,355,158,355,163,276,154"/>
-<area shape="rect" id="Node000007" href="$classGASteadyStateGA.html" title="Steady&#45;state genetic algorithm class." alt="" coords="339,203,477,228"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="230,157,312,187,355,200,353,205,310,193,228,162"/>
-<area shape="rect" id="Node000009" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="315,252,501,277"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="198,410,242,348,273,315,309,286,333,275,336,280,312,291,277,318,246,351,203,413"/>
-<area shape="rect" id="Node000011" href="$classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="311,301,505,327"/>
-<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="207,413,252,373,309,336,339,324,341,329,312,340,255,377,210,417"/>
-<area shape="rect" id="Node000013" href="$classGA2DArrayGenome.html" title=" " alt="" coords="315,351,501,376"/>
-<area shape="poly" id="edge12_Node000008_Node000013" title=" " alt="" coords="227,416,310,385,350,373,351,379,312,390,229,421"/>
-<area shape="rect" id="Node000015" href="$classGA2DBinaryStringGenome.html" title="This header defines the interface for the 2D binary string genome, including crossover objects and al..." alt="" coords="311,400,505,425"/>
-<area shape="poly" id="edge14_Node000008_Node000015" title=" " alt="" coords="247,427,310,421,311,426,248,433"/>
-<area shape="rect" id="Node000016" href="$classGA3DArrayGenome.html" title=" " alt="" coords="315,449,501,475"/>
-<area shape="poly" id="edge15_Node000008_Node000016" title=" " alt="" coords="248,441,315,449,314,454,247,446"/>
-<area shape="rect" id="Node000018" href="$classGA3DBinaryStringGenome.html" title=" " alt="" coords="311,499,505,524"/>
-<area shape="poly" id="edge17_Node000008_Node000018" title=" " alt="" coords="246,451,264,458,288,472,312,485,346,496,345,501,310,490,285,477,262,463,244,456"/>
-<area shape="rect" id="Node000019" href="$classGAListGenome.html" title="GAListGenome." alt="" coords="329,548,487,573"/>
-<area shape="poly" id="edge18_Node000008_Node000019" title=" " alt="" coords="247,448,264,459,281,478,289,498,296,517,312,535,333,546,330,550,309,539,292,520,284,500,277,481,261,463,245,453"/>
-<area shape="rect" id="Node000020" href="$classGATreeGenome.html" title=" " alt="" coords="328,597,488,623"/>
-<area shape="poly" id="edge19_Node000008_Node000020" title=" " alt="" coords="248,447,264,459,278,475,285,491,289,523,293,555,300,569,312,584,329,595,326,600,309,588,295,572,288,556,284,524,280,493,273,478,261,463,245,452"/>
-<area shape="rect" id="Node000010" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="553,252,777,277"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="515,262,553,262,553,267,515,267"/>
-<area shape="rect" id="Node000012" href="$classGABin2DecGenome.html" title=" " alt="" coords="590,301,741,327"/>
-<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="519,311,590,311,590,317,519,317"/>
-<area shape="rect" id="Node000014" href="$classGA2DArrayAlleleGenome.html" title=" " alt="" coords="553,351,777,376"/>
-<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="515,361,553,361,553,366,515,366"/>
-<area shape="rect" id="Node000017" href="$classGA3DArrayAlleleGenome.html" title=" " alt="" coords="553,449,777,475"/>
-<area shape="poly" id="edge16_Node000016_Node000017" title=" " alt="" coords="515,459,553,459,553,465,515,465"/>
-<area shape="rect" id="Node000023" href="$classGANoScaling.html" title=" " alt="" coords="355,647,461,672"/>
-<area shape="poly" id="edge22_Node000022_Node000023" title=" " alt="" coords="254,552,264,559,281,578,289,597,296,616,312,633,333,644,355,651,353,656,331,649,309,637,292,619,284,599,277,581,261,563,251,556"/>
+<area shape="rect" id="Node000001" title="This defines the identifiers for polymorphic classes." alt="" coords="5,604,60,632"/>
+<area shape="rect" id="Node000002" href="$classGAGeneticAlgorithm.html" title="The base GA class is virtual &#45; it defines the core data elements and parts of the interface that are ..." alt="" coords="108,136,262,164"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="40,589,177,163,181,166,45,590"/>
+<area shape="rect" id="Node000008" href="$classGAGenome.html" title="The base genome class just defines the genome interface &#45; how to mutate, crossover,..." alt="" coords="137,473,232,501"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="60,592,168,499,166,504,64,595"/>
+<area shape="rect" id="Node000023" href="$classGAPopulation.html" title=" " alt="" coords="130,604,240,632"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="74,616,132,616,128,620,77,620"/>
+<area shape="rect" id="Node000024" href="$classGAScalingScheme.html" title=" " alt="" coords="115,733,254,761"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="62,639,169,731,164,734,61,645"/>
+<area shape="rect" id="Node000030" href="$classGASelectionScheme.html" title=" " alt="" coords="109,785,261,813"/>
+<area shape="poly" id="edge29_Node000001_Node000030" title=" " alt="" coords="41,644,66,709,85,742,109,770,129,784,124,785,106,775,80,745,61,711,40,649"/>
+<area shape="rect" id="Node000003" href="$classGADCrowdingGA.html" title=" " alt="" coords="342,5,473,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="207,123,252,82,309,43,344,31,340,35,311,48,255,86,212,126"/>
+<area shape="rect" id="Node000004" href="$classGADemeGA.html" title=" " alt="" coords="358,57,457,85"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="229,127,309,95,360,81,356,85,311,100,233,131"/>
+<area shape="rect" id="Node000005" href="$classGAIncrementalGA.html" title=" " alt="" coords="339,109,476,137"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="276,137,341,130,337,133,279,141"/>
+<area shape="rect" id="Node000006" href="$classGASimpleGA.html" title="Simple genetic algorithm class." alt="" coords="356,161,460,189"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="276,158,357,168,353,171,279,163"/>
+<area shape="rect" id="Node000007" href="$classGASteadyStateGA.html" title="Steady&#45;state genetic algorithm class." alt="" coords="338,213,477,241"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="231,168,311,198,352,212,348,214,309,203,233,173"/>
+<area shape="rect" id="Node000009" href="$classGA1DArrayGenome.html" title="1 dimensional Array Genome" alt="" coords="314,265,501,293"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="195,458,213,423,237,381,269,339,308,304,335,292,331,296,312,308,273,343,242,384,217,425,200,460"/>
+<area shape="rect" id="Node000013" href="$classGA1DBinaryStringGenome.html" title="Interface for the 1D binary string genome, including crossover objects and all the default and built&#45;..." alt="" coords="311,317,504,345"/>
+<area shape="poly" id="edge12_Node000008_Node000013" title=" " alt="" coords="202,459,247,406,276,379,309,356,339,344,335,347,311,360,280,383,251,410,207,462"/>
+<area shape="rect" id="Node000015" href="$classGA2DArrayGenome.html" title=" " alt="" coords="314,369,501,397"/>
+<area shape="poly" id="edge14_Node000008_Node000015" title=" " alt="" coords="216,462,259,434,309,407,346,396,342,399,311,412,262,438,220,466"/>
+<area shape="rect" id="Node000017" href="$classGA2DBinaryStringGenome.html" title="This header defines the interface for the 2D binary string genome, including crossover objects and al..." alt="" coords="311,421,504,449"/>
+<area shape="poly" id="edge16_Node000008_Node000017" title=" " alt="" coords="246,470,347,448,343,451,249,475"/>
+<area shape="rect" id="Node000018" href="$classGA3DArrayGenome.html" title=" " alt="" coords="314,473,501,501"/>
+<area shape="poly" id="edge17_Node000008_Node000018" title=" " alt="" coords="247,485,316,486,312,489,249,490"/>
+<area shape="rect" id="Node000020" href="$classGA3DBinaryStringGenome.html" title=" " alt="" coords="311,525,504,553"/>
+<area shape="poly" id="edge19_Node000008_Node000020" title=" " alt="" coords="247,499,347,523,343,526,248,504"/>
+<area shape="rect" id="Node000021" href="$classGAListGenome.html" title="GAListGenome." alt="" coords="330,577,486,605"/>
+<area shape="poly" id="edge20_Node000008_Node000021" title=" " alt="" coords="217,508,262,536,311,562,346,576,341,577,309,567,259,541,218,513"/>
+<area shape="rect" id="Node000022" href="$classGATreeGenome.html" title=" " alt="" coords="328,629,487,657"/>
+<area shape="poly" id="edge21_Node000008_Node000022" title=" " alt="" coords="205,511,251,564,280,591,311,614,339,628,334,629,309,619,276,595,247,568,205,516"/>
+<area shape="rect" id="Node000010" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="572,128,758,172"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="494,257,504,250,519,234,527,218,535,200,552,182,575,171,571,174,555,187,540,203,532,220,524,237,507,255,497,261"/>
+<area shape="rect" id="Node000011" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="572,197,758,242"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="483,259,574,239,570,242,486,264"/>
+<area shape="rect" id="Node000012" href="$classGA1DArrayAlleleGenome.html" title=" " alt="" coords="553,265,777,293"/>
+<area shape="poly" id="edge11_Node000009_Node000012" title=" " alt="" coords="515,277,555,278,551,280,518,282"/>
+<area shape="rect" id="Node000014" href="$classGABin2DecGenome.html" title=" " alt="" coords="590,317,740,345"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="519,329,592,330,587,332,521,334"/>
+<area shape="rect" id="Node000016" href="$classGA2DArrayAlleleGenome.html" title=" " alt="" coords="553,369,777,397"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="515,381,555,382,551,384,517,386"/>
+<area shape="rect" id="Node000019" href="$classGA3DArrayAlleleGenome.html" title=" " alt="" coords="553,473,777,501"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="516,485,556,486,551,488,517,490"/>
+<area shape="rect" id="Node000025" href="$classGALinearScaling.html" title=" " alt="" coords="344,681,471,709"/>
+<area shape="poly" id="edge24_Node000024_Node000025" title=" " alt="" coords="261,727,347,708,343,711,263,732"/>
+<area shape="rect" id="Node000026" href="$classGANoScaling.html" title=" " alt="" coords="355,733,460,761"/>
+<area shape="poly" id="edge25_Node000024_Node000026" title=" " alt="" coords="269,745,357,746,352,748,270,750"/>
+<area shape="rect" id="Node000027" href="$classGAPowerLawScaling.html" title=" " alt="" coords="331,785,484,813"/>
+<area shape="poly" id="edge26_Node000024_Node000027" title=" " alt="" coords="262,762,348,784,342,785,262,768"/>
+<area shape="rect" id="Node000028" href="$classGASharing.html" title=" " alt="" coords="363,837,452,865"/>
+<area shape="poly" id="edge27_Node000024_Node000028" title=" " alt="" coords="252,765,264,772,279,785,288,798,297,810,311,822,337,834,365,844,360,844,335,839,309,827,293,814,284,801,275,788,260,776,252,771"/>
+<area shape="rect" id="Node000029" href="$classGASigmaTruncationScaling.html" title=" " alt="" coords="310,889,505,917"/>
+<area shape="poly" id="edge28_Node000024_Node000029" title=" " alt="" coords="256,766,264,772,275,785,282,799,288,825,294,851,301,863,312,874,332,889,327,888,308,879,296,866,289,852,283,826,277,800,271,788,260,776,256,772"/>
 </map>
