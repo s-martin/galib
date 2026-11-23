@@ -48,17 +48,6 @@ incorporate it into the code base.
 			  that it uses (such as real genome and string genome).
 
 
-  GALIB_USE_RAN1      These specify which random number function to use.  Only
-  GALIB_USE_RAN2      one of these may be specified.  You may have to tweak
-  GALIB_USE_RAN3      random.h a bit as well (these functions are not defined
-  GALIB_USE_RAND      the same way on each platform).  For best results, use
-  GALIB_USE_RANDOM    ran2 or ran3 (performance is slightly slower than most
-  GALIB_USE_RAND48    system RNGs, but you'll get better results).
-
-					  If you want to use another random number generator you
-					  must hack random.h directly (see the comments in that
-					  file).
-
   GALIB_BITBASE       The built-in type to use for bit conversions.  This
 					  should be set to the type of the largest integer that
 					  your system supports.  If you have long long int then
@@ -186,13 +175,6 @@ incorporate it into the code base.
 #endif
 
 #include <cassert>
-
-// If no RNG has been selected, use the ran2 generator by default
-#if !defined(GALIB_USE_RAND) && !defined(GALIB_USE_RANDOM) &&                  \
-	!defined(GALIB_USE_RAND48) && !defined(GALIB_USE_RAN2) &&                  \
-	!defined(GALIB_USE_RAN3)
-#define GALIB_USE_RAN2
-#endif
 
 // This defines how many bits are in a single word on your system.  Most
 // systems have a word length of 8 bits.

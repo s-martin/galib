@@ -38,9 +38,9 @@ BOOST_AUTO_TEST_CASE(GAListGenome_DestructiveMutator_001)
 
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
-    BOOST_CHECK_EQUAL(genome.size(), 2);
-    BOOST_CHECK_EQUAL(*genome.head(), 3);
-    BOOST_CHECK_EQUAL(*genome.next(), 4);
+    BOOST_CHECK_EQUAL(genome.size(), 3);
+    BOOST_CHECK_EQUAL(*genome.head(), 1);
+    BOOST_CHECK_EQUAL(*genome.next(), 2);
 }
 
 BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
@@ -63,11 +63,11 @@ BOOST_AUTO_TEST_CASE(GAListGenome_SwapMutator_001)
 
     BOOST_CHECK_EQUAL(genome.mutate(0.5), 2);
 
-    BOOST_CHECK_EQUAL(*genome.head(), 0);
-    BOOST_CHECK_EQUAL(*genome.next(), 1);
-    BOOST_CHECK_EQUAL(*genome.next(), 4);
-    BOOST_CHECK_EQUAL(*genome.next(), 2);
+    BOOST_CHECK_EQUAL(*genome.head(), 1);
     BOOST_CHECK_EQUAL(*genome.next(), 3);
+    BOOST_CHECK_EQUAL(*genome.next(), 2);
+    BOOST_CHECK_EQUAL(*genome.next(), 0);
+    BOOST_CHECK_EQUAL(*genome.next(), 4);
 }
 
 BOOST_AUTO_TEST_CASE(GAListGenome_NodeComparator_001)
@@ -125,15 +125,15 @@ BOOST_AUTO_TEST_CASE(GAListGenome_OnePointCrossover_001)
     BOOST_CHECK_EQUAL(*genomep2.next(), 9);
 
     BOOST_CHECK_EQUAL(*genomec1.head(), 0);
-    BOOST_CHECK_EQUAL(*genomec1.next(), 0);
     BOOST_CHECK_EQUAL(*genomec1.next(), 1);
     BOOST_CHECK_EQUAL(*genomec1.next(), 2);
     BOOST_CHECK_EQUAL(*genomec1.next(), 3);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 4);
 
-    BOOST_CHECK_EQUAL(*genomec2.head(), 1);
+    BOOST_CHECK_EQUAL(*genomec2.head(), 0);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 1);
     BOOST_CHECK_EQUAL(*genomec2.next(), 2);
-    BOOST_CHECK_EQUAL(*genomec2.next(), 3);
-    BOOST_CHECK_EQUAL(*genomec2.next(), 4);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 0);
     BOOST_CHECK_EQUAL(*genomec2.next(), 1);
 
     BOOST_CHECK_EQUAL(GAListGenome<int>::OnePointCrossover(genomep1, genomep1, nullptr, nullptr), 0);
@@ -282,17 +282,17 @@ BOOST_AUTO_TEST_CASE(GAListGenome_OrderCrossover_002)
     BOOST_CHECK_EQUAL(*genomep2.next(), 0);
 
     // the children contain a genuine recombination of both parents' orderings
-    BOOST_CHECK_EQUAL(*genomec1.head(), 0);
-	BOOST_CHECK_EQUAL(*genomec1.next(), 2);
-    BOOST_CHECK_EQUAL(*genomec1.next(), 3);
+    BOOST_CHECK_EQUAL(*genomec1.head(), 4);
+	BOOST_CHECK_EQUAL(*genomec1.next(), 3);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 2);
+    BOOST_CHECK_EQUAL(*genomec1.next(), 0);
     BOOST_CHECK_EQUAL(*genomec1.next(), 1);
-    BOOST_CHECK_EQUAL(*genomec1.next(), 4);
 
-    BOOST_CHECK_EQUAL(*genomec2.head(), 4);
-	BOOST_CHECK_EQUAL(*genomec2.next(), 2);
-    BOOST_CHECK_EQUAL(*genomec2.next(), 1);
+    BOOST_CHECK_EQUAL(*genomec2.head(), 0);
+	BOOST_CHECK_EQUAL(*genomec2.next(), 1);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 2);
+    BOOST_CHECK_EQUAL(*genomec2.next(), 4);
     BOOST_CHECK_EQUAL(*genomec2.next(), 3);
-    BOOST_CHECK_EQUAL(*genomec2.next(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(GAListGenome_CycleCrossover_001)
