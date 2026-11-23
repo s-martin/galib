@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Modernized GAlib: /home/runner/work/galib/galib/ga/GARealGenome.h Source File</title>
+<title>Modernized GAlib: /home/runner/work/galib/galib/ga/GARealGenome.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -75,7 +75,7 @@ $(function() {
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
-  <div class="headertitle"><div class="title">GARealGenome.h</div></div>
+  <div class="headertitle"><div class="title">GARealGenome.hpp</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* ----------------------------------------------------------------------------</span></div>
@@ -86,7 +86,7 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;GAAllele.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;GAAllele.hpp&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;GA1DArrayGenome.hpp&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">using </span>GARealAlleleSet = <a class="code hl_class" href="classGAAlleleSet.html">GAAlleleSet&lt;float&gt;</a>;</div>
@@ -96,11 +96,11 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">int</span> GARealGaussianMutator(<a class="code hl_class" href="classGAGenome.html">GAGenome</a> &amp;, <span class="keywordtype">float</span>);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// in one (and only one) place in the code that uses the string genome, you </span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// should define INSTANTIATE_STRING_GENOME in order to force the specialization</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// for this genome.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// In one (and only one) translation unit that uses the real genome, define</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// INSTANTIATE_REAL_GENOME before including this header to enable its</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// specializations.</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#if defined(INSTANTIATE_REAL_GENOME)</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;GARealGenome.C&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;GARealGenome_impl.hpp&gt;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">inline</span> <span class="keywordtype">void</span> GARealUniformInitializer(<a class="code hl_class" href="classGAGenome.html">GAGenome</a>&amp; g){</div>
@@ -153,8 +153,8 @@ $(function() {
 <div class="ttc" id="aclassGA1DArrayAlleleGenome_html"><div class="ttname"><a href="classGA1DArrayAlleleGenome.html">GA1DArrayAlleleGenome</a></div><div class="ttdef"><b>Definition</b> GA1DArrayGenome.hpp:1169</div></div>
 <div class="ttc" id="aclassGA1DArrayGenome_html_ab7d685d38877d57867c3b1650f5fb038"><div class="ttname"><a href="classGA1DArrayGenome.html#ab7d685d38877d57867c3b1650f5fb038">GA1DArrayGenome::SwapMutator</a></div><div class="ttdeci">static int SwapMutator(GAGenome &amp;c, float pmut)</div><div class="ttdoc">Randomly swap elements in the array.</div><div class="ttdef"><b>Definition</b> GA1DArrayGenome.hpp:52</div></div>
 <div class="ttc" id="aclassGA1DArrayGenome_html_ae9ec93a518f095418ca0d8b236f2e355"><div class="ttname"><a href="classGA1DArrayGenome.html#ae9ec93a518f095418ca0d8b236f2e355">GA1DArrayGenome::UniformCrossover</a></div><div class="ttdeci">static int UniformCrossover(const GAGenome &amp;p1, const GAGenome &amp;p2, GAGenome *c1, GAGenome *c2)</div><div class="ttdoc">Randomly take bits from each parent.</div><div class="ttdef"><b>Definition</b> GA1DArrayGenome.hpp:116</div></div>
-<div class="ttc" id="aclassGAAlleleSetArray_html"><div class="ttname"><a href="classGAAlleleSetArray.html">GAAlleleSetArray</a></div><div class="ttdef"><b>Definition</b> GAAllele.h:404</div></div>
-<div class="ttc" id="aclassGAAlleleSet_html"><div class="ttname"><a href="classGAAlleleSet.html">GAAlleleSet</a></div><div class="ttdef"><b>Definition</b> GAAllele.h:192</div></div>
+<div class="ttc" id="aclassGAAlleleSetArray_html"><div class="ttname"><a href="classGAAlleleSetArray.html">GAAlleleSetArray</a></div><div class="ttdef"><b>Definition</b> GAAllele.hpp:404</div></div>
+<div class="ttc" id="aclassGAAlleleSet_html"><div class="ttname"><a href="classGAAlleleSet.html">GAAlleleSet</a></div><div class="ttdef"><b>Definition</b> GAAllele.hpp:192</div></div>
 <div class="ttc" id="aclassGAGenome_html"><div class="ttname"><a href="classGAGenome.html">GAGenome</a></div><div class="ttdoc">The base genome class just defines the genome interface - how to mutate, crossover,...</div><div class="ttdef"><b>Definition</b> GAGenome.h:200</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
