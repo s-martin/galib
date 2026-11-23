@@ -9,7 +9,7 @@
 #include "gaconfig.h"
 #include <garandom.h>
 
-#include <GAAllele.h>
+#include <GAAllele.hpp>
 #include <cstring>
 #include <gaerror.h>
 #include <istream>

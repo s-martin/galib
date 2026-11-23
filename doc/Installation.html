@@ -247,7 +247,7 @@ The symptoms of no automatic instantiation are linker warnings about member func
 The string and real number genomes are treated differently than the other genomes in GAlib because they are specializations  of template classes.  They are not included in the ga.h header so that they will not force instantiations where they are not needed.
 </p>
 <p>
-Do not explicitly compile GARealGenome.C or GAStringGenome.C!  These are specializations of template classes and should be included once (and only once) in one of your source files.  If you are using a real number genome, include GARealGenome.h in any file that refers to a real number genome and include GARealGenome.C in one (and only one) location in your code.  GARealGenome.C contains a specialization of the one-dimensional array class, so by including it in a single location you will tell the compiler to use the specialization rather than the generic template code.  The string genome is also a specialization of the one-dimensional array genome, so to use it you should follow the same guidelines (but include the string genome header and source rather than the real number genome header and source).
+The template implementations are provided by their corresponding `.hpp` headers. Include `GARealGenome.hpp` or `GAStringGenome.hpp` when using those genomes. To enable the real or string genome specializations, define `INSTANTIATE_REAL_GENOME` or `INSTANTIATE_STRING_GENOME`, respectively, in one translation unit before including the corresponding header.
 </p>
 
 

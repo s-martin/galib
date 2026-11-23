@@ -9,11 +9,11 @@
   This header defines the interface for the 3D array genome.  See comments in
 1D array file.
 ---------------------------------------------------------------------------- */
-#ifndef _ga_array3_h_
-#define _ga_array3_h_
+#ifndef _ga_array3_hpp_
+#define _ga_array3_hpp_
 
-#include <GAAllele.h>
-#include <GAArray.h>
+#include <GAAllele.hpp>
+#include <GAArray.hpp>
 #include <GAGenome.h>
 
 #include <vector>
@@ -158,7 +158,7 @@ template <class T> class GA3DArrayAlleleGenome : public GA3DArrayGenome<T>
 	int read(std::istream &is) override;
 	int write(std::ostream &os) const override;
 
-	int equal(const GAGenome &c) const override;
+	bool equal(const GAGenome &c) const override;
 	int resize(int x, int y, int z) override;
 
 	const GAAlleleSet<T> &alleleset(unsigned int i = 0) const
@@ -169,5 +169,7 @@ template <class T> class GA3DArrayAlleleGenome : public GA3DArrayGenome<T>
   protected:
 	std::vector<GAAlleleSet<T>> aset;
 };
+
+#include <GA3DArrayGenome_impl.hpp>
 
 #endif

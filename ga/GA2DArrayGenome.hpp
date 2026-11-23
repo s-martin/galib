@@ -12,8 +12,8 @@
 #ifndef _ga_array2_h_
 #define _ga_array2_h_
 
-#include <GAAllele.h>
-#include <GAArray.h>
+#include <GAAllele.hpp>
+#include <GAArray.hpp>
 #include <GAGenome.h>
 #include <GAMask.h>
 #include <cstdio>

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "GAAllele.h"
-#include "GAArray.h"
+#include "GAAllele.hpp"
+#include "GAArray.hpp"
 #include "GAGenome.h"
 #include "GAMask.h"
 #include <cstdio>

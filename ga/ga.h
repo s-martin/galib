@@ -163,6 +163,6 @@ one copy of the genome type you want to use.
 
 #include <GA1DArrayGenome.hpp>
 #include <GA2DArrayGenome.hpp>
-#include <GA3DArrayGenome.h>
+#include <GA3DArrayGenome.hpp>
 #include <GAListGenome.hpp>
 #include <GATreeGenome.hpp>
